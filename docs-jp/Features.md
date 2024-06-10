@@ -3,288 +3,272 @@ layout: default
 title: "Features"
 ---
 
-# 機能
+# 特徴
 
-React-adminは、一般的な管理およびB2Bアプリケーションのほとんどのニーズをカバーする**リッチなフレームワーク**です。これは、創造性を解き放ち、素晴らしいアプリを構築するのに役立つ、大きな時間節約になります。そのユニークで独断的な機能は、シングルページアプリの開発者にとって最適な選択肢です。
+React-adminは、典型的な管理およびB2Bアプリケーションのニーズの大部分をカバーする**リッチなフレームワーク**です。これは、あなたの創造性を解放し、素晴らしいアプリケーションを構築するのに役立つ時間節約ツールです。その独自で意見のある機能により、シングルページアプリケーション開発者にとって最適な選択肢となります。
 
 ## 素晴らしい開発者体験
 
-React-adminを使用すると、開発者は低レベルの詳細を心配することなくアプリケーションコンポーネントを組み立てることができます。同じ結果を得るために必要なコードが少なくなり、アプリの**ビジネスロジックに集中**することができます。
+React-adminを使用すると、開発者は低レベルの詳細に煩わされることなく、アプリケーションコンポーネントを組み立てることができます。開発者は同じ結果を得るために少ないコードで済み、アプリの**ビジネスロジックに集中**できます。
 
-[![React-adminなしとありのリストビュー](./img/list-from-react-to-react-admin.webp)](./img/list-from-react-to-react-admin.webp)
+[![ReactからReact-adminへのリストビューの比較](./img/list-from-react-to-react-admin.webp)](./img/list-from-react-to-react-admin.webp)
 
-React-adminのコンポーネントとフックのAPIは、できるだけ**直感的**に設計されています。React-adminのコアチームは毎日react-adminを使用しており、開発者体験を向上させる方法を常に探しています。
+React-adminのコンポーネントとフックのAPIは、できるだけ**直感的**になるように設計されています。React-adminのコアチームは日々React-adminを使用しており、常に開発者体験を向上させる方法を模索しています。
 
-React-adminは、**業界最高レベルのドキュメント**、デモアプリ、サポートを提供します。エラーメッセージは明確で実行可能です。広範なTypeScriptの型とJSDocのおかげで、どのIDEでも簡単にreact-adminを使用できます。APIは安定しており、**破壊的変更は非常にまれ**です。[クエリ](./DataProviders.md#enabling-query-logs)と[フォーム](https://react-hook-form.com/dev-tools)の開発者ツールを使用してアプリをデバッグし、ブラウザで直接react-adminのコードを検査できます。
+React-adminは、**最高クラスのドキュメント**、デモアプリ、およびサポートを提供します。エラーメッセージは明確で実行可能です。広範なTypeScriptの型とJSDocのおかげで、任意のIDEでReact-adminを簡単に使用できます。APIは安定しており、**互換性のない変更は非常にまれ**です。アプリを[クエリ](./DataProviders.md#enabling-query-logs)および[フォーム](https://react-hook-form.com/dev-tools)の開発者ツールでデバッグし、React-adminのコードをブラウザで直接検査できます。
 
-これが、毎月3,000以上の新しいアプリがreact-adminを使用して公開される理由でしょう。
+これがおそらく、React-adminを使用して毎月3,000以上の新しいアプリが公開される理由です。
 
-したがって、react-adminは[react-query](https://react-query.tanstack.com/)、[react-hook-form](https://react-hook-form.com/)、[react-router](https://reacttraining.com/react-router/)、[Material UI](https://mui.com/material-ui/getting-started/)、[Emotion](https://github.com/emotion-js/emotion)の組み合わせだけではありません。それは、Reactでシングルページアプリの開発を加速し、容易にするための**フレームワーク**です。
+したがって、React-adminは単なる[react-query](https://react-query.tanstack.com/)、[react-hook-form](https://react-hook-form.com/)、[react-router](https://reacttraining.com/react-router/)、[Material UI](https://mui.com/material-ui/getting-started/)および[Emotion](https://github.com/emotion-js/emotion)の組み合わせではありません。Reactでのシングルページアプリケーション開発を加速し、容易にするために作られた**フレームワーク**です。
 
 ## 基本的なCRUD
 
-ほとんどの管理およびB2Bアプリは、レコードを操作するためのいくつかの基本的な画面から始まります：
+ほとんどの管理およびB2Bアプリは、レコードを操作するためのいくつかの基本画面から始まります：
 
-- レコードをフィルタリング、ページネーション、ソートする機能を含むリストページ
-- レコードの詳細を表示する読み取り専用のページ
-- フォームを介してレコードを更新する編集ページ
-- 作成ページ
+- レコードのフィルタリング、ページネーション、並べ替えを行うリストページ
+- レコードの詳細を表示する読み取り専用ページ
+- フォームを通じてレコードを更新する編集ページ
+- レコードを作成する作成ページ
 
-このタイプのインターフェースを「CRUDインターフェース」と呼びます。これにより、レコードの作成、読み取り、更新、削除が可能になります。
+このタイプのインターフェースを「CRUD」インターフェースと呼びます。これは、レコードの作成（Create）、読み取り（Read）、更新（Update）、削除（Delete）が可能であるためです。
 
-React-adminは、このようなCRUDインターフェースを生成するエンジンとして始まりましたが、それを非常にうまく実行しています。**React-adminを使用してCRUDインターフェースを構築することは、ほとんど労力を要せず、非常に簡単にカスタマイズできます。**
+React-adminは、そのようなCRUDインターフェースを生成するエンジンとして始まり、今でも非常にうまく機能しています。**React-adminでのCRUDインターフェースの構築はほとんど労力を必要とせず、非常に簡単にカスタマイズできます**。
 
 <video controls autoplay playsinline muted loop width="100%">
   <source src="./img/CRUD.webm" type="video/webm" />
   <source src="./img/CRUD.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
+  お使いのブラウザは動画タグをサポートしていません。
 </video>
 
+React-adminのCRUDインターフェースの基本的な構成要素は次のとおりです：
 
-React-adminでのCRUDインターフェースの基本的な構成要素は以下の通りです：
+- [`<Resource>`](./Resource.md)：特定のAPIリソースのCRUDルートを定義
+- [`<List>`](./ListTutorial.md)：レコードのリストを表示
+- [`<Edit>`](./EditTutorial.md)：レコードを編集するためのフォームを表示
+- [`<Create>`](./Create.md)：レコードを作成するためのフォームを表示
+- [`<Show>`](./Show.md)：読み取り専用モードでレコードを表示
 
-- [`<Resource>`](./Resource.md)：指定されたAPIリソースのCRUDルートを定義します。
-- [`<List>`](./ListTutorial.md)：レコードのリストを表示します。
-- [`<Edit>`](./EditTutorial.md)：レコードを編集するためのフォームを表示します。
-- [`<Create>`](./Create.md)：レコードを作成するためのフォームを表示します。
-- [`<Show>`](./Show.md)：レコードを読み取り専用モードで表示します。
+もちろん、React-adminはCRUDインターフェースに限定されません。必要に応じてカスタマイズされたインターフェースを構築するためのコンポーネントも提供します。
 
-しかしもちろん、react-adminはCRUDインターフェースに限定されません。必要に応じてカスタマイズされたインターフェースを構築するためのコンポーネントも提供しています。
+## バックエンドに依存しない
 
-## バックエンドアグノスティック
+React-adminアプリはブラウザ内で実行されます - これらは「シングルページアプリ」です。データの取得および更新にはAPIに依存します。
 
-React-adminアプリはブラウザ内で動作する「シングルページアプリ」です。データの取得と更新のためにAPIに依存しています。
+どのようなAPIでも？ **すべての種類**です。React-adminはバックエンドに依存しません。APIがREST APIであるか、GraphQL APIであるか、SOAP APIであるか、JSON-RPC APIであるか、ローカルAPIであるかは関係ありません。APIがPHP、Python、Ruby、Java、あるいはJavaScriptで書かれているかどうかも関係ありません。APIがサードパーティAPIであるか、自家製APIであるかも関係ありません。
 
-どのような種類のAPIかというと、**あらゆる種類**です。React-adminはバックエンドに依存しません。APIがREST APIであるか、GraphQL APIであるか、SOAP APIであるか、JSON-RPC APIであるか、あるいはローカルAPIであるかどうかは関係ありません。APIがPHP、Python、Ruby、Java、またはJavaScriptで書かれているかどうかは関係ありません。APIがサードパーティのAPIであるか、自家製のAPIであるかも関係ありません。
+<img src="./img/data-provider.png" class="no-shadow" alt="バックエンドに依存しない" />
 
-<img src="./img/data-provider.png" class="no-shadow" alt="Backend agnostic" />
+React-adminは、人気のあるAPIフレーバーの[50以上のアダプター](./DataProviderList.md)を提供し、独自のアダプターを作成するためのすべてのツールを提供します。これは[データプロバイダー](./DataProviders.md)と呼ばれる強力な抽象化レイヤーのおかげで機能します。
 
-React-adminには、一般的なAPIフレーバーに対応する[50種類以上のアダプター](./DataProviderList.md)が搭載されており、独自のアダプターを構築するためのすべてのツールを提供しています。これは、[データプロバイダー](./DataProviders.md)と呼ばれる強力な抽象化レイヤーのおかげで機能します。
-
-React-adminアプリでは、APIコールを書きません。代わりに、"データプロバイダーメソッド"と呼ばれる一連の高レベル関数を使用してAPIと通信します。例えば、投稿のリストを取得するには、リソース名とクエリパラメータを渡して`getList()`メソッドを呼び出します。
+React-adminアプリでは、APIコールを書きません。代わりに、「データプロバイダーメソッド」と呼ばれる一連の高レベル関数を使用してAPIと通信します。例えば、投稿リストを取得するには、リソース名とクエリパラメーターを渡して`getList()`メソッドを呼び出します。
 
 ```jsx
 import { useState, useEffect } from 'react';
 import { useDataProvider } from 'react-admin';
 
 const PostList = () => {
-    const [posts, setPosts] = useState([]);
-    const [error, setError] = useState();
-    const [isLoading, setIsLoading] = useState(true);
-    const dataProvider = useDataProvider();
-    useEffect(() => {
-        dataProvider.getList('posts', {
-            pagination: { page: 1, perPage: 10 },
-            sort: { field: 'published_at', order: 'DESC' },
-            filter: { status: 'published' }
-        })
-            .then(({ data }) => setPosts(data))
-            .catch(error => setError(error))
-            .finally(() => setIsLoading(false));
-    }, []);
-    if (isLoading) { return <p>Loading</p>; }
-    if (error) { return <p>ERROR</p>; }
-    return (
-        <ul>
-            {posts.map(post => (
-                <li key={post.id}>{post.title}</li>
-            ))}
-        </ul>
-    );
+const [posts, setPosts] = useState([]);
+const [error, setError] = useState();
+const [isLoading, setIsLoading] = useState(true);
+const dataProvider = useDataProvider();
+useEffect(() => {
+dataProvider.getList('posts', {
+pagination: { page: 1, perPage: 10 },
+sort: { field: 'published_at', order: 'DESC' },
+filter: { status: 'published' }
+})
+.then(({ data }) => setPosts(data))
+.catch(error => setError(error))
+.finally(() => setIsLoading(false));
+}, []);
+if (isLoading) { return <p>Loading</p>; }
+if (error) { return <p>ERROR</p>; }
+return (
+<ul>
+{posts.map(post => (
+<li key={post.id}>{post.title}</li>
+))}
+</ul>
+);
 };
-```
 
 データプロバイダーオブジェクトは、データプロバイダーメソッドの呼び出しをHTTPリクエストに変換し、HTTPレスポンスをデータプロバイダーメソッドの結果に変換する責任を負います。
 
-ところで、データ取得のために`useEffect`を使用するのは手間がかかります。代わりに、`useGetList`などの[特殊化されたデータプロバイダーフック](./Actions.md#dataprovider-method-hooks)に頼ることができます：
+ちなみに、データ取得に`useEffect`を使用するのは面倒です。代わりに、`useGetList`のような[専用のデータプロバイダーフック](./Actions.md#dataprovider-method-hooks)を使用できます：
 
 ```jsx
 import { useGetList } from 'react-admin';
 
 const PostList = () => {
-    const { data, isLoading, error } = useGetList('posts', {
-        pagination: { page: 1, perPage: 10 },
-        sort: { field: 'published_at', order: 'DESC' },
-        filter: { status: 'published' }
-    });
-    if (isLoading) { return <Loading />; }
-    if (error) { return <p>ERROR</p>; }
-    return (
-        <ul>
-            {data.map(post => (
-                <li key={post.id}>{post.title}</li>
-            ))}
-        </ul>
-    );
+const { data, isLoading, error } = useGetList('posts', {
+pagination: { page: 1, perPage: 10 },
+sort: { field: 'published_at', order: 'DESC' },
+filter: { status: 'published' }
+});
+if (isLoading) { return <Loading />; }
+if (error) { return <p>ERROR</p>; }
+return (
+<ul>
+{data.map(post => (
+<li key={post.id}>{post.title}</li>
+))}
+</ul>
+);
 };
 ```
 
-React-adminは、認証と認可に関しても**バックエンドアグノスティック**です。APIがJWT、OAuth、Auth0やCognitoのようなサードパーティプロバイダー、あるいはAzure Active Directoryを使用している場合でも、[認証プロバイダー](./Authentication.md)と呼ばれるアダプターオブジェクトを通じて認証バックエンドと通信できます。
+React-adminは、**認証および認可に対してもバックエンドに依存しません**。APIがJWT、OAuth、Auth0やCognitoのようなサードパーティプロバイダー、あるいはAzure Active Directoryを使用しているかどうかに関係なく、[認証プロバイダー](./Authentication.md)と呼ばれるアダプターオブジェクトを介して認証バックエンドと通信できます。
 
-そして、コンポーネントに特化したフックを使用してアクセスを制限できます。例えば、匿名アクセスを禁止するには`useAuthenticated`を使用します：
+その後、コンポーネント上で特定のフックを使用してアクセスを制限できます。例えば、匿名アクセスを禁止するには、`useAuthenticated`を使用します：
 
 ```jsx
 import { useAuthenticated } from 'react-admin';
 
 const MyPage = () => {
-    useAuthenticated(); // redirects to login if not authenticated
-    return (
-        <div>
-            ...
-        </div>
-    )
+useAuthenticated(); // 認証されていない場合はログインページにリダイレクト
+return (
+<div>
+...
+</div>
+)
 };
 
 export default MyPage;
 ```
 
-## 関連関係
+## リレーションシップ
 
-APIはしばしば関連モデル、つまり他のエンドポイントへの外部キーを返すエンドポイントを公開します。**React-adminは関連するAPIを活用して**、関連するレコードを表示するスマートコンポーネントや、関連するレコードの編集を可能にするコンポーネントを提供します。
+APIはしばしばリレーショナルモデルを公開します。つまり、他のエンドポイントへの外部キーを返すエンドポイントです。**React-adminはリレーショナルAPIを活用**して、関連するレコードを表示するスマートコンポーネントや、関連するレコードの編集を可能にするコンポーネントを提供します。
 
+```bash
+┌──────────────┐   ┌────────────────┐
+│ books│   │ authors│
+│--------------│   │----------------│
+│ id   │   ┌───│ id │
+│ author_id│╾──┘   │ first_name │
+│ title│   │ last_name  │
+│ published_at │   │ date_of_birth  │
+└──────────────┘   └────────────────┘
 ```
-┌──────────────┐       ┌────────────────┐
-│ books        │       │ authors        │
-│--------------│       │----------------│
-│ id           │   ┌───│ id             │
-│ author_id    │╾──┘   │ first_name     │
-│ title        │       │ last_name      │
-│ published_at │       │ date_of_birth  │
-└──────────────┘       └────────────────┘
-```
 
-たとえば、`<ReferenceField>` は関連するレコードの名前、例えば本の著者の名前などを表示します。
+例えば、`<ReferenceField>`は本の著者名のような関連レコードの名前を表示します。
 
 ```jsx
 const BookList = () => (
-    <List>
-        <Datagrid>
-            <TextField source="id" />
-            <TextField source="title" />
-            <ReferenceField source="authorId" reference="authors" />
-            <TextField source="year" />
-        </Datagrid>
-    </List>
+<List>
+<Datagrid>
+<TextField source="id" />
+<TextField source="title" />
+<ReferenceField source="authorId" reference="authors" />
+<TextField source="year" />
+</Datagrid>
+</List>
 );
 ```
 
 ![ReferenceField](./img/reference-field-link.png)
 
-API側で特別な機能を用意する必要はありません。`books` と `authors` リソースのためのシンプルなCRUDルートだけで十分です。`<ReferenceField>` は単一のAPIコールを通じて本の著者を取得します：
+これをサポートするためにAPI側で特別なことは必要ありません。`books`および`authors`リソースに対する単純なCRUDルートだけで十分です。`<ReferenceField>`は単一のAPIコールで本の著者を取得します：
 
-```
+```css
 GET https://my.api.url/authors?filter={ids:[1,2,3,4,5,6,7]}
 ```
 
-`<ReferenceField>` は関連する著者の呼び出しを**集約する**のに十分賢く、サーバー側での埋め込みやサブクエリの必要なしに、[N+1クエリ問題](https://stackoverflow.com/questions/97197/what-is-the-n1-selects-problem-in-orm-object-relational-mapping)を避けます。
+`<ReferenceField>`は関連する著者の呼び出しを**集約し、N+1クエリ問題を回避**します（[N+1クエリ問題とは](https://stackoverflow.com/questions/97197/what-is-the-n1-selects-problem-in-orm-object-relational-mapping)）。
 
-同様に、参照入力コンポーネントを使用すると、メインレコードと一緒に関連レコードの編集が可能です。例えば、製品のバリアントを編集する場合：
+同様に、リファレンス入力コンポーネントはユーザーがメインレコードと共に関連レコードを編集することを可能にします。例えば、商品のバリアントを編集するには：
 
 ```jsx
 const ProductEdit = () => (
-    <Edit mutationMode="optimistic">
-        <SimpleForm>
-            <TextInput source="name" />
-            <NumberInput source="price" />
-            <ReferenceInput source="category_id" reference="categories" />
-            <ReferenceManyInput reference="variants" target="product_id">
-                <SimpleFormIterator inline>
-                    <TextInput source="sku" />
-                    <SelectInput source="size" choices={sizes} />
-                    <SelectInput source="color" choices={colors} />
-                    <NumberInput source="stock" defaultValue={0} />
-                </SimpleFormIterator>
-            </ReferenceManyInput>
-        </SimpleForm>
-    </Edit>
+<Edit mutationMode="optimistic">
+<SimpleForm>
+<TextInput source="name" />
+<NumberInput source="price" />
+<ReferenceInput source="category_id" reference="categories" />
+<ReferenceManyInput reference="variants" target="product_id">
+<SimpleFormIterator inline>
+<TextInput source="sku" />
+<SelectInput source="size" choices={sizes} />
+<SelectInput source="color" choices={colors} />
+<NumberInput source="stock" defaultValue={0} />
+</SimpleFormIterator>
+</ReferenceManyInput>
+</SimpleForm>
+</Edit>
 );
 ```
+<video controls autoplay playsinline muted loop> <source src="./img/reference-many-input.webm" type="video/webm"/> <source src="./img/reference-many-input.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video>
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/reference-many-input.webm" type="video/webm"/>
-  <source src="./img/reference-many-input.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
-
-
-参照入力コンポーネントは、関連するレコードによってビューをフィルターするのにも非常に便利です。例えば、特定の著者の本のリストを表示する場合：
+リファレンス入力コンポーネントは、関連するレコードでビューをフィルタリングする際にも非常に便利です。例えば、特定の著者の本のリストを表示するには：
 
 ```jsx
 const BookList = () => (
-    <List filters={[
-        <ReferenceInput source="authorId" reference="authors" alwaysOn />,
-    ]}>
-        <Datagrid rowClick="edit">
-            <TextField source="id" />
-            <TextField source="title" />
-            <ReferenceField source="authorId" reference="authors" />
-            <TextField source="year" />
-        </Datagrid>
-    </List>
+<List filters={[
+<ReferenceInput source="authorId" reference="authors" alwaysOn />,
+]}>
+<Datagrid rowClick="edit">
+<TextField source="id" />
+<TextField source="title" />
+<ReferenceField source="authorId" reference="authors" />
+<TextField source="year" />
+</Datagrid>
+</List>
 );
 ```
+<video controls autoplay playsinline muted loop width="100%"> <source src="./img/reference-input-filter.webm" type="video/webm" /> <source src="./img/reference-input-filter.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
 
-<video controls autoplay playsinline muted loop width="100%">
-  <source src="./img/reference-input-filter.webm" type="video/webm" />
-  <source src="./img/reference-input-filter.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+React-adminは**一対多、多対一、一対一、および多対多のリレーションシップ**をサポートしています。[リレーションシップのフィールド](./FieldsForRelationships.md)ページには、すべてのリファレンスフィールドとその一般的な使用法が記載されています。リレーションシップについて詳しく知りたい場合は、以下のコンポーネントを確認してください：
 
-React-adminは、**一対多**、**多対一**、**一対一**、および**多対多の関係**をサポートしています。[Fields For Relationships](./FieldsForRelationships.md)ページには、すべての参照フィールドとその一般的な使用法がリストされています。関係性について詳しく学ぶために、以下のコンポーネントを確認してください：
+* [`<ReferenceField>`](./ReferenceField.md)
+* [`<ReferenceArrayField>`](./ReferenceArrayField.md)
+* [`<ReferenceManyField>`](./ReferenceManyField.md)
+* [`<ReferenceManyCount>`](./ReferenceManyCount.md)
+* [`<ReferenceManyToManyField>`](./ReferenceManyToManyField.md)
+* [`<ReferenceOneField>`](./ReferenceOneField.md)
+* [`<ReferenceInput>`](./ReferenceInput.md)
+* [`<ReferenceArrayInput>`](./ReferenceArrayInput.md)
+* [`<ReferenceManyInput>`](./ReferenceManyInput.md)
+* [`<ReferenceManyToManyInput>`](./ReferenceManyToManyInput.md)
+* [`<ReferenceOneInput>`](./ReferenceOneInput.md)
 
-
-- [`<ReferenceField>`](./ReferenceField.md)
-- [`<ReferenceArrayField>`](./ReferenceArrayField.md)
-- [`<ReferenceManyField>`](./ReferenceManyField.md)
-- [`<ReferenceManyCount>`](./ReferenceManyCount.md)
-- [`<ReferenceManyToManyField>`](./ReferenceManyToManyField.md)
-- [`<ReferenceOneField>`](./ReferenceOneField.md)
-- [`<ReferenceInput>`](./ReferenceInput.md)
-- [`<ReferenceArrayInput>`](./ReferenceArrayInput.md)
-- [`<ReferenceManyInput>`](./ReferenceManyInput.md)
-- [`<ReferenceManyToManyInput>`](./ReferenceManyToManyInput.md)
-- [`<ReferenceOneInput>`](./ReferenceOneInput.md)
-
-参照コンポーネントは、複雑なフロントエンド機能の開発を大幅に加速させます。また、複雑な結合の実装というバックエンド開発者の負担も軽減します。
+リファレンスコンポーネントは、複雑なフロントエンド機能の開発を大幅に加速させます。また、バックエンド開発者が複雑な結合を実装する負担から解放されます。
 
 ## 醜くない
 
-現実的に考えると、多くの開発者はまず機能に焦点を当て、ユーザーインターフェイス（UI）の磨きに多くの時間を割くことはありません。私たちも同様の傾向があります！その結果、管理アプリはしばしば見た目が悪いことがあります。スペーシングが一貫していなかったり、ボタンの位置が最適でなかったり、色の組み合わせが目に優しくない場合があります。
+現実的に言えば、多くの開発者はまず機能に焦点を当て、ユーザーインターフェース（UI）を磨くための時間をほとんど持っていません。私たちもそのような傾向があります！その結果、管理アプリが醜いことがよくあります。スペーシングが一貫しておらず、ボタンが最適な位置に配置されておらず、色の組み合わせが目に痛いことがあります。
 
-React-adminは、**箱から出しただけでかなり良い見た目のコンポーネントを提供します**ので、UIに時間をかけなくても見栄えが悪くなることはありません（意図的に試みない限り）。React-adminは[Material UI](https://mui.com/material-ui/getting-started/)を使用しており、これは[Material Design](https://material.io/)ガイドラインのReact実装で、最も実戦テストされたデザインシステムです。
+React-adminは**初期状態で見た目がかなり良いコンポーネント**を提供するため、UIに時間をかけなくても（意図的に醜くしない限り）悪く見えることはありません。React-adminは、[Material UI](https://mui.com/material-ui/getting-started/)を使用しています。これは、[Material Design](https://material.io/)ガイドラインのReact実装であり、最も実績のあるデザインシステムです。
 
-<video controls autoplay playsinline muted loop width="100%">
-  <source src="https://user-images.githubusercontent.com/99944/116970434-4a926480-acb8-11eb-8ce2-0602c680e45e.mp4" type="video/webm" />
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop width="100%"> <source src="https://user-images.githubusercontent.com/99944/116970434-4a926480-acb8-11eb-8ce2-0602c680e45e.mp4" type="video/webm" /> お使いのブラウザは動画タグをサポートしていません。 </video>
 
-デフォルトのデザインが十分でない場合でも、簡単にカスタマイズできます：react-adminのすべてのコンポーネントは**完全にテーマ化可能**であり、独自のコンポーネントに置き換えることもできます（[Theming](#theming)を参照）。
+デフォルトのデザインが十分でない場合は、すべてのReact-adminコンポーネントが**完全にテーマ化可能**であり、独自のコンポーネントに置き換えることも簡単です（[テーマ設定](#theming)を参照）。
 
-## 密集したUI
+## 高密度UI
 
-現代のWebアプリはしばしば視覚的に魅力的ですが、情報密度が低いために使用が難しいことがあります。エンドユーザーは、比較的複雑なタスクを完了するために多くのスクロールやクリックが必要になります。
+現代のウェブアプリはしばしば非常に視覚的に魅力的ですが、情報密度が低いために使いにくいことがあります。エンドユーザーは、比較的複雑なタスクを完了するために多くのスクロールとクリックが必要です。
 
-一方で、デフォルトのReact-adminスキンは密集して設計されており、**コンテンツにより多くのスペースを与え、クロムには少なく**することで、ユーザーの操作をより迅速にします。
+一方、React-adminのデフォルトスキンは高密度に設計されており、**クロームに対してコンテンツにより多くのスペースを与え**、ユーザーの操作を高速化します。
 
-[![Dense layout](./img/dense.webp)](https://marmelab.com/react-admin-demo/#/)
+[![高密度レイアウト](./img/dense.webp)](https://marmelab.com/react-admin-demo/#/)
 
-私たちは、ユーザーフィードバックに基づいてこのデフォルトレイアウトを多く改善しました。私たちの経験では、管理アプリ、ダッシュボード、B2Bアプリにおいて、効率は大きな余白よりも重要です。これがあなたのユースケースでない場合でも、[テーマ](./AppTheme.md)を使用してUIの余白と密度を簡単に**カスタマイズ**できます。
+ユーザーフィードバックに基づいて、このデフォルトレイアウトに多くの改良を加えてきました。私たちの経験では、管理アプリ、ダッシュボード、およびB2Bアプリでは、大きなマージンよりも効率性が重要です。もしこれがあなたのユースケースに当てはまらない場合は、[テーマ](./AppTheme.md)を使用してUIのマージンと密度を簡単にカスタマイズできます。
 
-また、モバイルユーザーのために、react-adminは大きな余白と低い情報密度を持つ異なるレイアウトをレンダリングします（[Responsive](#responsive)を参照）。
+モバイルユーザーの場合、React-adminはより大きなマージンと低い情報密度を持つ異なるレイアウトをレンダリングします（[レスポンシブ](#responsive)を参照）。
 
 ## ヘッドレスコア
 
-React-adminコンポーネントはデフォルトでMaterial UIコンポーネントを使用し、あっという間にページを構築できます。Material UIは[テーミング](#theming)に対応しているため、アプリのルックアンドフィールを簡単にカスタマイズできます。しかし、場合によってはこれだけでは不十分で、別のUIライブラリを使用する必要があります。
+React-adminコンポーネントはデフォルトでMaterial UIコンポーネントを使用しており、ページのスキャフォールディングを迅速に行えます。Material UIが[テーマ設定](#theming)をサポートしているため、アプリの外観と感触を簡単にカスタマイズできます。しかし、場合によってはこれだけでは不十分であり、他のUIライブラリを使用する必要があります。
 
-React-adminで使用するUIライブラリを[Ant Design](https://ant.design/)、[Daisy UI](https://daisyui.com/)、[Chakra UI](https://chakra-ui.com/)、あるいは独自のカスタムUIライブラリに変更することができます。React-adminコンポーネントの背後にある**ヘッドレスロジック**はUIライブラリに依存せず、`...Base`コンポーネントやコントローラーフックを介して公開されています。
+React-adminを使用するUIライブラリを変更して[Ant Design](https://ant.design/)、[Daisy UI](https://daisyui.com/)、[Chakra UI](https://chakra-ui.com/)、あるいは独自のカスタムUIライブラリを使用することができます。React-adminコンポーネントの背後にある**ヘッドレスロジック**はUIライブラリに依存せず、`...Base`コンポーネントおよびコントローラーフックを介して公開されています。
 
-例えば、こちらは[Ant Design](https://ant.design/)を使用したリストビューです：
+例えば、ここでは[Ant Design](https://ant.design/)を使用して構築されたリストビューです：
 
-![Ant Designで構築されたリストビュー](./img/list_ant_design.png)
+![Ant Designを使用して構築されたリストビュー](./img/list_ant_design.png)
 
-これは`useListController`フックを活用しています：
+`useListController`フックを活用しています：
 
 {% raw %}
+
 ```jsx
 import { useListController } from 'react-admin'; 
 import { Card, Table, Button } from 'antd';
@@ -297,29 +281,29 @@ import { Link } from 'react-router-dom';
 
 const PostList = () => {
   const { data, page, total, setPage, isLoading } = useListController({
-    sort: { field: 'published_at', order: 'DESC' },
-    perPage: 10,
+sort: { field: 'published_at', order: 'DESC' },
+perPage: 10,
   });
   const handleTableChange = (pagination) => {
-    setPage(pagination.current);
+setPage(pagination.current);
   };
   return (
-    <>
-      <div style={{ margin: 10, textAlign: 'right' }}>
-        <Link to="/posts/create">
-          <Button icon={<PlusOutlined />}>Create</Button>
-        </Link>
-      </div>
-      <Card bodyStyle={{ padding: '0' }} loading={isLoading}>
-        <Table
-          size="small"
-          dataSource={data}
-          columns={columns}
-          pagination={{ current: page, pageSize: 10, total }}
-          onChange={handleTableChange}
-        />
-      </Card>
-    </>
+<>
+  <div style={{ margin: 10, textAlign: 'right' }}>
+<Link to="/posts/create">
+  <Button icon={<PlusOutlined />}>Create</Button>
+</Link>
+  </div>
+  <Card bodyStyle={{ padding: '0' }} loading={isLoading}>
+<Table
+  size="small"
+  dataSource={data}
+  columns={columns}
+  pagination={{ current: page, pageSize: 10, total }}
+  onChange={handleTableChange}
+/>
+  </Card>
+</>
   );
 };
 
@@ -327,173 +311,120 @@ const columns = [
   { title: 'Id', dataIndex: 'id', key: 'id' },
   { title: 'Title', dataIndex: 'title', key: 'title' },
   {
-    title: 'Publication date',
-    dataIndex: 'published_at',
-    key: 'pub_at',
-    render: (value) => new Date(value).toLocaleDateString(),
+title: 'Publication date',
+dataIndex: 'published_at',
+key: 'pub_at',
+render: (value) => new Date(value).toLocaleDateString(),
   },
   {
-    title: 'Commentable',
-    dataIndex: 'commentable',
-    key: 'commentable',
-    render: (value) => (value ? <CheckCircleOutlined /> : null),
+title: 'Commentable',
+dataIndex: 'commentable',
+key: 'commentable',
+render: (value) => (value ? <CheckCircleOutlined /> : null),
   },
   {
-    title: 'Actions',
-    render: (_, record) => (
-      <Link to={`/posts/${record.id}`}>
-        <Button icon={<EditOutlined />}>Edit</Button>
-      </Link>
-    ),
+title: 'Actions',
+render: (_, record) => (
+  <Link to={`/posts/${record.id}`}>
+<Button icon={<EditOutlined />}>Edit</Button>
+  </Link>
+),
   },
 ];
 
 export default PostList;
 ```
+
 {% endraw %}
 
-ヘッドレス コントローラーの詳細については、次のフックを確認してください。
+ヘッドレスコントローラーについて詳しく知りたい場合は、以下のフックを確認してください：
 
-- [`useListController`](./useListController.md)
-- [`useEditController`](./useEditController.md)
-- [`useCreateController`](./useCreateController.md)
-- [`useShowController`](./useShowController.md)
+* [`useListController`](./useListController.md)
+* [`useEditController`](./useEditController.md)
+* [`useCreateController`](./useCreateController.md)
+* [`useShowController`](./useShowController.md)
 
-また、react-admin を使用してマテリアル UI を使用せずに構築された管理パネルの例を確認してください。
+また、Material UIを使用せずにReact-adminで構築された管理パネルの例を以下に示します：
 
-- [DaisyUI, Tailwind CSS, Tanstack Table and React-Aria](https://marmelab.com/blog/2023/11/28/using-react-admin-with-your-favorite-ui-library.html)
-- [shadcn/ui, Tailwind CSS and Radix UI](https://github.com/marmelab/ra-shadcn-demo)
+* [DaisyUI、Tailwind CSS、Tanstack TableおよびReact-Aria](https://marmelab.com/blog/2023/11/28/using-react-admin-with-your-favorite-ui-library.html)
+* [shadcn/ui、Tailwind CSSおよびRadix UI](https://github.com/marmelab/ra-shadcn-demo)
 
-## 推測器とスキャフォールディング
+## 推測とスキャフォールディング
 
-新しいAPIルートをCRUDビューにマッピングする際、フィールドを一つずつ追加するのは面倒な作業です。React-adminは、APIレスポンスに基づいて**完全なCRUD UIを自動生成する**一連の推測器を提供しています。
+新しいAPIルートをCRUDビューにマッピングする際に、フィールドを一つ一つ追加するのは面倒です。React-adminは、APIレスポンスに基づいて**完全なCRUD UIを自動生成**する推測機能を提供します。
 
-たとえば、次のコードは`posts`リソースのための完全なCRUD UIを生成します：
+例えば、次のコードは`posts`リソースの完全なCRUD UIを生成します：
 
 ```jsx
 import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-admin';
 
 const App = () => (
-    <Admin dataProvider={dataProvider}>
-        <Resource name="posts" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
-    </Admin>
+<Admin dataProvider={dataProvider}>
+<Resource name="posts" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+</Admin>
 );
 ```
 
-推測器コンポーネントはまずAPIからデータを取得し、レスポンスの形状を分析した後、データタイプに合ったフィールドと入力コンポーネントを選択します。また、生成されたコードをコンソールに出力し、UIのカスタマイズを開始する手助けをします。
+推測コンポーネントは、まずAPIからデータを取得し、レスポンスの形状を分析し、データ型に一致するフィールドおよび入力コンポーネントを選択します。また、生成されたコードをコンソールにダンプし、UIのカスタマイズを開始することができます。
 
 ![ListGuesser](./img/tutorial_guessed_list.png)
 
-推測器について詳しく学ぶには、以下のコンポーネントを確認してください：
+推測について詳しく知りたい場合は、以下のコンポーネントを確認してください：
 
-- [`<ListGuesser>`](./ListGuesser.md)
-- [`<EditGuesser>`](./EditGuesser.md)
-- [`<ShowGuesser>`](./ShowGuesser.md)
+* [`<ListGuesser>`](./ListGuesser.md)
+* [`<EditGuesser>`](./EditGuesser.md)
+* [`<ShowGuesser>`](./ShowGuesser.md)
 
-## Powerful Datagrid Components
+## 強力なデータグリッドコンポーネント
 
-Most admins need to display a list of records, letting users sort, filter, and paginate them. React-admin provides a set of components to build such lists, called "Datagrid components".
+ほとんどの管理アプリはレコードのリストを表示し、ユーザーがそれをソート、フィルタリング、およびページネーションすることを可能にします。React-adminは、そのようなリストを構築するためのコンポーネントセット、つまり「データグリッドコンポーネント」を提供します。
 
-The basic [`<Datagrid>` component](./Datagrid.md) displays a list of records in a table, with a row for each record and a column for each field. It alsosupports an expand panel, a row selection checkbox, and a bulk action toolbar.
+基本的な[`<Datagrid>`コンポーネント](./Datagrid.md)は、レコードを表形式で表示し、各レコードに対して1行、各フィールドに対して1列を持ちます。展開パネル、行選択チェックボックス、および一括アクションツールバーもサポートしています。
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/Datagrid.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop> <source src="./img/datagrid.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video>
 
-The [`<EditableDatagrid>` component](./EditableDatagrid.md) lets users edit records in place, without having to navigate to an edit form. It's a great way to speed up data entry.
+[`<EditableDatagrid>`コンポーネント](./EditableDatagrid.md)は、編集フォームに移動することなく、レコードをその場で編集できるようにします。データ入力のスピードを大幅に向上させる方法です。
 
-<video controls autoplay playsinline muted loop>
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-editable-datagrid-overview.webm" type="video/webm" />
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-editable-datagrid-overview.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop> <source src="https://react-admin-ee.marmelab.com/assets/ra-editable-datagrid-overview.webm" type="video/webm" /> <source src="https://react-admin-ee.marmelab.com/assets/ra-editable-datagrid-overview.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
 
-Finally, the [`<DatagridAG>` component](./DatagridAG.md) integrates the powerful [AG Grid](https://www.ag-grid.com/) library to provide a rich set of features, such as cell editing, aggregation, row grouping, master detail, clipboard, pivoting, column filtering, export to excel, context menu, tree data, charting, and more.
+最後に、[`<DatagridAG>`コンポーネント](./DatagridAG.md)は、[AG Grid](https://www.ag-grid.com/)ライブラリを統合し、セル編集、集計、行グループ化、マスターディテール、クリップボード、ピボット、列フィルタリング、Excelへのエクスポート、コンテキストメニュー、ツリーデータ、チャーティングなどの豊富な機能を提供します。
 
-<video controls autoplay playsinline muted loop>
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/DatagridAG-enterprise.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop> <source src="https://react-admin-ee.marmelab.com/assets/DatagridAG-enterprise.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video>
+## 検索とフィルタリング
 
-## Search & Filtering
+ほとんどの管理およびB2Bアプリでは、最も一般的なタスクはレコードを検索することです。React-adminは、**検索ワークフローを合理化するユーザーエクスペリエンスを構築する**のに役立つ多くの機能を提供します。
 
-In most admin and B2B apps, the most common task is to look for a record. React-admin includes many features to help you **build a user experience that streamlines the search workflow**.
+<table><tbody> <tr style="border:none"> <td style="width:50%;border:none;text-align:center"> <a title="フィルターボタン/フォームコンボ" href="./img/list\_filter.webm"> <video controls autoplay playsinline muted loop> <source src="./img/list\_filter.webm" type="video/webm"/> <source src="./img/list\_filter.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video> </a> <a href="./FilteringTutorial.html#the-filter-buttonform-combo" style="display: block;transform: translateY(-10px);">フィルターボタン/フォームコンボ</a> </td> <td style="width:50%;border:none;text-align:center"> <a title="<FilterList>サイドバー" href="./img/filter-sidebar.webm"> <video controls autoplay playsinline muted loop> <source src="./img/filter-sidebar.webm" type="video/webm"/> <source src="./img/filter-sidebar.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video> </a> <a href="./FilteringTutorial.html#the-filterlist-sidebar" style="display: block;transform: translateY(-10px);"><code>&lt;FilterList&gt;</code>サイドバー</a> </td> </tr> <tr style="border:none;background-color:#fff;"> <td style="width:50%;border:none;text-align:center"> <a title="積み重ねフィルター" href="https://react-admin-ee.marmelab.com/assets/ra-form-layout/latest/stackedfilters-overview.webm"> <video controls autoplay playsinline muted loop width="90%" style="margin:1rem;box-shadow:0px 4px 4px 0px rgb(0 0 0 / 24%);"> <source src="https://react-admin-ee.marmelab.com/assets/ra-form-layout/latest/stackedfilters-overview.webm" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video> </a> <a href="./FilteringTutorial.html#the-stackedfilters-component" style="display: block;transform: translateY(-10px);"><code>&lt;StackedFilters&gt;</code>ダイアログ</a> </td> <td style="width:50%;border:none;text-align:center;vertical-align:top;"> <a title="<Search>入力" href="https://react-admin-ee.marmelab.com/assets/ra-search-overview.gif"><img src="https://react-admin-ee.marmelab.com/assets/ra-search-overview.gif" /></a> <a href="./FilteringTutorial.html#global-search" style="display: block;transform: translateY(-10px);">グローバル<code>&lt;Search&gt;</code></a> </td> </tr> </tbody></table>
 
-<table><tbody>
-<tr style="border:none">
-    <td style="width:50%;border:none;text-align:center">
-        <a title="Filter Button/Form Combo" href="./img/list_filter.webm">
-            <video controls autoplay playsinline muted loop>
-                <source src="./img/list_filter.webm" type="video/webm"/>
-                <source src="./img/list_filter.mp4" type="video/mp4"/>
-                Your browser does not support the video tag.
-            </video>
-        </a>
-        <a href="./FilteringTutorial.html#the-filter-buttonform-combo" style="display: block;transform: translateY(-10px);">Filter Button/Form Combo</a>
-    </td>
-    <td style="width:50%;border:none;text-align:center">
-         <a title="<FilterList> Sidebar" href="./img/filter-sidebar.webm">
-            <video controls autoplay playsinline muted loop>
-                <source src="./img/filter-sidebar.webm" type="video/webm"/>
-                <source src="./img/filter-sidebar.mp4" type="video/mp4"/>
-                Your browser does not support the video tag.
-            </video>
-        </a>
-        <a href="./FilteringTutorial.html#the-filterlist-sidebar" style="display: block;transform: translateY(-10px);"><code>&lt;FilterList&gt;</code> Sidebar</a>
-    </td>
-</tr>
-<tr style="border:none;background-color:#fff;">
-    <td style="width:50%;border:none;text-align:center">
-        <a title="Stacked Filters" href="https://marmelab.com/ra-enterprise/modules/assets/ra-form-layout/latest/stackedfilters-overview.webm">
-            <video controls autoplay playsinline muted loop width="90%" style="margin:1rem;box-shadow:0px 4px 4px 0px rgb(0 0 0 / 24%);">
-                <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-form-layout/latest/stackedfilters-overview.webm" type="video/mp4" />
-                    Your browser does not support the video tag.
-            </video>
-        </a>
-        <a href="./FilteringTutorial.html#the-stackedfilters-component" style="display: block;transform: translateY(-10px);"><code>&lt;StackedFilters&gt;</code> Dialog</a>
-    </td>
-    <td style="width:50%;border:none;text-align:center;vertical-align:top;">
-        <a title="<Search> input" href="https://marmelab.com/ra-enterprise/modules/assets/ra-search-overview.gif"><img src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-overview.gif" /></a>
-        <a href="./FilteringTutorial.html#global-search" style="display: block;transform: translateY(-10px);">Global <code>&lt;Search&gt;</code></a>
-    </td>
-</tr>
-</tbody></table>
-
-These features rely on powerful components with an intuitive API. For instance, you can set the Filter Button/Form Combo with the `<List filters>` prop, using the same input components as in edition forms:
+これらの機能は、直感的なAPIを持つ強力なコンポーネントに依存しています。例えば、`<List filters>`プロップを使用してフィルターボタン/フォームコンボを設定し、編集フォームと同じ入力コンポーネントを使用できます：
 
 ```jsx
 import { List, TextInput } from 'react-admin';
 
 const postFilters = [
-    <TextInput label="Search" source="q" alwaysOn />,
-    <TextInput label="Title" source="title" defaultValue="Hello, World!" />,
+<TextInput label="検索" source="q" alwaysOn />,
+<TextInput label="タイトル" source="title" defaultValue="Hello, World!" />,
 ];
 
 export const PostList = () => (
-    <List filters={postFilters}>
-        {/* ... */}
-    </List>
+<List filters={postFilters}>
+{/* ... */}
+</List>
 );
 ```
 
-Check the following chapters to learn more about each search and filtering component:
+各検索およびフィルタリングコンポーネントについて詳しく知りたい場合は、以下の章を確認してください：
 
-- [The Filter Button/Form Combo](./FilteringTutorial.md#the-filter-buttonform-combo)
-- [`<FilterList>`](./FilterList.md)
-- [`<StackedFilters>`](./StackedFilters.md)
-- [`<Search>`](./Search.md)
+* [フィルターボタン/フォームコンボ](./FilteringTutorial.md#the-filter-buttonform-combo)
+* [`<FilterList>`](./FilterList.md)
+* [`<StackedFilters>`](./StackedFilters.md)
+* [`<Search>`](./Search.md)
 
-Users often apply the same filters over and over again. Saved Queries **let users save a combination of filters** and sort parameters into a new, personal filter, that persists between sessions.
+ユーザーは同じフィルターを何度も適用することがよくあります。保存されたクエリを使用すると、ユーザーは**フィルターとソートパラメーターの組み合わせを保存**し、新しい個人的なフィルターとしてセッション間で保持できます。
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/SavedQueriesList.webm" type="video/webm"/>
-  <source src="./img/SavedQueriesList.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop> <source src="./img/SavedQueriesList.webm" type="video/webm"/> <source src="./img/SavedQueriesList.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video>
 
-
-Here is an example `<FilterList>` sidebar with saved queries:
+以下は、保存されたクエリを持つ`<FilterList>`サイドバーの例です：
 
 ```jsx
 import { FilterList, FilterListItem, List, Datagrid } from 'react-admin';
@@ -502,145 +433,142 @@ import { Card, CardContent } from '@mui/material';
 import { SavedQueriesList } from 'react-admin';
 
 const SongFilterSidebar = () => (
-    <Card>
-        <CardContent>
-            <SavedQueriesList />
-            <FilterList label="Record Company" icon={<BusinessIcon />}>
-                ...
-            </FilterList>
-            <FilterList label="Released" icon={<DateRangeeIcon />}>
-               ...
-            </FilterList>
-        </CardContent>
-    </Card>
+<Card>
+<CardContent>
+<SavedQueriesList />
+<FilterList label="レコード会社" icon={<BusinessIcon />}>
+...
+</FilterList>
+<FilterList label="リリース" icon={<DateRangeeIcon />}>
+   ...
+</FilterList>
+</CardContent>
+</Card>
 );
 
 const SongList = () => (
-    <List aside={<SongFilterSidebar />}>
-        <Datagrid>
-            ...
-        </Datagrid>
-    </List>
+<List aside={<SongFilterSidebar />}>
+<Datagrid>
+...
+</Datagrid>
+</List>
 );
 ```
 
-Check [the Saved Queries Tutorial](./FilteringTutorial.md#saved-queries-let-users-save-filter-and-sort) to learn more.
+[保存されたクエリのチュートリアル](./FilteringTutorial.md#saved-queries-let-users-save-filter-and-sort)で詳細を確認してください。
 
-Finally, react-admin offers low-level components and hooks to **build your own search UI**:
+最後に、React-adminは**独自の検索UIを構築するための低レベルコンポーネントおよびフック**を提供します：
 
-- [`<FilterButton>`](./FilterButton.md)
-- [`<SearchInput>`](./FilteringTutorial.md#searchinput)
-- [`<FilterLiveSearch>`](./FilterLiveSearch.md)
-- [`<SavedQueriesList>`](./SavedQueriesList.md)
-- [`useListContext()`](./useListContext.md)
-- [`useList()`](./useList.md)
+* [`<FilterButton>`](./FilterButton.md)
+* [`<SearchInput>`](./FilteringTutorial.md#searchinput)
+* [`<FilterLiveSearch>`](./FilterLiveSearch.md)
+* [`<SavedQueriesList>`](./SavedQueriesList.md)
+* [`useListContext()`](./useListContext.md)
+* [`useList()`](./useList.md)
 
-Check the [Building A Custom Filter Tutorial](./FilteringTutorial.md#building-a-custom-filter) to learn more.
+[カスタムフィルターチュートリアル](./FilteringTutorial.md#building-a-custom-filter)を確認して詳細を学んでください。
 
-## Forms & Validation
+## フォームとバリデーション
 
-Many admin apps let users perform complex tasks implying the update of many fields and records. To allow such complex workflows, developers must be able to build sophisticated forms, with elaborate validation rules.
+多くの管理アプリは、複数のフィールドおよびレコードを更新する複雑なタスクをユーザーに実行させます。そのような複雑なワークフローを可能にするために、開発者は精巧なバリデーションルールを持つ高度なフォームを構築できる必要があります。
 
-React-admin offers a **rich set of input components and form layouts** to build forms, powered by [Material UI](https://mui.com/material-ui/getting-started/) and [react-hook-form](https://react-hook-form.com/). React-admin's form components also take care of binding the form values to the record being edited and validating the form inputs.
+React-adminは、フォームを構築するための**豊富な入力コンポーネントおよびフォームレイアウト**を提供します。これらは、[Material UI](https://mui.com/material-ui/getting-started/)および[react-hook-form](https://react-hook-form.com/)によって強化されています。React-adminのフォームコンポーネントは、フォームの値を編集中のレコードにバインドし、フォーム入力のバリデーションを行うことも自動的に行います。
 
-For instance, here is how to build a tabbed form for editing a blog post:
+例えば、ブログ投稿を編集するためのタブ付きフォームを構築する方法は次のとおりです：
 
 {% raw %}
+
 ```jsx
 import {
-    TabbedForm,
-    Edit,
-    Datagrid,
-    TextField,
-    DateField,
-    TextInput,
-    ReferenceManyField,
-    NumberInput,
-    DateInput,
-    BooleanInput,
-    EditButton
+TabbedForm,
+Edit,
+Datagrid,
+TextField,
+DateField,
+TextInput,
+ReferenceManyField,
+NumberInput,
+DateInput,
+BooleanInput,
+EditButton
 } from 'react-admin';
 
 export const PostEdit = () => (
-    <Edit>
-        <TabbedForm>
-            <TabbedForm.Tab label="summary">
-                <TextInput label="Id" source="id" InputProps={{ disabled: true }} />
-                <TextInput source="title" validate={required()} />
-                <TextInput multiline source="teaser" validate={required()} />
-            </TabbedForm.Tab>
-            <TabbedForm.Tab label="body">
-                <RichTextInput source="body" validate={required()} label={false} />
-            </TabbedForm.Tab>
-            <TabbedForm.Tab label="Miscellaneous">
-                <TextInput label="Password (if protected post)" source="password" type="password" />
-                <DateInput label="Publication date" source="published_at" />
-                <NumberInput source="average_note" validate={[ number(), minValue(0) ]} />
-                <BooleanInput label="Allow comments?" source="commentable" defaultValue />
-                <TextInput label="Nb views" source="views" InputProps={{ disabled: true }} />
-            </TabbedForm.Tab>
-            <TabbedForm.Tab label="comments">
-                <ReferenceManyField reference="comments" target="post_id" label={false}>
-                    <Datagrid>
-                        <TextField source="body" />
-                        <DateField source="created_at" />
-                        <EditButton />
-                    </Datagrid>
-                </ReferenceManyField>
-            </TabbedForm.Tab>
-        </TabbedForm>
-    </Edit>
+<Edit>
+<TabbedForm>
+<TabbedForm.Tab label="概要">
+<TextInput label="ID" source="id" InputProps={{ disabled: true }} />
+<TextInput source="title" validate={required()} />
+<TextInput multiline source="teaser" validate={required()} />
+</TabbedForm.Tab>
+<TabbedForm.Tab label="本文">
+<RichTextInput source="body" validate={required()} label={false} />
+</TabbedForm.Tab>
+<TabbedForm.Tab label="その他">
+<TextInput label="パスワード（保護された投稿の場合）" source="password" type="password" />
+<DateInput label="公開日" source="published_at" />
+<NumberInput source="average_note" validate={[ number(), minValue(0) ]} />
+<BooleanInput label="コメントを許可しますか？" source="commentable" defaultValue />
+<TextInput label="ビュー数" source="views" InputProps={{ disabled: true }} />
+</TabbedForm.Tab>
+<TabbedForm.Tab label="コメント">
+<ReferenceManyField reference="comments" target="post_id" label={false}>
+<Datagrid>
+<TextField source="body" />
+<DateField source="created_at" />
+<EditButton />
+</Datagrid>
+</ReferenceManyField>
+</TabbedForm.Tab>
+</TabbedForm>
+</Edit>
 );
 ```
+
 {% endraw %}
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/tabbed-form.webm" type="video/webm"/>
-  <source src="./img/tabbed-form.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop> <source src="./img/tabbed-form.webm" type="video/webm"/> <source src="./img/tabbed-form.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video>
+### フォームレイアウト
 
-### Form Layouts
+React-adminは、初期状態でいくつかのフォームレイアウトを提供します：
 
-React-admin offers, out of the box, several form layouts:
+* [`<SimpleForm>`](./SimpleForm.md)：シングルカラムレイアウト用
+* [`<TabbedForm>`](./TabbedForm.md)：タブ付きレイアウト用
+* [`<AccordionForm>`](./AccordionForm.md)：折りたたみセクション付きの長いフォーム用
+* [`<LongForm>`](./LongForm.md)：ナビゲーションサイドバー付きの長いフォーム用
+* [`<WizardForm>`](./WizardForm.md)：マルチステップフォーム用
+* [`<EditDialog>`](./EditDialog.md)：モーダルダイアログ内のサブフォーム用
+* [`Form`](./Form.md)：カスタムレイアウトのベースとして使用するヘッドレスコンポーネント
 
-- [`<SimpleForm>`](./SimpleForm.md) for a single-column layout
-- [`<TabbedForm>`](./TabbedForm.md) for a tabbed layout
-- [`<AccordionForm>`](./AccordionForm.md) for long forms with collapsible sections
-- [`<LongForm>`](./LongForm.md) for long forms with a navigation sidebar
-- [`<WizardForm>`](./WizardForm.md) for multi-step forms
-- [`<EditDialog>`](./EditDialog.md) for sub-forms in a modal dialog
-- and [`Form`](./Form.md), a headless component to use as a base for your custom layouts
+### 入力コンポーネント
 
-### Input Components
+フォーム内では、多くのデータタイプに対応した[入力コンポーネント](./Inputs.md)を使用できます：
 
-Inside forms, you can use specialize [input components](./Inputs.md), designed for many types of data:
+|データタイプ|例|入力コンポーネント|
+|---|---|---|
+|文字列|`'Lorem Ipsum'`|[`<TextInput>`](./TextInput.md)|
+|リッチテキスト|`<p>Lorem Ipsum</p>`|[`<RichTextInput>`](./RichTextInput.md)|
+|Markdown|`# Lorem Ipsum`|[`<MarkdownInput>`](./MarkdownInput.md)|
+|パスワード|`'********'`|[`<PasswordInput>`](./PasswordInput.md)|
+|画像URL|`'https://example.com/image.png'`|[`<ImageInput>`](./ImageInput.md)|
+|ファイルURL|`'https://example.com/file.pdf'`|[`<FileInput>`](./FileInput.md)|
+|数値|`42`, `1.345`|[`<NumberInput>`](./NumberInput.md)|
+|真偽値|`true`|[`<BooleanInput>`](./BooleanInput.md), [`<NullableBooleanInput>`](./NullableBooleanInput.md)|
+|日付|`'2022-10-23'`|[`<DateInput>`](./DateInput.md)|
+|時間|`'14:30:00'`|[`<TimeInput>`](./TimeInput.md)|
+|日付と時間|`'2022-10-24T19:40:28.003Z'`|[`<DateTimeInput>`](./DateTimeInput.md)|
+|オブジェクト|`{ foo: 'bar' }`|すべての入力コンポーネント (例： [`source`](./Inputs.md#source))|
+|列挙型|`'foo'`|[`<SelectInput>`](./SelectInput.md), [`<AutocompleteInput>`](./AutocompleteInput.md), [`<RadioButtonGroupInput>`](./RadioButtonGroupInput.md)|
+|外部キー|`42`|[`<ReferenceInput>`](./ReferenceInput.md)|
+|オブジェクトの配列|`[{ item: 'jeans', qty: 3 }, { item: 'shirt', qty: 1 }]`|[`<ArrayInput>`](./ArrayInput.md)|
+|列挙型の配列|`['foo', 'bar']`|[`<SelectArrayInput>`](./SelectArrayInput.md), [`<AutocompleteArrayInput>`](./AutocompleteArrayInput.md), [`<CheckboxGroupInput>`](./CheckboxGroupInput.md), [`<DualListInput>`](./DualListInput.md)|
+|外部キーの配列|`[42, 43]`|[`<ReferenceArrayInput>`](./ReferenceArrayInput.md)|
+|翻訳|`{ en: 'Hello', fr: 'Bonjour' }`|[`<TranslatableInputs>`](./TranslatableInputs.md)|
+|関連レコード|`[{ id: 42, title: 'Hello' }, { id: 43, title: 'World' }]`|[`<ReferenceManyInput>`](./ReferenceManyInput.md), [`<ReferenceManyToManyInput>`](./ReferenceManyToManyInput.md), [`<ReferenceOneInput>`](./ReferenceOneInput.md)|
 
-| Data Type             | Example value                                                | Input Components                                                                                                                                                                                     |
-|-----------------------|--------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| String                | `'Lorem Ipsum'`                                              | [`<TextInput>`](./TextInput.md)                                                                                                                                                                      |
-| Rich text             | `<p>Lorem Ipsum</p>`                                         | [`<RichTextInput>`](./RichTextInput.md)                                                                                                                                                              |
-| Markdown              | `# Lorem Ipsum`                                              | [`<MarkdownInput>`](./MarkdownInput.md)                                                                                                                                                              |
-| Password              | `'********'`                                                 | [`<PasswordInput>`](./PasswordInput.md)                                                                                                                                                              |
-| Image URL             | `'https://example.com/image.png'`                            | [`<ImageInput>`](./ImageInput.md)                                                                                                                                                                    |
-| File URL              | `'https://example.com/file.pdf'`                             | [`<FileInput>`](./FileInput.md)                                                                                                                                                                      |
-| Number                | `42`, `1.345`                                                | [`<NumberInput>`](./NumberInput.md)                                                                                                                                                                  |
-| Boolean               | `true`                                                       | [`<BooleanInput>`](./BooleanInput.md), [`<NullableBooleanInput>`](./NullableBooleanInput.md)                                                                                                         |
-| Date                  | `'2022-10-23'`                                               | [`<DateInput>`](./DateInput.md)                                                                                                                                                                      |
-| Time                  | `'14:30:00'`                                                 | [`<TimeInput>`](./TimeInput.md)                                                                                                                                                                      |
-| Date & time           | `'2022-10-24T19:40:28.003Z'`                                 | [`<DateTimeInput>`](./DateTimeInput.md)                                                                                                                                                              |
-| Object                | `{ foo: 'bar' }`                                             | All inputs (see [ `source`](./Inputs.md#source))                                                                                                                                                                |
-| Enum                  | `'foo'`                                                      | [`<SelectInput>`](./SelectInput.md), [`<AutocompleteInput>`](./AutocompleteInput.md), [`<RadioButtonGroupInput>`](./RadioButtonGroupInput.md)                                                        |
-| Foreign key           | `42`                                                         | [`<ReferenceInput>`](./ReferenceInput.md)                                                                                                                                                            |
-| Array of objects      | `[{ item: 'jeans', qty: 3 }, { item: 'shirt', qty: 1 }]`     | [`<ArrayInput>`](./ArrayInput.md)                                                                                                                                                                    |
-| Array of Enums        | `['foo', 'bar']`                                             | [`<SelectArrayInput>`](./SelectArrayInput.md), [`<AutocompleteArrayInput>`](./AutocompleteArrayInput.md), [`<CheckboxGroupInput>`](./CheckboxGroupInput.md), [`<DualListInput>`](./DualListInput.md) |
-| Array of foreign keys | `[42, 43]`                                                   | [`<ReferenceArrayInput>`](./ReferenceArrayInput.md)                                                                                                                                                  |
-| Translations          | `{ en: 'Hello', fr: 'Bonjour' }`                             | [`<TranslatableInputs>`](./TranslatableInputs.md)                                                                                                                                                    |
-| Related records       | `[{ id: 42, title: 'Hello' }, { id: 43, title: 'World' }]`   | [`<ReferenceManyInput>`](./ReferenceManyInput.md), [`<ReferenceManyToManyInput>`](./ReferenceManyToManyInput.md), [`<ReferenceOneInput>`](./ReferenceOneInput.md)                                    |
+### 従属入力
 
-### Dependent Inputs
-
-You can build dependent inputs, using the [react-hook-form's `useWatch` hook](https://react-hook-form.com/docs/usewatch). For instance, here is a `CityInput` that displays the cities of the selected country:
+[react-hook-formの`useWatch`フック](https://react-hook-form.com/docs/usewatch)を使用して従属入力を構築できます。例えば、選択された国の都市を表示する`CityInput`は次のようになります：
 
 ```jsx
 import * as React from 'react';
@@ -649,62 +577,62 @@ import { useWatch } from 'react-hook-form';
 
 const countries = ['USA', 'UK', 'France'];
 const cities = {
-    USA: ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix'],
-    UK: ['London', 'Birmingham', 'Glasgow', 'Liverpool', 'Bristol'],
-    France: ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice'],
+USA: ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix'],
+UK: ['London', 'Birmingham', 'Glasgow', 'Liverpool', 'Bristol'],
+France: ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice'],
 };
 const toChoices = items => items.map(item => ({ id: item, name: item }));
-// toChoices(coutries) should be [{ id: 'USA', name: 'USA' }, ...]
+// toChoices(countries)は[{ id: 'USA', name: 'USA' }, ...]になります
 
 
 const CityInput = () => {
-    const country = useWatch({ name: 'country' });
-    return (
-        <SelectInput
-            choices={country ? toChoices(cities[country]) : []}
-            source="cities"
-        />
-    );
+const country = useWatch({ name: 'country' });
+return (
+<SelectInput
+choices={country ? toChoices(cities[country]) : []}
+source="cities"
+/>
+);
 };
 
 const OrderEdit = () => (
-    <Edit>
-        <SimpleForm>
-            <SelectInput source="country" choices={toChoices(countries)} />
-            <CityInput />
-        </SimpleForm>
-    </Edit>
+<Edit>
+<SimpleForm>
+<SelectInput source="country" choices={toChoices(countries)} />
+<CityInput />
+</SimpleForm>
+</Edit>
 );
 
 export default OrderEdit;
 ```
 
-### Validation
+### バリデーション
 
-React-admin ships with a powerful and versatile validation engine.
+React-adminは強力で多用途なバリデーションエンジンを備えています。
 
-![Validation example](./img/validation.png)
+![バリデーションの例](./img/validation.png)
 
-React-admin forms support the most common validation strategies:
+React-adminのフォームは、最も一般的なバリデーション戦略をサポートしています：
 
-* [per field validators](./Validation.md#per-input-validation-built-in-field-validators),
-* [form validation](./Validation.md#global-validation),
-* [validation schema powered by yup or zod](./Validation.md#schema-validation),
-* [server-side validation](./Validation.md#server-side-validation).
+* [フィールドごとのバリデーター](./Validation.md#per-input-validation-built-in-field-validators),
+* [フォーム全体のバリデーション](./Validation.md#global-validation),
+* [yupまたはzodによるバリデーションスキーマ](./Validation.md#schema-validation),
+* [サーバーサイドバリデーション](./Validation.md#server-side-validation).
 
-Here is an example of per-field validation:
+以下はフィールドごとのバリデーションの例です：
 
 ```jsx
 import {
-    required,
-    minLength,
-    maxLength,
-    minValue,
-    maxValue,
-    number,
-    regex,
-    email,
-    choices
+required,
+minLength,
+maxLength,
+minValue,
+maxValue,
+number,
+regex,
+email,
+choices
 } from 'react-admin';
 
 const validateFirstName = [required(), minLength(2), maxLength(15)];
@@ -714,296 +642,272 @@ const validateZipCode = regex(/^\d{5}$/, 'Must be a valid Zip Code');
 const validateGender = choices(['m', 'f', 'nc'], 'Please choose one of the values');
 
 export const UserCreate = () => (
-    <Create>
-        <SimpleForm>
-            <TextInput label="First Name" source="firstName" validate={validateFirstName} />
-            <TextInput label="Email" source="email" validate={validateEmail} />
-            <TextInput label="Age" source="age" validate={validateAge}/>
-            <TextInput label="Zip Code" source="zip" validate={validateZipCode}/>
-            <SelectInput label="Gender" source="gender" choices={[
-                { id: 'm', name: 'Male' },
-                { id: 'f', name: 'Female' },
-                { id: 'nc', name: 'Prefer not say' },
-            ]} validate={validateGender}/>
-        </SimpleForm>
-    </Create>
+<Create>
+<SimpleForm>
+<TextInput label="First Name" source="firstName" validate={validateFirstName} />
+<TextInput label="Email" source="email" validate={validateEmail} />
+<TextInput label="Age" source="age" validate={validateAge}/>
+<TextInput label="Zip Code" source="zip" validate={validateZipCode}/>
+<SelectInput label="Gender" source="gender" choices={[
+{ id: 'm', name: 'Male' },
+{ id: 'f', name: 'Female' },
+{ id: 'nc', name: 'Prefer not say' },
+]} validate={validateGender}/>
+</SimpleForm>
+</Create>
 );
 ```
 
-### AutoSave
+### 自動保存
 
-React-admin lets you build forms saving changes automatically with [`<AutoSave>`](./AutoSave.md), so that users never lose their changes.
+React-adminでは、ユーザーが変更を失うことがないように、変更を自動的に保存するフォームを[`<AutoSave>`](./AutoSave.md)を使用して構築できます。
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/AutoSave.webm" type="video/webm"/>
-  <source src="./img/AutoSave.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop> <source src="./img/AutoSave.webm" type="video/webm"/> <source src="./img/AutoSave.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video>
+### JSONスキーマフォーム
 
-### JSON Schema Forms
-
-Finally, you can generate entire **forms based on a JSON schema**, using the [`<JsonSchemaForm>` component](./JsonSchemaForm.md).
+最後に、[`<JsonSchemaForm>`コンポーネント](./JsonSchemaForm.md)を使用して、**JSONスキーマに基づいてフォーム全体を生成**できます。
 
 {% raw %}
+
 ```jsx
 import { Edit } from "react-admin";
 import { JsonSchemaForm } from "@react-admin/ra-json-schema-form";
 
 const CustomerEdit = () => (
   <Edit>
-    <JsonSchemaForm
-      schema={{
-        type: "object",
-        properties: {
-          id: { type: "number" },
-          first_name: { type: "string", title: "First name" },
-          last_name: { type: "string", minLength: 3 },
-          dob: { type: "string", format: "date" },
-          sex: { type: "string", enum: ["male", "female"] },
-          employer_id: { type: "number" },
-          occupations: {
-            type: "array",
-            items: {
-              type: "object",
-              properties: {
-                name: { type: "string" },
-                from: { type: "string", format: "date" },
-                to: { type: "string", format: "date" },
-              },
-            },
-          },
-        },
-        required: ["id", "last_name", "employer_id"],
-      }}
-      uiSchema={{
-        id: { "ui:disabled": true },
-        employer_id: {
-          "ui:widget": "reference",
-          "ui:options": {
-            reference: "employers",
-            optionText: "name",
-          },
-        },
-      }}
-      onChange={(change) =>
-        process.env.NODE_ENV !== "test" && console.log("changed", change)
-      }
-      onError={(error) =>
-        process.env.NODE_ENV !== "test" && console.log("error", error)
-      }
-    />
+<JsonSchemaForm
+  schema={{
+type: "object",
+properties: {
+  id: { type: "number" },
+  first_name: { type: "string", title: "First name" },
+  last_name: { type: "string", minLength: 3 },
+  dob: { type: "string", format: "date" },
+  sex: { type: "string", enum: ["male", "female"] },
+  employer_id: { type: "number" },
+  occupations: {
+type: "array",
+items: {
+  type: "object",
+  properties: {
+name: { type: "string" },
+from: { type: "string", format: "date" },
+to: { type: "string", format: "date" },
+  },
+},
+  },
+},
+required: ["id", "last_name", "employer_id"],
+  }}
+  uiSchema={{
+id: { "ui:disabled": true },
+employer_id: {
+  "ui:widget": "reference",
+  "ui:options": {
+reference: "employers",
+optionText: "name",
+  },
+},
+  }}
+  onChange={(change) =>
+process.env.NODE_ENV !== "test" && console.log("changed", change)
+  }
+  onError={(error) =>
+process.env.NODE_ENV !== "test" && console.log("error", error)
+  }
+/>
   </Edit>
 );
 ```
+
 {% endraw %}
 
-![JsonSchemaForm](https://marmelab.com/ra-enterprise/modules/assets/jsonschemaform.webp)
+![JsonSchemaForm](https://react-admin-ee.marmelab.com/assets/jsonschemaform.webp)
 
-And if you want something super custom that react-admin doesn't support out of the box, you can always use [react-hook-form](https://react-hook-form.com/) directly.
+React-adminがサポートしていないカスタム要件がある場合は、直接[react-hook-form](https://react-hook-form.com/)を使用することもできます。
 
-## AI-Powered Components
+## AI搭載コンポーネント
 
-React-admin leverages recent breakthroughs in Artificial Intelligence (AI) to **boost user productivity**.
+React-adminは、人工知能（AI）の最近の進歩を活用して**ユーザーの生産性を向上**させます。
 
-One example is [`<PredictiveTextInput>`](./PredictiveTextInput.md), which suggests completion for the input value, using your favorite AI backend. Users can accept the completion by pressing the `Tab` key. It's like Intellisense or Copilot for your forms.
+例として、`<PredictiveTextInput>`は、お気に入りのAIバックエンドを使用して入力値の補完を提案するコンポーネントです。ユーザーは`Tab`キーを押して補完を受け入れることができます。これは、フォームのためのIntellisenseやCopilotのようなものです。
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/PredictiveTextInput.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop> <source src="./img/PredictiveTextInput.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video>
 
-Use `<PredictiveTextInput>` in any react-admin form:
+任意のReact-adminフォームで`<PredictiveTextInput>`を使用します：
 
 ```jsx
 import { Edit, SimpleForm, TextInput } from 'react-admin';
 import { PredictiveTextInput } from '@react-admin/ra-ai';
 
 const PersonEdit = () => (
-    <Edit>
-        <SimpleForm>
-            <TextInput source="firstName" />
-            <TextInput source="lastName" />
-            <TextInput source="company" />
-            <PredictiveTextInput source="email" />
-            <PredictiveTextInput source="website" />
-            <PredictiveTextInput source="bio" multiline />
-        </SimpleForm>
-    </Edit>
+<Edit>
+<SimpleForm>
+<TextInput source="firstName" />
+<TextInput source="lastName" />
+<TextInput source="company" />
+<PredictiveTextInput source="email" />
+<PredictiveTextInput source="website" />
+<PredictiveTextInput source="bio" multiline />
+</SimpleForm>
+</Edit>
 );
 ```
 
-You can also use the [`<SmartRichTextInput>`](./SmartRichTextInput.md) component, which lets users edit HTML documents in WYSIWYG with superpowers:
+また、HTMLドキュメントをWYSIWYGで編集する`<SmartRichTextInput>`コンポーネントも使用できます。
 
-<video controls playsinline muted loop poster="https://marmelab.com/ra-enterprise/modules/assets/SmartRichTextInput.png" >
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/SmartRichTextInput.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<video controls playsinline muted loop poster="https://react-admin-ee.marmelab.com/assets/SmartRichTextInput.png" > <source src="https://react-admin-ee.marmelab.com/assets/SmartRichTextInput.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+## 高速
 
-## Fast
+React-adminはシングルページアプリケーションのアーキテクチャを活用し、React-adminアプリをデフォルトで非常に高速にするさまざまなパフォーマンス最適化を実装しています。
 
-React-admin takes advantage of the Single-Page-Application architecture, implementing various performance optimizations that make react-admin apps incredibly fast by default.
+* **非ブロッキングデータ取得**：APIデータを待つ代わりに、UIのレンダリングプロセスをすぐに開始します。この戦略により、ユーザーインタラクションが即座にフィードバックを受け取り、サーバーサイドレンダリングアプリよりも高速なアプリケーションを実現します。
+* **再検証中の表示**：ページは以前のリクエストからのデータを表示しながら新しいデータを取得します。ほとんどの場合、新しいデータは同じまま（例：リストページを再訪する場合）であり、ユーザーはネットワークリクエストによる遅延を感じません。
+* **ローカルデータベースミラー**：React-adminは、`dataProvider.getList()`を使用してフェッチされた個々のレコードで内部キャッシュを埋めます。ユーザーが特定のレコードを表示すると、React-adminは内部データベースを活用して`dataProvider.getOne()`クエリレスポンスを事前に入力します。これにより、レコードの詳細が即座に表示され、サーバーレスポンスの待機時間がなくなります。
+* **楽観的更新**：ユーザーがレコードを編集し、「保存」ボタンを押すと、React-adminはすぐにローカルデータベースを更新し、更新クエリをサーバーに送信する前に変更されたデータを表示します。その結果、UIの変更は即座に表示されます - サーバーレスポンスの待機時間は必要ありません。同じロジックはレコードの削除にも適用されます。
+* **クエリの重複排除**：React-adminは、ページの複数のコンポーネントが同じデータプロバイダークエリを同一のデータに対して呼び出す場合を識別し、その場合にはデータプロバイダーへの呼び出しを単一にまとめます。
+* **クエリの集約**：React-adminは、リスト内で`<ReferenceField>`を使用する際に、関連データに対するすべての`dataProvider.getOne()`呼び出しを傍受し、要求されたIDを集約および重複排除し、単一の`dataProvider.getMany()`リクエストを発行します。この技術により、n+1クエリ問題が効果的に解決され、サーバークエリが減少し、リストビューのレンダリングが高速化されます。
+* **オプトインクエリキャッシュ**：React-adminは、特定の期間APIエンドポイントを再フェッチしないオプションを提供し、APIレスポンスが時間経過とともに一貫している場合に使用できます。
 
-- **Non-Blocking Data Fetching**: Instead of waiting for API data before starting to render the UI, React-admin initiates the rendering process immediately. This strategy ensures a snappy application where user interactions receive instant feedback, outperforming Server-side Rendered apps by eliminating waiting times for server responses.
-- **Stale While Revalidate**: This technique allows pages to display data from previous requests while newer data is being fetched. In most instances, the fresh data remains the same (e.g., when revisiting a list page), ensuring users won't notice any delays due to network requests.
-- **Local Database Mirror**: React-admin populates its internal cache with individual records fetched using `dataProvider.getList()`. When a user views a specific record, React-admin leverages its internal database to pre-fill the `dataProvider.getOne()` query response. As a result, record details are displayed instantaneously, without any wait time for server responses.
-- **Optimistic Updates**: When a user edits a record and hits the "Save" button, React-admin immediately updates its local database and displays the revised data, prior to sending the update query to the server. The resulting UI changes are instant - no server response wait time required. The same logic applies to record deletions.
-- **Query Deduplication**: React-admin identifies instances where multiple components on a page call the same data provider query for identical data. In such cases, it ensures only a single call to the data provider is made.
-- **Query Aggregation**: React-admin intercepts all calls to `dataProvider.getOne()` for related data when a `<ReferenceField>` is used in a list. It aggregates and deduplicates the requested ids, and issues a single `dataProvider.getMany()` request. This technique effectively addresses the n+1 query problem, reduces server queries, and accelerates list view rendering.
-- **Opt-In Query Cache**: React-admin provides an option to prevent refetching an API endpoint for a specified duration, which can be used when you're confident that the API response will remain consistent over time.
+## アンドゥ
 
-## Undo
+ユーザーがフォームを送信したり、レコードを削除したりすると、UIは即座に変更を反映します。ユーザーは変更の確認メッセージも表示され、そこに「アンドゥ」ボタンが表示されます。確認がスライドアウトする前に（デフォルトの遅延は5秒）、アンドゥボタンをクリックすると、React-adminは前の状態に戻り、データプロバイダーへの呼び出しをキャンセルします。
 
-When users submit a form, or delete a record, the UI reflects their change immediately. They also see a confirmation message for the change, containing an "Undo" button. If they click on it before the confirmation slides out (the default delay is 5s), react-admin reverts to the previous state and cancels the call to the data provider.
+<video controls autoplay playsinline muted loop> <source src="./img/tutorial\_post\_edit\_undo.webm" type="video/webm"/> <source src="./img/tutorial\_post\_edit\_undo.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video>
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/tutorial_post_edit_undo.webm" type="video/webm"/>
-  <source src="./img/tutorial_post_edit_undo.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+このアンドゥ機能はデフォルトで有効になっており、サーバー側で特別な設定は不要です。実際、React-adminはユーザーに「猶予」期間を与えるために、データプロバイダーへのミューテーション呼び出しを遅延させます。そのため、ユーザーが更新フォームを送信してから実際に`dataProvider.update()`呼び出しが行われるまでの間に5秒の遅延があります - UIはすぐに変更を反映しますが。
 
-This undo feature is enabled by default, and requires no particular setup on the server side. In fact, react-admin delays the call to the data provider for mutations, to give users a "grace" period. That's why the actual call to `dataProvider.update()` occurs 5 seconds after the user submits an update form - even though the UI reflects the changes immediately.
+この機能をページごとに無効にすることもでき、異なる[ミューテーションモード](./Edit.md#mutationmode)を選択することができます。
 
-You can disable this feature page by page, by choosing a different [mutationMode](./Edit.md#mutationmode).
+## ロールと権限
 
-## Roles & Permissions
+特定のアクションが特定のユーザーに許可されているかを確認し、ユーザーの権限に基づいてコンテンツをフィルタリングするのはサーバーの責任です。しかし、ロールと権限はクライアント側の問題でもあります。ユーザーのロールに基づいてアクションを非表示または無効にしたい場合があります。例えば、`admin`ロールを持たないユーザーには「削除」ボタンを表示したくない場合があります。
 
-It's the server's responsibility to check that an action is allowed for a given user, and to filter the content based on user permissions. But roles and permissions are also a client-side concern, because you want to hide or disable actions based on the user's role. For example, you may not want to show a "Delete" button for users who don't have the `admin` role.
+React-adminでは、**単純なルールセットに基づいてユーザーインターフェースをカスタマイズ**し、各ロールの権限を中央で定義できます。特定のロールにカスタムページを持たせたり、ユーザーのロールに基づいてコンポーネントのプロップを変更したりする必要がある場合でも、React-adminでそれを行うことができます。この機能は、`dataProvider`と同じアダプターアプローチを使用しているため、任意の認証バックエンドを使用できます。
 
-React-admin lets you **customize the user interface based on a simple set of rules**, and to define the permissions for each role in a centralized place. Whether you need to have custom pages for specific roles, or to change the props of a component based on the user's role, react-admin lets you do it. This feature uses the same adapter approach as for the `dataProvider`, which means you can use any authentication backend you want.
+<video controls="controls" style="max-width: 100%"> <source src="./img/ra-rbac.mp4" type="video/mp4" /> </video>
 
-<video controls="controls" style="max-width: 100%">
-    <source src="./img/ra-rbac.mp4" type="video/mp4" />
-</video>
+ページ、フィールド、ボタンなどの権限を定義できます。ロールと権限は`authProvider`によって管理されるため、任意のデータソース（Active Directoryサーバーなど）を使用できます。
 
-You can define permissions for pages, fields, buttons, etc. Roles and permissions are managed by the `authProvider`, which means you can use any data source you want (including an ActiveDirectory server).
-
-The above demo uses the following set of permissions:
+上記のデモは、以下の権限セットを使用しています：
 
 ```jsx
 const roles = {
-    accountant: [
-        { action: ['list', 'show'], resource: 'products' },
-        { action: 'read', resource: 'products.*' },
-        { type: 'deny', action: 'read', resource: 'products.description' },
-        { action: 'list', resource: 'categories' },
-        { action: 'read', resource: 'categories.*' },
-        { action: ['list', 'show'], resource: 'customers' },
-        { action: 'read', resource: 'customers.*' },
-        { action: '*', resource: 'invoices' },
-    ],
-    contentEditor: [
-        {
-            action: ['list', 'create', 'edit', 'delete', 'export'],
-            resource: 'products',
-        },
-        { action: 'read', resource: 'products.*' },
-        { type: 'deny', action: 'read', resource: 'products.stock' },
-        { type: 'deny', action: 'read', resource: 'products.sales' },
-        { action: 'write', resource: 'products.*' },
-        { type: 'deny', action: 'write', resource: 'products.stock' },
-        { type: 'deny', action: 'write', resource: 'products.sales' },
-        { action: 'list', resource: 'categories' },
-        { action: ['list', 'edit'], resource: 'customers' },
-        { action: ['list', 'edit'], resource: 'reviews' },
-    ],
-    stockManager: [
-        { action: ['list', 'edit', 'export'], resource: 'products' },
-        { action: 'read', resource: 'products.*' },
-        {
-            type: 'deny',
-            action: 'read',
-            resource: 'products.description',
-        },
-        { action: 'write', resource: 'products.stock' },
-        { action: 'write', resource: 'products.sales' },
-        { action: 'list', resource: 'categories' },
-    ],
-    administrator: [{ action: '*', resource: '*' }],
+accountant: [
+{ action: ['list', 'show'], resource: 'products' },
+{ action: 'read', resource: 'products.*' },
+{ type: 'deny', action: 'read', resource: 'products.description' },
+{ action: 'list', resource: 'categories' },
+{ action: 'read', resource: 'categories.*' },
+{ action: ['list', 'show'], resource: 'customers' },
+{ action: 'read', resource: 'customers.*' },
+{ action: '*', resource: 'invoices' },
+],
+contentEditor: [
+{
+action: ['list', 'create', 'edit', 'delete', 'export'],
+resource: 'products',
+},
+{ action: 'read', resource: 'products.*' },
+{ type: 'deny', action: 'read', resource: 'products.stock' },
+{ type: 'deny', action: 'read', resource: 'products.sales' },
+{ action: 'write', resource: 'products.*' },
+{ type: 'deny', action: 'write', resource: 'products.stock' },
+{ type: 'deny', action: 'write', resource: 'products.sales' },
+{ action: 'list', resource: 'categories' },
+{ action: ['list', 'edit'], resource: 'customers' },
+{ action: ['list', 'edit'], resource: 'reviews' },
+],
+stockManager: [
+{ action: ['list', 'edit', 'export'], resource: 'products' },
+{ action: 'read', resource: 'products.*' },
+{
+type: 'deny',
+action: 'read',
+resource: 'products.description',
+},
+{ action: 'write', resource: 'products.stock' },
+{ action: 'write', resource: 'products.sales' },
+{ action: 'list', resource: 'categories' },
+],
+administrator: [{ action: '*', resource: '*' }],
 };
 ```
 
-To learn more about authentication, roles, and permissions, check out the following pages:
+認証、ロール、および権限について詳細を知りたい場合は、以下のページを確認してください：
 
-- The [Security introduction](./Authentication.md)
-- [Role-Based Access Control (RBAC)](./AuthRBAC.md)
-- [`Authenticated`](./Authenticated.md)
-- [`IfCanAccess`](./IfCanAccess.md)
-- [`WithPermissions`](./WithPermissions.md)
-- [`useAuthProvider`](./useAuthProvider.md)
-- [`useAuthenticated`](./useAuthenticated.md)
-- [`useAuthstate`](./useAuthState.md)
-- [`useGetIdentity`](./useGetIdentity.md)
-- [`useLogin`](./useLogin.md)
-- [`useLogout`](./useLogout.md)
-- [`usePermissions`](./usePermissions.md)
-- [`useCanAccess`](./useCanAccess.md)
-- [`canAccess`](./canAccess.md)
+* [セキュリティの導入](./Authentication.md)
+* [ロールベースのアクセス制御（RBAC）](./AuthRBAC.md)
+* [`Authenticated`](./Authenticated.md)
+* [`IfCanAccess`](./IfCanAccess.md)
+* [`WithPermissions`](./WithPermissions.md)
+* [`useAuthProvider`](./useAuthProvider.md)
+* [`useAuthenticated`](./useAuthenticated.md)
+* [`useAuthstate`](./useAuthState.md)
+* [`useGetIdentity`](./useGetIdentity.md)
+* [`useLogin`](./useLogin.md)
+* [`useLogout`](./useLogout.md)
+* [`usePermissions`](./usePermissions.md)
+* [`useCanAccess`](./useCanAccess.md)
+* [`canAccess`](./canAccess.md)
 
-## Revisions & Versioning
+## リビジョンとバージョニング
 
-React-admin lets users **track the changes** made to any record. They can see the **history of revisions**, **compare differences** between any two versions, and **revert to a previous state** if needed.
+React-adminはユーザーに対して**任意のレコードの変更を追跡**することを可能にします。ユーザーは**リビジョンの履歴**を確認し、任意の2つのバージョン間の**違いを比較**し、必要に応じて**以前の状態に戻す**ことができます。
 
-<video controls autoplay playsinline muted loop>
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-history.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop> <source src="https://react-admin-ee.marmelab.com/assets/ra-history.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video>
 
-In detail, revision tracking lets you:
+具体的には、リビジョントラッキングにより以下が可能になります：
 
-- Prevent data loss with robust version control
-- Enhance transparency with detailed change logs
-- Uncover insights with the 'diff' feature, a powerful tool for comparing versions
-- Boost confidence in making changes with easy rollback options
+* 強力なバージョン管理によりデータ損失を防ぐ
+* 詳細な変更ログで透明性を高める
+* バージョン比較機能で洞察を得る
+* 簡単なロールバックオプションで変更の自信を高める
 
-These features are available through the following components:
+これらの機能は、以下のコンポーネントを通じて提供されます：
 
-- [`<SimpleFormWithRevision>`](https://marmelab.com/ra-enterprise/modules/ra-history#simpleformwithrevision)
-- [`<TabbedFormWithRevision>`](https://marmelab.com/ra-enterprise/modules/ra-history#tabbedformwithrevision)
-- [`<RevisionsButton>`](./RevisionsButton.md)
-- [`<RevisionListWithDetailsInDialog>`](https://marmelab.com/ra-enterprise/modules/ra-history#revisionlistwithdetailsindialog)
-- [`<FieldDiff>`](https://marmelab.com/ra-enterprise/modules/ra-history#fielddiff)
-- [`<SmartFieldDiff>`](https://marmelab.com/ra-enterprise/modules/ra-history#smartfielddiff)
+* [`<SimpleFormWithRevision>`](https://react-admin-ee.marmelab.com/documentation/ra-history#simpleformwithrevision)
+* [`<TabbedFormWithRevision>`](https://react-admin-ee.marmelab.com/documentation/ra-history#tabbedformwithrevision)
+* [`<RevisionsButton>`](./RevisionsButton.md)
+* [`<RevisionListWithDetailsInDialog>`](https://react-admin-ee.marmelab.com/documentation/ra-history#revisionlistwithdetailsindialog)
+* [`<FieldDiff>`](https://react-admin-ee.marmelab.com/documentation/ra-history#fielddiff)
+* [`<SmartFieldDiff>`](https://react-admin-ee.marmelab.com/documentation/ra-history#smartfielddiff)
 
-## Audit Log
+## 監査ログ
 
-Most admin and B2B apps require that user actions are recorded for audit purposes. React-admin provides templates for displaying such audit logs, and helpers to automatically **record user actions**.
+ほとんどの管理およびB2Bアプリでは、監査目的でユーザーアクションを記録する必要があります。React-adminは、そのような監査ログを表示するためのテンプレートと、ユーザーアクションを自動的に**記録するためのヘルパー**を提供します。
 
-<video controls autoplay playsinline muted loop>
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-audit-log/latest/ra-audit-log.webm" type="video/webm" />
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-audit-log/latest/ra-audit-log.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
-
+<video controls autoplay playsinline muted loop> <source src="https://react-admin-ee.marmelab.com/assets/ra-audit-log/latest/ra-audit-log.webm" type="video/webm" /> <source src="https://react-admin-ee.marmelab.com/assets/ra-audit-log/latest/ra-audit-log.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
 ```jsx
 import { useGetList } from "react-admin";
 import { Timeline } from "@react-admin/ra-audit-log";
 
 const Dashboard = () => {
   const { data, isLoading } = useGetList(
-    "events",
-    { page: 1, perPage: 25 },
-    { field: "date", order: "desc" }
+"events",
+{ page: 1, perPage: 25 },
+{ field: "date", order: "desc" }
   );
 
   return <Timeline isLoading={isLoading} records={data} />;
 };
 ```
 
-The Audit Log features let you:
+監査ログ機能により、以下が可能になります：
 
-- Comply with data and action traceability regulations
-- Troubleshoot and resolve problems with a clear action trail
-- Boost security by detecting unusual activity
-- Improve accountability with detailed action records
-- Monitor user activity with an aggregated timeline
+* データおよびアクションの追跡規制に準拠
+* 明確なアクショントレイルで問題をトラブルシューティングおよび解決
+* 詳細なアクション記録でセキュリティを強化
+* アクション履歴を通じて説明責任を向上
+* 集計されたタイムラインでユーザーアクティビティを監視
 
-These features are available through the following components:
+これらの機能は、以下のコンポーネントを通じて提供されます：
 
-- [`<Timeline>`](https://marmelab.com/ra-enterprise/modules/ra-audit-log#timeline) shows a list of all recent changes in the admin. It's a great component for dashboards.
-- [`<RecordTimeline>`](https://marmelab.com/ra-enterprise/modules/ra-audit-log#recordtimeline) shows a list of all recent changes for a given record, usually embedded in a `<Show>` or `<Edit>` view.
-- [`<EventList>`](https://marmelab.com/ra-enterprise/modules/ra-audit-log#eventlist) is a ready-to-use List component for navigating in your admin history, complete with filters and pagination.
+* [`<Timeline>`](https://react-admin-ee.marmelab.com/documentation/ra-audit-log#timeline)：管理のすべての最近の変更を表示するリストです。ダッシュボードに最適なコンポーネントです。
+* [`<RecordTimeline>`](https://react-admin-ee.marmelab.com/documentation/ra-audit-log#recordtimeline)：特定のレコードのすべての最近の変更を表示するリストであり、通常は`<Show>`または`<Edit>`ビューに埋め込まれています。
+* [`<EventList>`](https://react-admin-ee.marmelab.com/documentation/ra-audit-log#eventlist)：フィルターとページネーションを完備した、管理履歴をナビゲートするためのリストコンポーネントです。
 
-And you can use [the `addEventsForMutations` helper](https://marmelab.com/ra-enterprise/modules/ra-audit-log#client-side-tracking) to record user actions:
+また、ユーザーアクションを記録するために[`addEventsForMutations`ヘルパー](https://react-admin-ee.marmelab.com/documentation/ra-audit-log#client-side-tracking)を使用できます：
 
 ```jsx
 import { addEventsForMutations } from "@react-admin/ra-audit-log";
@@ -1016,206 +920,182 @@ const dataProvider = addEventsForMutations(
 );
 ```
 
-## Calendar
+## カレンダー
 
-If your app needs to display **events**, **appointments**, **time intervals**, or any other kind of time-based data, you can use the [`<Calendar>`](./Calendar.md) component.
+アプリが**イベント、予定、時間間隔**、またはその他の時間ベースのデータを表示する必要がある場合、[`<Calendar>`](./Calendar.md)コンポーネントを使用できます。
 
-<video controls autoplay playsinline muted loop>
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-calendar.webm" type="video/webm" />
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-calendar.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
-
+<video controls autoplay playsinline muted loop> <source src="https://react-admin-ee.marmelab.com/assets/ra-calendar.webm" type="video/webm" /> <source src="https://react-admin-ee.marmelab.com/assets/ra-calendar.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
 ```jsx
 import { Calendar, getFilterValuesFromInterval } from '@react-admin/ra-calendar';
 import { List } from 'react-admin';
 
 const EventList = () => (
-    <List
-        filterDefaultValues={getFilterValuesFromInterval()}
-        perPage={1000}
-        pagination={false}
-    >
-        <Calendar />
-    </List>
+<List
+filterDefaultValues={getFilterValuesFromInterval()}
+perPage={1000}
+pagination={false}
+>
+<Calendar />
+</List>
 );
 ```
 
-The user interface offers everything you expect:
+ユーザーインターフェースは期待されるすべての機能を提供します：
 
-- month, week, and day views
-- list view
-- drag and resize events
-- whole-day events
-- creating an event by clicking on the calendar
-- edition of the event title, and metadata
-- events spanning multiple days
-- recurring events
-- background events
-- theming
-- locales and timezones
-- resource time grid (e.g. rooms) (requires an additional license from Full Calendar)
+* 月、週、および日ビュー
+* リストビュー
+* イベントのドラッグアンドリサイズ
+* 終日イベント
+* カレンダー上でのクリックによるイベント作成
+* イベントタイトルおよびメタデータの編集
+* 複数日にわたるイベント
+* 繰り返しイベント
+* 背景イベント
+* テーマ設定
+* ロケールおよびタイムゾーン
+* リソースタイムグリッド（例：部屋）（Full Calendarの追加ライセンスが必要）
 
-Check the following components for more details:
+詳細については、以下のコンポーネントを確認してください：
 
-- [`<CompleteCalendar>`](https://marmelab.com/ra-enterprise/modules/ra-calendar#completecalendar)
-- [`<Calendar>`](./Calendar.md)
+* [`<CompleteCalendar>`](https://react-admin-ee.marmelab.com/documentation/ra-calendar#completecalendar)
+* [`<Calendar>`](./Calendar.md)
 
-## Tree View
+## ツリービュー
 
-To manage directories, categories, and any other **hierarchical data**, admins often rely on tree structures. Navigating and editing tree structures can be tricky, but React-admin provides a set of components to make it easy.
+ディレクトリ、カテゴリ、およびその他の**階層データ**を管理するために、管理者はツリーストラクチャーを頻繁に利用します。ツリーストラクチャーのナビゲーションおよび編集は難しい場合がありますが、React-adminはそれを容易にする一連のコンポーネントを提供します。
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/treewithdetails.webm" type="video/webm"/>
-  <source src="./img/treewithdetails.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
-
-
+<video controls autoplay playsinline muted loop> <source src="./img/treewithdetails.webm" type="video/webm"/> <source src="./img/treewithdetails.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video>
 ```jsx
 import { Create, Edit, SimpleForm, TextInput } from 'react-admin';
 import { CreateNode, EditNode, EditNodeToolbar, TreeWithDetails } from '@react-admin/ra-tree';
 
-// a Create view for a tree uses <CreateNode> instead of the standard <Create>
+// ツリーの作成ビューは標準の<Create>の代わりに<CreateNode>を使用します
 const CategoriesCreate = () => (
-    <CreateNode>
-        <SimpleForm>
-            <TextInput source="name" />
-        </SimpleForm>
-    </CreateNode>
+<CreateNode>
+<SimpleForm>
+<TextInput source="name" />
+</SimpleForm>
+</CreateNode>
 );
 
-// an Edit view for a tree uses <EditNode> instead of the standard <Edit>
+// ツリーの編集ビューは標準の<Edit>の代わりに<EditNode>を使用します
 const CategoriesEdit = () => (
-    <EditNode>
-        <SimpleForm toolbar={<EditNodeToolbar />}>
-            <TextInput source="title" />
-        </SimpleForm>
-    </EditNode>
+<EditNode>
+<SimpleForm toolbar={<EditNodeToolbar />}>
+<TextInput source="title" />
+</SimpleForm>
+</EditNode>
 );
 
-// a List view for a tree uses <TreeWithDetails>
+// ツリーのリストビューは<TreeWithDetails>を使用します
 export const CategoriesList = () => (
-    <TreeWithDetails create={CategoriesCreate} edit={CategoriesEdit} />
+<TreeWithDetails create={CategoriesCreate} edit={CategoriesEdit} />
 );
 ```
 
-Check out the following components for displaying hierarchical data:
+階層データを表示するための以下のコンポーネントを確認してください：
 
-- [`<TreeWithDetails>`](./TreeWithDetails.md): A list view for tree structures, with a details panel.
-- [`<TreeInput>`](./TreeInput.md): An input component for tree structures.
-- [`<Tree>`](https://marmelab.com/ra-enterprise/modules/ra-tree#tree-component): A list view for tree structures, with a Material UI skin.
+* [`<TreeWithDetails>`](./TreeWithDetails.md)：詳細パネルを持つツリーストラクチャーのリストビュー。
+* [`<TreeInput>`](./TreeInput.md)：ツリーストラクチャーの入力コンポーネント。
+* [`<Tree>`](https://react-admin-ee.marmelab.com/documentation/ra-tree#tree-component)：Material UIスキンを持つツリーストラクチャーのリストビュー。
 
-## Application Building Blocks
+## アプリケーション構築ブロック
 
-A UI kit like Material UI provides basic building blocks like a button, a form, a table, etc. React-admin goes one level higher and provides a set of **[application components](./Reference.md#components)** specifically designed for building admin and B2B *applications*.
+Material UIのようなUIキットは、ボタン、フォーム、テーブルなどの基本的な構築ブロックを提供します。React-adminはもう一段階上のレベルで、管理およびB2B**アプリケーション**を構築するために特別に設計された一連の\*\*[アプリケーションコンポーネント](./Reference.md#components)\*\*を提供します。
 
-<video controls autoplay playsinline muted loop>
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-editable-datagrid/latest/ra-editable-datagrid-overview.webm" type="video/webm" />
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-editable-datagrid/latest/ra-editable-datagrid-overview.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop> <source src="https://react-admin-ee.marmelab.com/assets/ra-editable-datagrid/latest/ra-editable-datagrid-overview.webm" type="video/webm" /> <source src="https://react-admin-ee.marmelab.com/assets/ra-editable-datagrid/latest/ra-editable-datagrid-overview.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
 
-These building blocks include:
+これらの構築ブロックには以下が含まれます：
 
-- A [notification system](./useNotify.md)
-- A smart location framework, simplifying the management of [breadcrumbs](./Breadcrumb.md) and [hierarchical menus](./MultiLevelMenu.md)
-- [Import](https://github.com/benwinding/react-admin-import-csv) / [export](./Buttons.md#exportbutton) buttons
-- An [editable datagrid](./EditableDatagrid.md)
-- A [guided tour system](https://marmelab.com/ra-enterprise/modules/ra-tour)
-- A [user menu](./Menu.md)
-- A [rich text editor](./RichTextInput.md),
-- A [markdown editor](./MarkdownInput.md)
-- A [clone button](./Buttons.md#clonebutton)
-- Various navigation menus ([simple](./Menu.md), [hierarchical](./MultiLevelMenu.md), [horizontal](./HorizontalMenu.md), etc.)
-- Various [page](./ContainerLayout.md) and [form](https://marmelab.com/ra-enterprise/modules/ra-form-layout) layouts
-- ...and many more.
+* [通知システム](./useNotify.md)
+* [パンくずリスト](./Breadcrumb.md)や[階層メニュー](./MultiLevelMenu.md)の管理を簡素化するスマートロケーションフレームワーク
+* [インポート](https://github.com/benwinding/react-admin-import-csv)/[エクスポート](./Buttons.md#exportbutton)ボタン
+* [編集可能なデータグリッド](./EditableDatagrid.md)
+* [ガイド付きツアーシステム](https://react-admin-ee.marmelab.com/documentation/ra-tour)
+* [ユーザーメニュー](./Menu.md)
+* [リッチテキストエディタ](./RichTextInput.md)
+* [Markdownエディタ](./MarkdownInput.md)
+* [複製ボタン](./Buttons.md#clonebutton)
+* 各種ナビゲーションメニュー（[シンプル](./Menu.md)、[階層](./MultiLevelMenu.md)、[水平](./HorizontalMenu.md)など）
+* 各種[ページ](./ContainerLayout.md)および[フォーム](https://react-admin-ee.marmelab.com/documentation/ra-form-layout)レイアウト
+* ...その他多数
 
-And if you want to create your building blocks, you can use any of the [75+ hooks](./Reference.md#hooks) that carry **headless, reusable logic**. To name a few of them:
+そして、React-adminが提供する**ヘッドレスで再利用可能なロジック**を持つ[75以上のフック](./Reference.md#hooks)を使用して独自の構築ブロックを作成することもできます。以下のフックはその一部です：
 
-- [`useRecordContext`](./useRecordContext.md) to get the current record anywhere in the app
-- [`useWarnWhenUnsavedChanges`](./EditTutorial.md#warning-about-unsaved-changes) to warn the user when he tries to leave a page with unsaved changes
-- [`useSaveContext`](./useSaveContext.md) to tweak form submission
-- [`useTheme`](./useTheme.md) to change the theme programmatically
+* アプリ内のどこでも現在のレコードを取得する[`useRecordContext`](./useRecordContext.md)
+* ページから離れる際に未保存の変更がある場合にユーザーに警告する[`useWarnWhenUnsavedChanges`](./EditTutorial.md#warning-about-unsaved-changes)
+* フォームの送信を調整する[`useSaveContext`](./useSaveContext.md)
+* プログラム的にテーマを変更する[`useTheme`](./useTheme.md)
 
-## Pub/Sub and Live Updates
+## パブ/サブおよびライブアップデート
 
-React-admin provides hooks and UI components for **collaborative applications** where several people work in parallel. It allows publishing and subscribing to real-time events, updating views when another user pushes a change, notifying end users of events, and **preventing data loss** when two editors work on the same resource concurrently.
+React-adminは、複数の人が同時に作業する**共同アプリケーション**向けのフックおよびUIコンポーネントを提供します。リアルタイムイベントの発行および購読、他のユーザーが変更をプッシュした際のビューの更新、イベントのエンドユーザーへの通知、**同じリソースを同時に編集する2人の編集者のデータ損失防止**が可能です。
 
-<video controls autoplay playsinline muted width="100%">
-  <source src="./img/CollaborativeDemo.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted width="100%"> <source src="./img/CollaborativeDemo.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
 
-At its core, the real-time system provides a **pub/sub mechanism** to send and receive real-time events. Events are sent to a topic, and all subscribers to this topic receive the event.
+リアルタイムシステムのコアは、リアルタイムイベントを送受信するための**パブ/サブメカニズム**を提供します。イベントはトピックに送信され、そのトピックを購読しているすべての購読者がイベントを受信します。
 
 ```jsx
-// on the publisher side
+// パブリッシャー側
 const [publish] = usePublish();
 publish(topic, event);
 
-// on the subscriber side
+// サブスクライバー側
 useSubscribe(topic, callback);
 ```
 
-Check the following low-level hooks for more details:
+詳細については、以下の低レベルフックを確認してください：
 
--   [`usePublish`](./usePublish.md)
--   [`useSubscribe`](./useSubscribe.md)
--   [`useSubscribeCallback`](./useSubscribeCallback.md)
--   [`useSubscribeToRecord`](./useSubscribeToRecord.md)
--   [`useSubscribeToRecordList`](./useSubscribeToRecordList.md)
+* [`usePublish`](./usePublish.md)
+* [`useSubscribe`](./useSubscribe.md)
+* [`useSubscribeCallback`](./useSubscribeCallback.md)
+* [`useSubscribeToRecord`](./useSubscribeToRecord.md)
+* [`useSubscribeToRecordList`](./useSubscribeToRecordList.md)
 
-React-admin provides **live updates** via specialized hooks and components. This means that when a user edits a resource, the other users working on the same resource see the changes in real time whether they are in a list, a show view, or an edit view.
+React-adminは、**ライブアップデート**を専用のフックおよびコンポーネントを介して提供します。これにより、ユーザーがリソースを編集すると、同じリソースで作業している他のユーザーもリスト、詳細表示、編集表示のいずれにいてもリアルタイムで変更を確認できます。
 
-For instance, replace `<List>` with `<ListLive>` to have a list refreshing automatically when an element is added, updated, or deleted:
+例えば、要素が追加、更新、削除されたときに自動的にリフレッシュされるリストを持つために、`<List>`を`<ListLive>`に置き換えます：
 
 ```diff
 import {
 -   List,
-    Datagrid,
-    TextField,
-    NumberField,
-    Datefield,
+Datagrid,
+TextField,
+NumberField,
+Datefield,
 } from 'react-admin';
 +import { ListLive } from '@react-admin/ra-realtime';
 
 const PostList = () => (
 -   <List>
 +   <ListLive>
-        <Datagrid>
-            <TextField source="title" />
-            <NumberField source="views" />
-            <DateField source="published_at" />
-        </Datagrid>
+<Datagrid>
+<TextField source="title" />
+<NumberField source="views" />
+<DateField source="published_at" />
+</Datagrid>
 -   </List>
 +   </ListLive>
 );
 ```
+<video controls autoplay playsinline muted loop> <source src="./img/useSubscribeToRecordList.webm" type="video/webm"/> <source src="./img/useSubscribeToRecordList.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video>
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/useSubscribeToRecordList.webm" type="video/webm"/>
-  <source src="./img/useSubscribeToRecordList.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+この機能は以下のフックを活用しています：
 
+* [`useGetListLive`](./useGetListLive.md)
+* [`useGetOneLive`](./useGetOneLive.md)
 
-This feature leverages the following hooks:
+および以下のコンポーネント：
 
--   [`useGetListLive`](./useGetListLive.md)
--   [`useGetOneLive`](./useGetOneLive.md)
+* [`<ListLive>`](./ListLive.md)
+* [`<EditLive>`](./EditLive.md)
+* [`<ShowLive>`](./ShowLive.md)
 
-And the following components:
-
--   [`<ListLive>`](./ListLive.md)
--   [`<EditLive>`](./EditLive.md)
--   [`<ShowLive>`](./ShowLive.md)
-
-React-admin also provides **badge notifications in the Menu**, so that users can see that something new happened to a resource list while working on another one.
+React-adminはまた、**メニュー内のバッジ通知**を提供し、ユーザーが他のリソースリストで作業している間に何か新しいことが起こったことを確認できます。
 
 ![MenuLive](./img/RealtimeMenu.png)
 
-Use `<MenuLive>` instead of react-admin's `<Menu>` to get this feature:
+この機能を使用するには、React-adminの`<Menu>`の代わりに`<MenuLive>`を使用します：
 
 ```jsx
 import React from 'react';
@@ -1225,94 +1105,84 @@ import { MenuLive } from '@react-admin/ra-realtime';
 import { PostList, PostShow, PostEdit, realTimeDataProvider } from '.';
 
 const CustomLayout = (props) => (
-    <Layout {...props} menu={MenuLive} />
+<Layout {...props} menu={MenuLive} />
 );
 
 const MyReactAdmin = () => (
-    <Admin dataProvider={realTimeDataProvider} layout={CustomLayout}>
-        <Resource name="posts" list={PostList} show={PostShow} edit={PostEdit} />
-    </Admin>
+<Admin dataProvider={realTimeDataProvider} layout={CustomLayout}>
+<Resource name="posts" list={PostList} show={PostShow} edit={PostEdit} />
+</Admin>
 );
 ```
 
-This feature leverages the following components:
+この機能は以下のコンポーネントを活用しています：
 
--   [`<MenuLive>`](./MenuLive.md)
--   [`<MenuLiveItemLink>`](./MenuLive.md)
+* [`<MenuLive>`](./MenuLive.md)
+* [`<MenuLiveItemLink>`](./MenuLive.md)
 
-And last but not least, react-admin provides a **lock mechanism** to prevent two users from editing the same resource at the same time.
+最後に、React-adminは2人のユーザーが同じリソースを同時に編集するのを防ぐ**ロックメカニズム**を提供します。
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/locks-demo.webm" type="video/webm"/>
-  <source src="./img/locks-demo.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop> <source src="./img/locks-demo.webm" type="video/webm"/> <source src="./img/locks-demo.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video>
 
-
-A user can lock a resource, either by voluntarily asking for a lock or by editing a resource. When a resource is locked, other users can't edit it. When the lock is released, other users can edit the resource again.
+ユーザーはリソースをロックでき、任意にロックを要求するか、リソースを編集することができます。リソースがロックされると、他のユーザーはそれを編集できません。ロックが解除されると、他のユーザーは再びリソースを編集できます。
 
 ```tsx
 export const NewMessageForm = () => {
-    const [create, { isLoading: isCreating }] = useCreate();
-    const record = useRecordContext();
+const [create, { isLoading: isCreating }] = useCreate();
+const record = useRecordContext();
 
-    const { data: lock } = useGetLockLive('tickets', { id: record.id });
-    const { identity } = useGetIdentity();
-    const isFormDisabled = lock && lock.identity !== identity?.id;
+const { data: lock } = useGetLockLive('tickets', { id: record.id });
+const { identity } = useGetIdentity();
+const isFormDisabled = lock && lock.identity !== identity?.id;
 
-    const [doLock] = useLockOnCall({ resource: 'tickets' });
-    const handleSubmit = (values: any) => {
-        /* ... */
-    };
+const [doLock] = useLockOnCall({ resource: 'tickets' });
+const handleSubmit = (values: any) => {
+/* ... */
+};
 
-    return (
-        <Form onSubmit={handleSubmit}>
-            <TextInput
-                source="message"
-                multiline
-                onFocus={() => {
-                    doLock();
-                }}
-                disabled={isFormDisabled}
-            />
-            <SelectInput
-                source="status"
-                choices={statusChoices}
-                disabled={isFormDisabled}
-            />
-            <Button type="submit" disabled={isCreating || isFormDisabled}>
-                Submit
-            </Button>
-        </Form>
-    );
+return (
+<Form onSubmit={handleSubmit}>
+<TextInput
+source="message"
+multiline
+onFocus={() => {
+doLock();
+}}
+disabled={isFormDisabled}
+/>
+<SelectInput
+source="status"
+choices={statusChoices}
+disabled={isFormDisabled}
+/>
+<Button type="submit" disabled={isCreating || isFormDisabled}>
+Submit
+</Button>
+</Form>
+);
 };
 ```
 
-This feature leverages the following hooks:
+この機能は以下のフックを活用しています：
 
--   [`useLock`](./useLock.md)
--   [`useUnlock`](./useUnlock.md)
--   [`useGetLock`](./useGetLock.md)
--   [`useGetLockLive`](./useGetLockLive.md)
--   [`useGetLocks`](./useGetLocks.md)
--   [`useGetLocksLive`](./useGetLocksLive.md)
--   [`useLockOnCall`](./useLockOnCall.md)
--   [`useLockOnMount`](./useLockOnMount.md)
+* [`useLock`](./useLock.md)
+* [`useUnlock`](./useUnlock.md)
+* [`useGetLock`](./useGetLock.md)
+* [`useGetLockLive`](./useGetLockLive.md)
+* [`useGetLocks`](./useGetLocks.md)
+* [`useGetLocksLive`](./useGetLocksLive.md)
+* [`useLockOnCall`](./useLockOnCall.md)
+* [`useLockOnMount`](./useLockOnMount.md)
 
-## Preferences
+## プリファレンス
 
-End-users tweak the UI to their liking, and **they expect these preferences to be saved** so that they don't need to do it again the next time they visit the app. React-admin provides a persistent `Store` for user preferences and uses it in many components.
+エンドユーザーはUIを好みに合わせて調整し、そのプリファレンスが保存されることを期待します。React-adminはユーザープリファレンスのための永続的な`Store`を提供し、多くのコンポーネントで使用されています。
 
-For instance, the Saved Queries feature lets users **save a combination of filters** and sort parameters into a new, personal filter.
+例えば、保存されたクエリ機能により、ユーザーは**フィルターとソートパラメーターの組み合わせを保存**し、新しい個人的なフィルターとしてセッション間で保持できます。
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/SavedQueriesList.webm" type="video/webm"/>
-  <source src="./img/SavedQueriesList.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop> <source src="./img/SavedQueriesList.webm" type="video/webm"/> <source src="./img/SavedQueriesList.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video>
 
-
-Saved queries persist between sessions, so users can find their custom queries even after closing and reopening the admin. Saved queries are available both for the Filter Button/Form combo and for the `<FilterList>` Sidebar. It's enabled by default for the Filter Button/Form combo, but you have to add it yourself in the `<FilterList>` Sidebar.
+保存されたクエリはセッション間で永続化されるため、ユーザーは管理を閉じて再度開いた後でもカスタムクエリを見つけることができます。保存されたクエリは、フィルターボタン/フォームコンボと`<FilterList>`サイドバーの両方で利用可能です。フィルターボタン/フォームコンボではデフォルトで有効ですが、`<FilterList>`サイドバーでは自分で追加する必要があります。
 
 ```diff
 import { FilterList, FilterListItem, List, Datagrid } from 'react-admin';
@@ -1321,165 +1191,154 @@ import { Card, CardContent } from '@mui/material';
 +import { SavedQueriesList } from 'react-admin';
 
 const SongFilterSidebar = () => (
-    <Card>
-        <CardContent>
-+           <SavedQueriesList />
-            <FilterList label="Record Company" icon={<BusinessIcon />}>
-                ...
-            </FilterList>
-            <FilterList label="Released" icon={<DateRangeeIcon />}>
-               ...
-            </FilterList>
-        </CardContent>
-    </Card>
+<Card>
+<CardContent>
++   <SavedQueriesList />
+<FilterList label="レコード会社" icon={<BusinessIcon />}>
+...
+</FilterList>
+<FilterList label="リリース" icon={<DateRangeeIcon />}>
+   ...
+</FilterList>
+</CardContent>
+</Card>
 );
 
 const SongList = () => (
-    <List aside={<SongFilterSidebar />}>
-        <Datagrid>
-            ...
-        </Datagrid>
-    </List>
+<List aside={<SongFilterSidebar />}>
+<Datagrid>
+...
+</Datagrid>
+</List>
 );
 ```
 
-React-admin also **persists the light/dark mode and the language choice** of end-users.
+React-adminはまた、エンドユーザーのライト/ダークモードおよび言語選択を**永続化**します。
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/ToggleThemeButton.webm" type="video/webm"/>
-  <source src="./img/ToggleThemeButton.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop> <source src="./img/ToggleThemeButton.webm" type="video/webm"/> <source src="./img/ToggleThemeButton.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video>
 
+`Store`とその使用方法について詳しく知りたい場合は、以下のセクションを確認してください：
 
-To learn more about the `Store` and how to use it, check the following sections:
+* [The `Store`](./Store.md)
+* [`useStore`](./useStore.md)
+* [`useStoreContext`](./useStoreContext.md)
+* [`useResetStore`](./useResetStore.md)
+* [`<SavedQueriesList>`](./FilteringTutorial.md#saved-queries-let-users-save-filter-and-sort)
+* [`<ToggleThemeButton>`](./ToggleThemeButton.md)
+* [`<LocalesMenuButton>`](./LocalesMenuButton.md)
 
-- [The `Store`](./Store.md)
-- [`useStore`](./useStore.md)
-- [`useStoreContext`](./useStoreContext.md)
-- [`useResetStore`](./useResetStore.md)
-- [`<SavedQueriesList>`](./FilteringTutorial.md#saved-queries-let-users-save-filter-and-sort)
-- [`<ToggleThemeButton>`](./ToggleThemeButton.md)
-- [`<LocalesMenuButton>`](./LocalesMenuButton.md)
+## コンフィギュラブルUI
 
-## Configurable UI
+プリファレンスの拡張として、設定可能なコンポーネントがあります。どれだけ洗練されたUIを持っていても、すべてのユースケースに適合することはありません。そこで、React-adminは、エンドユーザーが多くのコンポーネントの機能を視覚的に**カスタマイズ**できる方法を提供します。
 
-An extension of preferences is Configurable components. Because no matter how polished your UI is, it will never fit all use cases. That's why react-admin provides a way to let end users **customize the features of many components visually**, via the inspector.
+<video controls autoplay playsinline muted loop> <source src="./img/DatagridConfigurable.webm" type="video/webm"/> <source src="./img/DatagridConfigurable.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video>
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/DatagridConfigurable.webm" type="video/webm"/>
-  <source src="./img/DatagridConfigurable.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
-
-
-To enable this feature, replace a component (in that example, `<Datagrid>`) with its configurable counterpart:
+この機能を有効にするには、コンポーネント（この例では`<Datagrid>`）をその設定可能なカウンターパートに置き換えます：
 
 ```diff
 import {
-    List,
+List,
 -   Datagrid,
 +   DatagridConfigurable,
-    TextField,
+TextField,
 } from 'react-admin';
 
 const PostList = () => (
-    <List>
--       <Datagrid>
-+       <DatagridConfigurable>
-            <TextField source="id" />
-            <TextField source="title" />
-            <TextField source="author" />
-            <TextField source="year" />
--       </Datagrid>
-+       </DatagridConfigurable>
-    </List>
+<List>
+-   <Datagrid>
++   <DatagridConfigurable>
+<TextField source="id" />
+<TextField source="title" />
+<TextField source="author" />
+<TextField source="year" />
+-   </Datagrid>
++   </DatagridConfigurable>
+</List>
 );
 ```
 
-React-admin even provides primitives and components to **make your own components configurable**.
+React-adminは、独自のコンポーネントを**設定可能にするためのプリミティブおよびコンポーネント**も提供します。
 
-Check the following components for details:
+詳細については、以下のコンポーネントを確認してください：
 
-- [`<Configurable>`](./Configurable.md)
-- [`<DatagridConfigurable>`](./Datagrid.md#configurable)
-- [`<SimpleListConfigurable>`](./SimpleList.md#configurable)
-- [`<SimpleFormConfigurable>`](./SimpleForm.md#configurable)
+* [`<Configurable>`](./Configurable.md)
+* [`<DatagridConfigurable>`](./Datagrid.md#configurable)
+* [`<SimpleListConfigurable>`](./SimpleList.md#configurable)
+* [`<SimpleFormConfigurable>`](./SimpleForm.md#configurable)
 
-## Theming
+## テーマ設定
 
-The default [Material Design](https://material.io/) look and feel is nice, but a bit... Google-y. If this bothers you, or if you need to brand your app, rest assured: react-admin is fully themeable.
+デフォルトの[Material Design](https://material.io/)のルックアンドフィールは素晴らしいですが、少し... Google風です。これが気になる場合や、アプリをブランド化する必要がある場合、React-adminは完全にテーマ設定可能です。
 
-React-admin comes with 4 built-in themes: [Default](./AppTheme.md#default), [Nano](./AppTheme.md#nano), [Radiant](./AppTheme.md#radiant), and [House](./AppTheme.md#house). The [e-commerce demo](https://marmelab.com/react-admin-demo/) contains a theme switcher, so you can test them in a real application.
+React-adminは4つの組み込みテーマを提供します：[デフォルト](./AppTheme.md#default)、[Nano](./AppTheme.md#nano)、[Radiant](./AppTheme.md#radiant)、および[House](./AppTheme.md#house)。[eコマースデモ](https://marmelab.com/react-admin-demo/)にはテーマスイッチャーが含まれており、実際のアプリケーションでそれらをテストできます。
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/demo-themes.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop> <source src="./img/demo-themes.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video>
 
-To use a custom theme, pass a theme object to the `<Admin>` [`theme`](./Admin.md#theme) and [`darkTheme`](./Admin.md#darktheme) props:
+カスタムテーマを使用するには、テーマオブジェクトを`<Admin>`[`theme`](./Admin.md#theme)および[`darkTheme`](./Admin.md#darktheme)プロップに渡します：
 
 ```jsx
 import { Admin, nanoLightTheme, nanoDarkTheme } from 'react-admin';
 import { dataProvider } from './dataProvider';
 
 export const App = () => (
-    <Admin
-        dataProvider={dataProvider}
-        theme={nanoLightTheme}
-        darkTheme={nanoDarkTheme}
-    >
-        // ...
-    </Admin>
+<Admin
+dataProvider={dataProvider}
+theme={nanoLightTheme}
+darkTheme={nanoDarkTheme}
+>
+// ...
+</Admin>
 );
 ```
 
-Theming is so powerful that you can even use react-admin to build a [Music Player](https://demo.navidrome.org/app/):
+テーマ設定は非常に強力で、React-adminを使用して[音楽プレーヤー](https://demo.navidrome.org/app/)を構築することもできます：
 
 ![Music Player](./img/navidrome.png)
 
-Use the `sx` prop on almost every react-admin component to override its default style - and the style of its descendants. For instance, here is how to change the width of Datagrid columns:
+ほぼすべてのReact-adminコンポーネントで`sx`プロップを使用して、デフォルトのスタイルおよび子孫のスタイルを上書きできます。例えば、データグリッド列の幅を変更する方法は次のとおりです：
 
 {% raw %}
+
 ```jsx
 import {
-    BooleanField,
-    Datagrid,
-    DateField,
-    EditButton,
-    List,
-    NumberField,
-    TextField,
-    ShowButton,
+BooleanField,
+Datagrid,
+DateField,
+EditButton,
+List,
+NumberField,
+TextField,
+ShowButton,
 } from 'react-admin';
 import Icon from '@mui/icons-material/Person';
 
 export const VisitorIcon = Icon;
 
 export const PostList = () => (
-    <List>
-        <Datagrid
-            sx={{
-                backgroundColor: "Lavender",
-                "& .RaDatagrid-headerCell": {
-                    backgroundColor: "MistyRose",
-                },
-            }}
-        >
-            <TextField source="id" />
-            <TextField source="title" />
-            <DateField source="published_at" sortByOrder="DESC" />
-            <BooleanField source="commentable" sortable={false} />
-            <NumberField source="views" sortByOrder="DESC" />
-            <EditButton />
-            <ShowButton />
-        </Datagrid>
-    </List>
+<List>
+<Datagrid
+sx={{
+backgroundColor: "Lavender",
+"& .RaDatagrid-headerCell": {
+backgroundColor: "MistyRose",
+},
+}}
+>
+<TextField source="id" />
+<TextField source="title" />
+<DateField source="published_at" sortByOrder="DESC" />
+<BooleanField source="commentable" sortable={false} />
+<NumberField source="views" sortByOrder="DESC" />
+<EditButton />
+<ShowButton />
+</Datagrid>
+</List>
 );
 ```
+
 {% endraw %}
 
-React-admin relies on [Emotion](https://github.com/emotion-js/emotion), a popular CSS-in-JS library, to let you customize not only individual components but also the theme constants (colors, fonts, spacing, etc.).
+React-adminは、人気のあるCSS-in-JSライブラリである[Emotion](https://github.com/emotion-js/emotion)を使用して、個々のコンポーネントだけでなく、テーマ定数（色、フォント、間隔など）をカスタマイズできます。
 
 ```jsx
 import { defaultTheme } from 'react-admin';
@@ -1488,74 +1347,69 @@ import pink from '@mui/material/colors/pink';
 import red from '@mui/material/colors/red';
 
 const myTheme = {
-    ...defaultTheme,
-    palette: {
-        primary: indigo,
-        secondary: pink,
-        error: red,
-        contrastThreshold: 3,
-        tonalOffset: 0.2,
-    },
-    typography: {
-        // Use the system font instead of the default Roboto font.
-        fontFamily: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Arial', 'sans-serif'].join(','),
-    },
+...defaultTheme,
+palette: {
+primary: indigo,
+secondary: pink,
+error: red,
+contrastThreshold: 3,
+tonalOffset: 0.2,
+},
+typography: {
+// デフォルトのRobotoフォントの代わりにシステムフォントを使用します
+fontFamily: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Arial', 'sans-serif'].join(','),
+},
 };
 ```
 
-And if you find yourself needing to override the style of a component multiple times, you can do it in the theme, too:
+そして、コンポーネントのスタイルを複数回オーバーライドする必要がある場合は、それをテーマ内でも行うことができます：
 
 ```jsx
 import { defaultTheme } from 'react-admin';
 
 const theme = {
-    ...defaultTheme,
-    components: {
-        ...defaultTheme.components,
-        RaDatagrid: {
-            styleOverrides: {
-              root: {
-                  backgroundColor: "Lavender",
-                  "& .RaDatagrid-headerCell": {
-                      backgroundColor: "MistyRose",
-                  },
-              }
-           }
-        }
-    }
+...defaultTheme,
+components: {
+...defaultTheme.components,
+RaDatagrid: {
+styleOverrides: {
+  root: {
+  backgroundColor: "Lavender",
+  "& .RaDatagrid-headerCell": {
+  backgroundColor: "MistyRose",
+  },
+  }
+   }
+}
+}
 };
 
 const App = () => (
-    <Admin theme={theme}>
-        // ...
-    </Admin>
+<Admin theme={theme}>
+// ...
+</Admin>
 );
 ```
 
-To learn more about theming in react-admin, check the following sections:
+React-adminのテーマ設定について詳しく知りたい場合は、以下のセクションを確認してください：
 
-- [Introduction to Theming](./Theming.md)
-- [Page Layouts](./Theming.md#customizing-the-page-layout)
-- [The `sx` prop](./SX.md)
-- [Built-In Themes](./AppTheme.md#built-in-themes)
-- [App-wide theming](./AppTheme.md#theming-individual-components)
-- [Helper Components For Layouts](./BoxStackGrid.md)
-- [`<ToggleThemeButton>`](./ToggleThemeButton.md)
-- [`useTheme`](./useTheme.md)
-- [`useMediaQuery`](./useMediaQuery.md)
+* [テーマ設定の導入](./Theming.md)
+* [ページレイアウトのカスタマイズ](./Theming.md#customizing-the-page-layout)
+* [`sx`プロップ](./SX.md)
+* [組み込みテーマ](./AppTheme.md#built-in-themes)
+* [アプリ全体のテーマ設定](./AppTheme.md#theming-individual-components)
+* [レイアウト用のヘルパーコンポーネント](./BoxStackGrid.md)
+* [`<ToggleThemeButton>`](./ToggleThemeButton.md)
+* [`useTheme`](./useTheme.md)
+* [`useMediaQuery`](./useMediaQuery.md)
 
 ## I18n
 
-React-admin is **fully internationalized**.
+React-adminは**完全に国際化**されています。
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/LocalesMenuButton.webm" type="video/webm"/>
-  <source src="./img/LocalesMenuButton.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop> <source src="./img/LocalesMenuButton.webm" type="video/webm"/> <source src="./img/LocalesMenuButton.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video>
 
-
-The default interface messages (for buttons, tooltips, input labels, etc.) are in English. You can translate them to any of [the 30+ languages supported by react-admin](./TranslationLocales.md) by importing the appropriate translation package. For instance, to translate to French:
+デフォルトのインターフェースメッセージ（ボタン、ツールチップ、入力ラベルなど）は英語です。[React-adminがサポートする30以上の言語](./TranslationLocales.md)のいずれかに翻訳するには、適切な翻訳パッケージをインポートします。例えば、フランス語に翻訳するには：
 
 ```jsx
 import { Admin } from 'react-admin';
@@ -1565,96 +1419,94 @@ import fr from 'ra-language-french';
 export const i18nProvider = polyglotI18nProvider(() => fr, 'fr');
 
 export const App = () => (
-    <Admin i18nProvider={i18nProvider}>
-        // ...
-    </Admin>
+<Admin i18nProvider={i18nProvider}>
+// ...
+</Admin>
 );
 ```
 
-If you need to translate to a language not yet supported by react-admin, you can write a custom translation package. Check the [Writing a Custom Translation Package](./TranslationWriting.md) page for details.
+React-adminがまだサポートしていない言語に翻訳する必要がある場合は、カスタム翻訳パッケージを書くことができます。詳細については、[カスタム翻訳パッケージの作成](./TranslationWriting.md)ページを確認してください。
 
-If your app needs to support more than one language, you can use the [`<LocalesMenuButton>`](./LocalesMenuButton.md) component to **let users choose their language**:
+アプリが複数の言語をサポートする必要がある場合、[`<LocalesMenuButton>`](./LocalesMenuButton.md)コンポーネントを使用して、**ユーザーに言語を選択させる**ことができます：
 
 ```jsx
 import { LocalesMenuButton, TitlePortal } from 'react-admin';
 import { AppBar, Toolbar } from '@mui/material';
 
 export const MyAppBar = () => (
-    <AppBar>
-        <Toolbar>
-            <TitlePortal />
-            <LocalesMenuButton />
-        </Toolbar>
-    </AppBar>
+<AppBar>
+<Toolbar>
+<TitlePortal />
+<LocalesMenuButton />
+</Toolbar>
+</AppBar>
 );
 ```
 
-And in your components, to translate a message, use the `useTranslate` hook:
+コンポーネント内でメッセージを翻訳するには、`useTranslate`フックを使用します：
 
 ```jsx
 import { useTranslate } from 'react-admin';
 
 const MyHelloButton = () => {
-    const translate = useTranslate();
-    return (
-        <button>{translate('myroot.hello.world')}</button>
-    );
+const translate = useTranslate();
+return (
+<button>{translate('myroot.hello.world')}</button>
+);
 };
 
 export default MyHelloButton;
 ```
 
-The underlying translation library, [polyglot.js](https://airbnb.io/polyglot.js/), supports [pluralization](https://airbnb.io/polyglot.js/#pluralization) and [interpolation](https://airbnb.io/polyglot.js/#interpolation). It is popular, fast, and lightweight. But if you prefer to store your translations in GETTEXT or YAML files rather than JSON, the adapter approach lets you use any translation library you want.
+基盤となる翻訳ライブラリ[polyglot.js](https://airbnb.io/polyglot.js/)は、[複数形](https://airbnb.io/polyglot.js/#pluralization)と[補間](https://airbnb.io/polyglot.js/#interpolation)をサポートしています。これは人気があり、迅速で軽量です。しかし、JSONファイルの代わりにGETTEXTまたはYAMLファイルに翻訳を保存する場合、アダプターアプローチを使用して任意の翻訳ライブラリを利用できます。
 
-React-admin is used by thousands of companies across the world, so the internationalization support is mature and well-tested. Check the following sections to learn more about react-admin's i18n support:
+React-adminは世界中の何千もの企業で使用されているため、国際化サポートは成熟しており、よくテストされています。React-adminのI18nサポートについて詳しく知りたい場合は、以下のセクションを確認してください：
 
-- [The `i18nProvider` prop](./Translation.md)
-- [Translation messages](./TranslationTranslating.md)
-- [`<LocalesMenuButton>`](./LocalesMenuButton.md)
-- [`useTranslate`](./useTranslate.md)
-- [`useLocaleState`](./useLocaleState.md)
+* [The `i18nProvider`プロップ](./Translation.md)
+* [翻訳メッセージ](./TranslationTranslating.md)
+* [`<LocalesMenuButton>`](./LocalesMenuButton.md)
+* [`useTranslate`](./useTranslate.md)
+* [`useLocaleState`](./useLocaleState.md)
 
-## Accessibility
+## アクセシビリティ
 
-The react-admin core team has a **strong commitment to accessibility**. React-admin uses the [Material UI](https://mui.com/material-ui/getting-started/) components, which are accessible by default. For its own components, react-admin uses the [WAI-ARIA](https://www.w3.org/TR/wai-aria/) standard to make them accessible. This includes `aria-` attributes, keyboard navigation, and focus management.
+React-adminのコアチームは、**アクセシビリティに強いコミットメント**を持っています。React-adminはデフォルトでアクセシブルな[Material UI](https://mui.com/material-ui/getting-started/)コンポーネントを使用しています。独自のコンポーネントについては、React-adminはそれらをアクセシブルにするために[WAI-ARIA](https://www.w3.org/TR/wai-aria/)標準を使用しています。これには、`aria-`属性、キーボードナビゲーション、およびフォーカスマネジメントが含まれます。
 
-We routinely test react-admin with the [WAVE](https://wave.webaim.org/) and [Axe](https://www.deque.com/axe/) accessibility tools.
+私たちは定期的にReact-adminを[WAVE](https://wave.webaim.org/)および[Axe](https://www.deque.com/axe/)アクセシビリティツールでテストしています。
 
 ![Accessibility](./img/accessibility.webp)
 
-## Responsive
+## レスポンシブ
 
-The react-admin layouts and components are primarily designed for desktop screens. But they also **work well on mobile devices**. On mobile, buttons with a label become icon buttons, the sidebar menu becomes a drawer, the size of clickable elements is increased, the form toolbar becomes fixed, and many more adjustments.
+React-adminのレイアウトおよびコンポーネントは主にデスクトップ画面向けに設計されています。しかし、これらは**モバイルデバイスでもうまく機能**します。モバイルでは、ラベル付きボタンがアイコンボタンになり、サイドバーメニューがドロワーになり、クリック可能な要素のサイズが大きくなり、フォームツールバーが固定され、その他の調整が行われます。
 
-<video controls autoplay playsinline muted loop width="100%">
-  <source src="./img/responsive.webm" type="video/webm" />
-  <source src="./img/responsive.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop width="100%"> <source src="./img/responsive.webm" type="video/webm" /> <source src="./img/responsive.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
 
-React-admin provides specific components for mobile screens and gives you the tools to adapt the content to the screen size.
+React-adminはモバイル画面向けの特定のコンポーネントを提供し、コンテンツを画面サイズに適応させるためのツールを提供します。
 
-For a given component, the `sx` prop lets you customize its style based on the screen size. For instance, to reduce the width of an element on mobile screens:
+特定のコンポーネントに対して、`sx`プロップを使用して、画面サイズに基づいてそのスタイルをカスタマイズできます。例えば、モバイル画面で要素の幅を縮小するには：
 
 {% raw %}
+
 ```jsx
 <Box
-    sx={{
-        width: {
-            xs: 100, // theme.breakpoints.up('xs')
-            sm: 200, // theme.breakpoints.up('sm')
-            md: 300, // theme.breakpoints.up('md')
-            lg: 400, // theme.breakpoints.up('lg')
-            xl: 500, // theme.breakpoints.up('xl')
-        },
-    }}
+sx={{
+width: {
+xs: 100, // theme.breakpoints.up('xs')
+sm: 200, // theme.breakpoints.up('sm')
+md: 300, // theme.breakpoints.up('md')
+lg: 400, // theme.breakpoints.up('lg')
+xl: 500, // theme.breakpoints.up('xl')
+},
+}}
 >
-    This box has a responsive width.
+このボックスはレスポンシブな幅を持っています。
 </Box>
 ```
+
 {% endraw %}
 
-To make a component responsive, you can also render it conditionally based on the screen size. For instance, to render a `<SimpleList>` on desktop and a `<Datagrid>` on mobile:
+コンポーネントをレスポンシブにするには、画面サイズに基づいて条件付きでレンダリングすることもできます。例えば、デスクトップでは`<SimpleList>`をレンダリングし、モバイルでは`<Datagrid>`をレンダリングするには：
 
 ```jsx
 import * as React from 'react';
@@ -1662,66 +1514,63 @@ import { useMediaQuery } from '@mui/material';
 import { List, SimpleList, Datagrid, TextField, ReferenceField, EditButton } from 'react-admin';
 
 export const PostList = () => {
-    const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
-    return (
-        <List>
-            {isSmall ? (
-                <SimpleList
-                    primaryText={record => record.title}
-                    secondaryText={record => `${record.views} views`}
-                    tertiaryText={record => new Date(record.published_at).toLocaleDateString()}
-                />
-            ) : (
-                <Datagrid>
-                    <TextField source="id" />
-                    <ReferenceField label="User" source="userId" reference="users">
-                        <TextField source="name" />
-                    </ReferenceField>
-                    <TextField source="title" />
-                    <TextField source="body" />
-                    <EditButton />
-                </Datagrid>
-            )}
-        </List>
-    );
+const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
+return (
+<List>
+{isSmall ? (
+<SimpleList
+primaryText={record => record.title}
+secondaryText={record => `${record.views} views`}
+tertiaryText={record => new Date(record.published_at).toLocaleDateString()}
+/>
+) : (
+<Datagrid>
+<TextField source="id" />
+<ReferenceField label="ユーザー" source="userId" reference="users">
+<TextField source="name" />
+</ReferenceField>
+<TextField source="title" />
+<TextField source="body" />
+<EditButton />
+</Datagrid>
+)}
+</List>
+);
 };
 ```
 
-Check the following sections for help on making your app responsive:
+アプリをレスポンシブにする方法については、以下のセクションを確認してください：
 
-- [The `sx` prop](./SX.md)
-- [`<SimpleList>`](./SimpleList.md)
-- [`useMediaQuery`](./useMediaQuery.md)
+* [`sx`プロップ](./SX.md)
+* [`<SimpleList>`](./SimpleList.md)
+* [`useMediaQuery`](./useMediaQuery.md)
 
-## Type-Safe
+## 型安全
 
-React-admin is written in TypeScript. That doesn't mean you have to use TypeScript to use react-admin - **you can write react-admin apps in JavaScript**. But if you do, you get compile-time type checking for your components, hooks, data providers, auth providers, translation messages, and more.
+React-adminはTypeScriptで書かれています。これは、React-adminを使用するためにTypeScriptを使用する必要があるわけではなく、**JavaScriptでReact-adminアプリを作成することができます**。しかし、TypeScriptを使用すると、コンポーネント、フック、データプロバイダー、認証プロバイダー、翻訳メッセージなどに対してコンパイル時の型チェックが提供されます。
 
-And if your IDE supports TypeScript, you get autocompletion and inline documentation for all react-admin components and hooks.
+そして、IDEがTypeScriptをサポートしている場合、すべてのReact-adminコンポーネントおよびフックの自動補完とインラインドキュメントを利用できます。
 
-<video controls autoplay playsinline muted loop width="100%">
-  <source src="./img/typescript.webm" type="video/webm" />
-  <source src="./img/typescript.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop width="100%"> <source src="./img/typescript.webm" type="video/webm" /> <source src="./img/typescript.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
 
-Building react-admin apps with TypeScript brings more safety and productivity to your development workflow.
+TypeScriptを使用してReact-adminアプリを構築することは、開発ワークフローにさらなる安全性と生産性をもたらします。
 
-## Sustainable
+## 持続可能
 
-Last but not least, react-admin is here to stay. That's because the development of the open-source project is **funded by the customers** of the [Enterprise Edition](https://marmelab.com/ra-enterprise/).
+最後に、React-adminはここに留まります。なぜなら、オープンソースプロジェクトの開発は、[Enterprise Edition](https://react-admin-ee.marmelab.com/)の顧客によって**資金提供**されているからです。
 
-Maintaining a large open-source project in the long term is a challenge. But the react-admin core team, hosted by [Marmelab](https://marmelab.com), doesn't have to worry about the next funding round, or about paying back venture capital by raising prices. React-admin has zero debt, has already **passed the break-even point**, and the team will only grow as the number of customers grows.
+大規模なオープンソースプロジェクトを長期的に維持することは課題です。しかし、[Marmelab](https://marmelab.com)に所属するReact-adminのコアチームは、次の資金調達ラウンドやベンチャーキャピタルの返済について心配する必要がなく、価格を引き上げる必要もありません。React-adminには負債がなく、既に**損益分岐点を超えており**、顧客数が増えるに連れてチームも増えていきます。
 
-The core team is fortunate to be able to work full-time on react-admin, and this allows us to:
+コアチームはReact-adminにフルタイムで取り組むことができ、このことは以下のことを可能にします：
 
-- release bug fixes every week
-- release new features every month
-- provide support to our customers
-- maintain the documentation
-- refactor the codebase
-- create demos and tutorials
-- stay up-to-date with the latest React and libraries versions
-- contribute to the open-source community
+* 毎週バグ修正をリリース
+* 毎月新機能をリリース
+* 顧客へのサポートを提供
+* ドキュメントを維持
+* コードベースをリファクタリング
+* デモおよびチュートリアルを作成
+* 最新のReactおよびライブラリバージョンに対応
+* オープンソースコミュニティに貢献
 
-At Marmelab, "sustainable" also means **low carbon footprint**. React-admin is regularly audited with [GreenFrame](https://greenframe.io/), a tool that measures the carbon footprint of software projects. Technical choices are also made with the environment in mind. For instance, the use of [React Query](https://react-query-v3.tanstack.com/) for caching data in react-admin reduces the number of HTTP requests, and thus reduces the carbon footprint of the application.
+Marmelabでは、「持続可能」は**低炭素フットプリント**も意味します。React-adminは定期的に、ソフトウェアプロジェクトの炭素フットプリントを測定するツール[GreenFrame](https://greenframe.io/)で監査されます。React-adminでは、環境に配慮した技術選択も行っています。例えば、React-adminでデータキャッシュに[React Query](https://react-query-v3.tanstack.com/)を使用することで、HTTPリクエストの数が減少し、アプリケーションの炭素フットプリントが削減されます。
+

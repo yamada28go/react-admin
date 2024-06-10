@@ -66,31 +66,33 @@ React-adminアプリでは、APIコールを書きません。代わりに、「
 import { useState, useEffect } from 'react';
 import { useDataProvider } from 'react-admin';
 
-const PostList = () => {
-const [posts, setPosts] = useState([]);
-const [error, setError] = useState();
-const [isLoading, setIsLoading] = useState(true);
-const dataProvider = useDataProvider();
-useEffect(() => {
-dataProvider.getList('posts', {
-pagination: { page: 1, perPage: 10 },
-sort: { field: 'published_at', order: 'DESC' },
-filter: { status: 'published' }
-})
-.then(({ data }) => setPosts(data))
-.catch(error => setError(error))
-.finally(() => setIsLoading(false));
-}, []);
-if (isLoading) { return <p>Loading</p>; }
-if (error) { return <p>ERROR</p>; }
-return (
-<ul>
-{posts.map(post => (
-<li key={post.id}>{post.title}</li>
-))}
-</ul>
-);
-};
+    const PostList = () => {
+        const [posts, setPosts] = useState([]);
+        const [error, setError] = useState();
+        const [isLoading, setIsLoading] = useState(true);
+        const dataProvider = useDataProvider();
+        useEffect(() => {
+            dataProvider.getList('posts', {
+                pagination: { page: 1, perPage: 10 },
+                sort: { field: 'published_at', order: 'DESC' },
+                filter: { status: 'published' }
+            })
+                .then(({ data }) => setPosts(data))
+                .catch(error => setError(error))
+                .finally(() => setIsLoading(false));
+        }, []);
+        if (isLoading) { return <p>Loading</p>; }
+        if (error) { return <p>ERROR</p>; }
+        return (
+            <ul>
+                {posts.map(post => (
+                    <li key={post.id}>{post.title}</li>
+                ))}
+            </ul>
+        );
+    };
+```
+
 
 データプロバイダーオブジェクトは、データプロバイダーメソッドの呼び出しをHTTPリクエストに変換し、HTTPレスポンスをデータプロバイダーメソッドの結果に変換する責任を負います。
 
@@ -100,20 +102,20 @@ return (
 import { useGetList } from 'react-admin';
 
 const PostList = () => {
-const { data, isLoading, error } = useGetList('posts', {
-pagination: { page: 1, perPage: 10 },
-sort: { field: 'published_at', order: 'DESC' },
-filter: { status: 'published' }
-});
-if (isLoading) { return <Loading />; }
-if (error) { return <p>ERROR</p>; }
-return (
-<ul>
-{data.map(post => (
-<li key={post.id}>{post.title}</li>
-))}
-</ul>
-);
+    const { data, isLoading, error } = useGetList('posts', {
+        pagination: { page: 1, perPage: 10 },
+        sort: { field: 'published_at', order: 'DESC' },
+        filter: { status: 'published' }
+    });
+    if (isLoading) { return <Loading />; }
+    if (error) { return <p>ERROR</p>; }
+    return (
+        <ul>
+            {data.map(post => (
+                <li key={post.id}>{post.title}</li>
+            ))}
+        </ul>
+    );
 };
 ```
 
@@ -125,12 +127,12 @@ React-adminは、**認証および認可に対してもバックエンドに依�
 import { useAuthenticated } from 'react-admin';
 
 const MyPage = () => {
-useAuthenticated(); // 認証されていない場合はログインページにリダイレクト
-return (
-<div>
-...
-</div>
-)
+    useAuthenticated(); // 認証されていない場合はログインページにリダイレクト
+    return (
+        <div>
+            ...
+        </div>
+    )
 };
 
 export default MyPage;
@@ -141,28 +143,28 @@ export default MyPage;
 APIはしばしばリレーショナルモデルを公開します。つまり、他のエンドポイントへの外部キーを返すエンドポイントです。**React-adminはリレーショナルAPIを活用**して、関連するレコードを表示するスマートコンポーネントや、関連するレコードの編集を可能にするコンポーネントを提供します。
 
 ```bash
-┌──────────────┐   ┌────────────────┐
-│ books│   │ authors│
-│--------------│   │----------------│
-│ id   │   ┌───│ id │
-│ author_id│╾──┘   │ first_name │
-│ title│   │ last_name  │
-│ published_at │   │ date_of_birth  │
-└──────────────┘   └────────────────┘
+┌──────────────┐       ┌────────────────┐
+│ books        │       │ authors        │
+│--------------│       │----------------│
+│ id           │   ┌───│ id             │
+│ author_id    │╾──┘   │ first_name     │
+│ title        │       │ last_name      │
+│ published_at │       │ date_of_birth  │
+└──────────────┘       └────────────────┘
 ```
 
 例えば、`<ReferenceField>`は本の著者名のような関連レコードの名前を表示します。
 
 ```jsx
 const BookList = () => (
-<List>
-<Datagrid>
-<TextField source="id" />
-<TextField source="title" />
-<ReferenceField source="authorId" reference="authors" />
-<TextField source="year" />
-</Datagrid>
-</List>
+    <List>
+        <Datagrid>
+            <TextField source="id" />
+            <TextField source="title" />
+            <ReferenceField source="authorId" reference="authors" />
+            <TextField source="year" />
+        </Datagrid>
+    </List>
 );
 ```
 
@@ -180,21 +182,21 @@ GET https://my.api.url/authors?filter={ids:[1,2,3,4,5,6,7]}
 
 ```jsx
 const ProductEdit = () => (
-<Edit mutationMode="optimistic">
-<SimpleForm>
-<TextInput source="name" />
-<NumberInput source="price" />
-<ReferenceInput source="category_id" reference="categories" />
-<ReferenceManyInput reference="variants" target="product_id">
-<SimpleFormIterator inline>
-<TextInput source="sku" />
-<SelectInput source="size" choices={sizes} />
-<SelectInput source="color" choices={colors} />
-<NumberInput source="stock" defaultValue={0} />
-</SimpleFormIterator>
-</ReferenceManyInput>
-</SimpleForm>
-</Edit>
+    <Edit mutationMode="optimistic">
+        <SimpleForm>
+            <TextInput source="name" />
+            <NumberInput source="price" />
+            <ReferenceInput source="category_id" reference="categories" />
+            <ReferenceManyInput reference="variants" target="product_id">
+                <SimpleFormIterator inline>
+                    <TextInput source="sku" />
+                    <SelectInput source="size" choices={sizes} />
+                    <SelectInput source="color" choices={colors} />
+                    <NumberInput source="stock" defaultValue={0} />
+                </SimpleFormIterator>
+            </ReferenceManyInput>
+        </SimpleForm>
+    </Edit>
 );
 ```
 <video controls autoplay playsinline muted loop> <source src="./img/reference-many-input.webm" type="video/webm"/> <source src="./img/reference-many-input.mp4" type="video/mp4"/> お使いのブラウザは動画タグをサポートしていません。 </video>
@@ -203,16 +205,16 @@ const ProductEdit = () => (
 
 ```jsx
 const BookList = () => (
-<List filters={[
-<ReferenceInput source="authorId" reference="authors" alwaysOn />,
-]}>
-<Datagrid rowClick="edit">
-<TextField source="id" />
-<TextField source="title" />
-<ReferenceField source="authorId" reference="authors" />
-<TextField source="year" />
-</Datagrid>
-</List>
+    <List filters={[
+        <ReferenceInput source="authorId" reference="authors" alwaysOn />,
+    ]}>
+        <Datagrid rowClick="edit">
+            <TextField source="id" />
+            <TextField source="title" />
+            <ReferenceField source="authorId" reference="authors" />
+            <TextField source="year" />
+        </Datagrid>
+    </List>
 );
 ```
 <video controls autoplay playsinline muted loop width="100%"> <source src="./img/reference-input-filter.webm" type="video/webm" /> <source src="./img/reference-input-filter.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
@@ -281,29 +283,29 @@ import { Link } from 'react-router-dom';
 
 const PostList = () => {
   const { data, page, total, setPage, isLoading } = useListController({
-sort: { field: 'published_at', order: 'DESC' },
-perPage: 10,
+    sort: { field: 'published_at', order: 'DESC' },
+    perPage: 10,
   });
   const handleTableChange = (pagination) => {
-setPage(pagination.current);
+    setPage(pagination.current);
   };
   return (
-<>
-  <div style={{ margin: 10, textAlign: 'right' }}>
-<Link to="/posts/create">
-  <Button icon={<PlusOutlined />}>Create</Button>
-</Link>
-  </div>
-  <Card bodyStyle={{ padding: '0' }} loading={isLoading}>
-<Table
-  size="small"
-  dataSource={data}
-  columns={columns}
-  pagination={{ current: page, pageSize: 10, total }}
-  onChange={handleTableChange}
-/>
-  </Card>
-</>
+    <>
+      <div style={{ margin: 10, textAlign: 'right' }}>
+        <Link to="/posts/create">
+          <Button icon={<PlusOutlined />}>Create</Button>
+        </Link>
+      </div>
+      <Card bodyStyle={{ padding: '0' }} loading={isLoading}>
+        <Table
+          size="small"
+          dataSource={data}
+          columns={columns}
+          pagination={{ current: page, pageSize: 10, total }}
+          onChange={handleTableChange}
+        />
+      </Card>
+    </>
   );
 };
 
@@ -311,24 +313,24 @@ const columns = [
   { title: 'Id', dataIndex: 'id', key: 'id' },
   { title: 'Title', dataIndex: 'title', key: 'title' },
   {
-title: 'Publication date',
-dataIndex: 'published_at',
-key: 'pub_at',
-render: (value) => new Date(value).toLocaleDateString(),
+    title: 'Publication date',
+    dataIndex: 'published_at',
+    key: 'pub_at',
+    render: (value) => new Date(value).toLocaleDateString(),
   },
   {
-title: 'Commentable',
-dataIndex: 'commentable',
-key: 'commentable',
-render: (value) => (value ? <CheckCircleOutlined /> : null),
+    title: 'Commentable',
+    dataIndex: 'commentable',
+    key: 'commentable',
+    render: (value) => (value ? <CheckCircleOutlined /> : null),
   },
   {
-title: 'Actions',
-render: (_, record) => (
-  <Link to={`/posts/${record.id}`}>
-<Button icon={<EditOutlined />}>Edit</Button>
-  </Link>
-),
+    title: 'Actions',
+    render: (_, record) => (
+      <Link to={`/posts/${record.id}`}>
+        <Button icon={<EditOutlined />}>Edit</Button>
+      </Link>
+    ),
   },
 ];
 
@@ -359,9 +361,9 @@ export default PostList;
 import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-admin';
 
 const App = () => (
-<Admin dataProvider={dataProvider}>
-<Resource name="posts" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
-</Admin>
+    <Admin dataProvider={dataProvider}>
+        <Resource name="posts" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+    </Admin>
 );
 ```
 
@@ -402,14 +404,14 @@ const App = () => (
 import { List, TextInput } from 'react-admin';
 
 const postFilters = [
-<TextInput label="検索" source="q" alwaysOn />,
-<TextInput label="タイトル" source="title" defaultValue="Hello, World!" />,
+    <TextInput label="検索" source="q" alwaysOn />,
+    <TextInput label="タイトル" source="title" defaultValue="Hello, World!" />,
 ];
 
 export const PostList = () => (
-<List filters={postFilters}>
-{/* ... */}
-</List>
+    <List filters={postFilters}>
+        {/* ... */}
+    </List>
 );
 ```
 
@@ -433,25 +435,25 @@ import { Card, CardContent } from '@mui/material';
 import { SavedQueriesList } from 'react-admin';
 
 const SongFilterSidebar = () => (
-<Card>
-<CardContent>
-<SavedQueriesList />
-<FilterList label="レコード会社" icon={<BusinessIcon />}>
-...
-</FilterList>
-<FilterList label="リリース" icon={<DateRangeeIcon />}>
-   ...
-</FilterList>
-</CardContent>
-</Card>
+    <Card>
+        <CardContent>
+            <SavedQueriesList />
+            <FilterList label="レコード会社" icon={<BusinessIcon />}>
+                ...
+            </FilterList>
+            <FilterList label="リリース" icon={<DateRangeeIcon />}>
+               ...
+            </FilterList>
+        </CardContent>
+    </Card>
 );
 
 const SongList = () => (
-<List aside={<SongFilterSidebar />}>
-<Datagrid>
-...
-</Datagrid>
-</List>
+    <List aside={<SongFilterSidebar />}>
+        <Datagrid>
+            ...
+        </Datagrid>
+    </List>
 );
 ```
 
@@ -480,48 +482,48 @@ React-adminは、フォームを構築するための**豊富な入力コンポ�
 
 ```jsx
 import {
-TabbedForm,
-Edit,
-Datagrid,
-TextField,
-DateField,
-TextInput,
-ReferenceManyField,
-NumberInput,
-DateInput,
-BooleanInput,
-EditButton
+    TabbedForm,
+    Edit,
+    Datagrid,
+    TextField,
+    DateField,
+    TextInput,
+    ReferenceManyField,
+    NumberInput,
+    DateInput,
+    BooleanInput,
+    EditButton
 } from 'react-admin';
 
 export const PostEdit = () => (
-<Edit>
-<TabbedForm>
-<TabbedForm.Tab label="概要">
-<TextInput label="ID" source="id" InputProps={{ disabled: true }} />
-<TextInput source="title" validate={required()} />
-<TextInput multiline source="teaser" validate={required()} />
-</TabbedForm.Tab>
-<TabbedForm.Tab label="本文">
-<RichTextInput source="body" validate={required()} label={false} />
-</TabbedForm.Tab>
-<TabbedForm.Tab label="その他">
-<TextInput label="パスワード（保護された投稿の場合）" source="password" type="password" />
-<DateInput label="公開日" source="published_at" />
-<NumberInput source="average_note" validate={[ number(), minValue(0) ]} />
-<BooleanInput label="コメントを許可しますか？" source="commentable" defaultValue />
-<TextInput label="ビュー数" source="views" InputProps={{ disabled: true }} />
-</TabbedForm.Tab>
-<TabbedForm.Tab label="コメント">
-<ReferenceManyField reference="comments" target="post_id" label={false}>
-<Datagrid>
-<TextField source="body" />
-<DateField source="created_at" />
-<EditButton />
-</Datagrid>
-</ReferenceManyField>
-</TabbedForm.Tab>
-</TabbedForm>
-</Edit>
+    <Edit>
+        <TabbedForm>
+            <TabbedForm.Tab label="概要">
+                <TextInput label="ID" source="id" InputProps={{ disabled: true }} />
+                <TextInput source="title" validate={required()} />
+                <TextInput multiline source="teaser" validate={required()} />
+            </TabbedForm.Tab>
+            <TabbedForm.Tab label="本文">
+                <RichTextInput source="body" validate={required()} label={false} />
+            </TabbedForm.Tab>
+            <TabbedForm.Tab label="その他">
+                <TextInput label="パスワード（保護された投稿の場合）" source="password" type="password" />
+                <DateInput label="公開日" source="published_at" />
+                <NumberInput source="average_note" validate={[ number(), minValue(0) ]} />
+                <BooleanInput label="コメントを許可しますか？" source="commentable" defaultValue />
+                <TextInput label="ビュー数" source="views" InputProps={{ disabled: true }} />
+            </TabbedForm.Tab>
+            <TabbedForm.Tab label="コメント">
+                <ReferenceManyField reference="comments" target="post_id" label={false}>
+                    <Datagrid>
+                        <TextField source="body" />
+                        <DateField source="created_at" />
+                        <EditButton />
+                    </Datagrid>
+                </ReferenceManyField>
+            </TabbedForm.Tab>
+        </TabbedForm>
+    </Edit>
 );
 ```
 
@@ -577,31 +579,31 @@ import { useWatch } from 'react-hook-form';
 
 const countries = ['USA', 'UK', 'France'];
 const cities = {
-USA: ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix'],
-UK: ['London', 'Birmingham', 'Glasgow', 'Liverpool', 'Bristol'],
-France: ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice'],
+    USA: ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix'],
+    UK: ['London', 'Birmingham', 'Glasgow', 'Liverpool', 'Bristol'],
+    France: ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice'],
 };
 const toChoices = items => items.map(item => ({ id: item, name: item }));
 // toChoices(countries)は[{ id: 'USA', name: 'USA' }, ...]になります
 
 
 const CityInput = () => {
-const country = useWatch({ name: 'country' });
-return (
-<SelectInput
-choices={country ? toChoices(cities[country]) : []}
-source="cities"
-/>
-);
+    const country = useWatch({ name: 'country' });
+    return (
+        <SelectInput
+            choices={country ? toChoices(cities[country]) : []}
+            source="cities"
+        />
+    );
 };
 
 const OrderEdit = () => (
-<Edit>
-<SimpleForm>
-<SelectInput source="country" choices={toChoices(countries)} />
-<CityInput />
-</SimpleForm>
-</Edit>
+    <Edit>
+        <SimpleForm>
+            <SelectInput source="country" choices={toChoices(countries)} />
+            <CityInput />
+        </SimpleForm>
+    </Edit>
 );
 
 export default OrderEdit;
@@ -624,15 +626,15 @@ React-adminのフォームは、最も一般的なバリデーション戦略を
 
 ```jsx
 import {
-required,
-minLength,
-maxLength,
-minValue,
-maxValue,
-number,
-regex,
-email,
-choices
+    required,
+    minLength,
+    maxLength,
+    minValue,
+    maxValue,
+    number,
+    regex,
+    email,
+    choices
 } from 'react-admin';
 
 const validateFirstName = [required(), minLength(2), maxLength(15)];
@@ -642,19 +644,19 @@ const validateZipCode = regex(/^\d{5}$/, 'Must be a valid Zip Code');
 const validateGender = choices(['m', 'f', 'nc'], 'Please choose one of the values');
 
 export const UserCreate = () => (
-<Create>
-<SimpleForm>
-<TextInput label="First Name" source="firstName" validate={validateFirstName} />
-<TextInput label="Email" source="email" validate={validateEmail} />
-<TextInput label="Age" source="age" validate={validateAge}/>
-<TextInput label="Zip Code" source="zip" validate={validateZipCode}/>
-<SelectInput label="Gender" source="gender" choices={[
-{ id: 'm', name: 'Male' },
-{ id: 'f', name: 'Female' },
-{ id: 'nc', name: 'Prefer not say' },
-]} validate={validateGender}/>
-</SimpleForm>
-</Create>
+    <Create>
+        <SimpleForm>
+            <TextInput label="First Name" source="firstName" validate={validateFirstName} />
+            <TextInput label="Email" source="email" validate={validateEmail} />
+            <TextInput label="Age" source="age" validate={validateAge}/>
+            <TextInput label="Zip Code" source="zip" validate={validateZipCode}/>
+            <SelectInput label="Gender" source="gender" choices={[
+                { id: 'm', name: 'Male' },
+                { id: 'f', name: 'Female' },
+                { id: 'nc', name: 'Prefer not say' },
+            ]} validate={validateGender}/>
+        </SimpleForm>
+    </Create>
 );
 ```
 
@@ -675,47 +677,47 @@ import { JsonSchemaForm } from "@react-admin/ra-json-schema-form";
 
 const CustomerEdit = () => (
   <Edit>
-<JsonSchemaForm
-  schema={{
-type: "object",
-properties: {
-  id: { type: "number" },
-  first_name: { type: "string", title: "First name" },
-  last_name: { type: "string", minLength: 3 },
-  dob: { type: "string", format: "date" },
-  sex: { type: "string", enum: ["male", "female"] },
-  employer_id: { type: "number" },
-  occupations: {
-type: "array",
-items: {
-  type: "object",
-  properties: {
-name: { type: "string" },
-from: { type: "string", format: "date" },
-to: { type: "string", format: "date" },
-  },
-},
-  },
-},
-required: ["id", "last_name", "employer_id"],
-  }}
-  uiSchema={{
-id: { "ui:disabled": true },
-employer_id: {
-  "ui:widget": "reference",
-  "ui:options": {
-reference: "employers",
-optionText: "name",
-  },
-},
-  }}
-  onChange={(change) =>
-process.env.NODE_ENV !== "test" && console.log("changed", change)
-  }
-  onError={(error) =>
-process.env.NODE_ENV !== "test" && console.log("error", error)
-  }
-/>
+    <JsonSchemaForm
+      schema={{
+        type: "object",
+        properties: {
+          id: { type: "number" },
+          first_name: { type: "string", title: "First name" },
+          last_name: { type: "string", minLength: 3 },
+          dob: { type: "string", format: "date" },
+          sex: { type: "string", enum: ["male", "female"] },
+          employer_id: { type: "number" },
+          occupations: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                name: { type: "string" },
+                from: { type: "string", format: "date" },
+                to: { type: "string", format: "date" },
+              },
+            },
+          },
+        },
+        required: ["id", "last_name", "employer_id"],
+      }}
+      uiSchema={{
+        id: { "ui:disabled": true },
+        employer_id: {
+          "ui:widget": "reference",
+          "ui:options": {
+            reference: "employers",
+            optionText: "name",
+          },
+        },
+      }}
+      onChange={(change) =>
+        process.env.NODE_ENV !== "test" && console.log("changed", change)
+      }
+      onError={(error) =>
+        process.env.NODE_ENV !== "test" && console.log("error", error)
+      }
+    />
   </Edit>
 );
 ```
@@ -741,16 +743,16 @@ import { Edit, SimpleForm, TextInput } from 'react-admin';
 import { PredictiveTextInput } from '@react-admin/ra-ai';
 
 const PersonEdit = () => (
-<Edit>
-<SimpleForm>
-<TextInput source="firstName" />
-<TextInput source="lastName" />
-<TextInput source="company" />
-<PredictiveTextInput source="email" />
-<PredictiveTextInput source="website" />
-<PredictiveTextInput source="bio" multiline />
-</SimpleForm>
-</Edit>
+    <Edit>
+        <SimpleForm>
+            <TextInput source="firstName" />
+            <TextInput source="lastName" />
+            <TextInput source="company" />
+            <PredictiveTextInput source="email" />
+            <PredictiveTextInput source="website" />
+            <PredictiveTextInput source="bio" multiline />
+        </SimpleForm>
+    </Edit>
 );
 ```
 
@@ -793,44 +795,44 @@ React-adminでは、**単純なルールセットに基づいてユーザーイ�
 
 ```jsx
 const roles = {
-accountant: [
-{ action: ['list', 'show'], resource: 'products' },
-{ action: 'read', resource: 'products.*' },
-{ type: 'deny', action: 'read', resource: 'products.description' },
-{ action: 'list', resource: 'categories' },
-{ action: 'read', resource: 'categories.*' },
-{ action: ['list', 'show'], resource: 'customers' },
-{ action: 'read', resource: 'customers.*' },
-{ action: '*', resource: 'invoices' },
-],
-contentEditor: [
-{
-action: ['list', 'create', 'edit', 'delete', 'export'],
-resource: 'products',
-},
-{ action: 'read', resource: 'products.*' },
-{ type: 'deny', action: 'read', resource: 'products.stock' },
-{ type: 'deny', action: 'read', resource: 'products.sales' },
-{ action: 'write', resource: 'products.*' },
-{ type: 'deny', action: 'write', resource: 'products.stock' },
-{ type: 'deny', action: 'write', resource: 'products.sales' },
-{ action: 'list', resource: 'categories' },
-{ action: ['list', 'edit'], resource: 'customers' },
-{ action: ['list', 'edit'], resource: 'reviews' },
-],
-stockManager: [
-{ action: ['list', 'edit', 'export'], resource: 'products' },
-{ action: 'read', resource: 'products.*' },
-{
-type: 'deny',
-action: 'read',
-resource: 'products.description',
-},
-{ action: 'write', resource: 'products.stock' },
-{ action: 'write', resource: 'products.sales' },
-{ action: 'list', resource: 'categories' },
-],
-administrator: [{ action: '*', resource: '*' }],
+    accountant: [
+        { action: ['list', 'show'], resource: 'products' },
+        { action: 'read', resource: 'products.*' },
+        { type: 'deny', action: 'read', resource: 'products.description' },
+        { action: 'list', resource: 'categories' },
+        { action: 'read', resource: 'categories.*' },
+        { action: ['list', 'show'], resource: 'customers' },
+        { action: 'read', resource: 'customers.*' },
+        { action: '*', resource: 'invoices' },
+    ],
+    contentEditor: [
+        {
+            action: ['list', 'create', 'edit', 'delete', 'export'],
+            resource: 'products',
+        },
+        { action: 'read', resource: 'products.*' },
+        { type: 'deny', action: 'read', resource: 'products.stock' },
+        { type: 'deny', action: 'read', resource: 'products.sales' },
+        { action: 'write', resource: 'products.*' },
+        { type: 'deny', action: 'write', resource: 'products.stock' },
+        { type: 'deny', action: 'write', resource: 'products.sales' },
+        { action: 'list', resource: 'categories' },
+        { action: ['list', 'edit'], resource: 'customers' },
+        { action: ['list', 'edit'], resource: 'reviews' },
+    ],
+    stockManager: [
+        { action: ['list', 'edit', 'export'], resource: 'products' },
+        { action: 'read', resource: 'products.*' },
+        {
+            type: 'deny',
+            action: 'read',
+            resource: 'products.description',
+        },
+        { action: 'write', resource: 'products.stock' },
+        { action: 'write', resource: 'products.sales' },
+        { action: 'list', resource: 'categories' },
+    ],
+    administrator: [{ action: '*', resource: '*' }],
 };
 ```
 
@@ -884,9 +886,9 @@ import { Timeline } from "@react-admin/ra-audit-log";
 
 const Dashboard = () => {
   const { data, isLoading } = useGetList(
-"events",
-{ page: 1, perPage: 25 },
-{ field: "date", order: "desc" }
+    "events",
+    { page: 1, perPage: 25 },
+    { field: "date", order: "desc" }
   );
 
   return <Timeline isLoading={isLoading} records={data} />;
@@ -930,13 +932,13 @@ import { Calendar, getFilterValuesFromInterval } from '@react-admin/ra-calendar'
 import { List } from 'react-admin';
 
 const EventList = () => (
-<List
-filterDefaultValues={getFilterValuesFromInterval()}
-perPage={1000}
-pagination={false}
->
-<Calendar />
-</List>
+    <List
+        filterDefaultValues={getFilterValuesFromInterval()}
+        perPage={1000}
+        pagination={false}
+    >
+        <Calendar />
+    </List>
 );
 ```
 
@@ -971,25 +973,25 @@ import { CreateNode, EditNode, EditNodeToolbar, TreeWithDetails } from '@react-a
 
 // ツリーの作成ビューは標準の<Create>の代わりに<CreateNode>を使用します
 const CategoriesCreate = () => (
-<CreateNode>
-<SimpleForm>
-<TextInput source="name" />
-</SimpleForm>
-</CreateNode>
+    <CreateNode>
+        <SimpleForm>
+            <TextInput source="name" />
+        </SimpleForm>
+    </CreateNode>
 );
 
 // ツリーの編集ビューは標準の<Edit>の代わりに<EditNode>を使用します
 const CategoriesEdit = () => (
-<EditNode>
-<SimpleForm toolbar={<EditNodeToolbar />}>
-<TextInput source="title" />
-</SimpleForm>
-</EditNode>
+    <EditNode>
+        <SimpleForm toolbar={<EditNodeToolbar />}>
+            <TextInput source="title" />
+        </SimpleForm>
+    </EditNode>
 );
 
 // ツリーのリストビューは<TreeWithDetails>を使用します
 export const CategoriesList = () => (
-<TreeWithDetails create={CategoriesCreate} edit={CategoriesEdit} />
+    <TreeWithDetails create={CategoriesCreate} edit={CategoriesEdit} />
 );
 ```
 
@@ -1059,21 +1061,21 @@ React-adminは、**ライブアップデート**を専用のフックおよび�
 ```diff
 import {
 -   List,
-Datagrid,
-TextField,
-NumberField,
-Datefield,
+    Datagrid,
+    TextField,
+    NumberField,
+    Datefield,
 } from 'react-admin';
 +import { ListLive } from '@react-admin/ra-realtime';
 
 const PostList = () => (
 -   <List>
 +   <ListLive>
-<Datagrid>
-<TextField source="title" />
-<NumberField source="views" />
-<DateField source="published_at" />
-</Datagrid>
+        <Datagrid>
+            <TextField source="title" />
+            <NumberField source="views" />
+            <DateField source="published_at" />
+        </Datagrid>
 -   </List>
 +   </ListLive>
 );
@@ -1105,13 +1107,13 @@ import { MenuLive } from '@react-admin/ra-realtime';
 import { PostList, PostShow, PostEdit, realTimeDataProvider } from '.';
 
 const CustomLayout = (props) => (
-<Layout {...props} menu={MenuLive} />
+    <Layout {...props} menu={MenuLive} />
 );
 
 const MyReactAdmin = () => (
-<Admin dataProvider={realTimeDataProvider} layout={CustomLayout}>
-<Resource name="posts" list={PostList} show={PostShow} edit={PostEdit} />
-</Admin>
+    <Admin dataProvider={realTimeDataProvider} layout={CustomLayout}>
+        <Resource name="posts" list={PostList} show={PostShow} edit={PostEdit} />
+    </Admin>
 );
 ```
 
@@ -1128,38 +1130,38 @@ const MyReactAdmin = () => (
 
 ```tsx
 export const NewMessageForm = () => {
-const [create, { isLoading: isCreating }] = useCreate();
-const record = useRecordContext();
+    const [create, { isLoading: isCreating }] = useCreate();
+    const record = useRecordContext();
 
-const { data: lock } = useGetLockLive('tickets', { id: record.id });
-const { identity } = useGetIdentity();
-const isFormDisabled = lock && lock.identity !== identity?.id;
+    const { data: lock } = useGetLockLive('tickets', { id: record.id });
+    const { identity } = useGetIdentity();
+    const isFormDisabled = lock && lock.identity !== identity?.id;
 
-const [doLock] = useLockOnCall({ resource: 'tickets' });
-const handleSubmit = (values: any) => {
-/* ... */
-};
+    const [doLock] = useLockOnCall({ resource: 'tickets' });
+    const handleSubmit = (values: any) => {
+        /* ... */
+    };
 
-return (
-<Form onSubmit={handleSubmit}>
-<TextInput
-source="message"
-multiline
-onFocus={() => {
-doLock();
-}}
-disabled={isFormDisabled}
-/>
-<SelectInput
-source="status"
-choices={statusChoices}
-disabled={isFormDisabled}
-/>
-<Button type="submit" disabled={isCreating || isFormDisabled}>
-Submit
-</Button>
-</Form>
-);
+    return (
+        <Form onSubmit={handleSubmit}>
+            <TextInput
+                source="message"
+                multiline
+                onFocus={() => {
+                    doLock();
+                }}
+                disabled={isFormDisabled}
+            />
+            <SelectInput
+                source="status"
+                choices={statusChoices}
+                disabled={isFormDisabled}
+            />
+            <Button type="submit" disabled={isCreating || isFormDisabled}>
+                Submit
+            </Button>
+        </Form>
+    );
 };
 ```
 
@@ -1191,25 +1193,25 @@ import { Card, CardContent } from '@mui/material';
 +import { SavedQueriesList } from 'react-admin';
 
 const SongFilterSidebar = () => (
-<Card>
-<CardContent>
-+   <SavedQueriesList />
-<FilterList label="レコード会社" icon={<BusinessIcon />}>
-...
-</FilterList>
-<FilterList label="リリース" icon={<DateRangeeIcon />}>
-   ...
-</FilterList>
-</CardContent>
-</Card>
+    <Card>
+        <CardContent>
++           <SavedQueriesList />
+            <FilterList label="レコード会社" icon={<BusinessIcon />}>
+                ...
+            </FilterList>
+            <FilterList label="リリース" icon={<DateRangeeIcon />}>
+               ...
+            </FilterList>
+        </CardContent>
+    </Card>
 );
 
 const SongList = () => (
-<List aside={<SongFilterSidebar />}>
-<Datagrid>
-...
-</Datagrid>
-</List>
+    <List aside={<SongFilterSidebar />}>
+        <Datagrid>
+            ...
+        </Datagrid>
+    </List>
 );
 ```
 
@@ -1237,23 +1239,23 @@ React-adminはまた、エンドユーザーのライト/ダークモードお�
 
 ```diff
 import {
-List,
+    List,
 -   Datagrid,
 +   DatagridConfigurable,
-TextField,
+    TextField,
 } from 'react-admin';
 
 const PostList = () => (
-<List>
--   <Datagrid>
-+   <DatagridConfigurable>
-<TextField source="id" />
-<TextField source="title" />
-<TextField source="author" />
-<TextField source="year" />
--   </Datagrid>
-+   </DatagridConfigurable>
-</List>
+    <List>
+-       <Datagrid>
++       <DatagridConfigurable>
+            <TextField source="id" />
+            <TextField source="title" />
+            <TextField source="author" />
+            <TextField source="year" />
+-       </Datagrid>
++       </DatagridConfigurable>
+    </List>
 );
 ```
 
@@ -1281,13 +1283,13 @@ import { Admin, nanoLightTheme, nanoDarkTheme } from 'react-admin';
 import { dataProvider } from './dataProvider';
 
 export const App = () => (
-<Admin
-dataProvider={dataProvider}
-theme={nanoLightTheme}
-darkTheme={nanoDarkTheme}
->
-// ...
-</Admin>
+    <Admin
+        dataProvider={dataProvider}
+        theme={nanoLightTheme}
+        darkTheme={nanoDarkTheme}
+    >
+        // ...
+    </Admin>
 );
 ```
 
@@ -1301,38 +1303,38 @@ darkTheme={nanoDarkTheme}
 
 ```jsx
 import {
-BooleanField,
-Datagrid,
-DateField,
-EditButton,
-List,
-NumberField,
-TextField,
-ShowButton,
+    BooleanField,
+    Datagrid,
+    DateField,
+    EditButton,
+    List,
+    NumberField,
+    TextField,
+    ShowButton,
 } from 'react-admin';
 import Icon from '@mui/icons-material/Person';
 
 export const VisitorIcon = Icon;
 
 export const PostList = () => (
-<List>
-<Datagrid
-sx={{
-backgroundColor: "Lavender",
-"& .RaDatagrid-headerCell": {
-backgroundColor: "MistyRose",
-},
-}}
->
-<TextField source="id" />
-<TextField source="title" />
-<DateField source="published_at" sortByOrder="DESC" />
-<BooleanField source="commentable" sortable={false} />
-<NumberField source="views" sortByOrder="DESC" />
-<EditButton />
-<ShowButton />
-</Datagrid>
-</List>
+    <List>
+        <Datagrid
+            sx={{
+                backgroundColor: "Lavender",
+                "& .RaDatagrid-headerCell": {
+                    backgroundColor: "MistyRose",
+                },
+            }}
+        >
+            <TextField source="id" />
+            <TextField source="title" />
+            <DateField source="published_at" sortByOrder="DESC" />
+            <BooleanField source="commentable" sortable={false} />
+            <NumberField source="views" sortByOrder="DESC" />
+            <EditButton />
+            <ShowButton />
+        </Datagrid>
+    </List>
 );
 ```
 
@@ -1347,18 +1349,18 @@ import pink from '@mui/material/colors/pink';
 import red from '@mui/material/colors/red';
 
 const myTheme = {
-...defaultTheme,
-palette: {
-primary: indigo,
-secondary: pink,
-error: red,
-contrastThreshold: 3,
-tonalOffset: 0.2,
-},
-typography: {
-// デフォルトのRobotoフォントの代わりにシステムフォントを使用します
-fontFamily: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Arial', 'sans-serif'].join(','),
-},
+    ...defaultTheme,
+    palette: {
+        primary: indigo,
+        secondary: pink,
+        error: red,
+        contrastThreshold: 3,
+        tonalOffset: 0.2,
+    },
+    typography: {
+        // デフォルトのRobotoフォントの代わりにシステムフォントを使用します
+        fontFamily: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Arial', 'sans-serif'].join(','),
+    },
 };
 ```
 
@@ -1368,26 +1370,26 @@ fontFamily: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Arial', 'sans
 import { defaultTheme } from 'react-admin';
 
 const theme = {
-...defaultTheme,
-components: {
-...defaultTheme.components,
-RaDatagrid: {
-styleOverrides: {
-  root: {
-  backgroundColor: "Lavender",
-  "& .RaDatagrid-headerCell": {
-  backgroundColor: "MistyRose",
-  },
-  }
-   }
-}
-}
+    ...defaultTheme,
+    components: {
+        ...defaultTheme.components,
+        RaDatagrid: {
+            styleOverrides: {
+              root: {
+                  backgroundColor: "Lavender",
+                  "& .RaDatagrid-headerCell": {
+                      backgroundColor: "MistyRose",
+                  },
+              }
+           }
+        }
+    }
 };
 
 const App = () => (
-<Admin theme={theme}>
-// ...
-</Admin>
+    <Admin theme={theme}>
+        // ...
+    </Admin>
 );
 ```
 
@@ -1419,9 +1421,9 @@ import fr from 'ra-language-french';
 export const i18nProvider = polyglotI18nProvider(() => fr, 'fr');
 
 export const App = () => (
-<Admin i18nProvider={i18nProvider}>
-// ...
-</Admin>
+    <Admin i18nProvider={i18nProvider}>
+        // ...
+    </Admin>
 );
 ```
 
@@ -1434,12 +1436,12 @@ import { LocalesMenuButton, TitlePortal } from 'react-admin';
 import { AppBar, Toolbar } from '@mui/material';
 
 export const MyAppBar = () => (
-<AppBar>
-<Toolbar>
-<TitlePortal />
-<LocalesMenuButton />
-</Toolbar>
-</AppBar>
+    <AppBar>
+        <Toolbar>
+            <TitlePortal />
+            <LocalesMenuButton />
+        </Toolbar>
+    </AppBar>
 );
 ```
 
@@ -1449,10 +1451,10 @@ export const MyAppBar = () => (
 import { useTranslate } from 'react-admin';
 
 const MyHelloButton = () => {
-const translate = useTranslate();
-return (
-<button>{translate('myroot.hello.world')}</button>
-);
+    const translate = useTranslate();
+    return (
+        <button>{translate('myroot.hello.world')}</button>
+    );
 };
 
 export default MyHelloButton;
@@ -1490,17 +1492,17 @@ React-adminはモバイル画面向けの特定のコンポーネントを提供
 
 ```jsx
 <Box
-sx={{
-width: {
-xs: 100, // theme.breakpoints.up('xs')
-sm: 200, // theme.breakpoints.up('sm')
-md: 300, // theme.breakpoints.up('md')
-lg: 400, // theme.breakpoints.up('lg')
-xl: 500, // theme.breakpoints.up('xl')
-},
-}}
+    sx={{
+        width: {
+            xs: 100, // theme.breakpoints.up('xs')
+            sm: 200, // theme.breakpoints.up('sm')
+            md: 300, // theme.breakpoints.up('md')
+            lg: 400, // theme.breakpoints.up('lg')
+            xl: 500, // theme.breakpoints.up('xl')
+        },
+    }}
 >
-このボックスはレスポンシブな幅を持っています。
+    このボックスはレスポンシブな幅を持っています。
 </Box>
 ```
 
@@ -1514,28 +1516,28 @@ import { useMediaQuery } from '@mui/material';
 import { List, SimpleList, Datagrid, TextField, ReferenceField, EditButton } from 'react-admin';
 
 export const PostList = () => {
-const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
-return (
-<List>
-{isSmall ? (
-<SimpleList
-primaryText={record => record.title}
-secondaryText={record => `${record.views} views`}
-tertiaryText={record => new Date(record.published_at).toLocaleDateString()}
-/>
-) : (
-<Datagrid>
-<TextField source="id" />
-<ReferenceField label="ユーザー" source="userId" reference="users">
-<TextField source="name" />
-</ReferenceField>
-<TextField source="title" />
-<TextField source="body" />
-<EditButton />
-</Datagrid>
-)}
-</List>
-);
+    const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
+    return (
+        <List>
+            {isSmall ? (
+                <SimpleList
+                    primaryText={record => record.title}
+                    secondaryText={record => `${record.views} views`}
+                    tertiaryText={record => new Date(record.published_at).toLocaleDateString()}
+                />
+            ) : (
+                <Datagrid>
+                    <TextField source="id" />
+                    <ReferenceField label="ユーザー" source="userId" reference="users">
+                        <TextField source="name" />
+                    </ReferenceField>
+                    <TextField source="title" />
+                    <TextField source="body" />
+                    <EditButton />
+                </Datagrid>
+            )}
+        </List>
+    );
 };
 ```
 

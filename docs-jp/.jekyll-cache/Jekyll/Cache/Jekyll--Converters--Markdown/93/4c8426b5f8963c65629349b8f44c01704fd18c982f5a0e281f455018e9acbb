@@ -1,0 +1,1665 @@
+I"�.<h1 id="特徴">特徴</h1>
+
+<p>React-adminは、典型的な管理およびB2Bアプリケーションのニーズの大部分をカバーする<strong>リッチなフレームワーク</strong>です。これは、あなたの創造性を解放し、素晴らしいアプリケーションを構築するのに役立つ時間節約ツールです。その独自で意見のある機能により、シングルページアプリケーション開発者にとって最適な選択肢となります。</p>
+
+<h2 id="素晴らしい開発者体験">素晴らしい開発者体験</h2>
+
+<p>React-adminを使用すると、開発者は低レベルの詳細に煩わされることなく、アプリケーションコンポーネントを組み立てることができます。開発者は同じ結果を得るために少ないコードで済み、アプリの<strong>ビジネスロジックに集中</strong>できます。</p>
+
+<p><a href="./img/list-from-react-to-react-admin.webp"><img src="./img/list-from-react-to-react-admin.webp" alt="ReactからReact-adminへのリストビューの比較" /></a></p>
+
+<p>React-adminのコンポーネントとフックのAPIは、できるだけ<strong>直感的</strong>になるように設計されています。React-adminのコアチームは日々React-adminを使用しており、常に開発者体験を向上させる方法を模索しています。</p>
+
+<p>React-adminは、<strong>最高クラスのドキュメント</strong>、デモアプリ、およびサポートを提供します。エラーメッセージは明確で実行可能です。広範なTypeScriptの型とJSDocのおかげで、任意のIDEでReact-adminを簡単に使用できます。APIは安定しており、<strong>互換性のない変更は非常にまれ</strong>です。アプリを<a href="./DataProviders.md#enabling-query-logs">クエリ</a>および<a href="https://react-hook-form.com/dev-tools">フォーム</a>の開発者ツールでデバッグし、React-adminのコードをブラウザで直接検査できます。</p>
+
+<p>これがおそらく、React-adminを使用して毎月3,000以上の新しいアプリが公開される理由です。</p>
+
+<p>したがって、React-adminは単なる<a href="https://react-query.tanstack.com/">react-query</a>、<a href="https://react-hook-form.com/">react-hook-form</a>、<a href="https://reacttraining.com/react-router/">react-router</a>、<a href="https://mui.com/material-ui/getting-started/">Material UI</a>および<a href="https://github.com/emotion-js/emotion">Emotion</a>の組み合わせではありません。Reactでのシングルページアプリケーション開発を加速し、容易にするために作られた<strong>フレームワーク</strong>です。</p>
+
+<h2 id="基本的なcrud">基本的なCRUD</h2>
+
+<p>ほとんどの管理およびB2Bアプリは、レコードを操作するためのいくつかの基本画面から始まります：</p>
+
+<ul>
+  <li>レコードのフィルタリング、ページネーション、並べ替えを行うリストページ</li>
+  <li>レコードの詳細を表示する読み取り専用ページ</li>
+  <li>フォームを通じてレコードを更新する編集ページ</li>
+  <li>レコードを作成する作成ページ</li>
+</ul>
+
+<p>このタイプのインターフェースを「CRUD」インターフェースと呼びます。これは、レコードの作成（Create）、読み取り（Read）、更新（Update）、削除（Delete）が可能であるためです。</p>
+
+<p>React-adminは、そのようなCRUDインターフェースを生成するエンジンとして始まり、今でも非常にうまく機能しています。<strong>React-adminでのCRUDインターフェースの構築はほとんど労力を必要とせず、非常に簡単にカスタマイズできます</strong>。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop="" width="100%">
+  <source src="./img/CRUD.webm" type="video/webm" />
+  <source src="./img/CRUD.mp4" type="video/mp4" />
+  お使いのブラウザは動画タグをサポートしていません。
+</video>
+
+<p>React-adminのCRUDインターフェースの基本的な構成要素は次のとおりです：</p>
+
+<ul>
+  <li><a href="./Resource.md"><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code></a>：特定のAPIリソースのCRUDルートを定義</li>
+  <li><a href="./ListTutorial.md"><code class="language-plaintext highlighter-rouge">&lt;List&gt;</code></a>：レコードのリストを表示</li>
+  <li><a href="./EditTutorial.md"><code class="language-plaintext highlighter-rouge">&lt;Edit&gt;</code></a>：レコードを編集するためのフォームを表示</li>
+  <li><a href="./Create.md"><code class="language-plaintext highlighter-rouge">&lt;Create&gt;</code></a>：レコードを作成するためのフォームを表示</li>
+  <li><a href="./Show.md"><code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code></a>：読み取り専用モードでレコードを表示</li>
+</ul>
+
+<p>もちろん、React-adminはCRUDインターフェースに限定されません。必要に応じてカスタマイズされたインターフェースを構築するためのコンポーネントも提供します。</p>
+
+<h2 id="バックエンドに依存しない">バックエンドに依存しない</h2>
+
+<p>React-adminアプリはブラウザ内で実行されます - これらは「シングルページアプリ」です。データの取得および更新にはAPIに依存します。</p>
+
+<p>どのようなAPIでも？ <strong>すべての種類</strong>です。React-adminはバックエンドに依存しません。APIがREST APIであるか、GraphQL APIであるか、SOAP APIであるか、JSON-RPC APIであるか、ローカルAPIであるかは関係ありません。APIがPHP、Python、Ruby、Java、あるいはJavaScriptで書かれているかどうかも関係ありません。APIがサードパーティAPIであるか、自家製APIであるかも関係ありません。</p>
+
+<p><img src="./img/data-provider.png" class="no-shadow" alt="バックエンドに依存しない" /></p>
+
+<p>React-adminは、人気のあるAPIフレーバーの<a href="./DataProviderList.md">50以上のアダプター</a>を提供し、独自のアダプターを作成するためのすべてのツールを提供します。これは<a href="./DataProviders.md">データプロバイダー</a>と呼ばれる強力な抽象化レイヤーのおかげで機能します。</p>
+
+<p>React-adminアプリでは、APIコールを書きません。代わりに、「データプロバイダーメソッド」と呼ばれる一連の高レベル関数を使用してAPIと通信します。例えば、投稿リストを取得するには、リソース名とクエリパラメーターを渡して<code class="language-plaintext highlighter-rouge">getList()</code>メソッドを呼び出します。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useDataProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+
+    <span class="kd">const</span> <span class="nx">PostList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="p">[</span><span class="nx">posts</span><span class="p">,</span> <span class="nx">setPosts</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([]);</span>
+        <span class="kd">const</span> <span class="p">[</span><span class="nx">error</span><span class="p">,</span> <span class="nx">setError</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">();</span>
+        <span class="kd">const</span> <span class="p">[</span><span class="nx">isLoading</span><span class="p">,</span> <span class="nx">setIsLoading</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+        <span class="kd">const</span> <span class="nx">dataProvider</span> <span class="o">=</span> <span class="nx">useDataProvider</span><span class="p">();</span>
+        <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">dataProvider</span><span class="p">.</span><span class="nx">getList</span><span class="p">(</span><span class="dl">'</span><span class="s1">posts</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+                <span class="na">pagination</span><span class="p">:</span> <span class="p">{</span> <span class="na">page</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">perPage</span><span class="p">:</span> <span class="mi">10</span> <span class="p">},</span>
+                <span class="na">sort</span><span class="p">:</span> <span class="p">{</span> <span class="na">field</span><span class="p">:</span> <span class="dl">'</span><span class="s1">published_at</span><span class="dl">'</span><span class="p">,</span> <span class="na">order</span><span class="p">:</span> <span class="dl">'</span><span class="s1">DESC</span><span class="dl">'</span> <span class="p">},</span>
+                <span class="na">filter</span><span class="p">:</span> <span class="p">{</span> <span class="na">status</span><span class="p">:</span> <span class="dl">'</span><span class="s1">published</span><span class="dl">'</span> <span class="p">}</span>
+            <span class="p">})</span>
+                <span class="p">.</span><span class="nx">then</span><span class="p">(({</span> <span class="nx">data</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="nx">setPosts</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span>
+                <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">setError</span><span class="p">(</span><span class="nx">error</span><span class="p">))</span>
+                <span class="p">.</span><span class="k">finally</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">setIsLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">));</span>
+        <span class="p">},</span> <span class="p">[]);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">isLoading</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Loading<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;;</span> <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>ERROR<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;;</span> <span class="p">}</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+                <span class="si">{</span><span class="nx">posts</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">post</span> <span class="o">=&gt;</span> <span class="p">(</span>
+                    <span class="p">&lt;</span><span class="nt">li</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">post</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">post</span><span class="p">.</span><span class="nx">title</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+                <span class="p">))</span><span class="si">}</span>
+            <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+        <span class="p">);</span>
+    <span class="p">};</span>
+
+<span class="nx">データプロバイダーオブジェクトは</span><span class="err">、</span><span class="nx">データプロバイダーメソッドの呼び出しをHTTPリクエストに変換し</span><span class="err">、</span><span class="nx">HTTPレスポンスをデータプロバイダーメソッドの結果に変換する責任を負います</span><span class="err">。</span>
+
+<span class="nx">ちなみに</span><span class="err">、</span><span class="nx">データ取得に</span><span class="s2">`useEffect`</span><span class="nx">を使用するのは面倒です</span><span class="err">。</span><span class="nx">代わりに</span><span class="err">、</span><span class="s2">`useGetList`</span><span class="nx">のような</span><span class="p">[</span><span class="nx">専用のデータプロバイダーフック</span><span class="p">](.</span><span class="o">/</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">md</span><span class="err">#</span><span class="nx">dataprovider</span><span class="o">-</span><span class="nx">method</span><span class="o">-</span><span class="nx">hooks</span><span class="p">)</span><span class="nx">を使用できます</span><span class="err">：</span>
+
+<span class="s2">```jsx
+import { useGetList } from 'react-admin';
+
+const PostList = () =&gt; {
+    const { data, isLoading, error } = useGetList('posts', {
+        pagination: { page: 1, perPage: 10 },
+        sort: { field: 'published_at', order: 'DESC' },
+        filter: { status: 'published' }
+    });
+    if (isLoading) { return &lt;Loading /&gt;; }
+    if (error) { return &lt;p&gt;ERROR&lt;/p&gt;; }
+    return (
+        &lt;ul&gt;
+            {data.map(post =&gt; (
+                &lt;li key={post.id}&gt;{post.title}&lt;/li&gt;
+            ))}
+        &lt;/ul&gt;
+    );
+};
+</span></code></pre></div></div>
+
+<p>React-adminは、<strong>認証および認可に対してもバックエンドに依存しません</strong>。APIがJWT、OAuth、Auth0やCognitoのようなサードパーティプロバイダー、あるいはAzure Active Directoryを使用しているかどうかに関係なく、<a href="./Authentication.md">認証プロバイダー</a>と呼ばれるアダプターオブジェクトを介して認証バックエンドと通信できます。</p>
+
+<p>その後、コンポーネント上で特定のフックを使用してアクセスを制限できます。例えば、匿名アクセスを禁止するには、<code class="language-plaintext highlighter-rouge">useAuthenticated</code>を使用します：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useAuthenticated</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">MyPage</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">useAuthenticated</span><span class="p">();</span> <span class="c1">// 認証されていない場合はログインページにリダイレクト</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+            ...
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">)</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">MyPage</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="リレーションシップ">リレーションシップ</h2>
+
+<p>APIはしばしばリレーショナルモデルを公開します。つまり、他のエンドポイントへの外部キーを返すエンドポイントです。<strong>React-adminはリレーショナルAPIを活用</strong>して、関連するレコードを表示するスマートコンポーネントや、関連するレコードの編集を可能にするコンポーネントを提供します。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌──────────────┐       ┌────────────────┐
+│ books        │       │ authors        │
+│--------------│       │----------------│
+│ <span class="nb">id</span>           │   ┌───│ <span class="nb">id</span>             │
+│ author_id    │╾──┘   │ first_name     │
+│ title        │       │ last_name      │
+│ published_at │       │ date_of_birth  │
+└──────────────┘       └────────────────┘
+</code></pre></div></div>
+
+<p>例えば、<code class="language-plaintext highlighter-rouge">&lt;ReferenceField&gt;</code>は本の著者名のような関連レコードの名前を表示します。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">BookList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">List</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Datagrid</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"id"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">ReferenceField</span> <span class="na">source</span><span class="p">=</span><span class="s">"authorId"</span> <span class="na">reference</span><span class="p">=</span><span class="s">"authors"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"year"</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">Datagrid</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">List</span><span class="p">&gt;</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p><img src="./img/reference-field-link.png" alt="ReferenceField" /></p>
+
+<p>これをサポートするためにAPI側で特別なことは必要ありません。<code class="language-plaintext highlighter-rouge">books</code>および<code class="language-plaintext highlighter-rouge">authors</code>リソースに対する単純なCRUDルートだけで十分です。<code class="language-plaintext highlighter-rouge">&lt;ReferenceField&gt;</code>は単一のAPIコールで本の著者を取得します：</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">GET</span> <span class="nt">https</span><span class="o">://</span><span class="nt">my</span><span class="nc">.api.url</span><span class="o">/</span><span class="nt">authors</span><span class="o">?</span><span class="nt">filter</span><span class="o">=</span><span class="p">{</span><span class="py">ids</span><span class="p">:[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">7</span><span class="p">]}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;ReferenceField&gt;</code>は関連する著者の呼び出しを<strong>集約し、N+1クエリ問題を回避</strong>します（<a href="https://stackoverflow.com/questions/97197/what-is-the-n1-selects-problem-in-orm-object-relational-mapping">N+1クエリ問題とは</a>）。</p>
+
+<p>同様に、リファレンス入力コンポーネントはユーザーがメインレコードと共に関連レコードを編集することを可能にします。例えば、商品のバリアントを編集するには：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ProductEdit</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Edit</span> <span class="na">mutationMode</span><span class="p">=</span><span class="s">"optimistic"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"name"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">NumberInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"price"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">ReferenceInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"category_id"</span> <span class="na">reference</span><span class="p">=</span><span class="s">"categories"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">ReferenceManyInput</span> <span class="na">reference</span><span class="p">=</span><span class="s">"variants"</span> <span class="na">target</span><span class="p">=</span><span class="s">"product_id"</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">SimpleFormIterator</span> <span class="na">inline</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"sku"</span> <span class="p">/&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">SelectInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"size"</span> <span class="na">choices</span><span class="p">=</span><span class="si">{</span><span class="nx">sizes</span><span class="si">}</span> <span class="p">/&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">SelectInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"color"</span> <span class="na">choices</span><span class="p">=</span><span class="si">{</span><span class="nx">colors</span><span class="si">}</span> <span class="p">/&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">NumberInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"stock"</span> <span class="na">defaultValue</span><span class="p">=</span><span class="si">{</span><span class="mi">0</span><span class="si">}</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;/</span><span class="nc">SimpleFormIterator</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nc">ReferenceManyInput</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">Edit</span><span class="p">&gt;</span>
+<span class="p">);</span>
+</code></pre></div></div>
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/reference-many-input.webm" type="video/webm" /> <source src="./img/reference-many-input.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p>リファレンス入力コンポーネントは、関連するレコードでビューをフィルタリングする際にも非常に便利です。例えば、特定の著者の本のリストを表示するには：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">BookList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">List</span> <span class="na">filters</span><span class="p">=</span><span class="si">{</span><span class="p">[</span>
+        <span class="p">&lt;</span><span class="nc">ReferenceInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"authorId"</span> <span class="na">reference</span><span class="p">=</span><span class="s">"authors"</span> <span class="na">alwaysOn</span> <span class="p">/&gt;,</span>
+    <span class="p">]</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Datagrid</span> <span class="na">rowClick</span><span class="p">=</span><span class="s">"edit"</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"id"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">ReferenceField</span> <span class="na">source</span><span class="p">=</span><span class="s">"authorId"</span> <span class="na">reference</span><span class="p">=</span><span class="s">"authors"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"year"</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">Datagrid</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">List</span><span class="p">&gt;</span>
+<span class="p">);</span>
+</code></pre></div></div>
+<video controls="" autoplay="" playsinline="" muted="" loop="" width="100%"> <source src="./img/reference-input-filter.webm" type="video/webm" /> <source src="./img/reference-input-filter.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p>React-adminは<strong>一対多、多対一、一対一、および多対多のリレーションシップ</strong>をサポートしています。<a href="./FieldsForRelationships.md">リレーションシップのフィールド</a>ページには、すべてのリファレンスフィールドとその一般的な使用法が記載されています。リレーションシップについて詳しく知りたい場合は、以下のコンポーネントを確認してください：</p>
+
+<ul>
+  <li><a href="./ReferenceField.md"><code class="language-plaintext highlighter-rouge">&lt;ReferenceField&gt;</code></a></li>
+  <li><a href="./ReferenceArrayField.md"><code class="language-plaintext highlighter-rouge">&lt;ReferenceArrayField&gt;</code></a></li>
+  <li><a href="./ReferenceManyField.md"><code class="language-plaintext highlighter-rouge">&lt;ReferenceManyField&gt;</code></a></li>
+  <li><a href="./ReferenceManyCount.md"><code class="language-plaintext highlighter-rouge">&lt;ReferenceManyCount&gt;</code></a></li>
+  <li><a href="./ReferenceManyToManyField.md"><code class="language-plaintext highlighter-rouge">&lt;ReferenceManyToManyField&gt;</code></a></li>
+  <li><a href="./ReferenceOneField.md"><code class="language-plaintext highlighter-rouge">&lt;ReferenceOneField&gt;</code></a></li>
+  <li><a href="./ReferenceInput.md"><code class="language-plaintext highlighter-rouge">&lt;ReferenceInput&gt;</code></a></li>
+  <li><a href="./ReferenceArrayInput.md"><code class="language-plaintext highlighter-rouge">&lt;ReferenceArrayInput&gt;</code></a></li>
+  <li><a href="./ReferenceManyInput.md"><code class="language-plaintext highlighter-rouge">&lt;ReferenceManyInput&gt;</code></a></li>
+  <li><a href="./ReferenceManyToManyInput.md"><code class="language-plaintext highlighter-rouge">&lt;ReferenceManyToManyInput&gt;</code></a></li>
+  <li><a href="./ReferenceOneInput.md"><code class="language-plaintext highlighter-rouge">&lt;ReferenceOneInput&gt;</code></a></li>
+</ul>
+
+<p>リファレンスコンポーネントは、複雑なフロントエンド機能の開発を大幅に加速させます。また、バックエンド開発者が複雑な結合を実装する負担から解放されます。</p>
+
+<h2 id="醜くない">醜くない</h2>
+
+<p>現実的に言えば、多くの開発者はまず機能に焦点を当て、ユーザーインターフェース（UI）を磨くための時間をほとんど持っていません。私たちもそのような傾向があります！その結果、管理アプリが醜いことがよくあります。スペーシングが一貫しておらず、ボタンが最適な位置に配置されておらず、色の組み合わせが目に痛いことがあります。</p>
+
+<p>React-adminは<strong>初期状態で見た目がかなり良いコンポーネント</strong>を提供するため、UIに時間をかけなくても（意図的に醜くしない限り）悪く見えることはありません。React-adminは、<a href="https://mui.com/material-ui/getting-started/">Material UI</a>を使用しています。これは、<a href="https://material.io/">Material Design</a>ガイドラインのReact実装であり、最も実績のあるデザインシステムです。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop="" width="100%"> <source src="https://user-images.githubusercontent.com/99944/116970434-4a926480-acb8-11eb-8ce2-0602c680e45e.mp4" type="video/webm" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p>デフォルトのデザインが十分でない場合は、すべてのReact-adminコンポーネントが<strong>完全にテーマ化可能</strong>であり、独自のコンポーネントに置き換えることも簡単です（<a href="#theming">テーマ設定</a>を参照）。</p>
+
+<h2 id="高密度ui">高密度UI</h2>
+
+<p>現代のウェブアプリはしばしば非常に視覚的に魅力的ですが、情報密度が低いために使いにくいことがあります。エンドユーザーは、比較的複雑なタスクを完了するために多くのスクロールとクリックが必要です。</p>
+
+<p>一方、React-adminのデフォルトスキンは高密度に設計されており、<strong>クロームに対してコンテンツにより多くのスペースを与え</strong>、ユーザーの操作を高速化します。</p>
+
+<p><a href="https://marmelab.com/react-admin-demo/#/"><img src="./img/dense.webp" alt="高密度レイアウト" /></a></p>
+
+<p>ユーザーフィードバックに基づいて、このデフォルトレイアウトに多くの改良を加えてきました。私たちの経験では、管理アプリ、ダッシュボード、およびB2Bアプリでは、大きなマージンよりも効率性が重要です。もしこれがあなたのユースケースに当てはまらない場合は、<a href="./AppTheme.md">テーマ</a>を使用してUIのマージンと密度を簡単にカスタマイズできます。</p>
+
+<p>モバイルユーザーの場合、React-adminはより大きなマージンと低い情報密度を持つ異なるレイアウトをレンダリングします（<a href="#responsive">レスポンシブ</a>を参照）。</p>
+
+<h2 id="ヘッドレスコア">ヘッドレスコア</h2>
+
+<p>React-adminコンポーネントはデフォルトでMaterial UIコンポーネントを使用しており、ページのスキャフォールディングを迅速に行えます。Material UIが<a href="#theming">テーマ設定</a>をサポートしているため、アプリの外観と感触を簡単にカスタマイズできます。しかし、場合によってはこれだけでは不十分であり、他のUIライブラリを使用する必要があります。</p>
+
+<p>React-adminを使用するUIライブラリを変更して<a href="https://ant.design/">Ant Design</a>、<a href="https://daisyui.com/">Daisy UI</a>、<a href="https://chakra-ui.com/">Chakra UI</a>、あるいは独自のカスタムUIライブラリを使用することができます。React-adminコンポーネントの背後にある<strong>ヘッドレスロジック</strong>はUIライブラリに依存せず、<code class="language-plaintext highlighter-rouge">...Base</code>コンポーネントおよびコントローラーフックを介して公開されています。</p>
+
+<p>例えば、ここでは<a href="https://ant.design/">Ant Design</a>を使用して構築されたリストビューです：</p>
+
+<p><img src="./img/list_ant_design.png" alt="Ant Designを使用して構築されたリストビュー" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">useListController</code>フックを活用しています：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useListController</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span> 
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Card</span><span class="p">,</span> <span class="nx">Table</span><span class="p">,</span> <span class="nx">Button</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">antd</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span>
+  <span class="nx">CheckCircleOutlined</span><span class="p">,</span>
+  <span class="nx">PlusOutlined</span><span class="p">,</span>
+  <span class="nx">EditOutlined</span><span class="p">,</span>
+<span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@ant-design/icons</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Link</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">PostList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">page</span><span class="p">,</span> <span class="nx">total</span><span class="p">,</span> <span class="nx">setPage</span><span class="p">,</span> <span class="nx">isLoading</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useListController</span><span class="p">({</span>
+    <span class="na">sort</span><span class="p">:</span> <span class="p">{</span> <span class="na">field</span><span class="p">:</span> <span class="dl">'</span><span class="s1">published_at</span><span class="dl">'</span><span class="p">,</span> <span class="na">order</span><span class="p">:</span> <span class="dl">'</span><span class="s1">DESC</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="na">perPage</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="p">});</span>
+  <span class="kd">const</span> <span class="nx">handleTableChange</span> <span class="o">=</span> <span class="p">(</span><span class="nx">pagination</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setPage</span><span class="p">(</span><span class="nx">pagination</span><span class="p">.</span><span class="nx">current</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">margin</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="na">textAlign</span><span class="p">:</span> <span class="dl">'</span><span class="s1">right</span><span class="dl">'</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Link</span> <span class="na">to</span><span class="p">=</span><span class="s">"/posts/create"</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">icon</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">PlusOutlined</span> <span class="p">/&gt;</span><span class="si">}</span><span class="p">&gt;</span>Create<span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Card</span> <span class="na">bodyStyle</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">padding</span><span class="p">:</span> <span class="dl">'</span><span class="s1">0</span><span class="dl">'</span> <span class="p">}</span><span class="si">}</span> <span class="na">loading</span><span class="p">=</span><span class="si">{</span><span class="nx">isLoading</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Table</span>
+          <span class="na">size</span><span class="p">=</span><span class="s">"small"</span>
+          <span class="na">dataSource</span><span class="p">=</span><span class="si">{</span><span class="nx">data</span><span class="si">}</span>
+          <span class="na">columns</span><span class="p">=</span><span class="si">{</span><span class="nx">columns</span><span class="si">}</span>
+          <span class="na">pagination</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">current</span><span class="p">:</span> <span class="nx">page</span><span class="p">,</span> <span class="na">pageSize</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="nx">total</span> <span class="p">}</span><span class="si">}</span>
+          <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">handleTableChange</span><span class="si">}</span>
+        <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">Card</span><span class="p">&gt;</span>
+    <span class="p">&lt;/&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">columns</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span> <span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Id</span><span class="dl">'</span><span class="p">,</span> <span class="na">dataIndex</span><span class="p">:</span> <span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">,</span> <span class="na">key</span><span class="p">:</span> <span class="dl">'</span><span class="s1">id</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Title</span><span class="dl">'</span><span class="p">,</span> <span class="na">dataIndex</span><span class="p">:</span> <span class="dl">'</span><span class="s1">title</span><span class="dl">'</span><span class="p">,</span> <span class="na">key</span><span class="p">:</span> <span class="dl">'</span><span class="s1">title</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Publication date</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">dataIndex</span><span class="p">:</span> <span class="dl">'</span><span class="s1">published_at</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">key</span><span class="p">:</span> <span class="dl">'</span><span class="s1">pub_at</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">render</span><span class="p">:</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">value</span><span class="p">).</span><span class="nx">toLocaleDateString</span><span class="p">(),</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Commentable</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">dataIndex</span><span class="p">:</span> <span class="dl">'</span><span class="s1">commentable</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">key</span><span class="p">:</span> <span class="dl">'</span><span class="s1">commentable</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">render</span><span class="p">:</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">value</span> <span class="p">?</span> <span class="p">&lt;</span><span class="nc">CheckCircleOutlined</span> <span class="p">/&gt;</span> <span class="p">:</span> <span class="kc">null</span><span class="p">),</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Actions</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">render</span><span class="p">:</span> <span class="p">(</span><span class="nx">_</span><span class="p">,</span> <span class="nx">record</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nc">Link</span> <span class="na">to</span><span class="p">=</span><span class="si">{</span><span class="s2">`/posts/</span><span class="p">${</span><span class="nx">record</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">icon</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">EditOutlined</span> <span class="p">/&gt;</span><span class="si">}</span><span class="p">&gt;</span>Edit<span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+    <span class="p">),</span>
+  <span class="p">},</span>
+<span class="p">];</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">PostList</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>ヘッドレスコントローラーについて詳しく知りたい場合は、以下のフックを確認してください：</p>
+
+<ul>
+  <li><a href="./useListController.md"><code class="language-plaintext highlighter-rouge">useListController</code></a></li>
+  <li><a href="./useEditController.md"><code class="language-plaintext highlighter-rouge">useEditController</code></a></li>
+  <li><a href="./useCreateController.md"><code class="language-plaintext highlighter-rouge">useCreateController</code></a></li>
+  <li><a href="./useShowController.md"><code class="language-plaintext highlighter-rouge">useShowController</code></a></li>
+</ul>
+
+<p>また、Material UIを使用せずにReact-adminで構築された管理パネルの例を以下に示します：</p>
+
+<ul>
+  <li><a href="https://marmelab.com/blog/2023/11/28/using-react-admin-with-your-favorite-ui-library.html">DaisyUI、Tailwind CSS、Tanstack TableおよびReact-Aria</a></li>
+  <li><a href="https://github.com/marmelab/ra-shadcn-demo">shadcn/ui、Tailwind CSSおよびRadix UI</a></li>
+</ul>
+
+<h2 id="推測とスキャフォールディング">推測とスキャフォールディング</h2>
+
+<p>新しいAPIルートをCRUDビューにマッピングする際に、フィールドを一つ一つ追加するのは面倒です。React-adminは、APIレスポンスに基づいて<strong>完全なCRUD UIを自動生成</strong>する推測機能を提供します。</p>
+
+<p>例えば、次のコードは<code class="language-plaintext highlighter-rouge">posts</code>リソースの完全なCRUD UIを生成します：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span><span class="p">,</span> <span class="nx">ListGuesser</span><span class="p">,</span> <span class="nx">EditGuesser</span><span class="p">,</span> <span class="nx">ShowGuesser</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Admin</span> <span class="na">dataProvider</span><span class="p">=</span><span class="si">{</span><span class="nx">dataProvider</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Resource</span> <span class="na">name</span><span class="p">=</span><span class="s">"posts"</span> <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">ListGuesser</span><span class="si">}</span> <span class="na">edit</span><span class="p">=</span><span class="si">{</span><span class="nx">EditGuesser</span><span class="si">}</span> <span class="na">show</span><span class="p">=</span><span class="si">{</span><span class="nx">ShowGuesser</span><span class="si">}</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">Admin</span><span class="p">&gt;</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>推測コンポーネントは、まずAPIからデータを取得し、レスポンスの形状を分析し、データ型に一致するフィールドおよび入力コンポーネントを選択します。また、生成されたコードをコンソールにダンプし、UIのカスタマイズを開始することができます。</p>
+
+<p><img src="./img/tutorial_guessed_list.png" alt="ListGuesser" /></p>
+
+<p>推測について詳しく知りたい場合は、以下のコンポーネントを確認してください：</p>
+
+<ul>
+  <li><a href="./ListGuesser.md"><code class="language-plaintext highlighter-rouge">&lt;ListGuesser&gt;</code></a></li>
+  <li><a href="./EditGuesser.md"><code class="language-plaintext highlighter-rouge">&lt;EditGuesser&gt;</code></a></li>
+  <li><a href="./ShowGuesser.md"><code class="language-plaintext highlighter-rouge">&lt;ShowGuesser&gt;</code></a></li>
+</ul>
+
+<h2 id="強力なデータグリッドコンポーネント">強力なデータグリッドコンポーネント</h2>
+
+<p>ほとんどの管理アプリはレコードのリストを表示し、ユーザーがそれをソート、フィルタリング、およびページネーションすることを可能にします。React-adminは、そのようなリストを構築するためのコンポーネントセット、つまり「データグリッドコンポーネント」を提供します。</p>
+
+<p>基本的な<a href="./Datagrid.md"><code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>コンポーネント</a>は、レコードを表形式で表示し、各レコードに対して1行、各フィールドに対して1列を持ちます。展開パネル、行選択チェックボックス、および一括アクションツールバーもサポートしています。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/datagrid.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p><a href="./EditableDatagrid.md"><code class="language-plaintext highlighter-rouge">&lt;EditableDatagrid&gt;</code>コンポーネント</a>は、編集フォームに移動することなく、レコードをその場で編集できるようにします。データ入力のスピードを大幅に向上させる方法です。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="https://react-admin-ee.marmelab.com/assets/ra-editable-datagrid-overview.webm" type="video/webm" /> <source src="https://react-admin-ee.marmelab.com/assets/ra-editable-datagrid-overview.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p>最後に、<a href="./DatagridAG.md"><code class="language-plaintext highlighter-rouge">&lt;DatagridAG&gt;</code>コンポーネント</a>は、<a href="https://www.ag-grid.com/">AG Grid</a>ライブラリを統合し、セル編集、集計、行グループ化、マスターディテール、クリップボード、ピボット、列フィルタリング、Excelへのエクスポート、コンテキストメニュー、ツリーデータ、チャーティングなどの豊富な機能を提供します。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="https://react-admin-ee.marmelab.com/assets/DatagridAG-enterprise.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+<h2 id="検索とフィルタリング">検索とフィルタリング</h2>
+
+<p>ほとんどの管理およびB2Bアプリでは、最も一般的なタスクはレコードを検索することです。React-adminは、<strong>検索ワークフローを合理化するユーザーエクスペリエンスを構築する</strong>のに役立つ多くの機能を提供します。</p>
+
+<table><tbody> <tr style="border:none"> <td style="width:50%;border:none;text-align:center"> <a title="フィルターボタン/フォームコンボ" href="./img/list\_filter.webm"> <video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/list\_filter.webm" type="video/webm" /> <source src="./img/list\_filter.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video> </a> <a href="./FilteringTutorial.html#the-filter-buttonform-combo" style="display: block;transform: translateY(-10px);">フィルターボタン/フォームコンボ</a> </td> <td style="width:50%;border:none;text-align:center"> <a title="&lt;FilterList&gt;サイドバー" href="./img/filter-sidebar.webm"> <video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/filter-sidebar.webm" type="video/webm" /> <source src="./img/filter-sidebar.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video> </a> <a href="./FilteringTutorial.html#the-filterlist-sidebar" style="display: block;transform: translateY(-10px);"><code>&lt;FilterList&gt;</code>サイドバー</a> </td> </tr> <tr style="border:none;background-color:#fff;"> <td style="width:50%;border:none;text-align:center"> <a title="積み重ねフィルター" href="https://react-admin-ee.marmelab.com/assets/ra-form-layout/latest/stackedfilters-overview.webm"> <video controls="" autoplay="" playsinline="" muted="" loop="" width="90%" style="margin:1rem;box-shadow:0px 4px 4px 0px rgb(0 0 0 / 24%);"> <source src="https://react-admin-ee.marmelab.com/assets/ra-form-layout/latest/stackedfilters-overview.webm" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video> </a> <a href="./FilteringTutorial.html#the-stackedfilters-component" style="display: block;transform: translateY(-10px);"><code>&lt;StackedFilters&gt;</code>ダイアログ</a> </td> <td style="width:50%;border:none;text-align:center;vertical-align:top;"> <a title="&lt;Search&gt;入力" href="https://react-admin-ee.marmelab.com/assets/ra-search-overview.gif"><img src="https://react-admin-ee.marmelab.com/assets/ra-search-overview.gif" /></a> <a href="./FilteringTutorial.html#global-search" style="display: block;transform: translateY(-10px);">グローバル<code>&lt;Search&gt;</code></a> </td> </tr> </tbody></table>
+
+<p>これらの機能は、直感的なAPIを持つ強力なコンポーネントに依存しています。例えば、<code class="language-plaintext highlighter-rouge">&lt;List filters&gt;</code>プロップを使用してフィルターボタン/フォームコンボを設定し、編集フォームと同じ入力コンポーネントを使用できます：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">List</span><span class="p">,</span> <span class="nx">TextInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">postFilters</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"検索"</span> <span class="na">source</span><span class="p">=</span><span class="s">"q"</span> <span class="na">alwaysOn</span> <span class="p">/&gt;,</span>
+    <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"タイトル"</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">defaultValue</span><span class="p">=</span><span class="s">"Hello, World!"</span> <span class="p">/&gt;,</span>
+<span class="p">];</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">PostList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">List</span> <span class="na">filters</span><span class="p">=</span><span class="si">{</span><span class="nx">postFilters</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="si">{</span><span class="cm">/* ... */</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nc">List</span><span class="p">&gt;</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>各検索およびフィルタリングコンポーネントについて詳しく知りたい場合は、以下の章を確認してください：</p>
+
+<ul>
+  <li><a href="./FilteringTutorial.md#the-filter-buttonform-combo">フィルターボタン/フォームコンボ</a></li>
+  <li><a href="./FilterList.md"><code class="language-plaintext highlighter-rouge">&lt;FilterList&gt;</code></a></li>
+  <li><a href="./StackedFilters.md"><code class="language-plaintext highlighter-rouge">&lt;StackedFilters&gt;</code></a></li>
+  <li><a href="./Search.md"><code class="language-plaintext highlighter-rouge">&lt;Search&gt;</code></a></li>
+</ul>
+
+<p>ユーザーは同じフィルターを何度も適用することがよくあります。保存されたクエリを使用すると、ユーザーは<strong>フィルターとソートパラメーターの組み合わせを保存</strong>し、新しい個人的なフィルターとしてセッション間で保持できます。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/SavedQueriesList.webm" type="video/webm" /> <source src="./img/SavedQueriesList.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p>以下は、保存されたクエリを持つ<code class="language-plaintext highlighter-rouge">&lt;FilterList&gt;</code>サイドバーの例です：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">FilterList</span><span class="p">,</span> <span class="nx">FilterListItem</span><span class="p">,</span> <span class="nx">List</span><span class="p">,</span> <span class="nx">Datagrid</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Card</span><span class="p">,</span> <span class="nx">CardContent</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">SavedQueriesList</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">SongFilterSidebar</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Card</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">CardContent</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">SavedQueriesList</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">FilterList</span> <span class="na">label</span><span class="p">=</span><span class="s">"レコード会社"</span> <span class="na">icon</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">BusinessIcon</span> <span class="p">/&gt;</span><span class="si">}</span><span class="p">&gt;</span>
+                ...
+            <span class="p">&lt;/</span><span class="nc">FilterList</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">FilterList</span> <span class="na">label</span><span class="p">=</span><span class="s">"リリース"</span> <span class="na">icon</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">DateRangeeIcon</span> <span class="p">/&gt;</span><span class="si">}</span><span class="p">&gt;</span>
+               ...
+            <span class="p">&lt;/</span><span class="nc">FilterList</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">CardContent</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">Card</span><span class="p">&gt;</span>
+<span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">SongList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">List</span> <span class="na">aside</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">SongFilterSidebar</span> <span class="p">/&gt;</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Datagrid</span><span class="p">&gt;</span>
+            ...
+        <span class="p">&lt;/</span><span class="nc">Datagrid</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">List</span><span class="p">&gt;</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p><a href="./FilteringTutorial.md#saved-queries-let-users-save-filter-and-sort">保存されたクエリのチュートリアル</a>で詳細を確認してください。</p>
+
+<p>最後に、React-adminは<strong>独自の検索UIを構築するための低レベルコンポーネントおよびフック</strong>を提供します：</p>
+
+<ul>
+  <li><a href="./FilterButton.md"><code class="language-plaintext highlighter-rouge">&lt;FilterButton&gt;</code></a></li>
+  <li><a href="./FilteringTutorial.md#searchinput"><code class="language-plaintext highlighter-rouge">&lt;SearchInput&gt;</code></a></li>
+  <li><a href="./FilterLiveSearch.md"><code class="language-plaintext highlighter-rouge">&lt;FilterLiveSearch&gt;</code></a></li>
+  <li><a href="./SavedQueriesList.md"><code class="language-plaintext highlighter-rouge">&lt;SavedQueriesList&gt;</code></a></li>
+  <li><a href="./useListContext.md"><code class="language-plaintext highlighter-rouge">useListContext()</code></a></li>
+  <li><a href="./useList.md"><code class="language-plaintext highlighter-rouge">useList()</code></a></li>
+</ul>
+
+<p><a href="./FilteringTutorial.md#building-a-custom-filter">カスタムフィルターチュートリアル</a>を確認して詳細を学んでください。</p>
+
+<h2 id="フォームとバリデーション">フォームとバリデーション</h2>
+
+<p>多くの管理アプリは、複数のフィールドおよびレコードを更新する複雑なタスクをユーザーに実行させます。そのような複雑なワークフローを可能にするために、開発者は精巧なバリデーションルールを持つ高度なフォームを構築できる必要があります。</p>
+
+<p>React-adminは、フォームを構築するための<strong>豊富な入力コンポーネントおよびフォームレイアウト</strong>を提供します。これらは、<a href="https://mui.com/material-ui/getting-started/">Material UI</a>および<a href="https://react-hook-form.com/">react-hook-form</a>によって強化されています。React-adminのフォームコンポーネントは、フォームの値を編集中のレコードにバインドし、フォーム入力のバリデーションを行うことも自動的に行います。</p>
+
+<p>例えば、ブログ投稿を編集するためのタブ付きフォームを構築する方法は次のとおりです：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span>
+    <span class="nx">TabbedForm</span><span class="p">,</span>
+    <span class="nx">Edit</span><span class="p">,</span>
+    <span class="nx">Datagrid</span><span class="p">,</span>
+    <span class="nx">TextField</span><span class="p">,</span>
+    <span class="nx">DateField</span><span class="p">,</span>
+    <span class="nx">TextInput</span><span class="p">,</span>
+    <span class="nx">ReferenceManyField</span><span class="p">,</span>
+    <span class="nx">NumberInput</span><span class="p">,</span>
+    <span class="nx">DateInput</span><span class="p">,</span>
+    <span class="nx">BooleanInput</span><span class="p">,</span>
+    <span class="nx">EditButton</span>
+<span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">PostEdit</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Edit</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">TabbedForm</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TabbedForm</span><span class="p">.</span><span class="nc">Tab</span> <span class="na">label</span><span class="p">=</span><span class="s">"概要"</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"ID"</span> <span class="na">source</span><span class="p">=</span><span class="s">"id"</span> <span class="na">InputProps</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">disabled</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}</span><span class="si">}</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="nx">required</span><span class="p">()</span><span class="si">}</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">multiline</span> <span class="na">source</span><span class="p">=</span><span class="s">"teaser"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="nx">required</span><span class="p">()</span><span class="si">}</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;/</span><span class="nc">TabbedForm</span><span class="p">.</span><span class="nc">Tab</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TabbedForm</span><span class="p">.</span><span class="nc">Tab</span> <span class="na">label</span><span class="p">=</span><span class="s">"本文"</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">RichTextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"body"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="nx">required</span><span class="p">()</span><span class="si">}</span> <span class="na">label</span><span class="p">=</span><span class="si">{</span><span class="kc">false</span><span class="si">}</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;/</span><span class="nc">TabbedForm</span><span class="p">.</span><span class="nc">Tab</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TabbedForm</span><span class="p">.</span><span class="nc">Tab</span> <span class="na">label</span><span class="p">=</span><span class="s">"その他"</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"パスワード（保護された投稿の場合）"</span> <span class="na">source</span><span class="p">=</span><span class="s">"password"</span> <span class="na">type</span><span class="p">=</span><span class="s">"password"</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">DateInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"公開日"</span> <span class="na">source</span><span class="p">=</span><span class="s">"published_at"</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">NumberInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"average_note"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="p">[</span> <span class="nx">number</span><span class="p">(),</span> <span class="nx">minValue</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">]</span><span class="si">}</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">BooleanInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"コメントを許可しますか？"</span> <span class="na">source</span><span class="p">=</span><span class="s">"commentable"</span> <span class="na">defaultValue</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"ビュー数"</span> <span class="na">source</span><span class="p">=</span><span class="s">"views"</span> <span class="na">InputProps</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">disabled</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}</span><span class="si">}</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;/</span><span class="nc">TabbedForm</span><span class="p">.</span><span class="nc">Tab</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TabbedForm</span><span class="p">.</span><span class="nc">Tab</span> <span class="na">label</span><span class="p">=</span><span class="s">"コメント"</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">ReferenceManyField</span> <span class="na">reference</span><span class="p">=</span><span class="s">"comments"</span> <span class="na">target</span><span class="p">=</span><span class="s">"post_id"</span> <span class="na">label</span><span class="p">=</span><span class="si">{</span><span class="kc">false</span><span class="si">}</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">Datagrid</span><span class="p">&gt;</span>
+                        <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"body"</span> <span class="p">/&gt;</span>
+                        <span class="p">&lt;</span><span class="nc">DateField</span> <span class="na">source</span><span class="p">=</span><span class="s">"created_at"</span> <span class="p">/&gt;</span>
+                        <span class="p">&lt;</span><span class="nc">EditButton</span> <span class="p">/&gt;</span>
+                    <span class="p">&lt;/</span><span class="nc">Datagrid</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nc">ReferenceManyField</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nc">TabbedForm</span><span class="p">.</span><span class="nc">Tab</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">TabbedForm</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">Edit</span><span class="p">&gt;</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/tabbed-form.webm" type="video/webm" /> <source src="./img/tabbed-form.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+<h3 id="フォームレイアウト">フォームレイアウト</h3>
+
+<p>React-adminは、初期状態でいくつかのフォームレイアウトを提供します：</p>
+
+<ul>
+  <li><a href="./SimpleForm.md"><code class="language-plaintext highlighter-rouge">&lt;SimpleForm&gt;</code></a>：シングルカラムレイアウト用</li>
+  <li><a href="./TabbedForm.md"><code class="language-plaintext highlighter-rouge">&lt;TabbedForm&gt;</code></a>：タブ付きレイアウト用</li>
+  <li><a href="./AccordionForm.md"><code class="language-plaintext highlighter-rouge">&lt;AccordionForm&gt;</code></a>：折りたたみセクション付きの長いフォーム用</li>
+  <li><a href="./LongForm.md"><code class="language-plaintext highlighter-rouge">&lt;LongForm&gt;</code></a>：ナビゲーションサイドバー付きの長いフォーム用</li>
+  <li><a href="./WizardForm.md"><code class="language-plaintext highlighter-rouge">&lt;WizardForm&gt;</code></a>：マルチステップフォーム用</li>
+  <li><a href="./EditDialog.md"><code class="language-plaintext highlighter-rouge">&lt;EditDialog&gt;</code></a>：モーダルダイアログ内のサブフォーム用</li>
+  <li><a href="./Form.md"><code class="language-plaintext highlighter-rouge">Form</code></a>：カスタムレイアウトのベースとして使用するヘッドレスコンポーネント</li>
+</ul>
+
+<h3 id="入力コンポーネント">入力コンポーネント</h3>
+
+<p>フォーム内では、多くのデータタイプに対応した<a href="./Inputs.md">入力コンポーネント</a>を使用できます：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>データタイプ</th>
+      <th>例</th>
+      <th>入力コンポーネント</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>文字列</td>
+      <td><code class="language-plaintext highlighter-rouge">'Lorem Ipsum'</code></td>
+      <td><a href="./TextInput.md"><code class="language-plaintext highlighter-rouge">&lt;TextInput&gt;</code></a></td>
+    </tr>
+    <tr>
+      <td>リッチテキスト</td>
+      <td><code class="language-plaintext highlighter-rouge">&lt;p&gt;Lorem Ipsum&lt;/p&gt;</code></td>
+      <td><a href="./RichTextInput.md"><code class="language-plaintext highlighter-rouge">&lt;RichTextInput&gt;</code></a></td>
+    </tr>
+    <tr>
+      <td>Markdown</td>
+      <td><code class="language-plaintext highlighter-rouge"># Lorem Ipsum</code></td>
+      <td><a href="./MarkdownInput.md"><code class="language-plaintext highlighter-rouge">&lt;MarkdownInput&gt;</code></a></td>
+    </tr>
+    <tr>
+      <td>パスワード</td>
+      <td><code class="language-plaintext highlighter-rouge">'********'</code></td>
+      <td><a href="./PasswordInput.md"><code class="language-plaintext highlighter-rouge">&lt;PasswordInput&gt;</code></a></td>
+    </tr>
+    <tr>
+      <td>画像URL</td>
+      <td><code class="language-plaintext highlighter-rouge">'https://example.com/image.png'</code></td>
+      <td><a href="./ImageInput.md"><code class="language-plaintext highlighter-rouge">&lt;ImageInput&gt;</code></a></td>
+    </tr>
+    <tr>
+      <td>ファイルURL</td>
+      <td><code class="language-plaintext highlighter-rouge">'https://example.com/file.pdf'</code></td>
+      <td><a href="./FileInput.md"><code class="language-plaintext highlighter-rouge">&lt;FileInput&gt;</code></a></td>
+    </tr>
+    <tr>
+      <td>数値</td>
+      <td><code class="language-plaintext highlighter-rouge">42</code>, <code class="language-plaintext highlighter-rouge">1.345</code></td>
+      <td><a href="./NumberInput.md"><code class="language-plaintext highlighter-rouge">&lt;NumberInput&gt;</code></a></td>
+    </tr>
+    <tr>
+      <td>真偽値</td>
+      <td><code class="language-plaintext highlighter-rouge">true</code></td>
+      <td><a href="./BooleanInput.md"><code class="language-plaintext highlighter-rouge">&lt;BooleanInput&gt;</code></a>, <a href="./NullableBooleanInput.md"><code class="language-plaintext highlighter-rouge">&lt;NullableBooleanInput&gt;</code></a></td>
+    </tr>
+    <tr>
+      <td>日付</td>
+      <td><code class="language-plaintext highlighter-rouge">'2022-10-23'</code></td>
+      <td><a href="./DateInput.md"><code class="language-plaintext highlighter-rouge">&lt;DateInput&gt;</code></a></td>
+    </tr>
+    <tr>
+      <td>時間</td>
+      <td><code class="language-plaintext highlighter-rouge">'14:30:00'</code></td>
+      <td><a href="./TimeInput.md"><code class="language-plaintext highlighter-rouge">&lt;TimeInput&gt;</code></a></td>
+    </tr>
+    <tr>
+      <td>日付と時間</td>
+      <td><code class="language-plaintext highlighter-rouge">'2022-10-24T19:40:28.003Z'</code></td>
+      <td><a href="./DateTimeInput.md"><code class="language-plaintext highlighter-rouge">&lt;DateTimeInput&gt;</code></a></td>
+    </tr>
+    <tr>
+      <td>オブジェクト</td>
+      <td><code class="language-plaintext highlighter-rouge">{ foo: 'bar' }</code></td>
+      <td>すべての入力コンポーネント (例： <a href="./Inputs.md#source"><code class="language-plaintext highlighter-rouge">source</code></a>)</td>
+    </tr>
+    <tr>
+      <td>列挙型</td>
+      <td><code class="language-plaintext highlighter-rouge">'foo'</code></td>
+      <td><a href="./SelectInput.md"><code class="language-plaintext highlighter-rouge">&lt;SelectInput&gt;</code></a>, <a href="./AutocompleteInput.md"><code class="language-plaintext highlighter-rouge">&lt;AutocompleteInput&gt;</code></a>, <a href="./RadioButtonGroupInput.md"><code class="language-plaintext highlighter-rouge">&lt;RadioButtonGroupInput&gt;</code></a></td>
+    </tr>
+    <tr>
+      <td>外部キー</td>
+      <td><code class="language-plaintext highlighter-rouge">42</code></td>
+      <td><a href="./ReferenceInput.md"><code class="language-plaintext highlighter-rouge">&lt;ReferenceInput&gt;</code></a></td>
+    </tr>
+    <tr>
+      <td>オブジェクトの配列</td>
+      <td><code class="language-plaintext highlighter-rouge">[{ item: 'jeans', qty: 3 }, { item: 'shirt', qty: 1 }]</code></td>
+      <td><a href="./ArrayInput.md"><code class="language-plaintext highlighter-rouge">&lt;ArrayInput&gt;</code></a></td>
+    </tr>
+    <tr>
+      <td>列挙型の配列</td>
+      <td><code class="language-plaintext highlighter-rouge">['foo', 'bar']</code></td>
+      <td><a href="./SelectArrayInput.md"><code class="language-plaintext highlighter-rouge">&lt;SelectArrayInput&gt;</code></a>, <a href="./AutocompleteArrayInput.md"><code class="language-plaintext highlighter-rouge">&lt;AutocompleteArrayInput&gt;</code></a>, <a href="./CheckboxGroupInput.md"><code class="language-plaintext highlighter-rouge">&lt;CheckboxGroupInput&gt;</code></a>, <a href="./DualListInput.md"><code class="language-plaintext highlighter-rouge">&lt;DualListInput&gt;</code></a></td>
+    </tr>
+    <tr>
+      <td>外部キーの配列</td>
+      <td><code class="language-plaintext highlighter-rouge">[42, 43]</code></td>
+      <td><a href="./ReferenceArrayInput.md"><code class="language-plaintext highlighter-rouge">&lt;ReferenceArrayInput&gt;</code></a></td>
+    </tr>
+    <tr>
+      <td>翻訳</td>
+      <td><code class="language-plaintext highlighter-rouge">{ en: 'Hello', fr: 'Bonjour' }</code></td>
+      <td><a href="./TranslatableInputs.md"><code class="language-plaintext highlighter-rouge">&lt;TranslatableInputs&gt;</code></a></td>
+    </tr>
+    <tr>
+      <td>関連レコード</td>
+      <td><code class="language-plaintext highlighter-rouge">[{ id: 42, title: 'Hello' }, { id: 43, title: 'World' }]</code></td>
+      <td><a href="./ReferenceManyInput.md"><code class="language-plaintext highlighter-rouge">&lt;ReferenceManyInput&gt;</code></a>, <a href="./ReferenceManyToManyInput.md"><code class="language-plaintext highlighter-rouge">&lt;ReferenceManyToManyInput&gt;</code></a>, <a href="./ReferenceOneInput.md"><code class="language-plaintext highlighter-rouge">&lt;ReferenceOneInput&gt;</code></a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="従属入力">従属入力</h3>
+
+<p><a href="https://react-hook-form.com/docs/usewatch">react-hook-formの<code class="language-plaintext highlighter-rouge">useWatch</code>フック</a>を使用して従属入力を構築できます。例えば、選択された国の都市を表示する<code class="language-plaintext highlighter-rouge">CityInput</code>は次のようになります：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Edit</span><span class="p">,</span> <span class="nx">SimpleForm</span><span class="p">,</span> <span class="nx">SelectInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useWatch</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-hook-form</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">countries</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">USA</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">UK</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">France</span><span class="dl">'</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">cities</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">USA</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">New York</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Los Angeles</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Chicago</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Houston</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Phoenix</span><span class="dl">'</span><span class="p">],</span>
+    <span class="na">UK</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">London</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Birmingham</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Glasgow</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Liverpool</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Bristol</span><span class="dl">'</span><span class="p">],</span>
+    <span class="na">France</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Paris</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Marseille</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Lyon</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Toulouse</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Nice</span><span class="dl">'</span><span class="p">],</span>
+<span class="p">};</span>
+<span class="kd">const</span> <span class="nx">toChoices</span> <span class="o">=</span> <span class="nx">items</span> <span class="o">=&gt;</span> <span class="nx">items</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="nx">item</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="nx">item</span> <span class="p">}));</span>
+<span class="c1">// toChoices(countries)は[{ id: 'USA', name: 'USA' }, ...]になります</span>
+
+
+<span class="kd">const</span> <span class="nx">CityInput</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">country</span> <span class="o">=</span> <span class="nx">useWatch</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">country</span><span class="dl">'</span> <span class="p">});</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nc">SelectInput</span>
+            <span class="na">choices</span><span class="p">=</span><span class="si">{</span><span class="nx">country</span> <span class="p">?</span> <span class="nx">toChoices</span><span class="p">(</span><span class="nx">cities</span><span class="p">[</span><span class="nx">country</span><span class="p">])</span> <span class="p">:</span> <span class="p">[]</span><span class="si">}</span>
+            <span class="na">source</span><span class="p">=</span><span class="s">"cities"</span>
+        <span class="p">/&gt;</span>
+    <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">OrderEdit</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Edit</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">SelectInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"country"</span> <span class="na">choices</span><span class="p">=</span><span class="si">{</span><span class="nx">toChoices</span><span class="p">(</span><span class="nx">countries</span><span class="p">)</span><span class="si">}</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">CityInput</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">Edit</span><span class="p">&gt;</span>
+<span class="p">);</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">OrderEdit</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="バリデーション">バリデーション</h3>
+
+<p>React-adminは強力で多用途なバリデーションエンジンを備えています。</p>
+
+<p><img src="./img/validation.png" alt="バリデーションの例" /></p>
+
+<p>React-adminのフォームは、最も一般的なバリデーション戦略をサポートしています：</p>
+
+<ul>
+  <li><a href="./Validation.md#per-input-validation-built-in-field-validators">フィールドごとのバリデーター</a>,</li>
+  <li><a href="./Validation.md#global-validation">フォーム全体のバリデーション</a>,</li>
+  <li><a href="./Validation.md#schema-validation">yupまたはzodによるバリデーションスキーマ</a>,</li>
+  <li><a href="./Validation.md#server-side-validation">サーバーサイドバリデーション</a>.</li>
+</ul>
+
+<p>以下はフィールドごとのバリデーションの例です：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span>
+    <span class="nx">required</span><span class="p">,</span>
+    <span class="nx">minLength</span><span class="p">,</span>
+    <span class="nx">maxLength</span><span class="p">,</span>
+    <span class="nx">minValue</span><span class="p">,</span>
+    <span class="nx">maxValue</span><span class="p">,</span>
+    <span class="nx">number</span><span class="p">,</span>
+    <span class="nx">regex</span><span class="p">,</span>
+    <span class="nx">email</span><span class="p">,</span>
+    <span class="nx">choices</span>
+<span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">validateFirstName</span> <span class="o">=</span> <span class="p">[</span><span class="nx">required</span><span class="p">(),</span> <span class="nx">minLength</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nx">maxLength</span><span class="p">(</span><span class="mi">15</span><span class="p">)];</span>
+<span class="kd">const</span> <span class="nx">validateEmail</span> <span class="o">=</span> <span class="nx">email</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">validateAge</span> <span class="o">=</span> <span class="p">[</span><span class="nx">number</span><span class="p">(),</span> <span class="nx">minValue</span><span class="p">(</span><span class="mi">18</span><span class="p">)];</span>
+<span class="kd">const</span> <span class="nx">validateZipCode</span> <span class="o">=</span> <span class="nx">regex</span><span class="p">(</span><span class="sr">/^</span><span class="se">\d{5}</span><span class="sr">$/</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Must be a valid Zip Code</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">validateGender</span> <span class="o">=</span> <span class="nx">choices</span><span class="p">([</span><span class="dl">'</span><span class="s1">m</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">f</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">nc</span><span class="dl">'</span><span class="p">],</span> <span class="dl">'</span><span class="s1">Please choose one of the values</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">UserCreate</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Create</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"First Name"</span> <span class="na">source</span><span class="p">=</span><span class="s">"firstName"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="nx">validateFirstName</span><span class="si">}</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"Email"</span> <span class="na">source</span><span class="p">=</span><span class="s">"email"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="nx">validateEmail</span><span class="si">}</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"Age"</span> <span class="na">source</span><span class="p">=</span><span class="s">"age"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="nx">validateAge</span><span class="si">}</span><span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"Zip Code"</span> <span class="na">source</span><span class="p">=</span><span class="s">"zip"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="nx">validateZipCode</span><span class="si">}</span><span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">SelectInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"Gender"</span> <span class="na">source</span><span class="p">=</span><span class="s">"gender"</span> <span class="na">choices</span><span class="p">=</span><span class="si">{</span><span class="p">[</span>
+                <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">m</span><span class="dl">'</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Male</span><span class="dl">'</span> <span class="p">},</span>
+                <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">f</span><span class="dl">'</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Female</span><span class="dl">'</span> <span class="p">},</span>
+                <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">nc</span><span class="dl">'</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Prefer not say</span><span class="dl">'</span> <span class="p">},</span>
+            <span class="p">]</span><span class="si">}</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="nx">validateGender</span><span class="si">}</span><span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">Create</span><span class="p">&gt;</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="自動保存">自動保存</h3>
+
+<p>React-adminでは、ユーザーが変更を失うことがないように、変更を自動的に保存するフォームを<a href="./AutoSave.md"><code class="language-plaintext highlighter-rouge">&lt;AutoSave&gt;</code></a>を使用して構築できます。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/AutoSave.webm" type="video/webm" /> <source src="./img/AutoSave.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+<h3 id="jsonスキーマフォーム">JSONスキーマフォーム</h3>
+
+<p>最後に、<a href="./JsonSchemaForm.md"><code class="language-plaintext highlighter-rouge">&lt;JsonSchemaForm&gt;</code>コンポーネント</a>を使用して、<strong>JSONスキーマに基づいてフォーム全体を生成</strong>できます。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Edit</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-admin</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">JsonSchemaForm</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@react-admin/ra-json-schema-form</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">CustomerEdit</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+  <span class="p">&lt;</span><span class="nc">Edit</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nc">JsonSchemaForm</span>
+      <span class="na">schema</span><span class="p">=</span><span class="si">{</span><span class="p">{</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">object</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">properties</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">id</span><span class="p">:</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">number</span><span class="dl">"</span> <span class="p">},</span>
+          <span class="na">first_name</span><span class="p">:</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span> <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">First name</span><span class="dl">"</span> <span class="p">},</span>
+          <span class="na">last_name</span><span class="p">:</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span> <span class="na">minLength</span><span class="p">:</span> <span class="mi">3</span> <span class="p">},</span>
+          <span class="na">dob</span><span class="p">:</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span> <span class="na">format</span><span class="p">:</span> <span class="dl">"</span><span class="s2">date</span><span class="dl">"</span> <span class="p">},</span>
+          <span class="na">sex</span><span class="p">:</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span> <span class="na">enum</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">male</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">female</span><span class="dl">"</span><span class="p">]</span> <span class="p">},</span>
+          <span class="na">employer_id</span><span class="p">:</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">number</span><span class="dl">"</span> <span class="p">},</span>
+          <span class="na">occupations</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">array</span><span class="dl">"</span><span class="p">,</span>
+            <span class="na">items</span><span class="p">:</span> <span class="p">{</span>
+              <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">object</span><span class="dl">"</span><span class="p">,</span>
+              <span class="na">properties</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">name</span><span class="p">:</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span> <span class="p">},</span>
+                <span class="na">from</span><span class="p">:</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span> <span class="na">format</span><span class="p">:</span> <span class="dl">"</span><span class="s2">date</span><span class="dl">"</span> <span class="p">},</span>
+                <span class="na">to</span><span class="p">:</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">,</span> <span class="na">format</span><span class="p">:</span> <span class="dl">"</span><span class="s2">date</span><span class="dl">"</span> <span class="p">},</span>
+              <span class="p">},</span>
+            <span class="p">},</span>
+          <span class="p">},</span>
+        <span class="p">},</span>
+        <span class="na">required</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">last_name</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">employer_id</span><span class="dl">"</span><span class="p">],</span>
+      <span class="p">}</span><span class="si">}</span>
+      <span class="na">uiSchema</span><span class="p">=</span><span class="si">{</span><span class="p">{</span>
+        <span class="na">id</span><span class="p">:</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">ui:disabled</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span> <span class="p">},</span>
+        <span class="na">employer_id</span><span class="p">:</span> <span class="p">{</span>
+          <span class="dl">"</span><span class="s2">ui:widget</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">reference</span><span class="dl">"</span><span class="p">,</span>
+          <span class="dl">"</span><span class="s2">ui:options</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">employers</span><span class="dl">"</span><span class="p">,</span>
+            <span class="na">optionText</span><span class="p">:</span> <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">,</span>
+          <span class="p">},</span>
+        <span class="p">},</span>
+      <span class="p">}</span><span class="si">}</span>
+      <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="p">(</span><span class="nx">change</span><span class="p">)</span> <span class="o">=&gt;</span>
+        <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">!==</span> <span class="dl">"</span><span class="s2">test</span><span class="dl">"</span> <span class="o">&amp;&amp;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">changed</span><span class="dl">"</span><span class="p">,</span> <span class="nx">change</span><span class="p">)</span>
+      <span class="si">}</span>
+      <span class="na">onError</span><span class="p">=</span><span class="si">{</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span>
+        <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">!==</span> <span class="dl">"</span><span class="s2">test</span><span class="dl">"</span> <span class="o">&amp;&amp;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">)</span>
+      <span class="si">}</span>
+    <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nc">Edit</span><span class="p">&gt;</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p><img src="https://react-admin-ee.marmelab.com/assets/jsonschemaform.webp" alt="JsonSchemaForm" /></p>
+
+<p>React-adminがサポートしていないカスタム要件がある場合は、直接<a href="https://react-hook-form.com/">react-hook-form</a>を使用することもできます。</p>
+
+<h2 id="ai搭載コンポーネント">AI搭載コンポーネント</h2>
+
+<p>React-adminは、人工知能（AI）の最近の進歩を活用して<strong>ユーザーの生産性を向上</strong>させます。</p>
+
+<p>例として、<code class="language-plaintext highlighter-rouge">&lt;PredictiveTextInput&gt;</code>は、お気に入りのAIバックエンドを使用して入力値の補完を提案するコンポーネントです。ユーザーは<code class="language-plaintext highlighter-rouge">Tab</code>キーを押して補完を受け入れることができます。これは、フォームのためのIntellisenseやCopilotのようなものです。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/PredictiveTextInput.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p>任意のReact-adminフォームで<code class="language-plaintext highlighter-rouge">&lt;PredictiveTextInput&gt;</code>を使用します：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Edit</span><span class="p">,</span> <span class="nx">SimpleForm</span><span class="p">,</span> <span class="nx">TextInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">PredictiveTextInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@react-admin/ra-ai</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">PersonEdit</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Edit</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"firstName"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"lastName"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"company"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">PredictiveTextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"email"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">PredictiveTextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"website"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">PredictiveTextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"bio"</span> <span class="na">multiline</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">Edit</span><span class="p">&gt;</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>また、HTMLドキュメントをWYSIWYGで編集する<code class="language-plaintext highlighter-rouge">&lt;SmartRichTextInput&gt;</code>コンポーネントも使用できます。</p>
+
+<video controls="" playsinline="" muted="" loop="" poster="https://react-admin-ee.marmelab.com/assets/SmartRichTextInput.png"> <source src="https://react-admin-ee.marmelab.com/assets/SmartRichTextInput.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+<h2 id="高速">高速</h2>
+
+<p>React-adminはシングルページアプリケーションのアーキテクチャを活用し、React-adminアプリをデフォルトで非常に高速にするさまざまなパフォーマンス最適化を実装しています。</p>
+
+<ul>
+  <li><strong>非ブロッキングデータ取得</strong>：APIデータを待つ代わりに、UIのレンダリングプロセスをすぐに開始します。この戦略により、ユーザーインタラクションが即座にフィードバックを受け取り、サーバーサイドレンダリングアプリよりも高速なアプリケーションを実現します。</li>
+  <li><strong>再検証中の表示</strong>：ページは以前のリクエストからのデータを表示しながら新しいデータを取得します。ほとんどの場合、新しいデータは同じまま（例：リストページを再訪する場合）であり、ユーザーはネットワークリクエストによる遅延を感じません。</li>
+  <li><strong>ローカルデータベースミラー</strong>：React-adminは、<code class="language-plaintext highlighter-rouge">dataProvider.getList()</code>を使用してフェッチされた個々のレコードで内部キャッシュを埋めます。ユーザーが特定のレコードを表示すると、React-adminは内部データベースを活用して<code class="language-plaintext highlighter-rouge">dataProvider.getOne()</code>クエリレスポンスを事前に入力します。これにより、レコードの詳細が即座に表示され、サーバーレスポンスの待機時間がなくなります。</li>
+  <li><strong>楽観的更新</strong>：ユーザーがレコードを編集し、「保存」ボタンを押すと、React-adminはすぐにローカルデータベースを更新し、更新クエリをサーバーに送信する前に変更されたデータを表示します。その結果、UIの変更は即座に表示されます - サーバーレスポンスの待機時間は必要ありません。同じロジックはレコードの削除にも適用されます。</li>
+  <li><strong>クエリの重複排除</strong>：React-adminは、ページの複数のコンポーネントが同じデータプロバイダークエリを同一のデータに対して呼び出す場合を識別し、その場合にはデータプロバイダーへの呼び出しを単一にまとめます。</li>
+  <li><strong>クエリの集約</strong>：React-adminは、リスト内で<code class="language-plaintext highlighter-rouge">&lt;ReferenceField&gt;</code>を使用する際に、関連データに対するすべての<code class="language-plaintext highlighter-rouge">dataProvider.getOne()</code>呼び出しを傍受し、要求されたIDを集約および重複排除し、単一の<code class="language-plaintext highlighter-rouge">dataProvider.getMany()</code>リクエストを発行します。この技術により、n+1クエリ問題が効果的に解決され、サーバークエリが減少し、リストビューのレンダリングが高速化されます。</li>
+  <li><strong>オプトインクエリキャッシュ</strong>：React-adminは、特定の期間APIエンドポイントを再フェッチしないオプションを提供し、APIレスポンスが時間経過とともに一貫している場合に使用できます。</li>
+</ul>
+
+<h2 id="アンドゥ">アンドゥ</h2>
+
+<p>ユーザーがフォームを送信したり、レコードを削除したりすると、UIは即座に変更を反映します。ユーザーは変更の確認メッセージも表示され、そこに「アンドゥ」ボタンが表示されます。確認がスライドアウトする前に（デフォルトの遅延は5秒）、アンドゥボタンをクリックすると、React-adminは前の状態に戻り、データプロバイダーへの呼び出しをキャンセルします。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/tutorial\_post\_edit\_undo.webm" type="video/webm" /> <source src="./img/tutorial\_post\_edit\_undo.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p>このアンドゥ機能はデフォルトで有効になっており、サーバー側で特別な設定は不要です。実際、React-adminはユーザーに「猶予」期間を与えるために、データプロバイダーへのミューテーション呼び出しを遅延させます。そのため、ユーザーが更新フォームを送信してから実際に<code class="language-plaintext highlighter-rouge">dataProvider.update()</code>呼び出しが行われるまでの間に5秒の遅延があります - UIはすぐに変更を反映しますが。</p>
+
+<p>この機能をページごとに無効にすることもでき、異なる<a href="./Edit.md#mutationmode">ミューテーションモード</a>を選択することができます。</p>
+
+<h2 id="ロールと権限">ロールと権限</h2>
+
+<p>特定のアクションが特定のユーザーに許可されているかを確認し、ユーザーの権限に基づいてコンテンツをフィルタリングするのはサーバーの責任です。しかし、ロールと権限はクライアント側の問題でもあります。ユーザーのロールに基づいてアクションを非表示または無効にしたい場合があります。例えば、<code class="language-plaintext highlighter-rouge">admin</code>ロールを持たないユーザーには「削除」ボタンを表示したくない場合があります。</p>
+
+<p>React-adminでは、<strong>単純なルールセットに基づいてユーザーインターフェースをカスタマイズ</strong>し、各ロールの権限を中央で定義できます。特定のロールにカスタムページを持たせたり、ユーザーのロールに基づいてコンポーネントのプロップを変更したりする必要がある場合でも、React-adminでそれを行うことができます。この機能は、<code class="language-plaintext highlighter-rouge">dataProvider</code>と同じアダプターアプローチを使用しているため、任意の認証バックエンドを使用できます。</p>
+
+<video controls="controls" style="max-width: 100%"> <source src="./img/ra-rbac.mp4" type="video/mp4" /> </video>
+
+<p>ページ、フィールド、ボタンなどの権限を定義できます。ロールと権限は<code class="language-plaintext highlighter-rouge">authProvider</code>によって管理されるため、任意のデータソース（Active Directoryサーバーなど）を使用できます。</p>
+
+<p>上記のデモは、以下の権限セットを使用しています：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">roles</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">accountant</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">list</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">show</span><span class="dl">'</span><span class="p">],</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">products</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">read</span><span class="dl">'</span><span class="p">,</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">products.*</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">deny</span><span class="dl">'</span><span class="p">,</span> <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">read</span><span class="dl">'</span><span class="p">,</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">products.description</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">list</span><span class="dl">'</span><span class="p">,</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">categories</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">read</span><span class="dl">'</span><span class="p">,</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">categories.*</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">list</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">show</span><span class="dl">'</span><span class="p">],</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">customers</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">read</span><span class="dl">'</span><span class="p">,</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">customers.*</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">*</span><span class="dl">'</span><span class="p">,</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">invoices</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="p">],</span>
+    <span class="na">contentEditor</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="na">action</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">list</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">create</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">edit</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">delete</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">export</span><span class="dl">'</span><span class="p">],</span>
+            <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">products</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">read</span><span class="dl">'</span><span class="p">,</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">products.*</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">deny</span><span class="dl">'</span><span class="p">,</span> <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">read</span><span class="dl">'</span><span class="p">,</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">products.stock</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">deny</span><span class="dl">'</span><span class="p">,</span> <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">read</span><span class="dl">'</span><span class="p">,</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">products.sales</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">write</span><span class="dl">'</span><span class="p">,</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">products.*</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">deny</span><span class="dl">'</span><span class="p">,</span> <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">write</span><span class="dl">'</span><span class="p">,</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">products.stock</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">deny</span><span class="dl">'</span><span class="p">,</span> <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">write</span><span class="dl">'</span><span class="p">,</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">products.sales</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">list</span><span class="dl">'</span><span class="p">,</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">categories</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">list</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">edit</span><span class="dl">'</span><span class="p">],</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">customers</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">list</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">edit</span><span class="dl">'</span><span class="p">],</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">reviews</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="p">],</span>
+    <span class="na">stockManager</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">list</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">edit</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">export</span><span class="dl">'</span><span class="p">],</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">products</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">read</span><span class="dl">'</span><span class="p">,</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">products.*</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">deny</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">read</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">products.description</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">write</span><span class="dl">'</span><span class="p">,</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">products.stock</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">write</span><span class="dl">'</span><span class="p">,</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">products.sales</span><span class="dl">'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">list</span><span class="dl">'</span><span class="p">,</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">categories</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="p">],</span>
+    <span class="na">administrator</span><span class="p">:</span> <span class="p">[{</span> <span class="na">action</span><span class="p">:</span> <span class="dl">'</span><span class="s1">*</span><span class="dl">'</span><span class="p">,</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">*</span><span class="dl">'</span> <span class="p">}],</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>認証、ロール、および権限について詳細を知りたい場合は、以下のページを確認してください：</p>
+
+<ul>
+  <li><a href="./Authentication.md">セキュリティの導入</a></li>
+  <li><a href="./AuthRBAC.md">ロールベースのアクセス制御（RBAC）</a></li>
+  <li><a href="./Authenticated.md"><code class="language-plaintext highlighter-rouge">Authenticated</code></a></li>
+  <li><a href="./IfCanAccess.md"><code class="language-plaintext highlighter-rouge">IfCanAccess</code></a></li>
+  <li><a href="./WithPermissions.md"><code class="language-plaintext highlighter-rouge">WithPermissions</code></a></li>
+  <li><a href="./useAuthProvider.md"><code class="language-plaintext highlighter-rouge">useAuthProvider</code></a></li>
+  <li><a href="./useAuthenticated.md"><code class="language-plaintext highlighter-rouge">useAuthenticated</code></a></li>
+  <li><a href="./useAuthState.md"><code class="language-plaintext highlighter-rouge">useAuthstate</code></a></li>
+  <li><a href="./useGetIdentity.md"><code class="language-plaintext highlighter-rouge">useGetIdentity</code></a></li>
+  <li><a href="./useLogin.md"><code class="language-plaintext highlighter-rouge">useLogin</code></a></li>
+  <li><a href="./useLogout.md"><code class="language-plaintext highlighter-rouge">useLogout</code></a></li>
+  <li><a href="./usePermissions.md"><code class="language-plaintext highlighter-rouge">usePermissions</code></a></li>
+  <li><a href="./useCanAccess.md"><code class="language-plaintext highlighter-rouge">useCanAccess</code></a></li>
+  <li><a href="./canAccess.md"><code class="language-plaintext highlighter-rouge">canAccess</code></a></li>
+</ul>
+
+<h2 id="リビジョンとバージョニング">リビジョンとバージョニング</h2>
+
+<p>React-adminはユーザーに対して<strong>任意のレコードの変更を追跡</strong>することを可能にします。ユーザーは<strong>リビジョンの履歴</strong>を確認し、任意の2つのバージョン間の<strong>違いを比較</strong>し、必要に応じて<strong>以前の状態に戻す</strong>ことができます。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="https://react-admin-ee.marmelab.com/assets/ra-history.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p>具体的には、リビジョントラッキングにより以下が可能になります：</p>
+
+<ul>
+  <li>強力なバージョン管理によりデータ損失を防ぐ</li>
+  <li>詳細な変更ログで透明性を高める</li>
+  <li>バージョン比較機能で洞察を得る</li>
+  <li>簡単なロールバックオプションで変更の自信を高める</li>
+</ul>
+
+<p>これらの機能は、以下のコンポーネントを通じて提供されます：</p>
+
+<ul>
+  <li><a href="https://react-admin-ee.marmelab.com/documentation/ra-history#simpleformwithrevision"><code class="language-plaintext highlighter-rouge">&lt;SimpleFormWithRevision&gt;</code></a></li>
+  <li><a href="https://react-admin-ee.marmelab.com/documentation/ra-history#tabbedformwithrevision"><code class="language-plaintext highlighter-rouge">&lt;TabbedFormWithRevision&gt;</code></a></li>
+  <li><a href="./RevisionsButton.md"><code class="language-plaintext highlighter-rouge">&lt;RevisionsButton&gt;</code></a></li>
+  <li><a href="https://react-admin-ee.marmelab.com/documentation/ra-history#revisionlistwithdetailsindialog"><code class="language-plaintext highlighter-rouge">&lt;RevisionListWithDetailsInDialog&gt;</code></a></li>
+  <li><a href="https://react-admin-ee.marmelab.com/documentation/ra-history#fielddiff"><code class="language-plaintext highlighter-rouge">&lt;FieldDiff&gt;</code></a></li>
+  <li><a href="https://react-admin-ee.marmelab.com/documentation/ra-history#smartfielddiff"><code class="language-plaintext highlighter-rouge">&lt;SmartFieldDiff&gt;</code></a></li>
+</ul>
+
+<h2 id="監査ログ">監査ログ</h2>
+
+<p>ほとんどの管理およびB2Bアプリでは、監査目的でユーザーアクションを記録する必要があります。React-adminは、そのような監査ログを表示するためのテンプレートと、ユーザーアクションを自動的に<strong>記録するためのヘルパー</strong>を提供します。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="https://react-admin-ee.marmelab.com/assets/ra-audit-log/latest/ra-audit-log.webm" type="video/webm" /> <source src="https://react-admin-ee.marmelab.com/assets/ra-audit-log/latest/ra-audit-log.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useGetList</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-admin</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Timeline</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@react-admin/ra-audit-log</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">Dashboard</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">isLoading</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useGetList</span><span class="p">(</span>
+    <span class="dl">"</span><span class="s2">events</span><span class="dl">"</span><span class="p">,</span>
+    <span class="p">{</span> <span class="na">page</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">perPage</span><span class="p">:</span> <span class="mi">25</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">field</span><span class="p">:</span> <span class="dl">"</span><span class="s2">date</span><span class="dl">"</span><span class="p">,</span> <span class="na">order</span><span class="p">:</span> <span class="dl">"</span><span class="s2">desc</span><span class="dl">"</span> <span class="p">}</span>
+  <span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nc">Timeline</span> <span class="na">isLoading</span><span class="p">=</span><span class="si">{</span><span class="nx">isLoading</span><span class="si">}</span> <span class="na">records</span><span class="p">=</span><span class="si">{</span><span class="nx">data</span><span class="si">}</span> <span class="p">/&gt;;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>監査ログ機能により、以下が可能になります：</p>
+
+<ul>
+  <li>データおよびアクションの追跡規制に準拠</li>
+  <li>明確なアクショントレイルで問題をトラブルシューティングおよび解決</li>
+  <li>詳細なアクション記録でセキュリティを強化</li>
+  <li>アクション履歴を通じて説明責任を向上</li>
+  <li>集計されたタイムラインでユーザーアクティビティを監視</li>
+</ul>
+
+<p>これらの機能は、以下のコンポーネントを通じて提供されます：</p>
+
+<ul>
+  <li><a href="https://react-admin-ee.marmelab.com/documentation/ra-audit-log#timeline"><code class="language-plaintext highlighter-rouge">&lt;Timeline&gt;</code></a>：管理のすべての最近の変更を表示するリストです。ダッシュボードに最適なコンポーネントです。</li>
+  <li><a href="https://react-admin-ee.marmelab.com/documentation/ra-audit-log#recordtimeline"><code class="language-plaintext highlighter-rouge">&lt;RecordTimeline&gt;</code></a>：特定のレコードのすべての最近の変更を表示するリストであり、通常は<code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code>または<code class="language-plaintext highlighter-rouge">&lt;Edit&gt;</code>ビューに埋め込まれています。</li>
+  <li><a href="https://react-admin-ee.marmelab.com/documentation/ra-audit-log#eventlist"><code class="language-plaintext highlighter-rouge">&lt;EventList&gt;</code></a>：フィルターとページネーションを完備した、管理履歴をナビゲートするためのリストコンポーネントです。</li>
+</ul>
+
+<p>また、ユーザーアクションを記録するために<a href="https://react-admin-ee.marmelab.com/documentation/ra-audit-log#client-side-tracking"><code class="language-plaintext highlighter-rouge">addEventsForMutations</code>ヘルパー</a>を使用できます：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">addEventsForMutations</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@react-admin/ra-audit-log</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">simpleRestProvider</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">ra-data-simple-rest</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">authProvider</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./authProvider</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">dataProvider</span> <span class="o">=</span> <span class="nx">addEventsForMutations</span><span class="p">(</span>
+  <span class="nx">simpleRestProvider</span><span class="p">(</span><span class="dl">"</span><span class="s2">http://path.to.my.api/</span><span class="dl">"</span><span class="p">),</span>
+  <span class="nx">authProvider</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="カレンダー">カレンダー</h2>
+
+<p>アプリが<strong>イベント、予定、時間間隔</strong>、またはその他の時間ベースのデータを表示する必要がある場合、<a href="./Calendar.md"><code class="language-plaintext highlighter-rouge">&lt;Calendar&gt;</code></a>コンポーネントを使用できます。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="https://react-admin-ee.marmelab.com/assets/ra-calendar.webm" type="video/webm" /> <source src="https://react-admin-ee.marmelab.com/assets/ra-calendar.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Calendar</span><span class="p">,</span> <span class="nx">getFilterValuesFromInterval</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@react-admin/ra-calendar</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">List</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">EventList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">List</span>
+        <span class="na">filterDefaultValues</span><span class="p">=</span><span class="si">{</span><span class="nx">getFilterValuesFromInterval</span><span class="p">()</span><span class="si">}</span>
+        <span class="na">perPage</span><span class="p">=</span><span class="si">{</span><span class="mi">1000</span><span class="si">}</span>
+        <span class="na">pagination</span><span class="p">=</span><span class="si">{</span><span class="kc">false</span><span class="si">}</span>
+    <span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Calendar</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">List</span><span class="p">&gt;</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>ユーザーインターフェースは期待されるすべての機能を提供します：</p>
+
+<ul>
+  <li>月、週、および日ビュー</li>
+  <li>リストビュー</li>
+  <li>イベントのドラッグアンドリサイズ</li>
+  <li>終日イベント</li>
+  <li>カレンダー上でのクリックによるイベント作成</li>
+  <li>イベントタイトルおよびメタデータの編集</li>
+  <li>複数日にわたるイベント</li>
+  <li>繰り返しイベント</li>
+  <li>背景イベント</li>
+  <li>テーマ設定</li>
+  <li>ロケールおよびタイムゾーン</li>
+  <li>リソースタイムグリッド（例：部屋）（Full Calendarの追加ライセンスが必要）</li>
+</ul>
+
+<p>詳細については、以下のコンポーネントを確認してください：</p>
+
+<ul>
+  <li><a href="https://react-admin-ee.marmelab.com/documentation/ra-calendar#completecalendar"><code class="language-plaintext highlighter-rouge">&lt;CompleteCalendar&gt;</code></a></li>
+  <li><a href="./Calendar.md"><code class="language-plaintext highlighter-rouge">&lt;Calendar&gt;</code></a></li>
+</ul>
+
+<h2 id="ツリービュー">ツリービュー</h2>
+
+<p>ディレクトリ、カテゴリ、およびその他の<strong>階層データ</strong>を管理するために、管理者はツリーストラクチャーを頻繁に利用します。ツリーストラクチャーのナビゲーションおよび編集は難しい場合がありますが、React-adminはそれを容易にする一連のコンポーネントを提供します。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/treewithdetails.webm" type="video/webm" /> <source src="./img/treewithdetails.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Create</span><span class="p">,</span> <span class="nx">Edit</span><span class="p">,</span> <span class="nx">SimpleForm</span><span class="p">,</span> <span class="nx">TextInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">CreateNode</span><span class="p">,</span> <span class="nx">EditNode</span><span class="p">,</span> <span class="nx">EditNodeToolbar</span><span class="p">,</span> <span class="nx">TreeWithDetails</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@react-admin/ra-tree</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// ツリーの作成ビューは標準の&lt;Create&gt;の代わりに&lt;CreateNode&gt;を使用します</span>
+<span class="kd">const</span> <span class="nx">CategoriesCreate</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">CreateNode</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"name"</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">CreateNode</span><span class="p">&gt;</span>
+<span class="p">);</span>
+
+<span class="c1">// ツリーの編集ビューは標準の&lt;Edit&gt;の代わりに&lt;EditNode&gt;を使用します</span>
+<span class="kd">const</span> <span class="nx">CategoriesEdit</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">EditNode</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">SimpleForm</span> <span class="na">toolbar</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">EditNodeToolbar</span> <span class="p">/&gt;</span><span class="si">}</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">EditNode</span><span class="p">&gt;</span>
+<span class="p">);</span>
+
+<span class="c1">// ツリーのリストビューは&lt;TreeWithDetails&gt;を使用します</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">CategoriesList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">TreeWithDetails</span> <span class="na">create</span><span class="p">=</span><span class="si">{</span><span class="nx">CategoriesCreate</span><span class="si">}</span> <span class="na">edit</span><span class="p">=</span><span class="si">{</span><span class="nx">CategoriesEdit</span><span class="si">}</span> <span class="p">/&gt;</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>階層データを表示するための以下のコンポーネントを確認してください：</p>
+
+<ul>
+  <li><a href="./TreeWithDetails.md"><code class="language-plaintext highlighter-rouge">&lt;TreeWithDetails&gt;</code></a>：詳細パネルを持つツリーストラクチャーのリストビュー。</li>
+  <li><a href="./TreeInput.md"><code class="language-plaintext highlighter-rouge">&lt;TreeInput&gt;</code></a>：ツリーストラクチャーの入力コンポーネント。</li>
+  <li><a href="https://react-admin-ee.marmelab.com/documentation/ra-tree#tree-component"><code class="language-plaintext highlighter-rouge">&lt;Tree&gt;</code></a>：Material UIスキンを持つツリーストラクチャーのリストビュー。</li>
+</ul>
+
+<h2 id="アプリケーション構築ブロック">アプリケーション構築ブロック</h2>
+
+<p>Material UIのようなUIキットは、ボタン、フォーム、テーブルなどの基本的な構築ブロックを提供します。React-adminはもう一段階上のレベルで、管理およびB2B<strong>アプリケーション</strong>を構築するために特別に設計された一連の**<a href="./Reference.md#components">アプリケーションコンポーネント</a>**を提供します。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="https://react-admin-ee.marmelab.com/assets/ra-editable-datagrid/latest/ra-editable-datagrid-overview.webm" type="video/webm" /> <source src="https://react-admin-ee.marmelab.com/assets/ra-editable-datagrid/latest/ra-editable-datagrid-overview.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p>これらの構築ブロックには以下が含まれます：</p>
+
+<ul>
+  <li><a href="./useNotify.md">通知システム</a></li>
+  <li><a href="./Breadcrumb.md">パンくずリスト</a>や<a href="./MultiLevelMenu.md">階層メニュー</a>の管理を簡素化するスマートロケーションフレームワーク</li>
+  <li><a href="https://github.com/benwinding/react-admin-import-csv">インポート</a>/<a href="./Buttons.md#exportbutton">エクスポート</a>ボタン</li>
+  <li><a href="./EditableDatagrid.md">編集可能なデータグリッド</a></li>
+  <li><a href="https://react-admin-ee.marmelab.com/documentation/ra-tour">ガイド付きツアーシステム</a></li>
+  <li><a href="./Menu.md">ユーザーメニュー</a></li>
+  <li><a href="./RichTextInput.md">リッチテキストエディタ</a></li>
+  <li><a href="./MarkdownInput.md">Markdownエディタ</a></li>
+  <li><a href="./Buttons.md#clonebutton">複製ボタン</a></li>
+  <li>各種ナビゲーションメニュー（<a href="./Menu.md">シンプル</a>、<a href="./MultiLevelMenu.md">階層</a>、<a href="./HorizontalMenu.md">水平</a>など）</li>
+  <li>各種<a href="./ContainerLayout.md">ページ</a>および<a href="https://react-admin-ee.marmelab.com/documentation/ra-form-layout">フォーム</a>レイアウト</li>
+  <li>…その他多数</li>
+</ul>
+
+<p>そして、React-adminが提供する<strong>ヘッドレスで再利用可能なロジック</strong>を持つ<a href="./Reference.md#hooks">75以上のフック</a>を使用して独自の構築ブロックを作成することもできます。以下のフックはその一部です：</p>
+
+<ul>
+  <li>アプリ内のどこでも現在のレコードを取得する<a href="./useRecordContext.md"><code class="language-plaintext highlighter-rouge">useRecordContext</code></a></li>
+  <li>ページから離れる際に未保存の変更がある場合にユーザーに警告する<a href="./EditTutorial.md#warning-about-unsaved-changes"><code class="language-plaintext highlighter-rouge">useWarnWhenUnsavedChanges</code></a></li>
+  <li>フォームの送信を調整する<a href="./useSaveContext.md"><code class="language-plaintext highlighter-rouge">useSaveContext</code></a></li>
+  <li>プログラム的にテーマを変更する<a href="./useTheme.md"><code class="language-plaintext highlighter-rouge">useTheme</code></a></li>
+</ul>
+
+<h2 id="パブサブおよびライブアップデート">パブ/サブおよびライブアップデート</h2>
+
+<p>React-adminは、複数の人が同時に作業する<strong>共同アプリケーション</strong>向けのフックおよびUIコンポーネントを提供します。リアルタイムイベントの発行および購読、他のユーザーが変更をプッシュした際のビューの更新、イベントのエンドユーザーへの通知、<strong>同じリソースを同時に編集する2人の編集者のデータ損失防止</strong>が可能です。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" width="100%"> <source src="./img/CollaborativeDemo.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p>リアルタイムシステムのコアは、リアルタイムイベントを送受信するための<strong>パブ/サブメカニズム</strong>を提供します。イベントはトピックに送信され、そのトピックを購読しているすべての購読者がイベントを受信します。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// パブリッシャー側</span>
+<span class="kd">const</span> <span class="p">[</span><span class="nx">publish</span><span class="p">]</span> <span class="o">=</span> <span class="nx">usePublish</span><span class="p">();</span>
+<span class="nx">publish</span><span class="p">(</span><span class="nx">topic</span><span class="p">,</span> <span class="nx">event</span><span class="p">);</span>
+
+<span class="c1">// サブスクライバー側</span>
+<span class="nx">useSubscribe</span><span class="p">(</span><span class="nx">topic</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>詳細については、以下の低レベルフックを確認してください：</p>
+
+<ul>
+  <li><a href="./usePublish.md"><code class="language-plaintext highlighter-rouge">usePublish</code></a></li>
+  <li><a href="./useSubscribe.md"><code class="language-plaintext highlighter-rouge">useSubscribe</code></a></li>
+  <li><a href="./useSubscribeCallback.md"><code class="language-plaintext highlighter-rouge">useSubscribeCallback</code></a></li>
+  <li><a href="./useSubscribeToRecord.md"><code class="language-plaintext highlighter-rouge">useSubscribeToRecord</code></a></li>
+  <li><a href="./useSubscribeToRecordList.md"><code class="language-plaintext highlighter-rouge">useSubscribeToRecordList</code></a></li>
+</ul>
+
+<p>React-adminは、<strong>ライブアップデート</strong>を専用のフックおよびコンポーネントを介して提供します。これにより、ユーザーがリソースを編集すると、同じリソースで作業している他のユーザーもリスト、詳細表示、編集表示のいずれにいてもリアルタイムで変更を確認できます。</p>
+
+<p>例えば、要素が追加、更新、削除されたときに自動的にリフレッシュされるリストを持つために、<code class="language-plaintext highlighter-rouge">&lt;List&gt;</code>を<code class="language-plaintext highlighter-rouge">&lt;ListLive&gt;</code>に置き換えます：</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">import {
+</span><span class="gd">-   List,
+</span>    Datagrid,
+    TextField,
+    NumberField,
+    Datefield,
+<span class="err">}</span> from 'react-admin';
+<span class="gi">+import { ListLive } from '@react-admin/ra-realtime';
+</span>
+const PostList = () =&gt; (
+<span class="gd">-   &lt;List&gt;
+</span><span class="gi">+   &lt;ListLive&gt;
+</span>        &lt;Datagrid&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;NumberField source="views" /&gt;
+            &lt;DateField source="published_at" /&gt;
+        &lt;/Datagrid&gt;
+<span class="gd">-   &lt;/List&gt;
+</span><span class="gi">+   &lt;/ListLive&gt;
+</span><span class="err">);</span>
+</code></pre></div></div>
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/useSubscribeToRecordList.webm" type="video/webm" /> <source src="./img/useSubscribeToRecordList.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p>この機能は以下のフックを活用しています：</p>
+
+<ul>
+  <li><a href="./useGetListLive.md"><code class="language-plaintext highlighter-rouge">useGetListLive</code></a></li>
+  <li><a href="./useGetOneLive.md"><code class="language-plaintext highlighter-rouge">useGetOneLive</code></a></li>
+</ul>
+
+<p>および以下のコンポーネント：</p>
+
+<ul>
+  <li><a href="./ListLive.md"><code class="language-plaintext highlighter-rouge">&lt;ListLive&gt;</code></a></li>
+  <li><a href="./EditLive.md"><code class="language-plaintext highlighter-rouge">&lt;EditLive&gt;</code></a></li>
+  <li><a href="./ShowLive.md"><code class="language-plaintext highlighter-rouge">&lt;ShowLive&gt;</code></a></li>
+</ul>
+
+<p>React-adminはまた、<strong>メニュー内のバッジ通知</strong>を提供し、ユーザーが他のリソースリストで作業している間に何か新しいことが起こったことを確認できます。</p>
+
+<p><img src="./img/RealtimeMenu.png" alt="MenuLive" /></p>
+
+<p>この機能を使用するには、React-adminの<code class="language-plaintext highlighter-rouge">&lt;Menu&gt;</code>の代わりに<code class="language-plaintext highlighter-rouge">&lt;MenuLive&gt;</code>を使用します：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Layout</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MenuLive</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@react-admin/ra-realtime</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">PostList</span><span class="p">,</span> <span class="nx">PostShow</span><span class="p">,</span> <span class="nx">PostEdit</span><span class="p">,</span> <span class="nx">realTimeDataProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">.</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">CustomLayout</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Layout</span> <span class="si">{</span><span class="p">...</span><span class="nx">props</span><span class="si">}</span> <span class="na">menu</span><span class="p">=</span><span class="si">{</span><span class="nx">MenuLive</span><span class="si">}</span> <span class="p">/&gt;</span>
+<span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">MyReactAdmin</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Admin</span> <span class="na">dataProvider</span><span class="p">=</span><span class="si">{</span><span class="nx">realTimeDataProvider</span><span class="si">}</span> <span class="na">layout</span><span class="p">=</span><span class="si">{</span><span class="nx">CustomLayout</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Resource</span> <span class="na">name</span><span class="p">=</span><span class="s">"posts"</span> <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">PostList</span><span class="si">}</span> <span class="na">show</span><span class="p">=</span><span class="si">{</span><span class="nx">PostShow</span><span class="si">}</span> <span class="na">edit</span><span class="p">=</span><span class="si">{</span><span class="nx">PostEdit</span><span class="si">}</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">Admin</span><span class="p">&gt;</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>この機能は以下のコンポーネントを活用しています：</p>
+
+<ul>
+  <li><a href="./MenuLive.md"><code class="language-plaintext highlighter-rouge">&lt;MenuLive&gt;</code></a></li>
+  <li><a href="./MenuLive.md"><code class="language-plaintext highlighter-rouge">&lt;MenuLiveItemLink&gt;</code></a></li>
+</ul>
+
+<p>最後に、React-adminは2人のユーザーが同じリソースを同時に編集するのを防ぐ<strong>ロックメカニズム</strong>を提供します。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/locks-demo.webm" type="video/webm" /> <source src="./img/locks-demo.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p>ユーザーはリソースをロックでき、任意にロックを要求するか、リソースを編集することができます。リソースがロックされると、他のユーザーはそれを編集できません。ロックが解除されると、他のユーザーは再びリソースを編集できます。</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">NewMessageForm</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">[</span><span class="nx">create</span><span class="p">,</span> <span class="p">{</span> <span class="na">isLoading</span><span class="p">:</span> <span class="nx">isCreating</span> <span class="p">}]</span> <span class="o">=</span> <span class="nx">useCreate</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">record</span> <span class="o">=</span> <span class="nx">useRecordContext</span><span class="p">();</span>
+
+    <span class="kd">const</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="nx">lock</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useGetLockLive</span><span class="p">(</span><span class="dl">'</span><span class="s1">tickets</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="nx">record</span><span class="p">.</span><span class="nx">id</span> <span class="p">});</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">identity</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useGetIdentity</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">isFormDisabled</span> <span class="o">=</span> <span class="nx">lock</span> <span class="o">&amp;&amp;</span> <span class="nx">lock</span><span class="p">.</span><span class="nx">identity</span> <span class="o">!==</span> <span class="nx">identity</span><span class="p">?.</span><span class="nx">id</span><span class="p">;</span>
+
+    <span class="kd">const</span> <span class="p">[</span><span class="nx">doLock</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useLockOnCall</span><span class="p">({</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">tickets</span><span class="dl">'</span> <span class="p">});</span>
+    <span class="kd">const</span> <span class="nx">handleSubmit</span> <span class="o">=</span> <span class="p">(</span><span class="na">values</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="cm">/* ... */</span>
+    <span class="p">};</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nc">Form</span> <span class="na">onSubmit</span><span class="p">=</span><span class="si">{</span><span class="nx">handleSubmit</span><span class="si">}</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextInput</span>
+                <span class="na">source</span><span class="p">=</span><span class="s">"message"</span>
+                <span class="na">multiline</span>
+                <span class="na">onFocus</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                    <span class="nx">doLock</span><span class="p">();</span>
+                <span class="p">}</span><span class="si">}</span>
+                <span class="na">disabled</span><span class="p">=</span><span class="si">{</span><span class="nx">isFormDisabled</span><span class="si">}</span>
+            <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">SelectInput</span>
+                <span class="na">source</span><span class="p">=</span><span class="s">"status"</span>
+                <span class="na">choices</span><span class="p">=</span><span class="si">{</span><span class="nx">statusChoices</span><span class="si">}</span>
+                <span class="na">disabled</span><span class="p">=</span><span class="si">{</span><span class="nx">isFormDisabled</span><span class="si">}</span>
+            <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">type</span><span class="p">=</span><span class="s">"submit"</span> <span class="na">disabled</span><span class="p">=</span><span class="si">{</span><span class="nx">isCreating</span> <span class="o">||</span> <span class="nx">isFormDisabled</span><span class="si">}</span><span class="p">&gt;</span>
+                Submit
+            <span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">Form</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>この機能は以下のフックを活用しています：</p>
+
+<ul>
+  <li><a href="./useLock.md"><code class="language-plaintext highlighter-rouge">useLock</code></a></li>
+  <li><a href="./useUnlock.md"><code class="language-plaintext highlighter-rouge">useUnlock</code></a></li>
+  <li><a href="./useGetLock.md"><code class="language-plaintext highlighter-rouge">useGetLock</code></a></li>
+  <li><a href="./useGetLockLive.md"><code class="language-plaintext highlighter-rouge">useGetLockLive</code></a></li>
+  <li><a href="./useGetLocks.md"><code class="language-plaintext highlighter-rouge">useGetLocks</code></a></li>
+  <li><a href="./useGetLocksLive.md"><code class="language-plaintext highlighter-rouge">useGetLocksLive</code></a></li>
+  <li><a href="./useLockOnCall.md"><code class="language-plaintext highlighter-rouge">useLockOnCall</code></a></li>
+  <li><a href="./useLockOnMount.md"><code class="language-plaintext highlighter-rouge">useLockOnMount</code></a></li>
+</ul>
+
+<h2 id="プリファレンス">プリファレンス</h2>
+
+<p>エンドユーザーはUIを好みに合わせて調整し、そのプリファレンスが保存されることを期待します。React-adminはユーザープリファレンスのための永続的な<code class="language-plaintext highlighter-rouge">Store</code>を提供し、多くのコンポーネントで使用されています。</p>
+
+<p>例えば、保存されたクエリ機能により、ユーザーは<strong>フィルターとソートパラメーターの組み合わせを保存</strong>し、新しい個人的なフィルターとしてセッション間で保持できます。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/SavedQueriesList.webm" type="video/webm" /> <source src="./img/SavedQueriesList.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p>保存されたクエリはセッション間で永続化されるため、ユーザーは管理を閉じて再度開いた後でもカスタムクエリを見つけることができます。保存されたクエリは、フィルターボタン/フォームコンボと<code class="language-plaintext highlighter-rouge">&lt;FilterList&gt;</code>サイドバーの両方で利用可能です。フィルターボタン/フォームコンボではデフォルトで有効ですが、<code class="language-plaintext highlighter-rouge">&lt;FilterList&gt;</code>サイドバーでは自分で追加する必要があります。</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">import { FilterList, FilterListItem, List, Datagrid } from 'react-admin';
+import { Card, CardContent } from '@mui/material';
+</span>
++import { SavedQueriesList } from 'react-admin';
+
+const SongFilterSidebar = () =&gt; (
+    &lt;Card&gt;
+        &lt;CardContent&gt;
+<span class="gi">+           &lt;SavedQueriesList /&gt;
+</span>            &lt;FilterList label="レコード会社" icon={&lt;BusinessIcon /&gt;}&gt;
+                ...
+            &lt;/FilterList&gt;
+            &lt;FilterList label="リリース" icon={&lt;DateRangeeIcon /&gt;}&gt;
+               ...
+            &lt;/FilterList&gt;
+        &lt;/CardContent&gt;
+    &lt;/Card&gt;
+<span class="err">);</span>
+
+<span class="p">const SongList = () =&gt; (
+</span>    &lt;List aside={&lt;SongFilterSidebar /&gt;}&gt;
+        &lt;Datagrid&gt;
+            ...
+        &lt;/Datagrid&gt;
+    &lt;/List&gt;
+<span class="err">);</span>
+</code></pre></div></div>
+
+<p>React-adminはまた、エンドユーザーのライト/ダークモードおよび言語選択を<strong>永続化</strong>します。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/ToggleThemeButton.webm" type="video/webm" /> <source src="./img/ToggleThemeButton.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p><code class="language-plaintext highlighter-rouge">Store</code>とその使用方法について詳しく知りたい場合は、以下のセクションを確認してください：</p>
+
+<ul>
+  <li><a href="./Store.md">The <code class="language-plaintext highlighter-rouge">Store</code></a></li>
+  <li><a href="./useStore.md"><code class="language-plaintext highlighter-rouge">useStore</code></a></li>
+  <li><a href="./useStoreContext.md"><code class="language-plaintext highlighter-rouge">useStoreContext</code></a></li>
+  <li><a href="./useResetStore.md"><code class="language-plaintext highlighter-rouge">useResetStore</code></a></li>
+  <li><a href="./FilteringTutorial.md#saved-queries-let-users-save-filter-and-sort"><code class="language-plaintext highlighter-rouge">&lt;SavedQueriesList&gt;</code></a></li>
+  <li><a href="./ToggleThemeButton.md"><code class="language-plaintext highlighter-rouge">&lt;ToggleThemeButton&gt;</code></a></li>
+  <li><a href="./LocalesMenuButton.md"><code class="language-plaintext highlighter-rouge">&lt;LocalesMenuButton&gt;</code></a></li>
+</ul>
+
+<h2 id="コンフィギュラブルui">コンフィギュラブルUI</h2>
+
+<p>プリファレンスの拡張として、設定可能なコンポーネントがあります。どれだけ洗練されたUIを持っていても、すべてのユースケースに適合することはありません。そこで、React-adminは、エンドユーザーが多くのコンポーネントの機能を視覚的に<strong>カスタマイズ</strong>できる方法を提供します。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/DatagridConfigurable.webm" type="video/webm" /> <source src="./img/DatagridConfigurable.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p>この機能を有効にするには、コンポーネント（この例では<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>）をその設定可能なカウンターパートに置き換えます：</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">import {
+</span>    List,
+<span class="gd">-   Datagrid,
+</span><span class="gi">+   DatagridConfigurable,
+</span>    TextField,
+<span class="err">}</span> from 'react-admin';
+
+const PostList = () =&gt; (
+    &lt;List&gt;
+<span class="gd">-       &lt;Datagrid&gt;
+</span><span class="gi">+       &lt;DatagridConfigurable&gt;
+</span>            &lt;TextField source="id" /&gt;
+            &lt;TextField source="title" /&gt;
+            &lt;TextField source="author" /&gt;
+            &lt;TextField source="year" /&gt;
+<span class="gd">-       &lt;/Datagrid&gt;
+</span><span class="gi">+       &lt;/DatagridConfigurable&gt;
+</span>    &lt;/List&gt;
+<span class="err">);</span>
+</code></pre></div></div>
+
+<p>React-adminは、独自のコンポーネントを<strong>設定可能にするためのプリミティブおよびコンポーネント</strong>も提供します。</p>
+
+<p>詳細については、以下のコンポーネントを確認してください：</p>
+
+<ul>
+  <li><a href="./Configurable.md"><code class="language-plaintext highlighter-rouge">&lt;Configurable&gt;</code></a></li>
+  <li><a href="./Datagrid.md#configurable"><code class="language-plaintext highlighter-rouge">&lt;DatagridConfigurable&gt;</code></a></li>
+  <li><a href="./SimpleList.md#configurable"><code class="language-plaintext highlighter-rouge">&lt;SimpleListConfigurable&gt;</code></a></li>
+  <li><a href="./SimpleForm.md#configurable"><code class="language-plaintext highlighter-rouge">&lt;SimpleFormConfigurable&gt;</code></a></li>
+</ul>
+
+<h2 id="テーマ設定">テーマ設定</h2>
+
+<p>デフォルトの<a href="https://material.io/">Material Design</a>のルックアンドフィールは素晴らしいですが、少し… Google風です。これが気になる場合や、アプリをブランド化する必要がある場合、React-adminは完全にテーマ設定可能です。</p>
+
+<p>React-adminは4つの組み込みテーマを提供します：<a href="./AppTheme.md#default">デフォルト</a>、<a href="./AppTheme.md#nano">Nano</a>、<a href="./AppTheme.md#radiant">Radiant</a>、および<a href="./AppTheme.md#house">House</a>。<a href="https://marmelab.com/react-admin-demo/">eコマースデモ</a>にはテーマスイッチャーが含まれており、実際のアプリケーションでそれらをテストできます。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/demo-themes.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p>カスタムテーマを使用するには、テーマオブジェクトを<code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code><a href="./Admin.md#theme"><code class="language-plaintext highlighter-rouge">theme</code></a>および<a href="./Admin.md#darktheme"><code class="language-plaintext highlighter-rouge">darkTheme</code></a>プロップに渡します：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">nanoLightTheme</span><span class="p">,</span> <span class="nx">nanoDarkTheme</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">dataProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./dataProvider</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Admin</span>
+        <span class="na">dataProvider</span><span class="p">=</span><span class="si">{</span><span class="nx">dataProvider</span><span class="si">}</span>
+        <span class="na">theme</span><span class="p">=</span><span class="si">{</span><span class="nx">nanoLightTheme</span><span class="si">}</span>
+        <span class="na">darkTheme</span><span class="p">=</span><span class="si">{</span><span class="nx">nanoDarkTheme</span><span class="si">}</span>
+    <span class="p">&gt;</span>
+        // ...
+    <span class="p">&lt;/</span><span class="nc">Admin</span><span class="p">&gt;</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>テーマ設定は非常に強力で、React-adminを使用して<a href="https://demo.navidrome.org/app/">音楽プレーヤー</a>を構築することもできます：</p>
+
+<p><img src="./img/navidrome.png" alt="Music Player" /></p>
+
+<p>ほぼすべてのReact-adminコンポーネントで<code class="language-plaintext highlighter-rouge">sx</code>プロップを使用して、デフォルトのスタイルおよび子孫のスタイルを上書きできます。例えば、データグリッド列の幅を変更する方法は次のとおりです：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span>
+    <span class="nx">BooleanField</span><span class="p">,</span>
+    <span class="nx">Datagrid</span><span class="p">,</span>
+    <span class="nx">DateField</span><span class="p">,</span>
+    <span class="nx">EditButton</span><span class="p">,</span>
+    <span class="nx">List</span><span class="p">,</span>
+    <span class="nx">NumberField</span><span class="p">,</span>
+    <span class="nx">TextField</span><span class="p">,</span>
+    <span class="nx">ShowButton</span><span class="p">,</span>
+<span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Icon</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/icons-material/Person</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">VisitorIcon</span> <span class="o">=</span> <span class="nx">Icon</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">PostList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">List</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Datagrid</span>
+            <span class="na">sx</span><span class="p">=</span><span class="si">{</span><span class="p">{</span>
+                <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Lavender</span><span class="dl">"</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">&amp; .RaDatagrid-headerCell</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">"</span><span class="s2">MistyRose</span><span class="dl">"</span><span class="p">,</span>
+                <span class="p">},</span>
+            <span class="p">}</span><span class="si">}</span>
+        <span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"id"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">DateField</span> <span class="na">source</span><span class="p">=</span><span class="s">"published_at"</span> <span class="na">sortByOrder</span><span class="p">=</span><span class="s">"DESC"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">BooleanField</span> <span class="na">source</span><span class="p">=</span><span class="s">"commentable"</span> <span class="na">sortable</span><span class="p">=</span><span class="si">{</span><span class="kc">false</span><span class="si">}</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">NumberField</span> <span class="na">source</span><span class="p">=</span><span class="s">"views"</span> <span class="na">sortByOrder</span><span class="p">=</span><span class="s">"DESC"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">EditButton</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">ShowButton</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">Datagrid</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">List</span><span class="p">&gt;</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>React-adminは、人気のあるCSS-in-JSライブラリである<a href="https://github.com/emotion-js/emotion">Emotion</a>を使用して、個々のコンポーネントだけでなく、テーマ定数（色、フォント、間隔など）をカスタマイズできます。</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">defaultTheme</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">indigo</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material/colors/indigo</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">pink</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material/colors/pink</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">red</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material/colors/red</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">myTheme</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">...</span><span class="nx">defaultTheme</span><span class="p">,</span>
+    <span class="na">palette</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">primary</span><span class="p">:</span> <span class="nx">indigo</span><span class="p">,</span>
+        <span class="na">secondary</span><span class="p">:</span> <span class="nx">pink</span><span class="p">,</span>
+        <span class="na">error</span><span class="p">:</span> <span class="nx">red</span><span class="p">,</span>
+        <span class="na">contrastThreshold</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="na">tonalOffset</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">typography</span><span class="p">:</span> <span class="p">{</span>
+        <span class="c1">// デフォルトのRobotoフォントの代わりにシステムフォントを使用します</span>
+        <span class="na">fontFamily</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">-apple-system</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">BlinkMacSystemFont</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">"Segoe UI"</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Arial</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">sans-serif</span><span class="dl">'</span><span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">,</span><span class="dl">'</span><span class="p">),</span>
+    <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>そして、コンポーネントのスタイルを複数回オーバーライドする必要がある場合は、それをテーマ内でも行うことができます：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">defaultTheme</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">theme</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">...</span><span class="nx">defaultTheme</span><span class="p">,</span>
+    <span class="na">components</span><span class="p">:</span> <span class="p">{</span>
+        <span class="p">...</span><span class="nx">defaultTheme</span><span class="p">.</span><span class="nx">components</span><span class="p">,</span>
+        <span class="na">RaDatagrid</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">styleOverrides</span><span class="p">:</span> <span class="p">{</span>
+              <span class="na">root</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Lavender</span><span class="dl">"</span><span class="p">,</span>
+                  <span class="dl">"</span><span class="s2">&amp; .RaDatagrid-headerCell</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+                      <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">"</span><span class="s2">MistyRose</span><span class="dl">"</span><span class="p">,</span>
+                  <span class="p">},</span>
+              <span class="p">}</span>
+           <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Admin</span> <span class="na">theme</span><span class="p">=</span><span class="si">{</span><span class="nx">theme</span><span class="si">}</span><span class="p">&gt;</span>
+        // ...
+    <span class="p">&lt;/</span><span class="nc">Admin</span><span class="p">&gt;</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>React-adminのテーマ設定について詳しく知りたい場合は、以下のセクションを確認してください：</p>
+
+<ul>
+  <li><a href="./Theming.md">テーマ設定の導入</a></li>
+  <li><a href="./Theming.md#customizing-the-page-layout">ページレイアウトのカスタマイズ</a></li>
+  <li><a href="./SX.md"><code class="language-plaintext highlighter-rouge">sx</code>プロップ</a></li>
+  <li><a href="./AppTheme.md#built-in-themes">組み込みテーマ</a></li>
+  <li><a href="./AppTheme.md#theming-individual-components">アプリ全体のテーマ設定</a></li>
+  <li><a href="./BoxStackGrid.md">レイアウト用のヘルパーコンポーネント</a></li>
+  <li><a href="./ToggleThemeButton.md"><code class="language-plaintext highlighter-rouge">&lt;ToggleThemeButton&gt;</code></a></li>
+  <li><a href="./useTheme.md"><code class="language-plaintext highlighter-rouge">useTheme</code></a></li>
+  <li><a href="./useMediaQuery.md"><code class="language-plaintext highlighter-rouge">useMediaQuery</code></a></li>
+</ul>
+
+<h2 id="i18n">I18n</h2>
+
+<p>React-adminは<strong>完全に国際化</strong>されています。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/LocalesMenuButton.webm" type="video/webm" /> <source src="./img/LocalesMenuButton.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p>デフォルトのインターフェースメッセージ（ボタン、ツールチップ、入力ラベルなど）は英語です。<a href="./TranslationLocales.md">React-adminがサポートする30以上の言語</a>のいずれかに翻訳するには、適切な翻訳パッケージをインポートします。例えば、フランス語に翻訳するには：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">polyglotI18nProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-i18n-polyglot</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">fr</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-language-french</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">i18nProvider</span> <span class="o">=</span> <span class="nx">polyglotI18nProvider</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">fr</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fr</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Admin</span> <span class="na">i18nProvider</span><span class="p">=</span><span class="si">{</span><span class="nx">i18nProvider</span><span class="si">}</span><span class="p">&gt;</span>
+        // ...
+    <span class="p">&lt;/</span><span class="nc">Admin</span><span class="p">&gt;</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>React-adminがまだサポートしていない言語に翻訳する必要がある場合は、カスタム翻訳パッケージを書くことができます。詳細については、<a href="./TranslationWriting.md">カスタム翻訳パッケージの作成</a>ページを確認してください。</p>
+
+<p>アプリが複数の言語をサポートする必要がある場合、<a href="./LocalesMenuButton.md"><code class="language-plaintext highlighter-rouge">&lt;LocalesMenuButton&gt;</code></a>コンポーネントを使用して、<strong>ユーザーに言語を選択させる</strong>ことができます：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">LocalesMenuButton</span><span class="p">,</span> <span class="nx">TitlePortal</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AppBar</span><span class="p">,</span> <span class="nx">Toolbar</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">MyAppBar</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">AppBar</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Toolbar</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TitlePortal</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">LocalesMenuButton</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">Toolbar</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">AppBar</span><span class="p">&gt;</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>コンポーネント内でメッセージを翻訳するには、<code class="language-plaintext highlighter-rouge">useTranslate</code>フックを使用します：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useTranslate</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">MyHelloButton</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">translate</span> <span class="o">=</span> <span class="nx">useTranslate</span><span class="p">();</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">translate</span><span class="p">(</span><span class="dl">'</span><span class="s1">myroot.hello.world</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">MyHelloButton</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>基盤となる翻訳ライブラリ<a href="https://airbnb.io/polyglot.js/">polyglot.js</a>は、<a href="https://airbnb.io/polyglot.js/#pluralization">複数形</a>と<a href="https://airbnb.io/polyglot.js/#interpolation">補間</a>をサポートしています。これは人気があり、迅速で軽量です。しかし、JSONファイルの代わりにGETTEXTまたはYAMLファイルに翻訳を保存する場合、アダプターアプローチを使用して任意の翻訳ライブラリを利用できます。</p>
+
+<p>React-adminは世界中の何千もの企業で使用されているため、国際化サポートは成熟しており、よくテストされています。React-adminのI18nサポートについて詳しく知りたい場合は、以下のセクションを確認してください：</p>
+
+<ul>
+  <li><a href="./Translation.md">The <code class="language-plaintext highlighter-rouge">i18nProvider</code>プロップ</a></li>
+  <li><a href="./TranslationTranslating.md">翻訳メッセージ</a></li>
+  <li><a href="./LocalesMenuButton.md"><code class="language-plaintext highlighter-rouge">&lt;LocalesMenuButton&gt;</code></a></li>
+  <li><a href="./useTranslate.md"><code class="language-plaintext highlighter-rouge">useTranslate</code></a></li>
+  <li><a href="./useLocaleState.md"><code class="language-plaintext highlighter-rouge">useLocaleState</code></a></li>
+</ul>
+
+<h2 id="アクセシビリティ">アクセシビリティ</h2>
+
+<p>React-adminのコアチームは、<strong>アクセシビリティに強いコミットメント</strong>を持っています。React-adminはデフォルトでアクセシブルな<a href="https://mui.com/material-ui/getting-started/">Material UI</a>コンポーネントを使用しています。独自のコンポーネントについては、React-adminはそれらをアクセシブルにするために<a href="https://www.w3.org/TR/wai-aria/">WAI-ARIA</a>標準を使用しています。これには、<code class="language-plaintext highlighter-rouge">aria-</code>属性、キーボードナビゲーション、およびフォーカスマネジメントが含まれます。</p>
+
+<p>私たちは定期的にReact-adminを<a href="https://wave.webaim.org/">WAVE</a>および<a href="https://www.deque.com/axe/">Axe</a>アクセシビリティツールでテストしています。</p>
+
+<p><img src="./img/accessibility.webp" alt="Accessibility" /></p>
+
+<h2 id="レスポンシブ">レスポンシブ</h2>
+
+<p>React-adminのレイアウトおよびコンポーネントは主にデスクトップ画面向けに設計されています。しかし、これらは<strong>モバイルデバイスでもうまく機能</strong>します。モバイルでは、ラベル付きボタンがアイコンボタンになり、サイドバーメニューがドロワーになり、クリック可能な要素のサイズが大きくなり、フォームツールバーが固定され、その他の調整が行われます。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop="" width="100%"> <source src="./img/responsive.webm" type="video/webm" /> <source src="./img/responsive.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p>React-adminはモバイル画面向けの特定のコンポーネントを提供し、コンテンツを画面サイズに適応させるためのツールを提供します。</p>
+
+<p>特定のコンポーネントに対して、<code class="language-plaintext highlighter-rouge">sx</code>プロップを使用して、画面サイズに基づいてそのスタイルをカスタマイズできます。例えば、モバイル画面で要素の幅を縮小するには：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">Box</span>
+    <span class="na">sx</span><span class="p">=</span><span class="si">{</span><span class="p">{</span>
+        <span class="na">width</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">xs</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="c1">// theme.breakpoints.up('xs')</span>
+            <span class="na">sm</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="c1">// theme.breakpoints.up('sm')</span>
+            <span class="na">md</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="c1">// theme.breakpoints.up('md')</span>
+            <span class="na">lg</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span> <span class="c1">// theme.breakpoints.up('lg')</span>
+            <span class="na">xl</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span> <span class="c1">// theme.breakpoints.up('xl')</span>
+        <span class="p">},</span>
+    <span class="p">}</span><span class="si">}</span>
+<span class="p">&gt;</span>
+    このボックスはレスポンシブな幅を持っています。
+<span class="p">&lt;/</span><span class="nc">Box</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<p>コンポーネントをレスポンシブにするには、画面サイズに基づいて条件付きでレンダリングすることもできます。例えば、デスクトップでは<code class="language-plaintext highlighter-rouge">&lt;SimpleList&gt;</code>をレンダリングし、モバイルでは<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>をレンダリングするには：</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useMediaQuery</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">List</span><span class="p">,</span> <span class="nx">SimpleList</span><span class="p">,</span> <span class="nx">Datagrid</span><span class="p">,</span> <span class="nx">TextField</span><span class="p">,</span> <span class="nx">ReferenceField</span><span class="p">,</span> <span class="nx">EditButton</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">PostList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">isSmall</span> <span class="o">=</span> <span class="nx">useMediaQuery</span><span class="p">(</span><span class="nx">theme</span> <span class="o">=&gt;</span> <span class="nx">theme</span><span class="p">.</span><span class="nx">breakpoints</span><span class="p">.</span><span class="nx">down</span><span class="p">(</span><span class="dl">'</span><span class="s1">sm</span><span class="dl">'</span><span class="p">));</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nc">List</span><span class="p">&gt;</span>
+            <span class="si">{</span><span class="nx">isSmall</span> <span class="p">?</span> <span class="p">(</span>
+                <span class="p">&lt;</span><span class="nc">SimpleList</span>
+                    <span class="na">primaryText</span><span class="p">=</span><span class="si">{</span><span class="nx">record</span> <span class="o">=&gt;</span> <span class="nx">record</span><span class="p">.</span><span class="nx">title</span><span class="si">}</span>
+                    <span class="na">secondaryText</span><span class="p">=</span><span class="si">{</span><span class="nx">record</span> <span class="o">=&gt;</span> <span class="s2">`</span><span class="p">${</span><span class="nx">record</span><span class="p">.</span><span class="nx">views</span><span class="p">}</span><span class="s2"> views`</span><span class="si">}</span>
+                    <span class="na">tertiaryText</span><span class="p">=</span><span class="si">{</span><span class="nx">record</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">published_at</span><span class="p">).</span><span class="nx">toLocaleDateString</span><span class="p">()</span><span class="si">}</span>
+                <span class="p">/&gt;</span>
+            <span class="p">)</span> <span class="p">:</span> <span class="p">(</span>
+                <span class="p">&lt;</span><span class="nc">Datagrid</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"id"</span> <span class="p">/&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">ReferenceField</span> <span class="na">label</span><span class="p">=</span><span class="s">"ユーザー"</span> <span class="na">source</span><span class="p">=</span><span class="s">"userId"</span> <span class="na">reference</span><span class="p">=</span><span class="s">"users"</span><span class="p">&gt;</span>
+                        <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"name"</span> <span class="p">/&gt;</span>
+                    <span class="p">&lt;/</span><span class="nc">ReferenceField</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"body"</span> <span class="p">/&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">EditButton</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;/</span><span class="nc">Datagrid</span><span class="p">&gt;</span>
+            <span class="p">)</span><span class="si">}</span>
+        <span class="p">&lt;/</span><span class="nc">List</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>アプリをレスポンシブにする方法については、以下のセクションを確認してください：</p>
+
+<ul>
+  <li><a href="./SX.md"><code class="language-plaintext highlighter-rouge">sx</code>プロップ</a></li>
+  <li><a href="./SimpleList.md"><code class="language-plaintext highlighter-rouge">&lt;SimpleList&gt;</code></a></li>
+  <li><a href="./useMediaQuery.md"><code class="language-plaintext highlighter-rouge">useMediaQuery</code></a></li>
+</ul>
+
+<h2 id="型安全">型安全</h2>
+
+<p>React-adminはTypeScriptで書かれています。これは、React-adminを使用するためにTypeScriptを使用する必要があるわけではなく、<strong>JavaScriptでReact-adminアプリを作成することができます</strong>。しかし、TypeScriptを使用すると、コンポーネント、フック、データプロバイダー、認証プロバイダー、翻訳メッセージなどに対してコンパイル時の型チェックが提供されます。</p>
+
+<p>そして、IDEがTypeScriptをサポートしている場合、すべてのReact-adminコンポーネントおよびフックの自動補完とインラインドキュメントを利用できます。</p>
+
+<video controls="" autoplay="" playsinline="" muted="" loop="" width="100%"> <source src="./img/typescript.webm" type="video/webm" /> <source src="./img/typescript.mp4" type="video/mp4" /> お使いのブラウザは動画タグをサポートしていません。 </video>
+
+<p>TypeScriptを使用してReact-adminアプリを構築することは、開発ワークフローにさらなる安全性と生産性をもたらします。</p>
+
+<h2 id="持続可能">持続可能</h2>
+
+<p>最後に、React-adminはここに留まります。なぜなら、オープンソースプロジェクトの開発は、<a href="https://react-admin-ee.marmelab.com/">Enterprise Edition</a>の顧客によって<strong>資金提供</strong>されているからです。</p>
+
+<p>大規模なオープンソースプロジェクトを長期的に維持することは課題です。しかし、<a href="https://marmelab.com">Marmelab</a>に所属するReact-adminのコアチームは、次の資金調達ラウンドやベンチャーキャピタルの返済について心配する必要がなく、価格を引き上げる必要もありません。React-adminには負債がなく、既に<strong>損益分岐点を超えており</strong>、顧客数が増えるに連れてチームも増えていきます。</p>
+
+<p>コアチームはReact-adminにフルタイムで取り組むことができ、このことは以下のことを可能にします：</p>
+
+<ul>
+  <li>毎週バグ修正をリリース</li>
+  <li>毎月新機能をリリース</li>
+  <li>顧客へのサポートを提供</li>
+  <li>ドキュメントを維持</li>
+  <li>コードベースをリファクタリング</li>
+  <li>デモおよびチュートリアルを作成</li>
+  <li>最新のReactおよびライブラリバージョンに対応</li>
+  <li>オープンソースコミュニティに貢献</li>
+</ul>
+
+<p>Marmelabでは、「持続可能」は<strong>低炭素フットプリント</strong>も意味します。React-adminは定期的に、ソフトウェアプロジェクトの炭素フットプリントを測定するツール<a href="https://greenframe.io/">GreenFrame</a>で監査されます。React-adminでは、環境に配慮した技術選択も行っています。例えば、React-adminでデータキャッシュに<a href="https://react-query-v3.tanstack.com/">React Query</a>を使用することで、HTTPリクエストの数が減少し、アプリケーションの炭素フットプリントが削減されます。</p>
+
+:ET

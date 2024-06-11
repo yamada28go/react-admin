@@ -3,65 +3,65 @@ layout: default
 title: "Key Concepts"
 ---
 
-# Key Concepts
+# 主要概念
 
-React-admin relies on a several design decisions that structure its codebase.
+React-adminは、そのコードベースを構築するいくつかの設計決定に依存しています。
 
-## Single-Page Application
+## シングルページアプリケーション
 
-React-admin is specifically designed to build [Single-Page Applications (SPA)](https://en.wikipedia.org/wiki/Single-page_application). In a react-admin app, the browser fetches the required HTML, CSS, and JavaScript to render the application only once. Subsequently, data is fetched from APIs through AJAX calls. This is in contrast to traditional web applications, where the browser fetches a new HTML page for each screen.
+React-adminは[シングルページアプリケーション (SPA)](https://en.wikipedia.org/wiki/Single-page_application)を構築するために特別に設計されています。React-adminアプリでは、ブラウザは必要なHTML、CSS、およびJavaScriptを一度だけ取得し、その後はAJAXコールを通じてAPIからデータを取得します。これは、各画面のために新しいHTMLページを取得する従来のウェブアプリケーションとは対照的です。
 
 <img class="no-shadow" src="./img/SPA-lifecycle.png" alt="SPA lifecycle" />
 
-The SPA architecture ensures that react-admin apps are [exceptionally fast](./Features.md#fast), easy to host, and compatible with existing APIs without requiring a dedicated backend. 
+SPAアーキテクチャは、React-adminアプリを[非常に高速](./Features.md#fast)にし、ホスティングが容易で、専用のバックエンドを必要とせず既存のAPIと互換性があります。
 
-To achieve this, react-admin utilizes an internal router, powered by `react-router`, to display the appropriate screen when the user clicks on a link. Developers can define routes using the [`<Resource>`](./Resource.md) component for CRUD routes and the [`<CustomRoutes>`](./CustomRoutes.md) component for other routes.
+これを達成するために、React-adminは`react-router`によって提供される内部ルーターを使用して、ユーザーがリンクをクリックしたときに適切な画面を表示します。開発者は、CRUDルート用の[`<Resource>`](./Resource.md)コンポーネントおよび他のルート用の[`<CustomRoutes>`](./CustomRoutes.md)コンポーネントを使用してルートを定義できます。
 
-For example, the following react-admin application:
+例えば、以下のReact-adminアプリケーションは次のルートを宣言しています：
 
 ```jsx
 import { Admin, Resource, CustomRoutes } from 'react-admin';
 import { Route } from 'react-router-dom';
 
-export const App = () => (
-    <Admin dataProvider={dataProvider}>
-        <Resource name="labels" list={LabelList} edit={LabelEdit} show={LabelShow} />
-        <Resource label="genres" list={GenreList} />
-        <Resource name="artists" list={ArtistList} edit={ArtistDetail} create={ArtistCreate}>
-            <Route path=":id/songs" element={<SongList />} />
-            <Route path=":id/songs/:songId" element={<SongDetail />} />
-        </Resource>
-        <CustomRoutes>
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/organization" element={<Organization />} />
-        </CustomRoutes>
-    </Admin>
-);
+    export const App = () => (
+        <Admin dataProvider={dataProvider}>
+            <Resource name="labels" list={LabelList} edit={LabelEdit} show={LabelShow} />
+            <Resource label="genres" list={GenreList} />
+            <Resource name="artists" list={ArtistList} edit={ArtistDetail} create={ArtistCreate}>
+                <Route path=":id/songs" element={<SongList />} />
+                <Route path=":id/songs/:songId" element={<SongDetail />} />
+            </Resource>
+            <CustomRoutes>
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/organization" element={<Organization />} />
+            </CustomRoutes>
+        </Admin>
+    );
 ```
 
-Declares the following routes:
+宣言されるルートは以下の通りです：
 
--  `/labels`: `<LabelList>`
--  `/labels/:id`: `<LabelEdit>`
--  `/labels/:id/show`: `<LabelShow>`
--  `/genres`: `<GenreList>`
--  `/artists`: `<ArtistList>`
--  `/artists/:id`: `<ArtistDetail>`
--  `/artists/create`: `<ArtistCreate>`
--  `/artists/:id/songs`: `<SongList>`
--  `/artists/:id/songs/:songId`: `<SongDetail>`
--  `/profile`: `<Profile>`
--  `/organization`: `<Organization>`
+* `/labels`: `<LabelList>`
+* `/labels/:id`: `<LabelEdit>`
+* `/labels/:id/show`: `<LabelShow>`
+* `/genres`: `<GenreList>`
+* `/artists`: `<ArtistList>`
+* `/artists/:id`: `<ArtistDetail>`
+* `/artists/create`: `<ArtistCreate>`
+* `/artists/:id/songs`: `<SongList>`
+* `/artists/:id/songs/:songId`: `<SongDetail>`
+* `/profile`: `<Profile>`
+* `/organization`: `<Organization>`
 
-The `<Resource>` component allows react-admin to automatically link CRUD pages between them, including those for related entities. This approach allows you to think about your application in terms of entities, rather than getting bogged down by managing routes.
+`<Resource>`コンポーネントは、関連エンティティのCRUDページ間のリンクを自動的に行うため、ルートの管理に煩わされることなく、アプリケーションをエンティティの観点から考えることができます。
 
-## Providers
+## プロバイダ
 
-React-admin does not make any assumptions about the specific structure of your API. Instead, it defines its own syntax for data fetching, authentication, internationalization, and preferences. To interact with your API, react-admin relies on adapters called **providers**.
+React-adminは、APIの特定の構造について仮定をしません。その代わりに、データ取得、認証、国際化、設定のために独自のシンタックスを定義します。APIと対話するために、React-adminは**プロバイダ**と呼ばれるアダプタに依存します。
 
 <img class="no-shadow" src="./img/providers.png" alt="Providers" />
 
-For example, to fetch a list of records from the API, you would use the `dataProvider` object as follows:
+例えば、APIからレコードのリストを取得するためには、次のように`dataProvider`オブジェクトを使用します：
 
 ```jsx
 dataProvider.getList('posts', {
@@ -83,9 +83,9 @@ dataProvider.getList('posts', {
 // }
 ```
 
-The `dataProvider.getList()` method is responsible for translating this request into the appropriate HTTP request to your API. When using the REST data provider, the above code will translate to:
+`dataProvider.getList()`メソッドは、このリクエストをAPIへの適切なHTTPリクエストに変換する責任があります。RESTデータプロバイダを使用する場合、上記のコードは次のように変換されます：
 
-```
+```yaml
 GET http://path.to.my.api/posts?sort=["title","ASC"]&range=[0, 4]&filter={"author_id":12}
 
 HTTP/1.1 200 OK
@@ -100,9 +100,9 @@ Content-Range: posts 0-4/27
 ]
 ```
 
-React-admin comes with [more than 50 data providers](./DataProviderList.md) for various backends, including REST, GraphQL, Firebase, Django REST Framework, API Platform, and more. If these providers do not suit your API, you have the flexibility to [develop a custom provider](./DataProviderWriting.md).
+React-adminは、REST、GraphQL、Firebase、Django REST Framework、API Platformなど、さまざまなバックエンド用に[50以上のデータプロバイダ](./DataProviderList.md)を提供します。これらのプロバイダがAPIに適さない場合は、[カスタムプロバイダの開発](./DataProviderWriting.md)が可能です。
 
-This approach is why react-admin components do not call `fetch` or `axios` directly. Instead, they rely on the data provider to fetch data from the API. Similarly, it is recommended that your custom components follow the same pattern and utilize [data provider hooks](./Actions.md), such as [`useGetList`](./useGetList.md):
+このアプローチのため、React-adminコンポーネントは直接`fetch`や`axios`を呼び出すことはありません。代わりに、データプロバイダに依存してAPIからデータを取得します。同様に、カスタムコンポーネントも同じパターンに従い、[データプロバイダフック](./Actions.md)（例：[`useGetList`](./useGetList.md)）を使用することをお勧めします：
 
 ```jsx
 import { useGetList } from 'react-admin';
@@ -118,7 +118,7 @@ const MyComponent = () => {
     if (error) return <Error />;
     return (
         <div>
-            <h1>Found {total} posts matching your query</h1>
+            <h1>あなたのクエリに一致する投稿が{total}件見つかりました</h1>
             <ul>
                 {data.map(record => (
                     <li key={record.id}>{record.title}</li>
@@ -129,19 +129,19 @@ const MyComponent = () => {
 };
 ```
 
-By using `useGetList`, you gain various benefits beyond a simple `fetch`: it handles user credentials, triggers loading indicators, manages loading states, handles errors, caches results for future use, and controls the data shape, among other things.
+`useGetList`を使用することで、ユーザーの認証情報の管理、ローディングインジケータのトリガー、ローディング状態の管理、エラーの処理、結果のキャッシュ、データ形状の制御など、単なる`fetch`以上のさまざまな利点を得ることができます。
 
-Whenever you need to communicate with a server, you will use these providers. Since they are specialized for their respective domains and tightly integrated with react-admin, they will save you a significant amount of time and effort.
+サーバーと通信する必要があるときは、常にこれらのプロバイダを使用します。これらはそれぞれのドメインに特化しており、React-adminと緊密に統合されているため、開発者の時間と労力を大幅に節約できます。
 
-## Smart Components
+## スマートコンポーネント
 
-React-admin was built to avoid rewriting the same code and over again, because most web applications use the same basic building blocks. It provides a library of React components ([more than 150 components to date](./Reference.md#components)). Most of these are **smart components** as they not only handle rendering HTML but also take care of data fetching, state management, and interaction within the application.
+React-adminは、ほとんどのウェブアプリケーションが同じ基本的な構成要素を使用するため、同じコードを何度も書き直すことを避けるために作られました。React-adminは、データフェッチング、状態管理、アプリケーション内の相互作用を処理する**スマートコンポーネント**を提供しています。
 
 <a href="./img/components.webp"><img class="no-shadow" src="./img/components.webp" alt="Smart components" /></a>
 
-It's important to note that react-admin is not merely a UI Kit like Material UI or Bootstrap. It goes beyond presentation to offer building blocks specifically tailored for data-driven applications. While it is built on top of Material UI, you don't need to be familiar with Material UI to use react-admin effectively.
+React-adminは、Material UIやBootstrapのようなUIキットではありません。それ以上に、データ駆動型アプリケーションに特化した構成要素を提供します。Material UIの上に構築されていますが、Material UIに詳しくなくてもReact-adminを効果的に使用できます。
 
-For example, to create a custom menu for your application, you can utilize the `<Menu>` component:
+例えば、カスタムメニューを作成するには、`<Menu>`コンポーネントを利用できます：
 
 ```jsx
 // in src/MyMenu.js
@@ -159,17 +159,17 @@ export const MyMenu = () => (
 );
 ```
 
-In this example, `<Menu.DashboardItem>` links to the `/dashboard` route, `<Menu.ResourceItem>` links to the `list` page defined in the resource configuration from the `<Resource>` component, and `<Menu.Item>` is a generic component that you can use to link to any route in your application. The `<Menu>` component automatically responds to changes on the application location and highlights the current route. Additionally, if you use [Role-Based Access Control](./AuthRBAC.md), users will only see the menu items they have access to.
+この例では、`<Menu.DashboardItem>`は`/dashboard`ルートにリンクし、`<Menu.ResourceItem>`は`<Resource>`コンポーネントから定義されたリストページにリンクし、`<Menu.Item>`はアプリケーションの任意のルートにリンクするために使用できる汎用コンポーネントです。`<Menu>`コンポーネントは、アプリケーションの位置の変更に自動的に応答し、現在のルートを強調表示します。さらに、[役割ベースのアクセス制御](./AuthRBAC.md)を使用している場合、ユーザーはアクセス権限のあるメニュー項目のみを表示します。
 
-Before creating your custom component, it's a good practice to check if react-admin already provides a suitable component with a generic name for your purpose. In many cases, react-admin can save you hours, if not days, of development effort.
+カスタムコンポーネントを作成する前に、React-adminが目的に合ったコンポーネントを既に提供していないか確認するのが良い実践です。多くの場合、React-adminは数時間、場合によっては数日分の開発時間を節約できます。
 
-Some of the other useful react-admin components include those for guided tours, sub-forms, login screens, action buttons, calendars, and much more. Each react-admin component can be customized using props, children, and [theme](./AppTheme.md) to fit your application's specific needs.
+その他の有用なReact-adminコンポーネントには、ガイド付きツアー、サブフォーム、ログイン画面、アクションボタン、カレンダーなどがあります。各React-adminコンポーネントは、プロパティ、子要素、および[テーマ](./AppTheme.md)を使用してアプリケーションの特定のニーズに合わせてカスタマイズできます。
 
-## Composition
+## コンポジション
 
-React-admin follows the principle of avoiding components that accept an overwhelming number of props, which are often referred to as "God Components." Instead, react-admin encourages the use of composition, where components accept subcomponents (either through children or specific props) to handle a share of the logic.
+React-adminは、圧倒的な数のプロパティを受け取る「ゴッドコンポーネント」を避ける原則に従います。代わりに、React-adminは、コンポーネントがロジックの一部を処理するサブコンポーネントを受け入れる（子要素や特定のプロパティを通じて）コンポジションの使用を奨励します。
 
-For example, while you cannot directly pass a list of actions to the `<Edit>` component, you can achieve the same result by passing an `actions` component:
+例えば、`<Edit>`コンポーネントにアクションのリストを直接渡すことはできませんが、`actions`コンポーネントを渡すことで同じ結果を達成できます：
 
 ```jsx
 import { Button } from '@mui/material';
@@ -184,16 +184,16 @@ export const PostEdit = () => (
 const PostEditActions = () => (
     <TopToolbar>
         <ShowButton />
-        <Button color="primary" onClick={customAction}>Custom Action</Button>
+        <Button color="primary" onClick={customAction}>カスタムアクション</Button>
     </TopToolbar>
 );
 ```
 
-This approach enables you to override specific parts of the logic of a component by composing it with another component.
+このアプローチにより、別のコンポーネントと組み合わせることで、コンポーネントのロジックの特定部分をオーバーライドできます。
 
-Many react-admin components can be easily customized by passing custom components as children or through props.
+多くのReact-adminコンポーネントは、カスタムコンポーネントを子要素やプロパティとして渡すことで簡単にカスタマイズできます。
 
-The trade-off with this approach is that sometimes react-admin may require you to override several components just to enable one specific feature. For instance, to override the Menu, you must pass a custom Menu component to a custom `<Layout>`, and pass that custom `<Layout>` to the `<Admin>` component:
+このアプローチのトレードオフは、特定の機能を有効にするために複数のコンポーネントをオーバーライドする必要があることがある点です。例えば、メニューをオーバーライドするには、カスタムメニューコンポーネントをカスタム`<Layout>`に渡し、そのカスタム`<Layout>`を`<Admin>`コンポーネントに渡す必要があります：
 
 ```jsx
 // in src/Layout.js
@@ -212,15 +212,16 @@ const App = () => (
 );
 ```
 
-Although this drawback exists, we accept it because the use of composition in react-admin makes the components highly extensible, and it significantly improves the readability and maintainability of the code.
+この欠点にもかかわらず、React-adminでのコンポジションの使用は、コンポーネントを高度に拡張可能にし、コードの読みやすさと保守性を大幅に向上させます。
 
-## Hooks
+## フック
 
-When you find that you cannot tweak a react-admin component using props, you can always turn to the lower-level API: hooks. In fact, react-admin is built on top of a headless library called `ra-core`, which primarily consists of hooks. These hooks hide the framework's implementation details, allowing you to focus on your business logic. It's perfectly normal to use react-admin hooks in your own components if the default UI doesn't meet your specific requirements.
+React-adminコンポーネントをプロパティを使用して調整できない場合、常に低レベルのAPIであるフックに頼ることができます。実際、React-adminは`ra-core`というヘッドレスライブラリの上に構築されており、主にフックで構成されています。これらのフックはフレームワークの実装詳細を隠し、ビジネスロジックに集中することができます。デフォルトのUIが特定の要件を満たさない場合、React-adminフックを独自のコンポーネントで使用することは全く普通のことです。
 
-For example, the `<DeleteWithConfirmButton>` button renders a confirmation dialog when clicked and then calls the `dataProvider.delete()` method for the current record. If you want the same feature but with a different UI, you can use the `useDeleteWithConfirmController` hook:
+例えば、`<DeleteWithConfirmButton>`ボタンはクリック時に確認ダイアログを表示し、その後現在のレコードのために`dataProvider.delete()`メソッドを呼び出します。同じ機能を別のUIで実現したい場合、`useDeleteWithConfirmController`フックを使用できます：
 
 {% raw %}
+
 ```jsx
 const DeleteButton = () => {
     const resource = useResourceContext();
@@ -254,23 +255,24 @@ const DeleteButton = () => {
     );
 };
 ```
+
 {% endraw %}
 
-The fact that hook names often end with `Controller` is intentional and reflects the use of [the Model-View-Controller (MVC) pattern](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) for complex components in react-admin. 
+フック名がしばしば`Controller`で終わるのは意図的であり、React-adminの複雑なコンポーネントに対して[モデル・ビュー・コントローラ (MVC) パターン](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)を使用していることを反映しています。
 
-- The Controller logic is handled by React hooks (e.g. `useListController`).
-- The view logic is managed by React components (e.g. `<List>`).
-- The model logic is left to the developer, and react-admin simply defines the interface that the model must expose through its Providers.
+* コントローラロジックはReactフック（例：`useListController`）で処理されます。
+* ビューロジックはReactコンポーネント（例：`<List>`）で管理されます。
+* モデルロジックは開発者に任され、React-adminはそのモデルがプロバイダを通じて公開しなければならないインターフェースを定義するだけです。
 
-React-admin exposes [dozens of hooks](./Reference.md#hooks) to assist you in building your own components. You can even construct an entire react-admin application without relying on the Material UI components and use a different UI kit if desired. This flexibility allows you to tailor the application to your specific needs and preferences.
+React-adminは、独自のコンポーネントを構築するための[数十のフック](./Reference.md#hooks)を提供します。Material UIコンポーネントに依存せずにReact-adminアプリケーション全体を構築することも可能で、別のUIキットを使用することもできます。この柔軟性により、アプリケーションを特定のニーズや好みに合わせることができます。
 
-## Context: Pull, Don't Push
+## コンテキスト：プル、プッシュしない
 
-Communication between components can be challenging, especially in large React applications, where passing props down several levels can become cumbersome. React-admin addresses this issue using a pull model, where components expose props to their descendants via a context, and descendants can consume these props using custom hooks.
+コンポーネント間の通信は、大規模なReactアプリケーションでは特に難しい場合があります。いくつものレベルを通じてプロパティを渡すのが煩雑になることがあります。React-adminは、この問題に対応するためにプルモデルを採用しています。コンポーネントはコンテキストを介して子孫にプロパティを公開し、子孫はカスタムフックを使用してこれらのプロパティを消費できます。
 
-Whenever a react-admin component fetches data or defines a callback, it creates a context and places the data and callback in it.
+React-adminコンポーネントがデータを取得したり、コールバックを定義したりするときは常に、コンテキストを作成し、そのデータとコールバックをその中に配置します。
 
-For instance, the `<Admin>` component creates an `I18NProviderContext`, which exposes the `translate` function. All components in the application can utilize the `useTranslate` hook, which reads the `I18NProviderContext`, for translating labels and messages. 
+例えば、`<Admin>`コンポーネントは`I18NProviderContext`を作成し、`translate`関数を公開します。アプリケーション内のすべてのコンポーネントは、この`translate`関数を使用してラベルやメッセージを翻訳するために`useTranslate`フックを利用できます。
 
 ```jsx
 import { useTranslate } from 'react-admin';
@@ -283,14 +285,14 @@ export const MyHelloButton = ({ handleClick }) => {
 };
 ```
 
-Similarly, the `<Show>` component fetches a record and exposes it via a `RecordContext`. Inside the `<Show>` component, you can use the `useRecordContext` hook to access the record data. For example, you can use it to display a map of the record's location.
+同様に、`<Show>`コンポーネントはレコードを取得し、それを`RecordContext`を介して公開します。`<Show>`コンポーネント内では、`useRecordContext`フックを使用してレコードデータにアクセスできます。例えば、レコードの位置の地図を表示するために使用できます。
 
 ```jsx
 import { useRecordContext } from 'react-admin';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 
 const LocationField = ({ source }) => {
-    const record = useRecordContext(props); // use the RecordContext created by <Show>
+    const record = useRecordContext(props); // <Show>によって作成されたRecordContextを使用
     if (!record) return null;
 
     return (
@@ -305,7 +307,7 @@ const LocationField = ({ source }) => {
 };
 
 const StoreShowPage = () => (
-    <Show> {/* create a RecordContext */}
+    <Show> {/* RecordContextを作成 */}
         <SimpleShowLayout>
             <TextField source="name" />
             <LocationField source="location" />
@@ -314,23 +316,24 @@ const StoreShowPage = () => (
 )
 ```
 
-This approach eliminates the need for a dependency injection system and provides an elegant solution to access data and callbacks from higher levels in the render tree.
+このアプローチは、依存関係の注入システムの必要性を排除し、レンダーツリーの上位レベルからデータやコールバックにアクセスするためのエレガントな解決策を提供します。
 
-So when you write a component that needs to access data or callbacks defined higher in the render tree, you can always find a context to get it. 
+したがって、データやコールバックが必要なコンポーネントを書く場合は、常にそれを取得するためのコンテキストを見つけることができます。
 
-Contexts are fundamental concepts in React Admin. If you are not familiar with them, don't hesitate to read the [React documentation on Context](https://react.dev/learn/passing-data-deeply-with-context). Understanding contexts will greatly enhance your understanding of how react-admin leverages them to create a powerful and flexible framework.
+コンテキストは、React Adminの基本概念です。もしコンテキストに不慣れであれば、[Reactのコンテキストに関するドキュメント](https://react.dev/learn/passing-data-deeply-with-context)を読むことをお勧めします。コンテキストを理解することで、React-adminがこれをどのように活用して強力で柔軟なフレームワークを作り上げているかを大いに理解する助けになります。
 
-## Batteries Included But Removable
+## 充実したが取り外し可能なバッテリー
 
-React-admin allows you to build sophisticated web applications using only its built-in components, assuming that its design choices align with your needs. However, if you find that a component's existing capabilities don't meet your specific requirements, you're free to replace it with a custom component.
+React-adminは、その設計選択があなたのニーズに合う限り、組み込みコンポーネントだけを使用して高度なウェブアプリケーションを構築することができます。しかし、コンポーネントの既存の機能が特定の要件を満たさない場合は、カスタムコンポーネントで置き換えることができます。
 
-For example, if [`<SimpleShowLayout>`](./SimpleShowLayout.md) doesn't allow you to arrange the details of a contact as depicted in the image below:
+例えば、[`<SimpleShowLayout>`](./SimpleShowLayout.md)が、以下の画像のように連絡先の詳細を配置することを許可していない場合：
 
 ![contact details](./img/atomic-crm.png)
 
-You can create and use your own layout component:
+独自のレイアウトコンポーネントを作成して使用できます：
 
 {% raw %}
+
 ```tsx
 export const ContactShow = () => (
     <ShowBase>
@@ -388,55 +391,51 @@ const ContactShowContent = () => {
     );
 };
 ```
+
 {% endraw %}
 
-This particular example is sourced from [Atomic CRM](https://marmelab.com/react-admin-crm/#/contacts), one of the many [demo applications](./Demos.md) available for react-admin. 
+この特定の例は、[Atomic CRM](https://marmelab.com/react-admin-crm/#/contacts)から引用したもので、多くの[デモアプリケーション](./Demos.md)の一つです。
 
-Never hesitate to replace a react-admin component with one of your own design. React-admin does not aim to cover all possible use cases, instead, it provides hooks for incorporating custom components. After all, "It's just React"™.
+React-adminのコンポーネントを独自のデザインで置き換えることをためらわないでください。React-adminはすべてのユースケースをカバーすることを目指しているわけではなく、カスタムコンポーネントを統合するためのフックを提供しています。結局のところ、「それはただのReactです」™。
 
-With react-admin, you'll never find yourself backed into a corner.
+React-adminを使用している限り、行き詰まることはありません。
 
-## User Experience Is King
+## ユーザーエクスペリエンスは王である
 
-React-admin has two distinct sets of users:
+React-adminには、2つの異なるユーザーセットがあります：
 
-- End users, who use the react-admin app in their browser
-- Developers, who work with the react-admin code in their IDE
+* ブラウザでReact-adminアプリを使用するエンドユーザー
+* React-adminコードをIDEで操作する開発者
 
-We meticulously design both the User Experience (UX) and the Developer Experience (DX) for each feature.
+私たちは、各機能のユーザーエクスペリエンス（UX）と開発者エクスペリエンス（DX）の両方を慎重に設計しています。
 
-For the visual part, react-admin builds upon Material UI, which is a practical implementation of [Material Design](https://m3.material.io/). This design system is painstakingly constructed for web and mobile apps and serves as an excellent foundation for creating user-friendly, consistent user interfaces. However, it's only part of the story.
+ビジュアル部分については、React-adminは[Material Design](https://m3.material.io/)の実践的な実装であるMaterial UIの上に構築されています。このデザインシステムは、ウェブおよびモバイルアプリのために細心の注意を払って構築されており、ユーザーフレンドリーで一貫性のあるユーザーインターフェースを作成するための優れた基盤を提供します。しかし、これは物語の一部に過ぎません。
 
-We invest considerable time fine-tuning the UI to be as intuitive as possible. Small alignment discrepancies, screen flashes, and color inconsistencies are under constant scrutiny. We continually iterate based on customer feedback, working diligently to resolve any visual and animation issues that arise in real-world applications.
+UIを可能な限り直感的にするために、多くの時間を投資しています。小さな整列の不一致、画面のフラッシュ、色の不整合などに常に注意を払い、顧客のフィードバックに基づいて継続的に反復し、実際のアプリケーションで発生するビジュアルおよびアニメーションの問題を解決するために努力しています。
 
-By default, react-admin produces a purposefully bland user interface because we want the focus to be on the content rather than the aesthetics.
+デフォルトでは、React-adminは意図的に淡白なユーザーインターフェースを生成します。なぜなら、見た目よりもコンテンツに焦点を当てたいからです。
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/sort-button.webm" type="video/webm"/>
-  <source src="./img/sort-button.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop> <source src="./img/sort-button.webm" type="video/webm"/> <source src="./img/sort-button.mp4" type="video/mp4"/> Your browser does not support the video tag. </video>
 
+開発者エクスペリエンスに関しては、React-adminは直感的なAPI、高度な機能、合理的な抽象化レベル、および包括的なドキュメントのバランスを取るために常に進化しています。コアチームのメンバーはReact-adminの最初のテスターであり、すべてのフックとコンポーネントの生産性、デバッグ性、発見可能性、パフォーマンス、および信頼性に焦点を当てています。
 
-Regarding the developer experience, react-admin is always evolving to strike the right balance between an intuitive API, advanced features, a reasonable level of abstraction, and comprehensive documentation. The core team members are the initial testers of react-admin, focusing on productivity, debuggability, discoverability, performance, and reliability of all hooks and components.
+## 巨人の肩に乗って
 
-## Built On The Shoulders Of Giants
+多くの優れたオープンソースライブラリが、データフェッチング、フォーム、UIコンポーネント、テストなどのB2Bアプリの部分的な要件に対処しています。
 
-Many excellent open-source libraries already address partial requirements of B2B apps: data fetching, forms, UI components, testing, etc.
+React-adminは車輪の再発明を避け、各カテゴリで最高のツール（機能、開発者エクスペリエンス、アクティブなメンテナンス、ドキュメント、ユーザーベースの観点から）を使用し、これらのライブラリの周りに接着剤を提供します。
 
-Rather than reinventing the wheel, react-admin uses the best tools in each category (in terms of features, developer experience, active maintenance, documentation, user base), and provides a glue around these libraries.
+React-admin v4では、これらのライブラリは[react-query](https://tanstack.com/query/v3)、[react-router](https://reactrouter.com/en/main)、[react-hook-form](https://react-hook-form.com/)、[Material UI](https://mui.com/)、[emotion](https://emotion.sh/docs/introduction)、[testing-library](https://testing-library.com/docs/react-testing-library/intro)、[date-fns](https://date-fns.org/)、および[lodash](https://lodash.com/)と呼ばれます。
 
-In react-admin v4, these libraries are called [react-query](https://tanstack.com/query/v3), [react-router](https://reactrouter.com/en/main), [react-hook-form](https://react-hook-form.com/), [Material UI](https://mui.com/), [emotion](https://emotion.sh/docs/introduction), [testing-library](https://testing-library.com/docs/react-testing-library/intro), [date-fns](https://date-fns.org/), and [lodash](https://lodash.com/).
+新しい要件が発生した場合、React-adminチームは常に既存のソリューションを探し、統合を優先します。
 
-When a new requirement arises, the react-admin teams always looks for an existing solution, and prefers integrating it rather than redeveloping it.
+ただし、React-adminのすべての依存関係は、[MITライセンス](https://github.com/marmelab/react-admin/blob/master/LICENSE.md)と互換性がある必要があります。
 
-There is one constraint, though: all react-admin's dependencies must be compatible with the [MIT license](https://github.com/marmelab/react-admin/blob/master/LICENSE.md). 
+## 最小限のAPIサーフェス
 
-## Minimal API Surface
+新しいフックを導入したり、既存のコンポーネントに新しいプロパティを追加したりする前に、純粋なReactを使用して機能を実装する簡単な方法があるかどうかを常に検討します。可能であれば、新しいプロパティを追加しないことを選択します。これは、React-adminのAPI、コード、テスト、およびドキュメントの簡潔さを維持するために重要です。この決定は、学習曲線を管理しやすくし、保守の負担を軽減するために重要です。
 
-Before introducing a new hook or adding a new prop to an existing component, we always consider whether there's a straightforward way to implement the feature using pure React. If it's feasible, we opt not to add the new prop. Our goal is to maintain simplicity in the react-admin API, code, testing, and documentation. This decision is critical to ensuring a manageable learning curve and a low maintenance burden.
-
-Take the `<SimpleShowLayout>` component as an example, which displays Field elements in a column. Suppose you want to place two fields in a single column. We could introduce a specific syntax to indicate the number of elements per column and per line. However, this would overcomplicate the usage and documentation for simple use cases. Moreover, achieving this is quite doable in pure React, without necessitating any changes in the react-admin core. For instance, you can utilize Material UI's `<Stack>` component:
+例えば、`<SimpleShowLayout>`コンポーネントはフィールド要素を1列に表示します。1つの列に2つのフィールドを配置したい場合、列と行ごとの要素数を示す特定のシンタックスを導入することができます。しかし、これは単純なユースケースのための使用方法とドキュメントを過度に複雑にします。さらに、このようなことはReactを使用して十分に実現可能であり、React-adminコアに変更を加える必要はありません。例えば、Material UIの`<Stack>`コンポーネントを使用することができます：
 
 ```jsx
 import * as React from 'react';
@@ -456,65 +455,67 @@ const PostShow = () => (
 );
 ```
 
-We believe this code snippet is simple enough for a React developer, so we chose not to add core support for multiple elements per line.
+このコードスニペットはReact開発者にとって十分に簡単だと考えていますので、コアサポートを追加しないことを選びました。
 
-If you can't find a specific feature in the react-admin documentation, it's often because it can be quickly achieved using pure React.
+React-adminドキュメントに特定の機能が見つからない場合、それは純粋なReactを使用して迅速に達成できるためであることがよくあります。
 
-## Backward Compatibility Is More Important Than New Features
+## 新機能よりも後方互換性が重要
 
-Nobody enjoys updating their app's code simply because a foundational library has introduced a breaking change. React-admin makes a concerted effort to prevent such disruptions and the unnecessary time loss they cause for developers.
+基盤となるライブラリが破壊的な変更を導入したために、アプリのコードを更新することを誰も楽しんでいません。React-adminは、このような中断とそれが開発者に引き起こす不要な時間の損失を防ぐために努力しています。
 
-Some components may have peculiar APIs, often for historical reasons. We prioritize maintaining backward compatibility as much as possible, occasionally at the expense of API consistency.
+一部のコンポーネントには、歴史的な理由で独特のAPIがある場合があります。できるだけ後方互換性を維持することを優先しており、場合によってはAPIの一貫性を犠牲にすることがあります。
 
-The code for some components may seem unnecessarily complex. This usually happens when a component has to support both old and new syntaxes.
+一部のコンポーネントのコードは不必要に複雑に見えるかもしれません。これは通常、コンポーネントが古いシンタックスと新しいシンタックスの両方をサポートする必要がある場合に発生します。
 
-Maintaining this backward compatibility requires a significant effort from the react-admin core team, but it pays off by saving substantial time for react-admin users.
+この後方互換性を維持するには、React-adminのコアチームに多大な労力が必要ですが、それはReact-adminユーザーにとって大幅な時間の節約となります。
 
-## Principle of Least Surprise
+## 驚きの最小化の原則
 
-Due to our emphasis on [composition](#composition), you should be able to combine react-admin components in various ways and expect them to work seamlessly (courtesy of to [contexts](#context-pull-dont-push)). We have a comprehensive test suite to ensure that the react-admin components interact well together. Moreover, TypeScript assists in identifying if you're using a component in a manner that isn't supported.
+私たちは[コンポジション](#composition)を重視しているため、React-adminコンポーネントをさまざまな方法で組み合わせて、それがシームレスに動作することを期待できるべきです（[コンテキスト](#context-pull-dont-push)のおかげで）。React-adminコンポーネントがうまく連携することを確認するために包括的なテストスイートがあります。さらに、TypeScriptは、サポートされていない方法でコンポーネントを使用している場合を特定するのに役立ちます。
 
-These considerations lead to strong design choices in the react-admin code.
+これらの考慮事項は、React-adminコードの強力な設計選択につながります。
 
-One notable example relates to child inspection, which we strive to avoid whenever possible. An exception is the `<Datagrid>` component, which inspects its Field children at runtime to determine the column headers. This practice has significant drawbacks:
+顕著な例の一つは、子要素の検査に関するものです。これは可能な限り避けるよう努めています。例外は、列ヘッダーを決定するためにField子要素を実行時に検査する`<Datagrid>`コンポーネントです。このプラクティスには重大な欠点があります：
 
-- If a child is wrapped inside another component that doesn't follow the same API, the feature breaks
-- Developers typically expect a component to affect its subtree, not its ancestors. Violating this expectation can lead to difficult-to-explain bugs.
+* 子要素が同じAPIに従わない別のコンポーネント内にラップされている場合、この機能は壊れます
+* 開発者は通常、コンポーネントがそのサブツリーに影響を与えることを期待します。これを期待すると、説明が難しいバグにつながる可能性があります。
 
-We keep child inspection in `<Datagrid>` because there is no superior alternative, but it's an uncommon exception. Every time we've implemented child inspection, we regretted it later. 
+私たちはより優れた代替案がないため、`<Datagrid>`における子要素の検査を保持していますが、これは稀な例外です。子要素の検査を実装するたびに、後で後悔しました。
 
-To minimize surprises, we also avoid using `React.cloneElement()` and refrain from passing props down the tree.
+驚きを最小限に抑えるため、`React.cloneElement()`の使用を避け、ツリー全体にプロパティを渡すことはしません。
 
-## Principle Of Least Documentation
+## 最小限のドキュメントの原則
 
-No one reads docs. This is an unfortunate reality that we have come to terms with.
+誰もドキュメントを読みません。これは残念な現実ですが、私たちはそれを受け入れています。
 
-Therefore, when designing a new feature, our priority is to make it as intuitive as possible for developers. We keep the API minimal ([see above](#minimal-api-surface)). We emulate the APIs of well-established libraries. We throw errors with clear and informative messages. To aid developers in discovering the API within their IDE, we provide TypeScript types and JSDoc. Furthermore, we publish live examples complemented by annotated code.
+したがって、新しい機能を設計する際には、開発者にとって直感的であることを最優先します。APIを最小限に抑えます（[上記参照](#minimal-api-surface)）。確立されたライブラリのAPIを模倣します。明確で情報豊富なエラーメッセージを投げます。開発者がIDE内でAPIを発見できるように、TypeScriptタイプとJSDocを提供します。さらに、注釈付きコードを含むライブ例を公開しています。
 
-Despite this, given the extensive nature of react-admin, it inevitably comes with comprehensive documentation. We cover a wide variety of use cases, extending our documentation beyond mere usage instructions and API descriptions. To ensure that you find the information you need quickly, we frequently duplicate the same information in different places. We truly believe in the power of [serendipity](https://en.wikipedia.org/wiki/Serendipity).
+それにもかかわらず、React-adminは広範なため、結果的に包括的なドキュメントが必要です。さまざまなユースケースをカバーし、使用方法の指示やAPIの説明を超えてドキュメントを提供しています。必要な情報をすばやく見つけるために、同じ情報を異なる場所に頻繁に重複させています。私たちは[セレンディピティ](https://en.wikipedia.org/wiki/Serendipity)の力を本当に信じています。
 
-If you find this documentation overwhelming at first, don't fret. There's no need to read everything all at once. Start with the Introduction chapter of each section and examine the demo codes. Over time, you'll become familiar with the react-admin API, and finding the information you need will become a breeze.
+このドキュメントが最初は圧倒的に感じるかもしれませんが、心配しないでください。すべてを一度に読む必要はありません。各セクションのイントロダクションを読み、デモコードを調べてください。時間が経つにつれて、React-admin APIに慣れ、必要な情報を簡単に見つけることができるようになります。
 
-## Monorepo
+## モノレポ
 
-Whenever you import a react-admin component, it's sourced from the `react-admin` package:
+React-adminコンポーネントをインポートするたびに、それは`react-admin`パッケージからインポートされます：
 
 ```jsx
 import { List, Datagrid, TextField } from 'react-admin';
 ```
 
-But if you peek at [the react-admin source code](https://github.com/marmelab/react-admin) (which we encourage you to do), you will find imports like:
+しかし、[React-adminのソースコード](https://github.com/marmelab/react-admin)を覗いてみると（ぜひやってみてください）、次のようなインポートが見つかります：
 
 ```jsx
 import { useListController } from 'ra-core';
 ```
 
-That's because the `react-admin` package simply re-exports components from internal packages. React-admin is a *distribution* of several packages, each dedicated to a specific feature. These packages can be found in [the `packages/` directory](https://github.com/marmelab/react-admin/tree/master/packages). Some of the more notable packages include:
-    
-* `ra-core`: The core react-admin logic, without any UI.
-* `ra-ui-materialui`: The Material UI skin for react-admin.
-* `ra-data-*`: Data providers for various data backends.
-* `ra-language-*`: Interface translations for various languages.
-* `react-admin`: the standard distribution of react-admin
+これは、`react-admin`パッケージが内部パッケージからコンポーネントを再エクスポートしているためです。React-adminは、特定の機能に特化した複数のパッケージの*配布*です。これらのパッケージは[`packages/`ディレクトリ](https://github.com/marmelab/react-admin/tree/master/packages)にあります。注目すべきパッケージのいくつかは次のとおりです：
 
-You can construct your own distribution of react-admin by combining various packages. Alternatively, you can import hooks and components directly from one of these packages if you don't want to import the entire react-admin distribution.
+* `ra-core`: UIなしのReact-adminのコアロジック。
+* `ra-ui-materialui`: React-adminのMaterial UIスキン。
+* `ra-data-*`: さまざまなデータバックエンド用のデータプロバイダ。
+* `ra-language-*`: さまざまな言語用のインターフェース翻訳。
+* `react-admin`: 標準のReact-adminディストリビューション
+
+これらのパッケージを組み合わせて独自のReact-adminディストリビューションを構築できます。また、React-adminディストリビューション全体をインポートせずに、これらのパッケージの1つから直接フックやコンポーネントをインポートすることもできます。
+
+

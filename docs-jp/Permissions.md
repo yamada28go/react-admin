@@ -3,46 +3,47 @@ layout: default
 title: "Permissions"
 ---
 
-# Permissions
+# パーミッション
 
-By default, react-admin apps don't check user permissions. They only require users to be logged in for the list, create, edit, and show pages if there is an `authProvider`.
+デフォルトでは、react-admin アプリはユーザーのパーミッションをチェックしません。`authProvider`が存在する場合、リスト、作成、編集、および表示ページにはログインが必要です。
 
-However, some applications may require fine-grained permissions to enable or disable access to certain features. Since there are many possible strategies (single role, multiple roles or rights, ACLs, etc.), react-admin delegates the permission logic to the `authProvider`.
+しかし、アプリケーションによっては、特定の機能へのアクセスを有効または無効にするために細かいパーミッションが必要になることがあります。多くの戦略が考えられるため（シングルロール、マルチロール、ACLなど）、react-adminはパーミッションロジックを`authProvider`に委任します。
 
-Should you need to customize a page according to users permissions, you can get the permissions from the `authProvider` through the [`usePermissions()`](./usePermissions.md) hook.
+ユーザーのパーミッションに応じてページをカスタマイズする必要がある場合は、[`usePermissions()`](./usePermissions.md)フックを使用して`authProvider`からパーミッションを取得できます。
 
-## Permissions In The `authProvider`
+## `authProvider`のパーミッション
 
-It's the responsibility of `authProvider.getPermissions()` to return the user permissions. These permissions can take the shape you want:
+`authProvider.getPermissions()`はユーザーのパーミッションを返す責任があります。これらのパーミッションは以下のような形式を取ることができます：
 
-- a string (e.g. `'admin'`),
-- an array of roles (e.g. `['post_editor', 'comment_moderator', 'super_admin']`)
-- an object with fine-grained permissions (e.g. `{ postList: { read: true, write: false, delete: false } }`)
-- or even a function
+- 文字列（例：`'admin'`）
+- ロールの配列（例：`['post_editor', 'comment_moderator', 'super_admin']`）
+- 細かいパーミッションのオブジェクト（例：`{ postList: { read: true, write: false, delete: false } }`）
+- または関数
 
-The format of permissions is free because react-admin never actually uses the permissions itself. It's up to you to use them in your code to hide or display content, redirect the user to another page, or display warnings. 
+パーミッションの形式は自由です。なぜなら、react-admin自体はパーミッションを実際に使用しないためです。コード内でコンテンツを非表示または表示したり、ユーザーを別のページにリダイレクトしたり、警告を表示するためにそれらを使用するのはあなた次第です。
 
-React-admin is agnostic to the permissions format, but it provides an implementation for the most common permissions format: [role-based access control (RBAC)](./AuthRBAC.md). If you want to use RBAC, the `authProvider.getPermissions()` method should return an array of permissions objects.
+react-adminはパーミッションの形式には依存しませんが、最も一般的なパーミッション形式である[ロールベースアクセス制御（RBAC）](./AuthRBAC.md)の実装を提供します。RBACを使用する場合、`authProvider.getPermissions()`メソッドはパーミッションオブジェクトの配列を返す必要があります。
 
 ```tsx
-const authProvider = {
-    // ...
-    getPermissions: () => Promise.resolve([
-        { action: ["read", "create", "edit", "export"], resource: "companies" },
-        { action: ["read", "create", "edit"], resource: "people" },
-        { action: ["read", "create", "edit", "export"], resource: "deals" },
-        { action: ["read", "create"], resource: "comments" },,
-        { action: ["read", "create"], resource: "tasks" },
-        { action: ["write"], resource: "tasks.completed" },
-    ])
-};
+    const authProvider = {
+        // ...
+        getPermissions: () => Promise.resolve([
+            { action: ["read", "create", "edit", "export"], resource: "companies" },
+            { action: ["read", "create", "edit"], resource: "people" },
+            { action: ["read", "create", "edit", "export"], resource: "deals" },
+            { action: ["read", "create"], resource: "comments" },
+            { action: ["read", "create"], resource: "tasks" },
+            { action: ["write"], resource: "tasks.completed" },
+        ])
+    };
 ```
 
-Check the [RBAC chapter](./AuthRBAC.md) for more details on how to use role-based access control.
+ロールベースアクセス制御の使用方法の詳細については、[RBACの章](./AuthRBAC.md)を参照してください。
 
-Following is an example where the `authProvider` stores the user's permissions in `localStorage` upon authentication, and returns these permissions when called with `getPermissions`:
+以下は、`authProvider`が認証時にユーザーのパーミッションを`localStorage`に保存し、`getPermissions`でこれらのパーミッションを返す例です：
 
 {% raw %}
+
 ```jsx
 // in src/authProvider.js
 import decodeJwt from 'jwt-decode';
@@ -83,15 +84,17 @@ export default {
     }
 };
 ```
+
 {% endraw %}
 
-## Getting User Permissions
+## ユーザーパーミッションの取得
 
-If you need to check the permissions in any of the default react-admin views or in custom page, you can use the [`usePermissions()`](./usePermissions.md) hook:
+デフォルトのreact-adminビューやカスタムページでパーミッションを確認する必要がある場合は、[`usePermissions()`](./usePermissions.md)フックを使用できます：
 
-Here is an example of a `Create` view with a conditional Input based on permissions:
+以下は、パーミッションに基づいて条件付きの入力を行う`Create`ビューの例です：
 
 {% raw %}
+
 ```jsx
 export const UserCreate = () => {
     const { permissions } = usePermissions();
@@ -108,9 +111,10 @@ export const UserCreate = () => {
     )
 }
 ```
+
 {% endraw %}
 
-It works in custom pages too:
+カスタムページでも同様に機能します：
 
 ```jsx
 // in src/MyPage.js
@@ -132,7 +136,7 @@ const MyPage = () => {
 }
 ```
 
-**Tip**: If you use RBAC, use [the `<IfCanAccess>` component](./IfCanAccess.md) to fetch permissions, and render its children only if the user has the required permissions.
+**ヒント**: RBACを使用する場合は、[`<IfCanAccess>`コンポーネント](./IfCanAccess.md)を使用してパーミッションを取得し、ユーザーが必要なパーミッションを持っている場合にのみ子コンテンツをレンダリングします。
 
 ```jsx
 import { IfCanAccess } from '@react-admin/ra-rbac';
@@ -147,23 +151,23 @@ const MyPage = () => (
 );
 ```
 
-## Restricting Access to Resources or Views
+## リソースやビューへのアクセスの制限
 
-Permissions can be useful to restrict access to resources or their views. To do so, you must pass a function as a child of the `<Admin>` component. React-admin will call this function with the permissions returned by the `authProvider`. Note that you can only provide one of such function child.
+パーミッションはリソースやそのビューへのアクセスを制限するのに役立ちます。これを行うには、`<Admin>`コンポーネントの子として関数を渡す必要があります。react-adminは`authProvider`が返すパーミッションでこの関数を呼び出します。このような関数子を提供できるのは一つだけです。
 
 ```jsx
 export const App = () => (
     <Admin dataProvider={dataProvider} authProvider={authProvider}>
         {permissions => (
             <>
-                {/* Restrict access to the edit view to admin only */}
+                {/* 編集ビューへのアクセスを管理者にのみ制限 */}
                 <Resource
                     name="customers"
                     list={VisitorList}
                     edit={permissions === 'admin' ? VisitorEdit : null}
                     icon={VisitorIcon}
                 />
-                {/* Only include the categories resource for admin users */}
+                {/* カテゴリリソースを管理者ユーザーのみに含める */}
                 {permissions === 'admin'
                     ? <Resource name="categories" list={CategoryList} edit={CategoryEdit} icon={CategoryIcon} />
                     : null}
@@ -173,9 +177,9 @@ export const App = () => (
 );
 ```
 
-Note that the function may return as many fragments as you need.
+関数は必要なだけ多くのフラグメントを返すことができます。
 
-**Tip**: If you use RBAC, you won't need to check permissions manually as above. Just use [`ra-rbac`'s `<Resource>` component](./AuthRBAC.md#resource), which will do it for you.
+**ヒント**: RBACを使用する場合、上記のように手動でパーミッションをチェックする必要はありません。ただ[`ra-rbac`の`<Resource>`コンポーネント](./AuthRBAC.md#resource)を使用するだけです。これにより自動的にパーミッションがチェックされます。
 
 ```jsx
 import { Admin } from 'react-admin';
@@ -189,13 +193,14 @@ export const App = () => (
 );
 ```
 
-## Restricting Access to Form Inputs
+## フォーム入力へのアクセス制限
 
-You might want to display some inputs only to users with specific permissions. You can use the `usePermissions` hook for that.
+特定のパーミッションを持つユーザーにのみいくつかの入力を表示したい場合があります。そのためには`usePermissions`フックを使用できます。
 
-Here is an example of a `Create` view with a conditional Input based on permissions:
+以下は、パーミッションに基づいて条件付きの入力を行う`Create`ビューの例です：
 
 {% raw %}
+
 ```jsx
 import { usePermissions, Create, SimpleForm, TextInput } from 'react-admin';
 
@@ -212,9 +217,10 @@ export const UserCreate = () => {
     );
 }
 ```
+
 {% endraw %}
 
-**Note**: `usePermissions` is asynchronous, which means that `permissions` will always be `undefined` on mount. Once the `authProvider.getPermissions()` promise is resolved, `permissions` will be set to the value returned by the promise, and the component will re-render. This may cause surprises when using `permissions` in props that are not reactive, e.g. `defaultValue`:
+**注意**: `usePermissions`は非同期です。つまり、`permissions`はマウント時に常に`undefined`になります。`authProvider.getPermissions()`のプロミスが解決されると、`permissions`はプロミスが返す値に設定され、コンポーネントは再レンダリングされます。これにより、`defaultValue`などのリアクティブでないプロップスで`permissions`を使用する際に予期しないことが起こる可能性があります：
 
 ```jsx
 import { usePermissions, Create, SimpleForm, TextInput } from 'react-admin';
@@ -225,7 +231,7 @@ export const UserCreate = () => {
         <Create>
             <SimpleForm>
                 <TextInput source="name" defaultValue={
-                    // this doesn't work: the defaultValue will always be 'user' 
+                    // この方法は機能しません：defaultValueは常に'user'になります 
                     permissions === 'admin' ? 'admin' : 'user'
                 } />
             </SimpleForm>
@@ -234,7 +240,7 @@ export const UserCreate = () => {
 }
 ```
 
-In `react-hook-form`, `defaultValue` is only used on mount - changing its value after the initial render doesn't change the default value. The solution is to delay the rendering of the input until the permissions are resolved:
+`react-hook-form`では、`defaultValue`はマウント時にのみ使用され、初期レンダー後にその値が変更されてもデフォルト値は変わりません。解決策は、パーミッションが解決されるまで入力のレンダリングを遅らせることです：
 
 ```jsx
 import { usePermissions, Create, SimpleForm, TextInput } from 'react-admin';
@@ -253,7 +259,7 @@ export const UserCreate = () => {
 }
 ```
 
-**Tip**: If you use RBAC, use [`ra-rbac`'s `<SimpleForm>` component](./AuthRBAC.md#simpleform) instead. It renders its children only if the user has the required permissions.
+**ヒント**: RBACを使用する場合は、[`ra-rbac`の`<SimpleForm>`コンポーネント](./AuthRBAC.md#simpleform)を使用してください。これにより、ユーザーが必要なパーミッションを持っている場合にのみ子コンテンツがレンダリングされます。
 
 ```jsx
 import { Create, TextInput } from 'react-admin';
@@ -269,9 +275,9 @@ export const UserCreate = () => (
 );
 ```
 
-## Restricting Access to Columns In  a List
+## リストの列へのアクセス制限
 
-You can use `usePermissions` to hide some columns in a `Datagrid`. 
+いくつかの列を非表示にするために`usePermissions`を使用できます。
 
 ```jsx
 import * as React from 'react';
@@ -291,7 +297,7 @@ export const UserList = () => {
 };
 ```
 
-**Tip**: If you use RBAC, use [`ra-rbac`'s `<Datagrid>` component](./AuthRBAC.md#datagrid), which will render a column only if the user has the permissions for it.
+**ヒント**: RBACを使用する場合は、[`ra-rbac`の`<Datagrid>`コンポーネント](./AuthRBAC.md#datagrid)を使用してください。これにより、ユーザーがその列のパーミッションを持っている場合にのみ列がレンダリングされます。
 
 ```jsx
 import * as React from 'react';
@@ -309,9 +315,9 @@ export const UserList = () => (
 );
 ```
 
-## Restricting Access to a Menu
+## メニューへのアクセス制限
 
-What if you want to check the permissions inside a [custom menu](./Admin.md#menu)? Much like getting permissions inside a custom page, you'll have to use the `usePermissions` hook:
+[カスタムメニュー](./Admin.md#menu)内でパーミッションを確認したい場合はどうしますか？カスタムページ内でパーミッションを取得するのと同様に、`usePermissions`フックを使用する必要があります：
 
 ```jsx
 // in src/myMenu.js
@@ -332,8 +338,10 @@ const MyMenu = ({ onMenuClick }) => {
 }
 ```
 
-**Tip**: If you use RBAC, use [`ra-rbac`'s `<Menu>` component](./AuthRBAC.md#menu), which will render a menu item only if the user has the permissions for it.
+**ヒント**: RBACを使用する場合は、[`ra-rbac`の`<Menu>`コンポーネント](./AuthRBAC.md#menu)を使用してください。これにより、ユーザーがそのメニュー項目のパーミッションを持っている場合にのみメニュー項目がレンダリングされます。
 
-## Role-Based Access Control
+## ロールベースアクセス制御
 
-If you need a more complex permissions with roles and groups, principle of least privilege, record-level permissions, explicit deny and more, check the next section for the [Role-Based Access Control](./AuthRBAC.md).
+役割やグループを使用したより複雑なパーミッション、最小特権の原則、レコードレベルのパーミッション、明示的な拒否などが必要な場合は、次のセクションで[ロールベースアクセス制御](./AuthRBAC.md)の詳細を確認してください。
+
+

@@ -1,66 +1,65 @@
 ---
 layout: default
-title: "security"
+title: "セキュリティ"
 ---
 
-# Security
+# セキュリティ
 
 <video controls autoplay playsinline muted loop>
   <source src="./img/login.webm" type="video/webm"/>
   <source src="./img/login.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
+  お使いのブラウザはビデオタグをサポートしていません。
 </video>
 
+React-adminでは、お好みの認証戦略を使用して管理アプリを保護できます。Basic Auth、JWT、OAuthなど多くの戦略があるため、react-adminは認証ロジックを`authProvider`に委任します。
 
-React-admin lets you secure your admin app with the authentication strategy of your choice. Since there are many possible strategies (Basic Auth, JWT, OAuth, etc.), react-admin delegates authentication logic to an `authProvider`.
+## 認証機能の有効化
 
-## Enabling Auth Features
-
-By default, react-admin apps don't require authentication. To restrict access to the admin, pass an `authProvider` to the `<Admin>` component.
+デフォルトでは、react-adminアプリは認証を要求しません。管理アクセスを制限するには、`<Admin>`コンポーネントに`authProvider`を渡します。
 
 ```jsx
-// in src/App.js
-import authProvider from './authProvider';
+    // src/App.js
+    import authProvider from './authProvider';
 
-const App = () => (
-    <Admin authProvider={authProvider}>
-        ...
-    </Admin>
-);
+    const App = () => (
+        <Admin authProvider={authProvider}>
+            ...
+        </Admin>
+    );
 ```
 
-Once an admin has an `authProvider`, react-admin enables a new page on the `/login` route, which displays a login form asking for a username and password.
+管理アプリに`authProvider`が設定されると、`/login`ルートに新しいページが追加され、ユーザー名とパスワードを求めるログインフォームが表示されます。
 
-## Anatomy Of An `authProvider`
+## `authProvider`の構成
 
-What's an `authProvider`? Just like a `dataProvider`, an `authProvider` is an object that handles authentication and authorization logic. It exposes methods that react-admin calls when needed, and that you can call manually through specialized hooks. The `authProvider` methods must return a Promise. The simplest `authProvider` is:
+`authProvider`とは何でしょうか？`dataProvider`と同様に、`authProvider`は認証と認可のロジックを処理するオブジェクトです。必要に応じてreact-adminが呼び出すメソッドを公開し、専門のフックを通じて手動で呼び出すこともできます。`authProvider`のメソッドはPromiseを返す必要があります。最もシンプルな`authProvider`は次のようになります：
 
 ```js
 const authProvider = {
-    // send username and password to the auth server and get back credentials
+    // ユーザー名とパスワードを認証サーバーに送り、認証情報を取得
     login: params => Promise.resolve(),
-    // when the dataProvider returns an error, check if this is an authentication error
+    // dataProviderがエラーを返したときに、認証エラーかどうかを確認
     checkError: error => Promise.resolve(),
-    // when the user navigates, make sure that their credentials are still valid
+    // ユーザーがナビゲートする際に認証情報がまだ有効かどうかを確認
     checkAuth: params => Promise.resolve(),
-    // remove local credentials and notify the auth server that the user logged out
+    // ローカルの認証情報を削除し、ユーザーがログアウトしたことを認証サーバーに通知
     logout: () => Promise.resolve(),
-    // get the user's profile
+    // ユーザープロフィールを取得
     getIdentity: () => Promise.resolve(),
-    // get the user permissions (optional)
+    // ユーザーの権限を取得（オプション）
     getPermissions: () => Promise.resolve(),
 };
 ```
 
-Find an existing Auth Provider in the [List of Available Auth Providers](./AuthProviderList.md), or write your own by following the [Building Your Own Auth Provider](./AuthProviderWriting.md) instructions.
+既存の認証プロバイダーは[利用可能な認証プロバイダーのリスト](./AuthProviderList.md)で見つけるか、[独自の認証プロバイダーの作成方法](./AuthProviderWriting.md)に従って独自のものを作成できます。
 
-## Sending Credentials To The API
+## APIに認証情報を送信する
 
-The `authProvider` handles the authentication logic, but it's the `dataProvider`'s responsibility to use the credentials when communicating with the API. 
+`authProvider`は認証ロジックを処理しますが、APIとの通信で認証情報を使用するのは`dataProvider`の責任です。
 
-As explained in the [Data providers documentation](./DataProviders.md#adding-custom-headers), `simpleRestProvider` and `jsonServerProvider` take an `httpClient` as second parameter. That's the place where you can change request headers, cookies, etc.
+[データプロバイダードキュメント](./DataProviders.md#adding-custom-headers)で説明されているように、`simpleRestProvider`と`jsonServerProvider`は2番目のパラメータとして`httpClient`を受け取ります。ここでリクエストヘッダーやクッキーなどを変更できます。
 
-For instance, if the `authProvider` stores an authorization token in localStorage, here is how you can tweak the `dataProvider` to pass this token as an `Authorization` header:
+例えば、`authProvider`が認証トークンをlocalStorageに保存する場合、`dataProvider`を調整してこのトークンを`Authorization`ヘッダーとして渡す方法は次のとおりです：
 
 ```jsx
 import { fetchUtils, Admin, Resource } from 'react-admin';
@@ -83,15 +82,15 @@ const App = () => (
 );
 ```
 
-Now the admin is secured: The user can be authenticated and use their credentials to communicate with a secure API. 
+これで管理アプリが保護され、ユーザーは認証され、セキュアなAPIと通信するための認証情報を使用できます。
 
-If you have a custom REST client, don't forget to add credentials yourself.
+独自のRESTクライアントを使用する場合、必ず自分で認証情報を追加してください。
 
-## Allowing Anonymous Access
+## 匿名アクセスの許可
 
-As long as you add an `authProvider`, react-admin restricts access to all the pages declared in the `<Resource>` components. If you want to allow anonymous access, you can set the `disableAuthentication` prop in the page components. 
+`authProvider`を追加すると、react-adminは`<Resource>`コンポーネントで宣言されたすべてのページへのアクセスを制限します。匿名アクセスを許可する場合は、ページコンポーネントに`disableAuthentication`プロップを設定できます。
 
-For instance, to let anonymous users access the post list view:
+例えば、匿名ユーザーに投稿リストビューへのアクセスを許可するには：
 
 ```jsx
 const PostList = () => (
@@ -107,18 +106,18 @@ const App = () => (
 );
 ```
 
-`disableAuthentication` is available on the following components and hooks:
+`disableAuthentication`は次のコンポーネントやフックで利用可能です：
 
-- `<Create>`, `<CreateBase>`, `<CreateController>` and `useCreateController`
-- `<Edit>`, `<EditBase>`, `<EditController>` and `useEditController`
-- `<List>`, `<ListBase>`, `<ListController>` and `useListController`
-- `<Show>`, `<ShowBase>`, `<ShowController>` and `useShowController`
+* `<Create>`, `<CreateBase>`, `<CreateController>`, `useCreateController`
+* `<Edit>`, `<EditBase>`, `<EditController>`, `useEditController`
+* `<List>`, `<ListBase>`, `<ListController>`, `useListController`
+* `<Show>`, `<ShowBase>`, `<ShowController>`, `useShowController`
 
-## Disabling Anonymous Access
+## 匿名アクセスの無効化
 
-Some pages in react-admin apps may allow anonymous access. For that reason, react-admin starts rendering the page layout before knowing if the user is logged in. If all the pages require authentication, this default behaviour creates an unwanted "flash of UI" for users who never logged in, before the `authProvider` redirects them to the login page.
+react-adminアプリの一部のページは匿名アクセスを許可する場合があります。このため、react-adminはユーザーがログインしているかどうかを確認する前にページレイアウトを表示し始めます。すべてのページが認証を必要とする場合、このデフォルトの動作は、ログインしていないユーザーに対して不要な「UIのフラッシュ」を引き起こします。
 
-If you know your app will never accept anonymous access, you can force the app to wait for the `authProvider.checkAuth()` to resolve before rendering the page layout, by setting the `<Admin requireAuth>` prop.
+アプリが匿名アクセスを一切許可しないことがわかっている場合、`<Admin requireAuth>`プロップを設定して、ページレイアウトのレンダリング前に`authProvider.checkAuth()`の解決を待つように強制できます。
 
 ```jsx
 const App = () => (
@@ -128,15 +127,15 @@ const App = () => (
 );
 ```
 
-## Restricting Access To Custom Pages
+## カスタムページへのアクセス制限
 
-When you add custom pages, they are accessible to anonymous users by default. To make them only accessible to authenticated users, call [the `useAuthenticated` hook](./useAuthenticated.md) in the custom page:
+カスタムページを追加すると、デフォルトで匿名ユーザーがアクセス可能です。これらを認証されたユーザーのみがアクセスできるようにするには、カスタムページで[useAuthenticatedフック](./useAuthenticated.md)を呼び出します：
 
 ```jsx
 import { Admin, CustomRoutes, useAuthenticated } from 'react-admin';
 
 const MyPage = () => {
-    useAuthenticated(); // redirects to login if not authenticated
+    useAuthenticated(); // 認証されていない場合、ログインページにリダイレクト
     return (
         <div>
             ...
@@ -154,7 +153,7 @@ const App = () => (
 );
 ```
 
-Alternatively, you can use [the `<Authenticated>` component](./Authenticated.md), e.g. if you can't modify the page component, or if you want to add authentication in the `<Route element>` prop:
+または、[<Authenticated>コンポーネント](./Authenticated.md)を使用することもできます。例えば、ページコンポーネントを変更できない場合や、`<Route element>`プロップで認証を追加したい場合などです：
 
 ```jsx
 import { Admin, CustomRoutes, Authenticated } from 'react-admin';
@@ -177,39 +176,39 @@ const App = () => (
 );
 ```
 
-## Using External Authentication Providers
+## 外部認証プロバイダーの使用
 
-Instead of the built-in Login page, you can opt for an external authentication provider, such as Auth0, Cognito, or any other OAuth-based service. These services all require a callback URL in the app, to redirect users after login.
+組み込みのログインページの代わりに、Auth0、Cognito、または他のOAuthベースのサービスなどの外部認証プロバイダーを選択できます。これらのサービスはすべて、ログイン後にユーザーをリダイレクトするコールバックURLをアプリに要求します。
 
-React-admin provides a default callback URL at `/auth-callback`. This route calls the `authProvider.handleCallback` method on mount. This means it's the `authProvider`'s job to use the params received from the callback URL to authenticate future API calls.
+React-adminは`/auth-callback`にデフォルトのコールバックURLを提供します。このルートはマウント時に`authProvider.handleCallback`メソッドを呼び出します。つまり、受け取ったパラメーターを使用して将来のAPI呼び出しを認証するのは`authProvider`の役割です。
 
-For instance, here's what a simple authProvider for Auth0 might look like:
+例えば、Auth0のためのシンプルなauthProviderは次のようになります：
 
 ```js
 import { Auth0Client } from './Auth0Client';
 
 export const authProvider = {
-    async login() { /* Nothing to do here, this function will never be called */ },
+    async login() { /* ここでは何もしない、この関数は呼ばれません */ },
     async checkAuth() {
         const isAuthenticated = await Auth0Client.isAuthenticated();
         if (isAuthenticated) {
             return;
         }
-        // not authenticated: redirect the user to the Auth0 service,
-        // where they will be redirected back to the app after login
+        // 認証されていない場合、ユーザーをAuth0サービスにリダイレクトし、
+        // ログイン後にアプリに戻る
         Auth0Client.loginWithRedirect({
             authorizationParams: {
                 redirect_uri: `${window.location.origin}/auth-callback`,
             },
         });
     },
-    // A user logged successfully on the Auth0 service
-    // and was redirected back to the /auth-callback route on the app
+    // ユーザーがAuth0サービスで正常にログインし、
+    // アプリの/auth-callbackルートにリダイレクトされた
     async handleCallback() {
         const query = window.location.search;
         if (query.includes('code=') && query.includes('state=')) {
             try {
-                // get an access token based on the query paramaters
+                // クエリパラメータに基づいてアクセストークンを取得
                 await Auth0Client.handleRedirectCallback();
                 return;
             } catch (error) {
@@ -217,11 +216,11 @@ export const authProvider = {
                 throw error;
             }
         }
-        throw new Error('Failed to handle login callback.');
+        throw new Error('ログインコールバックの処理に失敗しました。');
     },
     async logout() {
         const isAuthenticated = await client.isAuthenticated();
-            // need to check for this as react-admin calls logout in case checkAuth failed
+            // react-adminがcheckAuthに失敗した場合にlogoutを呼び出す必要があるため、チェックが必要
         if (isAuthenticated) {
             return client.logout({
                 returnTo: window.location.origin,
@@ -232,40 +231,40 @@ export const authProvider = {
 }
 ```
 
-It's up to you to decide when to redirect users to the third party authentication service, for instance:
+ユーザーをサードパーティ認証サービスにリダイレクトするタイミングは、以下のように決定できます：
 
-* Directly in the `AuthProvider.checkAuth()` method as above;
-* When users click a button on a [custom login page](#customizing-the-login-component)
+* 上記のように`AuthProvider.checkAuth()`メソッド内で直接。
+* [カスタムログインページ](#customizing-the-login-component)でユーザーがボタンをクリックしたとき。
 
-## Handling Refresh Tokens
+## リフレッシュトークンの処理
 
-[Refresh tokens](https://oauth.net/2/refresh-tokens/) are an important security mechanism. In order to leverage them, you should decorate the `dataProvider` and the `authProvider` so that they can check whether the authentication must be refreshed and actually refresh it.
+[リフレッシュトークン](https://oauth.net/2/refresh-tokens/)は重要なセキュリティメカニズムです。これを活用するには、認証をリフレッシュする必要があるかどうかをチェックし、実際にリフレッシュするように`dataProvider`と`authProvider`を装飾する必要があります。
 
-You can use the [`addRefreshAuthToDataProvider`](./addRefreshAuthToDataProvider.md) and [`addRefreshAuthToAuthProvider`](./addRefreshAuthToAuthProvider.md) functions for this purpose. They accept a `dataProvider` or `authProvider` respectively and a function that should refresh the authentication token if necessary:
+この目的のために、[`addRefreshAuthToDataProvider`](./addRefreshAuthToDataProvider.md)および[`addRefreshAuthToAuthProvider`](./addRefreshAuthToAuthProvider.md)関数を使用できます。これらはそれぞれ`dataProvider`や`authProvider`を受け取り、必要に応じて認証トークンをリフレッシュする関数を受け取ります：
 
 ```jsx
-// in src/refreshAuth.js
+// src/refreshAuth.js
 import { getAuthTokensFromLocalStorage } from './getAuthTokensFromLocalStorage';
 import { refreshAuthTokens } from './refreshAuthTokens';
 
 export const refreshAuth = () => {
     const { accessToken, refreshToken } = getAuthTokensFromLocalStorage();
     if (accessToken.exp < Date.now().getTime() / 1000) {
-        // This function will fetch the new tokens from the authentication service and update them in localStorage
+        // この関数は認証サービスから新しいトークンを取得し、localStorageに更新します
         return refreshAuthTokens(refreshToken);
     }
     return Promise.resolve();
 }
 
-// in src/authProvider.js
+// src/authProvider.js
 import { addRefreshAuthToAuthProvider } from 'react-admin';
 import { refreshAuth } from 'refreshAuth';
 const myAuthProvider = {
-    // ...Usual AuthProvider methods
+    // 通常のAuthProviderメソッド
 };
 export const authProvider = addRefreshAuthToAuthProvider(myAuthProvider, refreshAuth);
 
-// in src/dataProvider.js
+// src/dataProvider.js
 import { addRefreshAuthToDataProvider } from 'react-admin';
 import simpleRestProvider from 'ra-data-simple-rest';
 import { refreshAuth } from 'refreshAuth';
@@ -273,16 +272,16 @@ const baseDataProvider = simpleRestProvider('http://path.to.my.api/');
 export const dataProvider = addRefreshAuthToDataProvider(baseDataProvider, refreshAuth);
 ```
 
-## Customizing The Login Component
+## ログインコンポーネントのカスタマイズ
 
-Using `authProvider` is enough to implement a full-featured authorization system if the authentication relies on a username and password.
+ユーザー名とパスワードに依存する認証の場合、`authProvider`を使用するだけで完全な認証システムを実装できます。
 
-But what if you want to use an email instead of a username? What if you want to use a Single-Sign-On (SSO) with a third-party authentication service? What if you want to use two-factor authentication?
+しかし、ユーザー名の代わりにメールを使用したい場合や、サードパーティの認証サービスでシングルサインオン（SSO）を使用したい場合、または二要素認証を使用したい場合はどうでしょうか？
 
-For all these cases, it's up to you to implement your own `LoginPage` component, which will be displayed under the `/login` route instead of the default username/password form. Pass this component to the `<Admin>` component:
+これらすべての場合、デフォルトのユーザー名/パスワードフォームの代わりに、`/login`ルートに表示される独自の`LoginPage`コンポーネントを実装する必要があります。このコンポーネントを`<Admin>`コンポーネントに渡します：
 
 ```jsx
-// in src/App.js
+// src/App.js
 import { Admin } from 'react-admin';
 
 import MyLoginPage from './MyLoginPage';
@@ -294,24 +293,24 @@ const App = () => (
 );
 ```
 
-By default, the login page displays a gradient background. If you just want to change the background, you can use the default Login page component and pass an image URL as the `backgroundImage` prop.
+デフォルトでは、ログインページはグラデーションの背景を表示します。背景だけを変更したい場合は、デフォルトのログインページコンポーネントを使用し、`backgroundImage`プロップに画像URLを渡すことができます。
 
 ```jsx
-// in src/MyLoginPage.js
+// src/MyLoginPage.js
 import { Login } from 'react-admin';
 
 const MyLoginPage = () => (
     <Login
-        // A random image that changes everyday
+        // 毎日変わるランダムな画像
         backgroundImage="https://source.unsplash.com/random/1600x900/daily"
     />
 );
 ```
 
-If you want to build a Login page from scratch, you'll need the [`useLogin` hook](./useLogin.md).
+ログインページを一から作成する場合、[`useLogin`フック](./useLogin.md)が必要です。
 
 ```jsx
-// in src/MyLoginPage.js
+// src/MyLoginPage.js
 import { useState } from 'react';
 import { useLogin, useNotify, Notification } from 'react-admin';
 
@@ -324,7 +323,7 @@ const MyLoginPage = ({ theme }) => {
     const handleSubmit = e => {
         e.preventDefault();
         login({ email, password }).catch(() =>
-            notify('Invalid email or password')
+            notify('無効なメールアドレスまたはパスワードです')
         );
     };
 
@@ -349,17 +348,17 @@ const MyLoginPage = ({ theme }) => {
 export default MyLoginPage;
 ```
 
-## Customizing The Logout Component
+## ログアウトコンポーネントのカスタマイズ
 
 ```jsx
-// in src/MyLogoutButton.js
+// src/MyLogoutButton.js
 import * as React from 'react';
 import { forwardRef } from 'react';
 import { useLogout } from 'react-admin';
 import MenuItem from '@mui/material/MenuItem';
 import ExitIcon from '@mui/icons-material/PowerSettingsNew';
 
-// It's important to pass the ref to allow Material UI to manage the keyboard navigation
+// Material UIがキーボードナビゲーションを管理できるようにするため、refを渡すことが重要です
 const MyLogoutButton = forwardRef((props, ref) => {
     const logout = useLogout();
     const handleClick = () => logout();
@@ -367,10 +366,10 @@ const MyLogoutButton = forwardRef((props, ref) => {
         <MenuItem
             onClick={handleClick}
             ref={ref}
-            // It's important to pass the props to allow Material UI to manage the keyboard navigation
+            // Material UIがキーボードナビゲーションを管理できるようにするため、propsを渡すことが重要です
             {...props}
         >
-            <ExitIcon /> Logout
+            <ExitIcon /> ログアウト
         </MenuItem>
     );
 });
@@ -378,16 +377,16 @@ const MyLogoutButton = forwardRef((props, ref) => {
 export default MyLogoutButton;
 ```
 
-**Tip**: By default, react-admin redirects the user to '/login' after they log out. This can be changed by passing the url to redirect to as parameter to the `logout()` function:
+**ヒント**：デフォルトでは、react-adminはログアウト後にユーザーを'/login'にリダイレクトします。これを変更するには、`logout()`関数にリダイレクトするURLをパラメータとして渡します：
 
 ```diff
-// in src/MyLogoutButton.js
+// src/MyLogoutButton.js
 // ...
 -   const handleClick = () => logout();
 +   const handleClick = () => logout('/custom-login');
 ```
 
-To use it, you must provide a custom `UserMenu`:
+これを使用するには、カスタム`UserMenu`を提供する必要があります：
 
 ```jsx
 import MyLogoutButton from './MyLogoutButton';
@@ -404,4 +403,5 @@ const App = () => (
     </Admin>
 );
 ```
+
 

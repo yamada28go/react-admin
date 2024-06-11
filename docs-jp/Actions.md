@@ -1,43 +1,43 @@
 ---
 layout: default
-title: "Querying the API"
+title: "APIのクエリ実行"
 ---
 
-# Querying the API
+# APIのクエリ実行
 
-React-admin provides special hooks to emit read and write queries to the [`dataProvider`](./DataProviders.md), which in turn sends requests to your API. Under the hood, it uses [react-query](https://tanstack.com/query/v3/) to call the `dataProvider` and cache the results.
+React-adminは、読み取りおよび書き込みクエリを[`dataProvider`](./DataProviders.md)に送信するための特別なフックを提供します。`dataProvider`はあなたのAPIにリクエストを送信します。内部では、[react-query](https://tanstack.com/query/v3/)を使用して`dataProvider`を呼び出し、その結果をキャッシュします。
 
-## Getting The `dataProvider` Instance
+## `dataProvider`インスタンスの取得
 
-React-admin stores the `dataProvider` object in a React context, so it's available from anywhere in your application code. The `useDataProvider` hook grabs the Data Provider from that context, so you can call it directly.
+React-adminは`dataProvider`オブジェクトをReactコンテキストに保存しているため、アプリケーションコードのどこからでもアクセスできます。`useDataProvider`フックはそのコンテキストから`dataProvider`を取得し、直接呼び出すことができます。
 
-For instance, here is how to query the Data Provider for the current user profile:
+例えば、現在のユーザープロファイルを`dataProvider`にクエリする方法は次の通りです:
 
 ```jsx
-import { useDataProvider } from 'react-admin';
+    import { useDataProvider } from 'react-admin';
 
-const MyComponent = () => {
-    const dataProvider = useDataProvider();
-    // ...
-}
+    const MyComponent = () => {
+        const dataProvider = useDataProvider();
+        // ...
+    }
 ```
 
-Refer to [the `useDataProvider` hook documentation](./useDataProvider.md) for more information.
+詳細については、[`useDataProvider`フックのドキュメント](./useDataProvider.md)を参照してください。
 
-**Tip**: The `dataProvider` returned by the hook is actually a *wrapper* around your Data Provider. This wrapper logs the user out if the `dataProvider` returns an error, and if the `authProvider` sees that error as an authentication error (via `authProvider.checkError()`).
+**ヒント**: フックによって返される`dataProvider`は、実際にはあなたの`dataProvider`の*ラッパー*です。このラッパーは、`dataProvider`がエラーを返した場合にユーザーをログアウトさせ、`authProvider`がそのエラーを認証エラーと見なす場合（`authProvider.checkError()`を通じて）にログアウトさせます。
 
-## DataProvider Method Hooks
+## DataProviderメソッドフック
 
-React-admin provides one hook for each of the Data Provider methods. They are useful shortcuts that make your code more readable and more robust.
+React-adminは、各Data Providerメソッドに対して1つのフックを提供します。これらはコードをより読みやすくし、より堅牢にするための便利なショートカットです。
 
-The query hooks execute on mount. They return an object with the following properties: `{ data, isLoading, error }`. Query hooks are:
+クエリフックはマウント時に実行され、次のプロパティを持つオブジェクトを返します: `{ data, isLoading, error }`。クエリフックには次のものがあります:
 
 * [`useGetList`](./useGetList.md)
 * [`useGetOne`](./useGetOne.md)
 * [`useGetMany`](./useGetMany.md)
 * [`useGetManyReference`](./useGetManyReference.md)
 
-The mutation hooks execute the query when you call a callback. They return an array with the following items: `[mutate, { data, isLoading, error }]`. Mutation hooks are:
+ミューテーションフックはコールバックを呼び出したときにクエリを実行し、次の項目を含む配列を返します: `[mutate, { data, isLoading, error }]`。ミューテーションフックには次のものがあります:
 
 * [`useCreate`](./useCreate.md)
 * [`useUpdate`](./useUpdate.md)
@@ -45,14 +45,14 @@ The mutation hooks execute the query when you call a callback. They return an ar
 * [`useDelete`](./useDelete.md)
 * [`useDeleteMany`](./useDeleteMany.md)
 
-Their signature is the same as the related dataProvider method, e.g.:
+そのシグネチャは関連する`dataProvider`メソッドと同じです。例えば：
 
 ```jsx
-// calls dataProvider.getOne(resource, { id })
+// dataProvider.getOne(resource, { id })を呼び出します
 const { data, isLoading, error } = useGetOne(resource, { id });
 ```
 
-For instance, here is how to fetch one record from the API using the `useGetOne` hook:
+例えば、`useGetOne`フックを使用してAPIから1つのレコードを取得する方法は次の通りです:
 
 ```jsx
 import { useGetOne } from 'react-admin';
@@ -74,7 +74,7 @@ const UserProfile = ({ userId }) => {
 };
 ```
 
-Here is another example, using `useUpdate()`:
+次に、`useUpdate()`を使用した別の例を示します:
 
 ```jsx
 import * as React from 'react';
@@ -87,7 +87,7 @@ const ApproveButton = () => {
 };
 ```
 
-Both the query and mutation hooks accept an `options` argument, to override the query options:
+クエリフックとミューテーションフックの両方は、クエリオプションを上書きするための`options`引数を受け取ります:
 
 ```jsx
 const { data: user, isLoading, error } = useGetOne(
@@ -97,16 +97,16 @@ const { data: user, isLoading, error } = useGetOne(
 );
 ```
 
-**Tip**: If you use TypeScript, you can specify the record type for more type safety:
+**ヒント**: TypeScriptを使用する場合、レコードタイプを指定してより型安全にすることができます:
 
 ```jsx
 const { data, isLoading } = useGetOne<Product>('products', { id: 123 });
-//        \- type of data is Product
+//        \- dataの型はProductになります
 ```
 
-## `meta` Parameter
+## `meta`パラメータ
 
-All Data Provider methods accept a `meta` parameter. React-admin doesn't set this parameter by default in its queries, but it's a good way to pass special arguments or metadata to an API call.
+すべてのData Providerメソッドは`meta`パラメータを受け取ります。React-adminはデフォルトではクエリにこのパラメータを設定しませんが、APIコールに特別な引数やメタデータを渡すための良い方法です。
 
 ```jsx
 const { data, isLoading, error } = useGetOne(
@@ -115,25 +115,25 @@ const { data, isLoading, error } = useGetOne(
 );
 ```
 
-It's up to the Data Provider to interpret this parameter.
+このパラメータを解釈するのはData Provider次第です。
 
-## `useQuery` and `useMutation`
+## `useQuery`と`useMutation`
 
-Internally, react-admin uses [react-query](https://tanstack.com/query/v3/) to call the dataProvider. When fetching data from the dataProvider in your components, if you can't use any of the dataProvider method hooks, you should use that library, too. It brings several benefits:
+内部的には、react-adminは[react-query](https://tanstack.com/query/v3/)を使用して`dataProvider`を呼び出します。コンポーネントで`dataProvider`からデータを取得する際、どの`dataProvider`メソッドフックも使用できない場合は、そのライブラリを使用することをお勧めします。以下のような利点があります:
 
-1. It triggers the loader in the AppBar when the query is running.
-2. It reduces the boilerplate code since you don't need to use `useState`.
-3. It supports a vast array of options
-4. It displays stale data while fetching up-to-date data, leading to a snappier UI
+1. クエリが実行されているときにAppBarのローダーがトリガーされる。
+2. `useState`を使用する必要がないため、ボイラープレートコードが削減される。
+3. 多くのオプションをサポートする。
+4. 最新のデータを取得する間、古いデータを表示し続けるため、UIがよりスムーズになる。
 
-React-query offers 2 main hooks to interact with the dataProvider:
+React-queryは、`dataProvider`と対話するための2つの主要なフックを提供します:
 
-* [`useQuery`](https://tanstack.com/query/v3/docs/react/reference/useQuery): fetches the dataProvider on mount. This is for *read* queries.
-* [`useMutation`](https://tanstack.com/query/v3/docs/react/reference/useMutation): fetches the dataProvider when you call a callback. This is for *write* queries, and *read* queries that execute on user interaction.
+* [`useQuery`](https://tanstack.com/query/v3/docs/react/reference/useQuery): マウント時に`dataProvider`をフェッチします。これは読み取りクエリ用です。
+* [`useMutation`](https://tanstack.com/query/v3/docs/react/reference/useMutation): コールバックを呼び出したときに`dataProvider`をフェッチします。これは書き込みクエリ用で、ユーザー操作で実行される読み取りクエリにも使用されます。
 
-Both these hooks accept a query *key* (identifying the query in the cache), and a query *function* (executing the query and returning a Promise). Internally, react-admin uses an array of arguments as the query key.
+これらのフックは、クエリキャッシュ内のクエリを識別するための*キー*と、クエリを実行しPromiseを返す*関数*を受け取ります。内部的には、react-adminは引数の配列をクエリキーとして使用します。
 
-For instance, the initial code snippet of this chapter can be rewritten with `useQuery` as follows:
+例えば、この章の最初のコードスニペットは、`useQuery`を使用して次のように書き直すことができます:
 
 ```jsx
 import * as React from 'react';
@@ -160,7 +160,7 @@ const UserProfile = ({ userId }) => {
 };
 ```
 
-To illustrate the usage of `useMutation`, here is an implementation of an "Approve" button for a comment:
+`useMutation`の使用法を説明するために、コメントの"Approve"ボタンの実装を示します:
 
 ```jsx
 import * as React from 'react';
@@ -177,28 +177,28 @@ const ApproveButton = () => {
 };
 ```
 
-If you want to go beyond data provider method hooks, we recommend that you read [the react-query documentation](https://react-query-v3.tanstack.com/overview).
+データプロバイダーメソッドフックを超えて使用したい場合は、[react-queryのドキュメント](https://react-query-v3.tanstack.com/overview)を読むことをお勧めします。
 
-## `isLoading` vs `isFetching`
+## `isLoading`対`isFetching`
 
-Data fetching hooks return two loading state variables: `isLoading` and `isFetching`. Which one should you use?
+データフェッチングフックは2つのロード状態変数を返します: `isLoading`と`isFetching`。どちらを使用するべきでしょうか？
 
-The short answer is: use `isLoading`. Read on to understand why.
+簡単な答えは: `isLoading`を使用してください。以下にその理由を説明します。
 
-The source of these two variables is [react-query](https://react-query-v3.tanstack.com/guides/queries#query-basics). Here is how they defined these two variables:
+これら2つの変数の出所は[react-query](https://react-query-v3.tanstack.com/guides/queries#query-basics)です。彼らはこれらの2つの変数を次のように定義しています:
 
-- `isLoading`:  The query has no data and is currently fetching
-- `isFetching`: In any state, if the query is fetching at any time (including background refetching) isFetching will be true.
+* `isLoading`: クエリにデータがなく、現在フェッチ中である
+* `isFetching`: クエリが任意の状態でフェッチ中である場合（バックグラウンドフェッチを含む）、`isFetching`はtrueになります。
 
-Let's see how what these variables contain in a typical usage scenario:
+典型的な使用シナリオでこれらの変数が何を含むかを見てみましょう:
 
-1. The user first loads a page. `isLoading` is true because the data was never loaded, and `isFetching` is also true because data is being fetched.
-2. The dataProvider returns the data. Both `isLoading` and `isFetching` become false
-3. The user navigates away
-4. The user comes back to the first page, which triggers a new fetch. `isLoading` is false, because the stale data is available, and `isFetching` is true because data is being fetched via the dataProvider.
-5. The dataProvider returns the data. Both `isLoading` and `isFetching` become false
+1. ユーザーが最初にページを読み込む。`isLoading`はtrueです。データが一度もロードされておらず、`isFetching`もデータがフェッチされているためtrueです。
+2. `dataProvider`がデータを返します。`isLoading`も`isFetching`もfalseになります。
+3. ユーザーが離れる
+4. ユーザーが最初のページに戻り、新しいフェッチがトリガーされます。`isLoading`はfalseです。古いデータがあり、`isFetching`はデータが`dataProvider`を介してフェッチされているためtrueです。
+5. `dataProvider`がデータを返します。`isLoading`も`isFetching`もfalseになります。
 
-Components use the loading state to show a loading indicator when there is no data to show. In the example above, the loading indicator is necessary for step 2, but not in step 4, because you can display the stale data while fresh data is being loaded.
+コンポーネントは、表示するデータがない場合にロードインジケータを表示するためにロード状態を使用します。上記の例では、ステップ2ではロードインジケータが必要ですが、ステップ4では古いデータを表示できるため不要です。
 
 ```jsx
 import { useGetOne, useRecordContext } from 'react-admin';
@@ -212,15 +212,15 @@ const UserProfile = () => {
 };
 ```
 
-As a consequence, you should always use `isLoading` to determine if you need to show a loading indicator.
+そのため、ロードインジケータを表示する必要がある場合は常に`isLoading`を使用する必要があります。
 
-## Calling Custom Methods
+## カスタムメソッドの呼び出し
 
-Admin interfaces often have to query the API beyond CRUD requests. For instance, a user profile page may need to get the User object based on a user id. Or, users may want to "Approve" a comment by pressing a button, and this action should update the `is_approved` property and save the updated record in one click.
+管理インターフェースでは、CRUDリクエストを超えてAPIにクエリを実行する必要があることがよくあります。例えば、ユーザープロファイルページではユーザーIDに基づいてユーザーオブジェクトを取得する必要があるかもしれません。また、ユーザーがボタンを押してコメントを「承認」したい場合、このアクションは`is_approved`プロパティを更新し、1クリックで更新されたレコードを保存する必要があります。
 
-Your dataProvider may contain custom methods, e.g. for calling RPC endpoints on your API. `useQuery` and `useMutation` are especially useful for calling these methods.
+あなたの`dataProvider`にはカスタムメソッドが含まれているかもしれません。例えば、APIのRPCエンドポイントを呼び出すためのメソッドです。`useQuery`と`useMutation`はこれらのメソッドを呼び出すために特に役立ちます。
 
-For instance, if your `dataProvider` exposes a `banUser()` method:
+例えば、あなたの`dataProvider`が`banUser()`メソッドを公開している場合:
 
 ```js
 const dataProvider = {
@@ -240,7 +240,7 @@ const dataProvider = {
 }
 ```
 
-You can call it inside a `<BanUser>` button component as follows:
+次のように`<BanUser>`ボタンコンポーネント内で呼び出すことができます:
 
 ```jsx
 const BanUserButton = ({ userId }) => {
@@ -252,38 +252,38 @@ const BanUserButton = ({ userId }) => {
 };
 ```
 
-## Query Options
+## クエリオプション
 
-The data provider method hooks (like `useGetOne`) and react-query's hooks (like `useQuery`) accept a query options object as the last argument. This object can be used to modify the way the query is executed. There are many options, all documented [in the react-query documentation](https://tanstack.com/query/v3/docs/react/reference/useQuery):
+データプロバイダーメソッドフック（`useGetOne`など）およびreact-queryのフック（`useQuery`など）は、最後の引数としてクエリオプションオブジェクトを受け取ります。このオブジェクトは、クエリの実行方法を変更するために使用できます。多くのオプションがあり、すべて[react-queryのドキュメント](https://tanstack.com/query/v3/docs/react/reference/useQuery)に記載されています:
 
-- `cacheTime`
-- `enabled`
-- `initialData`
-- `initialDataUpdatedA`
-- `isDataEqual`
-- `keepPreviousData`
-- `meta`
-- `notifyOnChangeProps`
-- `notifyOnChangePropsExclusions`
-- `onError`
-- `onSettled`
-- `onSuccess`
-- `queryKeyHashFn`
-- `refetchInterval`
-- `refetchIntervalInBackground`
-- `refetchOnMount`
-- `refetchOnReconnect`
-- `refetchOnWindowFocus`
-- `retry`
-- `retryOnMount`
-- `retryDelay`
-- `select`
-- `staleTime`
-- `structuralSharing`
-- `suspense`
-- `useErrorBoundary`
+* `cacheTime`
+* `enabled`
+* `initialData`
+* `initialDataUpdatedA`
+* `isDataEqual`
+* `keepPreviousData`
+* `meta`
+* `notifyOnChangeProps`
+* `notifyOnChangePropsExclusions`
+* `onError`
+* `onSettled`
+* `onSuccess`
+* `queryKeyHashFn`
+* `refetchInterval`
+* `refetchIntervalInBackground`
+* `refetchOnMount`
+* `refetchOnReconnect`
+* `refetchOnWindowFocus`
+* `retry`
+* `retryOnMount`
+* `retryDelay`
+* `select`
+* `staleTime`
+* `structuralSharing`
+* `suspense`
+* `useErrorBoundary`
 
-For instance, if you want to execute a callback when the query completes (whether it's successful or failed), you can use the `onSettled` option. this can be useful e.g. to log all calls to the dataProvider:
+例えば、クエリが完了したときにコールバックを実行したい場合（成功したか失敗したかに関わらず）、`onSettled`オプションを使用できます。これは例えば、dataProviderのすべての呼び出しをログに記録するのに役立ちます:
 
 ```jsx
 import { useGetOne, useRecordContext } from 'react-admin';
@@ -301,11 +301,12 @@ const UserProfile = () => {
 };
 ```
 
-We won't re-explain all these options here, but we'll focus on the most useful ones in react-admin. 
+これらのオプションをすべて再説明することはしませんが、react-adminで最も有用なものに焦点を当てます。
 
-**Tip**: In react-admin components that use the data provider method hooks, you can override the query options using the `queryOptions` prop, and the mutation options using the `mutationOptions` prop. For instance, to log the dataProvider calls, in the `<List>` component, you can do the following:
+**ヒント**: data providerメソッドフックを使用するreact-adminコンポーネントでは、`queryOptions`プロップを使用してクエリオプションを上書きし、`mutationOptions`プロップを使用してミューテーションオプションを上書きすることができます。例えば、`<List>`コンポーネントでdataProvider呼び出しをログに記録するには、次のようにします:
 
 {% raw %}
+
 ```jsx
 import { List, Datagrid, TextField } from 'react-admin';
 
@@ -321,75 +322,36 @@ const PostList = () => (
     </List>
 );
 ```
+
 {% endraw %}
 
-## Synchronizing Dependent Queries
+## 依存クエリの同期
 
-All Data Provider hooks support an `enabled` option. This is useful if you need to have a query executed only when a condition is met. 
+すべてのData Providerフックは`enabled`オプションをサポートしています。これは、条件が満たされたときにのみクエリを実行する必要がある場合に便利です。
 
-For example, the following code only fetches the categories if at least one post is already loaded:
+例えば、次のコードは、少なくとも1つのポストがすでにロードされている場合にのみカテゴリをフェッチします:
 
 ```jsx
-// fetch posts
+// ポストをフェッチ
 const { data: posts, isLoading } = useGetList(
     'posts',
     { pagination: { page: 1, perPage: 20 }, sort: { field: 'name', order: 'ASC' } },
 );
 
-// then fetch categories for these posts
+// その後、これらのポストのカテゴリをフェッチ
 const { data: categories, isLoading: isLoadingCategories } = useGetMany(
     'categories',
     { ids: posts.map(post => posts.category_id) },
-    // run only if the first query returns non-empty result
+    // 最初のクエリが空でない結果を返した場合にのみ実行
     { enabled: !isLoading && posts.length > 0 }
 );
 ```
 
-## Success and Error Side Effects
+## 成功とエラーの副作用
 
-To execute some logic after a query or a mutation is complete, use the `onSuccess` and `onError` options. React-admin uses the term "side effects" for this type of logic, as it's usually modifying another part of the UI.
+クエリやミューテーションが完了した後にロジックを実行するには、`onSuccess`と`onError`オプションを使用します。React-adminはこのタイプのロジックを「副作用」と呼び、通常はUIの他の部分を変更します。
 
-This is very common when using mutation hooks like `useUpdate`, e.g. to display a notification, or redirect to another page. For instance, here is an `<ApproveButton>` that notifies the user of success or failure using the bottom notification banner:
-
-```jsx
-import * as React from 'react';
-import { useUpdate, useNotify, useRedirect, useRecordContext, Button } from 'react-admin';
-
-const ApproveButton = () => {
-    const record = useRecordContext();
-    const notify = useNotify();
-    const redirect = useRedirect();
-    const [approve, { isLoading }] = useUpdate(
-        'comments',
-        { id: record.id, data: { isApproved: true } },
-        {
-            onSuccess: (data) => {
-                // success side effects go here
-                redirect('/comments');
-                notify('Comment approved');
-            },
-            onError: (error) => {
-                // failure side effects go here 
-                notify(`Comment approval error: ${error.message}`, { type: 'error' });
-            },
-        }
-    );
-    
-    return <Button label="Approve" onClick={() => approve()} disabled={isLoading} />;
-};
-```
-
-React-admin provides the following hooks to handle the most common side effects:
-
-- [`useNotify`](./useNotify.md): Return a function to display a notification.
-- [`useRedirect`](./useRedirect.md): Return a function to redirect the user to another page.
-- [`useRefresh`](./useRefresh.md): Return a function to force a rerender of the current view (equivalent to pressing the Refresh button).
-- [`useUnselect`](./useUnselect.md): Return a function to unselect lines in the current `Datagrid` based on the ids passed to it.
-- [`useUnselectAll`](./useUnselectAll.md): Return a function to unselect all lines in the current `Datagrid`.
-
-## Optimistic Rendering and Undo
-
-In the following example, after clicking on the "Approve" button, a loading spinner appears while the data provider is fetched. Then, users are redirected to the comments list. 
+これは、ミューテーションフック（例: `useUpdate`）を使用する際に非常に一般的であり、通知を表示したり、別のページにリダイレクトするために使用されます。例えば、次の`<ApproveButton>`は、成功または失敗をユーザーに通知するために下部の通知バナーを使用します:
 
 ```jsx
 import * as React from 'react';
@@ -404,6 +366,46 @@ const ApproveButton = () => {
         { id: record.id, data: { isApproved: true } },
         {
             onSuccess: (data) => {
+                // 成功時の副作用をここに記述
+                redirect('/comments');
+                notify('Comment approved');
+            },
+            onError: (error) => {
+                // 失敗時の副作用をここに記述
+                notify(`Comment approval error: ${error.message}`, { type: 'error' });
+            },
+        }
+    );
+    
+    return <Button label="Approve" onClick={() => approve()} disabled={isLoading} />;
+};
+```
+
+React-adminは、最も一般的な副作用を処理するために次のフックを提供します:
+
+* [`useNotify`](./useNotify.md): 通知を表示する関数を返します。
+* [`useRedirect`](./useRedirect.md): ユーザーを別のページにリダイレクトする関数を返します。
+* [`useRefresh`](./useRefresh.md): 現在のビューを強制的に再レンダリングする関数を返します（リフレッシュボタンを押すのと同等）。
+* [`useUnselect`](./useUnselect.md): 渡されたIDに基づいて現在の`Datagrid`の行を選択解除する関数を返します。
+* [`useUnselectAll`](./useUnselectAll.md): 現在の`Datagrid`のすべての行を選択解除する関数を返します。
+
+## 楽観的レンダリングとアンドゥ
+
+次の例では、"Approve"ボタンをクリックした後、データプロバイダーがフェッチされている間にローディングスピナーが表示されます。その後、ユーザーはコメントリストにリダイレクトされます。
+
+```jsx
+import * as React from 'react';
+import { useUpdate, useNotify, useRedirect, useRecordContext, Button } from 'react-admin';
+
+const ApproveButton = () => {
+    const record = useRecordContext();
+    const notify = useNotify();
+    const redirect = useRedirect();
+    const [approve, { isLoading }] = useUpdate(
+        'comments',
+        { id: record.id, data: { isApproved: true } },
+        {
+            onSuccess: (data) => {
                 redirect('/comments');
                 notify('Comment approved');
             },
@@ -417,29 +419,28 @@ const ApproveButton = () => {
 };
 ```
 
-But in most cases, the server returns a successful response, so the user waits for this response for nothing. 
+しかし、ほとんどの場合、サーバーは成功応答を返すため、ユーザーはこの応答を待つ必要がありません。
 
-This is called **pessimistic rendering**, as all users are forced to wait because of the (usually rare) possibility of server failure. 
+これは**悲観的レンダリング**と呼ばれ、すべてのユーザーがサーバーの障害の可能性があるために待たされることになります。
 
-An alternative mode for mutations is **optimistic rendering**. The idea is to handle the calls to the `dataProvider` on the client side first (i.e. updating entities in the react-query cache), and re-render the screen immediately. The user sees the effect of their action with no delay. Then, react-admin applies the success side effects, and only after that, it triggers the call to the data provider. If the fetch ends with success, react-admin does nothing more than a refresh to grab the latest data from the server. In most cases, the user sees no difference (the data in the react-query cache and the data from the `dataProvider` are the same). If the fetch fails, react-admin shows an error notification and reverts the mutation.
+ミューテーションのもう一つのモードは**楽観的レンダリング**です。このアイデアは、クライアント側で最初に`dataProvider`への呼び出しを処理し（つまり、react-queryキャッシュ内のエンティティを更新）、画面を即座に再レンダリングすることです。ユーザーは遅延なしでアクションの効果を見ることができます。その後、react-adminは成功の副作用を適用し、その後のみ`dataProvider`への呼び出しをトリガーします。フェッチが成功すると、react-adminはサーバーから最新のデータを取得するためにリフレッシュするだけです。ほとんどの場合、ユーザーは違いを感じません（react-queryキャッシュ内のデータと`dataProvider`からのデータは同じです）。フェッチが失敗すると、react-adminはエラー通知を表示し、ミューテーションを元に戻します。
 
-A third mutation mode is called **undoable**. It's like optimistic rendering, but with an added feature: after applying the changes and the side effects locally, react-admin *waits* for a few seconds before triggering the call to the `dataProvider`. During this delay, the end-user sees an "undo" button that, when clicked, cancels the call to the `dataProvider` and refreshes the screen.
+三つ目のミューテーションモードは**アンドゥ可能**です。これは楽観的レンダリングと似ていますが、追加の機能があります。ローカルで変更と副作用を適用した後、react-adminは`dataProvider`への呼び出しをトリガーする前に数秒間待ちます。この遅延中、エンドユーザーはアクションをキャンセルするための「アンドゥ」ボタンを見ることができ、クリックすると`dataProvider`への呼び出しがキャンセルされ、画面がリフレッシュされます。
 
-Here is a quick recap of the three mutation modes:
+以下は三つのミューテーションモードのクイックリキャップです:
 
-|                   | pessimistic               | optimistic | undoable  |
-|-------------------|---------------------------|------------|-----------|
-| dataProvider call | immediate                 | immediate  | delayed   |
-| local changes     | when dataProvider returns | immediate  | immediate |
-| side effects      | when dataProvider returns | immediate  | immediate |
-| cancellable       | no                        | no         | yes       |
+|悲観的|楽観的|アンドゥ可能|
+|---|---|---|---|
+|dataProvider呼び出し|即座に|即座に|遅延|
+|ローカル変更|dataProviderが返るとき|即座に|即座に|
+|副作用|dataProviderが返るとき|即座に|即座に|
+|キャンセル可能|いいえ|いいえ|はい|
 
+デフォルトでは、react-adminはEditビューに`undoable`モードを使用します。データプロバイダーメソッドフックの場合、デフォルトは`悲観的`モードです。
 
-By default, react-admin uses the `undoable` mode for the Edit view. As for the data provider method hooks, they default to the `pessimistic` mode.
+**ヒント**: Createビューでは、リソースのIDを知ってリダイレクトする必要があるため、ミューテーションモードは悲観的です。
 
-**Tip**: For the Create view, react-admin needs to wait for the response to know the id of the resource to redirect to, so the mutation mode is pessimistic.  
-
-You can benefit from optimistic and undoable modes when you call the `useUpdate` hook, too. You just need to pass a `mutationMode` option:
+`useUpdate`フックを呼び出すときにも楽観的およびアンドゥ可能なモードを活用できます。`mutationMode`オプションを渡すだけです:
 
 ```diff
 import * as React from 'react';
@@ -467,23 +468,23 @@ const ApproveButton = () => {
 };
 ```
 
-As you can see in this example, you need to tweak the notification for undoable calls: passing `undo: true` displays the 'Undo' button in the notification. Also, as side effects are executed immediately, they can't rely on the response being passed to onSuccess.
+この例に示すように、アンドゥ可能な呼び出しの場合、通知を微調整する必要があります。`undo: true`を渡すと、通知に「アンドゥ」ボタンが表示されます。また、副作用は即座に実行されるため、成功応答に依存することはできません。
 
-The following hooks accept a `mutationMode` option:
+次のフックは`mutationMode`オプションを受け入れます:
 
 * [`useUpdate`](./useUpdate.md)
 * [`useUpdateMany`](./useUpdateMany.md)
 * [`useDelete`](./useDelete.md)
 * [`useDeleteMany`](./useDeleteMany.md)
 
-## Querying The API With `fetch`
+## `fetch`を使用したAPIクエリの実行
 
-Data Provider method hooks are "the react-admin way" to query the API. But nothing prevents you from using `fetch` if you want. For instance, when you don't want to add some routing logic to the data provider for an RPC method on your API, that makes perfect sense.
+データプロバイダーメソッドフックはAPIにクエリを実行するための「react-adminの方法」です。しかし、必要に応じて`fetch`を使用することも可能です。例えば、APIのRPCメソッドに対してルーティングロジックを追加したくない場合は、その方が理にかなっています。
 
-There is no special react-admin sauce in that case. Here is an example implementation of calling `fetch` in a component:
+その場合、特別なreact-adminのソースはありません。コンポーネント内で`fetch`を呼び出す例の実装を示します:
 
 ```jsx
-// in src/comments/ApproveButton.js
+// src/comments/ApproveButton.js
 import * as React from 'react';
 import { useState } from 'react';
 import { useNotify, useRedirect, useRecordContext, Button } from 'react-admin';
@@ -514,4 +515,6 @@ const ApproveButton = () => {
 export default ApproveButton;
 ```
 
-**Tip**: APIs often require a bit of HTTP plumbing to deal with authentication, query parameters, encoding, headers, etc. It turns out you probably already have a function that maps from a REST request to an HTTP request: your [Data Provider](./DataProviders.md). So it's often better to use `useDataProvider` instead of `fetch`.
+**ヒント**: APIは認証、クエリパラメータ、エンコーディング、ヘッダーなどに対処するためのHTTPのプラミングを必要とすることがよくあります。RESTリクエストをHTTPリクエストにマッピングする関数をすでに持っている可能性があります。それがあなたの[Data Provider](./DataProviders.md)です。そのため、`fetch`の代わりに`useDataProvider`を使用する方が良いことがよくあります。
+
+

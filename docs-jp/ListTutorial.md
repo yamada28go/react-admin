@@ -1,110 +1,112 @@
 ---
 layout: default
-title: "The List Page"
+title: "リストページ"
 ---
 
-# The List Page
+# リストページ
 
-The List view displays a list of records, and lets users search for specific records using filters, sorting, and pagination. 
+リストビューはレコードの一覧を表示し、ユーザーがフィルター、ソート、およびページネーションを使用して特定のレコードを検索できるようにします。
 
-![The List View](./img/list-view.jpg)
+![リストビュー](./img/list-view.jpg)
 
-This tutorial explains the List view from first principles, and shows how react-admin allows you to reduce the amount of boilerplate code to focus on the business logic. 
+このチュートリアルでは、リストビューの基本原則を説明し、react-adminがどのようにして定型コードの量を減らし、ビジネスロジックに集中できるようにするかを示します。
 
-## From Pure React To React-Admin
+## ピュアReactからReact-Adminへ
 
-The List view fetches a list of records and renders them, together with UI controls for filter, sort and pagination. 
+リストビューはレコードのリストを取得し、フィルター、ソート、ページネーション用のUIコントロールと共にそれをレンダリングします。
 
-[![From Pure React To React-Admin](./img/list-from-react-to-react-admin.webp)](./img/list-from-react-to-react-admin.webp)
+[![ピュアReactからReact-Adminへ](./img/list-from-react-to-react-admin.webp)](./img/list-from-react-to-react-admin.webp)
 
-To better understand how to use the various react-admin hooks and components dedicated to editing and creating, let's start by building such an edition view by hand.
+編集および作成に専念するためのreact-adminの様々なフックやコンポーネントの使い方を理解するために、まず手動でそのような編集ビューを構築してみましょう。
 
-### A List View Built By Hand
+### 手動で構築したリストビュー
 
-You've probably developed it a dozen times, and in fact you don't need react-admin to build, say, a book List view:
+おそらく何度も開発してきたことがあると思いますし、実際に本のリストビューを作成するためにreact-adminを使用する必要はありません。
 
 {% raw %}
 ```tsx
-import { useState } from 'react';
-import { Title, useGetList } from 'react-admin';
-import {
-    Card,
-    TextField,
-    Button,
-    Toolbar,
-    Table,
-    TableHead,
-    TableRow,
-    TableBody,
-    TableCell,
-} from '@mui/material';
+    import { useState } from 'react';
+    import { Title, useGetList } from 'react-admin';
+    import {
+        Card,
+        TextField,
+        Button,
+        Toolbar,
+        Table,
+        TableHead,
+        TableRow,
+        TableBody,
+        TableCell,
+    } from '@mui/material';
 
-const BookList = () => {
-    const [filter, setFilter] = useState('');
-    const [page, setPage] = useState(1);
-    const perPage = 10;
-    const { data, total, isLoading } = useGetList<Book>('books', {
-        filter: { q: filter },
-        pagination: { page, perPage },
-        sort: { field: 'id', order: 'ASC' }
-    });
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-    return (
-        <div>
-            <Title title="Book list" />
-            <TextField
-                label="Search"
-                value={filter}
-                onChange={e => setFilter(e.target.value)}
-                variant="filled"
-                size="small"
-                margin="dense"
-            />
-            <Card>
-                <Table sx={{ padding: 2 }} size="small">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Id</TableCell>
-                            <TableCell>Title</TableCell>
-                            <TableCell>Author</TableCell>
-                            <TableCell>Year</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {data?.map(book => (
-                            <TableRow key={book.id}>
-                                <TableCell>{book.id}</TableCell>
-                                <TableCell>{book.title}</TableCell>
-                                <TableCell>{book.author}</TableCell>
-                                <TableCell>{book.year}</TableCell>
+    const BookList = () => {
+        const [filter, setFilter] = useState('');
+        const [page, setPage] = useState(1);
+        const perPage = 10;
+        const { data, total, isLoading } = useGetList<Book>('books', {
+            filter: { q: filter },
+            pagination: { page, perPage },
+            sort: { field: 'id', order: 'ASC' }
+        });
+        if (isLoading) {
+            return <div>Loading...</div>;
+        }
+        return (
+            <div>
+                <Title title="Book list" />
+                <TextField
+                    label="Search"
+                    value={filter}
+                    onChange={e => setFilter(e.target.value)}
+                    variant="filled"
+                    size="small"
+                    margin="dense"
+                />
+                <Card>
+                    <Table sx={{ padding: 2 }} size="small">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Id</TableCell>
+                                <TableCell>Title</TableCell>
+                                <TableCell>Author</TableCell>
+                                <TableCell>Year</TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </Card>
-            <Toolbar>
-                {page > 1 && <Button onClick={() => setPage(page - 1)}>Previous page</Button>}
-                {page < (total || 0) / perPage && <Button onClick={() => setPage(page + 1)}>Next page</Button>}
-            </Toolbar>
-        </div>
-    );
-};
+                        </TableHead>
+                        <TableBody>
+                            {data?.map(book => (
+                                <TableRow key={book.id}>
+                                    <TableCell>{book.id}</TableCell>
+                                    <TableCell>{book.title}</TableCell>
+                                    <TableCell>{book.author}</TableCell>
+                                    <TableCell>{book.year}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </Card>
+                <Toolbar>
+                    {page > 1 && <Button onClick={() => setPage(page - 1)}>Previous page</Button>}
+                    {page < (total || 0) / perPage && <Button onClick={() => setPage(page + 1)}>Next page</Button>}
+                </Toolbar>
+            </div>
+        );
+    };
 ```
+
 {% endraw %}
 
-You can pass this `BookList` component as the `list` prop of the `<Resource name="books" />`, and react-admin will render it on the `/books/` path.
+この`BookList`コンポーネントを`<Resource name="books" />`の`list`プロップとして渡すことができ、react-adminはそれを`/books/`パスにレンダリングします。
 
-This example uses the `useGetList` hook instead of `fetch` because `useGetList` already contains the authentication and request state logic. But you could totally write a List view with `fetch`.
+この例では、認証およびリクエスト状態のロジックを既に含んでいる`useGetList`フックを使用していますが、`fetch`を使用してリストビューを作成することも可能です。
 
-This list is a bit rough in the edges (for instance, typing in the search input makes one call to the dataProvider per character), but it's good enough for the purpose of this chapter. 
+このリストは多少粗削りです（例えば、検索入力に文字を1文字入力するごとにdataProviderへのコールが発生します）が、この章の目的には十分です。
 
-### `<Datagrid>` Displays Fields In A Table
+### `<Datagrid>`がテーブル内のフィールドを表示
 
-Table layouts usually require a lot of code to define the table head, row, columns, etc. React-admin `<Datagrid>` component, together with Field components, can help remove that boilerplate:
+テーブルレイアウトは通常、テーブルヘッド、行、列などを定義するために多くのコードが必要です。react-adminの`<Datagrid>`コンポーネントは、フィールドコンポーネントと共に、その定型コードを削減するのに役立ちます。
 
 {% raw %}
+
 ```diff
 import { useState } from 'react';
 -import { Title, useGetList } from 'react-admin';
@@ -181,15 +183,17 @@ const BookList = () => {
     );
 };
 ```
+
 {% endraw %}
 
-`<Datagrid>` does more than the previous table: it renders table headers depending on the current sort, and allows you to change the sort order by clicking a column header. Also, for each row, `<Datagrid>` creates a `RecordContext`, which lets you use react-admin Field and Buttons without explicitly passing the row data.
+`<Datagrid>`は以前のテーブル以上の機能を提供します。現在のソートに応じたテーブルヘッダーをレンダリングし、列ヘッダーをクリックすることでソート順序を変更することができます。また、各行に対して`RecordContext`を作成し、react-adminのフィールドおよびボタンを行データを明示的に渡すことなく使用することができます。
 
-### `ListContext` Exposes List Data To Descendants
+### `ListContext`が子孫コンポーネントにリストデータを公開
 
-`<Datagrid>` requires a `data` prop to render, but it can grab it from a `ListContext` instead. Creating such a context with `<ListContextProvider>` also allows to use other react-admin components specialized in filtering (`<FilterForm>`) and pagination (`<Pagination>`), and to reduce the boilerplate code even further:
+`<Datagrid>`はレンダリングするために`data`プロップを必要としますが、`ListContext`からそれを取得することもできます。`<ListContextProvider>`を使用してこのようなコンテキストを作成することにより、フィルタリング（`<FilterForm>`）やページネーション（`<Pagination>`）に特化した他のreact-adminコンポーネントを使用することができ、さらに定型コードを削減できます。
 
 {% raw %}
+
 ```diff
 import { useState } from 'react';
 import { 
@@ -255,13 +259,15 @@ const BookList = () => {
     );
 };
 ```
+
 {% endraw %}
 
-### `useListController` Handles Controller Logic
+### `useListController`がコントローラーロジックを処理
 
-The initial logic that grabs the records from the API, handles the filter and pagination state, and creates callbacks to change them is also common, and react-admin exposes [the `useListController` hook](./useListController.md) to do it. It returns an object that fits perfectly the format expected by `<ListContextProvider>`:
+APIからレコードを取得し、フィルターおよびページネーションの状態を管理し、それらを変更するためのコールバックを作成する初期ロジックも共通であり、react-adminは [`useListController` フック](./useListController.md)を提供しています。このフックは、`<ListContextProvider>`が期待する形式に完全に適合するオブジェクトを返します。
 
 {% raw %}
+
 ```diff
 -import { useState } from 'react';
 import { 
@@ -317,24 +323,25 @@ const BookList = () => {
     );
 };
 ```
+
 {% endraw %}
 
-Notice that `useListController` doesn't need the 'books' resource name - it relies on the `ResourceContext`, set by the `<Resource>` component, to guess it.
+`useListController`は'books'リソース名を必要としません - `<Resource>`コンポーネントによって設定された`ResourceContext`に依存してそれを推測します。
 
-React-admin's List controller does much, much more than the code it replaces above:
+react-adminのリストコントローラーは、上記のコードを置き換える以上のことを多く行います：
 
-- it uses sensible defaults for the sort and pagination state,
-- it stores the list state (sort, pagination, filters) in the URL to make the page bookmarkable,
-- it memorises this state to let users find the same filters when they come back to the list,
-- it allows to select records for bulk actions,
-- it debounces the calls to the API when the user types text in the filter form,
-- it keeps the current data on screen while a new page is being fetched,
-- it changes the current page if it's empty,
-- it translates the title 
+* ソートおよびページネーション状態のデフォルトを使用します
+* リスト状態（ソート、ページネーション、フィルター）をURLに保存し、ページをブックマーク可能にします
+* ユーザーがリストに戻ったときに同じフィルターを見つけられるようにその状態を記憶します
+* バルクアクション用にレコードを選択することを可能にします
+* ユーザーがフィルターフォームにテキストを入力する際にAPIへのコールをデバウンスします
+* 新しいページが取得される間、現在のデータを画面に保持します
+* ページが空の場合、現在のページを変更します
+* タイトルを翻訳します
 
-### `<ListBase>`: Component Version Of The Controller
+### `<ListBase>`：コントローラーのコンポーネント版
 
-As calling the List controller and putting its result into a context is also common, react-admin provides [the `<ListBase>` component](./ListBase.md) to do it. So the example can be further simplified to the following: 
+リストコントローラーを呼び出してその結果をコンテキストに入れることも一般的であるため、react-adminは [`<ListBase>` コンポーネント](./ListBase.md)を提供しています。これにより、次のようにさらに簡略化することができます。
 
 ```diff
 import { 
@@ -380,13 +387,13 @@ const BookList = () => {
 };
 ```
 
-Notice that we're not handling the loading state manually anymore. In fact, the `<Datagrid>` component can render a skeleton while the data is being fetched.
+ローディング状態を手動で処理する必要がなくなりました。実際、`<Datagrid>`コンポーネントはデータの取得中にスケルトンをレンダリングすることができます。
 
-### `useListContext` Accesses The List Context
+### `useListContext`でリストコンテキストにアクセス
 
-Using the `<ListBase>` component has one drawback: you can no longer access the list context (`data`, `total`, etc.) in the component. Instead, you have to access it from the `ListContext` using [the `useListContext` hook](./useListContext.md).
+`<ListBase>`コンポーネントを使用することで一つの欠点があります。それは、コンポーネント内でリストコンテキスト（`data`、`total`など）にアクセスできなくなることです。その代わりに、`ListContext`から [`useListContext` フック](./useListContext.md)を使用してアクセスする必要があります。
 
-The following example illustrates the usage of `useListContext` with a custom pagination component:
+以下の例は、カスタムページネーションコンポーネントでの`useListContext`の使用を示しています。
 
 ```tsx
 import { useListContext } from 'react-admin';
@@ -403,9 +410,9 @@ const Pagination = () => {
 }
 ```
 
-### `<List>` Renders Title, Filters, And Pagination
+### `<List>`はタイトル、フィルター、ページネーションをレンダリング
 
-`<ListBase>` is a headless component: it renders only its children. But almost every List view needs a wrapping `<div>`, a title, filters, pagination, a Material UI `<Card>`, etc. That's why react-admin provides [the `<List>` component](./List.md), which includes the `<ListBase>` component and a "classic" layout to reduce the boilerplate even further:
+`<ListBase>`はヘッドレスコンポーネントであり、その子要素のみをレンダリングします。しかし、ほとんどのリストビューにはラップする`<div>`、タイトル、フィルター、ページネーション、Material UIの`<Card>`などが必要です。そこでreact-adminは [`<List>` コンポーネント](./List.md)を提供しており、`<ListBase>`コンポーネントと"クラシック"なレイアウトを含め、さらに定型コードを削減します。
 
 ```diff
 import { 
@@ -443,9 +450,9 @@ const BookList = () => (
 );
 ```
 
-## A Typical React-Admin List View
+## 典型的なReact-Adminリストビュー
 
-Remember the first snippet in this page? The react-admin version is much shorter, and more expressive:
+このページの最初のスニペットを思い出してください。react-admin版ははるかに短く、表現力豊かです。
 
 ```tsx
 import { 
@@ -469,13 +476,13 @@ const BookList = () => (
 );
 ```
 
-By encapsulating common CRUD logic, react-admin reduces the amount of code you need to write, and lets you focus on the business logic. As you've seen with the List controller and context, there is no magic: it's just standard React hooks and components designed for B2B apps and web developers with deadlines.
+共通のCRUDロジックをカプセル化することで、react-adminは必要なコードの量を減らし、ビジネスロジックに集中できるようにします。リストコントローラーおよびコンテキストで見たように、魔法はありません：これは標準的なReactフックおよびコンポーネントで、B2Bアプリおよび期限のあるWeb開発者向けに設計されています。
 
-## `<ListGuesser>`: Zero-Configuration List
+## `<ListGuesser>`：ゼロコンフィギュレーションリスト
 
-Sometimes typing `<Datagrid>` and a few `<Field>` components is too much - for instance if you want to prototype an admin for many resources, or search data through an API without worrying about the actual data structure.
+時には`<Datagrid>`やいくつかの`<Field>`コンポーネントを入力することすら多すぎることがあります。例えば、多くのリソースの管理画面をプロトタイプする場合や、実際のデータ構造を気にせずにAPIを通じてデータを検索する場合です。
 
-For these cases, react-admin provides a `<ListGuesser>` component that will guess the datagrid columns from the data. It's a bit like the `<List>` component, but it doesn't require any configuration.
+このような場合に備えて、react-adminは`<ListGuesser>`コンポーネントを提供しており、データからdatagridの列を推測します。これは少し`<List>`コンポーネントのようですが、設定を一切必要としません。
 
 ```tsx
 import { Admin, Resource, ListGuesser } from 'react-admin';
@@ -488,33 +495,29 @@ const App = () => (
 );
 ```
 
-`<ListGuesser>` is also a good way to bootstrap a List view, as it outputs the code that it generated for the List into the console. Copy and paste that code in a custom List component, and you can start customizing the list view in no time.
+`<ListGuesser>`はリストビューをブートストラップするための良い方法でもあり、生成されたリストのコードをコンソールに出力します。そのコードをカスタムリストコンポーネントにコピー＆ペーストし、リストビューのカスタマイズをすぐに開始できます。
 
-## List Iterators
+## リストイテレータ
 
-The components you can use as child of `<List>` are called "List Iterator". They render a list of records. `<Datagrid>` is such a List Iterator, but react-admin provides many more:
+`<List>`の子要素として使用できるコンポーネントは「リストイテレータ」と呼ばれます。これらはレコードのリストをレンダリングします。`<Datagrid>`もその一つですが、react-adminは他にも多くのリストイテレータを提供しています。
 
-- [`<Datagrid>`](./Datagrid.md)
-- [`<DatagridAG>`](./DatagridAG.md)
-- [`<SimpleList>`](./SimpleList.md)
-- [`<SingleFieldList>`](./SingleFieldList.md)
-- [`<EditableDatagrid>`](./EditableDatagrid.md)
-- [`<TreeWithDetails>`](./TreeWithDetails.md)
-- [`<Calendar>`](./Calendar.md)
+* [`<Datagrid>`](./Datagrid.md)
+* [`<DatagridAG>`](./DatagridAG.md)
+* [`<SimpleList>`](./SimpleList.md)
+* [`<SingleFieldList>`](./SingleFieldList.md)
+* [`<EditableDatagrid>`]()
+* [`<TreeWithDetails>`](./TreeWithDetails.md)
+* [`<Calendar>`](./Calendar.md)
 
-If that's not enough, [building a custom iterator](#building-a-custom-iterator) isn't hard. 
+それでも十分でない場合は、[カスタムイテレータの作成](#building-a-custom-iterator)も難しくありません。
 
-## Responsive Lists
+## レスポンシブリスト
 
-On Mobile, `<Datagrid>` doesn't work well - the screen is too narrow. You should use [the  `<SimpleList>` component](./SimpleList.md) instead - it's another built-in List Iterator.
+モバイルでは、`<Datagrid>`はうまく機能しません - 画面が狭すぎます。代わりに、`<SimpleList>`コンポーネントを使用するべきです - これはもう一つの組み込みリストイテレータです。
 
-<video controls autoplay playsinline muted loop style="height:300px">
-    <source src="./img/simple-list.webm" type="video/webm"/>
-    <source src="./img/simple-list.mp4" type="video/mp4"/>
-    Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop style="height:300px"> <source src="./img/simple-list.webm" type="video/webm"/> <source src="./img/simple-list.mp4" type="video/mp4"/> Your browser does not support the video tag. </video>
 
-To use `<Datagrid>` on desktop and `<SimpleList>` on mobile, use the `useMediaQuery` hook:
+デスクトップでは`<Datagrid>`を、モバイルでは`<SimpleList>`を使用するには、`useMediaQuery`フックを使用します。
 
 ```tsx
 // in src/posts.tsx
@@ -556,15 +559,16 @@ export const PostList = () => {
 };
 ```
 
-Check [the dedicated `useMediaQuery` documentation](./useMediaQuery.md) for more information.
+詳細は [`useMediaQuery`の専用ドキュメント](./useMediaQuery.md)を参照してください。
 
-## Building a Custom Iterator
+## カスタムイテレータの作成
 
-In some cases, neither the `<Datagrid>` nor the `<SimpleList>` components allow to display the records in an optimal way for a given task. In these cases, pass your layout component directly as children of the `<List>` component. 
+場合によっては、`<Datagrid>`や`<SimpleList>`コンポーネントが特定のタスクに最適な方法でレコードを表示できないことがあります。このような場合、レイアウトコンポーネントを直接`<List>`コンポーネントの子要素として渡します。
 
-As `<List>` takes care of fetching the data and putting it in a `ListContext`, you can leverage [the `<WithListContext>` component](./WithListContext.md) to get the list data in a render prop. 
+`<List>`はデータの取得とそれを`ListContext`に配置する役割を担っているため、レンダープロップでリストデータを取得するために [`<WithListContext>` コンポーネント](./WithListContext.md)を活用することができます。
 
 {% raw %}
+
 ```tsx
 import { List, WithListContext } from 'react-admin';
 import { Stack, Typography } from '@mui/material';
@@ -590,11 +594,13 @@ const BookList = () => (
     </List>
 );
 ```
+
 {% endraw %}
 
-If you prefer using a hook, you can use [the `useListContext` hook](./useListContext.md) instead:
+フックを使用する場合は、代わりに [`useListContext` フック](./useListContext.md)を使用できます。
 
 {% raw %}
+
 ```tsx
 import { List, useListContext } from 'react-admin';
 import { Stack, Typography } from '@mui/material';
@@ -625,78 +631,59 @@ const BookList = () => (
     </List>
 );
 ```
+
 {% endraw %}
 
-**Tip**: With `emptyWhileLoading` turned on, the `<List>` component doesn't render its child component until the data is available. Without this flag, the `<SimpleBookList>` component would render even during the loading phase, break at `data.map()`. 
+**Tip**: `emptyWhileLoading`がオンになっている場合、`<List>`コンポーネントはデータが利用可能になるまで子コンポーネントをレンダリングしません。このフラグがない場合、`<SimpleBookList>`コンポーネントはロードフェーズ中にレンダリングされ、`data.map()`で壊れてしまいます。
 
-You can also handle the loading state inside a custom list layout by grabbing the `isLoading` variable from the `ListContext`, but `emptyWhileLoading` is usually more convenient.
+カスタムリストレイアウト内でローディング状態を処理することもできますが、通常は`emptyWhileLoading`がより便利です。
 
-## Filtering the List
+## リストのフィルタリング
 
-One of the most important features of the List page is the ability to search for a dedicated record. In this documentation, we use the term "filter" for the controls allowing to search the list.
+リストページの最も重要な機能の一つは、特定のレコードを検索する能力です。このドキュメントでは、リストを検索するためのコントロールを「フィルター」と呼びます。
 
-React-admin provides 2 possible UIs for filters, and lets your own if they're not sufficient.
+react-adminはフィルターのために2つのUIを提供し、それらが不十分な場合には独自のUIを作成することができます。
 
-The first filter UI is called "the Filer/Form Combo". 
+最初のフィルターUIは「フィルター/フォームコンボ」と呼ばれます。
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/list_filter.webm" type="video/webm"/>
-  <source src="./img/list_filter.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop> <source src="./img/list\_filter.webm" type="video/webm"/> <source src="./img/list\_filter.mp4" type="video/mp4"/> Your browser does not support the video tag. </video>
 
+二つ目のフィルターUIは「フィルターリストサイドバー」と呼ばれます。
 
-The second filter UI is called "the Filter List Sidebar".
+<video controls autoplay playsinline muted loop> <source src="./img/filter-sidebar.webm" type="video/webm"/> <source src="./img/filter-sidebar.mp4" type="video/mp4"/> Your browser does not support the video tag. </video>
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/filter-sidebar.webm" type="video/webm"/>
-  <source src="./img/filter-sidebar.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+フィルタリングに関する詳細は[専用フィルターチュートリアル章](./FilteringTutorial.md)を参照してください。
 
+## リストのソート
 
-Check [the dedicated Filter tutorial chapter](./FilteringTutorial.md) for more information on filtering.
+リストビューは`sort`および`order`クエリパラメータを使用して、`dataProvider.getList()`に渡されるソートフィールドおよび順序を決定します。
 
-## Sorting the List
+典型的なリストURLは次のとおりです。
 
-The List view uses the `sort` and `order` query parameters to determine the sort field and order passed to `dataProvider.getList()`.
+> [https://myadmin.dev/#/posts?displayedFilters=%7B%22commentable%22%3Atrue%7D&filter=%7B%22commentable%22%3Atrue%2C%22q%22%3A%22lorem%20%22%7D&order=DESC&page=1&perPage=10&sort=published\_at](https://myadmin.dev/#/posts?displayedFilters=%7B%22commentable%22%3Atrue%7D&filter=%7B%22commentable%22%3Atrue%2C%22q%22%3A%22lorem%20%22%7D&order=DESC&page=1&perPage=10&sort=published_at)
 
-Here is a typical List URL:
+これをデコードすると、意図されたソートが明らかになります。
 
-> https://myadmin.dev/#/posts?displayedFilters=%7B%22commentable%22%3Atrue%7D&filter=%7B%22commentable%22%3Atrue%2C%22q%22%3A%22lorem%20%22%7D&order=DESC&page=1&perPage=10&sort=published_at
-
-Once decoded, this URL reveals the intended sort:
-
-```
+```makefile
 sort=published_at
 order=DESC
 ```
 
-If you're using a `<Datagrid>` inside the List view, then the column headers are buttons allowing users to change the list sort field and order. This feature requires no configuration and works out fo the box. Check [the `<Datagrid>` documentation](./Datagrid.md#customizing-column-sort) to see how to disable or modify the field used for sorting on a particular column.
+`<Datagrid>`をリストビュー内で使用している場合、列ヘッダーはボタンになっており、ユーザーがリストのソートフィールドおよび順序を変更することができます。この機能は設定を必要とせず、そのまま機能します。特定の列のソートに使用するフィールドを無効にしたり変更したりする方法については、 [`<Datagrid>` のドキュメント](./Datagrid.md#customizing-column-sort)を参照してください。
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/sort-column-header.webm" type="video/webm"/>
-  <source src="./img/sort-column-header.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop> <source src="./img/sort-column-header.webm" type="video/webm"/> <source src="./img/sort-column-header.mp4" type="video/mp4"/> Your browser does not support the video tag. </video>
 
+他のリストレイアウトを使用している場合は、 [`<SortButton>` コンポーネント](./SortButton.md)を参照してください。これは、ユーザーがリストのソートフィールドおよび順序を変更できるスタンドアロンのボタンです。
 
-If you're using another List layout, check [the `<SortButton>` component](./SortButton.md): It's a standalone button that allows users to change the list sort field and order.
+<video controls autoplay playsinline muted loop> <source src="./img/sort-button.webm" type="video/webm"/> <source src="./img/sort-button.mp4" type="video/mp4"/> Your browser does not support the video tag. </video>
+## プリソートされたリストへのリンク
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/sort-button.webm" type="video/webm"/>
-  <source src="./img/sort-button.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+ソート値はURLから取得されるため、`sort`および`order`クエリパラメータを設定することでプリソートされたリストへのリンクを提供できます。
 
-
-## Linking to a Pre-Sorted List
-
-As the sort values are taken from the URL, you can link to a pre-sorted list by setting the `sort` and `order` query parameters.
-
-For instance, if you have a list of posts ordered by publication date, and you want to provide a button to sort the list by number of views descendant:
+例えば、公開日で並べ替えられた投稿のリストがあり、ビュー数の降順でリストを並べ替えるボタンを提供したい場合は次のようになります。
 
 {% raw %}
+
 ```tsx
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
@@ -721,13 +708,14 @@ const SortByViews = () => (
     </Button>
 );
 ```
+
 {% endraw %}
 
-**Tip**: You have to pass *all* the query string parameters - not just `sort` and `order`. That's a current limitation of react-admin.
+**Tip**: すべてのクエリ文字列パラメータを渡す必要があります - `sort`および`order`だけではありません。これはreact-adminの現在の制限です。
 
-## Building a Custom Sort Control
+## カスタムソートコントロールの作成
 
-When neither the `<Datagrid>` or the `<SortButton>` fit your UI needs, you have to write a custom sort control. As with custom filters, this boils down to grabbing the required data and callbacks from the `ListContext`. Let's use the `<SortButton>` source as an example usage of `sort` and `setSort`:
+`<Datagrid>`や`<SortButton>`がUIのニーズに合わない場合は、カスタムソートコントロールを作成する必要があります。カスタムフィルターと同様に、`ListContext`から必要なデータとコールバックを取得します。`sort`および`setSort`の使用例として、`<SortButton>`のソースを使用します。
 
 ```tsx
 import * as React from 'react';
@@ -737,15 +725,15 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useListSortContext, useTranslate } from 'react-admin';
 
 const SortButton = ({ fields }) => {
-    // sort is an object { field, order } containing the current sort
-    // setSort is a callback ({ field, order }) => void allowing to change the sort field and order
+    // sortは現在のソートを含むオブジェクト{ field, order }
+    // setSortはソートフィールドと順序を変更するコールバック({ field, order }) => void
     const { sort, setSort } = useListSortContext();
-    // rely on the translations to display labels like 'Sort by sales descending'
+    // 翻訳に依存して「Sort by sales descending」などのラベルを表示
     const translate = useTranslate();
-    // open/closed state for dropdown
+    // ドロップダウンのオープン/クローズ状態
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
-    // mouse handlers
+    // マウスハンドラ
 	const handleClick: React.MouseEventHandler<HTMLButtonElement> = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -763,7 +751,7 @@ const SortButton = ({ fields }) => {
         setAnchorEl(null);
     };
 
-    // English stranslation is 'Sort by %{field} %{order}'
+    // 英語翻訳は「Sort by %{field} %{order}」
     const buttonLabel = translate('ra.sort.sort_by', {
         field: translate(`resources.products.fields.${sort.field}`),
         order: translate(`ra.sort.${sort.order}`),
@@ -791,7 +779,7 @@ const SortButton = ({ fields }) => {
             {fields.map(field => (
                 <MenuItem
                     onClick={handleChangeSort}
-                    // store the sort field in the element dataset to avoid creating a new click handler for each item (better for performance)
+                    // ソートフィールドを要素データセットに格納し、各アイテムのために新しいクリックハンドラを作成することを避ける（パフォーマンス向上のため）
                     data-sort={field}
                     key={field}
                 >
@@ -814,20 +802,20 @@ const inverseOrder = (sort: string) => (sort === 'ASC' ? 'DESC' : 'ASC');
 export default SortButton;
 ```
 
-## Building a Custom Pagination
+## カスタムページネーションの作成
 
-The [`<Pagination>`](./Pagination.md) component gets the following constants from [the `useListContext` hook](./useListContext.md):
+[`<Pagination>`](./Pagination.md)コンポーネントは、 [`useListContext` フック](./useListContext.md)から次の定数を取得します：
 
-* `page`: The current page number (integer). First page is `1`.
-* `perPage`: The number of records per page.
-* `setPage`: `Function(page: number) => void`. A function that set the current page number.
-* `total`: The total number of records (may be undefined when the data provider uses [Partial pagination](./DataProviderWriting.md#partial-pagination)).
-* `hasPreviousPage`: True if the page number is greater than 1.
-* `hasNextPage`: True if the page number is lower than the total number of pages.
-* `actions`: A component that displays the pagination buttons (default: `<PaginationActions>`)
-* `limit`: An element that is displayed if there is no data to show (default: `<PaginationLimit>`)
+* `page`: 現在のページ番号（整数）。最初のページは`1`。
+* `perPage`: 1ページあたりのレコード数。
+* `setPage`: 現在のページ番号を設定する関数`Function(page: number) => void`。
+* `total`: レコードの総数（データプロバイダが[部分的なページネーション](./DataProviderWriting.md#partial-pagination)を使用している場合、未定義の場合があります）。
+* `hasPreviousPage`: ページ番号が1より大きい場合はtrue。
+* `hasNextPage`: ページ番号が総ページ数より小さい場合はtrue。
+* `actions`: ページネーションボタンを表示するコンポーネント（デフォルト：`<PaginationActions>`）
+* `limit`: 表示するデータがない場合に表示される要素（デフォルト：`<PaginationLimit>`）
 
-If you want to replace the default pagination by a "&lt; previous - next &gt;" pagination, create a pagination component like the following:
+デフォルトのページネーションを「<前 - 次>」ページネーションに置き換えたい場合は、次のようなページネーションコンポーネントを作成します。
 
 ```tsx
 import { List, useListContext } from 'react-admin';
@@ -869,14 +857,14 @@ export const PostList = () => (
 );
 ```
 
-But if you just want to change the color property of the pagination button, you can extend the existing components:
+ただし、ページネーションボタンの色プロパティを変更したいだけの場合は、既存のコンポーネントを拡張することができます。
 
 ```tsx
 import { List, Pagination, PaginationActions } from 'react-admin';
 
 export const MyPaginationActions = () => (
     <PaginationActions
-        // these props are passed down to the Material UI <Pagination> component
+        // これらのプロップはMaterial UIの<ページネーション>コンポーネントに渡されます
         color="primary"
         showFirstButton
         showLastButton
@@ -892,9 +880,10 @@ export const UserList = () => (
 );
 ```
 
-## Third-Party Components
+## サードパーティコンポーネント
 
-You can find more List components for react-admin in third-party repositories.
+react-admin用のリストコンポーネントは、サードパーティのリポジトリでも見つけることができます。
 
-- [ra-customizable-datagrid](https://github.com/fizix-io/ra-customizable-datagrid): plugin that allows to hide / show columns dynamically.
-- [ra-datagrid](https://github.com/marmelab/ra-datagrid): Integration of [Material UI's `<Datagrid>`](https://mui.com/components/data-grid/) into react-admin.
+* [ra-customizable-datagrid](https://github.com/fizix-io/ra-customizable-datagrid): 列を動的に表示/非表示にするプラグイン。
+* [ra-datagrid](https://github.com/marmelab/ra-datagrid): Material UIの`<Datagrid>`との統合。
+

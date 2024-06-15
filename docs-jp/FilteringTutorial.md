@@ -1,101 +1,94 @@
 ---
 layout: default
-title: "Filtering the List"
+title: "リストのフィルタリング"
 ---
 
-# Filtering the List
+# リストのフィルタリング
 
-One of the most important features of the List page is the ability to filter the results. React-admin offers powerful filter components, and gets out of the way when you want to go further.
+リストページの最も重要な機能の一つは、結果をフィルタリングできることです。React-adminは強力なフィルタコンポーネントを提供しており、さらにカスタマイズしたい場合にも対応できます。
 
-## Overview
+## 概要
 
 <table><tbody>
 <tr style="border:none">
-    <td style="width:50%;border:none;text-align:center">
-        <a title="Filter Button/Form Combo" href="./img/list_filter.webm">
-            <video controls autoplay playsinline muted loop>
-                <source src="./img/list_filter.webm" type="video/webm"/>
-                <source src="./img/list_filter.mp4" type="video/mp4"/>
-                Your browser does not support the video tag.
-            </video>
-        </a>
-        <a href="#the-filter-buttonform-combo" style="display: block;transform: translateY(-10px);">The Filter Button/Form Combo</a>
-    </td>
-    <td style="width:50%;border:none;text-align:center">
-        <a title="<FilterList> Sidebar" href="./img/filter-sidebar.webm">
-            <video controls autoplay playsinline muted loop>
-                <source src="./img/filter-sidebar.webm" type="video/webm"/>
-                <source src="./img/filter-sidebar.mp4" type="video/mp4"/>
-                Your browser does not support the video tag.
-            </video>
-        </a>
-        <a href="#the-filterlist-sidebar" style="display: block;transform: translateY(-10px);">The <code>&lt;FilterList&gt;</code> Sidebar</a>
-    </td>
+<td style="width:50%;border:none;text-align:center">
+            <a title="フィルターボタン/フォームコンボ" href="./img/list_filter.webm">
+                <video controls autoplay playsinline muted loop>
+                    <source src="./img/list_filter.webm" type="video/webm"/>
+                    <source src="./img/list_filter.mp4" type="video/mp4"/>
+                    Your browser does not support the video tag.
+                </video>
+            </a>
+            <a href="#the-filter-buttonform-combo" style="display: block;transform: translateY(-10px);">フィルターボタン/フォームコンボ</a>
+        </td>
+        <td style="width:50%;border:none;text-align:center">
+            <a title="<FilterList> サイドバー" href="./img/filter-sidebar.webm">
+                <video controls autoplay playsinline muted loop>
+                    <source src="./img/filter-sidebar.webm" type="video/webm"/>
+                    <source src="./img/filter-sidebar.mp4" type="video/mp4"/>
+                    Your browser does not support the video tag.
+                </video>
+            </a>
+            <a href="#the-filterlist-sidebar" style="display: block;transform: translateY(-10px);"><code>&lt;FilterList&gt;</code> サイドバー</a>
+        </td>
 </tr>
 <tr style="border:none;background-color:#fff;">
-    <td style="width:50%;border:none;text-align:center">
-        <a title="Stacked Filters" href="https://marmelab.com/ra-enterprise/modules/assets/ra-form-layout/latest/stackedfilters-overview.webm">
-            <video controls autoplay playsinline muted loop width="90%" style="margin:1rem;box-shadow:0px 4px 4px 0px rgb(0 0 0 / 24%);">
-                <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-form-layout/latest/stackedfilters-overview.webm" type="video/mp4" />
-                    Your browser does not support the video tag.
-            </video>
-        </a>
-        <a href="#the-stackedfilters-component" style="display: block;transform: translateY(-10px);">The <code>&lt;StackedFilters&gt;</code> Dialog</a>
-    </td>
-    <td style="width:50%;border:none;text-align:center;vertical-align:top;">
-        <a title="<Search> input" href="https://marmelab.com/ra-enterprise/modules/assets/ra-search-overview.gif"><img src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-overview.gif" /></a>
-        <a href="#global-search" style="display: block;transform: translateY(-10px);">The Global <code>&lt;Search&gt;</code></a>
-    </td>
+        <td style="width:50%;border:none;text-align:center">
+            <a title="積み重ねフィルター" href="https://marmelab.com/ra-enterprise/modules/assets/ra-form-layout/latest/stackedfilters-overview.webm">
+                <video controls autoplay playsinline muted loop width="90%" style="margin:1rem;box-shadow:0px 4px 4px 0px rgb(0 0 0 / 24%);">
+                    <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-form-layout/latest/stackedfilters-overview.webm" type="video/mp4" />
+                        Your browser does not support the video tag.
+                </video>
+            </a>
+            <a href="#the-stackedfilters-component" style="display: block;transform: translateY(-10px);"><code>&lt;StackedFilters&gt;</code> ダイアログ</a>
+        </td>
+        <td style="width:50%;border:none;text-align:center;vertical-align:top;">
+            <a title="<Search> 入力" href="https://marmelab.com/ra-enterprise/modules/assets/ra-search-overview.gif"><img src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-overview.gif" /></a>
+            <a href="#global-search" style="display: block;transform: translateY(-10px);">グローバル <code>&lt;Search&gt;</code></a>
+        </td>
 </tr>
 </tbody></table>
 
-React-admin offers 4 different ways to filter the list. Depending on the type of data you're displaying, the type and number of filters you have to display, and the device your users are using, you may want to use one or the other.
+React-adminはリストをフィルタリングするための4つの異なる方法を提供します。表示するデータの種類、フィルターの種類や数、ユーザーが使用するデバイスに応じて、適切な方法を選択できます。
 
-## The Filter Button/Form Combo
+## フィルターボタン/フォームコンボ
 
 <video controls autoplay playsinline muted loop>
-  <source src="./img/list_filter.webm" type="video/webm"/>
-  <source src="./img/list_filter.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
+      <source src="./img/list_filter.webm" type="video/webm"/>
+      <source src="./img/list_filter.mp4" type="video/mp4"/>
+      Your browser does not support the video tag.
 </video>
 
-
-The default appearance for filters is an inline form displayed on top of the list. Users also see a dropdown button allowing to add more inputs to that form. This functionality relies on the `<List filters>` prop:
+デフォルトのフィルター表示は、リストの上部に表示されるインラインフォームです。ユーザーはそのフォームに入力を追加するドロップダウンボタンも見ることができます。この機能は`<List filters>`プロパティに依存しています：
 
 ```jsx
-import { TextInput } from 'react-admin';
+    import { TextInput } from 'react-admin';
 
-const postFilters = [
-    <TextInput label="Search" source="q" alwaysOn />,
-    <TextInput label="Title" source="title" defaultValue="Hello, World!" />,
-];
+    const postFilters = [
+        <TextInput label="検索" source="q" alwaysOn />,
+        <TextInput label="タイトル" source="title" defaultValue="こんにちは、世界!" />,
+    ];
 
-export const PostList = () => (
-    <List filters={postFilters}>
-        ...
-    </List>
-);
+    export const PostList = () => (
+        <List filters={postFilters}>
+            ...
+        </List>
+    );
 ```
 
-Elements passed as `filters` are regular inputs. That means you can build sophisticated filters based on references, array values, etc. `<List>` hides all inputs in the [`Filter Form`](./FilterForm.md) by default, except those that have the `alwaysOn` prop.
+`filters`として渡された要素は通常の入力です。つまり、参照や配列値などに基づく高度なフィルターを構築することができます。`<List>`は、`alwaysOn`プロパティを持つもの以外のすべての入力をデフォルトで[`Filter Form`](./FilterForm.md)に隠します。
 
-**Tip**: For technical reasons, react-admin does not accept Filter inputs having both a `defaultValue` and `alwaysOn`. To set default values for always on filters, use the [`filterDefaultValues`](./List.md#filterdefaultvalues) prop of the `<List>` component instead.
+**ヒント**: 技術的な理由から、react-adminは`defaultValue`と`alwaysOn`の両方を持つフィルター入力を受け入れません。常にオンのフィルターにデフォルト値を設定するには、`<List>`コンポーネントの[`filterDefaultValues`](./List.md#filterdefaultvalues)プロパティを使用してください。
 
-`<List>` uses the elements passed as `filters` twice:
+`<List>`は`filters`として渡された要素を2回使用します：
 
-- once to render the filter *form*
-- once to render the filter *button* (using each element `label`, falling back to the humanized `source`)
+* 一度はフィルターフォームをレンダリングするため
+* 一度はフィルターボタンをレンダリングするため（各要素の`label`を使用し、`source`の人間化された形式にフォールバック）
 
 ### `<SearchInput>`
+<video controls autoplay playsinline muted loop> <source src="./img/search\_input.webm" type="video/webm"/> <source src="./img/search\_input.mp4" type="video/mp4"/> Your browser does not support the video tag. </video>
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/search_input.webm" type="video/webm"/>
-  <source src="./img/search_input.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
-
-
-In addition to [the usual input types](./Inputs.md) (`<TextInput>`, `<SelectInput>`, `<ReferenceInput>`, etc.), you can use the `<SearchInput>` in the `filters` array. This input is designed especially for the [`Filter Form`](./FilterForm.md). It's like a `<TextInput resettable>` with a magnifier glass icon - exactly the type of input users look for when they want to do a full-text search.
+[通常の入力タイプ](./Inputs.md)（`<TextInput>`, `<SelectInput>`, `<ReferenceInput>`など）に加えて、`filters`配列に`<SearchInput>`を使用できます。この入力は特に[`Filter Form`](./FilterForm.md)用に設計されています。これは、虫眼鏡アイコン付きの`<TextInput resettable>`のようなもので、ユーザーが全文検索を行いたいときに探すタイプの入力です。
 
 ```jsx
 import { SearchInput, TextInput } from 'react-admin';
@@ -105,24 +98,19 @@ const postFilters = [
 ];
 ```
 
-In the example given above, the `q` filter triggers a full-text search on all fields. It's your responsibility to implement the full-text filtering capabilities in your `dataProvider`, or in your API.
+上記の例では、`q`フィルターがすべてのフィールドで全文検索をトリガーします。全文フィルタリング機能を`dataProvider`やAPIで実装するのはあなたの責任です。
 
-For more details, you can consult [the `<SearchInput>` component chapter](./SearchInput.md).
+詳細については、[`<SearchInput>`コンポーネントの章](./SearchInput.md)を参照してください。
 
-### Quick Filters
+### クイックフィルター
+<video controls autoplay playsinline muted loop> <source src="./img/quick\_filters.webm" type="video/webm"/> <source src="./img/quick\_filters.mp4" type="video/mp4"/> Your browser does not support the video tag. </video>
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/quick_filters.webm" type="video/webm"/>
-  <source src="./img/quick_filters.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+ユーザーは通常、リストをフィルタリングするためにキーボードを使用することを嫌います（特にモバイルで）。このユーザーの要件を満たす良い方法は、フィルターを*クイックフィルター*に変えることです。クイックフィルターは、編集不可の`defaultValue`を持つフィルターです。ユーザーはそれらを有効または無効にするだけです。
 
-
-Users usually dislike using their keyboard to filter a list (especially on mobile). A good way to satisfy this user requirement is to turn filters into *quick filter*. A Quick filter is a filter with a non-editable `defaultValue`. Users can only enable or disable them.
-
-Here is how to implement a generic `<QuickFilter>` component:
+汎用の`<QuickFilter>`コンポーネントを実装する方法は次のとおりです：
 
 {% raw %}
+
 ```jsx
 import { SearchInput } from 'react-admin';
 import { Chip } from '@mui/material';
@@ -134,29 +122,25 @@ const QuickFilter = ({ label }) => {
 
 const postFilters = [
     <SearchInput source="q" alwaysOn />,
-    <QuickFilter source="commentable" label="Commentable" defaultValue={true} />,
-    <QuickFilter source="views_lte" label="Low views" defaultValue={150} />,
-    <QuickFilter source="tags" label="Tagged Code" defaultValue={[3]} />,
+    <QuickFilter source="commentable" label="コメント可能" defaultValue={true} />,
+    <QuickFilter source="views_lte" label="低視聴数" defaultValue={150} />,
+    <QuickFilter source="tags" label="タグ付きコード" defaultValue={[3]} />,
 ];
 ```
+
 {% endraw %}
 
-**Tip**: It's currently not possible to use two quick filters for the same source.
+**ヒント**: 同じソースに対して2つのクイックフィルターを使用することは現在できません。
 
-## The `<FilterList>` Sidebar
+## `<FilterList>` サイドバー
+<video controls autoplay playsinline muted loop> <source src="./img/filter-sidebar.webm" type="video/webm"/> <source src="./img/filter-sidebar.mp4" type="video/mp4"/> Your browser does not support the video tag. </video>
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/filter-sidebar.webm" type="video/webm"/>
-  <source src="./img/filter-sidebar.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+フィルターボタン/フォームコンボの代替UIは、FilterListサイドバーです。ユーザーが通常eコマースサイトで見るものと似ています。これは、多くのシンプルなフィルターをマウスで有効にし、組み合わせることができるパネルです。ユーザー体験はボタン/フォームコンボよりも優れています。なぜなら、フィルターの値が明示的で、フォームに入力する必要がないからです。しかし、有限の値（または区間）を持つフィルターのみを使用できるため、少し強力ではありません。
 
-
-An alternative UI to the Filter Button/Form Combo is the FilterList Sidebar. Similar to what users usually see on e-commerce websites, it's a panel with many simple filters that can be enabled and combined using the mouse. The user experience is better than the Button/Form Combo, because the filter values are explicit, and it doesn't require typing anything in a form. But it's a bit less powerful, as only filters with a finite set of values (or intervals) can be used in the `<FilterList>`.
-
-Here is an example FilterList sidebar:
+以下はFilterListサイドバーの例です：
 
 {% raw %}
+
 ```jsx
 import { SavedQueriesList, FilterLiveSearch, FilterList, FilterListItem } from 'react-admin';
 import { Card, CardContent } from '@mui/material';
@@ -168,23 +152,24 @@ export const PostFilterSidebar = () => (
         <CardContent>
             <SavedQueriesList />
             <FilterLiveSearch />
-            <FilterList label="Subscribed to newsletter" icon={<MailIcon />}>
-                <FilterListItem label="Yes" value={{ has_newsletter: true }} />
-                <FilterListItem label="No" value={{ has_newsletter: false }} />
+            <FilterList label="ニュースレターに登録済み" icon={<MailIcon />}>
+                <FilterListItem label="はい" value={{ has_newsletter: true }} />
+                <FilterListItem label="いいえ" value={{ has_newsletter: false }} />
             </FilterList>
-            <FilterList label="Category" icon={<CategoryIcon />}>
-                <FilterListItem label="Tests" value={{ category: 'tests' }} />
-                <FilterListItem label="News" value={{ category: 'news' }} />
-                <FilterListItem label="Deals" value={{ category: 'deals' }} />
-                <FilterListItem label="Tutorials" value={{ category: 'tutorials' }} />
+            <FilterList label="カテゴリー" icon={<CategoryIcon />}>
+                <FilterListItem label="テスト" value={{ category: 'tests' }} />
+                <FilterListItem label="ニュース" value={{ category: 'news' }} />
+                <FilterListItem label="取引" value={{ category: 'deals' }} />
+                <FilterListItem label="チュートリアル" value={{ category: 'tutorials' }} />
             </FilterList>
         </CardContent>
     </Card>
 );
 ```
+
 {% endraw %}
 
-Add it to the list view using the `<List aside>` prop:
+`<List aside>`プロパティを使用してリストビューに追加します：
 
 ```jsx
 import { PostFilterSidebar } from './PostFilterSidebar';
@@ -196,38 +181,23 @@ export const PostList = () => (
 );
 ```
 
-**Tip**: The `<Card sx>` prop in the `PostFilterSidebar` component above is here to put the sidebar on the left side of the screen, instead of the default right side.
+**ヒント**: 上記の`PostFilterSidebar`コンポーネントの`<Card sx>`プロパティは、デフォルトの右側ではなく、サイドバーを画面の左側に配置するために使用されています。
 
-Check [the `<FilterList>` documentation](./FilterList.md) for more information.
+詳細については、[`<FilterList>`のドキュメント](./FilterList.md)を参照してください。
 
-If you use the FilterList, you'll probably need a search input. As the FilterList sidebar is not a form, this requires a bit of extra work. Fortunately, react-admin provides a specialized search input component for that purpose: check [the `<FilterLiveSearch>` documentation](./FilterLiveSearch.md) for details.
+FilterListを使用する場合、検索入力が必要になることが多いでしょう。FilterListサイドバーはフォームではないため、少し余分な作業が必要です。幸いなことに、react-adminはそのための専用検索入力コンポーネントを提供しています。詳細については、[`<FilterLiveSearch>`のドキュメント](./FilterLiveSearch.md)を参照してください。
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/filter-live-search.webm" type="video/webm"/>
-  <source src="./img/filter-live-search.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop> <source src="./img/filter-live-search.webm" type="video/webm"/> <source src="./img/filter-live-search.mp4" type="video/mp4"/> Your browser does not support the video tag. </video>
 
+最後に、フィルターサイドバーはユーザーのお気に入りのフィルターを表示するのに理想的な場所です。詳細については、[`<SavedQueriesList>`のドキュメント](./SavedQueriesList.md)を参照してください。
 
-Finally, a filter sidebar is the ideal place to display the user's favorite filters. Check [the `<SavedQueriesList>` documentation](./SavedQueriesList.md) for more information.
+<video controls autoplay playsinline muted loop> <source src="./img/SavedQueriesList.webm" type="video/webm"/> <source src="./img/SavedQueriesList.mp4" type="video/mp4"/> Your browser does not support the video tag. </video>
+## `<StackedFilters>` コンポーネント
+<video controls autoplay playsinline muted loop width="100%"> <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-form-layout/latest/stackedfilters-overview.webm" type="video/mp4" /> Your browser does not support the video tag. </video>
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/SavedQueriesList.webm" type="video/webm"/>
-  <source src="./img/SavedQueriesList.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+もう一つの代替フィルターUIは、[エンタープライズ版](https://marmelab.com/ra-enterprise)<img class="icon" src="./img/premium.svg" />限定のStacked Filtersダイアログです。これは、フィールド、オペレーター、値を組み合わせて複雑なフィルターを構築することができます。フィルターボタン/フォームコンボよりも強力ですが、データプロバイダーの設定に多くの手間がかかります。
 
-
-## The `<StackedFilters>` Component
-
-<video controls autoplay playsinline muted loop width="100%">
-    <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-form-layout/latest/stackedfilters-overview.webm" type="video/mp4" />
-        Your browser does not support the video tag.
-</video>
-
-Another alternative filter UI is the Stacked Filters dialog, an [Enterprise Edition](https://marmelab.com/ra-enterprise)<img class="icon" src="./img/premium.svg" /> exclusive. It lets users build complex filters by combining a field, an operator, and a value. It's more powerful than the Filter Button/Form Combo, but requires more setup on the data provider.
-
-Here is an example StackedFilters configuration:
+以下はStackedFiltersの設定例です：
 
 ```jsx
 import {
@@ -275,45 +245,36 @@ const PostList = () => (
 )
 ```
 
-Check the [`<StackedFilters>` documentation](./StackedFilters.md) for more information.
+詳細については、[`<StackedFilters>`のドキュメント](./StackedFilters.md)を参照してください。
 
-## Global Search
+## グローバル検索
+<video controls autoplay playsinline muted loop> <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-overview.webm" type="video/webm" /> <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-overview.mp4" type="video/mp4" /> Your browser does not support the video tag. </video>
 
-<video controls autoplay playsinline muted loop>
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-overview.webm" type="video/webm" />
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-overview.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+リストフィルターはフィールドごとの条件を使って正確なクエリを作成できますが、ユーザーはしばしば全文検索のようなシンプルなインターフェースを好みます。結局、それは彼らが毎日検索エンジン、メールクライアント、ファイルエクスプローラーで使用するものです。
 
-Although list filters allow to make precise queries using per-field criteria, users often prefer simpler interfaces like full-text search. After all, that's what they use every day on search engines, email clients, and in their file explorer.
+管理画面で単一のフォーム入力を使用して任意のレコードを検索する全文検索を表示したい場合は、[<Search>コンポーネント](./Search.md)を確認してください。これは[エンタープライズ版](https://marmelab.com/ra-enterprise)<img class="icon" src="./img/premium.svg" />限定です。
 
-If you want to display a full-text search allowing to look for any record in the admin using a single form input, check out [the `<Search>` component](./Search.md), an [Enterprise Edition](https://marmelab.com/ra-enterprise)<img class="icon" src="./img/premium.svg" /> exclusive.
+`<Search>`は任意の既存の検索エンジン（ElasticSearch、Lucene、またはカスタム検索エンジン）に接続でき、検索結果をカスタマイズして関連項目への迅速なナビゲーションを提供し、検索エンジンを「Omnibox」に変えることができます：
 
-`<Search>` can plug to any existing search engine (ElasticSearch, Lucene, or custom search engine), and lets you customize the search results to provide quick navigation to related items, turning the search engine into an "Omnibox":
+<video controls autoplay playsinline muted loop> <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-demo.webm" type="video/webm" /> <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-demo.mp4" type="video/mp4" /> Your browser does not support the video tag. </video>
 
-<video controls autoplay playsinline muted loop>
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-demo.webm" type="video/webm" />
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-demo.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+グローバル検索の詳細については、[`<Search>`のドキュメント](./Search.md)を参照してください。
 
-For mode details about the global search, check the [`<Search>` documentation](./Search.md).
+## フィルタークエリパラメータ
 
-## Filter Query Parameter
+React-adminはURLから`filter`クエリパラメータを使用して、リストに適用するフィルターを決定します。
 
-React-admin uses the `filter` query parameter from the URL to determine the filters to apply to the list.
+React-adminアプリケーションの典型的なリストページURLは次のとおりです：
 
-Here is a typical List page URL in a react-admin application:
+> [https://myadmin.dev/#/posts?displayedFilters=%7B%22commentable%22%3Atrue%7D&filter=%7B%22commentable%22%3Atrue%2C%22q%22%3A%22lorem%20%22%7D&order=DESC&page=1&perPage=10&sort=published\_at](https://myadmin.dev/#/posts?displayedFilters=%7B%22commentable%22%3Atrue%7D&filter=%7B%22commentable%22%3Atrue%2C%22q%22%3A%22lorem%20%22%7D&order=DESC&page=1&perPage=10&sort=published_at)
 
-> https://myadmin.dev/#/posts?displayedFilters=%7B%22commentable%22%3Atrue%7D&filter=%7B%22commentable%22%3Atrue%2C%22q%22%3A%22lorem%20%22%7D&order=DESC&page=1&perPage=10&sort=published_at
+デコードすると、`filter`クエリパラメータはJSON値として表示されます：
 
-Once decoded, the `filter` query parameter reveals as a JSON value:
-
-```
+```sql
 filter={"commentable":true,"q":"lorem "}
 ```
 
-This leads to the following data provider call:
+これにより、次のデータプロバイダー呼び出しが行われます：
 
 ```js
 dataProvider.getList('posts', {
@@ -323,19 +284,20 @@ dataProvider.getList('posts', {
 });
 ```
 
-When a user adds or remove a filter, react-admin changes the `filter` query parameter in the URL, and the `<List>` components fetches `dataProvider.getList()` again with the new filters.
+ユーザーがフィルターを追加または削除すると、react-adminはURLの`filter`クエリパラメータを変更し、`<List>`コンポーネントが新しいフィルターで再度`dataProvider.getList()`をフェッチします。
 
-**Tip**: Once a user sets a filter, react-admin persists the filter value in the application state, so that when the user comes back to the list, they should see the filtered list. That's a design choice.
+**ヒント**: ユーザーがフィルターを設定すると、react-adminはフィルター値をアプリケーションの状態に保持し、ユーザーがリストに戻ったときにフィルター付きリストを表示します。これは設計上の選択です。
 
-**Tip**: You can change the filters programmatically by updating the query parameter, e.g. using the `<Link>` component or the `useNavigate()` hook from `react-router-dom`.
+**ヒント**: `<Link>`コンポーネントや`react-router-dom`の`useNavigate()`フックを使用して、クエリパラメータを更新することでプログラム的にフィルターを変更できます。
 
-## Linking To A Pre-Filtered List
+## 事前フィルターされたリストへのリンク
 
-As the filter values are taken from the URL, you can link to a pre-filtered list by setting the `filter` query parameter.
+フィルター値はURLから取得されるため、`filter`クエリパラメータを設定することで、事前フィルターされたリストへのリンクを作成できます。
 
-For instance, if you have a list of tags, you can display a button for each category to link to the list of posts filtered by that tag:
+たとえば、タグのリストがある場合、そのタグでフィルターされた投稿のリストにリンクするボタンを表示できます：
 
 {% raw %}
+
 ```jsx
 import { useTranslate, useRecordContext } from 'react-admin';
 import Button from '@mui/material/Button';
@@ -353,50 +315,50 @@ const LinkToRelatedProducts = () => {
                 search: `filter=${JSON.stringify({ category_id: record.id })}`,
             }}
         >
-            All posts with the category {record.name} ;
+            {record.name}のカテゴリーのすべての投稿
         </Button>
     ) : null;
 };
 ```
+
 {% endraw %}
 
-You can use this button e.g. as a child of `<Datagrid>`. You can also create a custom Menu button with that technique to link to the unfiltered list by setting the filter value to `{}`.
+このボタンを`<Datagrid>`の子として使用できます。この技術を使用して、フィルター値を`{}`に設定することで、フィルターされていないリストにリンクするカスタムメニューボタンを作成することもできます。
 
-## Filter Operators
+## フィルターオペレーター
 
-The internal format for storing filters and sending them to the dataProvider is an object, e.g.:
+フィルターを内部的に格納し、データプロバイダーに送信する形式はオブジェクトです。例えば：
 
 ```js
 { commentable: true, q: "lorem " }
 ```
 
-This is fine for equality filters, but how can you do more complex filters, like "between", "contains", "starts with", "greater than", etc.?
+これは等値フィルターには問題ありませんが、「間」、「含む」、「始まる」、「より大きい」などのより複雑なフィルターをどのように行うか？
 
-As there is no standard way to pass such complex filters to APIs, react-admin makes no decision about it. It's up to you to decide how to store them in the filter object.
+このような複雑なフィルターをAPIに渡す標準的な方法はないため、react-adminはその点について何も決定しません。それをフィルターオブジェクトに格納する方法を決めるのはあなた次第です。
 
-The demos show one possible way: suffix the filter name with an operator, e.g. "_gte" for "greater than or equal to".
+デモでは一つの方法を示しています：フィルター名にオペレーターをサフィックスとして付けます。例えば、"greater than or equal to"のために"\_gte"を使用します。
 
 ```jsx
 const postFilters = [
-    <DateInput source="released_gte" label="Released after" />,
-    <DateInput source="released_lte" label="Released before" />
+    <DateInput source="released_gte" label="これ以降にリリース" />,
+    <DateInput source="released_lte" label="これ以前にリリース" />
 ];
 ```
 
-Some API backends (e.g. JSON Server) know how to handle this syntax. If your API doesn't understand these 'virtual fields', you will have to transform them into the expected syntax in the Data Provider.
+一部のAPIバックエンド（例：JSON Server）はこの構文を理解します。あなたのAPIがこれらの「仮想フィールド」を理解しない場合は、それらをデータプロバイダーで期待される構文に変換する必要があります。
 
 ```jsx
-// in dataProvider.js
+// dataProvider.js内
 export default {
     getList: (resource, params) => {
-        // transform a filter object to a filters array with operators
-        // filter is like { commentable: true, released_gte: '2018-01-01' }
+        // フィルターオブジェクトをオペレーター付きのフィルター配列に変換する
+        // フィルターは{ commentable: true, released_gte: '2018-01-01' }のようになります
         const filter = params.filter;
         const operators = { '_gte': '>=', '_lte': '<=', '_neq': '!=' };
-        // filters is like [
+        // フィルターは次のようになります：
         //    { field: "commentable", operator: "=", value: true},
         //    { field: "released", operator: ">=", value: '2018-01-01'}
-        // ]
         const filters = Object.keys(filter).map(key => {
             const operator = operators[key.slice(-4)];
             return operator
@@ -418,18 +380,12 @@ export default {
 }
 ```
 
-## Saved Queries: Let Users Save Filter And Sort
+## 保存されたクエリ：ユーザーにフィルターとソートを保存させる
+<video controls autoplay playsinline muted loop> <source src="./img/SavedQueriesList.webm" type="video/webm"/> <source src="./img/SavedQueriesList.mp4" type="video/mp4"/> Your browser does not support the video tag. </video>
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/SavedQueriesList.webm" type="video/webm"/>
-  <source src="./img/SavedQueriesList.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+保存されたクエリにより、ユーザーはフィルターとソートの組み合わせを新しい個人用フィルターとして保存できます。保存されたクエリはセッション間で持続するため、ユーザーは管理画面を閉じたり再度開いたりしてもカスタムクエリを見つけることができます。保存されたクエリは、フィルターボタン/フォームコンボと<FilterList>サイドバーの両方で利用できます。フィルターボタン/フォームコンボにはデフォルトで有効ですが、<FilterList>サイドバーには自分で追加する必要があります。
 
-
-Saved Queries let users save a combination of filters and sort parameters into a new, personal filter. Saved queries persist between sessions, so users can find their custom queries even after closing and reopening the admin. Saved queries are available both for the Filter Button/Form combo and for the `<FilterList>` Sidebar. It's enabled by default for the Filter Button/Form combo but you have to add it yourself in the `<FilterList>` Sidebar.
-
-`<SavedQueriesList>` is a complement to `<FilterList>` sections for the filter sidebar
+`<SavedQueriesList>`はフィルターサイドバーの<FilterList>セクションを補完します
 
 ```diff
 import { FilterList, FilterListItem, List, Datagrid } from 'react-admin';
@@ -441,10 +397,10 @@ const SongFilterSidebar = () => (
     <Card>
         <CardContent>
 +           <SavedQueriesList />
-            <FilterList label="Record Company" icon={<BusinessIcon />}>
+            <FilterList label="レコード会社" icon={<BusinessIcon />}>
                 ...
             </FilterList>
-            <FilterList label="Released" icon={<DateRangeeIcon />}>
+            <FilterList label="リリース済み" icon={<DateRangeeIcon />}>
                ...
             </FilterList>
         </CardContent>
@@ -460,38 +416,32 @@ const SongList = () => (
 );
 ```
 
-## Building a Custom Filter
+## カスタムフィルターの構築
+<video controls autoplay playsinline muted loop> <source src="./img/filter\_with\_submit.webm" type="video/webm"/> <source src="./img/filter\_with\_submit.mp4" type="video/mp4"/> Your browser does not support the video tag. </video>
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/filter_with_submit.webm" type="video/webm"/>
-  <source src="./img/filter_with_submit.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+フィルターボタン/フォームコンボや<FilterList>サイドバーがニーズに合わない場合は、独自のものを作成できます。React-adminはカスタムフィルターの開発を容易にするショートカットを提供します。
 
+例えば、デフォルトではフィルターボタン/フォームコンボは送信ボタンを提供せず、ユーザーがフォームとの対話を終了した後に自動的に送信されます。これはスムーズなユーザー体験を提供しますが、一部のAPIにとっては呼び出しが多すぎることがあります。
 
-If neither the Filter button/form combo nor the `<FilterList>` sidebar match your need, you can always build your own. React-admin provides shortcuts to facilitate the development of custom filters.
+その場合、ユーザーがフォーム入力に値を入力するのではなく、送信ボタンをクリックしたときにフィルターを処理するのが解決策です。React-adminはそのためのコンポーネントを提供していませんが、フィルタ機能の内部を説明する良い機会です。実際には、フィルターボタン/フォームコンボの代替実装を提供します。
 
-For instance, by default, the filter button/form combo doesn't provide a submit button, and submits automatically after the user has finished interacting with the form. This provides a smooth user experience, but for some APIs, it can cause too many calls.
+カスタムフィルターUIを作成するには、デフォルトのリストツールバーコンポーネントを上書きする必要があります。これには、リストフィルターとやり取りするフィルターボタンと[`Filter Form`](./FilterForm.md)の両方が含まれます。
 
-In that case, the solution is to process the filter when users click on a submit button, rather than when they type values in form inputs. React-admin doesn't provide any component for that, but it's a good opportunity to illustrate the internals of the filter functionality. We'll actually provide an alternative implementation to the Filter button/form combo.
+### フィルターコールバック
 
-To create a custom filter UI, we'll have to override the default List Toolbar component, which will contain both a Filter Button and a [`Filter Form`](./FilterForm.md), interacting with the List filters via the ListContext.
+新しい要素は[useListContextフック](./useListContext.md)を使用して、リストフィルターとより簡単にやり取りできます。このフックは以下の定数を返します：
 
-### Filter Callbacks
+* `filterValues`: URIに基づくフィルターの値、例：`{ "commentable": true, "q": "lorem" }`
+* `setFilters()`: フィルター値を設定するコールバック、例：`setFilters({ "commentable":true })`
+* `displayedFilters`: フォームに表示されるフィルターの名前、例：`['commentable', 'title']`
+* `showFilter()`: フォームに追加のフィルターを表示するコールバック、例：`showFilter('views')`
+* `hideFilter()`: フォームにフィルターを隠すコールバック、例：`hideFilter('title')`
 
-The new element can use [the `useListContext` hook](./useListContext.md) to interact with the list filter more easily. The hook returns the following constants:
+この知識を活用して、送信時にフィルターを設定するカスタム`<List>`コンポーネントを書きます。
 
-- `filterValues`: Value of the filters based on the URI, e.g. `{ "commentable": true, "q": "lorem" }`
-- `setFilters()`: Callback to set the filter values, e.g. `setFilters({ "commentable":true })`
-- `displayedFilters`: Names of the filters displayed in the form, e.g. `['commentable', 'title']`
-- `showFilter()`: Callback to display an additional filter in the form, e.g. `showFilter('views')`
-- `hideFilter()`: Callback to hide a filter in the form, e.g. `hideFilter('title')`
+### カスタムフィルターボタン
 
-Let's use this knowledge to write a custom `<List>` component that filters on submit.
-
-### Custom Filter Button
-
-The following component shows the filter form on click. We'll take advantage of the `showFilter` function:
+次のコンポーネントはクリック時にフィルターフォームを表示します。`showFilter`関数を利用します：
 
 ```jsx
 import { useListContext } from 'react-admin';
@@ -507,19 +457,20 @@ const PostFilterButton = () => {
             onClick={() => showFilter("main")}
             startIcon={<ContentFilter />}
         >
-            Filter
+            フィルター
         </Button>
     );
 };
 ```
 
-Normally, `showFilter()` adds one input to the `displayedFilters` list. As the filter form will be entirely hidden or shown, we use `showFilter()` with a virtual "main" input, which represents the entire form.
+通常、`showFilter()`は`displayedFilters`リストに1つの入力を追加します。フィルターフォーム全体を隠すか表示するかなので、仮想の「main」入力を使用してフィルター全体を表します。
 
-### Custom Filter Form
+### カスタムフィルターフォーム
 
-Next is the filter form component, displayed only when the "main" filter is displayed (i.e. when a user has clicked the filter button). The form inputs appear directly in the form, and the form submission triggers the `setFilters()` callback passed as parameter. We'll use `react-hook-form` to handle the form state:
+次に、ユーザーがフィルターボタンをクリックしたときに表示されるフィルターフォームコンポーネントです。フォーム入力は直接フォーム内に表示され、フォーム送信はパラメータとして渡された`setFilters()`コールバックをトリガーします。フォーム状態を処理するために`react-hook-form`を使用します：
 
 {% raw %}
+
 ```jsx
 import * as React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
@@ -563,7 +514,7 @@ const PostFilterForm = () => {
                             resettable
                             helperText={false}
                             source="q"
-                            label="Search"
+                            label="検索"
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment>
@@ -582,12 +533,12 @@ const PostFilterForm = () => {
                     </Box>
                     <Box component="span" mr={2} mb={1.5}>
                         <Button variant="outlined" color="primary" type="submit">
-                            Filter
+                            フィルター
                         </Button>
                     </Box>
                     <Box component="span" mb={1.5}>
                         <Button variant="outlined" onClick={resetFilter}>
-                            Close
+                            閉じる
                         </Button>
                     </Box>
                 </Box>
@@ -596,11 +547,12 @@ const PostFilterForm = () => {
     );
 };
 ```
+
 {% endraw %}
 
-### Using The Custom Filters in The List Actions
+### カスタムフィルターをリストアクションで使用する
 
-To finish, create a `<ListAction>` component and pass it to the `<List>` component using the `actions` prop:
+最後に、`<ListAction>`コンポーネントを作成し、`actions`プロパティを使用して`<List>`コンポーネントに渡します：
 
 ```jsx
 import { TopToolbar, ExportButton } from 'react-admin';
@@ -623,6 +575,8 @@ export const PostList = () => (
 );
 ```
 
-**Tip**: No need to pass any `filters` to the list anymore, as the `<PostFilterForm>` component will display them.
+**ヒント**: フィルターをリストに渡す必要はもうありません。`<PostFilterForm>`コンポーネントがそれらを表示します。
 
-You can use a similar approach to offer alternative User Experiences for data filtering, e.g. to display the filters as a line in the datagrid headers.
+同様のアプローチを使用して、データフィルタリングのための代替ユーザーエクスペリエンスを提供することもできます。例えば、フィルターをデータグリッドヘッダーの行として表示することができます。
+
+

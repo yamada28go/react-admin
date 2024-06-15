@@ -563,42 +563,42 @@
                         <div
                             class="markdown-section DocSearch-content toc-content"
                         >
-                            <h1 id="key-concepts">Key Concepts</h1>
+                            <h1 id="主要概念">主要概念</h1>
 
-<p>React-admin relies on a several design decisions that structure its codebase.</p>
+<p>React-adminは、そのコードベースを構築するいくつかの設計決定に依存しています。</p>
 
-<h2 id="single-page-application">Single-Page Application</h2>
+<h2 id="シングルページアプリケーション">シングルページアプリケーション</h2>
 
-<p>React-admin is specifically designed to build <a href="https://en.wikipedia.org/wiki/Single-page_application">Single-Page Applications (SPA)</a>. In a react-admin app, the browser fetches the required HTML, CSS, and JavaScript to render the application only once. Subsequently, data is fetched from APIs through AJAX calls. This is in contrast to traditional web applications, where the browser fetches a new HTML page for each screen.</p>
+<p>React-adminは<a href="https://en.wikipedia.org/wiki/Single-page_application">シングルページアプリケーション (SPA)</a>を構築するために特別に設計されています。React-adminアプリでは、ブラウザは必要なHTML、CSS、およびJavaScriptを一度だけ取得し、その後はAJAXコールを通じてAPIからデータを取得します。これは、各画面のために新しいHTMLページを取得する従来のウェブアプリケーションとは対照的です。</p>
 
 <p><img class="no-shadow" src="./img/SPA-lifecycle.png" alt="SPA lifecycle" /></p>
 
-<p>The SPA architecture ensures that react-admin apps are <a href="./Features.md#fast">exceptionally fast</a>, easy to host, and compatible with existing APIs without requiring a dedicated backend.</p>
+<p>SPAアーキテクチャは、React-adminアプリを<a href="./Features.md#fast">非常に高速</a>にし、ホスティングが容易で、専用のバックエンドを必要とせず既存のAPIと互換性があります。</p>
 
-<p>To achieve this, react-admin utilizes an internal router, powered by <code class="language-plaintext highlighter-rouge">react-router</code>, to display the appropriate screen when the user clicks on a link. Developers can define routes using the <a href="./Resource.md"><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code></a> component for CRUD routes and the <a href="./CustomRoutes.md"><code class="language-plaintext highlighter-rouge">&lt;CustomRoutes&gt;</code></a> component for other routes.</p>
+<p>これを達成するために、React-adminは<code class="language-plaintext highlighter-rouge">react-router</code>によって提供される内部ルーターを使用して、ユーザーがリンクをクリックしたときに適切な画面を表示します。開発者は、CRUDルート用の<a href="./Resource.md"><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code></a>コンポーネントおよび他のルート用の<a href="./CustomRoutes.md"><code class="language-plaintext highlighter-rouge">&lt;CustomRoutes&gt;</code></a>コンポーネントを使用してルートを定義できます。</p>
 
-<p>For example, the following react-admin application:</p>
+<p>例えば、以下のReact-adminアプリケーションは次のルートを宣言しています：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span><span class="p">,</span> <span class="nx">CustomRoutes</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Route</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="k">export</span> <span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
-    <span class="p">&lt;</span><span class="nc">Admin</span> <span class="na">dataProvider</span><span class="p">=</span><span class="si">{</span><span class="nx">dataProvider</span><span class="si">}</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nc">Resource</span> <span class="na">name</span><span class="p">=</span><span class="s">"labels"</span> <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">LabelList</span><span class="si">}</span> <span class="na">edit</span><span class="p">=</span><span class="si">{</span><span class="nx">LabelEdit</span><span class="si">}</span> <span class="na">show</span><span class="p">=</span><span class="si">{</span><span class="nx">LabelShow</span><span class="si">}</span> <span class="p">/&gt;</span>
-        <span class="p">&lt;</span><span class="nc">Resource</span> <span class="na">label</span><span class="p">=</span><span class="s">"genres"</span> <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">GenreList</span><span class="si">}</span> <span class="p">/&gt;</span>
-        <span class="p">&lt;</span><span class="nc">Resource</span> <span class="na">name</span><span class="p">=</span><span class="s">"artists"</span> <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">ArtistList</span><span class="si">}</span> <span class="na">edit</span><span class="p">=</span><span class="si">{</span><span class="nx">ArtistDetail</span><span class="si">}</span> <span class="na">create</span><span class="p">=</span><span class="si">{</span><span class="nx">ArtistCreate</span><span class="si">}</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nc">Route</span> <span class="na">path</span><span class="p">=</span><span class="s">":id/songs"</span> <span class="na">element</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">SongList</span> <span class="p">/&gt;</span><span class="si">}</span> <span class="p">/&gt;</span>
-            <span class="p">&lt;</span><span class="nc">Route</span> <span class="na">path</span><span class="p">=</span><span class="s">":id/songs/:songId"</span> <span class="na">element</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">SongDetail</span> <span class="p">/&gt;</span><span class="si">}</span> <span class="p">/&gt;</span>
-        <span class="p">&lt;/</span><span class="nc">Resource</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nc">CustomRoutes</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nc">Route</span> <span class="na">path</span><span class="p">=</span><span class="s">"/profile"</span> <span class="na">element</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">Profile</span> <span class="p">/&gt;</span><span class="si">}</span> <span class="p">/&gt;</span>
-            <span class="p">&lt;</span><span class="nc">Route</span> <span class="na">path</span><span class="p">=</span><span class="s">"/organization"</span> <span class="na">element</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">Organization</span> <span class="p">/&gt;</span><span class="si">}</span> <span class="p">/&gt;</span>
-        <span class="p">&lt;/</span><span class="nc">CustomRoutes</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nc">Admin</span><span class="p">&gt;</span>
-<span class="p">);</span>
+    <span class="k">export</span> <span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nc">Admin</span> <span class="na">dataProvider</span><span class="p">=</span><span class="si">{</span><span class="nx">dataProvider</span><span class="si">}</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">Resource</span> <span class="na">name</span><span class="p">=</span><span class="s">"labels"</span> <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">LabelList</span><span class="si">}</span> <span class="na">edit</span><span class="p">=</span><span class="si">{</span><span class="nx">LabelEdit</span><span class="si">}</span> <span class="na">show</span><span class="p">=</span><span class="si">{</span><span class="nx">LabelShow</span><span class="si">}</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">Resource</span> <span class="na">label</span><span class="p">=</span><span class="s">"genres"</span> <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">GenreList</span><span class="si">}</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">Resource</span> <span class="na">name</span><span class="p">=</span><span class="s">"artists"</span> <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">ArtistList</span><span class="si">}</span> <span class="na">edit</span><span class="p">=</span><span class="si">{</span><span class="nx">ArtistDetail</span><span class="si">}</span> <span class="na">create</span><span class="p">=</span><span class="si">{</span><span class="nx">ArtistCreate</span><span class="si">}</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">Route</span> <span class="na">path</span><span class="p">=</span><span class="s">":id/songs"</span> <span class="na">element</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">SongList</span> <span class="p">/&gt;</span><span class="si">}</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">Route</span> <span class="na">path</span><span class="p">=</span><span class="s">":id/songs/:songId"</span> <span class="na">element</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">SongDetail</span> <span class="p">/&gt;</span><span class="si">}</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;/</span><span class="nc">Resource</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">CustomRoutes</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">Route</span> <span class="na">path</span><span class="p">=</span><span class="s">"/profile"</span> <span class="na">element</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">Profile</span> <span class="p">/&gt;</span><span class="si">}</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">Route</span> <span class="na">path</span><span class="p">=</span><span class="s">"/organization"</span> <span class="na">element</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">Organization</span> <span class="p">/&gt;</span><span class="si">}</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;/</span><span class="nc">CustomRoutes</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">Admin</span><span class="p">&gt;</span>
+    <span class="p">);</span>
 </code></pre></div></div>
 
-<p>Declares the following routes:</p>
+<p>宣言されるルートは以下の通りです：</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">/labels</code>: <code class="language-plaintext highlighter-rouge">&lt;LabelList&gt;</code></li>
@@ -614,15 +614,15 @@
   <li><code class="language-plaintext highlighter-rouge">/organization</code>: <code class="language-plaintext highlighter-rouge">&lt;Organization&gt;</code></li>
 </ul>
 
-<p>The <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> component allows react-admin to automatically link CRUD pages between them, including those for related entities. This approach allows you to think about your application in terms of entities, rather than getting bogged down by managing routes.</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>コンポーネントは、関連エンティティのCRUDページ間のリンクを自動的に行うため、ルートの管理に煩わされることなく、アプリケーションをエンティティの観点から考えることができます。</p>
 
-<h2 id="providers">Providers</h2>
+<h2 id="プロバイダ">プロバイダ</h2>
 
-<p>React-admin does not make any assumptions about the specific structure of your API. Instead, it defines its own syntax for data fetching, authentication, internationalization, and preferences. To interact with your API, react-admin relies on adapters called <strong>providers</strong>.</p>
+<p>React-adminは、APIの特定の構造について仮定をしません。その代わりに、データ取得、認証、国際化、設定のために独自のシンタックスを定義します。APIと対話するために、React-adminは<strong>プロバイダ</strong>と呼ばれるアダプタに依存します。</p>
 
 <p><img class="no-shadow" src="./img/providers.png" alt="Providers" /></p>
 
-<p>For example, to fetch a list of records from the API, you would use the <code class="language-plaintext highlighter-rouge">dataProvider</code> object as follows:</p>
+<p>例えば、APIからレコードのリストを取得するためには、次のように<code class="language-plaintext highlighter-rouge">dataProvider</code>オブジェクトを使用します：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">dataProvider</span><span class="p">.</span><span class="nx">getList</span><span class="p">(</span><span class="dl">'</span><span class="s1">posts</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
     <span class="na">pagination</span><span class="p">:</span> <span class="p">{</span> <span class="na">page</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">perPage</span><span class="p">:</span> <span class="mi">5</span> <span class="p">},</span>
@@ -643,25 +643,25 @@
 <span class="c1">// }</span>
 </code></pre></div></div>
 
-<p>The <code class="language-plaintext highlighter-rouge">dataProvider.getList()</code> method is responsible for translating this request into the appropriate HTTP request to your API. When using the REST data provider, the above code will translate to:</p>
+<p><code class="language-plaintext highlighter-rouge">dataProvider.getList()</code>メソッドは、このリクエストをAPIへの適切なHTTPリクエストに変換する責任があります。RESTデータプロバイダを使用する場合、上記のコードは次のように変換されます：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET http://path.to.my.api/posts?sort=["title","ASC"]&amp;range=[0, 4]&amp;filter={"author_id":12}
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">GET http://path.to.my.api/posts?sort=["title","ASC"]&amp;range=[0, 4]&amp;filter={"author_id":12}</span>
 
-HTTP/1.1 200 OK
-Content-Type: application/json
-Content-Range: posts 0-4/27
-[
-    { id: 452, title: "Harry Potter Cast: Where Now?", author_id: 12 },
-    { id: 384, title: "Hermione: A Feminist Icon", author_id: 12 },
-    { id: 496, title: "Marauder's Map Mysteries", author_id: 12 },
-    { id: 123, title: "Real-World Roots of Wizard Spells", author_id: 12 },
-    { id: 189, title: "Your True Hogwarts House Quiz", author_id: 12 },
-]
+<span class="s">HTTP/1.1 200 OK</span>
+<span class="na">Content-Type</span><span class="pi">:</span> <span class="s">application/json</span>
+<span class="na">Content-Range</span><span class="pi">:</span> <span class="s">posts 0-4/27</span>
+<span class="pi">[</span>
+    <span class="pi">{</span> <span class="nv">id</span><span class="pi">:</span> <span class="nv">452</span><span class="pi">,</span> <span class="nv">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Harry</span><span class="nv"> </span><span class="s">Potter</span><span class="nv"> </span><span class="s">Cast:</span><span class="nv"> </span><span class="s">Where</span><span class="nv"> </span><span class="s">Now?"</span><span class="pi">,</span> <span class="nv">author_id</span><span class="pi">:</span> <span class="nv">12</span> <span class="pi">},</span>
+    <span class="pi">{</span> <span class="nv">id</span><span class="pi">:</span> <span class="nv">384</span><span class="pi">,</span> <span class="nv">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Hermione:</span><span class="nv"> </span><span class="s">A</span><span class="nv"> </span><span class="s">Feminist</span><span class="nv"> </span><span class="s">Icon"</span><span class="pi">,</span> <span class="nv">author_id</span><span class="pi">:</span> <span class="nv">12</span> <span class="pi">},</span>
+    <span class="pi">{</span> <span class="nv">id</span><span class="pi">:</span> <span class="nv">496</span><span class="pi">,</span> <span class="nv">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Marauder's</span><span class="nv"> </span><span class="s">Map</span><span class="nv"> </span><span class="s">Mysteries"</span><span class="pi">,</span> <span class="nv">author_id</span><span class="pi">:</span> <span class="nv">12</span> <span class="pi">},</span>
+    <span class="pi">{</span> <span class="nv">id</span><span class="pi">:</span> <span class="nv">123</span><span class="pi">,</span> <span class="nv">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Real-World</span><span class="nv"> </span><span class="s">Roots</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Wizard</span><span class="nv"> </span><span class="s">Spells"</span><span class="pi">,</span> <span class="nv">author_id</span><span class="pi">:</span> <span class="nv">12</span> <span class="pi">},</span>
+    <span class="pi">{</span> <span class="nv">id</span><span class="pi">:</span> <span class="nv">189</span><span class="pi">,</span> <span class="nv">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Your</span><span class="nv"> </span><span class="s">True</span><span class="nv"> </span><span class="s">Hogwarts</span><span class="nv"> </span><span class="s">House</span><span class="nv"> </span><span class="s">Quiz"</span><span class="pi">,</span> <span class="nv">author_id</span><span class="pi">:</span> <span class="nv">12</span> <span class="pi">},</span>
+<span class="pi">]</span>
 </code></pre></div></div>
 
-<p>React-admin comes with <a href="./DataProviderList.md">more than 50 data providers</a> for various backends, including REST, GraphQL, Firebase, Django REST Framework, API Platform, and more. If these providers do not suit your API, you have the flexibility to <a href="./DataProviderWriting.md">develop a custom provider</a>.</p>
+<p>React-adminは、REST、GraphQL、Firebase、Django REST Framework、API Platformなど、さまざまなバックエンド用に<a href="./DataProviderList.md">50以上のデータプロバイダ</a>を提供します。これらのプロバイダがAPIに適さない場合は、<a href="./DataProviderWriting.md">カスタムプロバイダの開発</a>が可能です。</p>
 
-<p>This approach is why react-admin components do not call <code class="language-plaintext highlighter-rouge">fetch</code> or <code class="language-plaintext highlighter-rouge">axios</code> directly. Instead, they rely on the data provider to fetch data from the API. Similarly, it is recommended that your custom components follow the same pattern and utilize <a href="./Actions.md">data provider hooks</a>, such as <a href="./useGetList.md"><code class="language-plaintext highlighter-rouge">useGetList</code></a>:</p>
+<p>このアプローチのため、React-adminコンポーネントは直接<code class="language-plaintext highlighter-rouge">fetch</code>や<code class="language-plaintext highlighter-rouge">axios</code>を呼び出すことはありません。代わりに、データプロバイダに依存してAPIからデータを取得します。同様に、カスタムコンポーネントも同じパターンに従い、<a href="./Actions.md">データプロバイダフック</a>（例：<a href="./useGetList.md"><code class="language-plaintext highlighter-rouge">useGetList</code></a>）を使用することをお勧めします：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useGetList</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -676,7 +676,7 @@ Content-Range: posts 0-4/27
     <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">return</span> <span class="p">&lt;</span><span class="nc">Error</span> <span class="p">/&gt;;</span>
     <span class="k">return</span> <span class="p">(</span>
         <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Found <span class="si">{</span><span class="nx">total</span><span class="si">}</span> posts matching your query<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>あなたのクエリに一致する投稿が<span class="si">{</span><span class="nx">total</span><span class="si">}</span>件見つかりました<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
                 <span class="si">{</span><span class="nx">data</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">record</span> <span class="o">=&gt;</span> <span class="p">(</span>
                     <span class="p">&lt;</span><span class="nt">li</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">record</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">record</span><span class="p">.</span><span class="nx">title</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
@@ -687,19 +687,19 @@ Content-Range: posts 0-4/27
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>By using <code class="language-plaintext highlighter-rouge">useGetList</code>, you gain various benefits beyond a simple <code class="language-plaintext highlighter-rouge">fetch</code>: it handles user credentials, triggers loading indicators, manages loading states, handles errors, caches results for future use, and controls the data shape, among other things.</p>
+<p><code class="language-plaintext highlighter-rouge">useGetList</code>を使用することで、ユーザーの認証情報の管理、ローディングインジケータのトリガー、ローディング状態の管理、エラーの処理、結果のキャッシュ、データ形状の制御など、単なる<code class="language-plaintext highlighter-rouge">fetch</code>以上のさまざまな利点を得ることができます。</p>
 
-<p>Whenever you need to communicate with a server, you will use these providers. Since they are specialized for their respective domains and tightly integrated with react-admin, they will save you a significant amount of time and effort.</p>
+<p>サーバーと通信する必要があるときは、常にこれらのプロバイダを使用します。これらはそれぞれのドメインに特化しており、React-adminと緊密に統合されているため、開発者の時間と労力を大幅に節約できます。</p>
 
-<h2 id="smart-components">Smart Components</h2>
+<h2 id="スマートコンポーネント">スマートコンポーネント</h2>
 
-<p>React-admin was built to avoid rewriting the same code and over again, because most web applications use the same basic building blocks. It provides a library of React components (<a href="./Reference.md#components">more than 150 components to date</a>). Most of these are <strong>smart components</strong> as they not only handle rendering HTML but also take care of data fetching, state management, and interaction within the application.</p>
+<p>React-adminは、ほとんどのウェブアプリケーションが同じ基本的な構成要素を使用するため、同じコードを何度も書き直すことを避けるために作られました。React-adminは、データフェッチング、状態管理、アプリケーション内の相互作用を処理する<strong>スマートコンポーネント</strong>を提供しています。</p>
 
 <p><a href="./img/components.webp"><img class="no-shadow" src="./img/components.webp" alt="Smart components" /></a></p>
 
-<p>It’s important to note that react-admin is not merely a UI Kit like Material UI or Bootstrap. It goes beyond presentation to offer building blocks specifically tailored for data-driven applications. While it is built on top of Material UI, you don’t need to be familiar with Material UI to use react-admin effectively.</p>
+<p>React-adminは、Material UIやBootstrapのようなUIキットではありません。それ以上に、データ駆動型アプリケーションに特化した構成要素を提供します。Material UIの上に構築されていますが、Material UIに詳しくなくてもReact-adminを効果的に使用できます。</p>
 
-<p>For example, to create a custom menu for your application, you can utilize the <code class="language-plaintext highlighter-rouge">&lt;Menu&gt;</code> component:</p>
+<p>例えば、カスタムメニューを作成するには、<code class="language-plaintext highlighter-rouge">&lt;Menu&gt;</code>コンポーネントを利用できます：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/MyMenu.js</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Menu</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
@@ -716,17 +716,17 @@ Content-Range: posts 0-4/27
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>In this example, <code class="language-plaintext highlighter-rouge">&lt;Menu.DashboardItem&gt;</code> links to the <code class="language-plaintext highlighter-rouge">/dashboard</code> route, <code class="language-plaintext highlighter-rouge">&lt;Menu.ResourceItem&gt;</code> links to the <code class="language-plaintext highlighter-rouge">list</code> page defined in the resource configuration from the <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> component, and <code class="language-plaintext highlighter-rouge">&lt;Menu.Item&gt;</code> is a generic component that you can use to link to any route in your application. The <code class="language-plaintext highlighter-rouge">&lt;Menu&gt;</code> component automatically responds to changes on the application location and highlights the current route. Additionally, if you use <a href="./AuthRBAC.md">Role-Based Access Control</a>, users will only see the menu items they have access to.</p>
+<p>この例では、<code class="language-plaintext highlighter-rouge">&lt;Menu.DashboardItem&gt;</code>は<code class="language-plaintext highlighter-rouge">/dashboard</code>ルートにリンクし、<code class="language-plaintext highlighter-rouge">&lt;Menu.ResourceItem&gt;</code>は<code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>コンポーネントから定義されたリストページにリンクし、<code class="language-plaintext highlighter-rouge">&lt;Menu.Item&gt;</code>はアプリケーションの任意のルートにリンクするために使用できる汎用コンポーネントです。<code class="language-plaintext highlighter-rouge">&lt;Menu&gt;</code>コンポーネントは、アプリケーションの位置の変更に自動的に応答し、現在のルートを強調表示します。さらに、<a href="./AuthRBAC.md">役割ベースのアクセス制御</a>を使用している場合、ユーザーはアクセス権限のあるメニュー項目のみを表示します。</p>
 
-<p>Before creating your custom component, it’s a good practice to check if react-admin already provides a suitable component with a generic name for your purpose. In many cases, react-admin can save you hours, if not days, of development effort.</p>
+<p>カスタムコンポーネントを作成する前に、React-adminが目的に合ったコンポーネントを既に提供していないか確認するのが良い実践です。多くの場合、React-adminは数時間、場合によっては数日分の開発時間を節約できます。</p>
 
-<p>Some of the other useful react-admin components include those for guided tours, sub-forms, login screens, action buttons, calendars, and much more. Each react-admin component can be customized using props, children, and <a href="./AppTheme.md">theme</a> to fit your application’s specific needs.</p>
+<p>その他の有用なReact-adminコンポーネントには、ガイド付きツアー、サブフォーム、ログイン画面、アクションボタン、カレンダーなどがあります。各React-adminコンポーネントは、プロパティ、子要素、および<a href="./AppTheme.md">テーマ</a>を使用してアプリケーションの特定のニーズに合わせてカスタマイズできます。</p>
 
-<h2 id="composition">Composition</h2>
+<h2 id="コンポジション">コンポジション</h2>
 
-<p>React-admin follows the principle of avoiding components that accept an overwhelming number of props, which are often referred to as “God Components.” Instead, react-admin encourages the use of composition, where components accept subcomponents (either through children or specific props) to handle a share of the logic.</p>
+<p>React-adminは、圧倒的な数のプロパティを受け取る「ゴッドコンポーネント」を避ける原則に従います。代わりに、React-adminは、コンポーネントがロジックの一部を処理するサブコンポーネントを受け入れる（子要素や特定のプロパティを通じて）コンポジションの使用を奨励します。</p>
 
-<p>For example, while you cannot directly pass a list of actions to the <code class="language-plaintext highlighter-rouge">&lt;Edit&gt;</code> component, you can achieve the same result by passing an <code class="language-plaintext highlighter-rouge">actions</code> component:</p>
+<p>例えば、<code class="language-plaintext highlighter-rouge">&lt;Edit&gt;</code>コンポーネントにアクションのリストを直接渡すことはできませんが、<code class="language-plaintext highlighter-rouge">actions</code>コンポーネントを渡すことで同じ結果を達成できます：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Button</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">TopToolbar</span><span class="p">,</span> <span class="nx">ShowButton</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
@@ -740,16 +740,16 @@ Content-Range: posts 0-4/27
 <span class="kd">const</span> <span class="nx">PostEditActions</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">TopToolbar</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nc">ShowButton</span> <span class="p">/&gt;</span>
-        <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">color</span><span class="p">=</span><span class="s">"primary"</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">customAction</span><span class="si">}</span><span class="p">&gt;</span>Custom Action<span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">color</span><span class="p">=</span><span class="s">"primary"</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">customAction</span><span class="si">}</span><span class="p">&gt;</span>カスタムアクション<span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nc">TopToolbar</span><span class="p">&gt;</span>
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>This approach enables you to override specific parts of the logic of a component by composing it with another component.</p>
+<p>このアプローチにより、別のコンポーネントと組み合わせることで、コンポーネントのロジックの特定部分をオーバーライドできます。</p>
 
-<p>Many react-admin components can be easily customized by passing custom components as children or through props.</p>
+<p>多くのReact-adminコンポーネントは、カスタムコンポーネントを子要素やプロパティとして渡すことで簡単にカスタマイズできます。</p>
 
-<p>The trade-off with this approach is that sometimes react-admin may require you to override several components just to enable one specific feature. For instance, to override the Menu, you must pass a custom Menu component to a custom <code class="language-plaintext highlighter-rouge">&lt;Layout&gt;</code>, and pass that custom <code class="language-plaintext highlighter-rouge">&lt;Layout&gt;</code> to the <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component:</p>
+<p>このアプローチのトレードオフは、特定の機能を有効にするために複数のコンポーネントをオーバーライドする必要があることがある点です。例えば、メニューをオーバーライドするには、カスタムメニューコンポーネントをカスタム<code class="language-plaintext highlighter-rouge">&lt;Layout&gt;</code>に渡し、そのカスタム<code class="language-plaintext highlighter-rouge">&lt;Layout&gt;</code>を<code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code>コンポーネントに渡す必要があります：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/Layout.js</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Layout</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
@@ -767,13 +767,13 @@ Content-Range: posts 0-4/27
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>Although this drawback exists, we accept it because the use of composition in react-admin makes the components highly extensible, and it significantly improves the readability and maintainability of the code.</p>
+<p>この欠点にもかかわらず、React-adminでのコンポジションの使用は、コンポーネントを高度に拡張可能にし、コードの読みやすさと保守性を大幅に向上させます。</p>
 
-<h2 id="hooks">Hooks</h2>
+<h2 id="フック">フック</h2>
 
-<p>When you find that you cannot tweak a react-admin component using props, you can always turn to the lower-level API: hooks. In fact, react-admin is built on top of a headless library called <code class="language-plaintext highlighter-rouge">ra-core</code>, which primarily consists of hooks. These hooks hide the framework’s implementation details, allowing you to focus on your business logic. It’s perfectly normal to use react-admin hooks in your own components if the default UI doesn’t meet your specific requirements.</p>
+<p>React-adminコンポーネントをプロパティを使用して調整できない場合、常に低レベルのAPIであるフックに頼ることができます。実際、React-adminは<code class="language-plaintext highlighter-rouge">ra-core</code>というヘッドレスライブラリの上に構築されており、主にフックで構成されています。これらのフックはフレームワークの実装詳細を隠し、ビジネスロジックに集中することができます。デフォルトのUIが特定の要件を満たさない場合、React-adminフックを独自のコンポーネントで使用することは全く普通のことです。</p>
 
-<p>For example, the <code class="language-plaintext highlighter-rouge">&lt;DeleteWithConfirmButton&gt;</code> button renders a confirmation dialog when clicked and then calls the <code class="language-plaintext highlighter-rouge">dataProvider.delete()</code> method for the current record. If you want the same feature but with a different UI, you can use the <code class="language-plaintext highlighter-rouge">useDeleteWithConfirmController</code> hook:</p>
+<p>例えば、<code class="language-plaintext highlighter-rouge">&lt;DeleteWithConfirmButton&gt;</code>ボタンはクリック時に確認ダイアログを表示し、その後現在のレコードのために<code class="language-plaintext highlighter-rouge">dataProvider.delete()</code>メソッドを呼び出します。同じ機能を別のUIで実現したい場合、<code class="language-plaintext highlighter-rouge">useDeleteWithConfirmController</code>フックを使用できます：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">DeleteButton</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">resource</span> <span class="o">=</span> <span class="nx">useResourceContext</span><span class="p">();</span>
@@ -808,23 +808,23 @@ Content-Range: posts 0-4/27
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>The fact that hook names often end with <code class="language-plaintext highlighter-rouge">Controller</code> is intentional and reflects the use of <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">the Model-View-Controller (MVC) pattern</a> for complex components in react-admin.</p>
+<p>フック名がしばしば<code class="language-plaintext highlighter-rouge">Controller</code>で終わるのは意図的であり、React-adminの複雑なコンポーネントに対して<a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">モデル・ビュー・コントローラ (MVC) パターン</a>を使用していることを反映しています。</p>
 
 <ul>
-  <li>The Controller logic is handled by React hooks (e.g. <code class="language-plaintext highlighter-rouge">useListController</code>).</li>
-  <li>The view logic is managed by React components (e.g. <code class="language-plaintext highlighter-rouge">&lt;List&gt;</code>).</li>
-  <li>The model logic is left to the developer, and react-admin simply defines the interface that the model must expose through its Providers.</li>
+  <li>コントローラロジックはReactフック（例：<code class="language-plaintext highlighter-rouge">useListController</code>）で処理されます。</li>
+  <li>ビューロジックはReactコンポーネント（例：<code class="language-plaintext highlighter-rouge">&lt;List&gt;</code>）で管理されます。</li>
+  <li>モデルロジックは開発者に任され、React-adminはそのモデルがプロバイダを通じて公開しなければならないインターフェースを定義するだけです。</li>
 </ul>
 
-<p>React-admin exposes <a href="./Reference.md#hooks">dozens of hooks</a> to assist you in building your own components. You can even construct an entire react-admin application without relying on the Material UI components and use a different UI kit if desired. This flexibility allows you to tailor the application to your specific needs and preferences.</p>
+<p>React-adminは、独自のコンポーネントを構築するための<a href="./Reference.md#hooks">数十のフック</a>を提供します。Material UIコンポーネントに依存せずにReact-adminアプリケーション全体を構築することも可能で、別のUIキットを使用することもできます。この柔軟性により、アプリケーションを特定のニーズや好みに合わせることができます。</p>
 
-<h2 id="context-pull-dont-push">Context: Pull, Don’t Push</h2>
+<h2 id="コンテキストプルプッシュしない">コンテキスト：プル、プッシュしない</h2>
 
-<p>Communication between components can be challenging, especially in large React applications, where passing props down several levels can become cumbersome. React-admin addresses this issue using a pull model, where components expose props to their descendants via a context, and descendants can consume these props using custom hooks.</p>
+<p>コンポーネント間の通信は、大規模なReactアプリケーションでは特に難しい場合があります。いくつものレベルを通じてプロパティを渡すのが煩雑になることがあります。React-adminは、この問題に対応するためにプルモデルを採用しています。コンポーネントはコンテキストを介して子孫にプロパティを公開し、子孫はカスタムフックを使用してこれらのプロパティを消費できます。</p>
 
-<p>Whenever a react-admin component fetches data or defines a callback, it creates a context and places the data and callback in it.</p>
+<p>React-adminコンポーネントがデータを取得したり、コールバックを定義したりするときは常に、コンテキストを作成し、そのデータとコールバックをその中に配置します。</p>
 
-<p>For instance, the <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component creates an <code class="language-plaintext highlighter-rouge">I18NProviderContext</code>, which exposes the <code class="language-plaintext highlighter-rouge">translate</code> function. All components in the application can utilize the <code class="language-plaintext highlighter-rouge">useTranslate</code> hook, which reads the <code class="language-plaintext highlighter-rouge">I18NProviderContext</code>, for translating labels and messages.</p>
+<p>例えば、<code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code>コンポーネントは<code class="language-plaintext highlighter-rouge">I18NProviderContext</code>を作成し、<code class="language-plaintext highlighter-rouge">translate</code>関数を公開します。アプリケーション内のすべてのコンポーネントは、この<code class="language-plaintext highlighter-rouge">translate</code>関数を使用してラベルやメッセージを翻訳するために<code class="language-plaintext highlighter-rouge">useTranslate</code>フックを利用できます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useTranslate</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -836,13 +836,13 @@ Content-Range: posts 0-4/27
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>Similarly, the <code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code> component fetches a record and exposes it via a <code class="language-plaintext highlighter-rouge">RecordContext</code>. Inside the <code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code> component, you can use the <code class="language-plaintext highlighter-rouge">useRecordContext</code> hook to access the record data. For example, you can use it to display a map of the record’s location.</p>
+<p>同様に、<code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code>コンポーネントはレコードを取得し、それを<code class="language-plaintext highlighter-rouge">RecordContext</code>を介して公開します。<code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code>コンポーネント内では、<code class="language-plaintext highlighter-rouge">useRecordContext</code>フックを使用してレコードデータにアクセスできます。例えば、レコードの位置の地図を表示するために使用できます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useRecordContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">MapContainer</span><span class="p">,</span> <span class="nx">TileLayer</span><span class="p">,</span> <span class="nx">Marker</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-leaflet</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">LocationField</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">source</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="nx">record</span> <span class="o">=</span> <span class="nx">useRecordContext</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span> <span class="c1">// use the RecordContext created by &lt;Show&gt;</span>
+    <span class="kd">const</span> <span class="nx">record</span> <span class="o">=</span> <span class="nx">useRecordContext</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span> <span class="c1">// &lt;Show&gt;によって作成されたRecordContextを使用</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">record</span><span class="p">)</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
 
     <span class="k">return</span> <span class="p">(</span>
@@ -857,7 +857,7 @@ Content-Range: posts 0-4/27
 <span class="p">};</span>
 
 <span class="kd">const</span> <span class="nx">StoreShowPage</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
-    <span class="p">&lt;</span><span class="nc">Show</span><span class="p">&gt;</span> <span class="si">{</span><span class="cm">/* create a RecordContext */</span><span class="si">}</span>
+    <span class="p">&lt;</span><span class="nc">Show</span><span class="p">&gt;</span> <span class="si">{</span><span class="cm">/* RecordContextを作成 */</span><span class="si">}</span>
         <span class="p">&lt;</span><span class="nc">SimpleShowLayout</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"name"</span> <span class="p">/&gt;</span>
             <span class="p">&lt;</span><span class="nc">LocationField</span> <span class="na">source</span><span class="p">=</span><span class="s">"location"</span> <span class="p">/&gt;</span>
@@ -866,21 +866,21 @@ Content-Range: posts 0-4/27
 <span class="p">)</span>
 </code></pre></div></div>
 
-<p>This approach eliminates the need for a dependency injection system and provides an elegant solution to access data and callbacks from higher levels in the render tree.</p>
+<p>このアプローチは、依存関係の注入システムの必要性を排除し、レンダーツリーの上位レベルからデータやコールバックにアクセスするためのエレガントな解決策を提供します。</p>
 
-<p>So when you write a component that needs to access data or callbacks defined higher in the render tree, you can always find a context to get it.</p>
+<p>したがって、データやコールバックが必要なコンポーネントを書く場合は、常にそれを取得するためのコンテキストを見つけることができます。</p>
 
-<p>Contexts are fundamental concepts in React Admin. If you are not familiar with them, don’t hesitate to read the <a href="https://react.dev/learn/passing-data-deeply-with-context">React documentation on Context</a>. Understanding contexts will greatly enhance your understanding of how react-admin leverages them to create a powerful and flexible framework.</p>
+<p>コンテキストは、React Adminの基本概念です。もしコンテキストに不慣れであれば、<a href="https://react.dev/learn/passing-data-deeply-with-context">Reactのコンテキストに関するドキュメント</a>を読むことをお勧めします。コンテキストを理解することで、React-adminがこれをどのように活用して強力で柔軟なフレームワークを作り上げているかを大いに理解する助けになります。</p>
 
-<h2 id="batteries-included-but-removable">Batteries Included But Removable</h2>
+<h2 id="充実したが取り外し可能なバッテリー">充実したが取り外し可能なバッテリー</h2>
 
-<p>React-admin allows you to build sophisticated web applications using only its built-in components, assuming that its design choices align with your needs. However, if you find that a component’s existing capabilities don’t meet your specific requirements, you’re free to replace it with a custom component.</p>
+<p>React-adminは、その設計選択があなたのニーズに合う限り、組み込みコンポーネントだけを使用して高度なウェブアプリケーションを構築することができます。しかし、コンポーネントの既存の機能が特定の要件を満たさない場合は、カスタムコンポーネントで置き換えることができます。</p>
 
-<p>For example, if <a href="./SimpleShowLayout.md"><code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code></a> doesn’t allow you to arrange the details of a contact as depicted in the image below:</p>
+<p>例えば、<a href="./SimpleShowLayout.md"><code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code></a>が、以下の画像のように連絡先の詳細を配置することを許可していない場合：</p>
 
 <p><img src="./img/atomic-crm.png" alt="contact details" /></p>
 
-<p>You can create and use your own layout component:</p>
+<p>独自のレイアウトコンポーネントを作成して使用できます：</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">ContactShow</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">ShowBase</span><span class="p">&gt;</span>
@@ -939,54 +939,50 @@ Content-Range: posts 0-4/27
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>This particular example is sourced from <a href="https://marmelab.com/react-admin-crm/#/contacts">Atomic CRM</a>, one of the many <a href="./Demos.md">demo applications</a> available for react-admin.</p>
+<p>この特定の例は、<a href="https://marmelab.com/react-admin-crm/#/contacts">Atomic CRM</a>から引用したもので、多くの<a href="./Demos.md">デモアプリケーション</a>の一つです。</p>
 
-<p>Never hesitate to replace a react-admin component with one of your own design. React-admin does not aim to cover all possible use cases, instead, it provides hooks for incorporating custom components. After all, “It’s just React”™.</p>
+<p>React-adminのコンポーネントを独自のデザインで置き換えることをためらわないでください。React-adminはすべてのユースケースをカバーすることを目指しているわけではなく、カスタムコンポーネントを統合するためのフックを提供しています。結局のところ、「それはただのReactです」™。</p>
 
-<p>With react-admin, you’ll never find yourself backed into a corner.</p>
+<p>React-adminを使用している限り、行き詰まることはありません。</p>
 
-<h2 id="user-experience-is-king">User Experience Is King</h2>
+<h2 id="ユーザーエクスペリエンスは王である">ユーザーエクスペリエンスは王である</h2>
 
-<p>React-admin has two distinct sets of users:</p>
+<p>React-adminには、2つの異なるユーザーセットがあります：</p>
 
 <ul>
-  <li>End users, who use the react-admin app in their browser</li>
-  <li>Developers, who work with the react-admin code in their IDE</li>
+  <li>ブラウザでReact-adminアプリを使用するエンドユーザー</li>
+  <li>React-adminコードをIDEで操作する開発者</li>
 </ul>
 
-<p>We meticulously design both the User Experience (UX) and the Developer Experience (DX) for each feature.</p>
+<p>私たちは、各機能のユーザーエクスペリエンス（UX）と開発者エクスペリエンス（DX）の両方を慎重に設計しています。</p>
 
-<p>For the visual part, react-admin builds upon Material UI, which is a practical implementation of <a href="https://m3.material.io/">Material Design</a>. This design system is painstakingly constructed for web and mobile apps and serves as an excellent foundation for creating user-friendly, consistent user interfaces. However, it’s only part of the story.</p>
+<p>ビジュアル部分については、React-adminは<a href="https://m3.material.io/">Material Design</a>の実践的な実装であるMaterial UIの上に構築されています。このデザインシステムは、ウェブおよびモバイルアプリのために細心の注意を払って構築されており、ユーザーフレンドリーで一貫性のあるユーザーインターフェースを作成するための優れた基盤を提供します。しかし、これは物語の一部に過ぎません。</p>
 
-<p>We invest considerable time fine-tuning the UI to be as intuitive as possible. Small alignment discrepancies, screen flashes, and color inconsistencies are under constant scrutiny. We continually iterate based on customer feedback, working diligently to resolve any visual and animation issues that arise in real-world applications.</p>
+<p>UIを可能な限り直感的にするために、多くの時間を投資しています。小さな整列の不一致、画面のフラッシュ、色の不整合などに常に注意を払い、顧客のフィードバックに基づいて継続的に反復し、実際のアプリケーションで発生するビジュアルおよびアニメーションの問題を解決するために努力しています。</p>
 
-<p>By default, react-admin produces a purposefully bland user interface because we want the focus to be on the content rather than the aesthetics.</p>
+<p>デフォルトでは、React-adminは意図的に淡白なユーザーインターフェースを生成します。なぜなら、見た目よりもコンテンツに焦点を当てたいからです。</p>
 
-<video controls="" autoplay="" playsinline="" muted="" loop="">
-  <source src="./img/sort-button.webm" type="video/webm" />
-  <source src="./img/sort-button.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/sort-button.webm" type="video/webm" /> <source src="./img/sort-button.mp4" type="video/mp4" /> Your browser does not support the video tag. </video>
 
-<p>Regarding the developer experience, react-admin is always evolving to strike the right balance between an intuitive API, advanced features, a reasonable level of abstraction, and comprehensive documentation. The core team members are the initial testers of react-admin, focusing on productivity, debuggability, discoverability, performance, and reliability of all hooks and components.</p>
+<p>開発者エクスペリエンスに関しては、React-adminは直感的なAPI、高度な機能、合理的な抽象化レベル、および包括的なドキュメントのバランスを取るために常に進化しています。コアチームのメンバーはReact-adminの最初のテスターであり、すべてのフックとコンポーネントの生産性、デバッグ性、発見可能性、パフォーマンス、および信頼性に焦点を当てています。</p>
 
-<h2 id="built-on-the-shoulders-of-giants">Built On The Shoulders Of Giants</h2>
+<h2 id="巨人の肩に乗って">巨人の肩に乗って</h2>
 
-<p>Many excellent open-source libraries already address partial requirements of B2B apps: data fetching, forms, UI components, testing, etc.</p>
+<p>多くの優れたオープンソースライブラリが、データフェッチング、フォーム、UIコンポーネント、テストなどのB2Bアプリの部分的な要件に対処しています。</p>
 
-<p>Rather than reinventing the wheel, react-admin uses the best tools in each category (in terms of features, developer experience, active maintenance, documentation, user base), and provides a glue around these libraries.</p>
+<p>React-adminは車輪の再発明を避け、各カテゴリで最高のツール（機能、開発者エクスペリエンス、アクティブなメンテナンス、ドキュメント、ユーザーベースの観点から）を使用し、これらのライブラリの周りに接着剤を提供します。</p>
 
-<p>In react-admin v4, these libraries are called <a href="https://tanstack.com/query/v3">react-query</a>, <a href="https://reactrouter.com/en/main">react-router</a>, <a href="https://react-hook-form.com/">react-hook-form</a>, <a href="https://mui.com/">Material UI</a>, <a href="https://emotion.sh/docs/introduction">emotion</a>, <a href="https://testing-library.com/docs/react-testing-library/intro">testing-library</a>, <a href="https://date-fns.org/">date-fns</a>, and <a href="https://lodash.com/">lodash</a>.</p>
+<p>React-admin v4では、これらのライブラリは<a href="https://tanstack.com/query/v3">react-query</a>、<a href="https://reactrouter.com/en/main">react-router</a>、<a href="https://react-hook-form.com/">react-hook-form</a>、<a href="https://mui.com/">Material UI</a>、<a href="https://emotion.sh/docs/introduction">emotion</a>、<a href="https://testing-library.com/docs/react-testing-library/intro">testing-library</a>、<a href="https://date-fns.org/">date-fns</a>、および<a href="https://lodash.com/">lodash</a>と呼ばれます。</p>
 
-<p>When a new requirement arises, the react-admin teams always looks for an existing solution, and prefers integrating it rather than redeveloping it.</p>
+<p>新しい要件が発生した場合、React-adminチームは常に既存のソリューションを探し、統合を優先します。</p>
 
-<p>There is one constraint, though: all react-admin’s dependencies must be compatible with the <a href="https://github.com/marmelab/react-admin/blob/master/LICENSE.md">MIT license</a>.</p>
+<p>ただし、React-adminのすべての依存関係は、<a href="https://github.com/marmelab/react-admin/blob/master/LICENSE.md">MITライセンス</a>と互換性がある必要があります。</p>
 
-<h2 id="minimal-api-surface">Minimal API Surface</h2>
+<h2 id="最小限のapiサーフェス">最小限のAPIサーフェス</h2>
 
-<p>Before introducing a new hook or adding a new prop to an existing component, we always consider whether there’s a straightforward way to implement the feature using pure React. If it’s feasible, we opt not to add the new prop. Our goal is to maintain simplicity in the react-admin API, code, testing, and documentation. This decision is critical to ensuring a manageable learning curve and a low maintenance burden.</p>
+<p>新しいフックを導入したり、既存のコンポーネントに新しいプロパティを追加したりする前に、純粋なReactを使用して機能を実装する簡単な方法があるかどうかを常に検討します。可能であれば、新しいプロパティを追加しないことを選択します。これは、React-adminのAPI、コード、テスト、およびドキュメントの簡潔さを維持するために重要です。この決定は、学習曲線を管理しやすくし、保守の負担を軽減するために重要です。</p>
 
-<p>Take the <code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code> component as an example, which displays Field elements in a column. Suppose you want to place two fields in a single column. We could introduce a specific syntax to indicate the number of elements per column and per line. However, this would overcomplicate the usage and documentation for simple use cases. Moreover, achieving this is quite doable in pure React, without necessitating any changes in the react-admin core. For instance, you can utilize Material UI’s <code class="language-plaintext highlighter-rouge">&lt;Stack&gt;</code> component:</p>
+<p>例えば、<code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code>コンポーネントはフィールド要素を1列に表示します。1つの列に2つのフィールドを配置したい場合、列と行ごとの要素数を示す特定のシンタックスを導入することができます。しかし、これは単純なユースケースのための使用方法とドキュメントを過度に複雑にします。さらに、このようなことはReactを使用して十分に実現可能であり、React-adminコアに変更を加える必要はありません。例えば、Material UIの<code class="language-plaintext highlighter-rouge">&lt;Stack&gt;</code>コンポーネントを使用することができます：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Show</span><span class="p">,</span> <span class="nx">SimpleShowLayout</span><span class="p">,</span> <span class="nx">TextField</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
@@ -1005,70 +1001,71 @@ Content-Range: posts 0-4/27
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>We believe this code snippet is simple enough for a React developer, so we chose not to add core support for multiple elements per line.</p>
+<p>このコードスニペットはReact開発者にとって十分に簡単だと考えていますので、コアサポートを追加しないことを選びました。</p>
 
-<p>If you can’t find a specific feature in the react-admin documentation, it’s often because it can be quickly achieved using pure React.</p>
+<p>React-adminドキュメントに特定の機能が見つからない場合、それは純粋なReactを使用して迅速に達成できるためであることがよくあります。</p>
 
-<h2 id="backward-compatibility-is-more-important-than-new-features">Backward Compatibility Is More Important Than New Features</h2>
+<h2 id="新機能よりも後方互換性が重要">新機能よりも後方互換性が重要</h2>
 
-<p>Nobody enjoys updating their app’s code simply because a foundational library has introduced a breaking change. React-admin makes a concerted effort to prevent such disruptions and the unnecessary time loss they cause for developers.</p>
+<p>基盤となるライブラリが破壊的な変更を導入したために、アプリのコードを更新することを誰も楽しんでいません。React-adminは、このような中断とそれが開発者に引き起こす不要な時間の損失を防ぐために努力しています。</p>
 
-<p>Some components may have peculiar APIs, often for historical reasons. We prioritize maintaining backward compatibility as much as possible, occasionally at the expense of API consistency.</p>
+<p>一部のコンポーネントには、歴史的な理由で独特のAPIがある場合があります。できるだけ後方互換性を維持することを優先しており、場合によってはAPIの一貫性を犠牲にすることがあります。</p>
 
-<p>The code for some components may seem unnecessarily complex. This usually happens when a component has to support both old and new syntaxes.</p>
+<p>一部のコンポーネントのコードは不必要に複雑に見えるかもしれません。これは通常、コンポーネントが古いシンタックスと新しいシンタックスの両方をサポートする必要がある場合に発生します。</p>
 
-<p>Maintaining this backward compatibility requires a significant effort from the react-admin core team, but it pays off by saving substantial time for react-admin users.</p>
+<p>この後方互換性を維持するには、React-adminのコアチームに多大な労力が必要ですが、それはReact-adminユーザーにとって大幅な時間の節約となります。</p>
 
-<h2 id="principle-of-least-surprise">Principle of Least Surprise</h2>
+<h2 id="驚きの最小化の原則">驚きの最小化の原則</h2>
 
-<p>Due to our emphasis on <a href="#composition">composition</a>, you should be able to combine react-admin components in various ways and expect them to work seamlessly (courtesy of to <a href="#context-pull-dont-push">contexts</a>). We have a comprehensive test suite to ensure that the react-admin components interact well together. Moreover, TypeScript assists in identifying if you’re using a component in a manner that isn’t supported.</p>
+<p>私たちは<a href="#composition">コンポジション</a>を重視しているため、React-adminコンポーネントをさまざまな方法で組み合わせて、それがシームレスに動作することを期待できるべきです（<a href="#context-pull-dont-push">コンテキスト</a>のおかげで）。React-adminコンポーネントがうまく連携することを確認するために包括的なテストスイートがあります。さらに、TypeScriptは、サポートされていない方法でコンポーネントを使用している場合を特定するのに役立ちます。</p>
 
-<p>These considerations lead to strong design choices in the react-admin code.</p>
+<p>これらの考慮事項は、React-adminコードの強力な設計選択につながります。</p>
 
-<p>One notable example relates to child inspection, which we strive to avoid whenever possible. An exception is the <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> component, which inspects its Field children at runtime to determine the column headers. This practice has significant drawbacks:</p>
+<p>顕著な例の一つは、子要素の検査に関するものです。これは可能な限り避けるよう努めています。例外は、列ヘッダーを決定するためにField子要素を実行時に検査する<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>コンポーネントです。このプラクティスには重大な欠点があります：</p>
 
 <ul>
-  <li>If a child is wrapped inside another component that doesn’t follow the same API, the feature breaks</li>
-  <li>Developers typically expect a component to affect its subtree, not its ancestors. Violating this expectation can lead to difficult-to-explain bugs.</li>
+  <li>子要素が同じAPIに従わない別のコンポーネント内にラップされている場合、この機能は壊れます</li>
+  <li>開発者は通常、コンポーネントがそのサブツリーに影響を与えることを期待します。これを期待すると、説明が難しいバグにつながる可能性があります。</li>
 </ul>
 
-<p>We keep child inspection in <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> because there is no superior alternative, but it’s an uncommon exception. Every time we’ve implemented child inspection, we regretted it later.</p>
+<p>私たちはより優れた代替案がないため、<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>における子要素の検査を保持していますが、これは稀な例外です。子要素の検査を実装するたびに、後で後悔しました。</p>
 
-<p>To minimize surprises, we also avoid using <code class="language-plaintext highlighter-rouge">React.cloneElement()</code> and refrain from passing props down the tree.</p>
+<p>驚きを最小限に抑えるため、<code class="language-plaintext highlighter-rouge">React.cloneElement()</code>の使用を避け、ツリー全体にプロパティを渡すことはしません。</p>
 
-<h2 id="principle-of-least-documentation">Principle Of Least Documentation</h2>
+<h2 id="最小限のドキュメントの原則">最小限のドキュメントの原則</h2>
 
-<p>No one reads docs. This is an unfortunate reality that we have come to terms with.</p>
+<p>誰もドキュメントを読みません。これは残念な現実ですが、私たちはそれを受け入れています。</p>
 
-<p>Therefore, when designing a new feature, our priority is to make it as intuitive as possible for developers. We keep the API minimal (<a href="#minimal-api-surface">see above</a>). We emulate the APIs of well-established libraries. We throw errors with clear and informative messages. To aid developers in discovering the API within their IDE, we provide TypeScript types and JSDoc. Furthermore, we publish live examples complemented by annotated code.</p>
+<p>したがって、新しい機能を設計する際には、開発者にとって直感的であることを最優先します。APIを最小限に抑えます（<a href="#minimal-api-surface">上記参照</a>）。確立されたライブラリのAPIを模倣します。明確で情報豊富なエラーメッセージを投げます。開発者がIDE内でAPIを発見できるように、TypeScriptタイプとJSDocを提供します。さらに、注釈付きコードを含むライブ例を公開しています。</p>
 
-<p>Despite this, given the extensive nature of react-admin, it inevitably comes with comprehensive documentation. We cover a wide variety of use cases, extending our documentation beyond mere usage instructions and API descriptions. To ensure that you find the information you need quickly, we frequently duplicate the same information in different places. We truly believe in the power of <a href="https://en.wikipedia.org/wiki/Serendipity">serendipity</a>.</p>
+<p>それにもかかわらず、React-adminは広範なため、結果的に包括的なドキュメントが必要です。さまざまなユースケースをカバーし、使用方法の指示やAPIの説明を超えてドキュメントを提供しています。必要な情報をすばやく見つけるために、同じ情報を異なる場所に頻繁に重複させています。私たちは<a href="https://en.wikipedia.org/wiki/Serendipity">セレンディピティ</a>の力を本当に信じています。</p>
 
-<p>If you find this documentation overwhelming at first, don’t fret. There’s no need to read everything all at once. Start with the Introduction chapter of each section and examine the demo codes. Over time, you’ll become familiar with the react-admin API, and finding the information you need will become a breeze.</p>
+<p>このドキュメントが最初は圧倒的に感じるかもしれませんが、心配しないでください。すべてを一度に読む必要はありません。各セクションのイントロダクションを読み、デモコードを調べてください。時間が経つにつれて、React-admin APIに慣れ、必要な情報を簡単に見つけることができるようになります。</p>
 
-<h2 id="monorepo">Monorepo</h2>
+<h2 id="モノレポ">モノレポ</h2>
 
-<p>Whenever you import a react-admin component, it’s sourced from the <code class="language-plaintext highlighter-rouge">react-admin</code> package:</p>
+<p>React-adminコンポーネントをインポートするたびに、それは<code class="language-plaintext highlighter-rouge">react-admin</code>パッケージからインポートされます：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">List</span><span class="p">,</span> <span class="nx">Datagrid</span><span class="p">,</span> <span class="nx">TextField</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>But if you peek at <a href="https://github.com/marmelab/react-admin">the react-admin source code</a> (which we encourage you to do), you will find imports like:</p>
+<p>しかし、<a href="https://github.com/marmelab/react-admin">React-adminのソースコード</a>を覗いてみると（ぜひやってみてください）、次のようなインポートが見つかります：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useListController</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-core</span><span class="dl">'</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>That’s because the <code class="language-plaintext highlighter-rouge">react-admin</code> package simply re-exports components from internal packages. React-admin is a <em>distribution</em> of several packages, each dedicated to a specific feature. These packages can be found in <a href="https://github.com/marmelab/react-admin/tree/master/packages">the <code class="language-plaintext highlighter-rouge">packages/</code> directory</a>. Some of the more notable packages include:</p>
+<p>これは、<code class="language-plaintext highlighter-rouge">react-admin</code>パッケージが内部パッケージからコンポーネントを再エクスポートしているためです。React-adminは、特定の機能に特化した複数のパッケージの<em>配布</em>です。これらのパッケージは<a href="https://github.com/marmelab/react-admin/tree/master/packages"><code class="language-plaintext highlighter-rouge">packages/</code>ディレクトリ</a>にあります。注目すべきパッケージのいくつかは次のとおりです：</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">ra-core</code>: The core react-admin logic, without any UI.</li>
-  <li><code class="language-plaintext highlighter-rouge">ra-ui-materialui</code>: The Material UI skin for react-admin.</li>
-  <li><code class="language-plaintext highlighter-rouge">ra-data-*</code>: Data providers for various data backends.</li>
-  <li><code class="language-plaintext highlighter-rouge">ra-language-*</code>: Interface translations for various languages.</li>
-  <li><code class="language-plaintext highlighter-rouge">react-admin</code>: the standard distribution of react-admin</li>
+  <li><code class="language-plaintext highlighter-rouge">ra-core</code>: UIなしのReact-adminのコアロジック。</li>
+  <li><code class="language-plaintext highlighter-rouge">ra-ui-materialui</code>: React-adminのMaterial UIスキン。</li>
+  <li><code class="language-plaintext highlighter-rouge">ra-data-*</code>: さまざまなデータバックエンド用のデータプロバイダ。</li>
+  <li><code class="language-plaintext highlighter-rouge">ra-language-*</code>: さまざまな言語用のインターフェース翻訳。</li>
+  <li><code class="language-plaintext highlighter-rouge">react-admin</code>: 標準のReact-adminディストリビューション</li>
 </ul>
 
-<p>You can construct your own distribution of react-admin by combining various packages. Alternatively, you can import hooks and components directly from one of these packages if you don’t want to import the entire react-admin distribution.</p>
+<p>これらのパッケージを組み合わせて独自のReact-adminディストリビューションを構築できます。また、React-adminディストリビューション全体をインポートせずに、これらのパッケージの1つから直接フックやコンポーネントをインポートすることもできます。</p>
+
 
                         </div>
                     </div>

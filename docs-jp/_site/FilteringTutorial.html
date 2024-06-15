@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <title>React-admin - Filtering the List</title>
+        <title>React-admin - リストのフィルタリング</title>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
@@ -563,98 +563,93 @@
                         <div
                             class="markdown-section DocSearch-content toc-content"
                         >
-                            <h1 id="filtering-the-list">Filtering the List</h1>
+                            <h1 id="リストのフィルタリング">リストのフィルタリング</h1>
 
-<p>One of the most important features of the List page is the ability to filter the results. React-admin offers powerful filter components, and gets out of the way when you want to go further.</p>
+<p>リストページの最も重要な機能の一つは、結果をフィルタリングできることです。React-adminは強力なフィルタコンポーネントを提供しており、さらにカスタマイズしたい場合にも対応できます。</p>
 
-<h2 id="overview">Overview</h2>
+<h2 id="概要">概要</h2>
 
 <table><tbody>
 <tr style="border:none">
-    <td style="width:50%;border:none;text-align:center">
-        <a title="Filter Button/Form Combo" href="./img/list_filter.webm">
-            <video controls="" autoplay="" playsinline="" muted="" loop="">
-                <source src="./img/list_filter.webm" type="video/webm" />
-                <source src="./img/list_filter.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
-        </a>
-        <a href="#the-filter-buttonform-combo" style="display: block;transform: translateY(-10px);">The Filter Button/Form Combo</a>
-    </td>
-    <td style="width:50%;border:none;text-align:center">
-        <a title="&lt;FilterList&gt; Sidebar" href="./img/filter-sidebar.webm">
-            <video controls="" autoplay="" playsinline="" muted="" loop="">
-                <source src="./img/filter-sidebar.webm" type="video/webm" />
-                <source src="./img/filter-sidebar.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
-        </a>
-        <a href="#the-filterlist-sidebar" style="display: block;transform: translateY(-10px);">The <code>&lt;FilterList&gt;</code> Sidebar</a>
-    </td>
+<td style="width:50%;border:none;text-align:center">
+            <a title="フィルターボタン/フォームコンボ" href="./img/list_filter.webm">
+                <video controls="" autoplay="" playsinline="" muted="" loop="">
+                    <source src="./img/list_filter.webm" type="video/webm" />
+                    <source src="./img/list_filter.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </a>
+            <a href="#the-filter-buttonform-combo" style="display: block;transform: translateY(-10px);">フィルターボタン/フォームコンボ</a>
+        </td>
+        <td style="width:50%;border:none;text-align:center">
+            <a title="&lt;FilterList&gt; サイドバー" href="./img/filter-sidebar.webm">
+                <video controls="" autoplay="" playsinline="" muted="" loop="">
+                    <source src="./img/filter-sidebar.webm" type="video/webm" />
+                    <source src="./img/filter-sidebar.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </a>
+            <a href="#the-filterlist-sidebar" style="display: block;transform: translateY(-10px);"><code>&lt;FilterList&gt;</code> サイドバー</a>
+        </td>
 </tr>
 <tr style="border:none;background-color:#fff;">
-    <td style="width:50%;border:none;text-align:center">
-        <a title="Stacked Filters" href="https://marmelab.com/ra-enterprise/modules/assets/ra-form-layout/latest/stackedfilters-overview.webm">
-            <video controls="" autoplay="" playsinline="" muted="" loop="" width="90%" style="margin:1rem;box-shadow:0px 4px 4px 0px rgb(0 0 0 / 24%);">
-                <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-form-layout/latest/stackedfilters-overview.webm" type="video/mp4" />
-                    Your browser does not support the video tag.
-            </video>
-        </a>
-        <a href="#the-stackedfilters-component" style="display: block;transform: translateY(-10px);">The <code>&lt;StackedFilters&gt;</code> Dialog</a>
-    </td>
-    <td style="width:50%;border:none;text-align:center;vertical-align:top;">
-        <a title="&lt;Search&gt; input" href="https://marmelab.com/ra-enterprise/modules/assets/ra-search-overview.gif"><img src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-overview.gif" /></a>
-        <a href="#global-search" style="display: block;transform: translateY(-10px);">The Global <code>&lt;Search&gt;</code></a>
-    </td>
+        <td style="width:50%;border:none;text-align:center">
+            <a title="積み重ねフィルター" href="https://marmelab.com/ra-enterprise/modules/assets/ra-form-layout/latest/stackedfilters-overview.webm">
+                <video controls="" autoplay="" playsinline="" muted="" loop="" width="90%" style="margin:1rem;box-shadow:0px 4px 4px 0px rgb(0 0 0 / 24%);">
+                    <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-form-layout/latest/stackedfilters-overview.webm" type="video/mp4" />
+                        Your browser does not support the video tag.
+                </video>
+            </a>
+            <a href="#the-stackedfilters-component" style="display: block;transform: translateY(-10px);"><code>&lt;StackedFilters&gt;</code> ダイアログ</a>
+        </td>
+        <td style="width:50%;border:none;text-align:center;vertical-align:top;">
+            <a title="&lt;Search&gt; 入力" href="https://marmelab.com/ra-enterprise/modules/assets/ra-search-overview.gif"><img src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-overview.gif" /></a>
+            <a href="#global-search" style="display: block;transform: translateY(-10px);">グローバル <code>&lt;Search&gt;</code></a>
+        </td>
 </tr>
 </tbody></table>
 
-<p>React-admin offers 4 different ways to filter the list. Depending on the type of data you’re displaying, the type and number of filters you have to display, and the device your users are using, you may want to use one or the other.</p>
+<p>React-adminはリストをフィルタリングするための4つの異なる方法を提供します。表示するデータの種類、フィルターの種類や数、ユーザーが使用するデバイスに応じて、適切な方法を選択できます。</p>
 
-<h2 id="the-filter-buttonform-combo">The Filter Button/Form Combo</h2>
+<h2 id="フィルターボタンフォームコンボ">フィルターボタン/フォームコンボ</h2>
 
 <video controls="" autoplay="" playsinline="" muted="" loop="">
-  <source src="./img/list_filter.webm" type="video/webm" />
-  <source src="./img/list_filter.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
+      <source src="./img/list_filter.webm" type="video/webm" />
+      <source src="./img/list_filter.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
 </video>
 
-<p>The default appearance for filters is an inline form displayed on top of the list. Users also see a dropdown button allowing to add more inputs to that form. This functionality relies on the <code class="language-plaintext highlighter-rouge">&lt;List filters&gt;</code> prop:</p>
+<p>デフォルトのフィルター表示は、リストの上部に表示されるインラインフォームです。ユーザーはそのフォームに入力を追加するドロップダウンボタンも見ることができます。この機能は<code class="language-plaintext highlighter-rouge">&lt;List filters&gt;</code>プロパティに依存しています：</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">TextInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">import</span> <span class="p">{</span> <span class="nx">TextInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="kd">const</span> <span class="nx">postFilters</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"Search"</span> <span class="na">source</span><span class="p">=</span><span class="s">"q"</span> <span class="na">alwaysOn</span> <span class="p">/&gt;,</span>
-    <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"Title"</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">defaultValue</span><span class="p">=</span><span class="s">"Hello, World!"</span> <span class="p">/&gt;,</span>
-<span class="p">];</span>
+    <span class="kd">const</span> <span class="nx">postFilters</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"検索"</span> <span class="na">source</span><span class="p">=</span><span class="s">"q"</span> <span class="na">alwaysOn</span> <span class="p">/&gt;,</span>
+        <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"タイトル"</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">defaultValue</span><span class="p">=</span><span class="s">"こんにちは、世界!"</span> <span class="p">/&gt;,</span>
+    <span class="p">];</span>
 
-<span class="k">export</span> <span class="kd">const</span> <span class="nx">PostList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
-    <span class="p">&lt;</span><span class="nc">List</span> <span class="na">filters</span><span class="p">=</span><span class="si">{</span><span class="nx">postFilters</span><span class="si">}</span><span class="p">&gt;</span>
-        ...
-    <span class="p">&lt;/</span><span class="nc">List</span><span class="p">&gt;</span>
-<span class="p">);</span>
+    <span class="k">export</span> <span class="kd">const</span> <span class="nx">PostList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nc">List</span> <span class="na">filters</span><span class="p">=</span><span class="si">{</span><span class="nx">postFilters</span><span class="si">}</span><span class="p">&gt;</span>
+            ...
+        <span class="p">&lt;/</span><span class="nc">List</span><span class="p">&gt;</span>
+    <span class="p">);</span>
 </code></pre></div></div>
 
-<p>Elements passed as <code class="language-plaintext highlighter-rouge">filters</code> are regular inputs. That means you can build sophisticated filters based on references, array values, etc. <code class="language-plaintext highlighter-rouge">&lt;List&gt;</code> hides all inputs in the <a href="./FilterForm.md"><code class="language-plaintext highlighter-rouge">Filter Form</code></a> by default, except those that have the <code class="language-plaintext highlighter-rouge">alwaysOn</code> prop.</p>
+<p><code class="language-plaintext highlighter-rouge">filters</code>として渡された要素は通常の入力です。つまり、参照や配列値などに基づく高度なフィルターを構築することができます。<code class="language-plaintext highlighter-rouge">&lt;List&gt;</code>は、<code class="language-plaintext highlighter-rouge">alwaysOn</code>プロパティを持つもの以外のすべての入力をデフォルトで<a href="./FilterForm.md"><code class="language-plaintext highlighter-rouge">Filter Form</code></a>に隠します。</p>
 
-<p><strong>Tip</strong>: For technical reasons, react-admin does not accept Filter inputs having both a <code class="language-plaintext highlighter-rouge">defaultValue</code> and <code class="language-plaintext highlighter-rouge">alwaysOn</code>. To set default values for always on filters, use the <a href="./List.md#filterdefaultvalues"><code class="language-plaintext highlighter-rouge">filterDefaultValues</code></a> prop of the <code class="language-plaintext highlighter-rouge">&lt;List&gt;</code> component instead.</p>
+<p><strong>ヒント</strong>: 技術的な理由から、react-adminは<code class="language-plaintext highlighter-rouge">defaultValue</code>と<code class="language-plaintext highlighter-rouge">alwaysOn</code>の両方を持つフィルター入力を受け入れません。常にオンのフィルターにデフォルト値を設定するには、<code class="language-plaintext highlighter-rouge">&lt;List&gt;</code>コンポーネントの<a href="./List.md#filterdefaultvalues"><code class="language-plaintext highlighter-rouge">filterDefaultValues</code></a>プロパティを使用してください。</p>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;List&gt;</code> uses the elements passed as <code class="language-plaintext highlighter-rouge">filters</code> twice:</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;List&gt;</code>は<code class="language-plaintext highlighter-rouge">filters</code>として渡された要素を2回使用します：</p>
 
 <ul>
-  <li>once to render the filter <em>form</em></li>
-  <li>once to render the filter <em>button</em> (using each element <code class="language-plaintext highlighter-rouge">label</code>, falling back to the humanized <code class="language-plaintext highlighter-rouge">source</code>)</li>
+  <li>一度はフィルターフォームをレンダリングするため</li>
+  <li>一度はフィルターボタンをレンダリングするため（各要素の<code class="language-plaintext highlighter-rouge">label</code>を使用し、<code class="language-plaintext highlighter-rouge">source</code>の人間化された形式にフォールバック）</li>
 </ul>
 
 <h3 id="searchinput"><code class="language-plaintext highlighter-rouge">&lt;SearchInput&gt;</code></h3>
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/search\_input.webm" type="video/webm" /> <source src="./img/search\_input.mp4" type="video/mp4" /> Your browser does not support the video tag. </video>
 
-<video controls="" autoplay="" playsinline="" muted="" loop="">
-  <source src="./img/search_input.webm" type="video/webm" />
-  <source src="./img/search_input.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
-
-<p>In addition to <a href="./Inputs.md">the usual input types</a> (<code class="language-plaintext highlighter-rouge">&lt;TextInput&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;SelectInput&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;ReferenceInput&gt;</code>, etc.), you can use the <code class="language-plaintext highlighter-rouge">&lt;SearchInput&gt;</code> in the <code class="language-plaintext highlighter-rouge">filters</code> array. This input is designed especially for the <a href="./FilterForm.md"><code class="language-plaintext highlighter-rouge">Filter Form</code></a>. It’s like a <code class="language-plaintext highlighter-rouge">&lt;TextInput resettable&gt;</code> with a magnifier glass icon - exactly the type of input users look for when they want to do a full-text search.</p>
+<p><a href="./Inputs.md">通常の入力タイプ</a>（<code class="language-plaintext highlighter-rouge">&lt;TextInput&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;SelectInput&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;ReferenceInput&gt;</code>など）に加えて、<code class="language-plaintext highlighter-rouge">filters</code>配列に<code class="language-plaintext highlighter-rouge">&lt;SearchInput&gt;</code>を使用できます。この入力は特に<a href="./FilterForm.md"><code class="language-plaintext highlighter-rouge">Filter Form</code></a>用に設計されています。これは、虫眼鏡アイコン付きの<code class="language-plaintext highlighter-rouge">&lt;TextInput resettable&gt;</code>のようなもので、ユーザーが全文検索を行いたいときに探すタイプの入力です。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">SearchInput</span><span class="p">,</span> <span class="nx">TextInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -663,21 +658,16 @@
 <span class="p">];</span>
 </code></pre></div></div>
 
-<p>In the example given above, the <code class="language-plaintext highlighter-rouge">q</code> filter triggers a full-text search on all fields. It’s your responsibility to implement the full-text filtering capabilities in your <code class="language-plaintext highlighter-rouge">dataProvider</code>, or in your API.</p>
+<p>上記の例では、<code class="language-plaintext highlighter-rouge">q</code>フィルターがすべてのフィールドで全文検索をトリガーします。全文フィルタリング機能を<code class="language-plaintext highlighter-rouge">dataProvider</code>やAPIで実装するのはあなたの責任です。</p>
 
-<p>For more details, you can consult <a href="./SearchInput.md">the <code class="language-plaintext highlighter-rouge">&lt;SearchInput&gt;</code> component chapter</a>.</p>
+<p>詳細については、<a href="./SearchInput.md"><code class="language-plaintext highlighter-rouge">&lt;SearchInput&gt;</code>コンポーネントの章</a>を参照してください。</p>
 
-<h3 id="quick-filters">Quick Filters</h3>
+<h3 id="クイックフィルター">クイックフィルター</h3>
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/quick\_filters.webm" type="video/webm" /> <source src="./img/quick\_filters.mp4" type="video/mp4" /> Your browser does not support the video tag. </video>
 
-<video controls="" autoplay="" playsinline="" muted="" loop="">
-  <source src="./img/quick_filters.webm" type="video/webm" />
-  <source src="./img/quick_filters.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<p>ユーザーは通常、リストをフィルタリングするためにキーボードを使用することを嫌います（特にモバイルで）。このユーザーの要件を満たす良い方法は、フィルターを<em>クイックフィルター</em>に変えることです。クイックフィルターは、編集不可の<code class="language-plaintext highlighter-rouge">defaultValue</code>を持つフィルターです。ユーザーはそれらを有効または無効にするだけです。</p>
 
-<p>Users usually dislike using their keyboard to filter a list (especially on mobile). A good way to satisfy this user requirement is to turn filters into <em>quick filter</em>. A Quick filter is a filter with a non-editable <code class="language-plaintext highlighter-rouge">defaultValue</code>. Users can only enable or disable them.</p>
-
-<p>Here is how to implement a generic <code class="language-plaintext highlighter-rouge">&lt;QuickFilter&gt;</code> component:</p>
+<p>汎用の<code class="language-plaintext highlighter-rouge">&lt;QuickFilter&gt;</code>コンポーネントを実装する方法は次のとおりです：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">SearchInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Chip</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material</span><span class="dl">'</span><span class="p">;</span>
@@ -689,25 +679,20 @@
 
 <span class="kd">const</span> <span class="nx">postFilters</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">&lt;</span><span class="nc">SearchInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"q"</span> <span class="na">alwaysOn</span> <span class="p">/&gt;,</span>
-    <span class="p">&lt;</span><span class="nc">QuickFilter</span> <span class="na">source</span><span class="p">=</span><span class="s">"commentable"</span> <span class="na">label</span><span class="p">=</span><span class="s">"Commentable"</span> <span class="na">defaultValue</span><span class="p">=</span><span class="si">{</span><span class="kc">true</span><span class="si">}</span> <span class="p">/&gt;,</span>
-    <span class="p">&lt;</span><span class="nc">QuickFilter</span> <span class="na">source</span><span class="p">=</span><span class="s">"views_lte"</span> <span class="na">label</span><span class="p">=</span><span class="s">"Low views"</span> <span class="na">defaultValue</span><span class="p">=</span><span class="si">{</span><span class="mi">150</span><span class="si">}</span> <span class="p">/&gt;,</span>
-    <span class="p">&lt;</span><span class="nc">QuickFilter</span> <span class="na">source</span><span class="p">=</span><span class="s">"tags"</span> <span class="na">label</span><span class="p">=</span><span class="s">"Tagged Code"</span> <span class="na">defaultValue</span><span class="p">=</span><span class="si">{</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span> <span class="p">/&gt;,</span>
+    <span class="p">&lt;</span><span class="nc">QuickFilter</span> <span class="na">source</span><span class="p">=</span><span class="s">"commentable"</span> <span class="na">label</span><span class="p">=</span><span class="s">"コメント可能"</span> <span class="na">defaultValue</span><span class="p">=</span><span class="si">{</span><span class="kc">true</span><span class="si">}</span> <span class="p">/&gt;,</span>
+    <span class="p">&lt;</span><span class="nc">QuickFilter</span> <span class="na">source</span><span class="p">=</span><span class="s">"views_lte"</span> <span class="na">label</span><span class="p">=</span><span class="s">"低視聴数"</span> <span class="na">defaultValue</span><span class="p">=</span><span class="si">{</span><span class="mi">150</span><span class="si">}</span> <span class="p">/&gt;,</span>
+    <span class="p">&lt;</span><span class="nc">QuickFilter</span> <span class="na">source</span><span class="p">=</span><span class="s">"tags"</span> <span class="na">label</span><span class="p">=</span><span class="s">"タグ付きコード"</span> <span class="na">defaultValue</span><span class="p">=</span><span class="si">{</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span> <span class="p">/&gt;,</span>
 <span class="p">];</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: It’s currently not possible to use two quick filters for the same source.</p>
+<p><strong>ヒント</strong>: 同じソースに対して2つのクイックフィルターを使用することは現在できません。</p>
 
-<h2 id="the-filterlist-sidebar">The <code class="language-plaintext highlighter-rouge">&lt;FilterList&gt;</code> Sidebar</h2>
+<h2 id="filterlist-サイドバー"><code class="language-plaintext highlighter-rouge">&lt;FilterList&gt;</code> サイドバー</h2>
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/filter-sidebar.webm" type="video/webm" /> <source src="./img/filter-sidebar.mp4" type="video/mp4" /> Your browser does not support the video tag. </video>
 
-<video controls="" autoplay="" playsinline="" muted="" loop="">
-  <source src="./img/filter-sidebar.webm" type="video/webm" />
-  <source src="./img/filter-sidebar.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<p>フィルターボタン/フォームコンボの代替UIは、FilterListサイドバーです。ユーザーが通常eコマースサイトで見るものと似ています。これは、多くのシンプルなフィルターをマウスで有効にし、組み合わせることができるパネルです。ユーザー体験はボタン/フォームコンボよりも優れています。なぜなら、フィルターの値が明示的で、フォームに入力する必要がないからです。しかし、有限の値（または区間）を持つフィルターのみを使用できるため、少し強力ではありません。</p>
 
-<p>An alternative UI to the Filter Button/Form Combo is the FilterList Sidebar. Similar to what users usually see on e-commerce websites, it’s a panel with many simple filters that can be enabled and combined using the mouse. The user experience is better than the Button/Form Combo, because the filter values are explicit, and it doesn’t require typing anything in a form. But it’s a bit less powerful, as only filters with a finite set of values (or intervals) can be used in the <code class="language-plaintext highlighter-rouge">&lt;FilterList&gt;</code>.</p>
-
-<p>Here is an example FilterList sidebar:</p>
+<p>以下はFilterListサイドバーの例です：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">SavedQueriesList</span><span class="p">,</span> <span class="nx">FilterLiveSearch</span><span class="p">,</span> <span class="nx">FilterList</span><span class="p">,</span> <span class="nx">FilterListItem</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Card</span><span class="p">,</span> <span class="nx">CardContent</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material</span><span class="dl">'</span><span class="p">;</span>
@@ -719,22 +704,22 @@
         <span class="p">&lt;</span><span class="nc">CardContent</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nc">SavedQueriesList</span> <span class="p">/&gt;</span>
             <span class="p">&lt;</span><span class="nc">FilterLiveSearch</span> <span class="p">/&gt;</span>
-            <span class="p">&lt;</span><span class="nc">FilterList</span> <span class="na">label</span><span class="p">=</span><span class="s">"Subscribed to newsletter"</span> <span class="na">icon</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">MailIcon</span> <span class="p">/&gt;</span><span class="si">}</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nc">FilterListItem</span> <span class="na">label</span><span class="p">=</span><span class="s">"Yes"</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">has_newsletter</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}</span><span class="si">}</span> <span class="p">/&gt;</span>
-                <span class="p">&lt;</span><span class="nc">FilterListItem</span> <span class="na">label</span><span class="p">=</span><span class="s">"No"</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">has_newsletter</span><span class="p">:</span> <span class="kc">false</span> <span class="p">}</span><span class="si">}</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">FilterList</span> <span class="na">label</span><span class="p">=</span><span class="s">"ニュースレターに登録済み"</span> <span class="na">icon</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">MailIcon</span> <span class="p">/&gt;</span><span class="si">}</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">FilterListItem</span> <span class="na">label</span><span class="p">=</span><span class="s">"はい"</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">has_newsletter</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}</span><span class="si">}</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">FilterListItem</span> <span class="na">label</span><span class="p">=</span><span class="s">"いいえ"</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">has_newsletter</span><span class="p">:</span> <span class="kc">false</span> <span class="p">}</span><span class="si">}</span> <span class="p">/&gt;</span>
             <span class="p">&lt;/</span><span class="nc">FilterList</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nc">FilterList</span> <span class="na">label</span><span class="p">=</span><span class="s">"Category"</span> <span class="na">icon</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">CategoryIcon</span> <span class="p">/&gt;</span><span class="si">}</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nc">FilterListItem</span> <span class="na">label</span><span class="p">=</span><span class="s">"Tests"</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="dl">'</span><span class="s1">tests</span><span class="dl">'</span> <span class="p">}</span><span class="si">}</span> <span class="p">/&gt;</span>
-                <span class="p">&lt;</span><span class="nc">FilterListItem</span> <span class="na">label</span><span class="p">=</span><span class="s">"News"</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="dl">'</span><span class="s1">news</span><span class="dl">'</span> <span class="p">}</span><span class="si">}</span> <span class="p">/&gt;</span>
-                <span class="p">&lt;</span><span class="nc">FilterListItem</span> <span class="na">label</span><span class="p">=</span><span class="s">"Deals"</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="dl">'</span><span class="s1">deals</span><span class="dl">'</span> <span class="p">}</span><span class="si">}</span> <span class="p">/&gt;</span>
-                <span class="p">&lt;</span><span class="nc">FilterListItem</span> <span class="na">label</span><span class="p">=</span><span class="s">"Tutorials"</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="dl">'</span><span class="s1">tutorials</span><span class="dl">'</span> <span class="p">}</span><span class="si">}</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">FilterList</span> <span class="na">label</span><span class="p">=</span><span class="s">"カテゴリー"</span> <span class="na">icon</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">CategoryIcon</span> <span class="p">/&gt;</span><span class="si">}</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">FilterListItem</span> <span class="na">label</span><span class="p">=</span><span class="s">"テスト"</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="dl">'</span><span class="s1">tests</span><span class="dl">'</span> <span class="p">}</span><span class="si">}</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">FilterListItem</span> <span class="na">label</span><span class="p">=</span><span class="s">"ニュース"</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="dl">'</span><span class="s1">news</span><span class="dl">'</span> <span class="p">}</span><span class="si">}</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">FilterListItem</span> <span class="na">label</span><span class="p">=</span><span class="s">"取引"</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="dl">'</span><span class="s1">deals</span><span class="dl">'</span> <span class="p">}</span><span class="si">}</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">FilterListItem</span> <span class="na">label</span><span class="p">=</span><span class="s">"チュートリアル"</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="dl">'</span><span class="s1">tutorials</span><span class="dl">'</span> <span class="p">}</span><span class="si">}</span> <span class="p">/&gt;</span>
             <span class="p">&lt;/</span><span class="nc">FilterList</span><span class="p">&gt;</span>
         <span class="p">&lt;/</span><span class="nc">CardContent</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nc">Card</span><span class="p">&gt;</span>
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>Add it to the list view using the <code class="language-plaintext highlighter-rouge">&lt;List aside&gt;</code> prop:</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;List aside&gt;</code>プロパティを使用してリストビューに追加します：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">PostFilterSidebar</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./PostFilterSidebar</span><span class="dl">'</span><span class="p">;</span>
 
@@ -745,36 +730,23 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: The <code class="language-plaintext highlighter-rouge">&lt;Card sx&gt;</code> prop in the <code class="language-plaintext highlighter-rouge">PostFilterSidebar</code> component above is here to put the sidebar on the left side of the screen, instead of the default right side.</p>
+<p><strong>ヒント</strong>: 上記の<code class="language-plaintext highlighter-rouge">PostFilterSidebar</code>コンポーネントの<code class="language-plaintext highlighter-rouge">&lt;Card sx&gt;</code>プロパティは、デフォルトの右側ではなく、サイドバーを画面の左側に配置するために使用されています。</p>
 
-<p>Check <a href="./FilterList.md">the <code class="language-plaintext highlighter-rouge">&lt;FilterList&gt;</code> documentation</a> for more information.</p>
+<p>詳細については、<a href="./FilterList.md"><code class="language-plaintext highlighter-rouge">&lt;FilterList&gt;</code>のドキュメント</a>を参照してください。</p>
 
-<p>If you use the FilterList, you’ll probably need a search input. As the FilterList sidebar is not a form, this requires a bit of extra work. Fortunately, react-admin provides a specialized search input component for that purpose: check <a href="./FilterLiveSearch.md">the <code class="language-plaintext highlighter-rouge">&lt;FilterLiveSearch&gt;</code> documentation</a> for details.</p>
+<p>FilterListを使用する場合、検索入力が必要になることが多いでしょう。FilterListサイドバーはフォームではないため、少し余分な作業が必要です。幸いなことに、react-adminはそのための専用検索入力コンポーネントを提供しています。詳細については、<a href="./FilterLiveSearch.md"><code class="language-plaintext highlighter-rouge">&lt;FilterLiveSearch&gt;</code>のドキュメント</a>を参照してください。</p>
 
-<video controls="" autoplay="" playsinline="" muted="" loop="">
-  <source src="./img/filter-live-search.webm" type="video/webm" />
-  <source src="./img/filter-live-search.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/filter-live-search.webm" type="video/webm" /> <source src="./img/filter-live-search.mp4" type="video/mp4" /> Your browser does not support the video tag. </video>
 
-<p>Finally, a filter sidebar is the ideal place to display the user’s favorite filters. Check <a href="./SavedQueriesList.md">the <code class="language-plaintext highlighter-rouge">&lt;SavedQueriesList&gt;</code> documentation</a> for more information.</p>
+<p>最後に、フィルターサイドバーはユーザーのお気に入りのフィルターを表示するのに理想的な場所です。詳細については、<a href="./SavedQueriesList.md"><code class="language-plaintext highlighter-rouge">&lt;SavedQueriesList&gt;</code>のドキュメント</a>を参照してください。</p>
 
-<video controls="" autoplay="" playsinline="" muted="" loop="">
-  <source src="./img/SavedQueriesList.webm" type="video/webm" />
-  <source src="./img/SavedQueriesList.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/SavedQueriesList.webm" type="video/webm" /> <source src="./img/SavedQueriesList.mp4" type="video/mp4" /> Your browser does not support the video tag. </video>
+<h2 id="stackedfilters-コンポーネント"><code class="language-plaintext highlighter-rouge">&lt;StackedFilters&gt;</code> コンポーネント</h2>
+<video controls="" autoplay="" playsinline="" muted="" loop="" width="100%"> <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-form-layout/latest/stackedfilters-overview.webm" type="video/mp4" /> Your browser does not support the video tag. </video>
 
-<h2 id="the-stackedfilters-component">The <code class="language-plaintext highlighter-rouge">&lt;StackedFilters&gt;</code> Component</h2>
+<p>もう一つの代替フィルターUIは、<a href="https://marmelab.com/ra-enterprise">エンタープライズ版</a><img class="icon" src="./img/premium.svg" />限定のStacked Filtersダイアログです。これは、フィールド、オペレーター、値を組み合わせて複雑なフィルターを構築することができます。フィルターボタン/フォームコンボよりも強力ですが、データプロバイダーの設定に多くの手間がかかります。</p>
 
-<video controls="" autoplay="" playsinline="" muted="" loop="" width="100%">
-    <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-form-layout/latest/stackedfilters-overview.webm" type="video/mp4" />
-        Your browser does not support the video tag.
-</video>
-
-<p>Another alternative filter UI is the Stacked Filters dialog, an <a href="https://marmelab.com/ra-enterprise">Enterprise Edition</a><img class="icon" src="./img/premium.svg" /> exclusive. It lets users build complex filters by combining a field, an operator, and a value. It’s more powerful than the Filter Button/Form Combo, but requires more setup on the data provider.</p>
-
-<p>Here is an example StackedFilters configuration:</p>
+<p>以下はStackedFiltersの設定例です：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span>
     <span class="nx">BooleanField</span><span class="p">,</span>
@@ -821,46 +793,37 @@
 <span class="p">)</span>
 </code></pre></div></div>
 
-<p>Check the <a href="./StackedFilters.md"><code class="language-plaintext highlighter-rouge">&lt;StackedFilters&gt;</code> documentation</a> for more information.</p>
+<p>詳細については、<a href="./StackedFilters.md"><code class="language-plaintext highlighter-rouge">&lt;StackedFilters&gt;</code>のドキュメント</a>を参照してください。</p>
 
-<h2 id="global-search">Global Search</h2>
+<h2 id="グローバル検索">グローバル検索</h2>
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-overview.webm" type="video/webm" /> <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-overview.mp4" type="video/mp4" /> Your browser does not support the video tag. </video>
 
-<video controls="" autoplay="" playsinline="" muted="" loop="">
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-overview.webm" type="video/webm" />
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-overview.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<p>リストフィルターはフィールドごとの条件を使って正確なクエリを作成できますが、ユーザーはしばしば全文検索のようなシンプルなインターフェースを好みます。結局、それは彼らが毎日検索エンジン、メールクライアント、ファイルエクスプローラーで使用するものです。</p>
 
-<p>Although list filters allow to make precise queries using per-field criteria, users often prefer simpler interfaces like full-text search. After all, that’s what they use every day on search engines, email clients, and in their file explorer.</p>
+<p>管理画面で単一のフォーム入力を使用して任意のレコードを検索する全文検索を表示したい場合は、[<Search>コンポーネント](./Search.md)を確認してください。これは[エンタープライズ版](https://marmelab.com/ra-enterprise)<img class="icon" src="./img/premium.svg" />限定です。</Search></p>
 
-<p>If you want to display a full-text search allowing to look for any record in the admin using a single form input, check out <a href="./Search.md">the <code class="language-plaintext highlighter-rouge">&lt;Search&gt;</code> component</a>, an <a href="https://marmelab.com/ra-enterprise">Enterprise Edition</a><img class="icon" src="./img/premium.svg" /> exclusive.</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Search&gt;</code>は任意の既存の検索エンジン（ElasticSearch、Lucene、またはカスタム検索エンジン）に接続でき、検索結果をカスタマイズして関連項目への迅速なナビゲーションを提供し、検索エンジンを「Omnibox」に変えることができます：</p>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;Search&gt;</code> can plug to any existing search engine (ElasticSearch, Lucene, or custom search engine), and lets you customize the search results to provide quick navigation to related items, turning the search engine into an “Omnibox”:</p>
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-demo.webm" type="video/webm" /> <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-demo.mp4" type="video/mp4" /> Your browser does not support the video tag. </video>
 
-<video controls="" autoplay="" playsinline="" muted="" loop="">
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-demo.webm" type="video/webm" />
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-search-demo.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<p>グローバル検索の詳細については、<a href="./Search.md"><code class="language-plaintext highlighter-rouge">&lt;Search&gt;</code>のドキュメント</a>を参照してください。</p>
 
-<p>For mode details about the global search, check the <a href="./Search.md"><code class="language-plaintext highlighter-rouge">&lt;Search&gt;</code> documentation</a>.</p>
+<h2 id="フィルタークエリパラメータ">フィルタークエリパラメータ</h2>
 
-<h2 id="filter-query-parameter">Filter Query Parameter</h2>
+<p>React-adminはURLから<code class="language-plaintext highlighter-rouge">filter</code>クエリパラメータを使用して、リストに適用するフィルターを決定します。</p>
 
-<p>React-admin uses the <code class="language-plaintext highlighter-rouge">filter</code> query parameter from the URL to determine the filters to apply to the list.</p>
-
-<p>Here is a typical List page URL in a react-admin application:</p>
+<p>React-adminアプリケーションの典型的なリストページURLは次のとおりです：</p>
 
 <blockquote>
-  <p>https://myadmin.dev/#/posts?displayedFilters=%7B%22commentable%22%3Atrue%7D&amp;filter=%7B%22commentable%22%3Atrue%2C%22q%22%3A%22lorem%20%22%7D&amp;order=DESC&amp;page=1&amp;perPage=10&amp;sort=published_at</p>
+  <p><a href="https://myadmin.dev/#/posts?displayedFilters=%7B%22commentable%22%3Atrue%7D&amp;filter=%7B%22commentable%22%3Atrue%2C%22q%22%3A%22lorem%20%22%7D&amp;order=DESC&amp;page=1&amp;perPage=10&amp;sort=published_at">https://myadmin.dev/#/posts?displayedFilters=%7B%22commentable%22%3Atrue%7D&amp;filter=%7B%22commentable%22%3Atrue%2C%22q%22%3A%22lorem%20%22%7D&amp;order=DESC&amp;page=1&amp;perPage=10&amp;sort=published_at</a></p>
 </blockquote>
 
-<p>Once decoded, the <code class="language-plaintext highlighter-rouge">filter</code> query parameter reveals as a JSON value:</p>
+<p>デコードすると、<code class="language-plaintext highlighter-rouge">filter</code>クエリパラメータはJSON値として表示されます：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>filter={"commentable":true,"q":"lorem "}
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">filter</span><span class="o">=</span><span class="p">{</span><span class="nv">"commentable"</span><span class="p">:</span><span class="k">true</span><span class="p">,</span><span class="nv">"q"</span><span class="p">:</span><span class="nv">"lorem "</span><span class="p">}</span>
 </code></pre></div></div>
 
-<p>This leads to the following data provider call:</p>
+<p>これにより、次のデータプロバイダー呼び出しが行われます：</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">dataProvider</span><span class="p">.</span><span class="nx">getList</span><span class="p">(</span><span class="dl">'</span><span class="s1">posts</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
     <span class="na">filter</span><span class="p">:</span> <span class="p">{</span> <span class="na">commentable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">q</span><span class="p">:</span> <span class="dl">'</span><span class="s1">lorem </span><span class="dl">'</span> <span class="p">},</span>
@@ -869,17 +832,17 @@
 <span class="p">});</span>
 </code></pre></div></div>
 
-<p>When a user adds or remove a filter, react-admin changes the <code class="language-plaintext highlighter-rouge">filter</code> query parameter in the URL, and the <code class="language-plaintext highlighter-rouge">&lt;List&gt;</code> components fetches <code class="language-plaintext highlighter-rouge">dataProvider.getList()</code> again with the new filters.</p>
+<p>ユーザーがフィルターを追加または削除すると、react-adminはURLの<code class="language-plaintext highlighter-rouge">filter</code>クエリパラメータを変更し、<code class="language-plaintext highlighter-rouge">&lt;List&gt;</code>コンポーネントが新しいフィルターで再度<code class="language-plaintext highlighter-rouge">dataProvider.getList()</code>をフェッチします。</p>
 
-<p><strong>Tip</strong>: Once a user sets a filter, react-admin persists the filter value in the application state, so that when the user comes back to the list, they should see the filtered list. That’s a design choice.</p>
+<p><strong>ヒント</strong>: ユーザーがフィルターを設定すると、react-adminはフィルター値をアプリケーションの状態に保持し、ユーザーがリストに戻ったときにフィルター付きリストを表示します。これは設計上の選択です。</p>
 
-<p><strong>Tip</strong>: You can change the filters programmatically by updating the query parameter, e.g. using the <code class="language-plaintext highlighter-rouge">&lt;Link&gt;</code> component or the <code class="language-plaintext highlighter-rouge">useNavigate()</code> hook from <code class="language-plaintext highlighter-rouge">react-router-dom</code>.</p>
+<p><strong>ヒント</strong>: <code class="language-plaintext highlighter-rouge">&lt;Link&gt;</code>コンポーネントや<code class="language-plaintext highlighter-rouge">react-router-dom</code>の<code class="language-plaintext highlighter-rouge">useNavigate()</code>フックを使用して、クエリパラメータを更新することでプログラム的にフィルターを変更できます。</p>
 
-<h2 id="linking-to-a-pre-filtered-list">Linking To A Pre-Filtered List</h2>
+<h2 id="事前フィルターされたリストへのリンク">事前フィルターされたリストへのリンク</h2>
 
-<p>As the filter values are taken from the URL, you can link to a pre-filtered list by setting the <code class="language-plaintext highlighter-rouge">filter</code> query parameter.</p>
+<p>フィルター値はURLから取得されるため、<code class="language-plaintext highlighter-rouge">filter</code>クエリパラメータを設定することで、事前フィルターされたリストへのリンクを作成できます。</p>
 
-<p>For instance, if you have a list of tags, you can display a button for each category to link to the list of posts filtered by that tag:</p>
+<p>たとえば、タグのリストがある場合、そのタグでフィルターされた投稿のリストにリンクするボタンを表示できます：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useTranslate</span><span class="p">,</span> <span class="nx">useRecordContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">Button</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material/Button</span><span class="dl">'</span><span class="p">;</span>
@@ -897,46 +860,45 @@
                 <span class="na">search</span><span class="p">:</span> <span class="s2">`filter=</span><span class="p">${</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">category_id</span><span class="p">:</span> <span class="nx">record</span><span class="p">.</span><span class="nx">id</span> <span class="p">})}</span><span class="s2">`</span><span class="p">,</span>
             <span class="p">}</span><span class="si">}</span>
         <span class="p">&gt;</span>
-            All posts with the category <span class="si">{</span><span class="nx">record</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span> ;
+            <span class="si">{</span><span class="nx">record</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span>のカテゴリーのすべての投稿
         <span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span>
     <span class="p">)</span> <span class="p">:</span> <span class="kc">null</span><span class="p">;</span>
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>You can use this button e.g. as a child of <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>. You can also create a custom Menu button with that technique to link to the unfiltered list by setting the filter value to <code class="language-plaintext highlighter-rouge">{}</code>.</p>
+<p>このボタンを<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>の子として使用できます。この技術を使用して、フィルター値を<code class="language-plaintext highlighter-rouge">{}</code>に設定することで、フィルターされていないリストにリンクするカスタムメニューボタンを作成することもできます。</p>
 
-<h2 id="filter-operators">Filter Operators</h2>
+<h2 id="フィルターオペレーター">フィルターオペレーター</h2>
 
-<p>The internal format for storing filters and sending them to the dataProvider is an object, e.g.:</p>
+<p>フィルターを内部的に格納し、データプロバイダーに送信する形式はオブジェクトです。例えば：</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span> <span class="nl">commentable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">q</span><span class="p">:</span> <span class="dl">"</span><span class="s2">lorem </span><span class="dl">"</span> <span class="p">}</span>
 </code></pre></div></div>
 
-<p>This is fine for equality filters, but how can you do more complex filters, like “between”, “contains”, “starts with”, “greater than”, etc.?</p>
+<p>これは等値フィルターには問題ありませんが、「間」、「含む」、「始まる」、「より大きい」などのより複雑なフィルターをどのように行うか？</p>
 
-<p>As there is no standard way to pass such complex filters to APIs, react-admin makes no decision about it. It’s up to you to decide how to store them in the filter object.</p>
+<p>このような複雑なフィルターをAPIに渡す標準的な方法はないため、react-adminはその点について何も決定しません。それをフィルターオブジェクトに格納する方法を決めるのはあなた次第です。</p>
 
-<p>The demos show one possible way: suffix the filter name with an operator, e.g. “_gte” for “greater than or equal to”.</p>
+<p>デモでは一つの方法を示しています：フィルター名にオペレーターをサフィックスとして付けます。例えば、”greater than or equal to”のために”_gte”を使用します。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">postFilters</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">&lt;</span><span class="nc">DateInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"released_gte"</span> <span class="na">label</span><span class="p">=</span><span class="s">"Released after"</span> <span class="p">/&gt;,</span>
-    <span class="p">&lt;</span><span class="nc">DateInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"released_lte"</span> <span class="na">label</span><span class="p">=</span><span class="s">"Released before"</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nc">DateInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"released_gte"</span> <span class="na">label</span><span class="p">=</span><span class="s">"これ以降にリリース"</span> <span class="p">/&gt;,</span>
+    <span class="p">&lt;</span><span class="nc">DateInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"released_lte"</span> <span class="na">label</span><span class="p">=</span><span class="s">"これ以前にリリース"</span> <span class="p">/&gt;</span>
 <span class="p">];</span>
 </code></pre></div></div>
 
-<p>Some API backends (e.g. JSON Server) know how to handle this syntax. If your API doesn’t understand these ‘virtual fields’, you will have to transform them into the expected syntax in the Data Provider.</p>
+<p>一部のAPIバックエンド（例：JSON Server）はこの構文を理解します。あなたのAPIがこれらの「仮想フィールド」を理解しない場合は、それらをデータプロバイダーで期待される構文に変換する必要があります。</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in dataProvider.js</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// dataProvider.js内</span>
 <span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
     <span class="na">getList</span><span class="p">:</span> <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="c1">// transform a filter object to a filters array with operators</span>
-        <span class="c1">// filter is like { commentable: true, released_gte: '2018-01-01' }</span>
+        <span class="c1">// フィルターオブジェクトをオペレーター付きのフィルター配列に変換する</span>
+        <span class="c1">// フィルターは{ commentable: true, released_gte: '2018-01-01' }のようになります</span>
         <span class="kd">const</span> <span class="nx">filter</span> <span class="o">=</span> <span class="nx">params</span><span class="p">.</span><span class="nx">filter</span><span class="p">;</span>
         <span class="kd">const</span> <span class="nx">operators</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">'</span><span class="s1">_gte</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&gt;=</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">_lte</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;=</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">_neq</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">!=</span><span class="dl">'</span> <span class="p">};</span>
-        <span class="c1">// filters is like [</span>
+        <span class="c1">// フィルターは次のようになります：</span>
         <span class="c1">//    { field: "commentable", operator: "=", value: true},</span>
         <span class="c1">//    { field: "released", operator: "&gt;=", value: '2018-01-01'}</span>
-        <span class="c1">// ]</span>
         <span class="kd">const</span> <span class="nx">filters</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">filter</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">key</span> <span class="o">=&gt;</span> <span class="p">{</span>
             <span class="kd">const</span> <span class="nx">operator</span> <span class="o">=</span> <span class="nx">operators</span><span class="p">[</span><span class="nx">key</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">)];</span>
             <span class="k">return</span> <span class="nx">operator</span>
@@ -958,17 +920,12 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<h2 id="saved-queries-let-users-save-filter-and-sort">Saved Queries: Let Users Save Filter And Sort</h2>
+<h2 id="保存されたクエリユーザーにフィルターとソートを保存させる">保存されたクエリ：ユーザーにフィルターとソートを保存させる</h2>
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/SavedQueriesList.webm" type="video/webm" /> <source src="./img/SavedQueriesList.mp4" type="video/mp4" /> Your browser does not support the video tag. </video>
 
-<video controls="" autoplay="" playsinline="" muted="" loop="">
-  <source src="./img/SavedQueriesList.webm" type="video/webm" />
-  <source src="./img/SavedQueriesList.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<p>保存されたクエリにより、ユーザーはフィルターとソートの組み合わせを新しい個人用フィルターとして保存できます。保存されたクエリはセッション間で持続するため、ユーザーは管理画面を閉じたり再度開いたりしてもカスタムクエリを見つけることができます。保存されたクエリは、フィルターボタン/フォームコンボと<FilterList>サイドバーの両方で利用できます。フィルターボタン/フォームコンボにはデフォルトで有効ですが、<FilterList>サイドバーには自分で追加する必要があります。</FilterList></FilterList></p>
 
-<p>Saved Queries let users save a combination of filters and sort parameters into a new, personal filter. Saved queries persist between sessions, so users can find their custom queries even after closing and reopening the admin. Saved queries are available both for the Filter Button/Form combo and for the <code class="language-plaintext highlighter-rouge">&lt;FilterList&gt;</code> Sidebar. It’s enabled by default for the Filter Button/Form combo but you have to add it yourself in the <code class="language-plaintext highlighter-rouge">&lt;FilterList&gt;</code> Sidebar.</p>
-
-<p><code class="language-plaintext highlighter-rouge">&lt;SavedQueriesList&gt;</code> is a complement to <code class="language-plaintext highlighter-rouge">&lt;FilterList&gt;</code> sections for the filter sidebar</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;SavedQueriesList&gt;</code>はフィルターサイドバーの<FilterList>セクションを補完します</FilterList></p>
 
 <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">import { FilterList, FilterListItem, List, Datagrid } from 'react-admin';
 import { Card, CardContent } from '@mui/material';
@@ -979,10 +936,10 @@ const SongFilterSidebar = () =&gt; (
     &lt;Card&gt;
         &lt;CardContent&gt;
 <span class="gi">+           &lt;SavedQueriesList /&gt;
-</span>            &lt;FilterList label="Record Company" icon={&lt;BusinessIcon /&gt;}&gt;
+</span>            &lt;FilterList label="レコード会社" icon={&lt;BusinessIcon /&gt;}&gt;
                 ...
             &lt;/FilterList&gt;
-            &lt;FilterList label="Released" icon={&lt;DateRangeeIcon /&gt;}&gt;
+            &lt;FilterList label="リリース済み" icon={&lt;DateRangeeIcon /&gt;}&gt;
                ...
             &lt;/FilterList&gt;
         &lt;/CardContent&gt;
@@ -998,39 +955,34 @@ const SongFilterSidebar = () =&gt; (
 <span class="err">);</span>
 </code></pre></div></div>
 
-<h2 id="building-a-custom-filter">Building a Custom Filter</h2>
+<h2 id="カスタムフィルターの構築">カスタムフィルターの構築</h2>
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/filter\_with\_submit.webm" type="video/webm" /> <source src="./img/filter\_with\_submit.mp4" type="video/mp4" /> Your browser does not support the video tag. </video>
 
-<video controls="" autoplay="" playsinline="" muted="" loop="">
-  <source src="./img/filter_with_submit.webm" type="video/webm" />
-  <source src="./img/filter_with_submit.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<p>フィルターボタン/フォームコンボや<FilterList>サイドバーがニーズに合わない場合は、独自のものを作成できます。React-adminはカスタムフィルターの開発を容易にするショートカットを提供します。</FilterList></p>
 
-<p>If neither the Filter button/form combo nor the <code class="language-plaintext highlighter-rouge">&lt;FilterList&gt;</code> sidebar match your need, you can always build your own. React-admin provides shortcuts to facilitate the development of custom filters.</p>
+<p>例えば、デフォルトではフィルターボタン/フォームコンボは送信ボタンを提供せず、ユーザーがフォームとの対話を終了した後に自動的に送信されます。これはスムーズなユーザー体験を提供しますが、一部のAPIにとっては呼び出しが多すぎることがあります。</p>
 
-<p>For instance, by default, the filter button/form combo doesn’t provide a submit button, and submits automatically after the user has finished interacting with the form. This provides a smooth user experience, but for some APIs, it can cause too many calls.</p>
+<p>その場合、ユーザーがフォーム入力に値を入力するのではなく、送信ボタンをクリックしたときにフィルターを処理するのが解決策です。React-adminはそのためのコンポーネントを提供していませんが、フィルタ機能の内部を説明する良い機会です。実際には、フィルターボタン/フォームコンボの代替実装を提供します。</p>
 
-<p>In that case, the solution is to process the filter when users click on a submit button, rather than when they type values in form inputs. React-admin doesn’t provide any component for that, but it’s a good opportunity to illustrate the internals of the filter functionality. We’ll actually provide an alternative implementation to the Filter button/form combo.</p>
+<p>カスタムフィルターUIを作成するには、デフォルトのリストツールバーコンポーネントを上書きする必要があります。これには、リストフィルターとやり取りするフィルターボタンと<a href="./FilterForm.md"><code class="language-plaintext highlighter-rouge">Filter Form</code></a>の両方が含まれます。</p>
 
-<p>To create a custom filter UI, we’ll have to override the default List Toolbar component, which will contain both a Filter Button and a <a href="./FilterForm.md"><code class="language-plaintext highlighter-rouge">Filter Form</code></a>, interacting with the List filters via the ListContext.</p>
+<h3 id="フィルターコールバック">フィルターコールバック</h3>
 
-<h3 id="filter-callbacks">Filter Callbacks</h3>
-
-<p>The new element can use <a href="./useListContext.md">the <code class="language-plaintext highlighter-rouge">useListContext</code> hook</a> to interact with the list filter more easily. The hook returns the following constants:</p>
+<p>新しい要素は<a href="./useListContext.md">useListContextフック</a>を使用して、リストフィルターとより簡単にやり取りできます。このフックは以下の定数を返します：</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">filterValues</code>: Value of the filters based on the URI, e.g. <code class="language-plaintext highlighter-rouge">{ "commentable": true, "q": "lorem" }</code></li>
-  <li><code class="language-plaintext highlighter-rouge">setFilters()</code>: Callback to set the filter values, e.g. <code class="language-plaintext highlighter-rouge">setFilters({ "commentable":true })</code></li>
-  <li><code class="language-plaintext highlighter-rouge">displayedFilters</code>: Names of the filters displayed in the form, e.g. <code class="language-plaintext highlighter-rouge">['commentable', 'title']</code></li>
-  <li><code class="language-plaintext highlighter-rouge">showFilter()</code>: Callback to display an additional filter in the form, e.g. <code class="language-plaintext highlighter-rouge">showFilter('views')</code></li>
-  <li><code class="language-plaintext highlighter-rouge">hideFilter()</code>: Callback to hide a filter in the form, e.g. <code class="language-plaintext highlighter-rouge">hideFilter('title')</code></li>
+  <li><code class="language-plaintext highlighter-rouge">filterValues</code>: URIに基づくフィルターの値、例：<code class="language-plaintext highlighter-rouge">{ "commentable": true, "q": "lorem" }</code></li>
+  <li><code class="language-plaintext highlighter-rouge">setFilters()</code>: フィルター値を設定するコールバック、例：<code class="language-plaintext highlighter-rouge">setFilters({ "commentable":true })</code></li>
+  <li><code class="language-plaintext highlighter-rouge">displayedFilters</code>: フォームに表示されるフィルターの名前、例：<code class="language-plaintext highlighter-rouge">['commentable', 'title']</code></li>
+  <li><code class="language-plaintext highlighter-rouge">showFilter()</code>: フォームに追加のフィルターを表示するコールバック、例：<code class="language-plaintext highlighter-rouge">showFilter('views')</code></li>
+  <li><code class="language-plaintext highlighter-rouge">hideFilter()</code>: フォームにフィルターを隠すコールバック、例：<code class="language-plaintext highlighter-rouge">hideFilter('title')</code></li>
 </ul>
 
-<p>Let’s use this knowledge to write a custom <code class="language-plaintext highlighter-rouge">&lt;List&gt;</code> component that filters on submit.</p>
+<p>この知識を活用して、送信時にフィルターを設定するカスタム<code class="language-plaintext highlighter-rouge">&lt;List&gt;</code>コンポーネントを書きます。</p>
 
-<h3 id="custom-filter-button">Custom Filter Button</h3>
+<h3 id="カスタムフィルターボタン">カスタムフィルターボタン</h3>
 
-<p>The following component shows the filter form on click. We’ll take advantage of the <code class="language-plaintext highlighter-rouge">showFilter</code> function:</p>
+<p>次のコンポーネントはクリック時にフィルターフォームを表示します。<code class="language-plaintext highlighter-rouge">showFilter</code>関数を利用します：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useListContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Button</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material</span><span class="dl">'</span><span class="p">;</span>
@@ -1045,17 +997,17 @@ const SongFilterSidebar = () =&gt; (
             <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">showFilter</span><span class="p">(</span><span class="dl">"</span><span class="s2">main</span><span class="dl">"</span><span class="p">)</span><span class="si">}</span>
             <span class="na">startIcon</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">ContentFilter</span> <span class="p">/&gt;</span><span class="si">}</span>
         <span class="p">&gt;</span>
-            Filter
+            フィルター
         <span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span>
     <span class="p">);</span>
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>Normally, <code class="language-plaintext highlighter-rouge">showFilter()</code> adds one input to the <code class="language-plaintext highlighter-rouge">displayedFilters</code> list. As the filter form will be entirely hidden or shown, we use <code class="language-plaintext highlighter-rouge">showFilter()</code> with a virtual “main” input, which represents the entire form.</p>
+<p>通常、<code class="language-plaintext highlighter-rouge">showFilter()</code>は<code class="language-plaintext highlighter-rouge">displayedFilters</code>リストに1つの入力を追加します。フィルターフォーム全体を隠すか表示するかなので、仮想の「main」入力を使用してフィルター全体を表します。</p>
 
-<h3 id="custom-filter-form">Custom Filter Form</h3>
+<h3 id="カスタムフィルターフォーム">カスタムフィルターフォーム</h3>
 
-<p>Next is the filter form component, displayed only when the “main” filter is displayed (i.e. when a user has clicked the filter button). The form inputs appear directly in the form, and the form submission triggers the <code class="language-plaintext highlighter-rouge">setFilters()</code> callback passed as parameter. We’ll use <code class="language-plaintext highlighter-rouge">react-hook-form</code> to handle the form state:</p>
+<p>次に、ユーザーがフィルターボタンをクリックしたときに表示されるフィルターフォームコンポーネントです。フォーム入力は直接フォーム内に表示され、フォーム送信はパラメータとして渡された<code class="language-plaintext highlighter-rouge">setFilters()</code>コールバックをトリガーします。フォーム状態を処理するために<code class="language-plaintext highlighter-rouge">react-hook-form</code>を使用します：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useForm</span><span class="p">,</span> <span class="nx">FormProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-hook-form</span><span class="dl">'</span><span class="p">;</span>
@@ -1099,7 +1051,7 @@ const SongFilterSidebar = () =&gt; (
                             <span class="na">resettable</span>
                             <span class="na">helperText</span><span class="p">=</span><span class="si">{</span><span class="kc">false</span><span class="si">}</span>
                             <span class="na">source</span><span class="p">=</span><span class="s">"q"</span>
-                            <span class="na">label</span><span class="p">=</span><span class="s">"Search"</span>
+                            <span class="na">label</span><span class="p">=</span><span class="s">"検索"</span>
                             <span class="na">InputProps</span><span class="p">=</span><span class="si">{</span><span class="p">{</span>
                                 <span class="na">endAdornment</span><span class="p">:</span> <span class="p">(</span>
                                     <span class="p">&lt;</span><span class="nc">InputAdornment</span><span class="p">&gt;</span>
@@ -1118,12 +1070,12 @@ const SongFilterSidebar = () =&gt; (
                     <span class="p">&lt;/</span><span class="nc">Box</span><span class="p">&gt;</span>
                     <span class="p">&lt;</span><span class="nc">Box</span> <span class="na">component</span><span class="p">=</span><span class="s">"span"</span> <span class="na">mr</span><span class="p">=</span><span class="si">{</span><span class="mi">2</span><span class="si">}</span> <span class="na">mb</span><span class="p">=</span><span class="si">{</span><span class="mf">1.5</span><span class="si">}</span><span class="p">&gt;</span>
                         <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">variant</span><span class="p">=</span><span class="s">"outlined"</span> <span class="na">color</span><span class="p">=</span><span class="s">"primary"</span> <span class="na">type</span><span class="p">=</span><span class="s">"submit"</span><span class="p">&gt;</span>
-                            Filter
+                            フィルター
                         <span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span>
                     <span class="p">&lt;/</span><span class="nc">Box</span><span class="p">&gt;</span>
                     <span class="p">&lt;</span><span class="nc">Box</span> <span class="na">component</span><span class="p">=</span><span class="s">"span"</span> <span class="na">mb</span><span class="p">=</span><span class="si">{</span><span class="mf">1.5</span><span class="si">}</span><span class="p">&gt;</span>
                         <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">variant</span><span class="p">=</span><span class="s">"outlined"</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">resetFilter</span><span class="si">}</span><span class="p">&gt;</span>
-                            Close
+                            閉じる
                         <span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span>
                     <span class="p">&lt;/</span><span class="nc">Box</span><span class="p">&gt;</span>
                 <span class="p">&lt;/</span><span class="nc">Box</span><span class="p">&gt;</span>
@@ -1133,9 +1085,9 @@ const SongFilterSidebar = () =&gt; (
 <span class="p">};</span>
 </code></pre></div></div>
 
-<h3 id="using-the-custom-filters-in-the-list-actions">Using The Custom Filters in The List Actions</h3>
+<h3 id="カスタムフィルターをリストアクションで使用する">カスタムフィルターをリストアクションで使用する</h3>
 
-<p>To finish, create a <code class="language-plaintext highlighter-rouge">&lt;ListAction&gt;</code> component and pass it to the <code class="language-plaintext highlighter-rouge">&lt;List&gt;</code> component using the <code class="language-plaintext highlighter-rouge">actions</code> prop:</p>
+<p>最後に、<code class="language-plaintext highlighter-rouge">&lt;ListAction&gt;</code>コンポーネントを作成し、<code class="language-plaintext highlighter-rouge">actions</code>プロパティを使用して<code class="language-plaintext highlighter-rouge">&lt;List&gt;</code>コンポーネントに渡します：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">TopToolbar</span><span class="p">,</span> <span class="nx">ExportButton</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Box</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material</span><span class="dl">'</span><span class="p">;</span>
@@ -1157,9 +1109,10 @@ const SongFilterSidebar = () =&gt; (
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: No need to pass any <code class="language-plaintext highlighter-rouge">filters</code> to the list anymore, as the <code class="language-plaintext highlighter-rouge">&lt;PostFilterForm&gt;</code> component will display them.</p>
+<p><strong>ヒント</strong>: フィルターをリストに渡す必要はもうありません。<code class="language-plaintext highlighter-rouge">&lt;PostFilterForm&gt;</code>コンポーネントがそれらを表示します。</p>
 
-<p>You can use a similar approach to offer alternative User Experiences for data filtering, e.g. to display the filters as a line in the datagrid headers.</p>
+<p>同様のアプローチを使用して、データフィルタリングのための代替ユーザーエクスペリエンスを提供することもできます。例えば、フィルターをデータグリッドヘッダーの行として表示することができます。</p>
+
 
                         </div>
                     </div>

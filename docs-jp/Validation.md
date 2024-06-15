@@ -1,40 +1,40 @@
 ---
 layout: default
-title: "Form Validation"
+title: "フォームバリデーション"
 ---
 
-# Form Validation
+# フォームバリデーション
 
-![Validation example](./img/validation.png)
+![バリデーションの例](./img/validation.png)
 
-React-admin relies on [react-hook-form](https://react-hook-form.com/) for the validation of user input in forms. React-admin supports several approaches:
+React-adminはフォーム内のユーザー入力のバリデーションに[react-hook-form](https://react-hook-form.com/)を利用しています。React-adminは以下のアプローチをサポートしています：
 
-- using the `validate` prop at the Form level (validation by function)
-- using the `validate` prop at the Input level
-- using the `resolver` prop at the Form level (validation by schema)
-- using the return value from the server (server-side validation)
+- `validate`プロパティをフォームレベルで使用（関数によるバリデーション）
+- `validate`プロパティを入力レベルで使用
+- `resolver`プロパティをフォームレベルで使用（スキーマによるバリデーション）
+- サーバからの戻り値を使用（サーバサイドバリデーション）
 
-You can’t use both form level validation and input level validation - this is a `react-hook-form` limitation.
+フォームレベルのバリデーションと入力レベルのバリデーションを同時に使用することはできません。これは`react-hook-form`の制限です。
 
-## Validation Mode
+## バリデーションモード
 
-By default, the validation mode is `onSubmit`, and the re-validation mode is `onChange`.
+デフォルトでは、バリデーションモードは`onSubmit`で、再バリデーションモードは`onChange`です。
 
-Since [`<Form>`](./Form.md) actually passes all additional props to react-hook-form's [`useForm` hook](https://react-hook-form.com/docs/useform/), this can easily be changed by setting the `mode` and `reValidateMode` props.
+[`<Form>`](./Form.md)は実際にはすべての追加プロパティをreact-hook-formの[`useForm`フック](https://react-hook-form.com/docs/useform/)に渡すため、`mode`および`reValidateMode`プロパティを設定することで簡単に変更できます。
 
 ```jsx
-export const UserCreate = () => (
-    <Create>
-        <SimpleForm mode="onBlur" reValidateMode="onBlur">
-            <TextInput label="First Name" source="firstName" validate={required()} />
-        </SimpleForm>
-    </Create>
-);
+    export const UserCreate = () => (
+        <Create>
+            <SimpleForm mode="onBlur" reValidateMode="onBlur">
+                <TextInput label="First Name" source="firstName" validate={required()} />
+            </SimpleForm>
+        </Create>
+    );
 ```
 
-## Global Validation
+## グローバルバリデーション
 
-The value of the form `validate` prop must be a function taking the record as input, and returning an object with error messages indexed by field. For instance:
+フォームの`validate`プロパティの値は、レコードを入力として取り、フィールドごとにエラーメッセージをインデックス付けして返す関数でなければなりません。例えば：
 
 ```jsx
 const validateUserCreation = (values) => {
@@ -43,41 +43,33 @@ const validateUserCreation = (values) => {
         errors.firstName = 'The firstName is required';
     }
     if (!values.age) {
-        // You can return translation keys
         errors.age = 'ra.validation.required';
     } else if (values.age < 18) {
-        // Or an object if the translation messages need parameters
         errors.age = {
             message: 'ra.validation.minValue',
             args: { min: 18 }
         };
     }
-    // You can add a message for a whole ArrayInput
     if (!values.children || !values.children.length) {
         errors.children = 'ra.validation.required';
     } else {
-        // Or target each child of an ArrayInput by returning an array of error objects
         errors.children = values.children.map(child => {
             const childErrors = {};
             if (!child || !child.firstName) {
                 childErrors.firstName = 'The firstName is required';
             }
             if (!child || !child.age) {
-                childErrors.age = 'ra.validation.required'; // Translation keys are supported here too
+                childErrors.age = 'ra.validation.required';
             }
             return childErrors;
         });
     }
-    return errors
+    return errors;
 };
 
 export const UserCreate = () => (
     <Create>
         <SimpleForm validate={validateUserCreation}>
-            {/* 
-                We need to add `validate={required()}` on required fields to append a '*' symbol 
-                to the label, but the real validation still happens in `validateUserCreation`
-            */}
             <TextInput label="First Name" source="firstName" validate={required()} />
             <TextInput label="Age" source="age" validate={required()} />
             <ArrayInput label="Children" source="children" fullWidth validate={required()}>
@@ -91,26 +83,26 @@ export const UserCreate = () => (
 );
 ```
 
-**Tip**: The props you pass to `<SimpleForm>` and `<TabbedForm>` are passed to the [useForm hook](https://react-hook-form.com/docs/useform) of `react-hook-form`.
+**ヒント**: `<SimpleForm>`および`<TabbedForm>`に渡すプロパティは、`react-hook-form`の[useFormフック](https://react-hook-form.com/docs/useform)に渡されます。
 
-**Tip**: The `validate` function can return a promise for asynchronous validation. See [the Server-Side Validation section](#server-side-validation) below.
+**ヒント**: `validate`関数は、非同期バリデーションのためにプロミスを返すことができます。以下の[サーバサイドバリデーションのセクション](#server-side-validation)を参照してください。
 
-## Per Input Validation: Built-in Field Validators
+## 入力ごとのバリデーション：組み込みフィールドバリデーター
 
-Alternatively, you can specify a `validate` prop directly in `<Input>` components, taking either a function or an array of functions. React-admin already bundles a few validator functions, that you can just require, and use as input-level validators:
+代わりに、`<Input>`コンポーネントに`validate`プロパティを直接指定することができます。これは関数または関数の配列を受け取ります。React-adminにはすでにいくつかのバリデータ関数がバンドルされており、これらを入力レベルのバリデーターとして使用できます：
 
-* `required(message)` if the field is mandatory,
-* `minValue(min, message)` to specify a minimum value for integers,
-* `maxValue(max, message)` to specify a maximum value for integers,
-* `minLength(min, message)` to specify a minimum length for strings,
-* `maxLength(max, message)` to specify a maximum length for strings,
-* `number(message)` to check that the input is a valid number,
-* `email(message)` to check that the input is a valid email address,
-* `regex(pattern, message)` to validate that the input matches a regex,
-* `choices(list, message)` to validate that the input is within a given list,
-* `unique()` to validate that the input is unique (see [`useUnique`](./useUnique.md)),
+* 必須フィールドの場合は`required(message)`
+* 整数の最小値を指定する場合は`minValue(min, message)`
+* 整数の最大値を指定する場合は`maxValue(max, message)`
+* 文字列の最小長を指定する場合は`minLength(min, message)`
+* 文字列の最大長を指定する場合は`maxLength(max, message)`
+* 有効な数値であることを確認する場合は`number(message)`
+* 有効なメールアドレスであることを確認する場合は`email(message)`
+* 入力が正規表現に一致することを確認する場合は`regex(pattern, message)`
+* 入力が指定されたリスト内であることを確認する場合は`choices(list, message)`
+* 入力が一意であることを確認する場合は`unique()`（[`useUnique`](./useUnique.md)を参照）
 
-Example usage:
+使用例：
 
 ```jsx
 import {
@@ -148,17 +140,16 @@ export const UserCreate = () => (
 );
 ```
 
-**Tip**: If you pass a function as a message, react-admin calls this function with `{ args, value, values,translate, ...props }` as argument. For instance:
+**ヒント**: メッセージとして関数を渡すと、react-adminはこの関数を`{ args, value, values, translate, ...props }`として呼び出します。例えば：
 
 ```jsx
 const message = ({ translate }) => translate('myroot.validation.email_invalid');
 const validateEmail = email(message);
 ```
 
-## Per Input Validation: Custom Function Validator
+## 入力ごとのバリデーション：カスタム関数バリデーター
 
-You can also define your own validator functions. These functions should return `undefined` when there is no error, or an error string.
-
+独自のバリデーター関数を定義することもできます。これらの関数はエラーがない場合は`undefined`を返し、エラーメッセージを返します。
 
 ```jsx
 const required = (message = 'Required') =>
@@ -193,11 +184,11 @@ export const UserCreate = () => (
 );
 ```
 
-React-admin will combine all the input-level functions into a single function looking just like the previous one.
+React-adminはすべての入力レベル関数を単一の関数に結合し、前述のような形になります。
 
-Input validation functions receive the current field value and the values of all fields of the current record. This allows for complex validation scenarios (e.g. validate that two passwords are the same).
+入力バリデーション関数は、現在のフィールド値と現在のレコードのすべてのフィールドの値を受け取ります。これにより、複雑なバリデーションシナリオ（例えば、2つのパスワードが同じかどうかのバリデーション）が可能になります。
 
-**Tip**: If your admin has multi-language support, validator functions should return message *identifiers* rather than messages themselves. React-admin automatically passes these identifiers to the translation function: 
+**ヒント**: 管理者が多言語対応の場合、バリデーター関数はメッセージそのものではなく、メッセージ識別子を返すべきです。React-adminはこれらの識別子を翻訳関数に自動的に渡します：
 
 ```jsx
 // in validators/required.js
@@ -216,7 +207,7 @@ export default {
 }
 ```
 
-If the translation depends on a variable, the validator can return an object rather than a translation identifier:
+翻訳が変数に依存する場合、バリデーターは翻訳識別子ではなくオブジェクトを返すことができます：
 
 ```jsx
 // in validators/minLength.js
@@ -235,11 +226,12 @@ export default {
 }
 ```
 
-See the [Translation documentation](./TranslationTranslating.md#translating-form-validation-errors) for details.
+詳細は[翻訳ドキュメント](./TranslationTranslating.md#translating-form-validation-errors)を参照してください。
 
-**Tip**: Make sure to define validation functions or array of functions in a variable outside your component, instead of defining them directly in JSX. This can result in a new function or array at every render, and trigger infinite rerender.
+**ヒント**: バリデーター関数や関数の配列はコンポーネントの外側で変数として定義し、JSX内で直接定義しないようにしましょう。これにより、毎回新しい関数や配列が作成され、無限リレンダリングが発生する可能性があります。
 
 {% raw %}
+
 ```jsx
 const validateStock = [required(), number(), minValue(0)];
 
@@ -247,24 +239,25 @@ export const ProductEdit = () => (
     <Edit>
         <SimpleForm defaultValues={{ stock: 0 }}>
             ...
-            {/* do this */}
+            {/* こちらを使用 */}
             <NumberInput source="stock" validate={validateStock} />
-            {/* don't do that */}
+            {/* こちらを使用しない */}
             <NumberInput source="stock" validate={[required(), number(), minValue(0)]} />
             ...
         </SimpleForm>
     </Edit>
 );
 ```
+
 {% endraw %}
 
-**Tip**: The props of your Input components are passed to a `react-hook-form` [useController](https://react-hook-form.com/docs/usecontroller) hook.
+**ヒント**: 入力コンポーネントのプロパティは、`react-hook-form`の[useController](https://react-hook-form.com/docs/usecontroller)フックに渡されます。
 
-**Tip**: The custom validator function can return a promise, e.g. to use server-side validation. See next section for details.
+**ヒント**: カスタムバリデーター関数はプロミスを返すことができ、サーバサイドバリデーションに使用されます。詳細は次のセクションを参照してください。
 
-## Async Validation
+## 非同期バリデーション
 
-You can validate the entire form by returning a Promise in the form `validate` function. For instance:
+フォーム全体をバリデートするために、フォームの`validate`関数でプロミスを返すことができます。例えば：
 
 ```jsx
 const validateUserCreation = async (values) => {
@@ -280,17 +273,14 @@ const validateUserCreation = async (values) => {
 
     const isEmailUnique = await checkEmailIsUnique(values.email);
     if (!isEmailUnique) {
-        // Return a message directly
         errors.email = 'Email already used';
-        // Or a translation key
         errors.email = 'myapp.validation.email_not_unique';
-        // Or an object if the translation needs parameters
         errors.email = {
             message: 'myapp.validation.email_not_unique',
             args: { email: values.email }
         };
     }
-    return errors
+    return errors;
 };
 
 export const UserCreate = () => (
@@ -304,20 +294,15 @@ export const UserCreate = () => (
 );
 ```
 
-Per Input validators can also return a Promise to call the server for validation. For instance:
+入力バリデーターもプロミスを返し、サーバにバリデーションを行わせることができます。例えば：
 
 ```jsx
 const validateEmailUnicity = async (value) => {
     const isEmailUnique = await checkEmailIsUnique(value);
     if (!isEmailUnique) {
         return 'Email already used';
-
-        // You can return a translation key as well
         return 'myroot.validation.email_already_used';
-
-        // Or even an object just like the other validators
-        return { message: 'myroot.validation.email_already_used', args: { email: value } }
-
+        return { message: 'myroot.validation.email_already_used', args: { email: value } };
     }
 
     return undefined;
@@ -336,9 +321,9 @@ export const UserCreate = () => (
 );
 ```
 
-## Schema Validation
+## スキーマバリデーション
 
-`react-hook-form` supports schema validation with many libraries through its [`resolver` props](https://react-hook-form.com/docs/useform#validationResolver). To use it, follow their [resolvers documentation](https://github.com/react-hook-form/resolvers). Here's an example using `yup`:
+`react-hook-form`は[`resolver`プロパティ](https://react-hook-form.com/docs/useform#validationResolver)を通じて多くのライブラリと連携してスキーマバリデーションをサポートします。使用するには、[resolversのドキュメント](https://github.com/react-hook-form/resolvers)に従ってください。以下は`yup`を使用した例です：
 
 ```jsx
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -363,27 +348,27 @@ const CustomerCreate = () => (
 );
 ```
 
-## Server-Side Validation
+## サーバサイドバリデーション
 
-Server-side validation is supported out of the box for `pessimistic` mode only. It requires that the dataProvider throws an error with the following shape:
+サーバサイドバリデーションは`pessimistic`モードのみで標準サポートされています。これは、dataProviderが以下の形のエラーをスローする必要があることを意味します：
 
-```
+```css
 {
     body: {
         errors: {
-            title: 'An article with this title already exists. The title must be unique.',
-            date: 'The date is required',
-            tags: { message: "The tag 'agrriculture' doesn't exist" },
+            title: 'このタイトルの記事は既に存在します。タイトルは一意である必要があります。',
+            date: '日付は必須です。',
+            tags: { message: "タグ 'agriculture' は存在しません。" },
         }
     }
 }
 ```
 
-**Tip**: The shape of the returned validation errors must match the form shape: each key needs to match a `source` prop.
+**ヒント**: 返されるバリデーションエラーの形はフォームの形と一致する必要があります：各キーは`source`プロパティと一致する必要があります。
 
-**Tip**: The returned validation errors might have any validation format we support (simple strings, translation strings or translation objects with a `message` attribute) for each key.
+**ヒント**: 返されるバリデーションエラーは、各キーに対して任意のバリデーションフォーマット（単純な文字列、翻訳文字列、または`message`属性を持つ翻訳オブジェクト）を持つことができます。
 
-**Tip**: If your data provider leverages React Admin's [`httpClient`](https://marmelab.com/react-admin/DataProviderWriting.html#example-rest-implementation), all error response bodies are wrapped and thrown as `HttpError`. This means your API only needs to return an invalid response with a json body containing the `errors` key.
+**ヒント**: React Adminの[`httpClient`](https://marmelab.com/react-admin/DataProviderWriting.html#example-rest-implementation)を利用するdata providerの場合、すべてのエラーレスポンスボディは`HttpError`としてラップされてスローされます。つまり、APIは`errors`キーを含むJSONボディを持つ無効なレスポンスを返すだけで済みます。
 
 ```js
 import { fetchUtils } from "react-admin";
@@ -392,13 +377,13 @@ const httpClient = fetchUtils.fetchJson;
 
 const apiUrl = 'https://my.api.com/';
 /*
-  Example response from the API when there are validation errors:
+  バリデーションエラーがある場合のAPIからの例：
 
   {
     "errors": {
-      "title": "An article with this title already exists. The title must be unique.",
-      "date": "The date is required",
-      "tags": { "message": "The tag 'agrriculture' doesn't exist" },
+      "title": "このタイトルの記事は既に存在します。タイトルは一意である必要があります。",
+      "date": "日付は必須です。",
+      "tags": { "message": "タグ 'agriculture' は存在しません。" },
     }
   }
 */
@@ -414,10 +399,10 @@ const myDataProvider = {
 }
 ```
 
-**Tip:** If you are not using React Admin's `httpClient`, you can still wrap errors in an `HttpError` to return them with the correct shape:
+**ヒント:** React Adminの`httpClient`を使用していない場合でも、エラーを`HttpError`でラップして正しい形で返すことができます：
 
 ```js
-import { HttpError } from 'react-admin'
+import { HttpError } from 'react-admin';
 
 const myDataProvider = {
     create: async (resource, { data }) => {
@@ -428,12 +413,12 @@ const myDataProvider = {
 
         const body = response.json();
         /*
-            body should be something like:
+            bodyは次のようなものでなければなりません：
             {
                 errors: {
-                    title: "An article with this title already exists. The title must be unique.",
-                    date: "The date is required",
-                    tags: { message: "The tag 'agrriculture' doesn't exist" },
+                    title: "このタイトルの記事は既に存在します。タイトルは一意である必要があります。",
+                    date: "日付は必須です。",
+                    tags: { message: "タグ 'agriculture' は存在しません。" },
                 }
             }
         */
@@ -450,3 +435,5 @@ const myDataProvider = {
     }
 }
 ```
+
+

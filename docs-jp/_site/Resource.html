@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <title>React-admin - The Resource Component</title>
+        <title>React-admin - リソースコンポーネント</title>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
@@ -563,98 +563,98 @@
                         <div
                             class="markdown-section DocSearch-content toc-content"
                         >
-                            <h1 id="the-resource-component">The <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> component</h1>
+                            <h1 id="resourceコンポーネント"><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>コンポーネント</h1>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> components define the CRUD routes of a react-admin application.</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>コンポーネントは、react-adminアプリケーションのCRUDルートを定義します。</p>
 
-<p>In react-admin terms, a <em>resource</em> is a string that refers to an entity type (like ‘products’, ‘subscribers’, or ‘tags’). <em>Records</em> are objects with an <code class="language-plaintext highlighter-rouge">id</code> field, and two records of the same <em>resource</em> have the same field structure (e.g. all posts records have a title, a publication date, etc.).</p>
+<p>react-adminの用語では、<em>resource</em>はエンティティタイプ（例えば「products」、「subscribers」、「tags」など）を指す文字列です。<em>records</em>は<code class="language-plaintext highlighter-rouge">id</code>フィールドを持つオブジェクトで、同じ<em>resource</em>に属する2つのrecordは同じフィールド構造を持ちます（例えば、全てのpostレコードはタイトル、公開日などを持つ）。</p>
 
-<p>A <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> component has 3 responsibilities:</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>コンポーネントには3つの責任があります：</p>
 
 <ul>
-  <li>It defines the CRUD routes of a given resource (to display a list of records, the details of a record, or to create a new one).</li>
-  <li>It creates a context that lets every descendant component know the current resource name (this context is called <code class="language-plaintext highlighter-rouge">ResourceContext</code>).</li>
-  <li>It stores the resource definition (its name, icon, and label) inside a shared context (this context is called <code class="language-plaintext highlighter-rouge">ResourceDefinitionContext</code>).</li>
+  <li>指定されたリソースのCRUDルートを定義します（レコードのリストを表示、レコードの詳細を表示、新しいレコードを作成）。</li>
+  <li>すべての子孫コンポーネントが現在のリソース名を知ることができるコンテキストを作成します（このコンテキストは<code class="language-plaintext highlighter-rouge">ResourceContext</code>と呼ばれます）。</li>
+  <li>リソース定義（名前、アイコン、ラベル）を共有コンテキストに保存します（このコンテキストは<code class="language-plaintext highlighter-rouge">ResourceDefinitionContext</code>と呼ばれます）。</li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> components can only be used as children of <a href="./Admin.md">the <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component</a>.</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>コンポーネントは[<Admin>コンポーネント](./Admin.md)の子としてのみ使用できます。</Admin></p>
 
-<h2 id="usage">Usage</h2>
+<h2 id="使用方法">使用方法</h2>
 
-<p>For instance, the following admin app offers an interface to the resources exposed by the JSONPlaceholder API (<a href="https://jsonplaceholder.typicode.com/posts">posts</a>, <a href="https://jsonplaceholder.typicode.com/users">users</a>, <a href="https://jsonplaceholder.typicode.com/comments">comments</a>, and <a href="https://jsonplaceholder.typicode.com/tags">tags</a>):</p>
+<p>例えば、以下のadminアプリケーションはJSONPlaceholder APIが提供するリソース（<a href="https://jsonplaceholder.typicode.com/posts">posts</a>、<a href="https://jsonplaceholder.typicode.com/users">users</a>、<a href="https://jsonplaceholder.typicode.com/comments">comments</a>、および<a href="https://jsonplaceholder.typicode.com/tags">tags</a>）に対するインターフェースを提供します：</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">jsonServerProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-json-server</span><span class="dl">'</span><span class="p">;</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+    <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">import</span> <span class="nx">jsonServerProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-json-server</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="k">import</span> <span class="p">{</span> <span class="nx">PostList</span><span class="p">,</span> <span class="nx">PostCreate</span><span class="p">,</span> <span class="nx">PostEdit</span><span class="p">,</span> <span class="nx">PostShow</span><span class="p">,</span> <span class="nx">PostIcon</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./posts</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">UserList</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./posts</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">CommentList</span><span class="p">,</span> <span class="nx">CommentEdit</span><span class="p">,</span> <span class="nx">CommentCreate</span><span class="p">,</span> <span class="nx">CommentIcon</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./comments</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">import</span> <span class="p">{</span> <span class="nx">PostList</span><span class="p">,</span> <span class="nx">PostCreate</span><span class="p">,</span> <span class="nx">PostEdit</span><span class="p">,</span> <span class="nx">PostShow</span><span class="p">,</span> <span class="nx">PostIcon</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./posts</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">import</span> <span class="p">{</span> <span class="nx">UserList</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./posts</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">import</span> <span class="p">{</span> <span class="nx">CommentList</span><span class="p">,</span> <span class="nx">CommentEdit</span><span class="p">,</span> <span class="nx">CommentCreate</span><span class="p">,</span> <span class="nx">CommentIcon</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./comments</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
-    <span class="p">&lt;</span><span class="nc">Admin</span> <span class="na">dataProvider</span><span class="p">=</span><span class="si">{</span><span class="nx">jsonServerProvider</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://jsonplaceholder.typicode.com</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>
-        <span class="si">{</span><span class="cm">/* complete CRUD pages for posts */</span><span class="si">}</span>
-        <span class="p">&lt;</span><span class="nc">Resource</span> <span class="na">name</span><span class="p">=</span><span class="s">"posts"</span> <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">PostList</span><span class="si">}</span> <span class="na">create</span><span class="p">=</span><span class="si">{</span><span class="nx">PostCreate</span><span class="si">}</span> <span class="na">edit</span><span class="p">=</span><span class="si">{</span><span class="nx">PostEdit</span><span class="si">}</span> <span class="na">show</span><span class="p">=</span><span class="si">{</span><span class="nx">PostShow</span><span class="si">}</span> <span class="p">/&gt;</span>
-        <span class="si">{</span><span class="cm">/* read-only user list */</span><span class="si">}</span>
-        <span class="p">&lt;</span><span class="nc">Resource</span> <span class="na">name</span><span class="p">=</span><span class="s">"users"</span> <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">UserList</span><span class="si">}</span> <span class="p">/&gt;</span>
-        <span class="si">{</span><span class="cm">/* no show page for the comments resource */</span><span class="si">}</span>
-        <span class="p">&lt;</span><span class="nc">Resource</span> <span class="na">name</span><span class="p">=</span><span class="s">"comments"</span> <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">CommentList</span><span class="si">}</span> <span class="na">create</span><span class="p">=</span><span class="si">{</span><span class="nx">CommentCreate</span><span class="si">}</span> <span class="na">edit</span><span class="p">=</span><span class="si">{</span><span class="nx">CommentEdit</span><span class="si">}</span> <span class="na">icon</span><span class="p">=</span><span class="si">{</span><span class="nx">CommentIcon</span><span class="si">}</span> <span class="p">/&gt;</span>
-    <span class="p">&lt;/</span><span class="nc">Admin</span><span class="p">&gt;</span>
-<span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nc">Admin</span> <span class="na">dataProvider</span><span class="p">=</span><span class="si">{</span><span class="nx">jsonServerProvider</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://jsonplaceholder.typicode.com</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>
+            <span class="si">{</span><span class="cm">/* postsの完全なCRUDページ */</span><span class="si">}</span>
+            <span class="p">&lt;</span><span class="nc">Resource</span> <span class="na">name</span><span class="p">=</span><span class="s">"posts"</span> <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">PostList</span><span class="si">}</span> <span class="na">create</span><span class="p">=</span><span class="si">{</span><span class="nx">PostCreate</span><span class="si">}</span> <span class="na">edit</span><span class="p">=</span><span class="si">{</span><span class="nx">PostEdit</span><span class="si">}</span> <span class="na">show</span><span class="p">=</span><span class="si">{</span><span class="nx">PostShow</span><span class="si">}</span> <span class="p">/&gt;</span>
+            <span class="si">{</span><span class="cm">/* 読み取り専用のuserリスト */</span><span class="si">}</span>
+            <span class="p">&lt;</span><span class="nc">Resource</span> <span class="na">name</span><span class="p">=</span><span class="s">"users"</span> <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">UserList</span><span class="si">}</span> <span class="p">/&gt;</span>
+            <span class="si">{</span><span class="cm">/* commentsリソースのshowページはなし */</span><span class="si">}</span>
+            <span class="p">&lt;</span><span class="nc">Resource</span> <span class="na">name</span><span class="p">=</span><span class="s">"comments"</span> <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">CommentList</span><span class="si">}</span> <span class="na">create</span><span class="p">=</span><span class="si">{</span><span class="nx">CommentCreate</span><span class="si">}</span> <span class="na">edit</span><span class="p">=</span><span class="si">{</span><span class="nx">CommentEdit</span><span class="si">}</span> <span class="na">icon</span><span class="p">=</span><span class="si">{</span><span class="nx">CommentIcon</span><span class="si">}</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">Admin</span><span class="p">&gt;</span>
+    <span class="p">);</span>
 </code></pre></div></div>
 
-<p>The routes call the following <code class="language-plaintext highlighter-rouge">dataProvider</code> methods:</p>
+<p>これらのルートは以下の<code class="language-plaintext highlighter-rouge">dataProvider</code>メソッドを呼び出します：</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">list</code> calls <code class="language-plaintext highlighter-rouge">getList()</code> on mount</li>
-  <li><code class="language-plaintext highlighter-rouge">show</code> calls <code class="language-plaintext highlighter-rouge">getOne()</code> on mount</li>
-  <li><code class="language-plaintext highlighter-rouge">edit</code> calls <code class="language-plaintext highlighter-rouge">getOne()</code> on mount, and <code class="language-plaintext highlighter-rouge">update()</code> or <code class="language-plaintext highlighter-rouge">delete()</code> on submission</li>
-  <li><code class="language-plaintext highlighter-rouge">create</code> calls <code class="language-plaintext highlighter-rouge">create()</code> on submission</li>
+  <li><code class="language-plaintext highlighter-rouge">list</code>はマウント時に<code class="language-plaintext highlighter-rouge">getList()</code>を呼び出します</li>
+  <li><code class="language-plaintext highlighter-rouge">show</code>はマウント時に<code class="language-plaintext highlighter-rouge">getOne()</code>を呼び出します</li>
+  <li><code class="language-plaintext highlighter-rouge">edit</code>はマウント時に<code class="language-plaintext highlighter-rouge">getOne()</code>を呼び出し、送信時に<code class="language-plaintext highlighter-rouge">update()</code>または<code class="language-plaintext highlighter-rouge">delete()</code>を呼び出します</li>
+  <li><code class="language-plaintext highlighter-rouge">create</code>は送信時に<code class="language-plaintext highlighter-rouge">create()</code>を呼び出します</li>
 </ul>
 
-<p><strong>Tip</strong>: Which API endpoint does a resource rely on? The <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> component doesn’t know this mapping - it’s <a href="./DataProviders.md">the <code class="language-plaintext highlighter-rouge">dataProvider</code>’s job</a> to define it.</p>
+<p><strong>ヒント</strong>: リソースがどのAPIエンドポイントに依存しているかは、<code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>コンポーネントには分かりません。それは<a href="./DataProviders.md"><code class="language-plaintext highlighter-rouge">dataProvider</code></a>の役割です。</p>
 
 <h2 id="name"><code class="language-plaintext highlighter-rouge">name</code></h2>
 
-<p><code class="language-plaintext highlighter-rouge">name</code> is the only required prop for a <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>. React-admin uses the <code class="language-plaintext highlighter-rouge">name</code> prop both to determine the API endpoint (passed to the <code class="language-plaintext highlighter-rouge">dataProvider</code>), and to form the URL for the resource.</p>
+<p><code class="language-plaintext highlighter-rouge">name</code>は<code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>に必要な唯一のpropです。React-adminは<code class="language-plaintext highlighter-rouge">name</code> propを使用してAPIエンドポイント（<code class="language-plaintext highlighter-rouge">dataProvider</code>に渡される）を決定し、リソースのURLを形成します。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">Resource</span> <span class="na">name</span><span class="p">=</span><span class="s">"posts"</span> <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">PostList</span><span class="si">}</span> <span class="na">create</span><span class="p">=</span><span class="si">{</span><span class="nx">PostCreate</span><span class="si">}</span> <span class="na">edit</span><span class="p">=</span><span class="si">{</span><span class="nx">PostEdit</span><span class="si">}</span> <span class="na">show</span><span class="p">=</span><span class="si">{</span><span class="nx">PostShow</span><span class="si">}</span> <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<p>For this resource react-admin will fetch the <code class="language-plaintext highlighter-rouge">https://jsonplaceholder.typicode.com/posts</code> endpoint for data.</p>
+<p>このリソースの場合、react-adminはデータを取得するために<code class="language-plaintext highlighter-rouge">https://jsonplaceholder.typicode.com/posts</code>エンドポイントにアクセスします。</p>
 
-<p>The routing will map the component as follows:</p>
+<p>ルーティングは以下のようにコンポーネントにマップされます：</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">/posts/</code> maps to <code class="language-plaintext highlighter-rouge">PostList</code></li>
-  <li><code class="language-plaintext highlighter-rouge">/posts/create</code> maps to <code class="language-plaintext highlighter-rouge">PostCreate</code></li>
-  <li><code class="language-plaintext highlighter-rouge">/posts/:id</code> maps to <code class="language-plaintext highlighter-rouge">PostEdit</code></li>
-  <li><code class="language-plaintext highlighter-rouge">/posts/:id/show</code> maps to <code class="language-plaintext highlighter-rouge">PostShow</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/posts/</code>は<code class="language-plaintext highlighter-rouge">PostList</code>にマップ</li>
+  <li><code class="language-plaintext highlighter-rouge">/posts/create</code>は<code class="language-plaintext highlighter-rouge">PostCreate</code>にマップ</li>
+  <li><code class="language-plaintext highlighter-rouge">/posts/:id</code>は<code class="language-plaintext highlighter-rouge">PostEdit</code>にマップ</li>
+  <li><code class="language-plaintext highlighter-rouge">/posts/:id/show</code>は<code class="language-plaintext highlighter-rouge">PostShow</code>にマップ</li>
 </ul>
 
-<p><strong>Tip</strong>: If you want to use a special API endpoint (e.g. ‘https://jsonplaceholder.typicode.com/my-custom-posts-endpoint’) without altering the URL in the react-admin application (so still use <code class="language-plaintext highlighter-rouge">/posts</code>), write the mapping from the resource <code class="language-plaintext highlighter-rouge">name</code> (<code class="language-plaintext highlighter-rouge">posts</code>) to the API endpoint (<code class="language-plaintext highlighter-rouge">my-custom-posts-endpoint</code>) in your own <a href="./Admin.md#dataprovider"><code class="language-plaintext highlighter-rouge">dataProvider</code></a>.</p>
+<p><strong>ヒント</strong>: 特殊なAPIエンドポイント（例：’<a href="">https://jsonplaceholder.typicode.com/my-custom-posts-endpoint’）を使用しつつ、react-adminアプリケーション内のURL（例：`/posts`）を変更しない場合、リソース`name`（`posts`）とAPIエンドポイント（`my-custom-posts-endpoint`）のマッピングを独自の[`dataProvider`</a>](./Admin.md#dataprovider)に記述します。</p>
 
 <h2 id="list-create-edit-show"><code class="language-plaintext highlighter-rouge">list</code>, <code class="language-plaintext highlighter-rouge">create</code>, <code class="language-plaintext highlighter-rouge">edit</code>, <code class="language-plaintext highlighter-rouge">show</code></h2>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> allows you to define a component for each CRUD operation, using the following prop names:</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>は各CRUD操作のためのコンポーネントを以下のprop名で定義できます：</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">list</code> (usually using <a href="./List.md">the <code class="language-plaintext highlighter-rouge">&lt;List&gt;</code> component</a>) (if defined, the resource is displayed on the Menu)</li>
-  <li><code class="language-plaintext highlighter-rouge">create</code> (usually using <a href="./Create.md">the <code class="language-plaintext highlighter-rouge">&lt;Create&gt;</code> component</a>)</li>
-  <li><code class="language-plaintext highlighter-rouge">edit</code> (usually using <a href="./Edit.md">the <code class="language-plaintext highlighter-rouge">&lt;Edit&gt;</code> component</a>)</li>
-  <li><code class="language-plaintext highlighter-rouge">show</code> (usually using <a href="./Show.md">the <code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code> component</a>)</li>
+  <li><code class="language-plaintext highlighter-rouge">list</code>（通常[<List>コンポーネント](./List.md)を使用）（定義されている場合、リソースはメニューに表示されます）</List></li>
+  <li><code class="language-plaintext highlighter-rouge">create</code>（通常[<Create>コンポーネント](./Create.md)を使用）</Create></li>
+  <li><code class="language-plaintext highlighter-rouge">edit</code>（通常[<Edit>コンポーネント](./Edit.md)を使用）</Edit></li>
+  <li><code class="language-plaintext highlighter-rouge">show</code>（通常[<Show>コンポーネント](./Show.md)を使用）</Show></li>
 </ul>
 
-<p><strong>Tip</strong>: Under the hood, the <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> component uses <a href="https://reactrouter.com/web/guides/quick-start">react-router</a> to create several routes:</p>
+<p><strong>ヒント</strong>: 内部的には、<code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>コンポーネントは<a href="https://reactrouter.com/web/guides/quick-start">react-router</a>を使用して複数のルートを作成します：</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">/</code> maps to the <code class="language-plaintext highlighter-rouge">list</code> component</li>
-  <li><code class="language-plaintext highlighter-rouge">/create</code> maps to the <code class="language-plaintext highlighter-rouge">create</code> component</li>
-  <li><code class="language-plaintext highlighter-rouge">/:id</code> maps to the <code class="language-plaintext highlighter-rouge">edit</code> component</li>
-  <li><code class="language-plaintext highlighter-rouge">/:id/show</code> maps to the <code class="language-plaintext highlighter-rouge">show</code> component</li>
+  <li><code class="language-plaintext highlighter-rouge">/</code>は<code class="language-plaintext highlighter-rouge">list</code>コンポーネントにマップ</li>
+  <li><code class="language-plaintext highlighter-rouge">/create</code>は<code class="language-plaintext highlighter-rouge">create</code>コンポーネントにマップ</li>
+  <li><code class="language-plaintext highlighter-rouge">/:id</code>は<code class="language-plaintext highlighter-rouge">edit</code>コンポーネントにマップ</li>
+  <li><code class="language-plaintext highlighter-rouge">/:id/show</code>は<code class="language-plaintext highlighter-rouge">show</code>コンポーネントにマップ</li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> also accepts additional props:</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>は追加のpropsも受け付けます：</p>
 
 <ul>
   <li><a href="#name"><code class="language-plaintext highlighter-rouge">name</code></a></li>
@@ -665,13 +665,13 @@
 
 <h2 id="children"><code class="language-plaintext highlighter-rouge">children</code></h2>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> defines the CRUD routes of your application. So <code class="language-plaintext highlighter-rouge">&lt;Resource name="posts"&gt;</code> defines a set of routes starting with <code class="language-plaintext highlighter-rouge">/posts</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>はアプリケーションのCRUDルートを定義します。したがって、<code class="language-plaintext highlighter-rouge">&lt;Resource name="posts"&gt;</code>は<code class="language-plaintext highlighter-rouge">/posts</code>から始まる一連のルートを定義します。</p>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> accepts <code class="language-plaintext highlighter-rouge">&lt;Route&gt;</code> components as <code class="language-plaintext highlighter-rouge">children</code>, to let you define sub routes for the resource.</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>は<code class="language-plaintext highlighter-rouge">children</code>として<code class="language-plaintext highlighter-rouge">&lt;Route&gt;</code>コンポーネントを受け入れ、リソースのサブルートを定義できます。</p>
 
-<p>For instance, the following code creates an <code class="language-plaintext highlighter-rouge">authors</code> resource, and adds an <code class="language-plaintext highlighter-rouge">/authors/:authorId/books</code> route displaying the books of the given author:</p>
+<p>例えば、以下のコードは<code class="language-plaintext highlighter-rouge">authors</code>リソースを作成し、指定された著者の本を表示する<code class="language-plaintext highlighter-rouge">/authors/:authorId/books</code>ルートを追加します：</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/App.jsx</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/App.jsx内</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Route</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
 
@@ -687,9 +687,9 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>The <code class="language-plaintext highlighter-rouge">BookList</code> component can grab the <code class="language-plaintext highlighter-rouge">authorId</code> parameter from the URL using the <code class="language-plaintext highlighter-rouge">useParams</code> hook, and pass it as a <code class="language-plaintext highlighter-rouge">&lt;List filter&gt;</code> parameter to display a list of books for the given author:</p>
+<p><code class="language-plaintext highlighter-rouge">BookList</code>コンポーネントは、<code class="language-plaintext highlighter-rouge">useParams</code>フックを使用してURLから<code class="language-plaintext highlighter-rouge">authorId</code>パラメータを取得し、指定された著者の本のリストを表示するために<code class="language-plaintext highlighter-rouge">&lt;List filter&gt;</code>パラメータとして渡すことができます：</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/BookList.jsx</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/BookList.jsx内</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">List</span><span class="p">,</span> <span class="nx">Datagrid</span><span class="p">,</span> <span class="nx">TextField</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useParams</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
 
@@ -707,11 +707,11 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: In the above example, the <code class="language-plaintext highlighter-rouge">resource="books"</code> prop is required in <code class="language-plaintext highlighter-rouge">&lt;List&gt;</code> because the <code class="language-plaintext highlighter-rouge">ResourceContext</code> defaults to <code class="language-plaintext highlighter-rouge">authors</code> inside the <code class="language-plaintext highlighter-rouge">&lt;Resource name="authors"&gt;</code>.</p>
+<p><strong>ヒント</strong>: 上記の例では、<code class="language-plaintext highlighter-rouge">&lt;List&gt;</code>内で<code class="language-plaintext highlighter-rouge">resource="books"</code>プロパティが必要なのは、<code class="language-plaintext highlighter-rouge">&lt;Resource name="authors"&gt;</code>内では<code class="language-plaintext highlighter-rouge">ResourceContext</code>が<code class="language-plaintext highlighter-rouge">authors</code>にデフォルト設定されているためです。</p>
 
-<p>It’s your responsibility to route to the <code class="language-plaintext highlighter-rouge">/authors/:id/books</code> route, e.g. from each line of the <code class="language-plaintext highlighter-rouge">AuthorList</code> component:</p>
+<p><code class="language-plaintext highlighter-rouge">/authors/:id/books</code>ルートへのルーティングは、例えば各<code class="language-plaintext highlighter-rouge">AuthorList</code>コンポーネントの行から行います：</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/AuthorList.jsx</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/AuthorList.jsx内</span>
 <span class="kd">const</span> <span class="nx">BooksButton</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">record</span> <span class="o">=</span> <span class="nx">useRecordContext</span><span class="p">();</span>
     <span class="k">return</span> <span class="p">(</span>
@@ -737,13 +737,13 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: As the <code class="language-plaintext highlighter-rouge">/authors/:authorId/books</code> route is a sub-route of the <code class="language-plaintext highlighter-rouge">/authors</code> route, the active menu item will be “Authors”.</p>
+<p><strong>ヒント</strong>: <code class="language-plaintext highlighter-rouge">/authors/:authorId/books</code>ルートは<code class="language-plaintext highlighter-rouge">/authors</code>ルートのサブルートであるため、アクティブなメニューアイテムは「Authors」となります。</p>
 
 <h2 id="icon"><code class="language-plaintext highlighter-rouge">icon</code></h2>
 
-<p>React-admin will render the <code class="language-plaintext highlighter-rouge">icon</code> prop component in the menu:</p>
+<p>React-adminはメニューに<code class="language-plaintext highlighter-rouge">icon</code>プロパティのコンポーネントを表示します：</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/App.js</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/App.js内</span>
 <span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">PostIcon</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/icons-material/Book</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">UserIcon</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/icons-material/People</span><span class="dl">'</span><span class="p">;</span>
@@ -762,16 +762,16 @@
 
 <h2 id="options"><code class="language-plaintext highlighter-rouge">options</code></h2>
 
-<p><code class="language-plaintext highlighter-rouge">options.label</code> allows to customize the display name of a given resource in the menu.</p>
+<p><code class="language-plaintext highlighter-rouge">options.label</code>は、メニュー内の特定のリソースの表示名をカスタマイズするために使用されます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">Resource</span> <span class="na">name</span><span class="p">=</span><span class="s">"v2/posts"</span> <span class="na">options</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">label</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Posts</span><span class="dl">'</span> <span class="p">}</span><span class="si">}</span> <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">PostList</span><span class="si">}</span> <span class="p">/&gt;</span>
 </code></pre></div></div>
 
 <h2 id="recordrepresentation"><code class="language-plaintext highlighter-rouge">recordRepresentation</code></h2>
 
-<p>Whenever react-admin needs to render a record (e.g. in the title of an edition view, or in a <code class="language-plaintext highlighter-rouge">&lt;ReferenceField&gt;</code>), it uses the <code class="language-plaintext highlighter-rouge">recordRepresentation</code> to do it. By default, the representation of a record is its <code class="language-plaintext highlighter-rouge">id</code> field. But you can customize it by specifying the representation you want.</p>
+<p>react-adminがレコードをレンダリングする必要がある場合（例えば、編集ビューのタイトルや<code class="language-plaintext highlighter-rouge">&lt;ReferenceField&gt;</code>内など）、<code class="language-plaintext highlighter-rouge">recordRepresentation</code>を使用します。デフォルトでは、レコードの表現はその<code class="language-plaintext highlighter-rouge">id</code>フィールドです。しかし、希望する表現を指定してカスタマイズできます。</p>
 
-<p>For instance, to change the default representation of “users” records to render the full name instead of the id:</p>
+<p>例えば、「users」レコードのデフォルト表現をidではなくフルネームに変更する場合：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">Resource</span>
     <span class="na">name</span><span class="p">=</span><span class="s">"users"</span>
@@ -780,23 +780,23 @@
 <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">recordRepresentation</code> can take 3 types of values:</p>
+<p><code class="language-plaintext highlighter-rouge">recordRepresentation</code>は3種類の値を取ることができます：</p>
 
 <ul>
-  <li>a string (e.g. <code class="language-plaintext highlighter-rouge">'title'</code>) to specify the field to use as representation</li>
-  <li>a function (e.g. <code class="language-plaintext highlighter-rouge">(record) =&gt; record.title</code>) to specify a custom string representation</li>
-  <li>a React component (e.g. <code class="language-plaintext highlighter-rouge">&lt;MyCustomRecordRepresentation /&gt;</code>). In such components, use <a href="./useRecordContext.md"><code class="language-plaintext highlighter-rouge">useRecordContext</code></a> to access the record.</li>
+  <li>文字列（例：<code class="language-plaintext highlighter-rouge">'title'</code>）で、表現に使用するフィールドを指定</li>
+  <li>関数（例：<code class="language-plaintext highlighter-rouge">(record) =&gt; record.title</code>）で、カスタム文字列表現を指定</li>
+  <li>Reactコンポーネント（例：<code class="language-plaintext highlighter-rouge">&lt;MyCustomRecordRepresentation /&gt;</code>）。このようなコンポーネントでは<a href="./useRecordContext.md"><code class="language-plaintext highlighter-rouge">useRecordContext</code></a>を使用してレコードにアクセスします。</li>
 </ul>
 
-<p>If you want to display this record representation somewhere, you can leverage the <a href="./useGetRecordRepresentation.md"><code class="language-plaintext highlighter-rouge">useGetRecordRepresentation</code></a> hook or the <a href="./RecordRepresentation.md"><code class="language-plaintext highlighter-rouge">&lt;RecordRepresentation&gt;</code></a> component.</p>
+<p>このレコード表現をどこかで表示したい場合、<a href="./useGetRecordRepresentation.md"><code class="language-plaintext highlighter-rouge">useGetRecordRepresentation</code></a>フックや<a href="./RecordRepresentation.md"><code class="language-plaintext highlighter-rouge">&lt;RecordRepresentation&gt;</code></a>コンポーネントを活用できます。</p>
 
 <h2 id="hascreate-hasedit-hasshow"><code class="language-plaintext highlighter-rouge">hasCreate</code>, <code class="language-plaintext highlighter-rouge">hasEdit</code>, <code class="language-plaintext highlighter-rouge">hasShow</code></h2>
 
-<p>Some components, like <a href="./CreateDialog.md"><code class="language-plaintext highlighter-rouge">&lt;CreateDialog&gt;</code></a>, <a href="./EditDialog.md"><code class="language-plaintext highlighter-rouge">&lt;EditDialog&gt;</code></a> or <a href="./ShowDialog.md"><code class="language-plaintext highlighter-rouge">&lt;ShowDialog&gt;</code></a> need to declare the CRUD components outside of the <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> component. In such cases, you can use the <code class="language-plaintext highlighter-rouge">hasCreate</code>, <code class="language-plaintext highlighter-rouge">hasEdit</code> and <code class="language-plaintext highlighter-rouge">hasShow</code> props to tell react-admin which CRUD components are available for a given resource.</p>
+<p>一部のコンポーネント（例：<a href="./CreateDialog.md"><code class="language-plaintext highlighter-rouge">&lt;CreateDialog&gt;</code></a>、<a href="./EditDialog.md"><code class="language-plaintext highlighter-rouge">&lt;EditDialog&gt;</code></a>、<a href="./ShowDialog.md"><code class="language-plaintext highlighter-rouge">&lt;ShowDialog&gt;</code></a>）は、<code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>コンポーネントの外でCRUDコンポーネントを宣言する必要があります。その場合、特定のリソースにどのCRUDコンポーネントが利用可能かをreact-adminに伝えるために<code class="language-plaintext highlighter-rouge">hasCreate</code>、<code class="language-plaintext highlighter-rouge">hasEdit</code>、<code class="language-plaintext highlighter-rouge">hasShow</code>プロパティを使用できます。</p>
 
-<p>This is useful, for instance, to have the <code class="language-plaintext highlighter-rouge">&lt;ReferenceField&gt;</code> component display a link to the edit or show view of the referenced record.</p>
+<p>例えば、<code class="language-plaintext highlighter-rouge">&lt;ReferenceField&gt;</code>コンポーネントが参照されるレコードの編集または表示ビューへのリンクを表示するようにします。</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/App.js</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/App.js内</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">dataProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./dataProvider</span><span class="dl">'</span><span class="p">;</span>
 
@@ -810,13 +810,13 @@
     <span class="p">&lt;/</span><span class="nc">Admin</span><span class="p">&gt;</span>
 <span class="p">);</span>
 
-<span class="c1">// in src/commentEdit.js</span>
+<span class="c1">// src/commentEdit.js内</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Edit</span><span class="p">,</span> <span class="nx">SimpleForm</span><span class="p">,</span> <span class="nx">ReferenceField</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">CommentEdit</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">Edit</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
-            <span class="si">{</span><span class="cm">/* renders a link to the edit view only because `hasEdit` has been set on `&lt;Resource&gt;` */</span><span class="si">}</span>
+            <span class="si">{</span><span class="cm">/* `hasEdit`が`&lt;Resource&gt;`で設定されているため、編集ビューへのリンクが表示されます */</span><span class="si">}</span>
             <span class="p">&lt;</span><span class="nc">ReferenceField</span> <span class="na">source</span><span class="p">=</span><span class="s">"post_id"</span> <span class="na">reference</span><span class="p">=</span><span class="s">"posts"</span> <span class="p">/&gt;</span>
         <span class="p">&lt;/</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nc">Edit</span><span class="p">&gt;</span>
@@ -825,11 +825,11 @@
 
 <h2 id="resource-context">Resource Context</h2>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> also creates a <code class="language-plaintext highlighter-rouge">ResourceContext</code>, that gives access to the current resource name to all descendants of the main page components (<code class="language-plaintext highlighter-rouge">list</code>, <code class="language-plaintext highlighter-rouge">create</code>, <code class="language-plaintext highlighter-rouge">edit</code>, <code class="language-plaintext highlighter-rouge">show</code>).</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>はまた、現在のリソース名にアクセスできる<code class="language-plaintext highlighter-rouge">ResourceContext</code>を作成し、メインページコンポーネント（<code class="language-plaintext highlighter-rouge">list</code>、<code class="language-plaintext highlighter-rouge">create</code>、<code class="language-plaintext highlighter-rouge">edit</code>、<code class="language-plaintext highlighter-rouge">show</code>）のすべての子孫に提供します。</p>
 
-<p>To read the current resource name, use the <code class="language-plaintext highlighter-rouge">useResourceContext()</code> hook.</p>
+<p>現在のリソース名を読み取るには、<code class="language-plaintext highlighter-rouge">useResourceContext()</code>フックを使用します。</p>
 
-<p>For instance, the following component displays the name of the current resource:</p>
+<p>例えば、以下のコンポーネントは現在のリソース名を表示します：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Datagrid</span><span class="p">,</span> <span class="nx">DateField</span><span class="p">,</span> <span class="nx">TextField</span><span class="p">,</span> <span class="nx">List</span><span class="p">,</span> <span class="nx">useResourceContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
@@ -842,7 +842,7 @@
 <span class="kd">const</span> <span class="nx">PostList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">List</span><span class="p">&gt;</span>
         <span class="p">&lt;&gt;</span>
-            <span class="p">&lt;</span><span class="nc">ResourceName</span> <span class="p">/&gt;</span> <span class="si">{</span><span class="cm">/* renders 'posts' */</span><span class="si">}</span>
+            <span class="p">&lt;</span><span class="nc">ResourceName</span> <span class="p">/&gt;</span> <span class="si">{</span><span class="cm">/* 'posts'をレンダリング */</span><span class="si">}</span>
             <span class="p">&lt;</span><span class="nc">Datagrid</span><span class="p">&gt;</span>
                 <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
                 <span class="p">&lt;</span><span class="nc">DateField</span> <span class="na">source</span><span class="p">=</span><span class="s">"published_at"</span> <span class="p">/&gt;</span>
@@ -852,19 +852,19 @@
 <span class="p">)</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: You can <em>change</em> the current resource context, e.g. to use a component for a related resource. Use the <code class="language-plaintext highlighter-rouge">&lt;ResourceContextProvider&gt;</code> component for that:</p>
+<p><strong>ヒント</strong>: 現在のリソースコンテキストを<em>変更</em>することができます。例えば、関連リソースのコンポーネントを使用する場合。これには、<code class="language-plaintext highlighter-rouge">&lt;ResourceContextProvider&gt;</code>コンポーネントを使用します：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">MyComponent</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">ResourceContextProvider</span> <span class="na">value</span><span class="p">=</span><span class="s">"comments"</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nc">ResourceName</span> <span class="p">/&gt;</span> <span class="si">{</span><span class="cm">/* renders 'comments' */</span><span class="si">}</span>
+        <span class="p">&lt;</span><span class="nc">ResourceName</span> <span class="p">/&gt;</span> <span class="si">{</span><span class="cm">/* 'comments'をレンダリング */</span><span class="si">}</span>
         ...
     <span class="p">&lt;/</span><span class="nc">ResourceContextProvider</span><span class="p">&gt;</span>
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="nested-resources">Nested Resources</h2>
+<h2 id="ネストされたリソース">ネストされたリソース</h2>
 
-<p>React-admin doesn’t support nested resources, but you can use <a href="#children">the <code class="language-plaintext highlighter-rouge">children</code> prop</a> to render a custom component for a given sub-route. For instance, to display a list of songs for a given artist:</p>
+<p>React-adminはネストされたリソースをサポートしていませんが、<a href="#children"><code class="language-plaintext highlighter-rouge">children</code>プロパティ</a>を使用して、特定のサブルート用のカスタムコンポーネントをレンダリングできます。例えば、特定のアーティストの曲のリストを表示するには：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Route</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
@@ -879,24 +879,18 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<video controls="" autoplay="" playsinline="" muted="" loop="" width="100%">
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-navigation/latest/breadcumb-nested-resource.webm" type="video/webm" />
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-navigation/latest/breadcumb-nested-resource.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
-
-<p>This setup creates four routes:</p>
+<p>この設定は4つのルートを作成します：</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">/artists</code> renders the <code class="language-plaintext highlighter-rouge">&lt;ArtistList&gt;</code> element</li>
-  <li><code class="language-plaintext highlighter-rouge">/artists/:id</code> renders the <code class="language-plaintext highlighter-rouge">&lt;ArtistDetail&gt;</code> element</li>
-  <li><code class="language-plaintext highlighter-rouge">/artists/:id/songs</code> renders the <code class="language-plaintext highlighter-rouge">&lt;SongList&gt;</code> element</li>
-  <li><code class="language-plaintext highlighter-rouge">/artists/:id/songs/:songId</code> renders the <code class="language-plaintext highlighter-rouge">&lt;SongDetail&gt;</code> element</li>
+  <li><code class="language-plaintext highlighter-rouge">/artists</code>は<code class="language-plaintext highlighter-rouge">&lt;ArtistList&gt;</code>要素をレンダリング</li>
+  <li><code class="language-plaintext highlighter-rouge">/artists/:id</code>は<code class="language-plaintext highlighter-rouge">&lt;ArtistDetail&gt;</code>要素をレンダリング</li>
+  <li><code class="language-plaintext highlighter-rouge">/artists/:id/songs</code>は<code class="language-plaintext highlighter-rouge">&lt;SongList&gt;</code>要素をレンダリング</li>
+  <li><code class="language-plaintext highlighter-rouge">/artists/:id/songs/:songId</code>は<code class="language-plaintext highlighter-rouge">&lt;SongDetail&gt;</code>要素をレンダリング</li>
 </ul>
 
-<p>In order to display a list of songs for the selected artist, <code class="language-plaintext highlighter-rouge">&lt;SongList&gt;</code> should filter the songs by the <code class="language-plaintext highlighter-rouge">id</code> parameter. To do so, use the <code class="language-plaintext highlighter-rouge">useParams</code> hook from <code class="language-plaintext highlighter-rouge">react-router-dom</code>:</p>
+<p>選択されたアーティストの曲のリストを表示するために、<code class="language-plaintext highlighter-rouge">&lt;SongList&gt;</code>は<code class="language-plaintext highlighter-rouge">id</code>パラメータで曲をフィルタリングする必要があります。これを行うには、<code class="language-plaintext highlighter-rouge">react-router-dom</code>の<code class="language-plaintext highlighter-rouge">useParams</code>フックを使用します：</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/SongList.jsx</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/SongList.jsx内</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">List</span><span class="p">,</span> <span class="nx">Datagrid</span><span class="p">,</span> <span class="nx">TextField</span><span class="p">,</span> <span class="nx">useRecordContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useParams</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Button</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material</span><span class="dl">'</span><span class="p">;</span>
@@ -931,9 +925,9 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>In the <code class="language-plaintext highlighter-rouge">&lt;SongDetail&gt;</code> component, you must also use the <code class="language-plaintext highlighter-rouge">useParams</code> hook to get the <code class="language-plaintext highlighter-rouge">songId</code> parameter and display the song with the corresponding <code class="language-plaintext highlighter-rouge">id</code>:</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;SongDetail&gt;</code>コンポーネント内では、<code class="language-plaintext highlighter-rouge">useParams</code>フックを使用して<code class="language-plaintext highlighter-rouge">songId</code>パラメータを取得し、対応する<code class="language-plaintext highlighter-rouge">id</code>の曲を表示する必要があります：</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/SongDetail.jsx</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/SongDetail.jsx内</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Edit</span><span class="p">,</span> <span class="nx">SimpleForm</span><span class="p">,</span> <span class="nx">TextInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useParams</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
 
@@ -953,13 +947,13 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: As seen in the screencast above, when browsing to nested resources, users can get lost unless they have a breadcrumb path displayed on screen. Check <a href="./Breadcrumb.md#nested-resources">the <code class="language-plaintext highlighter-rouge">&lt;Breadcrumb&gt;</code> component</a> for more details about how to set up this navigation element.</p>
+<p><strong>ヒント</strong>: 上記のスクリーンキャストで示されているように、ネストされたリソースに移動するとき、ユーザーは画面にパンくずリストが表示されていないと迷子になりやすくなります。このナビゲーション要素の設定については、[<Breadcrumb>コンポーネント](./Breadcrumb.md#nested-resources)をご確認ください。</Breadcrumb></p>
 
-<h2 id="lazy-loading">Lazy Loading</h2>
+<h2 id="レイジーローディング">レイジーローディング</h2>
 
-<p>If you need to speed up the initial loading of your application, you may want to enable code splitting using <a href="https://react.dev/reference/react/lazy#suspense-for-code-splitting"><code class="language-plaintext highlighter-rouge">React.lazy()</code></a>. The default react-admin layout uses Suspense, so there is no special setup required to use lazy loaded components in <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>.</p>
+<p>アプリケーションの初期読み込みを高速化する必要がある場合、<a href="https://react.dev/reference/react/lazy#suspense-for-code-splitting"><code class="language-plaintext highlighter-rouge">React.lazy()</code></a>を使用してコード分割を有効にしたいかもしれません。デフォルトのreact-adminレイアウトはSuspenseを使用しているため、<code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>内でレイジーローディングされたコンポーネントを使用するための特別な設定は必要ありません。</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/App.js</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/App.js内</span>
 <span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -977,9 +971,13 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>When users navigate to the <code class="language-plaintext highlighter-rouge">/posts</code> route, react-admin will display a loading indicator while the <code class="language-plaintext highlighter-rouge">PostList</code> component is being loaded.</p>
+<p>ユーザーが<code class="language-plaintext highlighter-rouge">/posts</code>ルートに移動すると、react-adminは<code class="language-plaintext highlighter-rouge">PostList</code>コンポーネントの読み込み中にロードインジケーターを表示します。</p>
 
 <p><img src="./img/lazy-resource.png" alt="Loading indicator" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
 
                         </div>
                     </div>

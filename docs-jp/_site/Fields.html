@@ -563,13 +563,13 @@
                         <div
                             class="markdown-section DocSearch-content toc-content"
                         >
-                            <h1 id="field-components">Field Components</h1>
+                            <h1 id="フィールドコンポーネント">フィールドコンポーネント</h1>
 
-<p>A <code class="language-plaintext highlighter-rouge">Field</code> component displays a given property of a record. Such components are used in the <code class="language-plaintext highlighter-rouge">List</code> and <code class="language-plaintext highlighter-rouge">Show</code> views, but you can also use them anywhere in your application, as long as there is a <a href="./useRecordContext.md"><code class="language-plaintext highlighter-rouge">RecordContext</code></a>.</p>
+<p><code class="language-plaintext highlighter-rouge">Field</code> コンポーネントはレコードの特定のプロパティを表示します。これらのコンポーネントは <code class="language-plaintext highlighter-rouge">List</code> や <code class="language-plaintext highlighter-rouge">Show</code> ビューで使用されますが、<a href="./useRecordContext.md"><code class="language-plaintext highlighter-rouge">RecordContext</code></a> が存在する限り、アプリケーションのどこにでも使用できます。</p>
 
-<h2 id="anatomy-of-a-field">Anatomy Of A Field</h2>
+<h2 id="フィールドの構造">フィールドの構造</h2>
 
-<p><code class="language-plaintext highlighter-rouge">Field</code> components read the current <code class="language-plaintext highlighter-rouge">record</code> from the current <code class="language-plaintext highlighter-rouge">RecordContext</code> (set by react-admin). There is nothing magic there - you can easily write your own:</p>
+<p><code class="language-plaintext highlighter-rouge">Field</code> コンポーネントは現在の <code class="language-plaintext highlighter-rouge">RecordContext</code> から現在の <code class="language-plaintext highlighter-rouge">record</code> を読み取ります（react-adminによって設定されます）。特別なことは何もなく、自分で簡単に作成できます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useRecordContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -579,11 +579,11 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: Every time it renders a record, react-admin creates a <code class="language-plaintext highlighter-rouge">RecordContext</code>. This includes datagrid rows, simple list items, reference fields, show, and edit pages. You can even create a <code class="language-plaintext highlighter-rouge">RecordContext</code> yourself and use react-admin Fields in custom pages.</p>
+<p><strong>ヒント</strong>: react-admin はレコードをレンダリングするたびに <code class="language-plaintext highlighter-rouge">RecordContext</code> を作成します。これにはデータグリッドの行、シンプルリストアイテム、参照フィールド、表示および編集ページが含まれます。独自の <code class="language-plaintext highlighter-rouge">RecordContext</code> を作成し、カスタムページでreact-adminのフィールドを使用することもできます。</p>
 
-<p>React-admin Field components also accept a <code class="language-plaintext highlighter-rouge">record</code> prop. This allows you to use them outside a <code class="language-plaintext highlighter-rouge">RecordContext</code>, or to use another <code class="language-plaintext highlighter-rouge">record</code> than the one in the current context.</p>
+<p>React-admin の Field コンポーネントは <code class="language-plaintext highlighter-rouge">record</code> プロップも受け取ります。これにより、<code class="language-plaintext highlighter-rouge">RecordContext</code> 以外の場所で使用したり、現在のコンテキストとは異なるレコードを使用したりできます。</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// a post looks like</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ポストは次のようになります</span>
 <span class="c1">// { id: 123, title: "Hello, world", author: "John Doe", body: "..." }</span>
 
 <span class="kd">const</span> <span class="nx">PostShow</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">id</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -600,11 +600,11 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<h2 id="usage">Usage</h2>
+<h2 id="使用方法">使用方法</h2>
 
-<p>To render a record field (e.g. <code class="language-plaintext highlighter-rouge">record.title</code>), choose the Field component that corresponds to the field type (e.g. <code class="language-plaintext highlighter-rouge">TextField</code> for a text field) and pass the field name (e.g. <code class="language-plaintext highlighter-rouge">title</code>) as the <code class="language-plaintext highlighter-rouge">source</code> prop.</p>
+<p>レコードフィールド（例：<code class="language-plaintext highlighter-rouge">record.title</code>）をレンダリングするには、フィールドタイプに対応する Field コンポーネントを選択し（例：テキストフィールドの場合は <code class="language-plaintext highlighter-rouge">TextField</code>）、フィールド名を <code class="language-plaintext highlighter-rouge">source</code> プロップとして渡します。</p>
 
-<p>So the following Show view:</p>
+<p>次の Show ビューの場合:</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">TextField</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -617,7 +617,7 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>When rendered for the following record:</p>
+<p>次のレコードに対してレンダリングされると:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span> 
     <span class="nl">id</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
@@ -625,16 +625,16 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Will render</p>
+<p>次のように表示されます:</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">Typography</span> <span class="na">component</span><span class="p">=</span><span class="s">"span"</span> <span class="na">variant</span><span class="p">=</span><span class="s">"body2"</span><span class="p">&gt;</span>
     War And Peace
 <span class="p">&lt;/</span><span class="nc">Typography</span><span class="p">&gt;</span>
 </code></pre></div></div>
 
-<p>Field components are generally used in List and Show views, as children of <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code>, and <code class="language-plaintext highlighter-rouge">&lt;TabbedShowLayout&gt;</code>. The parent component usually reads their <code class="language-plaintext highlighter-rouge">source</code> and/or <code class="language-plaintext highlighter-rouge">label</code> prop to add a title.</p>
+<p>Field コンポーネントは通常、<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>、<code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code>、<code class="language-plaintext highlighter-rouge">&lt;TabbedShowLayout&gt;</code> の子として、リストおよび表示ビューで使用されます。親コンポーネントは通常、タイトルを追加するために <code class="language-plaintext highlighter-rouge">source</code> や <code class="language-plaintext highlighter-rouge">label</code> プロップを読み取ります。</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/posts.js</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/posts.js にて</span>
 <span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Show</span><span class="p">,</span> <span class="nx">SimpleShowLayout</span><span class="p">,</span> <span class="nx">TextField</span><span class="p">,</span> <span class="nx">DateField</span><span class="p">,</span> <span class="nx">RichTextField</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -652,120 +652,120 @@
 
 <p><img src="./img/post-show.png" alt="post show view" /></p>
 
-<p><strong>Tip</strong>: You can use field components inside the <code class="language-plaintext highlighter-rouge">Edit</code> and <code class="language-plaintext highlighter-rouge">Create</code> views, too, to render read-only values in a form:</p>
+<p><strong>ヒント</strong>: <code class="language-plaintext highlighter-rouge">Edit</code> および <code class="language-plaintext highlighter-rouge">Create</code> ビュー内でも Field コンポーネントを使用して、フォーム内で読み取り専用の値をレンダリングできます:</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">PostEdit</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">Edit</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"id"</span> <span class="p">/&gt;</span> <span class="si">{</span><span class="cm">/* read-only */</span><span class="si">}</span>
+            <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"id"</span> <span class="p">/&gt;</span> <span class="si">{</span><span class="cm">/* 読み取り専用 */</span><span class="si">}</span>
             <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
         <span class="p">&lt;/</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nc">Edit</span><span class="p">&gt;</span>
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>React-admin comes with about 20 field components, specialized in rendering numbers, image URLs, booleans, arrays, etc. And if you can’t find a field for your need, you can always create your own.</p>
+<p>React-admin には数値、画像URL、ブール値、配列などのレンダリングに特化した約20種類のフィールドコンポーネントが用意されています。また、必要なフィールドが見つからない場合は、独自に作成することもできます。</p>
 
-<h2 id="common-field-props">Common Field Props</h2>
+<h2 id="共通のフィールドプロップ">共通のフィールドプロップ</h2>
 
-<p>All Field components accept the following props:</p>
+<p>すべてのフィールドコンポーネントは次のプロップを受け入れます：</p>
 
 <table>
   <thead>
     <tr>
-      <th>Prop</th>
-      <th>Required</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
+      <th>プロップ名</th>
+      <th>必須</th>
+      <th>タイプ</th>
+      <th>デフォルト</th>
+      <th>説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><a href="#source"><code class="language-plaintext highlighter-rouge">source</code></a></td>
-      <td>Required</td>
+      <td>必須</td>
       <td><code class="language-plaintext highlighter-rouge">string</code></td>
       <td>-</td>
-      <td>Name of the property to display</td>
+      <td>表示するプロパティの名前</td>
     </tr>
     <tr>
       <td><a href="#label"><code class="language-plaintext highlighter-rouge">label</code></a></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">string</code> | <code class="language-plaintext highlighter-rouge">ReactElement</code></td>
       <td><code class="language-plaintext highlighter-rouge">source</code></td>
-      <td>Used as a Datagrid column header or in a Show layout</td>
+      <td>Datagrid の列見出しや Show レイアウトで使用される</td>
     </tr>
     <tr>
       <td><a href="#record"><code class="language-plaintext highlighter-rouge">record</code></a></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">Object</code></td>
       <td>-</td>
-      <td>Object containing the properties to display, to override the record from the current <code class="language-plaintext highlighter-rouge">RecordContext</code></td>
+      <td>表示するプロパティを含むオブジェクトで、現在の <code class="language-plaintext highlighter-rouge">RecordContext</code> からのレコードをオーバーライドするために使用されます</td>
     </tr>
     <tr>
       <td><a href="#sortable"><code class="language-plaintext highlighter-rouge">sortable</code></a></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">boolean</code></td>
       <td><code class="language-plaintext highlighter-rouge">true</code></td>
-      <td>When used in a <code class="language-plaintext highlighter-rouge">List</code>, should the list be sortable using the <code class="language-plaintext highlighter-rouge">source</code> attribute? Setting it to <code class="language-plaintext highlighter-rouge">false</code> disables the click handler on the column header.</td>
+      <td><code class="language-plaintext highlighter-rouge">List</code> で使用される場合、このリストは <code class="language-plaintext highlighter-rouge">source</code> 属性を使用してソート可能かどうか。<code class="language-plaintext highlighter-rouge">false</code> に設定すると列見出しのクリックハンドラが無効になります。</td>
     </tr>
     <tr>
       <td><a href="#sortby"><code class="language-plaintext highlighter-rouge">sortBy</code></a></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">string</code></td>
       <td><code class="language-plaintext highlighter-rouge">source</code></td>
-      <td>When used in a <code class="language-plaintext highlighter-rouge">List</code>, specifies the actual <code class="language-plaintext highlighter-rouge">source</code> to be used for sorting when the user clicks the column header</td>
+      <td><code class="language-plaintext highlighter-rouge">List</code> で使用される場合、ユーザーが列見出しをクリックしたときに使用する実際の <code class="language-plaintext highlighter-rouge">source</code> を指定します</td>
     </tr>
     <tr>
       <td><a href="#sortbyorder"><code class="language-plaintext highlighter-rouge">sortByOrder</code></a></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">ASC</code> | <code class="language-plaintext highlighter-rouge">DESC</code></td>
       <td><code class="language-plaintext highlighter-rouge">ASC</code></td>
-      <td>When used in a <code class="language-plaintext highlighter-rouge">List</code>, specifies the sort order to be used for sorting when the user clicks the column header</td>
+      <td><code class="language-plaintext highlighter-rouge">List</code> で使用される場合、ユーザーが列見出しをクリックしたときに使用するソート順序を指定します</td>
     </tr>
     <tr>
       <td><a href="#classname"><code class="language-plaintext highlighter-rouge">className</code></a></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">string</code></td>
       <td>-</td>
-      <td>A class name (usually generated by JSS) to customize the look and feel of the field element itself</td>
+      <td>フィールド要素自体の見た目をカスタマイズするためのクラス名（通常はJSSによって生成されます）</td>
     </tr>
     <tr>
       <td><a href="#textalign"><code class="language-plaintext highlighter-rouge">textAlign</code></a></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">string</code></td>
       <td>‘left’</td>
-      <td>Defines the text alignment inside a cell. Set to <code class="language-plaintext highlighter-rouge">right</code> for right alignment (e.g. for numbers)</td>
+      <td>セル内のテキストの位置揃えを定義します。数値の場合は <code class="language-plaintext highlighter-rouge">right</code> に設定するのが一般的です。</td>
     </tr>
     <tr>
       <td><a href="#emptytext"><code class="language-plaintext highlighter-rouge">emptyText</code></a></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">string</code></td>
       <td>’’</td>
-      <td>Defines a text to be shown when a field has no value (not supported in array fields)</td>
+      <td>フィールドに値がない場合に表示されるテキストを定義します（配列フィールドではサポートされていません）</td>
     </tr>
     <tr>
       <td><a href="#sx"><code class="language-plaintext highlighter-rouge">sx</code></a></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">SxProps</code></td>
       <td>’’</td>
-      <td>Material UI shortcut for defining custom styles with access to the theme</td>
+      <td>テーマへのアクセスを可能にするカスタムスタイルを定義するための Material UI ショートカット</td>
     </tr>
   </tbody>
 </table>
 
 <h2 id="classname"><code class="language-plaintext highlighter-rouge">className</code></h2>
 
-<p>CSS class name passed to the root component.</p>
+<p>ルートコンポーネントに渡されるCSSクラス名。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">className</span><span class="p">=</span><span class="s">"number"</span> <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<p><strong>Note</strong>: To customize field styles, prefer <a href="#sx">the <code class="language-plaintext highlighter-rouge">sx</code> prop</a>.</p>
+<p><strong>注意</strong>: フィールドスタイルをカスタマイズするには、 <a href="#sx"><code class="language-plaintext highlighter-rouge">sx</code> プロップ</a> を使用することをお勧めします。</p>
 
 <h2 id="emptytext"><code class="language-plaintext highlighter-rouge">emptyText</code></h2>
 
-<p>By default, a Field renders an empty string when the record has no value for that field. You can override this behavior by setting the <code class="language-plaintext highlighter-rouge">emptyText</code> prop. The emptyText supports i8nProvider translation, if the translation is not found it will display the value as default.</p>
+<p>デフォルトでは、フィールドはそのフィールドに値がない場合に空の文字列をレンダリングします。この動作を上書きするには、<code class="language-plaintext highlighter-rouge">emptyText</code> プロップを設定します。<code class="language-plaintext highlighter-rouge">emptyText</code> は i8nProvider の翻訳をサポートしており、翻訳が見つからない場合はデフォルトの値が表示されます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">PostList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">List</span><span class="p">&gt;</span>
@@ -779,38 +779,38 @@
 
 <h2 id="label"><code class="language-plaintext highlighter-rouge">label</code></h2>
 
-<p>By default, a Field doesn’t render any label - just the value. But when rendering several fields on the same screen, it’s necessary to label them. That’s why components like <code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> read the field <code class="language-plaintext highlighter-rouge">source</code>, and use a humanized version as the label (e.g. <code class="language-plaintext highlighter-rouge">source="title"</code> gives the label <code class="language-plaintext highlighter-rouge">Title</code>).</p>
+<p>デフォルトでは、フィールドはラベルを表示しませんが、同じ画面に複数のフィールドを表示する場合、それらにラベルを付ける必要があります。<code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code> や <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> のようなコンポーネントはフィールドの <code class="language-plaintext highlighter-rouge">source</code> を読み取り、人間が読める形式に変換してラベルとして使用します（例：<code class="language-plaintext highlighter-rouge">source="title"</code> は <code class="language-plaintext highlighter-rouge">Title</code> というラベルになります）。</p>
 
-<p>You can customize this automated label by specifying a <code class="language-plaintext highlighter-rouge">label</code> prop. <code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> will then use the <code class="language-plaintext highlighter-rouge">label</code> prop instead of the <code class="language-plaintext highlighter-rouge">source</code> prop to label the field.</p>
+<p><code class="language-plaintext highlighter-rouge">label</code> プロップを指定することでこの自動ラベルをカスタマイズできます。<code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code> や <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> は <code class="language-plaintext highlighter-rouge">source</code> プロップの代わりに <code class="language-plaintext highlighter-rouge">label</code> プロップを使用してフィールドをラベル付けします。</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// label can be a string</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// label は文字列でもかまいません</span>
 <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"author.name"</span> <span class="na">label</span><span class="p">=</span><span class="s">"Author"</span> <span class="p">/&gt;</span>
-<span class="c1">// the label is automatically translated, so you can use translation identifiers</span>
+<span class="c1">// label は自動的に翻訳されるため、翻訳識別子を使用できます</span>
 <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"author.name"</span> <span class="na">label</span><span class="p">=</span><span class="s">"ra.field.author"</span> <span class="p">/&gt;</span>
-<span class="c1">// you can also use a React element</span>
+<span class="c1">// React要素も使用できます</span>
 <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"author.name"</span> <span class="na">label</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">FieldTitle</span> <span class="na">label</span><span class="p">=</span><span class="s">"Author"</span> <span class="p">/&gt;</span><span class="si">}</span> <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: If your admin has to support multiple languages, don’t use the <code class="language-plaintext highlighter-rouge">label</code> prop, and put the localized labels in a dictionary instead. See the <a href="./TranslationTranslating.md#translating-resource-and-field-names">Translation documentation</a> for details.</p>
+<p><strong>ヒント</strong>: 管理者が複数の言語をサポートする必要がある場合は、<code class="language-plaintext highlighter-rouge">label</code> プロップを使用せず、ローカライズされたラベルを辞書に入れてください。詳細は <a href="./TranslationTranslating.md#translating-resource-and-field-names">翻訳ドキュメント</a> を参照してください。</p>
 
-<p><strong>Tip</strong>: You can opt out of the label decoration by passing <code class="language-plaintext highlighter-rouge">false</code> to the <code class="language-plaintext highlighter-rouge">label</code> prop.</p>
+<p><strong>ヒント</strong>: <code class="language-plaintext highlighter-rouge">label</code> プロップに <code class="language-plaintext highlighter-rouge">false</code> を渡すことでラベル装飾をオプトアウトできます。</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// No label will be added</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ラベルは追加されません</span>
 <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"author.name"</span> <span class="na">label</span><span class="p">=</span><span class="si">{</span><span class="kc">false</span><span class="si">}</span> <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<p><strong>Note</strong>: This prop has no effect when rendering a field outside a <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>, a <code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code>, a <code class="language-plaintext highlighter-rouge">&lt;TabbedShowLayout&gt;</code>, a <code class="language-plaintext highlighter-rouge">&lt;SimpleForm&gt;</code>, or a <code class="language-plaintext highlighter-rouge">&lt;TabbedForm&gt;</code>.</p>
+<p><strong>注意</strong>: このプロップは、<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>、<code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code>、<code class="language-plaintext highlighter-rouge">&lt;TabbedShowLayout&gt;</code>、<code class="language-plaintext highlighter-rouge">&lt;SimpleForm&gt;</code>、または <code class="language-plaintext highlighter-rouge">&lt;TabbedForm&gt;</code> 以外の場所でフィールドをレンダリングする場合には効果がありません。</p>
 
 <h2 id="record"><code class="language-plaintext highlighter-rouge">record</code></h2>
 
-<p>By default, fields use the <code class="language-plaintext highlighter-rouge">record</code> from the <code class="language-plaintext highlighter-rouge">RecordContext</code>. But you can override it by passing the <code class="language-plaintext highlighter-rouge">record</code> prop - e.g. if you’re rendering a field outside a <code class="language-plaintext highlighter-rouge">RecordContext</code>, or if you want to use a different record than the one in the context.</p>
+<p>デフォルトでは、フィールドは <code class="language-plaintext highlighter-rouge">RecordContext</code> から <code class="language-plaintext highlighter-rouge">record</code> を使用します。しかし、<code class="language-plaintext highlighter-rouge">record</code> プロップを渡すことでこれをオーバーライドできます。例えば、<code class="language-plaintext highlighter-rouge">RecordContext</code> の外でフィールドをレンダリングする場合や、コンテキスト内のレコードとは異なるレコードを使用する場合です。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">record</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span> <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Hello</span><span class="dl">"</span> <span class="p">}</span><span class="si">}</span> <span class="p">/&gt;</span>
 </code></pre></div></div>
 
 <h2 id="sortable"><code class="language-plaintext highlighter-rouge">sortable</code></h2>
 
-<p>In a <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>, users can change the sort field and order by clicking on the column headers. You may want to disable this behavior for a given field (e.g. for reference or computed fields). In that case, pass the <code class="language-plaintext highlighter-rouge">sortable</code> prop to <code class="language-plaintext highlighter-rouge">&lt;Field&gt;</code> with a <code class="language-plaintext highlighter-rouge">false</code> value.</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> では、ユーザーが列見出しをクリックすることでソートフィールドと順序を変更できます。特定のフィールド（例：参照フィールドや計算フィールド）に対してこの動作を無効にしたい場合、<code class="language-plaintext highlighter-rouge">sortable</code> プロップに <code class="language-plaintext highlighter-rouge">false</code> を渡します。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">PostList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">List</span><span class="p">&gt;</span>
@@ -824,13 +824,13 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Note</strong>: This prop has no effect when rendering a field outside a <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>.</p>
+<p><strong>注意</strong>: このプロップは <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> 外でフィールドをレンダリングする場合には効果がありません。</p>
 
 <h2 id="sortby"><code class="language-plaintext highlighter-rouge">sortBy</code></h2>
 
-<p>In a <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>, users can change the sort field and order by clicking on the column headers. <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> uses the Field <code class="language-plaintext highlighter-rouge">source</code>to determine the sort field (e.g. clicking on the column header for the <code class="language-plaintext highlighter-rouge">&lt;TextField source="title" /&gt;</code> field sorts the list according to the <code class="language-plaintext highlighter-rouge">title</code> field).</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> では、ユーザーが列見出しをクリックすることでソートフィールドと順序を変更できます。<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> はフィールド <code class="language-plaintext highlighter-rouge">source</code> を使用してソートフィールドを決定します（例：<code class="language-plaintext highlighter-rouge">&lt;TextField source="title" /&gt;</code> フィールドの列見出しをクリックするとリストは <code class="language-plaintext highlighter-rouge">title</code> フィールドに基づいてソートされます）。</p>
 
-<p>You may want to use a different sort field than the <code class="language-plaintext highlighter-rouge">source</code>, e.g. for Reference fields. In that case, use the <code class="language-plaintext highlighter-rouge">sortBy</code> prop to specify the sort field.</p>
+<p><code class="language-plaintext highlighter-rouge">source</code> とは異なるソートフィールドを使用したい場合（例：参照フィールドの場合）、<code class="language-plaintext highlighter-rouge">sortBy</code> プロップを使用してソートフィールドを指定します。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">PostList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">List</span><span class="p">&gt;</span>
@@ -844,13 +844,13 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Note</strong>: This prop has no effect when rendering a field outside a <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>.</p>
+<p><strong>注意</strong>: このプロップは <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> 外でフィールドをレンダリングする場合には効果がありません。</p>
 
 <h2 id="sortbyorder"><code class="language-plaintext highlighter-rouge">sortByOrder</code></h2>
 
-<p>By default, when users click on a <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> column header, react-admin reorders the list using the field source, <em>with an ascending order</em>. For some fields, it brings unexpected results. For instance, when clicking on a “Last seen at” header, users probably expect to see the users seen more recently.</p>
+<p>デフォルトでは、ユーザーが <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> の列見出しをクリックすると、react-admin はフィールドの <code class="language-plaintext highlighter-rouge">source</code> を使用してリストを並べ替えます（昇順で）。一部のフィールドでは予期しない結果をもたらすことがあります。例えば、「Last seen at」見出しをクリックすると、ユーザーは最近見られたユーザーを期待するでしょう。</p>
 
-<p>You can change the default sort field order by using the <code class="language-plaintext highlighter-rouge">sortByOrder</code> prop.</p>
+<p>このような場合、<code class="language-plaintext highlighter-rouge">sortByOrder</code> プロップを使用してデフォルトのソート順序を変更できます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">PostList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">List</span><span class="p">&gt;</span>
@@ -862,18 +862,18 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Note</strong>: This prop has no effect when rendering a field outside a <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>.</p>
+<p><strong>注意</strong>: このプロップは <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> 外でフィールドをレンダリングする場合には効果がありません。</p>
 
 <h2 id="source"><code class="language-plaintext highlighter-rouge">source</code></h2>
 
-<p>The name of the property to display. Can contain dots for accessing properties of nested objects.</p>
+<p>表示するプロパティの名前です。ネストされたオブジェクトのプロパティにアクセスするためにドットを含めることができます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"author.first_name"</span> <span class="p">/&gt;</span>
 </code></pre></div></div>
 
 <h2 id="sx"><code class="language-plaintext highlighter-rouge">sx</code></h2>
 
-<p>Like all react-admin components, you can customize the style of Field components using the <code class="language-plaintext highlighter-rouge">sx</code> prop.</p>
+<p>すべての react-admin コンポーネントと同様に、Field コンポーネントのスタイルを <code class="language-plaintext highlighter-rouge">sx</code> プロップを使用してカスタマイズできます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">List</span><span class="p">,</span> <span class="nx">Datagrid</span><span class="p">,</span> <span class="nx">WrapperField</span><span class="p">,</span> <span class="nx">TextField</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -888,15 +888,15 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>In addition to the root component, the <code class="language-plaintext highlighter-rouge">sx</code> prop also allows you to override the style of inner components. Refer to the documentation of each Field component to see the classes that you can override.</p>
+<p>ルートコンポーネントに加えて、<code class="language-plaintext highlighter-rouge">sx</code> プロップは内部コンポーネントのスタイルをオーバーライドすることもできます。各フィールドコンポーネントのドキュメントを参照して、オーバーライドできるクラスを確認してください。</p>
 
-<p>And see <a href="https://mui.com/system/the-sx-prop/">the Material UI system documentation</a> for more information.</p>
+<p>詳細は <a href="https://mui.com/system/the-sx-prop/">Material UI システムのドキュメント</a> を参照してください。</p>
 
 <h2 id="textalign"><code class="language-plaintext highlighter-rouge">textAlign</code></h2>
 
-<p>This prop defines the text alignment of the field when rendered inside a <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> cell. By default, datagrid values are left-aligned ; for numeric values, it’s often better to right-align them. Set <code class="language-plaintext highlighter-rouge">textAlign</code> to <code class="language-plaintext highlighter-rouge">right</code> for that.</p>
+<p>このプロップは、<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> セル内でフィールドをレンダリングする際のテキストの位置揃えを定義します。デフォルトではデータグリッドの値は左揃えですが、数値の場合は右揃えが望ましいことが多いです。この場合、<code class="language-plaintext highlighter-rouge">textAlign</code> を <code class="language-plaintext highlighter-rouge">right</code> に設定します。</p>
 
-<p><a href="./NumberField.md"><code class="language-plaintext highlighter-rouge">&lt;NumberField&gt;</code></a> already uses <code class="language-plaintext highlighter-rouge">textAlign="right"</code>. Set the default value for this prop if you create a custom numeric field.</p>
+<p><a href="./NumberField.md"><code class="language-plaintext highlighter-rouge">&lt;NumberField&gt;</code></a> はすでに <code class="language-plaintext highlighter-rouge">textAlign="right"</code> を使用しています。カスタム数値フィールドを作成する場合、このプロップのデフォルト値を設定します。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">BasketTotal</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">record</span> <span class="o">=</span> <span class="nx">useRecordContext</span><span class="p">();</span>
@@ -909,11 +909,11 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<h2 id="deep-field-source">Deep Field Source</h2>
+<h2 id="深いフィールドソース">深いフィールドソース</h2>
 
-<p>Fields use the <code class="language-plaintext highlighter-rouge">source</code> as a <em>path</em> to read the actual value (using <a href="https://lodash.com/docs/4.17.15#get"><code class="language-plaintext highlighter-rouge">lodash.get()</code></a>). This means you can include dots in the source name to render a deeply nested value.</p>
+<p>フィールドは <code class="language-plaintext highlighter-rouge">source</code> を <em>パス</em> として使用して実際の値を読み取ります（<a href="https://lodash.com/docs/4.17.15#get"><code class="language-plaintext highlighter-rouge">lodash.get()</code></a> を使用）。つまり、ネストされた値をレンダリングするためにソース名にドットを含めることができます。</p>
 
-<p>For instance, if you have a record like the following:</p>
+<p>例えば、次のようなレコードがある場合:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span> 
     <span class="nl">id</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
@@ -924,16 +924,16 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Then you can render the author name like this:</p>
+<p>次のようにして著者名をレンダリングできます:</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"author.name"</span> <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<h2 id="setting-a-field-label">Setting A Field Label</h2>
+<h2 id="フィールドラベルの設定">フィールドラベルの設定</h2>
 
-<p>React-admin Field layout components like <a href="./Datagrid.md"><code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code></a> and <a href="./SimpleShowLayout.md"><code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code></a> inspect their children and use their <code class="language-plaintext highlighter-rouge">label</code> prop to set the table headers or the field labels.</p>
+<p>React-admin のフィールドレイアウトコンポーネント（<a href="./Datagrid.md"><code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code></a> や <a href="./SimpleShowLayout.md"><code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code></a> など）はその子要素を調査し、<code class="language-plaintext highlighter-rouge">label</code> プロップを使用してテーブルヘッダーやフィールドラベルを設定します。</p>
 
-<p>So inside these components, you can provide a <code class="language-plaintext highlighter-rouge">label</code> prop to override the default label.</p>
+<p>そのため、これらのコンポーネント内ではデフォルトのラベルを上書きするために <code class="language-plaintext highlighter-rouge">label</code> プロップを提供できます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">BookList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
    <span class="p">&lt;</span><span class="nc">List</span><span class="p">&gt;</span>
@@ -944,7 +944,7 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>The label uses <a href="./Translation.md">the i18n layer</a>, so you can use a translation key, too:</p>
+<p>ラベルは <a href="./Translation.md">i18n レイヤー</a> を使用しているため、翻訳キーも使用できます:</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">BookList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
    <span class="p">&lt;</span><span class="nc">List</span><span class="p">&gt;</span>
@@ -955,9 +955,9 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>But as Field components don’t render the label themselves (again, this is the responsibility of the parent layout component to render the label), this doesn’t work when you use a Field inside a Form, or when the field isn’t a direct child of a layout component.</p>
+<p>しかし、フィールドコンポーネント自身はラベルをレンダリングしません（これは親レイアウトコンポーネントの責任でラベルをレンダリングします）。そのため、フォーム内でフィールドを使用する場合や、フィールドがレイアウトコンポーネントの直接の子ではない場合にはこの方法は機能しません。</p>
 
-<p>To render a field with a label in such situations, wrap the field in <a href="./Labeled.md">a <code class="language-plaintext highlighter-rouge">&lt;Labeled&gt;</code> component</a>:</p>
+<p>このような状況でラベル付きフィールドをレンダリングするには、フィールドを <a href="./Labeled.md"><code class="language-plaintext highlighter-rouge">&lt;Labeled&gt;</code> コンポーネント</a> でラップします。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">BookEdit</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
    <span class="p">&lt;</span><span class="nc">Edit</span><span class="p">&gt;</span>
@@ -970,17 +970,17 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="hiding-the-field-label">Hiding The Field Label</h2>
+<h2 id="フィールドラベルの非表示">フィールドラベルの非表示</h2>
 
-<p>React-admin Field layout components like <a href="./Datagrid.md"><code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code></a> and <a href="./SimpleShowLayout.md"><code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code></a> inspect their children and use their <code class="language-plaintext highlighter-rouge">source</code> prop to set the table headers or the field labels. To opt out of this behavior, pass <code class="language-plaintext highlighter-rouge">false</code> to the <code class="language-plaintext highlighter-rouge">label</code> prop.</p>
+<p>React-admin のフィールドレイアウトコンポーネント（<a href="./Datagrid.md"><code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code></a> や <a href="./SimpleShowLayout.md"><code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code></a> など）はその子要素を調査し、<code class="language-plaintext highlighter-rouge">source</code> プロップを使用してテーブルヘッダーやフィールドラベルを設定します。この動作をオプトアウトするには、<code class="language-plaintext highlighter-rouge">label</code> プロップに <code class="language-plaintext highlighter-rouge">false</code> を渡します。</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// No label will be added in SimpleShowLayout</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SimpleShowLayout ではラベルは追加されません</span>
 <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"author.name"</span> <span class="na">label</span><span class="p">=</span><span class="si">{</span><span class="kc">false</span><span class="si">}</span> <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<h2 id="conditional-formatting">Conditional Formatting</h2>
+<h2 id="条件付きフォーマット">条件付きフォーマット</h2>
 
-<p>If you want to format a field depending on the value, create another component wrapping this field, and set the <code class="language-plaintext highlighter-rouge">sx</code> prop depending on the field value:</p>
+<p>値に応じてフィールドをフォーマットしたい場合は、このフィールドをラップする別のコンポーネントを作成し、フィールド値に応じて <code class="language-plaintext highlighter-rouge">sx</code> プロップを設定します。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">FormattedNumberField</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">source</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">record</span> <span class="o">=</span> <span class="nx">useRecordContext</span><span class="p">();</span>
@@ -991,11 +991,11 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<h2 id="combining-two-fields">Combining Two Fields</h2>
+<h2 id="2つのフィールドを組み合わせる">2つのフィールドを組み合わせる</h2>
 
-<p>You may want to render more than one field per cell (in a <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>) or per row (in a <code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code>).</p>
+<p>1つのセル（<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> 内）や1行（<code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code> 内）に複数のフィールドをレンダリングしたい場合があります。</p>
 
-<p>In theory, you can simply put two fields inside a React Fragment (<code class="language-plaintext highlighter-rouge">&lt;&gt;</code>):</p>
+<p>理論的には、React フラグメント（<code class="language-plaintext highlighter-rouge">&lt;&gt;</code>）内に2つのフィールドを単純に配置できます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">BookList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
    <span class="p">&lt;</span><span class="nc">List</span><span class="p">&gt;</span>
@@ -1010,11 +1010,11 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>This will render a 2-columns datagrid, one with the book title, and one with the book author.</p>
+<p>これにより、本のタイトルが表示される列と、著者の名前が表示される列が2列のデータグリッドがレンダリングされます。</p>
 
-<p>In practice, the result lacks a column title for the second column. As <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> looks for a <code class="language-plaintext highlighter-rouge">source</code> or a <code class="language-plaintext highlighter-rouge">label</code> in its children, it will not find a name for the second column.</p>
+<p>実際には、2列目には列タイトルが欠けています。<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> は子要素の <code class="language-plaintext highlighter-rouge">source</code> や <code class="language-plaintext highlighter-rouge">label</code> を探して名前を取得しますが、2列目の名前は見つかりません。</p>
 
-<p>There are two solutions. The first is to use <code class="language-plaintext highlighter-rouge">&lt;WrapperField&gt;</code>, which supports common field props (to allow inspection by parents) and renders its children:</p>
+<p>解決策は2つあります。1つ目は <code class="language-plaintext highlighter-rouge">&lt;WrapperField&gt;</code> を使用する方法で、これは一般的なフィールドプロップをサポートし（親による調査を可能にする）、子要素をレンダリングします。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">List</span><span class="p">,</span> <span class="nx">Datagrid</span><span class="p">,</span> <span class="nx">WrapperField</span><span class="p">,</span> <span class="nx">TextField</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -1031,7 +1031,7 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>The second solution is to use the <a href="./FunctionField.md"><code class="language-plaintext highlighter-rouge">&lt;FunctionField&gt;</code></a>, which accepts a <code class="language-plaintext highlighter-rouge">render</code> function:</p>
+<p>2つ目の解決策は <a href="./FunctionField.md"><code class="language-plaintext highlighter-rouge">&lt;FunctionField&gt;</code></a> を使用する方法で、これは <code class="language-plaintext highlighter-rouge">render</code> 関数を受け入れます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">List</span><span class="p">,</span> <span class="nx">Datagrid</span><span class="p">,</span> <span class="nx">WrapperField</span><span class="p">,</span> <span class="nx">FunctionField</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -1047,13 +1047,13 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="writing-your-own-field-component">Writing Your Own Field Component</h2>
+<h2 id="独自のフィールドコンポーネントを作成する">独自のフィールドコンポーネントを作成する</h2>
 
-<p>If you don’t find what you need in the list of available Fields, you can write your own Field component.</p>
+<p>利用可能なフィールドのリストに必要なものが見つからない場合は、独自のフィールドコンポーネントを作成できます。</p>
 
-<p>It must be a regular React component, accepting a <code class="language-plaintext highlighter-rouge">source</code> attribute and retrieving the <code class="language-plaintext highlighter-rouge">record</code> from the <code class="language-plaintext highlighter-rouge">RecordContext</code> with the <code class="language-plaintext highlighter-rouge">useRecordContext</code> hook. React-admin will set the <code class="language-plaintext highlighter-rouge">record</code> in this context based on the API response data at render time. The field component only needs to find the <code class="language-plaintext highlighter-rouge">source</code> in the <code class="language-plaintext highlighter-rouge">record</code> and display it.</p>
+<p>これは通常の React コンポーネントで、<code class="language-plaintext highlighter-rouge">source</code> 属性を受け入れ、<code class="language-plaintext highlighter-rouge">useRecordContext</code> フックを使用して <code class="language-plaintext highlighter-rouge">RecordContext</code> から <code class="language-plaintext highlighter-rouge">record</code> を取得します。React-admin は、レンダリング時にAPI応答データに基づいてこのコンテキストに <code class="language-plaintext highlighter-rouge">record</code> を設定します。フィールドコンポーネントは <code class="language-plaintext highlighter-rouge">record</code> から <code class="language-plaintext highlighter-rouge">source</code> を見つけて表示するだけです。</p>
 
-<p>Let’s see an example for an API returning user records with <code class="language-plaintext highlighter-rouge">firstName</code> and <code class="language-plaintext highlighter-rouge">lastName</code> properties.</p>
+<p>次に、<code class="language-plaintext highlighter-rouge">firstName</code> および <code class="language-plaintext highlighter-rouge">lastName</code> プロパティを持つユーザーレコードを返すAPIの例を見てみましょう。</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
     <span class="nl">id</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
@@ -1062,7 +1062,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Here is a custom field displaying the full name:</p>
+<p>以下はフルネームを表示するカスタムフィールドです。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useRecordContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -1074,9 +1074,9 @@
 <span class="nx">FullNameField</span><span class="p">.</span><span class="nx">defaultProps</span> <span class="o">=</span> <span class="p">{</span> <span class="na">label</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Name</span><span class="dl">'</span> <span class="p">};</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: Always check the <code class="language-plaintext highlighter-rouge">record</code> is defined before inspecting its properties, as react-admin may display the Show view <em>before</em> fetching the record from the data provider. So the first time it renders the show view for a resource, the <code class="language-plaintext highlighter-rouge">record</code> is <code class="language-plaintext highlighter-rouge">undefined</code>.</p>
+<p><strong>ヒント</strong>: react-admin は <em>レコードをデータプロバイダから取得する前に</em> Show ビューを表示する場合があるため、プロパティを調査する前に <code class="language-plaintext highlighter-rouge">record</code> が定義されていることを常に確認してください。そのため、リソースの Show ビューを初めてレンダリングする際、<code class="language-plaintext highlighter-rouge">record</code> は <code class="language-plaintext highlighter-rouge">undefined</code> です。</p>
 
-<p>You can now use this field like any other react-admin field:</p>
+<p>このフィールドは他の react-admin フィールドと同様に使用できます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">List</span><span class="p">,</span> <span class="nx">Datagrid</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">FullNameField</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./FullNameField</span><span class="dl">'</span><span class="p">;</span>
@@ -1090,9 +1090,9 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: In such custom fields, the <code class="language-plaintext highlighter-rouge">source</code> is optional. React-admin uses it to determine which column to use for sorting when the column header is clicked. In case you use the <code class="language-plaintext highlighter-rouge">source</code> property for additional purposes, the sorting can be overridden by the <code class="language-plaintext highlighter-rouge">sortBy</code> property on any <code class="language-plaintext highlighter-rouge">Field</code> component.</p>
+<p><strong>ヒント</strong>: このようなカスタムフィールドでは、<code class="language-plaintext highlighter-rouge">source</code> はオプションです。react-admin は列見出しがクリックされたときにどの列をソートするかを決定するために使用します。<code class="language-plaintext highlighter-rouge">source</code> プロパティを追加目的で使用する場合、ソートは任意の <code class="language-plaintext highlighter-rouge">Field</code> コンポーネントの <code class="language-plaintext highlighter-rouge">sortBy</code> プロパティで上書きできます。</p>
 
-<p>If you build a reusable field accepting a <code class="language-plaintext highlighter-rouge">source</code> props, you will probably want to support deep field sources (e.g. source values like <code class="language-plaintext highlighter-rouge">author.name</code>). Use <a href="https://www.npmjs.com/package/lodash.get">lodash/get</a> to replace the simple object lookup. For instance, for a Text field:</p>
+<p><code class="language-plaintext highlighter-rouge">source</code> プロップを受け入れる再利用可能なフィールドを作成する場合、深いフィールドソース（例：<code class="language-plaintext highlighter-rouge">author.name</code>）をサポートする必要があります。単純なオブジェクトルックアップを置き換えるために <a href="https://www.npmjs.com/package/lodash.get">lodash/get</a> を使用します。例えば、テキストフィールドの場合は次のようにします。</p>
 
 <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">import * as React from 'react';
 </span><span class="gi">+import get from 'lodash/get';
@@ -1107,11 +1107,11 @@ const TextField = ({ source }) =&gt; {
 <span class="p">export default TextField;
 </span></code></pre></div></div>
 
-<h2 id="hiding-a-field-based-on-the-value-of-another">Hiding A Field Based On The Value Of Another</h2>
+<h2 id="別の値に基づいてフィールドを非表示にする">別の値に基づいてフィールドを非表示にする</h2>
 
-<p>In a Show view, you may want to display or hide fields based on the value of another field - for instance, show an <code class="language-plaintext highlighter-rouge">email</code> field only if the <code class="language-plaintext highlighter-rouge">hasEmail</code> boolean field is <code class="language-plaintext highlighter-rouge">true</code>.</p>
+<p>Show ビューで、別のフィールドの値に基づいてフィールドを表示または非表示にしたい場合があります。例えば、<code class="language-plaintext highlighter-rouge">hasEmail</code> ブールフィールドが <code class="language-plaintext highlighter-rouge">true</code> の場合にのみ <code class="language-plaintext highlighter-rouge">email</code> フィールドを表示する場合です。</p>
 
-<p>For such cases, you can use <a href="./WithRecord.md">the <code class="language-plaintext highlighter-rouge">&lt;WithRecord&gt;</code> component</a>, or the custom field approach: write a custom field that reads the <code class="language-plaintext highlighter-rouge">record</code> from the context, and renders another Field based on the value.</p>
+<p>そのような場合には、<a href="./WithRecord.md"><code class="language-plaintext highlighter-rouge">&lt;WithRecord&gt;</code> コンポーネント</a> を使用するか、カスタムフィールドアプローチを取ります。<code class="language-plaintext highlighter-rouge">record</code> をコンテキストから読み取り、値に基づいて別のフィールドをレンダリングするカスタムフィールドを作成します。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Show</span><span class="p">,</span> <span class="nx">SimpleShowLayout</span><span class="p">,</span> <span class="nx">TextField</span><span class="p">,</span> <span class="nx">EmailField</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -1131,23 +1131,23 @@ const TextField = ({ source }) =&gt; {
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>This <code class="language-plaintext highlighter-rouge">&lt;ConditionalEmailField&gt;</code> is properly hidden when <code class="language-plaintext highlighter-rouge">hasEmail</code> is <code class="language-plaintext highlighter-rouge">false</code>. But the label for the field never renders. And if you add a <code class="language-plaintext highlighter-rouge">label</code> default prop, <code class="language-plaintext highlighter-rouge">SimpleShowLayout</code> layout will render the label regardless of the <code class="language-plaintext highlighter-rouge">hasEmail</code> value.</p>
+<p>この <code class="language-plaintext highlighter-rouge">&lt;ConditionalEmailField&gt;</code> は <code class="language-plaintext highlighter-rouge">hasEmail</code> が <code class="language-plaintext highlighter-rouge">false</code> の場合には適切に非表示になります。しかし、フィールドのラベルは表示されません。デフォルトの <code class="language-plaintext highlighter-rouge">label</code> プロップを追加すると、<code class="language-plaintext highlighter-rouge">SimpleShowLayout</code> レイアウトは <code class="language-plaintext highlighter-rouge">hasEmail</code> の値に関係なくラベルをレンダリングします。</p>
 
-<p>How about using React conditionals in <code class="language-plaintext highlighter-rouge">UserShow</code> to add the <code class="language-plaintext highlighter-rouge">&lt;EmailField&gt;</code> field only if the <code class="language-plaintext highlighter-rouge">record.hasEmail</code> is <code class="language-plaintext highlighter-rouge">true</code>? Unfortunately, the <code class="language-plaintext highlighter-rouge">useRecordContext()</code> hook doesn’t work in <code class="language-plaintext highlighter-rouge">&lt;UserShow&gt;</code> (as it’s the <code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code> component’s responsibility to fetch the record and put it into a context).</p>
+<p>React の条件文を使用して <code class="language-plaintext highlighter-rouge">UserShow</code> 内で <code class="language-plaintext highlighter-rouge">record.hasEmail</code> が <code class="language-plaintext highlighter-rouge">true</code> の場合にのみ <code class="language-plaintext highlighter-rouge">&lt;EmailField&gt;</code> フィールドを追加することを検討してみてください。しかし、<code class="language-plaintext highlighter-rouge">useRecordContext()</code> フックは <code class="language-plaintext highlighter-rouge">&lt;UserShow&gt;</code> 内では機能しません（レコードを取得し、それをコンテキストに置くのは <code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code> コンポーネントの責任です）。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">UserShow</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">Show</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nc">SimpleShowLayout</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"first_name"</span> <span class="p">/&gt;</span>
             <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"last_name"</span> <span class="p">/&gt;</span>
-            <span class="si">{</span><span class="cm">/* Where can we get the record? */</span><span class="si">}</span>
+            <span class="si">{</span><span class="cm">/* record をどこから取得できますか？ */</span><span class="si">}</span>
             <span class="si">{</span><span class="nx">record</span><span class="p">.</span><span class="nx">hasEmail</span> <span class="o">&amp;&amp;</span> <span class="p">&lt;</span><span class="nc">EmailField</span> <span class="na">source</span><span class="p">=</span><span class="s">"email"</span> <span class="p">/&gt;</span><span class="si">}</span>
         <span class="p">&lt;/</span><span class="nc">SimpleShowLayout</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nc">Show</span><span class="p">&gt;</span>
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>The solution is to <em>split</em> the <code class="language-plaintext highlighter-rouge">&lt;UserShow&gt;</code> component into two: one that fetches the record, and one that renders the show layout. In descendants of <code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code>, you can use the <code class="language-plaintext highlighter-rouge">useRecordContext()</code> hook.</p>
+<p>解決策は、<code class="language-plaintext highlighter-rouge">&lt;UserShow&gt;</code> コンポーネントを2つに分割することです。1つはレコードを取得し、もう1つは表示レイアウトをレンダリングします。<code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code> の子孫では、<code class="language-plaintext highlighter-rouge">useRecordContext()</code> フックを使用できます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">UserShow</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">Show</span><span class="p">&gt;</span>
@@ -1168,11 +1168,11 @@ const TextField = ({ source }) =&gt; {
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>And now you can use a regular Field component, and the label displays correctly in the Show view.</p>
+<p>これで、通常のフィールドコンポーネントを使用でき、Show ビューでラベルが正しく表示されます。</p>
 
-<h2 id="linking-to-other-records">Linking To Other Records</h2>
+<h2 id="他のレコードへのリンク">他のレコードへのリンク</h2>
 
-<p>A custom Field component might need to display a link to another record. Build the URL to the distant record using the resource name and the id, as follows:</p>
+<p>カスタムフィールドコンポーネントは、別のレコードへのリンクを表示する必要がある場合があります。次のようにして、リソース名とIDを使用して遠方のレコードへのURLを構築します。</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useRecordContext</span><span class="p">,</span> <span class="nx">useGetOne</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Link</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
@@ -1186,24 +1186,24 @@ const TextField = ({ source }) =&gt; {
 </span><span class="p">};</span>
 </code></pre></div></div>
 
-<h2 id="third-party-components">Third-Party Components</h2>
+<h2 id="サードパーティ製コンポーネント">サードパーティ製コンポーネント</h2>
 
-<p>You can find components for react-admin in third-party repositories.</p>
+<p>react-admin 用のコンポーネントはサードパーティ製のリポジトリでも見つけることができます。</p>
 
 <ul>
-  <li><a href="https://github.com/OoDeLally/react-admin-clipboard-list-field">OoDeLally/react-admin-clipboard-list-field</a>: a quick and customizable copy-to-clipboard field.</li>
-  <li><a href="https://github.com/MrHertal/react-admin-json-view">MrHertal/react-admin-json-view</a>: JSON field and input for react-admin.</li>
-  <li><a href="https://github.com/alexgschwend/react-admin-color-picker">alexgschwend/react-admin-color-picker</a>: a color field</li>
+  <li><a href="https://github.com/OoDeLally/react-admin-clipboard-list-field">OoDeLally/react-admin-clipboard-list-field</a>: カスタマイズ可能なクリップボードコピー用フィールド。</li>
+  <li><a href="https://github.com/MrHertal/react-admin-json-view">MrHertal/react-admin-json-view</a>: react-admin 用の JSON フィールドおよび入力フィールド。</li>
+  <li><a href="https://github.com/alexgschwend/react-admin-color-picker">alexgschwend/react-admin-color-picker</a>: カラーフィールド。</li>
 </ul>
 
 <h2 id="typescript">TypeScript</h2>
 
-<p>All field components accept a generic type that describes the record. This lets TypeScript validate that the <code class="language-plaintext highlighter-rouge">source</code> prop targets an actual field of the record:</p>
+<p>すべてのフィールドコンポーネントはレコードを記述するジェネリック型を受け入れます。これにより、TypeScript は <code class="language-plaintext highlighter-rouge">source</code> プロップがレコードの実際のフィールドを対象としていることを検証できます。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Show</span><span class="p">,</span> <span class="nx">SimpleShowLayout</span><span class="p">,</span> <span class="nx">TextField</span><span class="p">,</span> <span class="nx">DateField</span><span class="p">,</span> <span class="nx">RichTextField</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="c1">// Note that you shouldn't extend RaRecord for this to work</span>
+<span class="c1">// 注: これが機能するためには RaRecord を拡張しないでください</span>
 <span class="kd">type</span> <span class="nx">Post</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
     <span class="nl">title</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
@@ -1217,7 +1217,7 @@ const TextField = ({ source }) =&gt; {
         <span class="p">&lt;</span><span class="nc">SimpleShowLayout</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nc">TextField</span><span class="err">&lt;</span><span class="na">Post</span><span class="p">&gt;</span> source="title" /&gt;
             <span class="p">&lt;</span><span class="nc">TextField</span><span class="err">&lt;</span><span class="na">Post</span><span class="p">&gt;</span> source="teaser" /&gt;
-            <span class="si">{</span><span class="cm">/* Here TS will show an error because a teasr field does not exist */</span><span class="si">}</span>
+            <span class="si">{</span><span class="cm">/* ここで TS は teasr フィールドが存在しないためエラーを表示します */</span><span class="si">}</span>
             <span class="p">&lt;</span><span class="nc">TextField</span><span class="err">&lt;</span><span class="na">Post</span><span class="p">&gt;</span> source="teasr" /&gt;
             <span class="p">&lt;</span><span class="nc">RichTextField</span><span class="err">&lt;</span><span class="na">Post</span><span class="p">&gt;</span> source="body" /&gt;
             <span class="p">&lt;</span><span class="nc">DateField</span><span class="err">&lt;</span><span class="na">Post</span><span class="p">&gt;</span> label="Publication date" source="published_at" /&gt;
@@ -1226,9 +1226,10 @@ const TextField = ({ source }) =&gt; {
 );
 </code></pre></div></div>
 
-<p><strong>Limitation</strong>: You must not extend <code class="language-plaintext highlighter-rouge">RaRecord</code> for this to work or TypeScript would not be able to infer your types properties.</p>
+<p><strong>制限</strong>: これが機能するためには <code class="language-plaintext highlighter-rouge">RaRecord</code> を拡張してはいけません。さもないと、TypeScript は型のプロパティを推論できません。</p>
 
-<p>Specifying the record type will also allow your IDE to provide auto-completion for both the <code class="language-plaintext highlighter-rouge">source</code> and <code class="language-plaintext highlighter-rouge">sortBy</code> prop. Note that the <code class="language-plaintext highlighter-rouge">sortBy</code> prop also accepts any string.</p>
+<p>レコード型を指定すると、<code class="language-plaintext highlighter-rouge">source</code> プロップおよび <code class="language-plaintext highlighter-rouge">sortBy</code> プロップに対するIDEの自動補完も可能になります。<code class="language-plaintext highlighter-rouge">sortBy</code> プロップは任意の文字列も受け入れることに注意してください。</p>
+
 
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <title>React-admin - Writing An Auth Provider</title>
+        <title>React-admin - Authプロバイダーの作成</title>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
@@ -563,24 +563,24 @@
                         <div
                             class="markdown-section DocSearch-content toc-content"
                         >
-                            <h1 id="writing-an-auth-provider">Writing An Auth Provider</h1>
+                            <h1 id="authプロバイダーの作成">Authプロバイダーの作成</h1>
 
-<p>Here is the interface react-admin expect <code class="language-plaintext highlighter-rouge">authProvider</code> objects to implement.</p>
+<p>ここでは、<code class="language-plaintext highlighter-rouge">authProvider</code>オブジェクトがreact-adminによって期待されるインターフェースを示します。</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">authProvider</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">// authentication</span>
-    <span class="na">login</span><span class="p">:</span> <span class="nx">params</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">),</span>
-    <span class="na">checkError</span><span class="p">:</span> <span class="nx">error</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">),</span>
-    <span class="na">checkAuth</span><span class="p">:</span> <span class="nx">params</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">),</span>
-    <span class="na">logout</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">),</span>
-    <span class="na">getIdentity</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">),</span>
-    <span class="na">handleCallback</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">),</span> <span class="c1">// for third-party authentication only</span>
-    <span class="c1">// authorization</span>
-    <span class="na">getPermissions</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">),</span>
-<span class="p">};</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">const</span> <span class="nx">authProvider</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="c1">// 認証</span>
+        <span class="na">login</span><span class="p">:</span> <span class="nx">params</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">),</span>
+        <span class="na">checkError</span><span class="p">:</span> <span class="nx">error</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">),</span>
+        <span class="na">checkAuth</span><span class="p">:</span> <span class="nx">params</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">),</span>
+        <span class="na">logout</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">),</span>
+        <span class="na">getIdentity</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">),</span>
+        <span class="na">handleCallback</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">),</span> <span class="c1">// サードパーティの認証のみ</span>
+        <span class="c1">// 認可</span>
+        <span class="na">getPermissions</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">),</span>
+    <span class="p">};</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: If you’re a TypeScript user, you can check that your <code class="language-plaintext highlighter-rouge">authProvider</code> is correct at compile-time using the <code class="language-plaintext highlighter-rouge">AuthProvider</code> type.</p>
+<p><strong>Tip</strong>: TypeScriptユーザーの場合、<code class="language-plaintext highlighter-rouge">AuthProvider</code>型を使用してコンパイル時に<code class="language-plaintext highlighter-rouge">authProvider</code>が正しいか確認できます。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">AuthProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -589,9 +589,9 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<h2 id="example">Example</h2>
+<h2 id="例">例</h2>
 
-<p>Here is a complete but fictive implementation of an auth provider. It only accepts user “john” with password “123”.</p>
+<p>ここでは、完全な例ですが架空のauthプロバイダーの実装を示します。これは”john”というユーザーと”123”というパスワードのみを受け付けます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">authProvider</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">login</span><span class="p">:</span> <span class="p">({</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -605,15 +605,15 @@
         <span class="nx">localStorage</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">username</span><span class="dl">'</span><span class="p">);</span>
         <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
     <span class="p">},</span>
-        <span class="na">checkAuth</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span>
+    <span class="na">checkAuth</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span>
         <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">username</span><span class="dl">'</span><span class="p">)</span> <span class="p">?</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">()</span> <span class="p">:</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">(),</span>
-    <span class="na">checkError</span><span class="p">:</span>  <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="na">checkError</span><span class="p">:</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="kd">const</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">status</span><span class="p">;</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">401</span> <span class="o">||</span> <span class="nx">status</span> <span class="o">===</span> <span class="mi">403</span><span class="p">)</span> <span class="p">{</span>
             <span class="nx">localStorage</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">username</span><span class="dl">'</span><span class="p">);</span>
             <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">();</span>
         <span class="p">}</span>
-        <span class="c1">// other error code (404, 500, etc): no need to log out</span>
+        <span class="c1">// 他のエラーコード（404, 500など）：ログアウトの必要はなし</span>
         <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
     <span class="p">},</span>
     <span class="na">getIdentity</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span>
@@ -627,21 +627,21 @@
 <span class="k">export</span> <span class="k">default</span> <span class="nx">authProvider</span><span class="p">;</span>
 </code></pre></div></div>
 
-<h2 id="step-by-step">Step-By-Step</h2>
+<h2 id="ステップバイステップ">ステップバイステップ</h2>
 
-<p>If you have to implement your own auth provider, here is a step-by-step guide to get you started.</p>
+<p>独自のauthプロバイダーを実装する必要がある場合は、以下のステップバイステップガイドを参考にしてください。</p>
 
 <h3 id="login"><code class="language-plaintext highlighter-rouge">login</code></h3>
 
-<p>Once an admin has an <code class="language-plaintext highlighter-rouge">authProvider</code>, react-admin enables a new page on the <code class="language-plaintext highlighter-rouge">/login</code> route, which displays a login form asking for a username and password.</p>
+<p>管理者が<code class="language-plaintext highlighter-rouge">authProvider</code>を持つと、react-adminは<code class="language-plaintext highlighter-rouge">/login</code>ルートに新しいページを有効にし、ユーザー名とパスワードを要求するログインフォームを表示します。</p>
 
-<p><img src="./img/login-form.png" alt="Default Login Form" /></p>
+<p><img src="./img/login-form.png" alt="デフォルトのログインフォーム" /></p>
 
-<p>Upon submission, this form calls the <code class="language-plaintext highlighter-rouge">authProvider.login({ username, password })</code> method. React-admin expects this method to return a resolved Promise if the credentials are correct, and a rejected Promise if they’re not.</p>
+<p>送信すると、このフォームは<code class="language-plaintext highlighter-rouge">authProvider.login({ username, password })</code>メソッドを呼び出します。このメソッドは、資格情報が正しければ解決されたPromiseを返し、正しくなければ拒否されたPromiseを返すことをreact-adminは期待しています。</p>
 
-<p>For instance, to query an authentication route via HTTPS and store the credentials (a token) in local storage, configure the <code class="language-plaintext highlighter-rouge">authProvider</code> as follows:</p>
+<p>例えば、HTTPSを介して認証ルートにクエリを実行し、資格情報（トークン）をローカルストレージに保存するには、次のように<code class="language-plaintext highlighter-rouge">authProvider</code>を設定します。</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/authProvider.js</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/authProvider.js</span>
 <span class="kd">const</span> <span class="nx">authProvider</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">login</span><span class="p">:</span> <span class="p">({</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span> <span class="p">})</span> <span class="o">=&gt;</span>  <span class="p">{</span>
         <span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Request</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://mydomain.com/authenticate</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
@@ -664,11 +664,11 @@
             <span class="p">});</span>
     <span class="p">},</span>
     <span class="na">checkAuth</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="c1">// Required for the authentication to work</span>
+        <span class="c1">// 認証が機能するために必要</span>
         <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
     <span class="p">},</span>
     <span class="na">getPermissions</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="c1">// Required for the authentication to work</span>
+        <span class="c1">// 認証が機能するために必要</span>
         <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
     <span class="p">},</span>
     <span class="c1">// ...</span>
@@ -677,13 +677,13 @@
 <span class="k">export</span> <span class="k">default</span> <span class="nx">authProvider</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>Once the promise resolves, the login form redirects to the previous page, or to the admin index if the user just arrived.</p>
+<p>Promiseが解決されると、ログインフォームは前のページにリダイレクトされるか、ユーザーが到着した場合は管理インデックスにリダイレクトされます。</p>
 
-<p><strong>Tip</strong>: It’s a good idea to store credentials in <code class="language-plaintext highlighter-rouge">localStorage</code>, as in this example, to avoid reconnection when opening a new browser tab. But this makes your application <a href="https://www.redotheweb.com/2015/11/09/api-security.html">open to XSS attacks</a>, so you’d better double down on security, and add an <code class="language-plaintext highlighter-rouge">httpOnly</code> cookie on the server side, too.</p>
+<p><strong>Tip</strong>: この例のように資格情報を<code class="language-plaintext highlighter-rouge">localStorage</code>に保存するのは良いアイデアです。これにより、新しいブラウザタブを開くときに再接続する必要がなくなります。ただし、これによりアプリケーションが<a href="https://www.redotheweb.com/2015/11/09/api-security.html">XSS攻撃に対して脆弱</a>になるため、セキュリティを強化し、サーバー側で<code class="language-plaintext highlighter-rouge">httpOnly</code>クッキーも追加する方が良いでしょう。</p>
 
-<p>After login, react-admin redirects the user to the location returned by <code class="language-plaintext highlighter-rouge">authProvider.login()</code> - or to the previous page if the method returns nothing. You can customize the redirection url by returning an object with a <code class="language-plaintext highlighter-rouge">redirectTo</code> key containing a string or false to disable redirection after login.</p>
+<p>ログイン後、react-adminはユーザーを<code class="language-plaintext highlighter-rouge">authProvider.login()</code>によって返される場所にリダイレクトします - またはメソッドが何も返さない場合は前のページにリダイレクトします。ログイン後のリダイレクトURLをカスタマイズするには、<code class="language-plaintext highlighter-rouge">redirectTo</code>キーを含むオブジェクトを返し、文字列またはログイン後のリダイレクトを無効にするにはfalseを返します。</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/authProvider.js</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/authProvider.js</span>
 <span class="kd">const</span> <span class="nx">authProvider</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">login</span><span class="p">:</span> <span class="p">({</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span> <span class="p">})</span> <span class="o">=&gt;</span>  <span class="p">{</span>
         <span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Request</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://mydomain.com/authenticate</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
@@ -706,19 +706,20 @@
 <span class="p">};</span>
 
 </code></pre></div></div>
-<p>If the login fails, <code class="language-plaintext highlighter-rouge">authProvider.login()</code> should return a rejected Promise with an Error object. React-admin displays the Error message to the user in a notification.</p>
+
+<p>ログインが失敗した場合、<code class="language-plaintext highlighter-rouge">authProvider.login()</code>はErrorオブジェクトを持つ拒否されたPromiseを返すべきです。react-adminはエラーメッセージを通知でユーザーに表示します。</p>
 
 <h3 id="checkerror"><code class="language-plaintext highlighter-rouge">checkError</code></h3>
 
-<p>When the user credentials are missing or become invalid, a secure API usually answers to the <code class="language-plaintext highlighter-rouge">dataProvider</code> with an HTTP error code 401 or 403.</p>
+<p>ユーザーの資格情報が欠落しているか無効になった場合、安全なAPIは通常、HTTPエラーコード401または403で<code class="language-plaintext highlighter-rouge">dataProvider</code>に応答します。</p>
 
-<p>Fortunately, each time the <code class="language-plaintext highlighter-rouge">dataProvider</code> or the <code class="language-plaintext highlighter-rouge">authProvider.getPermissions</code> returns an error, react-admin calls the <code class="language-plaintext highlighter-rouge">authProvider.checkError()</code> method. If it returns a rejected promise, react-admin calls the <code class="language-plaintext highlighter-rouge">authProvider.logout()</code> method immediately, and asks the user to log in again.</p>
+<p>幸いなことに、<code class="language-plaintext highlighter-rouge">dataProvider</code>または<code class="language-plaintext highlighter-rouge">authProvider.getPermissions</code>がエラーを返すたびに、react-adminは<code class="language-plaintext highlighter-rouge">authProvider.checkError()</code>メソッドを呼び出します。これが拒否されたPromiseを返すと、react-adminは直ちに<code class="language-plaintext highlighter-rouge">authProvider.logout()</code>メソッドを呼び出し、ユーザーに再ログインを要求します。</p>
 
-<p>So it’s up to you to decide which HTTP status codes should let the user continue (by returning a resolved promise) or log them out (by returning a rejected promise).</p>
+<p>したがって、どのHTTPステータスコードがユーザーを続行させるべきか（Promiseを解決することによって）またはログアウトさせるべきか（Promiseを拒否することによって）を決定するのはあなた次第です。</p>
 
-<p>For instance, to log the user out for both 401 and 403 codes:</p>
+<p>例えば、401および403の両方のコードでユーザーをログアウトさせるには、次のようにします。</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/authProvider.js</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/authProvider.js</span>
 <span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
     <span class="na">login</span><span class="p">:</span> <span class="p">({</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
     <span class="na">checkError</span><span class="p">:</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -727,16 +728,16 @@
             <span class="nx">localStorage</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">auth</span><span class="dl">'</span><span class="p">);</span>
             <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">();</span>
         <span class="p">}</span>
-        <span class="c1">// other error code (404, 500, etc): no need to log out</span>
+        <span class="c1">// 他のエラーコード（404, 500など）：ログアウトの必要はなし</span>
         <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
     <span class="p">},</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>When <code class="language-plaintext highlighter-rouge">authProvider.checkError()</code> returns a rejected Promise, react-admin redirects to the <code class="language-plaintext highlighter-rouge">/login</code> page, or to the <code class="language-plaintext highlighter-rouge">error.redirectTo</code> url. That means you can override the default redirection as follows:</p>
+<p><code class="language-plaintext highlighter-rouge">authProvider.checkError()</code>が拒否されたPromiseを返すと、react-adminは<code class="language-plaintext highlighter-rouge">/login</code>ページまたは<code class="language-plaintext highlighter-rouge">error.redirectTo</code> URLにリダイレクトします。これにより、デフォルトのリダイレクトを次のように上書きできます。</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/authProvider.js</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/authProvider.js</span>
 <span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
     <span class="na">login</span><span class="p">:</span> <span class="p">({</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
     <span class="na">checkError</span><span class="p">:</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -745,16 +746,16 @@
             <span class="nx">localStorage</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">auth</span><span class="dl">'</span><span class="p">);</span>
             <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">({</span> <span class="na">redirectTo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/credentials-required</span><span class="dl">'</span> <span class="p">});</span>
         <span class="p">}</span>
-        <span class="c1">// other error code (404, 500, etc): no need to log out</span>
+        <span class="c1">// 他のエラーコード（404, 500など）：ログアウトの必要はなし</span>
         <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
     <span class="p">},</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>It’s possible to not log the user out, and to instead redirect them. You can do this by passing <code class="language-plaintext highlighter-rouge">error.logoutUser = false</code> to the <code class="language-plaintext highlighter-rouge">Promise.reject</code> along with an <code class="language-plaintext highlighter-rouge">error.redirectTo</code> url.</p>
+<p>ユーザーをログアウトさせずにリダイレクトすることも可能です。これには、<code class="language-plaintext highlighter-rouge">Promise.reject</code>に<code class="language-plaintext highlighter-rouge">error.redirectTo</code> URLとともに<code class="language-plaintext highlighter-rouge">error.logoutUser = false</code>を渡します。</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/authProvider.js</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/authProvider.js</span>
 <span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
     <span class="na">login</span><span class="p">:</span> <span class="p">({</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
     <span class="na">checkError</span><span class="p">:</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -762,16 +763,16 @@
         <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">401</span> <span class="o">||</span> <span class="nx">status</span> <span class="o">===</span> <span class="mi">403</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">({</span> <span class="na">redirectTo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/unauthorized</span><span class="dl">'</span><span class="p">,</span> <span class="na">logoutUser</span><span class="p">:</span> <span class="kc">false</span> <span class="p">});</span>
         <span class="p">}</span>
-        <span class="c1">// other error code (404, 500, etc): no need to log out</span>
+        <span class="c1">// 他のエラーコード（404, 500など）：ログアウトの必要はなし</span>
         <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
     <span class="p">},</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>When <code class="language-plaintext highlighter-rouge">authProvider.checkError()</code> returns a rejected Promise, react-admin displays a notification to the end user, unless the <code class="language-plaintext highlighter-rouge">error.message</code> is <code class="language-plaintext highlighter-rouge">false</code>. That means you can disable or customize the notification on error as follows:</p>
+<p><code class="language-plaintext highlighter-rouge">authProvider.checkError()</code>が拒否されたPromiseを返すと、react-adminはエンドユーザーに通知を表示します。ただし、<code class="language-plaintext highlighter-rouge">error.message</code>が<code class="language-plaintext highlighter-rouge">false</code>の場合は表示しません。これにより、次のようにエラー時の通知を無効化またはカスタマイズできます。</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/authProvider.js</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/authProvider.js</span>
 <span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
     <span class="na">login</span><span class="p">:</span> <span class="p">({</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
     <span class="na">checkError</span><span class="p">:</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -779,9 +780,9 @@
         <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">401</span> <span class="o">||</span> <span class="nx">status</span> <span class="o">===</span> <span class="mi">403</span><span class="p">)</span> <span class="p">{</span>
             <span class="nx">localStorage</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">auth</span><span class="dl">'</span><span class="p">);</span>
             <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">({</span> <span class="na">message</span><span class="p">:</span> <span class="kc">false</span> <span class="p">});</span>
-            <span class="c1">//return Promise.reject({ message: 'Unauthorized user!' });</span>
+            <span class="c1">// return Promise.reject({ message: 'Unauthorized user!' });</span>
         <span class="p">}</span>
-        <span class="c1">// other error code (404, 500, etc): no need to log out</span>
+        <span class="c1">// 他のエラーコード（404, 500など）：ログアウトの必要はなし</span>
         <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
     <span class="p">},</span>
     <span class="c1">// ...</span>
@@ -790,13 +791,13 @@
 
 <h3 id="checkauth"><code class="language-plaintext highlighter-rouge">checkAuth</code></h3>
 
-<p>Redirecting to the login page whenever a REST response uses a 401 status code is usually not enough. React-admin keeps data on the client side, and could briefly display stale data while contacting the server - even after the credentials are no longer valid.</p>
+<p>RESTレスポンスが401ステータスコードを使用するたびにログインページにリダイレクトするだけでは通常十分ではありません。react-adminはクライアント側でデータを保持し、サーバーと連絡を取る際に資格情報が無効になっても古いデータを一時的に表示することがあります。</p>
 
-<p>Fortunately, each time the user navigates to a list, edit, create or show page, react-admin calls the <code class="language-plaintext highlighter-rouge">authProvider.checkAuth()</code> method. If this method returns a rejected Promise, react-admin calls <code class="language-plaintext highlighter-rouge">authProvider.logout()</code> and redirects the user to the login page. So it’s the ideal place to make sure the credentials are still valid.</p>
+<p>幸いなことに、ユーザーがリスト、編集、作成、または表示ページに移動するたびに、react-adminは<code class="language-plaintext highlighter-rouge">authProvider.checkAuth()</code>メソッドを呼び出します。このメソッドが拒否されたPromiseを返すと、react-adminは<code class="language-plaintext highlighter-rouge">authProvider.logout()</code>を呼び出し、ユーザーをログインページにリダイレクトします。したがって、資格情報がまだ有効であることを確認するための理想的な場所です。</p>
 
-<p>For instance, to check for the existence of the authentication data in local storage:</p>
+<p>例えば、ローカルストレージに認証データが存在するかどうかを確認するには次のようにします。</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/authProvider.js</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/authProvider.js</span>
 <span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
     <span class="na">login</span><span class="p">:</span> <span class="p">({</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
     <span class="na">checkError</span><span class="p">:</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
@@ -807,9 +808,9 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>If the promise is rejected, react-admin redirects by default to the <code class="language-plaintext highlighter-rouge">/login</code> page. You can override where to redirect the user in <code class="language-plaintext highlighter-rouge">checkAuth()</code>, by rejecting an object with a <code class="language-plaintext highlighter-rouge">redirectTo</code> property:</p>
+<p>Promiseが拒否された場合、react-adminはデフォルトで<code class="language-plaintext highlighter-rouge">/login</code>ページにリダイレクトします。<code class="language-plaintext highlighter-rouge">checkAuth()</code>でユーザーのリダイレクト先を上書きするには、リダイレクト先を持つオブジェクトを拒否します。</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/authProvider.js</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/authProvider.js</span>
 <span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
     <span class="na">login</span><span class="p">:</span> <span class="p">({</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
     <span class="na">checkError</span><span class="p">:</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
@@ -820,24 +821,24 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: If both <code class="language-plaintext highlighter-rouge">authProvider.checkAuth()</code> and <code class="language-plaintext highlighter-rouge">authProvider.logout()</code> return a redirect URL, the one from <code class="language-plaintext highlighter-rouge">authProvider.checkAuth()</code> takes precedence.</p>
+<p><strong>Tip</strong>: <code class="language-plaintext highlighter-rouge">authProvider.checkAuth()</code>と<code class="language-plaintext highlighter-rouge">authProvider.logout()</code>の両方がリダイレクトURLを返す場合、<code class="language-plaintext highlighter-rouge">authProvider.checkAuth()</code>のリダイレクト先が優先されます。</p>
 
-<p>If the promise is rejected, react-admin displays a notification to the end user. You can customize this message by rejecting an error with a <code class="language-plaintext highlighter-rouge">message</code> property:</p>
+<p>Promiseが拒否された場合、react-adminはエンドユーザーに通知を表示します。このメッセージをカスタマイズするには、<code class="language-plaintext highlighter-rouge">message</code>プロパティを持つエラーを拒否します。</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/authProvider.js</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/authProvider.js</span>
 <span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
     <span class="na">login</span><span class="p">:</span> <span class="p">({</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
     <span class="na">checkError</span><span class="p">:</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
     <span class="na">checkAuth</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">auth</span><span class="dl">'</span><span class="p">)</span>
         <span class="p">?</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">()</span>
-        <span class="p">:</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">({</span> <span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">login.required</span><span class="dl">'</span> <span class="p">}),</span> <span class="c1">// react-admin passes the error message to the translation layer</span>
+        <span class="p">:</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">({</span> <span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">login.required</span><span class="dl">'</span> <span class="p">}),</span> <span class="c1">// react-adminはエラーメッセージを翻訳レイヤーに渡します</span>
     <span class="c1">// ...</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>You can also disable this notification completely by rejecting an error with a <code class="language-plaintext highlighter-rouge">message</code> with a <code class="language-plaintext highlighter-rouge">false</code> value:</p>
+<p>この通知を完全に無効にすることも可能です。そのためには、<code class="language-plaintext highlighter-rouge">message</code>プロパティに<code class="language-plaintext highlighter-rouge">false</code>を持つエラーを拒否します。</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/authProvider.js</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/authProvider.js</span>
 <span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
     <span class="na">login</span><span class="p">:</span> <span class="p">({</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
     <span class="na">checkError</span><span class="p">:</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
@@ -850,11 +851,11 @@
 
 <h3 id="logout"><code class="language-plaintext highlighter-rouge">logout</code></h3>
 
-<p>If you enable authentication, react-admin adds a logout button in the user menu in the top bar (or in the sliding menu on mobile). When the user clicks on the logout button, this calls the <code class="language-plaintext highlighter-rouge">authProvider.logout()</code> method, and removes potentially sensitive data sored in <a href="./Store.md">the react-admin Store</a>. Then the user gets redirected to the login page. The two previous sections also illustrated that react-admin can call <code class="language-plaintext highlighter-rouge">authProvider.logout()</code> itself, when the API returns a 403 error or when the local credentials expire.</p>
+<p>認証を有効にすると、react-adminはトップバーのユーザーメニュー（またはモバイルではスライドメニュー）にログアウトボタンを追加します。ユーザーがログアウトボタンをクリックすると、<code class="language-plaintext highlighter-rouge">authProvider.logout()</code>メソッドが呼び出され、<a href="./Store.md">react-admin Store</a>に保存されている可能性のある機密データが削除されます。その後、ユーザーはログインページにリダイレクトされます。前の2つのセクションでも示したように、react-adminはAPIが403エラーを返したときやローカルの資格情報が期限切れになったときに<code class="language-plaintext highlighter-rouge">authProvider.logout()</code>を呼び出すことがあります。</p>
 
-<p>It’s the responsibility of the <code class="language-plaintext highlighter-rouge">authProvider.logout()</code> method to clean up the current authentication data. For instance, if the authentication was a token stored in local storage, here is the code to remove it:</p>
+<p><code class="language-plaintext highlighter-rouge">authProvider.logout()</code>メソッドは、現在の認証データをクリーンアップする責任を負います。例えば、認証がローカルストレージに保存されているトークンであった場合、これを削除するコードは次のとおりです。</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/authProvider.js</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/authProvider.js</span>
 <span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
     <span class="na">login</span><span class="p">:</span> <span class="p">({</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
     <span class="na">checkError</span><span class="p">:</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
@@ -866,18 +867,13 @@
     <span class="c1">// ...</span>
 <span class="p">};</span>
 </code></pre></div></div>
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/logout.webm" type="video/webm" /> <source src="./img/logout.mp4" type="video/mp4" /> お使いのブラウザはvideoタグをサポートしていません。 </video>
 
-<video controls="" autoplay="" playsinline="" muted="" loop="">
-  <source src="./img/logout.webm" type="video/webm" />
-  <source src="./img/logout.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<p><code class="language-plaintext highlighter-rouge">authProvider.logout()</code>メソッドは、ログアウト後に認証バックエンドにユーザー資格情報が無効になったことを通知するための良い場所でもあります。</p>
 
-<p>The <code class="language-plaintext highlighter-rouge">authProvider.logout()</code> method is also a good place to notify the authentication backend that the user credentials are no longer valid after logout.</p>
+<p>ログアウト後、react-adminは<code class="language-plaintext highlighter-rouge">authProvider.logout()</code>によって返される文字列にユーザーをリダイレクトします - またはメソッドが何も返さない場合は<code class="language-plaintext highlighter-rouge">/login</code> URLにリダイレクトします。ログアウト後のリダイレクトURLをカスタマイズするには、ルート文字列を返すか、ログアウト後のリダイレクトを無効にするには<code class="language-plaintext highlighter-rouge">false</code>を返します。</p>
 
-<p>After logout, react-admin redirects the user to the string returned by <code class="language-plaintext highlighter-rouge">authProvider.logout()</code> - or to the <code class="language-plaintext highlighter-rouge">/login</code> url if the method returns nothing. You can customize the redirection url by returning a route string, or <code class="language-plaintext highlighter-rouge">false</code> to disable redirection after logout.</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/authProvider.js</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/authProvider.js</span>
 <span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
     <span class="na">login</span><span class="p">:</span> <span class="p">({</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
     <span class="na">checkError</span><span class="p">:</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
@@ -892,9 +888,9 @@
 
 <h3 id="getidentity"><code class="language-plaintext highlighter-rouge">getIdentity</code></h3>
 
-<p>React-admin can display the current user name and avatar on the top right side of the screen. To enable this feature, implement the <code class="language-plaintext highlighter-rouge">authProvider.getIdentity()</code> method:</p>
+<p>react-adminは画面右上に現在のユーザー名とアバターを表示できます。この機能を有効にするには、<code class="language-plaintext highlighter-rouge">authProvider.getIdentity()</code>メソッドを実装します。</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/authProvider.js</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/authProvider.js</span>
 <span class="kd">const</span> <span class="nx">authProvider</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">login</span><span class="p">:</span> <span class="p">({</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
     <span class="na">checkError</span><span class="p">:</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
@@ -914,11 +910,11 @@
 <span class="k">export</span> <span class="k">default</span> <span class="nx">authProvider</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>React-admin uses the <code class="language-plaintext highlighter-rouge">fullName</code> and the <code class="language-plaintext highlighter-rouge">avatar</code> (an image source, or a data-uri) in the App Bar:</p>
+<p>react-adminは、App Barで<code class="language-plaintext highlighter-rouge">fullName</code>と<code class="language-plaintext highlighter-rouge">avatar</code>（画像ソースまたはdata-uri）を使用します。</p>
 
-<p><img src="./img/identity.png" alt="User identity" /></p>
+<p><img src="./img/identity.png" alt="ユーザーのアイデンティティ" /></p>
 
-<p><strong>Tip</strong>: You can use the <code class="language-plaintext highlighter-rouge">id</code> field to identify the current user in your code, by calling the <code class="language-plaintext highlighter-rouge">useGetIdentity</code> hook:</p>
+<p><strong>Tip</strong>: <code class="language-plaintext highlighter-rouge">useGetIdentity</code>フックを呼び出すことで、コード内で現在のユーザーを識別するために<code class="language-plaintext highlighter-rouge">id</code>フィールドを使用できます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useGetIdentity</span><span class="p">,</span> <span class="nx">useGetOne</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -927,10 +923,10 @@
     <span class="kd">const</span> <span class="p">{</span> <span class="nx">identity</span><span class="p">,</span> <span class="na">isLoading</span><span class="p">:</span> <span class="nx">identityLoading</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useGetIdentity</span><span class="p">();</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">postLoading</span> <span class="o">||</span> <span class="nx">identityLoading</span><span class="p">)</span> <span class="k">return</span> <span class="p">&lt;&gt;</span>Loading...<span class="p">&lt;/&gt;;</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">post</span><span class="p">.</span><span class="nx">lockedBy</span> <span class="o">||</span> <span class="nx">post</span><span class="p">.</span><span class="nx">lockedBy</span> <span class="o">===</span> <span class="nx">identity</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// post isn't locked, or is locked by me</span>
+        <span class="c1">// ポストはロックされていないか、自分によってロックされている</span>
         <span class="k">return</span> <span class="p">&lt;</span><span class="nc">PostEdit</span> <span class="na">post</span><span class="p">=</span><span class="si">{</span><span class="nx">post</span><span class="si">}</span> <span class="p">/&gt;</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="c1">// post is locked by someone else and cannot be edited</span>
+        <span class="c1">// ポストは他の誰かによってロックされており、編集できない</span>
         <span class="k">return</span> <span class="p">&lt;</span><span class="nc">PostShow</span> <span class="na">post</span><span class="p">=</span><span class="si">{</span><span class="nx">post</span><span class="si">}</span> <span class="p">/&gt;</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -938,222 +934,148 @@
 
 <h3 id="getpermissions"><code class="language-plaintext highlighter-rouge">getPermissions</code></h3>
 
-<p>This method should return the user permissions. It can be any format you want - a simple string (e.g. <code class="language-plaintext highlighter-rouge">'editor'</code>), an array of strings (e.g. <code class="language-plaintext highlighter-rouge">['editor', 'admin']</code>), or a complex object (e.g. <code class="language-plaintext highlighter-rouge">{ posts: 'editor', comments: 'moderator', users: 'admin' }</code>).</p>
+<p>このメソッドはユーザーの権限を返すべきです。形式は任意で構いません - 単純な文字列（例：<code class="language-plaintext highlighter-rouge">'editor'</code>）、文字列の配列（例：<code class="language-plaintext highlighter-rouge">['editor', 'admin']</code>）、または複雑なオブジェクト（例：<code class="language-plaintext highlighter-rouge">{ posts: 'editor', comments: 'moderator', users: 'admin' }</code>）。</p>
 
-<p>React-admin doesn’t use permissions by default, but it provides <a href="./usePermissions.md">the <code class="language-plaintext highlighter-rouge">usePermissions</code> hook</a> to retrieve the permissions of the current user. This lets you add the permissions logic that fits your need in your components.</p>
+<p>react-adminはデフォルトでは権限を使用しませんが、現在のユーザーの権限を取得するための <a href="./usePermissions.md"><code class="language-plaintext highlighter-rouge">usePermissions</code>フック</a>を提供します。これにより、コンポーネント内にニーズに合った権限ロジックを追加できます。</p>
 
-<p><a href="./AuthRBAC.md">The Role-Based Access Control (RBAC) module</a> allows fined-grained permissions in react-admin apps, and specifies a custom return format for <code class="language-plaintext highlighter-rouge">authProvider.getPermissions()</code>. Check <a href="./AuthRBAC.md#authprovider-methods">the RBAC documentation</a> for more information.</p>
+<p><a href="./AuthRBAC.md">役割ベースのアクセス制御（RBAC）モジュール</a>は、react-adminアプリで詳細な権限を可能にし、<code class="language-plaintext highlighter-rouge">authProvider.getPermissions()</code>のカスタムリターン形式を指定します。詳細については<a href="./AuthRBAC.md#authprovider-methods">RBACドキュメント</a>を参照してください。</p>
 
 <h3 id="handlecallback"><code class="language-plaintext highlighter-rouge">handleCallback</code></h3>
 
-<p>This method is used when integrating a third-party authentication provider such as <a href="https://auth0.com/">Auth0</a>. React-admin provides a route at the <code class="language-plaintext highlighter-rouge">/auth-callback</code> path, to be used as the callback URL in the authentication service. After logging in using the authentication service, users will be redirected to this route. The <code class="language-plaintext highlighter-rouge">/auth-callback</code> route calls the <code class="language-plaintext highlighter-rouge">authProvider.handleCallback</code> method on mount.</p>
+<p>このメソッドは、<a href="https://auth0.com/">Auth0</a>などのサードパーティの認証プロバイダーを統合する際に使用されます。react-adminは認証サービスのコールバックURLとして使用される<code class="language-plaintext highlighter-rouge">/auth-callback</code>パスにルートを提供します。認証サービスを使用してログインした後、ユーザーはこのルートにリダイレクトされます。<code class="language-plaintext highlighter-rouge">/auth-callback</code>ルートはマウント時に<code class="language-plaintext highlighter-rouge">authProvider.handleCallback</code>メソッドを呼び出します。</p>
 
-<p>So <code class="language-plaintext highlighter-rouge">handleCallback</code> lets you process query parameters passed by the third-party authentication service, e.g. to retrieve an authentication token.</p>
+<p>したがって、<code class="language-plaintext highlighter-rouge">handleCallback</code>はサードパーティの認証サービスによって渡されたクエリパラメータを処理し、例として認証トークンを取得します。</p>
 
-<p>Here’s an example using Auth0:</p>
+<p>ここでは、Auth0を使用した例を示します。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">PreviousLocationStorageKey</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Auth0Client</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./Auth0Client</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="k">export</span> <span class="kd">const</span> <span class="nx">authProvider</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="k">async</span> <span class="nx">login</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* Nothing to do here, this function will never be called */</span> <span class="p">},</span>
+    <span class="k">async</span> <span class="nx">login</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ここでは何もする必要はありません。この関数は呼び出されることはありません */</span> <span class="p">},</span>
     <span class="k">async</span> <span class="nx">checkAuth</span><span class="p">()</span> <span class="p">{</span>
         <span class="kd">const</span> <span class="nx">isAuthenticated</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">client</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">();</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">isAuthenticated</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">return</span><span class="p">;</span>
         <span class="p">}</span>
-        <span class="c1">// not authenticated: save the location that the user tried to access</span>
+        <span class="c1">// 認証されていない：ユーザーがアクセスしようとした場所を保存</span>
         <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="nx">PreviousLocationStorageKey</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">);</span>
-        <span class="c1">// then redirect the user to the Auth0 service</span>
+        <span class="c1">// その後、ユーザーをAuth0サービスにリダイレクト</span>
         <span class="nx">client</span><span class="p">.</span><span class="nx">loginWithRedirect</span><span class="p">({</span>
             <span class="na">authorizationParams</span><span class="p">:</span> <span class="p">{</span>
-                <span class="c1">// after login, Auth0 will redirect users back to this page</span>
+                <span class="c1">// ログイン後、Auth0はユーザーをこのページにリダイレクトします</span>
                 <span class="na">redirect_uri</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span><span class="p">}</span><span class="s2">/auth-callback`</span><span class="p">,</span>
             <span class="p">},</span>
         <span class="p">});</span>
     <span class="p">},</span>
-    <span class="c1">// A user logged in successfully on the Auth0 service</span>
-    <span class="c1">// and was redirected back to the /auth-callback route on the app</span>
+    <span class="c1">// ユーザーがAuth0サービスで正常にログインし、</span>
+    <span class="c1">// アプリの/auth-callbackルートにリダイレクトされた</span>
     <span class="k">async</span> <span class="nx">handleCallback</span><span class="p">()</span> <span class="p">{</span>
         <span class="kd">const</span> <span class="nx">query</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">search</span><span class="p">;</span>
         <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">query</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">code=</span><span class="dl">'</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">query</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">state=</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to handle login callback.</span><span class="dl">'</span><span class="p">);</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">ログインコールバックの処理に失敗しました。</span><span class="dl">'</span><span class="p">);</span>
         <span class="p">}</span>
-        <span class="c1">// If we did receive the Auth0 parameters,</span>
-        <span class="c1">// get an access token based on the query paramaters</span>
+        <span class="c1">// Auth0パラメータを受け取った場合、</span>
+        <span class="c1">// クエリパラメータに基づいてアクセストークンを取得</span>
         <span class="k">await</span> <span class="nx">Auth0Client</span><span class="p">.</span><span class="nx">handleRedirectCallback</span><span class="p">();</span>
     <span class="p">},</span>
     <span class="p">...</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Once <code class="language-plaintext highlighter-rouge">handleCallback</code> returns a resolved Promise, react-admin redirects the user to the home page, or to the location found in <code class="language-plaintext highlighter-rouge">localStorage.getItem(PreviousLocationStorageKey)</code>. In the above example, <code class="language-plaintext highlighter-rouge">authProvider.checkAuth()</code> sets this location to the page the user was trying to access.</p>
+<p><code class="language-plaintext highlighter-rouge">handleCallback</code>が解決されたPromiseを返すと、react-adminはユーザーをホームページまたは<code class="language-plaintext highlighter-rouge">localStorage.getItem(PreviousLocationStorageKey)</code>に格納されている場所にリダイレクトします。上記の例では、<code class="language-plaintext highlighter-rouge">authProvider.checkAuth()</code>がユーザーがアクセスしようとしていたページをこの場所に設定します。</p>
 
-<p>You can override this behavior by returning an object with a <code class="language-plaintext highlighter-rouge">redirectTo</code> property, as follows:</p>
+<p>この動作を上書きするには、<code class="language-plaintext highlighter-rouge">redirectTo</code>プロパティを持つオブジェクトを返します。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="nx">handleCallback</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">query</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">code=</span><span class="dl">'</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">query</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">state=</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to handle login callback.</span><span class="dl">'</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">ログインコールバックの処理に失敗しました。</span><span class="dl">'</span><span class="p">);</span>
     <span class="p">}</span>
-    <span class="c1">// If we did receive the Auth0 parameters,</span>
-    <span class="c1">// get an access token based on the query paramaters</span>
+    <span class="c1">// Auth0パラメータを受け取った場合、</span>
+    <span class="c1">// クエリパラメータに基づいてアクセストークンを取得</span>
     <span class="k">await</span> <span class="nx">Auth0Client</span><span class="p">.</span><span class="nx">handleRedirectCallback</span><span class="p">();</span>
     <span class="k">return</span> <span class="p">{</span> <span class="na">redirectTo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/posts</span><span class="dl">'</span> <span class="p">};</span>
 <span class="p">},</span>
 </code></pre></div></div>
 
-<h2 id="request-format">Request Format</h2>
+<h2 id="リクエスト形式">リクエスト形式</h2>
 
-<p>React-admin calls the <code class="language-plaintext highlighter-rouge">authProvider</code> methods with the following params:</p>
+<p>react-adminは以下のパラメータで<code class="language-plaintext highlighter-rouge">authProvider</code>メソッドを呼び出します：</p>
 
 <table>
   <thead>
     <tr>
-      <th>Method</th>
-      <th>Usage</th>
-      <th>Parameters format</th>
+      <th>メソッド</th>
+      <th>使用例</th>
+      <th>パラメータ形式</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">login</code></td>
-      <td>Log a user in</td>
-      <td><code class="language-plaintext highlighter-rouge">Object</code> whatever fields the login form contains</td>
+      <td>ユーザーのログイン</td>
+      <td><code class="language-plaintext highlighter-rouge">Object</code> ログインフォームに含まれる任意のフィールド</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">checkError</code></td>
-      <td>Check if a dataProvider error is an authentication error</td>
-      <td><code class="language-plaintext highlighter-rouge">{ message: string, status: number, body: Object }</code> the error returned by the <code class="language-plaintext highlighter-rouge">dataProvider</code></td>
+      <td><code class="language-plaintext highlighter-rouge">dataProvider</code>エラーが認証エラーであるか確認</td>
+      <td><code class="language-plaintext highlighter-rouge">{ message: string, status: number, body: Object }</code> <code class="language-plaintext highlighter-rouge">dataProvider</code>が返すエラー</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">checkAuth</code></td>
-      <td>Check credentials before moving to a new route</td>
-      <td><code class="language-plaintext highlighter-rouge">Object</code> whatever params passed to <code class="language-plaintext highlighter-rouge">useCheckAuth()</code> - empty for react-admin default routes</td>
+      <td>新しいルートに移動する前に資格情報を確認</td>
+      <td><code class="language-plaintext highlighter-rouge">Object</code> <code class="language-plaintext highlighter-rouge">useCheckAuth()</code>に渡される任意のパラメータ - react-adminデフォルトルートの場合は空</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">logout</code></td>
-      <td>Log a user out</td>
+      <td>ユーザーのログアウト</td>
       <td> </td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">getIdentity</code></td>
-      <td>Get the current user identity</td>
+      <td>現在のユーザーのアイデンティティを取得</td>
       <td> </td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">handleCallback</code></td>
-      <td>Validate users after third party authentication service redirection</td>
+      <td>サードパーティ認証サービスのリダイレクト後にユーザーを検証</td>
       <td> </td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">getPermissions</code></td>
-      <td>Get the current user credentials</td>
-      <td><code class="language-plaintext highlighter-rouge">Object</code> whatever params passed to <code class="language-plaintext highlighter-rouge">usePermissions()</code> - empty for react-admin default routes</td>
+      <td>現在のユーザーの資格情報を取得</td>
+      <td><code class="language-plaintext highlighter-rouge">Object</code> <code class="language-plaintext highlighter-rouge">usePermissions()</code>に渡される任意のパラメータ - react-adminデフォルトルートの場合は空</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="response-format">Response Format</h2>
+<h2 id="レスポンス形式">レスポンス形式</h2>
 
-<p><code class="language-plaintext highlighter-rouge">authProvider</code> methods must return a Promise. In case of success, the Promise should resolve to the following value:</p>
+<p><code class="language-plaintext highlighter-rouge">authProvider</code>メソッドはPromiseを返さなければなりません。成功の場合、Promiseは次の値を返すべきです：</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Method</th>
-      <th>Resolve if</th>
-      <th>Response format</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">login</code></td>
-      <td>Login credentials were accepted</td>
-      <td><code class="language-plaintext highlighter-rouge">void | { redirectTo?: string | boolean  }</code> route to redirect to after login</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">checkError</code></td>
-      <td>Error is not an auth error</td>
-      <td><code class="language-plaintext highlighter-rouge">void</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">checkAuth</code></td>
-      <td>User is authenticated</td>
-      <td><code class="language-plaintext highlighter-rouge">void</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">logout</code></td>
-      <td>Auth backend acknowledged logout</td>
-      <td><code class="language-plaintext highlighter-rouge">string | false | void</code> route to redirect to after logout, defaults to <code class="language-plaintext highlighter-rouge">/login</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">getIdentity</code></td>
-      <td>Auth backend returned identity</td>
-      <td><code class="language-plaintext highlighter-rouge">{ id: string | number, fullName?: string, avatar?: string }</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">handleCallback</code></td>
-      <td>User is authenticated</td>
-      <td><code class="language-plaintext highlighter-rouge">void | { redirectTo?: string | boolean  }</code> route to redirect to after login</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">getPermissions</code></td>
-      <td>Auth backend returned permissions</td>
-      <td><code class="language-plaintext highlighter-rouge">Object | Array</code> free format - the response will be returned when <code class="language-plaintext highlighter-rouge">usePermissions()</code> is called</td>
-    </tr>
-  </tbody>
-</table>
+<p>|メソッド|解決される条件|レスポンス形式|
+|—|—|—|
+|<code class="language-plaintext highlighter-rouge">login</code>|ログイン資格情報が受け入れられた|`void|
+|<code class="language-plaintext highlighter-rouge">checkError</code>|エラーが認証エラーでない|<code class="language-plaintext highlighter-rouge">void</code>|
+|<code class="language-plaintext highlighter-rouge">checkAuth</code>|ユーザーが認証されている|<code class="language-plaintext highlighter-rouge">void</code>|
+|<code class="language-plaintext highlighter-rouge">logout</code>|認証バックエンドがログアウトを確認|`string|
+|<code class="language-plaintext highlighter-rouge">getIdentity</code>|認証バックエンドがアイデンティティを返した|`{ id: string|
+|<code class="language-plaintext highlighter-rouge">handleCallback</code>|ユーザーが認証された|`void|
+|<code class="language-plaintext highlighter-rouge">getPermissions</code>|認証バックエンドが権限を返した|`Object|</p>
 
-<h2 id="error-format">Error Format</h2>
+<h2 id="エラー形式">エラー形式</h2>
 
-<p>When the auth backend returns an error, the Auth Provider should return a rejected Promise, with the following value:</p>
+<p>認証バックエンドがエラーを返す場合、Authプロバイダーは以下の値で拒否されたPromiseを返すべきです：</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Method</th>
-      <th>Reject if</th>
-      <th>Error format</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">login</code></td>
-      <td>Login credentials weren’t accepted</td>
-      <td><code class="language-plaintext highlighter-rouge">string | { message?: string }</code> error message to display</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">checkError</code></td>
-      <td>Error is an auth error</td>
-      <td><code class="language-plaintext highlighter-rouge">void | { redirectTo?: string, message?: string | boolean  }</code> route to redirect to after logout, message to notify the user or <code class="language-plaintext highlighter-rouge">false</code> to disable notification</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">checkAuth</code></td>
-      <td>User is not authenticated</td>
-      <td><code class="language-plaintext highlighter-rouge">void | { redirectTo?: string, message?: string }</code> route to redirect to after logout, message to notify the user</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">logout</code></td>
-      <td>Auth backend failed to log the user out</td>
-      <td><code class="language-plaintext highlighter-rouge">void</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">getIdentity</code></td>
-      <td>Auth backend failed to return identity</td>
-      <td><code class="language-plaintext highlighter-rouge">Object</code> free format - returned as <code class="language-plaintext highlighter-rouge">error</code> when <code class="language-plaintext highlighter-rouge">useGetIdentity()</code> is called</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">handleCallback</code></td>
-      <td>Failed to authenticate users after redirection</td>
-      <td><code class="language-plaintext highlighter-rouge">void | { redirectTo?: string, logoutOnFailure?: boolean, message?: string }</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">getPermissions</code></td>
-      <td>Auth backend failed to return permissions</td>
-      <td><code class="language-plaintext highlighter-rouge">Object</code> free format - returned as <code class="language-plaintext highlighter-rouge">error</code> when <code class="language-plaintext highlighter-rouge">usePermissions()</code> is called. The error will be passed to <code class="language-plaintext highlighter-rouge">checkError</code></td>
-    </tr>
-  </tbody>
-</table>
+<p>|メソッド|拒否される条件|エラー形式|
+|—|—|—|
+|<code class="language-plaintext highlighter-rouge">login</code>|ログイン資格情報が受け入れられなかった|`string|
+|<code class="language-plaintext highlighter-rouge">checkError</code>|エラーが認証エラーである場合|`void|
+|<code class="language-plaintext highlighter-rouge">checkAuth</code>|ユーザーが認証されていない場合|`void|
+|<code class="language-plaintext highlighter-rouge">logout</code>|認証バックエンドがユーザーのログアウトに失敗|<code class="language-plaintext highlighter-rouge">void</code>|
+|<code class="language-plaintext highlighter-rouge">getIdentity</code>|認証バックエンドがアイデンティティを返すのに失敗|<code class="language-plaintext highlighter-rouge">Object</code> 自由形式 - <code class="language-plaintext highlighter-rouge">useGetIdentity()</code>が呼び出されたときに<code class="language-plaintext highlighter-rouge">error</code>として返される|
+|<code class="language-plaintext highlighter-rouge">handleCallback</code>|リダイレクト後にユーザーの認証に失敗|`void|
+|<code class="language-plaintext highlighter-rouge">getPermissions</code>|認証バックエンドが権限を返すのに失敗|<code class="language-plaintext highlighter-rouge">Object</code> 自由形式 - <code class="language-plaintext highlighter-rouge">usePermissions()</code>が呼び出されたときに<code class="language-plaintext highlighter-rouge">error</code>として返される。エラーは<code class="language-plaintext highlighter-rouge">checkError</code>に渡される|</p>
 
 
                         </div>

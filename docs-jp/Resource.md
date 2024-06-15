@@ -1,92 +1,92 @@
 ---
 layout: default
-title: "The Resource Component"
+title: "リソースコンポーネント"
 ---
 
-# The `<Resource>` component
+# `<Resource>`コンポーネント
 
-`<Resource>` components define the CRUD routes of a react-admin application. 
+`<Resource>`コンポーネントは、react-adminアプリケーションのCRUDルートを定義します。
 
-In react-admin terms, a *resource* is a string that refers to an entity type (like 'products', 'subscribers', or 'tags'). *Records* are objects with an `id` field, and two records of the same *resource* have the same field structure (e.g. all posts records have a title, a publication date, etc.). 
+react-adminの用語では、*resource*はエンティティタイプ（例えば「products」、「subscribers」、「tags」など）を指す文字列です。*records*は`id`フィールドを持つオブジェクトで、同じ*resource*に属する2つのrecordは同じフィールド構造を持ちます（例えば、全てのpostレコードはタイトル、公開日などを持つ）。
 
-A `<Resource>` component has 3 responsibilities:
+`<Resource>`コンポーネントには3つの責任があります：
 
-- It defines the CRUD routes of a given resource (to display a list of records, the details of a record, or to create a new one).
-- It creates a context that lets every descendant component know the current resource name (this context is called `ResourceContext`).
-- It stores the resource definition (its name, icon, and label) inside a shared context (this context is called `ResourceDefinitionContext`).
+- 指定されたリソースのCRUDルートを定義します（レコードのリストを表示、レコードの詳細を表示、新しいレコードを作成）。
+- すべての子孫コンポーネントが現在のリソース名を知ることができるコンテキストを作成します（このコンテキストは`ResourceContext`と呼ばれます）。
+- リソース定義（名前、アイコン、ラベル）を共有コンテキストに保存します（このコンテキストは`ResourceDefinitionContext`と呼ばれます）。
 
-`<Resource>` components can only be used as children of [the `<Admin>` component](./Admin.md).
+`<Resource>`コンポーネントは[<Admin>コンポーネント](./Admin.md)の子としてのみ使用できます。
 
-## Usage
+## 使用方法
 
-For instance, the following admin app offers an interface to the resources exposed by the JSONPlaceholder API ([posts](https://jsonplaceholder.typicode.com/posts), [users](https://jsonplaceholder.typicode.com/users), [comments](https://jsonplaceholder.typicode.com/comments), and [tags](https://jsonplaceholder.typicode.com/tags)):
+例えば、以下のadminアプリケーションはJSONPlaceholder APIが提供するリソース（[posts](https://jsonplaceholder.typicode.com/posts)、[users](https://jsonplaceholder.typicode.com/users)、[comments](https://jsonplaceholder.typicode.com/comments)、および[tags](https://jsonplaceholder.typicode.com/tags)）に対するインターフェースを提供します：
 
 ```jsx
-import * as React from "react";
-import { Admin, Resource } from 'react-admin';
-import jsonServerProvider from 'ra-data-json-server';
+    import * as React from "react";
+    import { Admin, Resource } from 'react-admin';
+    import jsonServerProvider from 'ra-data-json-server';
 
-import { PostList, PostCreate, PostEdit, PostShow, PostIcon } from './posts';
-import { UserList } from './posts';
-import { CommentList, CommentEdit, CommentCreate, CommentIcon } from './comments';
+    import { PostList, PostCreate, PostEdit, PostShow, PostIcon } from './posts';
+    import { UserList } from './posts';
+    import { CommentList, CommentEdit, CommentCreate, CommentIcon } from './comments';
 
-const App = () => (
-    <Admin dataProvider={jsonServerProvider('https://jsonplaceholder.typicode.com')}>
-        {/* complete CRUD pages for posts */}
-        <Resource name="posts" list={PostList} create={PostCreate} edit={PostEdit} show={PostShow} />
-        {/* read-only user list */}
-        <Resource name="users" list={UserList} />
-        {/* no show page for the comments resource */}
-        <Resource name="comments" list={CommentList} create={CommentCreate} edit={CommentEdit} icon={CommentIcon} />
-    </Admin>
-);
+    const App = () => (
+        <Admin dataProvider={jsonServerProvider('https://jsonplaceholder.typicode.com')}>
+            {/* postsの完全なCRUDページ */}
+            <Resource name="posts" list={PostList} create={PostCreate} edit={PostEdit} show={PostShow} />
+            {/* 読み取り専用のuserリスト */}
+            <Resource name="users" list={UserList} />
+            {/* commentsリソースのshowページはなし */}
+            <Resource name="comments" list={CommentList} create={CommentCreate} edit={CommentEdit} icon={CommentIcon} />
+        </Admin>
+    );
 ```
 
-The routes call the following `dataProvider` methods:
+これらのルートは以下の`dataProvider`メソッドを呼び出します：
 
-* `list` calls `getList()` on mount
-* `show` calls `getOne()` on mount
-* `edit` calls `getOne()` on mount, and `update()` or `delete()` on submission
-* `create` calls `create()` on submission
+* `list`はマウント時に`getList()`を呼び出します
+* `show`はマウント時に`getOne()`を呼び出します
+* `edit`はマウント時に`getOne()`を呼び出し、送信時に`update()`または`delete()`を呼び出します
+* `create`は送信時に`create()`を呼び出します
 
-**Tip**: Which API endpoint does a resource rely on? The `<Resource>` component doesn't know this mapping - it's [the `dataProvider`'s job](./DataProviders.md) to define it.
+**ヒント**: リソースがどのAPIエンドポイントに依存しているかは、`<Resource>`コンポーネントには分かりません。それは[`dataProvider`](./DataProviders.md)の役割です。
 
 ## `name`
 
-`name` is the only required prop for a `<Resource>`. React-admin uses the `name` prop both to determine the API endpoint (passed to the `dataProvider`), and to form the URL for the resource.
+`name`は`<Resource>`に必要な唯一のpropです。React-adminは`name` propを使用してAPIエンドポイント（`dataProvider`に渡される）を決定し、リソースのURLを形成します。
 
 ```jsx
 <Resource name="posts" list={PostList} create={PostCreate} edit={PostEdit} show={PostShow} />
 ```
 
-For this resource react-admin will fetch the `https://jsonplaceholder.typicode.com/posts` endpoint for data.
+このリソースの場合、react-adminはデータを取得するために`https://jsonplaceholder.typicode.com/posts`エンドポイントにアクセスします。
 
-The routing will map the component as follows:
+ルーティングは以下のようにコンポーネントにマップされます：
 
-* `/posts/` maps to `PostList`
-* `/posts/create` maps to `PostCreate`
-* `/posts/:id` maps to `PostEdit`
-* `/posts/:id/show` maps to `PostShow`
+* `/posts/`は`PostList`にマップ
+* `/posts/create`は`PostCreate`にマップ
+* `/posts/:id`は`PostEdit`にマップ
+* `/posts/:id/show`は`PostShow`にマップ
 
-**Tip**: If you want to use a special API endpoint (e.g. 'https://jsonplaceholder.typicode.com/my-custom-posts-endpoint') without altering the URL in the react-admin application (so still use `/posts`), write the mapping from the resource `name` (`posts`) to the API endpoint (`my-custom-posts-endpoint`) in your own [`dataProvider`](./Admin.md#dataprovider).
+**ヒント**: 特殊なAPIエンドポイント（例：'[https://jsonplaceholder.typicode.com/my-custom-posts-endpoint'）を使用しつつ、react-adminアプリケーション内のURL（例：\`/posts\`）を変更しない場合、リソース\`name\`（\`posts\`）とAPIエンドポイント（\`my-custom-posts-endpoint\`）のマッピングを独自の\[\`dataProvider\`]()\](./Admin.md#dataprovider)に記述します。
 
 ## `list`, `create`, `edit`, `show`
 
-`<Resource>` allows you to define a component for each CRUD operation, using the following prop names:
+`<Resource>`は各CRUD操作のためのコンポーネントを以下のprop名で定義できます：
 
-* `list` (usually using [the `<List>` component](./List.md)) (if defined, the resource is displayed on the Menu)
-* `create` (usually using [the `<Create>` component](./Create.md))
-* `edit` (usually using [the `<Edit>` component](./Edit.md))
-* `show` (usually using [the `<Show>` component](./Show.md))
+* `list`（通常[<List>コンポーネント](./List.md)を使用）（定義されている場合、リソースはメニューに表示されます）
+* `create`（通常[<Create>コンポーネント](./Create.md)を使用）
+* `edit`（通常[<Edit>コンポーネント](./Edit.md)を使用）
+* `show`（通常[<Show>コンポーネント](./Show.md)を使用）
 
-**Tip**: Under the hood, the `<Resource>` component uses [react-router](https://reactrouter.com/web/guides/quick-start) to create several routes:
+**ヒント**: 内部的には、`<Resource>`コンポーネントは[react-router](https://reactrouter.com/web/guides/quick-start)を使用して複数のルートを作成します：
 
-* `/` maps to the `list` component
-* `/create` maps to the `create` component
-* `/:id` maps to the `edit` component
-* `/:id/show` maps to the `show` component
+* `/`は`list`コンポーネントにマップ
+* `/create`は`create`コンポーネントにマップ
+* `/:id`は`edit`コンポーネントにマップ
+* `/:id/show`は`show`コンポーネントにマップ
 
-`<Resource>` also accepts additional props:
+`<Resource>`は追加のpropsも受け付けます：
 
 * [`name`](#name)
 * [`icon`](#icon)
@@ -95,14 +95,14 @@ The routing will map the component as follows:
 
 ## `children`
 
-`<Resource>` defines the CRUD routes of your application. So `<Resource name="posts">` defines a set of routes starting with `/posts`. 
+`<Resource>`はアプリケーションのCRUDルートを定義します。したがって、`<Resource name="posts">`は`/posts`から始まる一連のルートを定義します。
 
-`<Resource>` accepts `<Route>` components as `children`, to let you define sub routes for the resource. 
+`<Resource>`は`children`として`<Route>`コンポーネントを受け入れ、リソースのサブルートを定義できます。
 
-For instance, the following code creates an `authors` resource, and adds an `/authors/:authorId/books` route displaying the books of the given author:
+例えば、以下のコードは`authors`リソースを作成し、指定された著者の本を表示する`/authors/:authorId/books`ルートを追加します：
 
 ```jsx
-// in src/App.jsx
+// src/App.jsx内
 import { Admin, Resource } from 'react-admin';
 import { Route } from 'react-router-dom';
 
@@ -118,11 +118,12 @@ export const App = () => (
 );
 ```
 
-The `BookList` component can grab the `authorId` parameter from the URL using the `useParams` hook, and pass it as a `<List filter>` parameter to display a list of books for the given author:
+`BookList`コンポーネントは、`useParams`フックを使用してURLから`authorId`パラメータを取得し、指定された著者の本のリストを表示するために`<List filter>`パラメータとして渡すことができます：
 
 {% raw %}
+
 ```jsx
-// in src/BookList.jsx
+// src/BookList.jsx内
 import { List, Datagrid, TextField } from 'react-admin';
 import { useParams } from 'react-router-dom';
 
@@ -139,14 +140,15 @@ export const BookList = () => {
     );
 };
 ```
+
 {% endraw %}
 
-**Tip**: In the above example, the `resource="books"` prop is required in `<List>` because the `ResourceContext` defaults to `authors` inside the `<Resource name="authors">`.
+**ヒント**: 上記の例では、`<List>`内で`resource="books"`プロパティが必要なのは、`<Resource name="authors">`内では`ResourceContext`が`authors`にデフォルト設定されているためです。
 
-It's your responsibility to route to the `/authors/:id/books` route, e.g. from each line of the `AuthorList` component:
+`/authors/:id/books`ルートへのルーティングは、例えば各`AuthorList`コンポーネントの行から行います：
 
 ```jsx
-// in src/AuthorList.jsx
+// src/AuthorList.jsx内
 const BooksButton = () => {
     const record = useRecordContext();
     return (
@@ -172,14 +174,14 @@ export const AuthorList = () => (
 );
 ```
 
-**Tip**: As the `/authors/:authorId/books` route is a sub-route of the `/authors` route, the active menu item will be "Authors". 
+**ヒント**: `/authors/:authorId/books`ルートは`/authors`ルートのサブルートであるため、アクティブなメニューアイテムは「Authors」となります。
 
 ## `icon`
 
-React-admin will render the `icon` prop component in the menu:
+React-adminはメニューに`icon`プロパティのコンポーネントを表示します：
 
 ```jsx
-// in src/App.js
+// src/App.js内
 import * as React from "react";
 import PostIcon from '@mui/icons-material/Book';
 import UserIcon from '@mui/icons-material/People';
@@ -198,19 +200,21 @@ const App = () => (
 
 ## `options`
 
-`options.label` allows to customize the display name of a given resource in the menu.
+`options.label`は、メニュー内の特定のリソースの表示名をカスタマイズするために使用されます。
 
 {% raw %}
+
 ```jsx
 <Resource name="v2/posts" options={{ label: 'Posts' }} list={PostList} />
 ```
+
 {% endraw %}
 
 ## `recordRepresentation`
 
-Whenever react-admin needs to render a record (e.g. in the title of an edition view, or in a `<ReferenceField>`), it uses the `recordRepresentation` to do it. By default, the representation of a record is its `id` field. But you can customize it by specifying the representation you want.
+react-adminがレコードをレンダリングする必要がある場合（例えば、編集ビューのタイトルや`<ReferenceField>`内など）、`recordRepresentation`を使用します。デフォルトでは、レコードの表現はその`id`フィールドです。しかし、希望する表現を指定してカスタマイズできます。
 
-For instance, to change the default representation of "users" records to render the full name instead of the id:
+例えば、「users」レコードのデフォルト表現をidではなくフルネームに変更する場合：
 
 ```jsx
 <Resource
@@ -220,22 +224,22 @@ For instance, to change the default representation of "users" records to render 
 />
 ```
 
-`recordRepresentation` can take 3 types of values:
+`recordRepresentation`は3種類の値を取ることができます：
 
-- a string (e.g. `'title'`) to specify the field to use as representation
-- a function (e.g. `(record) => record.title`) to specify a custom string representation
-- a React component (e.g. `<MyCustomRecordRepresentation />`). In such components, use [`useRecordContext`](./useRecordContext.md) to access the record.
+* 文字列（例：`'title'`）で、表現に使用するフィールドを指定
+* 関数（例：`(record) => record.title`）で、カスタム文字列表現を指定
+* Reactコンポーネント（例：`<MyCustomRecordRepresentation />`）。このようなコンポーネントでは[`useRecordContext`](./useRecordContext.md)を使用してレコードにアクセスします。
 
-If you want to display this record representation somewhere, you can leverage the [`useGetRecordRepresentation`](./useGetRecordRepresentation.md) hook or the [`<RecordRepresentation>`](./RecordRepresentation.md) component.
+このレコード表現をどこかで表示したい場合、[`useGetRecordRepresentation`](./useGetRecordRepresentation.md)フックや[`<RecordRepresentation>`](./RecordRepresentation.md)コンポーネントを活用できます。
 
 ## `hasCreate`, `hasEdit`, `hasShow`
 
-Some components, like [`<CreateDialog>`](./CreateDialog.md), [`<EditDialog>`](./EditDialog.md) or [`<ShowDialog>`](./ShowDialog.md) need to declare the CRUD components outside of the `<Resource>` component. In such cases, you can use the `hasCreate`, `hasEdit` and `hasShow` props to tell react-admin which CRUD components are available for a given resource.
+一部のコンポーネント（例：[`<CreateDialog>`](./CreateDialog.md)、[`<EditDialog>`](./EditDialog.md)、[`<ShowDialog>`](./ShowDialog.md)）は、`<Resource>`コンポーネントの外でCRUDコンポーネントを宣言する必要があります。その場合、特定のリソースにどのCRUDコンポーネントが利用可能かをreact-adminに伝えるために`hasCreate`、`hasEdit`、`hasShow`プロパティを使用できます。
 
-This is useful, for instance, to have the `<ReferenceField>` component display a link to the edit or show view of the referenced record.
+例えば、`<ReferenceField>`コンポーネントが参照されるレコードの編集または表示ビューへのリンクを表示するようにします。
 
 ```jsx
-// in src/App.js
+// src/App.js内
 import { Admin, Resource } from 'react-admin';
 import { dataProvider } from './dataProvider';
 
@@ -249,13 +253,13 @@ const App = () => (
     </Admin>
 );
 
-// in src/commentEdit.js
+// src/commentEdit.js内
 import { Edit, SimpleForm, ReferenceField } from 'react-admin';
 
 const CommentEdit = () => (
     <Edit>
         <SimpleForm>
-            {/* renders a link to the edit view only because `hasEdit` has been set on `<Resource>` */}
+            {/* `hasEdit`が`<Resource>`で設定されているため、編集ビューへのリンクが表示されます */}
             <ReferenceField source="post_id" reference="posts" />
         </SimpleForm>
     </Edit>
@@ -264,11 +268,11 @@ const CommentEdit = () => (
 
 ## Resource Context
 
-`<Resource>` also creates a `ResourceContext`, that gives access to the current resource name to all descendants of the main page components (`list`, `create`, `edit`, `show`). 
+`<Resource>`はまた、現在のリソース名にアクセスできる`ResourceContext`を作成し、メインページコンポーネント（`list`、`create`、`edit`、`show`）のすべての子孫に提供します。
 
-To read the current resource name, use the `useResourceContext()` hook.
+現在のリソース名を読み取るには、`useResourceContext()`フックを使用します。
 
-For instance, the following component displays the name of the current resource:
+例えば、以下のコンポーネントは現在のリソース名を表示します：
 
 ```jsx
 import * as React from 'react';
@@ -282,7 +286,7 @@ const ResourceName = () => {
 const PostList = () => (
     <List>
         <>
-            <ResourceName /> {/* renders 'posts' */}
+            <ResourceName /> {/* 'posts'をレンダリング */}
             <Datagrid>
                 <TextField source="title" />
                 <DateField source="published_at" />
@@ -292,20 +296,20 @@ const PostList = () => (
 )
 ```
 
-**Tip**: You can *change* the current resource context, e.g. to use a component for a related resource. Use the `<ResourceContextProvider>` component for that:
+**ヒント**: 現在のリソースコンテキストを*変更*することができます。例えば、関連リソースのコンポーネントを使用する場合。これには、`<ResourceContextProvider>`コンポーネントを使用します：
 
 ```jsx
 const MyComponent = () => (
     <ResourceContextProvider value="comments">
-        <ResourceName /> {/* renders 'comments' */}
+        <ResourceName /> {/* 'comments'をレンダリング */}
         ...
     </ResourceContextProvider>
 );
 ```
 
-## Nested Resources
+## ネストされたリソース
 
-React-admin doesn't support nested resources, but you can use [the `children` prop](#children) to render a custom component for a given sub-route. For instance, to display a list of songs for a given artist:
+React-adminはネストされたリソースをサポートしていませんが、[`children`プロパティ](#children)を使用して、特定のサブルート用のカスタムコンポーネントをレンダリングできます。例えば、特定のアーティストの曲のリストを表示するには：
 
 ```jsx
 import { Admin, Resource } from 'react-admin';
@@ -321,24 +325,19 @@ export const App = () => (
 );
 ```
 
-<video controls autoplay playsinline muted loop width="100%">
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-navigation/latest/breadcumb-nested-resource.webm" type="video/webm" />
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-navigation/latest/breadcumb-nested-resource.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+この設定は4つのルートを作成します：
 
-This setup creates four routes:
+* `/artists`は`<ArtistList>`要素をレンダリング
+* `/artists/:id`は`<ArtistDetail>`要素をレンダリング
+* `/artists/:id/songs`は`<SongList>`要素をレンダリング
+* `/artists/:id/songs/:songId`は`<SongDetail>`要素をレンダリング
 
-- `/artists` renders the `<ArtistList>` element
-- `/artists/:id` renders the `<ArtistDetail>` element
-- `/artists/:id/songs` renders the `<SongList>` element
-- `/artists/:id/songs/:songId` renders the `<SongDetail>` element
-
-In order to display a list of songs for the selected artist, `<SongList>` should filter the songs by the `id` parameter. To do so, use the `useParams` hook from `react-router-dom`:
+選択されたアーティストの曲のリストを表示するために、`<SongList>`は`id`パラメータで曲をフィルタリングする必要があります。これを行うには、`react-router-dom`の`useParams`フックを使用します：
 
 {% raw %}
+
 ```jsx
-// in src/SongList.jsx
+// src/SongList.jsx内
 import { List, Datagrid, TextField, useRecordContext } from 'react-admin';
 import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
@@ -372,13 +371,15 @@ const EditSongButton = () => {
     );
 };
 ```
+
 {% endraw %}
 
-In the `<SongDetail>` component, you must also use the `useParams` hook to get the `songId` parameter and display the song with the corresponding `id`:
+`<SongDetail>`コンポーネント内では、`useParams`フックを使用して`songId`パラメータを取得し、対応する`id`の曲を表示する必要があります：
 
 {% raw %}
+
 ```jsx
-// in src/SongDetail.jsx
+// src/SongDetail.jsx内
 import { Edit, SimpleForm, TextInput } from 'react-admin';
 import { useParams } from 'react-router-dom';
 
@@ -397,16 +398,17 @@ export const SongDetail = () => {
     );
 };
 ```
+
 {% endraw %}
 
-**Tip**: As seen in the screencast above, when browsing to nested resources, users can get lost unless they have a breadcrumb path displayed on screen. Check [the `<Breadcrumb>` component](./Breadcrumb.md#nested-resources) for more details about how to set up this navigation element.
+**ヒント**: 上記のスクリーンキャストで示されているように、ネストされたリソースに移動するとき、ユーザーは画面にパンくずリストが表示されていないと迷子になりやすくなります。このナビゲーション要素の設定については、[<Breadcrumb>コンポーネント](./Breadcrumb.md#nested-resources)をご確認ください。
 
-## Lazy Loading
+## レイジーローディング
 
-If you need to speed up the initial loading of your application, you may want to enable code splitting using [`React.lazy()`](https://react.dev/reference/react/lazy#suspense-for-code-splitting). The default react-admin layout uses Suspense, so there is no special setup required to use lazy loaded components in `<Resource>`.
+アプリケーションの初期読み込みを高速化する必要がある場合、[`React.lazy()`](https://react.dev/reference/react/lazy#suspense-for-code-splitting)を使用してコード分割を有効にしたいかもしれません。デフォルトのreact-adminレイアウトはSuspenseを使用しているため、`<Resource>`内でレイジーローディングされたコンポーネントを使用するための特別な設定は必要ありません。
 
 ```jsx
-// in src/App.js
+// src/App.js内
 import * as React from 'react';
 import { Admin, Resource } from 'react-admin';
 
@@ -424,6 +426,11 @@ const App = () => (
 );
 ```
 
-When users navigate to the `/posts` route, react-admin will display a loading indicator while the `PostList` component is being loaded.
+ユーザーが`/posts`ルートに移動すると、react-adminは`PostList`コンポーネントの読み込み中にロードインジケーターを表示します。
 
 ![Loading indicator](./img/lazy-resource.png)
+
+```
+
+```
+

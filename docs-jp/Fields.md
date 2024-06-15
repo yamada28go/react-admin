@@ -3,13 +3,13 @@ layout: default
 title: "Field Components"
 ---
 
-# Field Components
+# フィールドコンポーネント
 
-A `Field` component displays a given property of a record. Such components are used in the `List` and `Show` views, but you can also use them anywhere in your application, as long as there is a [`RecordContext`](./useRecordContext.md).
+`Field` コンポーネントはレコードの特定のプロパティを表示します。これらのコンポーネントは `List` や `Show` ビューで使用されますが、[`RecordContext`](./useRecordContext.md) が存在する限り、アプリケーションのどこにでも使用できます。
 
-## Anatomy Of A Field
+## フィールドの構造
 
-`Field` components read the current `record` from the current `RecordContext` (set by react-admin). There is nothing magic there - you can easily write your own:
+`Field` コンポーネントは現在の `RecordContext` から現在の `record` を読み取ります（react-adminによって設定されます）。特別なことは何もなく、自分で簡単に作成できます。
 
 {% raw %}
 ```jsx
@@ -20,14 +20,15 @@ const PurpleTextField = ({ source }) => {
     return (<span style={{ color: 'purple' }}>{record && record[source]}</span>);
 };
 ```
+
 {% endraw %}
 
-**Tip**: Every time it renders a record, react-admin creates a `RecordContext`. This includes datagrid rows, simple list items, reference fields, show, and edit pages. You can even create a `RecordContext` yourself and use react-admin Fields in custom pages.
+**ヒント**: react-admin はレコードをレンダリングするたびに `RecordContext` を作成します。これにはデータグリッドの行、シンプルリストアイテム、参照フィールド、表示および編集ページが含まれます。独自の `RecordContext` を作成し、カスタムページでreact-adminのフィールドを使用することもできます。
 
-React-admin Field components also accept a `record` prop. This allows you to use them outside a `RecordContext`, or to use another `record` than the one in the current context.
+React-admin の Field コンポーネントは `record` プロップも受け取ります。これにより、`RecordContext` 以外の場所で使用したり、現在のコンテキストとは異なるレコードを使用したりできます。
 
 ```jsx
-// a post looks like
+// ポストは次のようになります
 // { id: 123, title: "Hello, world", author: "John Doe", body: "..." }
 
 const PostShow = ({ id }) => {
@@ -44,11 +45,11 @@ const PostShow = ({ id }) => {
 }
 ```
 
-## Usage
+## 使用方法
 
-To render a record field (e.g. `record.title`), choose the Field component that corresponds to the field type (e.g. `TextField` for a text field) and pass the field name (e.g. `title`) as the `source` prop.
+レコードフィールド（例：`record.title`）をレンダリングするには、フィールドタイプに対応する Field コンポーネントを選択し（例：テキストフィールドの場合は `TextField`）、フィールド名を `source` プロップとして渡します。
 
-So the following Show view:
+次の Show ビューの場合:
 
 ```jsx
 import { TextField } from 'react-admin';
@@ -62,7 +63,7 @@ export const BookShow = () => (
 );
 ```
 
-When rendered for the following record:
+次のレコードに対してレンダリングされると:
 
 ```js
 { 
@@ -71,7 +72,7 @@ When rendered for the following record:
 }
 ```
 
-Will render
+次のように表示されます:
 
 ```jsx
 <Typography component="span" variant="body2">
@@ -79,10 +80,10 @@ Will render
 </Typography>
 ```
 
-Field components are generally used in List and Show views, as children of `<Datagrid>`, `<SimpleShowLayout>`, and `<TabbedShowLayout>`. The parent component usually reads their `source` and/or `label` prop to add a title.
+Field コンポーネントは通常、`<Datagrid>`、`<SimpleShowLayout>`、`<TabbedShowLayout>` の子として、リストおよび表示ビューで使用されます。親コンポーネントは通常、タイトルを追加するために `source` や `label` プロップを読み取ります。
 
 ```jsx
-// in src/posts.js
+// src/posts.js にて
 import * as React from "react";
 import { Show, SimpleShowLayout, TextField, DateField, RichTextField } from 'react-admin';
 
@@ -100,51 +101,51 @@ export const PostShow = () => (
 
 ![post show view](./img/post-show.png)
 
-**Tip**: You can use field components inside the `Edit` and `Create` views, too, to render read-only values in a form:
+**ヒント**: `Edit` および `Create` ビュー内でも Field コンポーネントを使用して、フォーム内で読み取り専用の値をレンダリングできます:
 
 ```jsx
 export const PostEdit = () => (
     <Edit>
         <SimpleForm>
-            <TextField source="id" /> {/* read-only */}
+            <TextField source="id" /> {/* 読み取り専用 */}
             <TextInput source="title" />
         </SimpleForm>
     </Edit>
 );
 ```
 
-React-admin comes with about 20 field components, specialized in rendering numbers, image URLs, booleans, arrays, etc. And if you can't find a field for your need, you can always create your own.
+React-admin には数値、画像URL、ブール値、配列などのレンダリングに特化した約20種類のフィールドコンポーネントが用意されています。また、必要なフィールドが見つからない場合は、独自に作成することもできます。
 
-## Common Field Props
+## 共通のフィールドプロップ
 
-All Field components accept the following props:
+すべてのフィールドコンポーネントは次のプロップを受け入れます：
 
-| Prop                          | Required | Type                           | Default  | Description                                                                                                                                             |
-|-------------------------------| -------- |--------------------------------| -------- |---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [`source`](#source)           | Required | `string`                       | -        | Name of the property to display                                                                                                                         |
-| [`label`](#label)             | Optional | `string` &#124; `ReactElement` | `source` | Used as a Datagrid column header or in a Show layout                                                                                                    |
-| [`record`](#record)           | Optional | `Object`                       | -        | Object containing the properties to display, to override the record from the current `RecordContext`                                                    |
-| [`sortable`](#sortable)       | Optional | `boolean`                      | `true`   | When used in a `List`, should the list be sortable using the `source` attribute? Setting it to `false` disables the click handler on the column header. |
-| [`sortBy`](#sortby)           | Optional | `string`                       | `source` | When used in a `List`, specifies the actual `source` to be used for sorting when the user clicks the column header                                      |
-| [`sortByOrder`](#sortbyorder) | Optional | `ASC` &#124; `DESC`            | `ASC`    | When used in a `List`, specifies the sort order to be used for sorting when the user clicks the column header                                           |
-| [`className`](#classname)     | Optional | `string`                       | -        | A class name (usually generated by JSS) to customize the look and feel of the field element itself                                                      |
-| [`textAlign`](#textalign)     | Optional | `string`                       | 'left'   | Defines the text alignment inside a cell. Set to `right` for right alignment (e.g. for numbers)                                                         |
-| [`emptyText`](#emptytext)     | Optional | `string`                       | ''       | Defines a text to be shown when a field has no value (not supported in array fields)                                                                    |
-| [`sx`](#sx)                   | Optional | `SxProps`                      | ''       | Material UI shortcut for defining custom styles with access to the theme                                                                                        |
+|プロップ名|必須|タイプ|デフォルト|説明|
+|---|---|---|---|---|
+|[`source`](#source)|必須|`string`|\-|表示するプロパティの名前|
+|[`label`](#label)|任意|`string` \| `ReactElement`|`source`|Datagrid の列見出しや Show レイアウトで使用される|
+|[`record`](#record)|任意|`Object`|\-|表示するプロパティを含むオブジェクトで、現在の `RecordContext` からのレコードをオーバーライドするために使用されます|
+|[`sortable`](#sortable)|任意|`boolean`|`true`|`List` で使用される場合、このリストは `source` 属性を使用してソート可能かどうか。`false` に設定すると列見出しのクリックハンドラが無効になります。|
+|[`sortBy`](#sortby)|任意|`string`|`source`|`List` で使用される場合、ユーザーが列見出しをクリックしたときに使用する実際の `source` を指定します|
+|[`sortByOrder`](#sortbyorder)|任意|`ASC` \| `DESC`|`ASC`|`List` で使用される場合、ユーザーが列見出しをクリックしたときに使用するソート順序を指定します|
+|[`className`](#classname)|任意|`string`|\-|フィールド要素自体の見た目をカスタマイズするためのクラス名（通常はJSSによって生成されます）|
+|[`textAlign`](#textalign)|任意|`string`|'left'|セル内のテキストの位置揃えを定義します。数値の場合は `right` に設定するのが一般的です。|
+|[`emptyText`](#emptytext)|任意|`string`|''|フィールドに値がない場合に表示されるテキストを定義します（配列フィールドではサポートされていません）|
+|[`sx`](#sx)|任意|`SxProps`|''|テーマへのアクセスを可能にするカスタムスタイルを定義するための Material UI ショートカット|
 
 ## `className`
 
-CSS class name passed to the root component. 
+ルートコンポーネントに渡されるCSSクラス名。
 
 ```jsx
 <TextField source="title" className="number" />
 ```
 
-**Note**: To customize field styles, prefer [the `sx` prop](#sx).
+**注意**: フィールドスタイルをカスタマイズするには、 [`sx` プロップ](#sx) を使用することをお勧めします。
 
 ## `emptyText`
 
-By default, a Field renders an empty string when the record has no value for that field. You can override this behavior by setting the `emptyText` prop. The emptyText supports i8nProvider translation, if the translation is not found it will display the value as default.
+デフォルトでは、フィールドはそのフィールドに値がない場合に空の文字列をレンダリングします。この動作を上書きするには、`emptyText` プロップを設定します。`emptyText` は i8nProvider の翻訳をサポートしており、翻訳が見つからない場合はデフォルトの値が表示されます。
 
 ```jsx
 const PostList = () => (
@@ -159,43 +160,45 @@ const PostList = () => (
 
 ## `label`
 
-By default, a Field doesn't render any label - just the value. But when rendering several fields on the same screen, it's necessary to label them. That's why components like `<SimpleShowLayout>` and `<Datagrid>` read the field `source`, and use a humanized version as the label (e.g. `source="title"` gives the label `Title`). 
+デフォルトでは、フィールドはラベルを表示しませんが、同じ画面に複数のフィールドを表示する場合、それらにラベルを付ける必要があります。`<SimpleShowLayout>` や `<Datagrid>` のようなコンポーネントはフィールドの `source` を読み取り、人間が読める形式に変換してラベルとして使用します（例：`source="title"` は `Title` というラベルになります）。
 
-You can customize this automated label by specifying a `label` prop. `<SimpleShowLayout>` and `<Datagrid>` will then use the `label` prop instead of the `source` prop to label the field.
+`label` プロップを指定することでこの自動ラベルをカスタマイズできます。`<SimpleShowLayout>` や `<Datagrid>` は `source` プロップの代わりに `label` プロップを使用してフィールドをラベル付けします。
 
 ```jsx
-// label can be a string
+// label は文字列でもかまいません
 <TextField source="author.name" label="Author" />
-// the label is automatically translated, so you can use translation identifiers
+// label は自動的に翻訳されるため、翻訳識別子を使用できます
 <TextField source="author.name" label="ra.field.author" />
-// you can also use a React element
+// React要素も使用できます
 <TextField source="author.name" label={<FieldTitle label="Author" />} />
 ```
 
-**Tip**: If your admin has to support multiple languages, don't use the `label` prop, and put the localized labels in a dictionary instead. See the [Translation documentation](./TranslationTranslating.md#translating-resource-and-field-names) for details.
+**ヒント**: 管理者が複数の言語をサポートする必要がある場合は、`label` プロップを使用せず、ローカライズされたラベルを辞書に入れてください。詳細は [翻訳ドキュメント](./TranslationTranslating.md#translating-resource-and-field-names) を参照してください。
 
-**Tip**: You can opt out of the label decoration by passing `false` to the `label` prop.
+**ヒント**: `label` プロップに `false` を渡すことでラベル装飾をオプトアウトできます。
 
 ```jsx
-// No label will be added
+// ラベルは追加されません
 <TextField source="author.name" label={false} />
 ```
 
-**Note**: This prop has no effect when rendering a field outside a `<Datagrid>`, a `<SimpleShowLayout>`, a `<TabbedShowLayout>`, a `<SimpleForm>`, or a `<TabbedForm>`.
+**注意**: このプロップは、`<Datagrid>`、`<SimpleShowLayout>`、`<TabbedShowLayout>`、`<SimpleForm>`、または `<TabbedForm>` 以外の場所でフィールドをレンダリングする場合には効果がありません。
 
 ## `record`
 
-By default, fields use the `record` from the `RecordContext`. But you can override it by passing the `record` prop - e.g. if you're rendering a field outside a `RecordContext`, or if you want to use a different record than the one in the context.
+デフォルトでは、フィールドは `RecordContext` から `record` を使用します。しかし、`record` プロップを渡すことでこれをオーバーライドできます。例えば、`RecordContext` の外でフィールドをレンダリングする場合や、コンテキスト内のレコードとは異なるレコードを使用する場合です。
 
 {% raw %}
+
 ```jsx
 <TextField source="title" record={{ id: 123, title: "Hello" }} />
 ```
+
 {% endraw %}
 
 ## `sortable`
 
-In a `<Datagrid>`, users can change the sort field and order by clicking on the column headers. You may want to disable this behavior for a given field (e.g. for reference or computed fields). In that case, pass the `sortable` prop to `<Field>` with a `false` value.
+`<Datagrid>` では、ユーザーが列見出しをクリックすることでソートフィールドと順序を変更できます。特定のフィールド（例：参照フィールドや計算フィールド）に対してこの動作を無効にしたい場合、`sortable` プロップに `false` を渡します。
 
 ```jsx
 const PostList = () => (
@@ -210,13 +213,13 @@ const PostList = () => (
 );
 ```
 
-**Note**: This prop has no effect when rendering a field outside a `<Datagrid>`.
+**注意**: このプロップは `<Datagrid>` 外でフィールドをレンダリングする場合には効果がありません。
 
 ## `sortBy`
 
-In a `<Datagrid>`, users can change the sort field and order by clicking on the column headers. `<Datagrid>` uses the Field `source`to determine the sort field (e.g. clicking on the column header for the `<TextField source="title" />` field sorts the list according to the `title` field).
+`<Datagrid>` では、ユーザーが列見出しをクリックすることでソートフィールドと順序を変更できます。`<Datagrid>` はフィールド `source` を使用してソートフィールドを決定します（例：`<TextField source="title" />` フィールドの列見出しをクリックするとリストは `title` フィールドに基づいてソートされます）。
 
-You may want to use a different sort field than the `source`, e.g. for Reference fields. In that case, use the `sortBy` prop to specify the sort field.
+`source` とは異なるソートフィールドを使用したい場合（例：参照フィールドの場合）、`sortBy` プロップを使用してソートフィールドを指定します。
 
 ```jsx
 const PostList = () => (
@@ -231,13 +234,13 @@ const PostList = () => (
 );
 ```
 
-**Note**: This prop has no effect when rendering a field outside a `<Datagrid>`.
+**注意**: このプロップは `<Datagrid>` 外でフィールドをレンダリングする場合には効果がありません。
 
 ## `sortByOrder`
 
-By default, when users click on a `<Datagrid>` column header, react-admin reorders the list using the field source, *with an ascending order*. For some fields, it brings unexpected results. For instance, when clicking on a "Last seen at" header, users probably expect to see the users seen more recently. 
+デフォルトでは、ユーザーが `<Datagrid>` の列見出しをクリックすると、react-admin はフィールドの `source` を使用してリストを並べ替えます（昇順で）。一部のフィールドでは予期しない結果をもたらすことがあります。例えば、「Last seen at」見出しをクリックすると、ユーザーは最近見られたユーザーを期待するでしょう。
 
-You can change the default sort field order by using the `sortByOrder` prop.
+このような場合、`sortByOrder` プロップを使用してデフォルトのソート順序を変更できます。
 
 ```jsx
 const PostList = () => (
@@ -250,11 +253,11 @@ const PostList = () => (
 );
 ```
 
-**Note**: This prop has no effect when rendering a field outside a `<Datagrid>`.
+**注意**: このプロップは `<Datagrid>` 外でフィールドをレンダリングする場合には効果がありません。
 
 ## `source`
 
-The name of the property to display. Can contain dots for accessing properties of nested objects. 
+表示するプロパティの名前です。ネストされたオブジェクトのプロパティにアクセスするためにドットを含めることができます。
 
 ```jsx
 <TextField source="author.first_name" />
@@ -262,9 +265,10 @@ The name of the property to display. Can contain dots for accessing properties o
 
 ## `sx`
 
-Like all react-admin components, you can customize the style of Field components using the `sx` prop. 
+すべての react-admin コンポーネントと同様に、Field コンポーネントのスタイルを `sx` プロップを使用してカスタマイズできます。
 
 {% raw %}
+
 ```jsx
 import { List, Datagrid, WrapperField, TextField } from 'react-admin';
 
@@ -278,17 +282,18 @@ const UserList = () => (
     </List>
 );
 ```
+
 {% endraw %}
 
-In addition to the root component, the `sx` prop also allows you to override the style of inner components. Refer to the documentation of each Field component to see the classes that you can override.
+ルートコンポーネントに加えて、`sx` プロップは内部コンポーネントのスタイルをオーバーライドすることもできます。各フィールドコンポーネントのドキュメントを参照して、オーバーライドできるクラスを確認してください。
 
-And see [the Material UI system documentation](https://mui.com/system/the-sx-prop/) for more information.
+詳細は [Material UI システムのドキュメント](https://mui.com/system/the-sx-prop/) を参照してください。
 
 ## `textAlign`
 
-This prop defines the text alignment of the field when rendered inside a `<Datagrid>` cell. By default, datagrid values are left-aligned ; for numeric values, it's often better to right-align them. Set `textAlign` to `right` for that.
+このプロップは、`<Datagrid>` セル内でフィールドをレンダリングする際のテキストの位置揃えを定義します。デフォルトではデータグリッドの値は左揃えですが、数値の場合は右揃えが望ましいことが多いです。この場合、`textAlign` を `right` に設定します。
 
-[`<NumberField>`](./NumberField.md) already uses `textAlign="right"`. Set the default value for this prop if you create a custom numeric field.
+[`<NumberField>`](./NumberField.md) はすでに `textAlign="right"` を使用しています。カスタム数値フィールドを作成する場合、このプロップのデフォルト値を設定します。
 
 ```jsx
 const BasketTotal = () => {
@@ -302,11 +307,11 @@ BasketTotal.defaultProps = {
 };
 ```
 
-## Deep Field Source
+## 深いフィールドソース
 
-Fields use the `source` as a *path* to read the actual value (using [`lodash.get()`](https://lodash.com/docs/4.17.15#get)). This means you can include dots in the source name to render a deeply nested value. 
+フィールドは `source` を *パス* として使用して実際の値を読み取ります（[`lodash.get()`](https://lodash.com/docs/4.17.15#get) を使用）。つまり、ネストされた値をレンダリングするためにソース名にドットを含めることができます。
 
-For instance, if you have a record like the following:
+例えば、次のようなレコードがある場合:
 
 ```js
 { 
@@ -318,17 +323,17 @@ For instance, if you have a record like the following:
 }
 ```
 
-Then you can render the author name like this:
+次のようにして著者名をレンダリングできます:
 
 ```jsx
 <TextField source="author.name" />
 ```
 
-## Setting A Field Label
+## フィールドラベルの設定
 
-React-admin Field layout components like [`<Datagrid>`](./Datagrid.md) and [`<SimpleShowLayout>`](./SimpleShowLayout.md) inspect their children and use their `label` prop to set the table headers or the field labels.
+React-admin のフィールドレイアウトコンポーネント（[`<Datagrid>`](./Datagrid.md) や [`<SimpleShowLayout>`](./SimpleShowLayout.md) など）はその子要素を調査し、`label` プロップを使用してテーブルヘッダーやフィールドラベルを設定します。
 
-So inside these components, you can provide a `label` prop to override the default label.
+そのため、これらのコンポーネント内ではデフォルトのラベルを上書きするために `label` プロップを提供できます。
 
 ```jsx
 const BookList = () => (
@@ -340,7 +345,7 @@ const BookList = () => (
 );
 ```
 
-The label uses [the i18n layer](./Translation.md), so you can use a translation key, too:
+ラベルは [i18n レイヤー](./Translation.md) を使用しているため、翻訳キーも使用できます:
 
 ```jsx
 const BookList = () => (
@@ -352,9 +357,9 @@ const BookList = () => (
 );
 ```
 
-But as Field components don't render the label themselves (again, this is the responsibility of the parent layout component to render the label), this doesn't work when you use a Field inside a Form, or when the field isn't a direct child of a layout component.
+しかし、フィールドコンポーネント自身はラベルをレンダリングしません（これは親レイアウトコンポーネントの責任でラベルをレンダリングします）。そのため、フォーム内でフィールドを使用する場合や、フィールドがレイアウトコンポーネントの直接の子ではない場合にはこの方法は機能しません。
 
-To render a field with a label in such situations, wrap the field in [a `<Labeled>` component](./Labeled.md):
+このような状況でラベル付きフィールドをレンダリングするには、フィールドを [`<Labeled>` コンポーネント](./Labeled.md) でラップします。
 
 ```jsx
 const BookEdit = () => (
@@ -368,20 +373,21 @@ const BookEdit = () => (
 );
 ```
 
-## Hiding The Field Label
+## フィールドラベルの非表示
 
-React-admin Field layout components like [`<Datagrid>`](./Datagrid.md) and [`<SimpleShowLayout>`](./SimpleShowLayout.md) inspect their children and use their `source` prop to set the table headers or the field labels. To opt out of this behavior, pass `false` to the `label` prop.
+React-admin のフィールドレイアウトコンポーネント（[`<Datagrid>`](./Datagrid.md) や [`<SimpleShowLayout>`](./SimpleShowLayout.md) など）はその子要素を調査し、`source` プロップを使用してテーブルヘッダーやフィールドラベルを設定します。この動作をオプトアウトするには、`label` プロップに `false` を渡します。
 
 ```jsx
-// No label will be added in SimpleShowLayout
+// SimpleShowLayout ではラベルは追加されません
 <TextField source="author.name" label={false} />
 ```
 
-## Conditional Formatting
+## 条件付きフォーマット
 
-If you want to format a field depending on the value, create another component wrapping this field, and set the `sx` prop depending on the field value:
+値に応じてフィールドをフォーマットしたい場合は、このフィールドをラップする別のコンポーネントを作成し、フィールド値に応じて `sx` プロップを設定します。
 
 {% raw %}
+
 ```jsx
 const FormattedNumberField = ({ source }) => {
     const record = useRecordContext();
@@ -391,14 +397,14 @@ FormattedNumberField.defaultProps = {
     textAlign: 'right',
 };
 ```
+
 {% endraw %}
 
+## 2つのフィールドを組み合わせる
 
-## Combining Two Fields
+1つのセル（`<Datagrid>` 内）や1行（`<SimpleShowLayout>` 内）に複数のフィールドをレンダリングしたい場合があります。
 
-You may want to render more than one field per cell (in a `<Datagrid>`) or per row (in a `<SimpleShowLayout>`). 
-
-In theory, you can simply put two fields inside a React Fragment (`<>`):
+理論的には、React フラグメント（`<>`）内に2つのフィールドを単純に配置できます。
 
 ```jsx
 const BookList = () => (
@@ -414,11 +420,11 @@ const BookList = () => (
 );
 ```
 
-This will render a 2-columns datagrid, one with the book title, and one with the book author. 
+これにより、本のタイトルが表示される列と、著者の名前が表示される列が2列のデータグリッドがレンダリングされます。
 
-In practice, the result lacks a column title for the second column. As `<Datagrid>` looks for a `source` or a `label` in its children, it will not find a name for the second column.
+実際には、2列目には列タイトルが欠けています。`<Datagrid>` は子要素の `source` や `label` を探して名前を取得しますが、2列目の名前は見つかりません。
 
-There are two solutions. The first is to use `<WrapperField>`, which supports common field props (to allow inspection by parents) and renders its children:
+解決策は2つあります。1つ目は `<WrapperField>` を使用する方法で、これは一般的なフィールドプロップをサポートし（親による調査を可能にする）、子要素をレンダリングします。
 
 ```jsx
 import { List, Datagrid, WrapperField, TextField } from 'react-admin';
@@ -436,7 +442,7 @@ const BookList = () => (
 );
 ```
 
-The second solution is to use the [`<FunctionField>`](./FunctionField.md), which accepts a `render` function:
+2つ目の解決策は [`<FunctionField>`](./FunctionField.md) を使用する方法で、これは `render` 関数を受け入れます。
 
 ```jsx
 import { List, Datagrid, WrapperField, FunctionField } from 'react-admin';
@@ -453,13 +459,13 @@ const BookList = () => (
 );
 ```
 
-## Writing Your Own Field Component
+## 独自のフィールドコンポーネントを作成する
 
-If you don't find what you need in the list of available Fields, you can write your own Field component.
+利用可能なフィールドのリストに必要なものが見つからない場合は、独自のフィールドコンポーネントを作成できます。
 
-It must be a regular React component, accepting a `source` attribute and retrieving the `record` from the `RecordContext` with the `useRecordContext` hook. React-admin will set the `record` in this context based on the API response data at render time. The field component only needs to find the `source` in the `record` and display it.
+これは通常の React コンポーネントで、`source` 属性を受け入れ、`useRecordContext` フックを使用して `RecordContext` から `record` を取得します。React-admin は、レンダリング時にAPI応答データに基づいてこのコンテキストに `record` を設定します。フィールドコンポーネントは `record` から `source` を見つけて表示するだけです。
 
-Let's see an example for an API returning user records with `firstName` and `lastName` properties.
+次に、`firstName` および `lastName` プロパティを持つユーザーレコードを返すAPIの例を見てみましょう。
 
 ```js
 {
@@ -469,7 +475,7 @@ Let's see an example for an API returning user records with `firstName` and `las
 }
 ```
 
-Here is a custom field displaying the full name:
+以下はフルネームを表示するカスタムフィールドです。
 
 ```jsx
 import { useRecordContext } from 'react-admin';
@@ -482,9 +488,9 @@ export const FullNameField = (props) => {
 FullNameField.defaultProps = { label: 'Name' };
 ```
 
-**Tip**: Always check the `record` is defined before inspecting its properties, as react-admin may display the Show view *before* fetching the record from the data provider. So the first time it renders the show view for a resource, the `record` is `undefined`.
+**ヒント**: react-admin は *レコードをデータプロバイダから取得する前に* Show ビューを表示する場合があるため、プロパティを調査する前に `record` が定義されていることを常に確認してください。そのため、リソースの Show ビューを初めてレンダリングする際、`record` は `undefined` です。
 
-You can now use this field like any other react-admin field:
+このフィールドは他の react-admin フィールドと同様に使用できます。
 
 ```jsx
 import { List, Datagrid } from 'react-admin';
@@ -499,9 +505,9 @@ export const UserList = () => (
 );
 ```
 
-**Tip**: In such custom fields, the `source` is optional. React-admin uses it to determine which column to use for sorting when the column header is clicked. In case you use the `source` property for additional purposes, the sorting can be overridden by the `sortBy` property on any `Field` component.
+**ヒント**: このようなカスタムフィールドでは、`source` はオプションです。react-admin は列見出しがクリックされたときにどの列をソートするかを決定するために使用します。`source` プロパティを追加目的で使用する場合、ソートは任意の `Field` コンポーネントの `sortBy` プロパティで上書きできます。
 
-If you build a reusable field accepting a `source` props, you will probably want to support deep field sources (e.g. source values like `author.name`). Use [lodash/get](https://www.npmjs.com/package/lodash.get) to replace the simple object lookup. For instance, for a Text field:
+`source` プロップを受け入れる再利用可能なフィールドを作成する場合、深いフィールドソース（例：`author.name`）をサポートする必要があります。単純なオブジェクトルックアップを置き換えるために [lodash/get](https://www.npmjs.com/package/lodash.get) を使用します。例えば、テキストフィールドの場合は次のようにします。
 
 ```diff
 import * as React from 'react';
@@ -517,11 +523,11 @@ const TextField = ({ source }) => {
 export default TextField;
 ```
 
-## Hiding A Field Based On The Value Of Another
+## 別の値に基づいてフィールドを非表示にする
 
-In a Show view, you may want to display or hide fields based on the value of another field - for instance, show an `email` field only if the `hasEmail` boolean field is `true`.
+Show ビューで、別のフィールドの値に基づいてフィールドを表示または非表示にしたい場合があります。例えば、`hasEmail` ブールフィールドが `true` の場合にのみ `email` フィールドを表示する場合です。
 
-For such cases, you can use [the `<WithRecord>` component](./WithRecord.md), or the custom field approach: write a custom field that reads the `record` from the context, and renders another Field based on the value.
+そのような場合には、[`<WithRecord>` コンポーネント](./WithRecord.md) を使用するか、カスタムフィールドアプローチを取ります。`record` をコンテキストから読み取り、値に基づいて別のフィールドをレンダリングするカスタムフィールドを作成します。
 
 ```jsx
 import { Show, SimpleShowLayout, TextField, EmailField } from 'react-admin';
@@ -542,9 +548,9 @@ const UserShow = () => (
 );
 ```
 
-This `<ConditionalEmailField>` is properly hidden when `hasEmail` is `false`. But the label for the field never renders. And if you add a `label` default prop, `SimpleShowLayout` layout will render the label regardless of the `hasEmail` value.
+この `<ConditionalEmailField>` は `hasEmail` が `false` の場合には適切に非表示になります。しかし、フィールドのラベルは表示されません。デフォルトの `label` プロップを追加すると、`SimpleShowLayout` レイアウトは `hasEmail` の値に関係なくラベルをレンダリングします。
 
-How about using React conditionals in `UserShow` to add the `<EmailField>` field only if the `record.hasEmail` is `true`? Unfortunately, the `useRecordContext()` hook doesn't work in `<UserShow>` (as it's the `<Show>` component's responsibility to fetch the record and put it into a context).
+React の条件文を使用して `UserShow` 内で `record.hasEmail` が `true` の場合にのみ `<EmailField>` フィールドを追加することを検討してみてください。しかし、`useRecordContext()` フックは `<UserShow>` 内では機能しません（レコードを取得し、それをコンテキストに置くのは `<Show>` コンポーネントの責任です）。
 
 ```jsx
 const UserShow = () => (
@@ -552,14 +558,14 @@ const UserShow = () => (
         <SimpleShowLayout>
             <TextField source="first_name" />
             <TextField source="last_name" />
-            {/* Where can we get the record? */}
+            {/* record をどこから取得できますか？ */}
             {record.hasEmail && <EmailField source="email" />}
         </SimpleShowLayout>
     </Show>
 );
 ```
 
-The solution is to *split* the `<UserShow>` component into two: one that fetches the record, and one that renders the show layout. In descendants of `<Show>`, you can use the `useRecordContext()` hook.
+解決策は、`<UserShow>` コンポーネントを2つに分割することです。1つはレコードを取得し、もう1つは表示レイアウトをレンダリングします。`<Show>` の子孫では、`useRecordContext()` フックを使用できます。
 
 ```jsx
 const UserShow = () => (
@@ -581,11 +587,11 @@ const UserShowLayout = () => {
 };
 ```
 
-And now you can use a regular Field component, and the label displays correctly in the Show view.
+これで、通常のフィールドコンポーネントを使用でき、Show ビューでラベルが正しく表示されます。
 
-## Linking To Other Records
+## 他のレコードへのリンク
 
-A custom Field component might need to display a link to another record. Build the URL to the distant record using the resource name and the id, as follows:
+カスタムフィールドコンポーネントは、別のレコードへのリンクを表示する必要がある場合があります。次のようにして、リソース名とIDを使用して遠方のレコードへのURLを構築します。
 
 ```js
 import { useRecordContext, useGetOne } from 'react-admin';
@@ -600,23 +606,23 @@ const AuthorField = () => {
 };
 ```
 
-## Third-Party Components
+## サードパーティ製コンポーネント
 
-You can find components for react-admin in third-party repositories.
+react-admin 用のコンポーネントはサードパーティ製のリポジトリでも見つけることができます。
 
-- [OoDeLally/react-admin-clipboard-list-field](https://github.com/OoDeLally/react-admin-clipboard-list-field): a quick and customizable copy-to-clipboard field.
-- [MrHertal/react-admin-json-view](https://github.com/MrHertal/react-admin-json-view): JSON field and input for react-admin.
-- [alexgschwend/react-admin-color-picker](https://github.com/alexgschwend/react-admin-color-picker): a color field
+* [OoDeLally/react-admin-clipboard-list-field](https://github.com/OoDeLally/react-admin-clipboard-list-field): カスタマイズ可能なクリップボードコピー用フィールド。
+* [MrHertal/react-admin-json-view](https://github.com/MrHertal/react-admin-json-view): react-admin 用の JSON フィールドおよび入力フィールド。
+* [alexgschwend/react-admin-color-picker](https://github.com/alexgschwend/react-admin-color-picker): カラーフィールド。
 
 ## TypeScript
 
-All field components accept a generic type that describes the record. This lets TypeScript validate that the `source` prop targets an actual field of the record:
+すべてのフィールドコンポーネントはレコードを記述するジェネリック型を受け入れます。これにより、TypeScript は `source` プロップがレコードの実際のフィールドを対象としていることを検証できます。
 
 ```tsx
 import * as React from "react";
 import { Show, SimpleShowLayout, TextField, DateField, RichTextField } from 'react-admin';
 
-// Note that you shouldn't extend RaRecord for this to work
+// 注: これが機能するためには RaRecord を拡張しないでください
 type Post = {
     id: number;
     title: string;
@@ -630,7 +636,7 @@ export const PostShow = () => (
         <SimpleShowLayout>
             <TextField<Post> source="title" />
             <TextField<Post> source="teaser" />
-            {/* Here TS will show an error because a teasr field does not exist */}
+            {/* ここで TS は teasr フィールドが存在しないためエラーを表示します */}
             <TextField<Post> source="teasr" />
             <RichTextField<Post> source="body" />
             <DateField<Post> label="Publication date" source="published_at" />
@@ -639,6 +645,8 @@ export const PostShow = () => (
 );
 ```
 
-**Limitation**: You must not extend `RaRecord` for this to work or TypeScript would not be able to infer your types properties.
+**制限**: これが機能するためには `RaRecord` を拡張してはいけません。さもないと、TypeScript は型のプロパティを推論できません。
 
-Specifying the record type will also allow your IDE to provide auto-completion for both the `source` and `sortBy` prop. Note that the `sortBy` prop also accepts any string.
+レコード型を指定すると、`source` プロップおよび `sortBy` プロップに対するIDEの自動補完も可能になります。`sortBy` プロップは任意の文字列も受け入れることに注意してください。
+
+

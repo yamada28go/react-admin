@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <title>React-admin - security</title>
+        <title>React-admin - セキュリティ</title>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
@@ -563,61 +563,61 @@
                         <div
                             class="markdown-section DocSearch-content toc-content"
                         >
-                            <h1 id="security">Security</h1>
+                            <h1 id="セキュリティ">セキュリティ</h1>
 
 <video controls="" autoplay="" playsinline="" muted="" loop="">
   <source src="./img/login.webm" type="video/webm" />
   <source src="./img/login.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
+  お使いのブラウザはビデオタグをサポートしていません。
 </video>
 
-<p>React-admin lets you secure your admin app with the authentication strategy of your choice. Since there are many possible strategies (Basic Auth, JWT, OAuth, etc.), react-admin delegates authentication logic to an <code class="language-plaintext highlighter-rouge">authProvider</code>.</p>
+<p>React-adminでは、お好みの認証戦略を使用して管理アプリを保護できます。Basic Auth、JWT、OAuthなど多くの戦略があるため、react-adminは認証ロジックを<code class="language-plaintext highlighter-rouge">authProvider</code>に委任します。</p>
 
-<h2 id="enabling-auth-features">Enabling Auth Features</h2>
+<h2 id="認証機能の有効化">認証機能の有効化</h2>
 
-<p>By default, react-admin apps don’t require authentication. To restrict access to the admin, pass an <code class="language-plaintext highlighter-rouge">authProvider</code> to the <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component.</p>
+<p>デフォルトでは、react-adminアプリは認証を要求しません。管理アクセスを制限するには、<code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code>コンポーネントに<code class="language-plaintext highlighter-rouge">authProvider</code>を渡します。</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/App.js</span>
-<span class="k">import</span> <span class="nx">authProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./authProvider</span><span class="dl">'</span><span class="p">;</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// src/App.js</span>
+    <span class="k">import</span> <span class="nx">authProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./authProvider</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
-    <span class="p">&lt;</span><span class="nc">Admin</span> <span class="na">authProvider</span><span class="p">=</span><span class="si">{</span><span class="nx">authProvider</span><span class="si">}</span><span class="p">&gt;</span>
-        ...
-    <span class="p">&lt;/</span><span class="nc">Admin</span><span class="p">&gt;</span>
-<span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nc">Admin</span> <span class="na">authProvider</span><span class="p">=</span><span class="si">{</span><span class="nx">authProvider</span><span class="si">}</span><span class="p">&gt;</span>
+            ...
+        <span class="p">&lt;/</span><span class="nc">Admin</span><span class="p">&gt;</span>
+    <span class="p">);</span>
 </code></pre></div></div>
 
-<p>Once an admin has an <code class="language-plaintext highlighter-rouge">authProvider</code>, react-admin enables a new page on the <code class="language-plaintext highlighter-rouge">/login</code> route, which displays a login form asking for a username and password.</p>
+<p>管理アプリに<code class="language-plaintext highlighter-rouge">authProvider</code>が設定されると、<code class="language-plaintext highlighter-rouge">/login</code>ルートに新しいページが追加され、ユーザー名とパスワードを求めるログインフォームが表示されます。</p>
 
-<h2 id="anatomy-of-an-authprovider">Anatomy Of An <code class="language-plaintext highlighter-rouge">authProvider</code></h2>
+<h2 id="authproviderの構成"><code class="language-plaintext highlighter-rouge">authProvider</code>の構成</h2>
 
-<p>What’s an <code class="language-plaintext highlighter-rouge">authProvider</code>? Just like a <code class="language-plaintext highlighter-rouge">dataProvider</code>, an <code class="language-plaintext highlighter-rouge">authProvider</code> is an object that handles authentication and authorization logic. It exposes methods that react-admin calls when needed, and that you can call manually through specialized hooks. The <code class="language-plaintext highlighter-rouge">authProvider</code> methods must return a Promise. The simplest <code class="language-plaintext highlighter-rouge">authProvider</code> is:</p>
+<p><code class="language-plaintext highlighter-rouge">authProvider</code>とは何でしょうか？<code class="language-plaintext highlighter-rouge">dataProvider</code>と同様に、<code class="language-plaintext highlighter-rouge">authProvider</code>は認証と認可のロジックを処理するオブジェクトです。必要に応じてreact-adminが呼び出すメソッドを公開し、専門のフックを通じて手動で呼び出すこともできます。<code class="language-plaintext highlighter-rouge">authProvider</code>のメソッドはPromiseを返す必要があります。最もシンプルな<code class="language-plaintext highlighter-rouge">authProvider</code>は次のようになります：</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">authProvider</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">// send username and password to the auth server and get back credentials</span>
+    <span class="c1">// ユーザー名とパスワードを認証サーバーに送り、認証情報を取得</span>
     <span class="na">login</span><span class="p">:</span> <span class="nx">params</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(),</span>
-    <span class="c1">// when the dataProvider returns an error, check if this is an authentication error</span>
+    <span class="c1">// dataProviderがエラーを返したときに、認証エラーかどうかを確認</span>
     <span class="na">checkError</span><span class="p">:</span> <span class="nx">error</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(),</span>
-    <span class="c1">// when the user navigates, make sure that their credentials are still valid</span>
+    <span class="c1">// ユーザーがナビゲートする際に認証情報がまだ有効かどうかを確認</span>
     <span class="na">checkAuth</span><span class="p">:</span> <span class="nx">params</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(),</span>
-    <span class="c1">// remove local credentials and notify the auth server that the user logged out</span>
+    <span class="c1">// ローカルの認証情報を削除し、ユーザーがログアウトしたことを認証サーバーに通知</span>
     <span class="na">logout</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(),</span>
-    <span class="c1">// get the user's profile</span>
+    <span class="c1">// ユーザープロフィールを取得</span>
     <span class="na">getIdentity</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(),</span>
-    <span class="c1">// get the user permissions (optional)</span>
+    <span class="c1">// ユーザーの権限を取得（オプション）</span>
     <span class="na">getPermissions</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(),</span>
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>Find an existing Auth Provider in the <a href="./AuthProviderList.md">List of Available Auth Providers</a>, or write your own by following the <a href="./AuthProviderWriting.md">Building Your Own Auth Provider</a> instructions.</p>
+<p>既存の認証プロバイダーは<a href="./AuthProviderList.md">利用可能な認証プロバイダーのリスト</a>で見つけるか、<a href="./AuthProviderWriting.md">独自の認証プロバイダーの作成方法</a>に従って独自のものを作成できます。</p>
 
-<h2 id="sending-credentials-to-the-api">Sending Credentials To The API</h2>
+<h2 id="apiに認証情報を送信する">APIに認証情報を送信する</h2>
 
-<p>The <code class="language-plaintext highlighter-rouge">authProvider</code> handles the authentication logic, but it’s the <code class="language-plaintext highlighter-rouge">dataProvider</code>’s responsibility to use the credentials when communicating with the API.</p>
+<p><code class="language-plaintext highlighter-rouge">authProvider</code>は認証ロジックを処理しますが、APIとの通信で認証情報を使用するのは<code class="language-plaintext highlighter-rouge">dataProvider</code>の責任です。</p>
 
-<p>As explained in the <a href="./DataProviders.md#adding-custom-headers">Data providers documentation</a>, <code class="language-plaintext highlighter-rouge">simpleRestProvider</code> and <code class="language-plaintext highlighter-rouge">jsonServerProvider</code> take an <code class="language-plaintext highlighter-rouge">httpClient</code> as second parameter. That’s the place where you can change request headers, cookies, etc.</p>
+<p><a href="./DataProviders.md#adding-custom-headers">データプロバイダードキュメント</a>で説明されているように、<code class="language-plaintext highlighter-rouge">simpleRestProvider</code>と<code class="language-plaintext highlighter-rouge">jsonServerProvider</code>は2番目のパラメータとして<code class="language-plaintext highlighter-rouge">httpClient</code>を受け取ります。ここでリクエストヘッダーやクッキーなどを変更できます。</p>
 
-<p>For instance, if the <code class="language-plaintext highlighter-rouge">authProvider</code> stores an authorization token in localStorage, here is how you can tweak the <code class="language-plaintext highlighter-rouge">dataProvider</code> to pass this token as an <code class="language-plaintext highlighter-rouge">Authorization</code> header:</p>
+<p>例えば、<code class="language-plaintext highlighter-rouge">authProvider</code>が認証トークンをlocalStorageに保存する場合、<code class="language-plaintext highlighter-rouge">dataProvider</code>を調整してこのトークンを<code class="language-plaintext highlighter-rouge">Authorization</code>ヘッダーとして渡す方法は次のとおりです：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">fetchUtils</span><span class="p">,</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">simpleRestProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-simple-rest</span><span class="dl">'</span><span class="p">;</span>
@@ -639,15 +639,15 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>Now the admin is secured: The user can be authenticated and use their credentials to communicate with a secure API.</p>
+<p>これで管理アプリが保護され、ユーザーは認証され、セキュアなAPIと通信するための認証情報を使用できます。</p>
 
-<p>If you have a custom REST client, don’t forget to add credentials yourself.</p>
+<p>独自のRESTクライアントを使用する場合、必ず自分で認証情報を追加してください。</p>
 
-<h2 id="allowing-anonymous-access">Allowing Anonymous Access</h2>
+<h2 id="匿名アクセスの許可">匿名アクセスの許可</h2>
 
-<p>As long as you add an <code class="language-plaintext highlighter-rouge">authProvider</code>, react-admin restricts access to all the pages declared in the <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> components. If you want to allow anonymous access, you can set the <code class="language-plaintext highlighter-rouge">disableAuthentication</code> prop in the page components.</p>
+<p><code class="language-plaintext highlighter-rouge">authProvider</code>を追加すると、react-adminは<code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>コンポーネントで宣言されたすべてのページへのアクセスを制限します。匿名アクセスを許可する場合は、ページコンポーネントに<code class="language-plaintext highlighter-rouge">disableAuthentication</code>プロップを設定できます。</p>
 
-<p>For instance, to let anonymous users access the post list view:</p>
+<p>例えば、匿名ユーザーに投稿リストビューへのアクセスを許可するには：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">PostList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">List</span> <span class="na">disableAuthentication</span><span class="p">&gt;</span>
@@ -662,20 +662,20 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">disableAuthentication</code> is available on the following components and hooks:</p>
+<p><code class="language-plaintext highlighter-rouge">disableAuthentication</code>は次のコンポーネントやフックで利用可能です：</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">&lt;Create&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;CreateBase&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;CreateController&gt;</code> and <code class="language-plaintext highlighter-rouge">useCreateController</code></li>
-  <li><code class="language-plaintext highlighter-rouge">&lt;Edit&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;EditBase&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;EditController&gt;</code> and <code class="language-plaintext highlighter-rouge">useEditController</code></li>
-  <li><code class="language-plaintext highlighter-rouge">&lt;List&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;ListBase&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;ListController&gt;</code> and <code class="language-plaintext highlighter-rouge">useListController</code></li>
-  <li><code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;ShowBase&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;ShowController&gt;</code> and <code class="language-plaintext highlighter-rouge">useShowController</code></li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;Create&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;CreateBase&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;CreateController&gt;</code>, <code class="language-plaintext highlighter-rouge">useCreateController</code></li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;Edit&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;EditBase&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;EditController&gt;</code>, <code class="language-plaintext highlighter-rouge">useEditController</code></li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;List&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;ListBase&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;ListController&gt;</code>, <code class="language-plaintext highlighter-rouge">useListController</code></li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;ShowBase&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;ShowController&gt;</code>, <code class="language-plaintext highlighter-rouge">useShowController</code></li>
 </ul>
 
-<h2 id="disabling-anonymous-access">Disabling Anonymous Access</h2>
+<h2 id="匿名アクセスの無効化">匿名アクセスの無効化</h2>
 
-<p>Some pages in react-admin apps may allow anonymous access. For that reason, react-admin starts rendering the page layout before knowing if the user is logged in. If all the pages require authentication, this default behaviour creates an unwanted “flash of UI” for users who never logged in, before the <code class="language-plaintext highlighter-rouge">authProvider</code> redirects them to the login page.</p>
+<p>react-adminアプリの一部のページは匿名アクセスを許可する場合があります。このため、react-adminはユーザーがログインしているかどうかを確認する前にページレイアウトを表示し始めます。すべてのページが認証を必要とする場合、このデフォルトの動作は、ログインしていないユーザーに対して不要な「UIのフラッシュ」を引き起こします。</p>
 
-<p>If you know your app will never accept anonymous access, you can force the app to wait for the <code class="language-plaintext highlighter-rouge">authProvider.checkAuth()</code> to resolve before rendering the page layout, by setting the <code class="language-plaintext highlighter-rouge">&lt;Admin requireAuth&gt;</code> prop.</p>
+<p>アプリが匿名アクセスを一切許可しないことがわかっている場合、<code class="language-plaintext highlighter-rouge">&lt;Admin requireAuth&gt;</code>プロップを設定して、ページレイアウトのレンダリング前に<code class="language-plaintext highlighter-rouge">authProvider.checkAuth()</code>の解決を待つように強制できます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">Admin</span> <span class="na">dataProvider</span><span class="p">=</span><span class="si">{</span><span class="nx">dataProvider</span><span class="si">}</span> <span class="na">authProvider</span><span class="p">=</span><span class="si">{</span><span class="nx">authProvider</span><span class="si">}</span> <span class="na">requireAuth</span><span class="p">&gt;</span>
@@ -684,14 +684,14 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="restricting-access-to-custom-pages">Restricting Access To Custom Pages</h2>
+<h2 id="カスタムページへのアクセス制限">カスタムページへのアクセス制限</h2>
 
-<p>When you add custom pages, they are accessible to anonymous users by default. To make them only accessible to authenticated users, call <a href="./useAuthenticated.md">the <code class="language-plaintext highlighter-rouge">useAuthenticated</code> hook</a> in the custom page:</p>
+<p>カスタムページを追加すると、デフォルトで匿名ユーザーがアクセス可能です。これらを認証されたユーザーのみがアクセスできるようにするには、カスタムページで<a href="./useAuthenticated.md">useAuthenticatedフック</a>を呼び出します：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">CustomRoutes</span><span class="p">,</span> <span class="nx">useAuthenticated</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">MyPage</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">useAuthenticated</span><span class="p">();</span> <span class="c1">// redirects to login if not authenticated</span>
+    <span class="nx">useAuthenticated</span><span class="p">();</span> <span class="c1">// 認証されていない場合、ログインページにリダイレクト</span>
     <span class="k">return</span> <span class="p">(</span>
         <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
             ...
@@ -709,7 +709,7 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>Alternatively, you can use <a href="./Authenticated.md">the <code class="language-plaintext highlighter-rouge">&lt;Authenticated&gt;</code> component</a>, e.g. if you can’t modify the page component, or if you want to add authentication in the <code class="language-plaintext highlighter-rouge">&lt;Route element&gt;</code> prop:</p>
+<p>または、[<Authenticated>コンポーネント](./Authenticated.md)を使用することもできます。例えば、ページコンポーネントを変更できない場合や、`<Route element="">`プロップで認証を追加したい場合などです：</Route></Authenticated></p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">CustomRoutes</span><span class="p">,</span> <span class="nx">Authenticated</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -731,38 +731,38 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="using-external-authentication-providers">Using External Authentication Providers</h2>
+<h2 id="外部認証プロバイダーの使用">外部認証プロバイダーの使用</h2>
 
-<p>Instead of the built-in Login page, you can opt for an external authentication provider, such as Auth0, Cognito, or any other OAuth-based service. These services all require a callback URL in the app, to redirect users after login.</p>
+<p>組み込みのログインページの代わりに、Auth0、Cognito、または他のOAuthベースのサービスなどの外部認証プロバイダーを選択できます。これらのサービスはすべて、ログイン後にユーザーをリダイレクトするコールバックURLをアプリに要求します。</p>
 
-<p>React-admin provides a default callback URL at <code class="language-plaintext highlighter-rouge">/auth-callback</code>. This route calls the <code class="language-plaintext highlighter-rouge">authProvider.handleCallback</code> method on mount. This means it’s the <code class="language-plaintext highlighter-rouge">authProvider</code>’s job to use the params received from the callback URL to authenticate future API calls.</p>
+<p>React-adminは<code class="language-plaintext highlighter-rouge">/auth-callback</code>にデフォルトのコールバックURLを提供します。このルートはマウント時に<code class="language-plaintext highlighter-rouge">authProvider.handleCallback</code>メソッドを呼び出します。つまり、受け取ったパラメーターを使用して将来のAPI呼び出しを認証するのは<code class="language-plaintext highlighter-rouge">authProvider</code>の役割です。</p>
 
-<p>For instance, here’s what a simple authProvider for Auth0 might look like:</p>
+<p>例えば、Auth0のためのシンプルなauthProviderは次のようになります：</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Auth0Client</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./Auth0Client</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="k">export</span> <span class="kd">const</span> <span class="nx">authProvider</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="k">async</span> <span class="nx">login</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* Nothing to do here, this function will never be called */</span> <span class="p">},</span>
+    <span class="k">async</span> <span class="nx">login</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ここでは何もしない、この関数は呼ばれません */</span> <span class="p">},</span>
     <span class="k">async</span> <span class="nx">checkAuth</span><span class="p">()</span> <span class="p">{</span>
         <span class="kd">const</span> <span class="nx">isAuthenticated</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Auth0Client</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">();</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">isAuthenticated</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">return</span><span class="p">;</span>
         <span class="p">}</span>
-        <span class="c1">// not authenticated: redirect the user to the Auth0 service,</span>
-        <span class="c1">// where they will be redirected back to the app after login</span>
+        <span class="c1">// 認証されていない場合、ユーザーをAuth0サービスにリダイレクトし、</span>
+        <span class="c1">// ログイン後にアプリに戻る</span>
         <span class="nx">Auth0Client</span><span class="p">.</span><span class="nx">loginWithRedirect</span><span class="p">({</span>
             <span class="na">authorizationParams</span><span class="p">:</span> <span class="p">{</span>
                 <span class="na">redirect_uri</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span><span class="p">}</span><span class="s2">/auth-callback`</span><span class="p">,</span>
             <span class="p">},</span>
         <span class="p">});</span>
     <span class="p">},</span>
-    <span class="c1">// A user logged successfully on the Auth0 service</span>
-    <span class="c1">// and was redirected back to the /auth-callback route on the app</span>
+    <span class="c1">// ユーザーがAuth0サービスで正常にログインし、</span>
+    <span class="c1">// アプリの/auth-callbackルートにリダイレクトされた</span>
     <span class="k">async</span> <span class="nx">handleCallback</span><span class="p">()</span> <span class="p">{</span>
         <span class="kd">const</span> <span class="nx">query</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">search</span><span class="p">;</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">code=</span><span class="dl">'</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">query</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">'</span><span class="s1">state=</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
             <span class="k">try</span> <span class="p">{</span>
-                <span class="c1">// get an access token based on the query paramaters</span>
+                <span class="c1">// クエリパラメータに基づいてアクセストークンを取得</span>
                 <span class="k">await</span> <span class="nx">Auth0Client</span><span class="p">.</span><span class="nx">handleRedirectCallback</span><span class="p">();</span>
                 <span class="k">return</span><span class="p">;</span>
             <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
@@ -770,11 +770,11 @@
                 <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
             <span class="p">}</span>
         <span class="p">}</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to handle login callback.</span><span class="dl">'</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">ログインコールバックの処理に失敗しました。</span><span class="dl">'</span><span class="p">);</span>
     <span class="p">},</span>
     <span class="k">async</span> <span class="nx">logout</span><span class="p">()</span> <span class="p">{</span>
         <span class="kd">const</span> <span class="nx">isAuthenticated</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">client</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">();</span>
-            <span class="c1">// need to check for this as react-admin calls logout in case checkAuth failed</span>
+            <span class="c1">// react-adminがcheckAuthに失敗した場合にlogoutを呼び出す必要があるため、チェックが必要</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">isAuthenticated</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">return</span> <span class="nx">client</span><span class="p">.</span><span class="nx">logout</span><span class="p">({</span>
                 <span class="na">returnTo</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span><span class="p">,</span>
@@ -785,41 +785,41 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>It’s up to you to decide when to redirect users to the third party authentication service, for instance:</p>
+<p>ユーザーをサードパーティ認証サービスにリダイレクトするタイミングは、以下のように決定できます：</p>
 
 <ul>
-  <li>Directly in the <code class="language-plaintext highlighter-rouge">AuthProvider.checkAuth()</code> method as above;</li>
-  <li>When users click a button on a <a href="#customizing-the-login-component">custom login page</a></li>
+  <li>上記のように<code class="language-plaintext highlighter-rouge">AuthProvider.checkAuth()</code>メソッド内で直接。</li>
+  <li><a href="#customizing-the-login-component">カスタムログインページ</a>でユーザーがボタンをクリックしたとき。</li>
 </ul>
 
-<h2 id="handling-refresh-tokens">Handling Refresh Tokens</h2>
+<h2 id="リフレッシュトークンの処理">リフレッシュトークンの処理</h2>
 
-<p><a href="https://oauth.net/2/refresh-tokens/">Refresh tokens</a> are an important security mechanism. In order to leverage them, you should decorate the <code class="language-plaintext highlighter-rouge">dataProvider</code> and the <code class="language-plaintext highlighter-rouge">authProvider</code> so that they can check whether the authentication must be refreshed and actually refresh it.</p>
+<p><a href="https://oauth.net/2/refresh-tokens/">リフレッシュトークン</a>は重要なセキュリティメカニズムです。これを活用するには、認証をリフレッシュする必要があるかどうかをチェックし、実際にリフレッシュするように<code class="language-plaintext highlighter-rouge">dataProvider</code>と<code class="language-plaintext highlighter-rouge">authProvider</code>を装飾する必要があります。</p>
 
-<p>You can use the <a href="./addRefreshAuthToDataProvider.md"><code class="language-plaintext highlighter-rouge">addRefreshAuthToDataProvider</code></a> and <a href="./addRefreshAuthToAuthProvider.md"><code class="language-plaintext highlighter-rouge">addRefreshAuthToAuthProvider</code></a> functions for this purpose. They accept a <code class="language-plaintext highlighter-rouge">dataProvider</code> or <code class="language-plaintext highlighter-rouge">authProvider</code> respectively and a function that should refresh the authentication token if necessary:</p>
+<p>この目的のために、<a href="./addRefreshAuthToDataProvider.md"><code class="language-plaintext highlighter-rouge">addRefreshAuthToDataProvider</code></a>および<a href="./addRefreshAuthToAuthProvider.md"><code class="language-plaintext highlighter-rouge">addRefreshAuthToAuthProvider</code></a>関数を使用できます。これらはそれぞれ<code class="language-plaintext highlighter-rouge">dataProvider</code>や<code class="language-plaintext highlighter-rouge">authProvider</code>を受け取り、必要に応じて認証トークンをリフレッシュする関数を受け取ります：</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/refreshAuth.js</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/refreshAuth.js</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">getAuthTokensFromLocalStorage</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./getAuthTokensFromLocalStorage</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">refreshAuthTokens</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./refreshAuthTokens</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="k">export</span> <span class="kd">const</span> <span class="nx">refreshAuth</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="p">{</span> <span class="nx">accessToken</span><span class="p">,</span> <span class="nx">refreshToken</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">getAuthTokensFromLocalStorage</span><span class="p">();</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">accessToken</span><span class="p">.</span><span class="nx">exp</span> <span class="o">&lt;</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// This function will fetch the new tokens from the authentication service and update them in localStorage</span>
+        <span class="c1">// この関数は認証サービスから新しいトークンを取得し、localStorageに更新します</span>
         <span class="k">return</span> <span class="nx">refreshAuthTokens</span><span class="p">(</span><span class="nx">refreshToken</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
 <span class="p">}</span>
 
-<span class="c1">// in src/authProvider.js</span>
+<span class="c1">// src/authProvider.js</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">addRefreshAuthToAuthProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">refreshAuth</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">refreshAuth</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">myAuthProvider</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">// ...Usual AuthProvider methods</span>
+    <span class="c1">// 通常のAuthProviderメソッド</span>
 <span class="p">};</span>
 <span class="k">export</span> <span class="kd">const</span> <span class="nx">authProvider</span> <span class="o">=</span> <span class="nx">addRefreshAuthToAuthProvider</span><span class="p">(</span><span class="nx">myAuthProvider</span><span class="p">,</span> <span class="nx">refreshAuth</span><span class="p">);</span>
 
-<span class="c1">// in src/dataProvider.js</span>
+<span class="c1">// src/dataProvider.js</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">addRefreshAuthToDataProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">simpleRestProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-simple-rest</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">refreshAuth</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">refreshAuth</span><span class="dl">'</span><span class="p">;</span>
@@ -827,15 +827,15 @@
 <span class="k">export</span> <span class="kd">const</span> <span class="nx">dataProvider</span> <span class="o">=</span> <span class="nx">addRefreshAuthToDataProvider</span><span class="p">(</span><span class="nx">baseDataProvider</span><span class="p">,</span> <span class="nx">refreshAuth</span><span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="customizing-the-login-component">Customizing The Login Component</h2>
+<h2 id="ログインコンポーネントのカスタマイズ">ログインコンポーネントのカスタマイズ</h2>
 
-<p>Using <code class="language-plaintext highlighter-rouge">authProvider</code> is enough to implement a full-featured authorization system if the authentication relies on a username and password.</p>
+<p>ユーザー名とパスワードに依存する認証の場合、<code class="language-plaintext highlighter-rouge">authProvider</code>を使用するだけで完全な認証システムを実装できます。</p>
 
-<p>But what if you want to use an email instead of a username? What if you want to use a Single-Sign-On (SSO) with a third-party authentication service? What if you want to use two-factor authentication?</p>
+<p>しかし、ユーザー名の代わりにメールを使用したい場合や、サードパーティの認証サービスでシングルサインオン（SSO）を使用したい場合、または二要素認証を使用したい場合はどうでしょうか？</p>
 
-<p>For all these cases, it’s up to you to implement your own <code class="language-plaintext highlighter-rouge">LoginPage</code> component, which will be displayed under the <code class="language-plaintext highlighter-rouge">/login</code> route instead of the default username/password form. Pass this component to the <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component:</p>
+<p>これらすべての場合、デフォルトのユーザー名/パスワードフォームの代わりに、<code class="language-plaintext highlighter-rouge">/login</code>ルートに表示される独自の<code class="language-plaintext highlighter-rouge">LoginPage</code>コンポーネントを実装する必要があります。このコンポーネントを<code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code>コンポーネントに渡します：</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/App.js</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/App.js</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="k">import</span> <span class="nx">MyLoginPage</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./MyLoginPage</span><span class="dl">'</span><span class="p">;</span>
@@ -847,22 +847,22 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>By default, the login page displays a gradient background. If you just want to change the background, you can use the default Login page component and pass an image URL as the <code class="language-plaintext highlighter-rouge">backgroundImage</code> prop.</p>
+<p>デフォルトでは、ログインページはグラデーションの背景を表示します。背景だけを変更したい場合は、デフォルトのログインページコンポーネントを使用し、<code class="language-plaintext highlighter-rouge">backgroundImage</code>プロップに画像URLを渡すことができます。</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/MyLoginPage.js</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/MyLoginPage.js</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Login</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">MyLoginPage</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">Login</span>
-        <span class="c1">// A random image that changes everyday</span>
+        <span class="c1">// 毎日変わるランダムな画像</span>
         <span class="na">backgroundImage</span><span class="p">=</span><span class="s">"https://source.unsplash.com/random/1600x900/daily"</span>
     <span class="p">/&gt;</span>
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>If you want to build a Login page from scratch, you’ll need the <a href="./useLogin.md"><code class="language-plaintext highlighter-rouge">useLogin</code> hook</a>.</p>
+<p>ログインページを一から作成する場合、<a href="./useLogin.md"><code class="language-plaintext highlighter-rouge">useLogin</code>フック</a>が必要です。</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/MyLoginPage.js</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/MyLoginPage.js</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useLogin</span><span class="p">,</span> <span class="nx">useNotify</span><span class="p">,</span> <span class="nx">Notification</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -875,7 +875,7 @@
     <span class="kd">const</span> <span class="nx">handleSubmit</span> <span class="o">=</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
         <span class="nx">login</span><span class="p">({</span> <span class="nx">email</span><span class="p">,</span> <span class="nx">password</span> <span class="p">}).</span><span class="k">catch</span><span class="p">(()</span> <span class="o">=&gt;</span>
-            <span class="nx">notify</span><span class="p">(</span><span class="dl">'</span><span class="s1">Invalid email or password</span><span class="dl">'</span><span class="p">)</span>
+            <span class="nx">notify</span><span class="p">(</span><span class="dl">'</span><span class="s1">無効なメールアドレスまたはパスワードです</span><span class="dl">'</span><span class="p">)</span>
         <span class="p">);</span>
     <span class="p">};</span>
 
@@ -900,16 +900,16 @@
 <span class="k">export</span> <span class="k">default</span> <span class="nx">MyLoginPage</span><span class="p">;</span>
 </code></pre></div></div>
 
-<h2 id="customizing-the-logout-component">Customizing The Logout Component</h2>
+<h2 id="ログアウトコンポーネントのカスタマイズ">ログアウトコンポーネントのカスタマイズ</h2>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/MyLogoutButton.js</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/MyLogoutButton.js</span>
 <span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">forwardRef</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useLogout</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">MenuItem</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material/MenuItem</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">ExitIcon</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/icons-material/PowerSettingsNew</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="c1">// It's important to pass the ref to allow Material UI to manage the keyboard navigation</span>
+<span class="c1">// Material UIがキーボードナビゲーションを管理できるようにするため、refを渡すことが重要です</span>
 <span class="kd">const</span> <span class="nx">MyLogoutButton</span> <span class="o">=</span> <span class="nx">forwardRef</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span> <span class="nx">ref</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">logout</span> <span class="o">=</span> <span class="nx">useLogout</span><span class="p">();</span>
     <span class="kd">const</span> <span class="nx">handleClick</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">logout</span><span class="p">();</span>
@@ -917,10 +917,10 @@
         <span class="p">&lt;</span><span class="nc">MenuItem</span>
             <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">handleClick</span><span class="si">}</span>
             <span class="na">ref</span><span class="p">=</span><span class="si">{</span><span class="nx">ref</span><span class="si">}</span>
-            <span class="c1">// It's important to pass the props to allow Material UI to manage the keyboard navigation</span>
+            <span class="c1">// Material UIがキーボードナビゲーションを管理できるようにするため、propsを渡すことが重要です</span>
             <span class="si">{</span><span class="p">...</span><span class="nx">props</span><span class="si">}</span>
         <span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nc">ExitIcon</span> <span class="p">/&gt;</span> Logout
+            <span class="p">&lt;</span><span class="nc">ExitIcon</span> <span class="p">/&gt;</span> ログアウト
         <span class="p">&lt;/</span><span class="nc">MenuItem</span><span class="p">&gt;</span>
     <span class="p">);</span>
 <span class="p">});</span>
@@ -928,15 +928,15 @@
 <span class="k">export</span> <span class="k">default</span> <span class="nx">MyLogoutButton</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: By default, react-admin redirects the user to ‘/login’ after they log out. This can be changed by passing the url to redirect to as parameter to the <code class="language-plaintext highlighter-rouge">logout()</code> function:</p>
+<p><strong>ヒント</strong>：デフォルトでは、react-adminはログアウト後にユーザーを’/login’にリダイレクトします。これを変更するには、<code class="language-plaintext highlighter-rouge">logout()</code>関数にリダイレクトするURLをパラメータとして渡します：</p>
 
-<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span> in src/MyLogoutButton.js
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span> src/MyLogoutButton.js
 <span class="err">//</span> ...
 <span class="gd">-   const handleClick = () =&gt; logout();
 </span><span class="gi">+   const handleClick = () =&gt; logout('/custom-login');
 </span></code></pre></div></div>
 
-<p>To use it, you must provide a custom <code class="language-plaintext highlighter-rouge">UserMenu</code>:</p>
+<p>これを使用するには、カスタム<code class="language-plaintext highlighter-rouge">UserMenu</code>を提供する必要があります：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">MyLogoutButton</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./MyLogoutButton</span><span class="dl">'</span><span class="p">;</span>
 

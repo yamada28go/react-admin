@@ -5,65 +5,65 @@ title: "The Show Page"
 
 # The Show Page
 
-The Show view displays the details of a single record. 
+Showビューは単一のレコードの詳細を表示します。
 
 ![post show view](./img/show-view.png)
 
-## From Pure React To React-Admin
+## 純粋なReactからReact-Adminへ
 
-The Show view is the simplest view in an admin: it fetches and displays the fields of a single record. You've probably developed such pages a dozen times, and they're not rocket science. But the data fetching logic and presentation code can be long and tedious to write, and hide the business logic. That's why, even for such simple pages, react-admin can help a lot.
+Showビューは管理画面の中で最もシンプルなビューです。単一のレコードのフィールドを取得して表示します。これまでにこうしたページを何度も開発してきたかもしれませんが、データ取得ロジックと表示コードを書くのは長くて退屈な作業であり、ビジネスロジックが隠れてしまうことがあります。だからこそ、こんなシンプルなページでもreact-adminは大いに役立ちます。
 
-To better understand how to use the various react-admin hooks and components dedicated to the show view, let’s start by building such a view by hand.
+react-adminのShowビュー専用フックやコンポーネントの使い方をより理解するために、まずは手動でShowビューを構築するところから始めましょう。
 
-### A Show View Built By Hand
+### 手動で構築するShowビュー
 
-Here is how you could write a simple book show view, leveraging react-admin's [data fetching hooks](./DataProviders.md):
+以下に、react-adminの[データ取得フック](./DataProviders.md)を活用して、シンプルな本のShowビューを書く方法を示します：
 
 ```jsx
-import { useParams } from 'react-router-dom';
-import { useGetOne, useRedirect, Title } from 'react-admin';
-import { Card, Stack, Typography } from '@mui/material';
+    import { useParams } from 'react-router-dom';
+    import { useGetOne, useRedirect, Title } from 'react-admin';
+    import { Card, Stack, Typography } from '@mui/material';
 
-/**
- * Fetch a book from the API and display it
- */
-const BookShow = () => {
-    const { id } = useParams(); // this component is rendered in the /books/:id path
-    const redirect = useRedirect();
-    const { data, isLoading } = useGetOne(
-        'books',
-        { id },
-        // redirect to the list if the book is not found
-        { onError: () => redirect('/books') }
-    );
-    if (isLoading) { return <Loading />; }
-    return (
-        <div>
-            <Title title="Book Show"/>
-            <Card>
-                <Stack spacing={1}>
-                    <div>
-                        <Typography variant="caption" display="block">Title</Typography>
-                        <Typography variant="body2">{data.title}</Typography>
-                    </div>
-                    <div>
-                        <Typography variant="caption" display="block">Publication Date</Typography>
-                        <Typography variant="body2">{new Date(data.published_at).toDateString()}</Typography>
-                    </div>
-                </Stack>
-            </Card>
-        </div>
-    );
-};
+    /**
+     * APIから本を取得して表示する
+     */
+    const BookShow = () => {
+        const { id } = useParams(); // このコンポーネントは /books/:id パスでレンダリングされます
+        const redirect = useRedirect();
+        const { data, isLoading } = useGetOne(
+            'books',
+            { id },
+            // 本が見つからない場合はリストにリダイレクト
+            { onError: () => redirect('/books') }
+        );
+        if (isLoading) { return <Loading />; }
+        return (
+            <div>
+                <Title title="Book Show"/>
+                <Card>
+                    <Stack spacing={1}>
+                        <div>
+                            <Typography variant="caption" display="block">タイトル</Typography>
+                            <Typography variant="body2">{data.title}</Typography>
+                        </div>
+                        <div>
+                            <Typography variant="caption" display="block">出版日</Typography>
+                            <Typography variant="body2">{new Date(data.published_at).toDateString()}</Typography>
+                        </div>
+                    </Stack>
+                </Card>
+            </div>
+        );
+    };
 ```
 
-You can pass this `BookShow` component as the `show` prop of the `<Resource name="books" />`, and react-admin will render it on the `/books/:id/show` path.
+この `BookShow` コンポーネントを `<Resource name="books" />` の `show` プロップとして渡すと、react-adminはこれを `/books/:id/show` パスにレンダリングします。
 
-This example uses the `useGetOne` hook instead of `fetch` because `useGetOne` already contains the authentication and request state logic. But you could totally write a Show view with `fetch`.
+この例では、認証とリクエスト状態ロジックを既に含んでいる `useGetOne` フックを使用していますが、`fetch` を使ってShowビューを書くことも可能です。
 
-### `<Labeled>` Displays Labels Over Fields
+### `<Labeled>`でフィールドにラベルを表示
 
-When you build Show views like the one above, you have to repeat quite a lot of code for each field. React-admin Field components can help avoid that repetition. The following example leverages the `<Labeled>`, `<TextField>`, and `<DateField>` components for that purpose:
+上記のようなShowビューを構築する際、各フィールドごとにかなりのコードを繰り返す必要があります。React-adminのFieldコンポーネントを利用することで、この繰り返しを避けることができます。次の例では、その目的で `<Labeled>`, `<TextField>`, および `<DateField>` コンポーネントを活用しています：
 
 ```diff
 import { useParams } from 'react-router-dom';
@@ -87,17 +87,17 @@ const BookShow = () => {
             <Card>
                 <Stack spacing={1}>
 -                   <div>
--                       <Typography variant="caption" display="block">Title</Typography>
+-                       <Typography variant="caption" display="block">タイトル</Typography>
 -                       <Typography variant="body2">{data.title}</Typography>
 -                   </div>
-+                   <Labeled label="Title">
++                   <Labeled label="タイトル">
 +                       <TextField source="title" record={data} />
 +                   </Labeled>
 -                   <div>
--                       <Typography variant="caption" display="block">Publication Date</Typography>
+-                       <Typography variant="caption" display="block">出版日</Typography>
 -                       <Typography variant="body2">{new Date(data.published_at).toDateString()}</Typography>
 -                   </div>
-+                   <Labeled label="Publication Date">
++                   <Labeled label="出版日">
 +                       <DateField source="published_at" record={data} />
 +                   </Labeled>
                 </Stack>
@@ -107,9 +107,9 @@ const BookShow = () => {
 };
 ```
 
-### `<RecordContext>` Exposes The `record`
+### `<RecordContext>` で `record` を公開
 
-Field components require a `record` to render, but they can grab it from a `RecordContext` instead of the `record` prop. Creating such a context with `<RecordContextProvider>` allows to reduce even more the amount of code you need to write for each field.
+フィールドコンポーネントはレンダリングのために `record` が必要ですが、`record` プロップの代わりに `RecordContext` から取得することができます。 `<RecordContextProvider>` を使用してこのようなコンテキストを作成することで、各フィールドに必要なコードの量をさらに減らすことができます。
 
 ```diff
 import { useParams } from 'react-router-dom';
@@ -132,11 +132,11 @@ const BookShow = () => {
                 <Title title="Book Show"/>
                 <Card>
                     <Stack spacing={1}>
-                        <Labeled label="Title">
+                        <Labeled label="タイトル">
 -                           <TextField source="title" record={data} />
 +                           <TextField source="title" />
                         </Labeled>
-                        <Labeled label="Publication Date">
+                        <Labeled label="出版日">
 -                           <DateField source="published_at" record={data} />
 +                           <DateField source="published_at" />
                         </Labeled>
@@ -148,9 +148,9 @@ const BookShow = () => {
 };
 ```
 
-### `<SimpleShowLayout>` Displays Fields In A Stack
+### `<SimpleShowLayout>` でフィールドをスタックに表示
 
-Displaying a stack of fields with a label is such a common task that react-admin provides a helper component for that. It's called [`<SimpleShowLayout>`](./SimpleShowLayout.md):
+ラベル付きのフィールドをスタック表示することは非常に一般的なタスクであるため、react-adminはそのためのヘルパーコンポーネントを提供しています。それが[`<SimpleShowLayout>`](./SimpleShowLayout.md)です：
 
 ```diff
 import { useParams } from 'react-router-dom';
@@ -174,11 +174,11 @@ const BookShow = () => {
                 <Card>
 -                   <Stack spacing={1}>
 +                   <SimpleShowLayout>
--                       <Labeled label="Title">
-                            <TextField label="Title" source="title" />
+-                       <Labeled label="タイトル">
+                            <TextField label="タイトル" source="title" />
 -                       </Labeled>
--                       <Labeled label="Publication Date">
-                            <DateField label="Publication Date" source="published_at" />
+-                       <Labeled label="出版日">
+                            <DateField label="出版日" source="published_at" />
 -                       </Labeled>
 +                   </SimpleShowLayout>
 -                   </Stack>
@@ -189,11 +189,11 @@ const BookShow = () => {
 };
 ```
 
-`<SimpleShowLayout>` renders nothing as long as the `data` is not loaded (`record` is `undefined`), so the `isLoading` variable isn't needed anymore.
+`<SimpleShowLayout>` は `data` が読み込まれていない間は何もレンダリングしないので、`isLoading` 変数はもう必要ありません。
 
-### `useShowController`: The Controller Logic
+### `useShowController`: コントローラロジック
 
-The initial logic that grabs the id from the location and fetches the record from the API is also common, and react-admin exposes [the `useShowController` hook](./useShowController.md) to do it: 
+ロケーションからIDを取得し、APIからレコードを取得する初期ロジックも一般的で、react-adminはこれを行うための[`useShowController`フック](./useShowController.md)を公開しています：
 
 ```diff
 -import { useParams } from 'react-router-dom';
@@ -216,8 +216,8 @@ const BookShow = () => {
                 <Title title="Book Show" />
                 <Card>
                     <SimpleShowLayout>
-                        <TextField label="Title" source="title" />
-                        <DateField label="Publication Date" source="published_at" />
+                        <TextField label="タイトル" source="title" />
+                        <DateField label="出版日" source="published_at" />
                     </SimpleShowLayout>
                 </Card>
             </div>
@@ -226,16 +226,16 @@ const BookShow = () => {
 };
 ```
 
-Notice that `useShowController` doesn't need the 'books' resource name - it relies on the `ResourceContext`, set by the `<Resource>` component, to guess it.
+`useShowController` は 'books' リソース名を必要としません。これは、`<Resource>` コンポーネントによって設定された `ResourceContext` に依存してそれを推測するためです。
 
-### `<ShowBase>`: Component Version Of The Controller
+### `<ShowBase>`: コントローラのコンポーネント版
 
-As calling the Show controller and putting its result into a context is also common, react-admin provides [the `<ShowBase>` component](./ShowBase.md) to do it. So the example can be further simplified to the following: 
+Showコントローラを呼び出してその結果をコンテキストに入れることも一般的であるため、react-adminはこれを行うための[`<ShowBase>`コンポーネント](./ShowBase.md)を提供しています。このため、例をさらに以下のように簡素化できます：
 
 ```diff
 -import { useShowController, RecordContextProvider, SimpleShowLayout, Title, TextField, DateField } from 'react-admin';
 +import { ShowBase, SimpleShowLayout, Title, TextField, DateField } from 'react-admin';
-import { Card } from '@mui/material';
+import { Card } from '@mui/material;
 
 const BookShow = () => {
 -   const { data } = useShowController();
@@ -246,8 +246,8 @@ const BookShow = () => {
                 <Title title="Book Show" />
                 <Card>
                     <SimpleShowLayout>
-                        <TextField label="Title" source="title" />
-                        <DateField label="Publication Date" source="published_at" />
+                        <TextField label="タイトル" source="title" />
+                        <DateField label="出版日" source="published_at" />
                     </SimpleShowLayout>
                 </Card>
             </div>
@@ -257,9 +257,9 @@ const BookShow = () => {
 };
 ```
 
-### `<Show>` Renders Title, Fields, And Actions
+### `<Show>`: タイトル、フィールド、アクションをレンダリング
 
-`<ShowBase>` is a headless component: it renders only its children. But almost every show view needs a wrapping `<div>`, a title, and a `<Card>`. That's why react-admin provides [the `<Show>` component](./Show.md), which includes the `<ShowBase>` component, a title built from the resource name, and even an "Edit" button if the resource has an edit component:
+`<ShowBase>` はヘッドレスコンポーネントで、子要素のみをレンダリングします。しかし、ほとんどのShowビューにはラッピングする `<div>`、リソース名から構築されたタイトル、そして `<Card>` が必要です。そのためreact-adminは、`<ShowBase>` コンポーネント、リソース名から構築されたタイトル、そしてリソースに編集コンポーネントがある場合には「編集」ボタンさえも含む[`<Show>`コンポーネント](./Show.md)を提供しています：
 
 ```diff
 -import { ShowBase, SimpleShowLayout, Title, TextField, DateField } from 'react-admin';
@@ -273,8 +273,8 @@ const BookShow = () => (
 -           <Card>
 +   <Show>
         <SimpleShowLayout>
-            <TextField label="Title" source="title" />
-            <DateField label="Publication Date" source="published_at" />
+            <TextField label="タイトル" source="title" />
+            <DateField label="出版日" source="published_at" />
         </SimpleShowLayout>
 +   </Show>
 -           </Card>
@@ -283,13 +283,13 @@ const BookShow = () => (
 );
 ```
 
-**Tip**: Actually, `<Show>` does more than the code it replaces in the previous example: it redirects to the List view if the call to `useGetOne` returns an error, it sets the page title, and stores all the data it prepared in a `<ShowContext>`.
+**Tip**: 実際には、`<Show>` は前の例のコードが置き換えるもの以上のことを行います。`useGetOne` の呼び出しがエラーを返した場合にリストビューにリダイレクトし、ページタイトルを設定し、準備したすべてのデータを `<ShowContext>` に保存します。
 
-**Tip**: Don't mix up the `RecordContext`, which stores a Record (e.g. `{ id: '1', title: 'The Lord of the Rings' }`), and the `<ResourceContext>`, which stores a resource name (e.g. `'book'`).
+**Tip**: `RecordContext`（例：`{ id: '1', title: '指輪物語' }`）と`<ResourceContext>`（例：`'book'`）を混同しないでください。
 
-### A Typical React-Admin Show View 
+### 典型的なReact-AdminのShowビュー
 
-Now the code only expresses business logic. You only need 6 lines to express with react-admin what required 26 lines with React alone:
+今やコードはビジネスロジックのみを表現しています。React-adminを使用すると、React単独で必要だった26行のコードが、わずか6行で済みます：
 
 ```jsx
 import { Show, SimpleShowLayout, TextField, DateField } from 'react-admin';
@@ -297,20 +297,20 @@ import { Show, SimpleShowLayout, TextField, DateField } from 'react-admin';
 const BookShow = () => (
     <Show>
         <SimpleShowLayout>
-            <TextField label="Title" source="title" />
-            <DateField label="Publication Date" source="published_at" />
+            <TextField label="タイトル" source="title" />
+            <DateField label="出版日" source="published_at" />
         </SimpleShowLayout>
     </Show>
 );
 ```
 
-React-admin components are not magic, they are React components designed to let you focus on the business logic and avoid repetitive tasks.
+React-adminコンポーネントは魔法ではなく、ビジネスロジックに集中し、繰り返しの作業を避けるために設計されたReactコンポーネントです。
 
-## Accessing the Record
+## レコードにアクセスする
 
-Using the `<Show>` component instead of calling `useGetOne` manually has one drawback: there is no longer a `data` object containing the fetched record. Instead, you have to access the record from the `<RecordContext>` using [the `useRecordContext` hook](./useRecordContext.md).
+`useGetOne` を手動で呼び出す代わりに `<Show>` コンポーネントを使用することには、一つの欠点があります。それは、取得されたレコードを含む `data` オブジェクトがなくなることです。代わりに、`<RecordContext>` からレコードにアクセスする必要があります。[`useRecordContext` フック](./useRecordContext.md)を使用してこれを行います。
 
-The following example illustrates the usage of this hook with a custom Field component displaying stars according to the book rating:
+次の例は、本の評価に応じて星を表示するカスタムフィールドコンポーネントを使用する場合の、このフックの使い方を示しています：
 
 ```jsx
 import { Show, SimpleShowLayout, TextField, DateField, useRecordContext } from 'react-admin';
@@ -326,15 +326,15 @@ const NbStarsField = () => {
 const BookShow = () => (
     <Show>
         <SimpleShowLayout>
-            <TextField label="Title" source="title" />
-            <DateField label="Publication Date" source="published_at" />
-            <NbStarsField label="Rating" />
+            <TextField label="タイトル" source="title" />
+            <DateField label="出版日" source="published_at" />
+            <NbStarsField label="評価" />
         </SimpleShowLayout>
     </Show>
 );
 ```
 
-Sometimes you don't want to create a new component just to be able to use the `useRecordContext` hook. In these cases, you can use [the `<WithRecord>` component](./WithRecord.md), which is the render prop version of the hook:
+新しいコンポーネントを作成せずに `useRecordContext` フックを使用したい場合もあります。そのような場合、フックのレンダープロップバージョンである[`<WithRecord>`コンポーネント](./WithRecord.md)を使用できます：
 
 ```jsx
 import { Show, SimpleShowLayout, TextField, DateField, WithRecord } from 'react-admin';
@@ -343,9 +343,9 @@ import StarIcon from '@mui/icons-material/Star';
 const BookShow = () => (
     <Show>
         <SimpleShowLayout>
-            <TextField label="Title" source="title" />
-            <DateField label="Publication Date" source="published_at" />
-            <WithRecord label="Rating" render={record => <>
+            <TextField label="タイトル" source="title" />
+            <DateField label="出版日" source="published_at" />
+            <WithRecord label="評価" render={record => <>
                 {[...Array(record.rating)].map((_, index) => <StarIcon key={index} />)}
             </>} />
         </SimpleShowLayout>
@@ -353,9 +353,9 @@ const BookShow = () => (
 );
 ```
 
-## Using Another Layout
+## 別のレイアウトを使用する
 
-When a Show view has to display a lot of fields, the `<SimpleShowLayout>` component ends up in very long page that is not user-friendly. You can use [the `<TabbedShowLayout>` component](./TabbedShowLayout.md) instead, which is a variant of the `<SimpleShowLayout>` component that displays the fields in tabs. 
+Showビューが多数のフィールドを表示する必要がある場合、`<SimpleShowLayout>` コンポーネントは非常に長いページになり、ユーザーフレンドリーではありません。代わりに、フィールドをタブで表示する `<TabbedShowLayout>` コンポーネントを使用できます：
 
 ```jsx
 import { Show, TabbedShowLayout, TextField, DateField, WithRecord } from 'react-admin';
@@ -366,31 +366,32 @@ import PersonPinIcon from '@mui/icons-material/PersonPin';
 const BookShow = () => (
     <Show>
         <TabbedShowLayout>
-            <TabbedShowLayout.Tab label="Description" icon={<FavoriteIcon />}>
-                <TextField label="Title" source="title" />
-                <ReferenceField label="Author" source="author_id">
+            <TabbedShowLayout.Tab label="説明" icon={<FavoriteIcon />}>
+                <TextField label="タイトル" source="title" />
+                <ReferenceField label="著者" source="author_id">
                     <TextField source="name" />
                 </ReferenceField>
-                <DateField label="Publication Date" source="published_at" />
+                <DateField label="出版日" source="published_at" />
             </TabbedShowLayout.Tab>
-            <TabbedShowLayout.Tab label="User ratings" icon={<PersonPinIcon />}>
-                <WithRecord label="Rating" render={record => <>
+            <TabbedShowLayout.Tab label="ユーザー評価" icon={<PersonPinIcon />}>
+                <WithRecord label="評価" render={record => <>
                     {[...Array(record.rating)].map((_, index) => <StarIcon key={index} />)}
                 </>} />
-                <DateField label="Last rating" source="last_rated_at" />
+                <DateField label="最終評価日" source="last_rated_at" />
             </TabbedShowLayout.Tab>
         </TabbedShowLayout>
     </Show>
 );
 ```
 
-## Building a Custom Layout
+## カスタムレイアウトの構築
 
-In many cases, neither the `<SimpleShowLayout>` nor the `<TabbedShowLayout>` components are enough to display the fields you want. In these cases, pass your layout components directly as children of the `<Show>` component. As `<Show>` takes care of fetching the record and putting it in a `<RecordContextProvider>`, you can use Field components directly. 
+多くの場合、`<SimpleShowLayout>` や `<TabbedShowLayout>` コンポーネントだけでは表示したいフィールドを十分に表示できないことがあります。そのような場合は、レイアウトコンポーネントを `<Show>` コンポーネントの子要素として直接渡します。 `<Show>` はレコードを取得して `<RecordContextProvider>` に入れるため、フィールドコンポーネントを直接使用できます。
 
-For instance, to display several fields in a single line, you can use Material UI's `<Grid>` component:
+たとえば、複数のフィールドを1行に表示するには、Material UIの `<Grid>` コンポーネントを使用できます：
 
 {% raw %}
+
 ```jsx
 import { Show, TextField, DateField, ReferenceField, WithRecord } from 'react-admin';
 import { Grid } from '@mui/material';
@@ -400,18 +401,18 @@ const BookShow = () => (
     <Show emptyWhileLoading>
         <Grid container spacing={2} sx={{ margin: 2 }}>
             <Grid item xs={12} sm={6}>
-                <TextField label="Title" source="title" />
+                <TextField label="タイトル" source="title" />
             </Grid>
             <Grid item xs={12} sm={6}>
-                <ReferenceField label="Author" source="author_id" reference="authors">
+                <ReferenceField label="著者" source="author_id" reference="authors">
                     <TextField source="name" />
                 </ReferenceField>
             </Grid>
             <Grid item xs={12} sm={6}>
-                <DateField label="Publication Date" source="published_at" />
+                <DateField label="出版日" source="published_at" />
             </Grid>
             <Grid item xs={12} sm={6}>
-                <WithRecord label="Rating" render={record => <>
+                <WithRecord label="評価" render={record => <>
                     {[...Array(record.rating)].map((_, index) => <StarIcon key={index} />)}
                 </>} />
             </Grid>
@@ -419,13 +420,15 @@ const BookShow = () => (
     </Show>
 );
 ```
+
 {% endraw %}
 
-**Tip**: With `emptyWhileLoading` turned on, the `<Show>` component doesn't render its child component until the record is available. Without this flag, the Field components would render even during the loading phase, and may break if they aren't planned to work with an empty record context. You could grab the `isLoading` state from the `ShowContext` instead, but that would force you to split the `<BookShow>` component into two.  
+**Tip**: `emptyWhileLoading` をオンにすると、`<Show>` コンポーネントはレコードが利用可能になるまで子コンポーネントをレンダリングしません。このフラグがないと、フィールドコンポーネントはローディングフェーズ中にもレンダリングされ、空のレコードコンテキストで動作するように計画されていない場合は壊れる可能性があります。代わりに `ShowContext` から `isLoading` 状態を取得することもできますが、それでは `<BookShow>` コンポーネントを二つに分割する必要があります。
 
-You can also split the list of fields into two stacks, and use the `<SimpleShowLayout>` in the main panel:
+リストのフィールドを二つのスタックに分割し、メインパネルに `<SimpleShowLayout>` を使用することもできます：
 
 {% raw %}
+
 ```jsx
 import { Show, SimpleShowLayout, TextField, DateField, WithRecord } from 'react-admin';
 import StarIcon from '@mui/icons-material/Star';
@@ -435,28 +438,31 @@ const BookShow = () => (
         <Grid container spacing={2} sx={{ margin: 2 }}>
             <Grid item xs={12} sm={8}>
                 <SimpleShowLayout>
-                    <TextField label="Title" source="title" />
-                    <DateField label="Publication Date" source="published_at" />
-                    <WithRecord label="Rating" render={record => <>
+                    <TextField label="タイトル" source="title" />
+                    <DateField label="出版日" source="published_at" />
+                    <WithRecord label="評価" render={record => <>
                         {[...Array(record.rating)].map((_, index) => <StarIcon key={index} />)}
                     </>} />
                 </SimpleShowLayout>
             </Grid>
             <Grid item xs={12} sm={4}>
-                <Typography>Details</Typography>
+                <Typography>詳細</Typography>
                 <Stack spacing={1}>
                     <Labeled label="ISBN"><TextField source="isbn" /></Labeled>
-                    <Labeled label="Last rating"><DateField source="last_rated_at" /></Labeled>
+                    <Labeled label="最終評価日"><DateField source="last_rated_at" /></Labeled>
                 </Stack>
             </Grid>
         </Grid>
     </Show>
 );
 ```
+
 {% endraw %}
 
-## Third-Party Components
+## サードパーティコンポーネントの使用
 
-You can find components for react-admin in third-party repositories.
+react-adminのコンポーネントはサードパーティリポジトリで見つけることができます。
 
-- [ra-compact-ui](https://github.com/ValentinnDimitroff/ra-compact-ui#layouts): plugin that allows to have custom styled show layouts.
+* [ra-compact-ui](https://github.com/ValentinnDimitroff/ra-compact-ui#layouts): カスタムスタイルのShowレイアウトを持つことができるプラグイン。
+
+

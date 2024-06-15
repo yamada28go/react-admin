@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <title>React-admin - Data Fetching</title>
+        <title>React-admin - データフェッチング</title>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
@@ -563,66 +563,66 @@
                         <div
                             class="markdown-section DocSearch-content toc-content"
                         >
-                            <h1 id="data-fetching">Data Fetching</h1>
+                            <h1 id="データフェッチング">データフェッチング</h1>
 
-<p>You can build a react-admin app on top of any API, whether it uses REST, GraphQL, RPC, or even SOAP, regardless of the dialect it uses. This works because react-admin doesn’t use <code class="language-plaintext highlighter-rouge">fetch</code> directly. Instead, it uses a Data Provider object to interface with your API, and <a href="https://tanstack.com/query/v3/docs/react/overview">react-query</a> to handle data fetching.</p>
+<p>React-adminアプリは、使用するAPIがREST、GraphQL、RPC、さらにはSOAPであっても、その方言に関係なく構築できます。これは、react-adminが<code class="language-plaintext highlighter-rouge">fetch</code>を直接使用しないためです。代わりに、APIとインターフェースするためのデータプロバイダーオブジェクトと、データフェッチングを処理するための<a href="https://tanstack.com/query/v3/docs/react/overview">react-query</a>を使用します。</p>
 
-<h2 id="the-data-provider">The Data Provider</h2>
+<h2 id="データプロバイダー">データプロバイダー</h2>
 
-<p>Whenever react-admin needs to communicate with your APIs, it does it through an object called the <code class="language-plaintext highlighter-rouge">dataProvider</code>. The <code class="language-plaintext highlighter-rouge">dataProvider</code> exposes a predefined interface that allows react-admin to query any API in a normalized way.</p>
+<p>react-adminがAPIと通信する必要があるときは、<code class="language-plaintext highlighter-rouge">dataProvider</code>と呼ばれるオブジェクトを介して行います。この<code class="language-plaintext highlighter-rouge">dataProvider</code>は、react-adminが標準化された方法でAPIをクエリできるようにする定義済みインターフェースを公開します。</p>
 
-<p><img src="./img/data-provider.png" class="no-shadow" alt="Backend agnostic" /></p>
+<p><img src="./img/data-provider.png" class="no-shadow" alt="バックエンドに依存しない" /></p>
 
-<p>For instance, to query the API for a single record, react-admin calls <code class="language-plaintext highlighter-rouge">dataProvider.getOne()</code>:</p>
+<p>例えば、APIから単一のレコードを取得するために、react-adminは<code class="language-plaintext highlighter-rouge">dataProvider.getOne()</code>を呼び出します：</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">dataProvider</span>
-    <span class="p">.</span><span class="nx">getOne</span><span class="p">(</span><span class="dl">'</span><span class="s1">posts</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">123</span> <span class="p">})</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span> <span class="c1">// { id: 123, title: "hello, world" }</span>
-    <span class="p">});</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nx">dataProvider</span>
+        <span class="p">.</span><span class="nx">getOne</span><span class="p">(</span><span class="dl">'</span><span class="s1">posts</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">123</span> <span class="p">})</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span> <span class="c1">// { id: 123, title: "hello, world" }</span>
+        <span class="p">});</span>
 </code></pre></div></div>
 
-<p>It’s the Data Provider’s job to turn these method calls into HTTP requests, and transform the HTTP responses to the data format expected by react-admin. In technical terms, a Data Provider is an <em>adapter</em> for an API.</p>
+<p>データプロバイダーの役割は、これらのメソッド呼び出しをHTTPリクエストに変換し、HTTPレスポンスをreact-adminが期待するデータ形式に変換することです。技術的には、データプロバイダーはAPIの<em>アダプター</em>です。</p>
 
-<p>Thanks to this adapter system, react-admin can communicate with any API. Check out the <a href="./DataProviderList.md">list of supported backends</a> to pick an open-source package for your API.</p>
+<p>このアダプターシステムのおかげで、react-adminはどのAPIとも通信できます。オープンソースパッケージのリストについては、<a href="./DataProviderList.md">サポートされているバックエンドのリスト</a>を参照して、APIに適したものを選んでください。</p>
 
-<p>You can also <a href="./DataProviderWriting.md">Write your own Data Provider</a> so that it fits the particularities of your backend(s). Data Providers can use <code class="language-plaintext highlighter-rouge">fetch</code>, <code class="language-plaintext highlighter-rouge">axios</code>, <code class="language-plaintext highlighter-rouge">apollo-client</code>, or any other library to communicate with APIs. The Data Provider is also the ideal place to add custom HTTP headers, authentication, etc.</p>
+<p>特定のバックエンドに対応するために、<a href="./DataProviderWriting.md">独自のデータプロバイダーを作成</a>することもできます。データプロバイダーは、<code class="language-plaintext highlighter-rouge">fetch</code>、<code class="language-plaintext highlighter-rouge">axios</code>、<code class="language-plaintext highlighter-rouge">apollo-client</code>、その他のライブラリを使用してAPIと通信できます。また、データプロバイダーはカスタムHTTPヘッダー、認証などを追加する理想的な場所でもあります。</p>
 
-<p>A Data Provider must have the following methods:</p>
+<p>データプロバイダーは、以下のメソッドを持つ必要があります：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">dataProvider</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">getList</span><span class="p">:</span>    <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">,</span> <span class="c1">// get a list of records based on sort, filter, and pagination</span>
-    <span class="na">getOne</span><span class="p">:</span>     <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">,</span> <span class="c1">// get a single record by id</span>
-    <span class="na">getMany</span><span class="p">:</span>    <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">,</span> <span class="c1">// get a list of records based on an array of ids</span>
-    <span class="na">getManyReference</span><span class="p">:</span> <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">,</span> <span class="c1">// get the records referenced to another record, e.g. comments for a post</span>
-    <span class="na">create</span><span class="p">:</span>     <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">,</span> <span class="c1">// create a record</span>
-    <span class="na">update</span><span class="p">:</span>     <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">,</span> <span class="c1">// update a record based on a patch</span>
-    <span class="na">updateMany</span><span class="p">:</span> <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">,</span> <span class="c1">// update a list of records based on an array of ids and a common patch</span>
-    <span class="na">delete</span><span class="p">:</span>     <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">,</span> <span class="c1">// delete a record by id</span>
-    <span class="na">deleteMany</span><span class="p">:</span> <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">,</span> <span class="c1">// delete a list of records based on an array of ids</span>
+    <span class="na">getList</span><span class="p">:</span>    <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">,</span> <span class="c1">// ソート、フィルター、ページネーションに基づいてレコードのリストを取得</span>
+    <span class="na">getOne</span><span class="p">:</span>     <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">,</span> <span class="c1">// IDで単一のレコードを取得</span>
+    <span class="na">getMany</span><span class="p">:</span>    <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">,</span> <span class="c1">// IDの配列に基づいてレコードのリストを取得</span>
+    <span class="na">getManyReference</span><span class="p">:</span> <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">,</span> <span class="c1">// 他のレコードに参照されているレコードを取得（例：投稿に対するコメント）</span>
+    <span class="na">create</span><span class="p">:</span>     <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">,</span> <span class="c1">// レコードを作成</span>
+    <span class="na">update</span><span class="p">:</span>     <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">,</span> <span class="c1">// パッチに基づいてレコードを更新</span>
+    <span class="na">updateMany</span><span class="p">:</span> <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">,</span> <span class="c1">// IDの配列と共通のパッチに基づいてレコードのリストを更新</span>
+    <span class="na">delete</span><span class="p">:</span>     <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">,</span> <span class="c1">// IDでレコードを削除</span>
+    <span class="na">deleteMany</span><span class="p">:</span> <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">,</span> <span class="c1">// IDの配列に基づいてレコードのリストを削除</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: A Data Provider can have <a href="#adding-custom-methods">more methods</a> than the 9 methods listed above. For instance, you create a dataProvider with custom methods for calling non-REST API endpoints, manipulating tree structures, subscribing to real time updates, etc.</p>
+<p><strong>ヒント</strong>: データプロバイダーは、上記の9つのメソッド以外に<a href="#adding-custom-methods">カスタムメソッドを追加</a>することもできます。例えば、非REST APIエンドポイントを呼び出すカスタムメソッドや、ツリー構造の操作、リアルタイム更新の購読などのためのデータプロバイダーを作成できます。</p>
 
-<p>The Data Provider is at the heart of react-admin’s architecture. By being very opinionated about the Data Provider interface, react-admin can be very flexible AND provide very sophisticated features, including reference handling, optimistic updates, and automated navigation.</p>
+<p>データプロバイダーはreact-adminのアーキテクチャの中心にあります。データプロバイダーインターフェースについて非常に意見が分かれるため、react-adminは非常に柔軟で高度な機能を提供できます。これには、参照の取り扱い、楽観的更新、自動ナビゲーションが含まれます。</p>
 
 <h2 id="admin-dataprovider"><code class="language-plaintext highlighter-rouge">&lt;Admin dataProvider&gt;</code></h2>
 
-<p>The first step to use a Data Provider is to pass it to <a href="./Admin.md">the <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component</a>. You can do so by using the <code class="language-plaintext highlighter-rouge">dataProvider</code> prop.</p>
+<p>データプロバイダーを使用する最初のステップは、<a href="./Admin.md"><code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code>コンポーネント</a>にデータプロバイダーを渡すことです。<code class="language-plaintext highlighter-rouge">dataProvider</code>プロップを使用して渡すことができます。</p>
 
-<p>You can either pick a data provider from the list of <a href="./DataProviderList.md">supported API backends</a>, or <a href="./DataProviderWriting.md">write your own</a>.</p>
+<p><a href="./DataProviderList.md">サポートされているAPIバックエンドのリスト</a>からデータプロバイダーを選ぶか、<a href="./DataProviderWriting.md">独自に作成</a>することができます。</p>
 
-<p>As an example, let’s focus on <a href="https://github.com/marmelab/react-admin/tree/master/packages/ra-data-simple-rest">the Simple REST data provider</a>. It fits REST APIs using simple GET parameters for filters and sorting.</p>
+<p>例として、<a href="https://github.com/marmelab/react-admin/tree/master/packages/ra-data-simple-rest">Simple RESTデータプロバイダー</a>に焦点を当てます。これは、フィルターとソートのためにシンプルなGETパラメーターを使用するREST APIに適しています。</p>
 
-<p>Install the <code class="language-plaintext highlighter-rouge">ra-data-simple-rest</code> package to use this provider.</p>
+<p>このプロバイダーを使用するには、<code class="language-plaintext highlighter-rouge">ra-data-simple-rest</code>パッケージをインストールします。</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn add ra-data-simple-rest
 </code></pre></div></div>
 
-<p>Then, initialize the provider with the REST backend URL, and pass the result to the <code class="language-plaintext highlighter-rouge">dataProvider</code> prop of the <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component:</p>
+<p>次に、RESTバックエンドURLでプロバイダーを初期化し、その結果を<code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code>コンポーネントの<code class="language-plaintext highlighter-rouge">dataProvider</code>プロップに渡します：</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/App.js</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/App.js</span>
 <span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">simpleRestProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-simple-rest</span><span class="dl">'</span><span class="p">;</span>
@@ -640,15 +640,15 @@
 <span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>That’s enough to make all react-admin components work.</p>
+<p>これだけで、すべてのreact-adminコンポーネントが動作します。</p>
 
-<p>Here is how this particular Data Provider maps react-admin calls to API calls:</p>
+<p>この特定のデータプロバイダーがreact-adminの呼び出しをAPI呼び出しにマッピングする方法は次の通りです：</p>
 
 <table>
   <thead>
     <tr>
-      <th>Method name</th>
-      <th>API call</th>
+      <th>メソッド名</th>
+      <th>API呼び出し</th>
     </tr>
   </thead>
   <tbody>
@@ -678,7 +678,7 @@
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">updateMany</code></td>
-      <td>Multiple calls to <code class="language-plaintext highlighter-rouge">PUT http://my.api.url/posts/123</code></td>
+      <td><code class="language-plaintext highlighter-rouge">PUT http://my.api.url/posts/123</code>の複数回呼び出し</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">delete</code></td>
@@ -686,28 +686,28 @@
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">deleteMany</code></td>
-      <td>Multiple calls to <code class="language-plaintext highlighter-rouge">DELETE http://my.api.url/posts/123</code></td>
+      <td><code class="language-plaintext highlighter-rouge">DELETE http://my.api.url/posts/123</code>の複数回呼び出し</td>
     </tr>
   </tbody>
 </table>
 
-<p><strong>Note</strong>: The simple REST client expects the API to include a <code class="language-plaintext highlighter-rouge">Content-Range</code> header in the response to <code class="language-plaintext highlighter-rouge">getList</code> calls. The value must be the total number of resources in the collection. This allows react-admin to know how many pages of resources there are in total, and build the pagination controls.</p>
+<p><strong>注意</strong>: Simple RESTクライアントは、<code class="language-plaintext highlighter-rouge">getList</code>呼び出しに対するレスポンスに<code class="language-plaintext highlighter-rouge">Content-Range</code>ヘッダーを含めることをAPIに期待します。この値はコレクション内のリソースの総数でなければなりません。これにより、react-adminはリソースの総ページ数を知り、ページネーションコントロールを構築できます。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Content-Range: posts 0-24/319
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">Content-Range</span><span class="o">:</span> <span class="nt">posts</span> <span class="err">0</span><span class="nt">-24</span><span class="o">/</span><span class="err">319</span>
 </code></pre></div></div>
 
-<p>If your API is on another domain as the JS code, you’ll need to whitelist this header with an <code class="language-plaintext highlighter-rouge">Access-Control-Expose-Headers</code> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS">CORS</a> header.</p>
+<p>APIがJSコードとは別のドメインにある場合、このヘッダーを<code class="language-plaintext highlighter-rouge">Access-Control-Expose-Headers</code>という<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS">CORS</a>ヘッダーでホワイトリストに登録する必要があります。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Access-Control-Expose-Headers: Content-Range
-</code></pre></div></div>
+<div class="language-mathematica highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">Access</span><span class="o">-</span><span class="nb">Control</span><span class="o">-</span><span class="nv">Expose</span><span class="o">-</span><span class="nv">Headers</span><span class="o">:</span><span class="w"> </span><span class="nv">Content</span><span class="o">-</span><span class="nb">Range</span><span class="w">
+</span></code></pre></div></div>
 
-<h2 id="enabling-query-logs">Enabling Query Logs</h2>
+<h2 id="クエリログの有効化">クエリログの有効化</h2>
 
-<p>React-admin uses <code class="language-plaintext highlighter-rouge">react-query</code> to call the dataProvider. You can see all the calls made by react-query in the browser thanks to <a href="https://react-query-v3.tanstack.com/devtools">the react-query devtools</a>.</p>
+<p>react-adminは<code class="language-plaintext highlighter-rouge">react-query</code>を使用してデータプロバイダーを呼び出します。ブラウザでreact-queryによって行われたすべての呼び出しを<a href="https://react-query-v3.tanstack.com/devtools">react-query devtools</a>で確認できます。</p>
 
 <p><img src="./img/react-query-devtools.png" alt="React-Query DevTools" /></p>
 
-<p>To enable these devtools, add the <code class="language-plaintext highlighter-rouge">&lt;ReactQueryDevtools&gt;</code> component to a custom Layout:</p>
+<p>これらのデブツールを有効にするには、カスタムレイアウトに<code class="language-plaintext highlighter-rouge">&lt;ReactQueryDevtools&gt;</code>コンポーネントを追加します：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Layout</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">ReactQueryDevtools</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-query/devtools</span><span class="dl">'</span><span class="p">;</span>
@@ -720,7 +720,7 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>Then use this layout in <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code>:</p>
+<p>次に、このレイアウトを<code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code>で使用します：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -734,16 +734,16 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: By default, React Query Devtools are only included in bundles when <code class="language-plaintext highlighter-rouge">process.env.NODE_ENV === 'development'</code>, so you don’t need to worry about excluding them during a production build.</p>
+<p><strong>ヒント</strong>: デフォルトでは、React Query Devtoolsは<code class="language-plaintext highlighter-rouge">process.env.NODE_ENV === 'development'</code>の場合にのみバンドルに含まれるため、プロダクションビルド時に除外する心配はありません。</p>
 
-<p><strong>Tip</strong>: Some Data Providers have their own logging system. Refer to their documentation to learn more. For instance, <a href="https://github.com/marmelab/react-admin/tree/master/packages/ra-data-fakerest">the <code class="language-plaintext highlighter-rouge">ra-data-fakerest</code> package</a> logs all the calls to the REST API in the browser console when you pass <code class="language-plaintext highlighter-rouge">true</code> as second argument:</p>
+<p><strong>ヒント</strong>: 一部のデータプロバイダーには独自のロギングシステムがあります。詳細については、それらのドキュメントを参照してください。例えば、<a href="https://github.com/marmelab/react-admin/tree/master/packages/ra-data-fakerest"><code class="language-plaintext highlighter-rouge">ra-data-fakerest</code>パッケージ</a>は、第二引数に<code class="language-plaintext highlighter-rouge">true</code>を渡すと、REST APIへのすべての呼び出しをブラウザコンソールにログします：</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/App.js</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/App.js</span>
 <span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">fakeDataProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-fakerest</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="kd">const</span> <span class="nx">dataProvider</span> <span class="o">=</span> <span class="nx">fakeDataProvider</span><span class="p">({</span> <span class="cm">/* data here */</span> <span class="p">},</span> <span class="kc">true</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">dataProvider</span> <span class="o">=</span> <span class="nx">fakeDataProvider</span><span class="p">({</span> <span class="cm">/* データをここに */</span> <span class="p">},</span> <span class="kc">true</span><span class="p">);</span>
 
 <span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">Admin</span> <span class="na">dataProvider</span><span class="p">=</span><span class="si">{</span><span class="nx">dataProvider</span><span class="si">}</span><span class="p">&gt;</span>
@@ -752,13 +752,13 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="handling-authentication">Handling Authentication</h2>
+<h2 id="認証の処理">認証の処理</h2>
 
-<p>In react-admin, the <code class="language-plaintext highlighter-rouge">dataProvider</code> is responsible for fetching data, and <a href="./Authentication.md">the <code class="language-plaintext highlighter-rouge">authProvider</code></a> is responsible for managing authentication. In order to authenticate API requests, you must use info from the <code class="language-plaintext highlighter-rouge">authProvider</code> in the queries made by the <code class="language-plaintext highlighter-rouge">dataProvider</code>. You can use <code class="language-plaintext highlighter-rouge">localStorage</code> for this purpose.</p>
+<p>react-adminでは、データのフェッチを担当するのは<code class="language-plaintext highlighter-rouge">dataProvider</code>であり、認証の管理を担当するのは<a href="./Authentication.md"><code class="language-plaintext highlighter-rouge">authProvider</code></a>です。APIリクエストを認証するために、<code class="language-plaintext highlighter-rouge">dataProvider</code>が行うクエリに<code class="language-plaintext highlighter-rouge">authProvider</code>の情報を使用する必要があります。この目的のために<code class="language-plaintext highlighter-rouge">localStorage</code>を使用できます。</p>
 
-<p>For instance, here is how to use a token returned during the login process to authenticate all requests to the API via a Bearer token, using the Simple REST data provider:</p>
+<p>例えば、ログインプロセス中に返されたトークンを使用して、Bearerトークンを介してAPIへのすべてのリクエストを認証する方法を示します。Simple RESTデータプロバイダーを使用します：</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in authProvider.js</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// authProvider.js</span>
 <span class="kd">const</span> <span class="nx">authProvider</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">login</span><span class="p">:</span> <span class="p">({</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span> <span class="p">})</span> <span class="o">=&gt;</span>  <span class="p">{</span>
         <span class="kd">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Request</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://mydomain.com/authenticate</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
@@ -774,24 +774,24 @@
                 <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
             <span class="p">})</span>
             <span class="p">.</span><span class="nx">then</span><span class="p">(({</span> <span class="nx">token</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
-                <span class="c1">// store the token in local storage</span>
+                <span class="c1">// トークンをローカルストレージに保存</span>
                 <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">token</span><span class="dl">'</span><span class="p">,</span> <span class="nx">token</span><span class="p">);</span>
             <span class="p">})</span>
             <span class="p">.</span><span class="k">catch</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-                <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Network error</span><span class="dl">'</span><span class="p">)</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">ネットワークエラー</span><span class="dl">'</span><span class="p">)</span>
             <span class="p">});</span>
     <span class="p">},</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
 
-<span class="c1">// in dataProvider.js</span>
+<span class="c1">// dataProvider.js</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">fetchUtils</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">simpleRestProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-simple-rest</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">fetchJson</span> <span class="o">=</span> <span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">options</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
         <span class="na">authenticated</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="c1">// use the token from local storage</span>
+        <span class="c1">// ローカルストレージからトークンを使用</span>
         <span class="na">token</span><span class="p">:</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">token</span><span class="dl">'</span><span class="p">)</span>
     <span class="p">};</span>
     <span class="k">return</span> <span class="nx">fetchUtils</span><span class="p">.</span><span class="nx">fetchJson</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
@@ -799,17 +799,17 @@
 <span class="kd">const</span> <span class="nx">dataProvider</span> <span class="o">=</span> <span class="nx">simpleRestProvider</span><span class="p">(</span><span class="dl">'</span><span class="s1">http://path.to.my.api/</span><span class="dl">'</span><span class="p">,</span> <span class="nx">fetchJson</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p>Now all the requests to the REST API will contain the <code class="language-plaintext highlighter-rouge">Authorization: SRTRDFVESGNJYTUKTYTHRG</code> header.</p>
+<p>これで、REST APIへのすべてのリクエストに<code class="language-plaintext highlighter-rouge">Authorization: SRTRDFVESGNJYTUKTYTHRG</code>ヘッダーが含まれます。</p>
 
-<p>In this example, the <code class="language-plaintext highlighter-rouge">simpleRestProvider</code> accepts a second parameter to set authentication. Each Data Provider has its own way of accepting credentials. Refer to the documentation of your Data Provider for details.</p>
+<p>この例では、<code class="language-plaintext highlighter-rouge">simpleRestProvider</code>は認証を設定するために第二引数を受け入れます。各データプロバイダーには資格情報を受け入れる独自の方法があります。詳細については、使用するデータプロバイダーのドキュメントを参照してください。</p>
 
-<h2 id="adding-custom-headers">Adding Custom Headers</h2>
+<h2 id="カスタムヘッダーの追加">カスタムヘッダーの追加</h2>
 
-<p>The <code class="language-plaintext highlighter-rouge">dataProvider</code> doesn’t “speak” HTTP, so it doesn’t have the notion of HTTP headers. If you need to pass custom headers to the API, the syntax depends on the Data Provider you use.</p>
+<p>データプロバイダーはHTTPを「話しません」ので、HTTPヘッダーの概念はありません。APIにカスタムヘッダーを渡す必要がある場合、使用するデータプロバイダーによって構文が異なります。</p>
 
-<p>For instance, the <code class="language-plaintext highlighter-rouge">simpleRestProvider</code> function accepts an HTTP client function as its second argument. By default, it uses react-admin’s <a href="./fetchJson.md"><code class="language-plaintext highlighter-rouge">fetchUtils.fetchJson()</code></a> function as the HTTP client. It’s similar to the HTML5 <code class="language-plaintext highlighter-rouge">fetch()</code>, except it handles JSON decoding and HTTP error codes automatically.</p>
+<p>例えば、<code class="language-plaintext highlighter-rouge">simpleRestProvider</code>関数は第二引数としてHTTPクライアント関数を受け入れます。デフォルトでは、react-adminの<a href="./fetchJson.md"><code class="language-plaintext highlighter-rouge">fetchUtils.fetchJson()</code></a>関数をHTTPクライアントとして使用します。これはHTML5の<code class="language-plaintext highlighter-rouge">fetch()</code>に似ていますが、JSONデコードとHTTPエラ ーコードを自動的に処理します。</p>
 
-<p>That means that if you need to add custom headers to your requests, you can just <em>wrap</em> the <code class="language-plaintext highlighter-rouge">fetchJson()</code> call inside your own function:</p>
+<p>カスタムヘッダーをリクエストに追加する必要がある場合、<code class="language-plaintext highlighter-rouge">fetchJson()</code>呼び出しを独自の関数内で<em>ラップ</em>するだけです：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">fetchUtils</span><span class="p">,</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">simpleRestProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-simple-rest</span><span class="dl">'</span><span class="p">;</span>
@@ -818,7 +818,7 @@
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">options</span><span class="p">.</span><span class="nx">headers</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">options</span><span class="p">.</span><span class="nx">headers</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">({</span> <span class="na">Accept</span><span class="p">:</span> <span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span> <span class="p">});</span>
     <span class="p">}</span>
-    <span class="c1">// add your own headers here</span>
+    <span class="c1">// ここに独自のヘッダーを追加</span>
     <span class="nx">options</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">'</span><span class="s1">X-Custom-Header</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">foobar</span><span class="dl">'</span><span class="p">);</span>
     <span class="k">return</span> <span class="nx">fetchUtils</span><span class="p">.</span><span class="nx">fetchJson</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
 <span class="p">}</span>
@@ -831,50 +831,48 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: For TypeScript users, here is a typed version of the <code class="language-plaintext highlighter-rouge">fetchJson</code> function:</p>
+<p><strong>ヒント</strong>: TypeScriptユーザー向けに、<code class="language-plaintext highlighter-rouge">fetchJson</code>関数の型付きバージョンを以下に示します：</p>
 
 <div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fetchJson</span> <span class="o">=</span> <span class="p">(</span><span class="nx">url</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">options</span><span class="p">:</span> <span class="nx">fetchUtils</span><span class="p">.</span><span class="nx">Options</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">customHeaders</span> <span class="o">=</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">headers</span> <span class="o">||</span>
         <span class="k">new</span> <span class="nx">Headers</span><span class="p">({</span>
             <span class="na">Accept</span><span class="p">:</span> <span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span>
         <span class="p">}))</span> <span class="k">as</span> <span class="nx">Headers</span><span class="p">;</span>
-    <span class="c1">// add your own headers here</span>
+    <span class="c1">// ここに独自のヘッダーを追加</span>
     <span class="nx">customHeaders</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">'</span><span class="s1">X-Custom-Header</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">foobar</span><span class="dl">'</span><span class="p">);</span>
     <span class="nx">options</span><span class="p">.</span><span class="nx">headers</span> <span class="o">=</span> <span class="nx">customHeaders</span><span class="p">;</span>
     <span class="k">return</span> <span class="nx">fetchUtils</span><span class="p">.</span><span class="nx">fetchJson</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Now all the requests to the REST API will contain the <code class="language-plaintext highlighter-rouge">X-Custom-Header: foobar</code> header.</p>
+<p>これで、REST APIへのすべてのリクエストに<code class="language-plaintext highlighter-rouge">X-Custom-Header: foobar</code>ヘッダーが含まれます。</p>
 
-<p><strong>Tip:</strong> Have a look at the <a href="./fetchJson.md"><code class="language-plaintext highlighter-rouge">fetchJson</code> documentation</a> to learn more about its features.</p>
+<p><strong>警告</strong>: APIがJSコードとは別のドメインにある場合、このヘッダーを<code class="language-plaintext highlighter-rouge">Access-Control-Expose-Headers</code>という<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS">CORS</a>ヘッダーでホワイトリストに登録する必要があります。</p>
 
-<p><strong>Warning</strong>: If your API is on another domain as the JS code, you’ll need to whitelist this header with an <code class="language-plaintext highlighter-rouge">Access-Control-Expose-Headers</code> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS">CORS</a> header.</p>
+<div class="language-mathematica highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">Access</span><span class="o">-</span><span class="nb">Control</span><span class="o">-</span><span class="nv">Expose</span><span class="o">-</span><span class="nv">Headers</span><span class="o">:</span><span class="w"> </span><span class="nv">X</span><span class="o">-</span><span class="nv">Custom</span><span class="o">-</span><span class="nv">Header</span><span class="w">
+</span></code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Access-Control-Expose-Headers: X-Custom-Header
-</code></pre></div></div>
+<p>これはサーバー側で行う必要があります。</p>
 
-<p>This must be done on the server side.</p>
+<h2 id="ライフサイクルコールバックの追加">ライフサイクルコールバックの追加</h2>
 
-<h2 id="adding-lifecycle-callbacks">Adding Lifecycle Callbacks</h2>
+<p>データプロバイダーの呼び出しの前後に特定のデータロジックを実行する必要がある場合があります。例えば、投稿自体を削除する前に関連するコメントを削除したい場合などです。一般的なアドバイスは、このコードを<strong>サーバー側に置く</strong>ことです。もしできない場合、次に最適な場所はデータプロバイダーです。</p>
 
-<p>It often happens that you need specific data logic to be executed before or after a dataProvider call. For instance, you may want to delete the comments related to a post before deleting the post itself. The general advice is to <strong>put that code on the server-side</strong>. If you can’t, the next best place to put this logic is the <code class="language-plaintext highlighter-rouge">dataProvider</code>.</p>
-
-<p>You can, of course, use <code class="language-plaintext highlighter-rouge">if</code> statements in the <code class="language-plaintext highlighter-rouge">dataProvider</code> methods to execute the logic only for the resources that need it, like so:</p>
+<p>データプロバイダーメソッドに<code class="language-plaintext highlighter-rouge">if</code>ステートメントを使用して、特定のリソースにのみロジックを実行することはもちろん可能です。以下のように：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">dataProvider</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="na">delete</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">resource</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">posts</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// delete all comments related to the post</span>
-            <span class="c1">// first, fetch the comments</span>
+            <span class="c1">// 投稿に関連するすべてのコメントを削除</span>
+            <span class="c1">// まず、コメントを取得</span>
             <span class="kd">const</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="nx">comments</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">httpClient</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">apiUrl</span><span class="p">}</span><span class="s2">/comments?post_id=</span><span class="p">${</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-            <span class="c1">// then, delete them</span>
+            <span class="c1">// 次に、それらを削除</span>
             <span class="k">await</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">comments</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">comment</span> <span class="o">=&gt;</span> <span class="nx">httpClient</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">apiUrl</span><span class="p">}</span><span class="s2">/comments/</span><span class="p">${</span><span class="nx">comment</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="p">{</span>
                 <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">DELETE</span><span class="dl">'</span><span class="p">,</span>
             <span class="p">})));</span>
         <span class="p">}</span>
-        <span class="c1">// fallback to the default implementation</span>
+        <span class="c1">// デフォルトの実装にフォールバック</span>
         <span class="kd">const</span> <span class="p">{</span> <span class="nx">data</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">httpClient</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">apiUrl</span><span class="p">}</span><span class="s2">/</span><span class="p">${</span><span class="nx">resource</span><span class="p">}</span><span class="s2">/</span><span class="p">${</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="p">{</span>
             <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">DELETE</span><span class="dl">'</span><span class="p">,</span>
         <span class="p">});</span>
@@ -885,7 +883,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>But the <code class="language-plaintext highlighter-rouge">dataProvider</code> code quickly becomes hard to read and maintain. React-admin provides a helper function to make it easier to add lifecycle callbacks to the dataProvider: <code class="language-plaintext highlighter-rouge">withLifecycleCallbacks</code>:</p>
+<p>しかし、データプロバイダーコードはすぐに読みづらく、保守が難しくなります。react-adminは、データプロバイダーにライフサイクルコールバックを追加するのを容易にするために<code class="language-plaintext highlighter-rouge">withLifecycleCallbacks</code>というヘルパー関数を提供しています：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">withLifecycleCallbacks</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -893,14 +891,14 @@
     <span class="p">{</span>
         <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">posts</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">beforeDelete</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">params</span><span class="p">,</span> <span class="nx">dataProvider</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-            <span class="c1">// delete all comments related to the post</span>
-            <span class="c1">// first, fetch the comments</span>
+            <span class="c1">// 投稿に関連するすべてのコメントを削除</span>
+            <span class="c1">// まず、コメントを取得</span>
             <span class="kd">const</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="nx">comments</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">dataProvider</span><span class="p">.</span><span class="nx">getList</span><span class="p">(</span><span class="dl">'</span><span class="s1">comments</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
                 <span class="na">filter</span><span class="p">:</span> <span class="p">{</span> <span class="na">post_id</span><span class="p">:</span> <span class="nx">params</span><span class="p">.</span><span class="nx">id</span> <span class="p">},</span>
                 <span class="na">pagination</span><span class="p">:</span> <span class="p">{</span> <span class="na">page</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">perPage</span><span class="p">:</span> <span class="mi">1000</span> <span class="p">},</span>
                 <span class="na">sort</span><span class="p">:</span> <span class="p">{</span> <span class="na">field</span><span class="p">:</span> <span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">,</span> <span class="na">order</span><span class="p">:</span> <span class="dl">'</span><span class="s1">DESC</span><span class="dl">'</span> <span class="p">},</span>
             <span class="p">});</span>
-            <span class="c1">// then, delete them</span>
+            <span class="c1">// 次に、それらを削除</span>
             <span class="k">await</span> <span class="nx">dataProvider</span><span class="p">.</span><span class="nx">deleteMany</span><span class="p">(</span><span class="dl">'</span><span class="s1">comments</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">ids</span><span class="p">:</span> <span class="nx">comments</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">comment</span> <span class="o">=&gt;</span> <span class="nx">comment</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span> <span class="p">});</span>
 
             <span class="k">return</span> <span class="nx">params</span><span class="p">;</span>
@@ -909,18 +907,18 @@
 <span class="p">]);</span>
 </code></pre></div></div>
 
-<p>Check the <a href="./withLifecycleCallbacks.md">withLifecycleCallbacks</a> documentation for more details.</p>
+<p>詳細については、<a href="./withLifecycleCallbacks.md">withLifecycleCallbacks</a>のドキュメントを参照してください。</p>
 
-<h2 id="adding-custom-methods">Adding Custom Methods</h2>
+<h2 id="カスタムメソッドの追加">カスタムメソッドの追加</h2>
 
-<p>Your API backend may expose non-CRUD endpoints, e.g. for calling RPC endpoints.</p>
+<p>APIバックエンドは、非CRUDエンドポイントを公開している場合があります。例えば、RPCエンドポイントを呼び出すためのものです。</p>
 
-<p>For instance, let’s say your API exposes an endpoint to ban a user based on its <code class="language-plaintext highlighter-rouge">id</code>:</p>
+<p>例えば、APIがユーザーを<code class="language-plaintext highlighter-rouge">id</code>に基づいて禁止するエンドポイントを公開しているとします：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /api/user/123/ban
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /api/user/123/ban
 </code></pre></div></div>
 
-<p>The react-admin way to expose these endpoints to the app components is to add a custom method in the <code class="language-plaintext highlighter-rouge">dataProvider</code>:</p>
+<p>これらのエンドポイントをアプリコンポーネントに公開するreact-adminの方法は、<code class="language-plaintext highlighter-rouge">dataProvider</code>にカスタムメソッドを追加することです：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">simpleRestDataProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-simple-rest</span><span class="dl">'</span><span class="p">;</span>
 
@@ -935,7 +933,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Then you can use react-query’s <code class="language-plaintext highlighter-rouge">useMutation</code> hook to call the <code class="language-plaintext highlighter-rouge">dataProvider.banUser()</code> method:</p>
+<p>次に、react-queryの<code class="language-plaintext highlighter-rouge">useMutation</code>フックを使用して<code class="language-plaintext highlighter-rouge">dataProvider.banUser()</code>メソッドを呼び出します：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useDataProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useMutation</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-query</span><span class="dl">'</span><span class="p">;</span>
@@ -949,13 +947,13 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>Check the <a href="./Actions.md#calling-custom-methods">Calling Custom Methods</a> documentation for more details.</p>
+<p>詳細については、<a href="./Actions.md#calling-custom-methods">カスタムメソッドの呼び出し</a>のドキュメントを参照してください。</p>
 
-<h2 id="async-initialization">Async Initialization</h2>
+<h2 id="非同期初期化">非同期初期化</h2>
 
-<p>Some Data Providers need an asynchronous initialization phase (e.g. to connect to the API). To use such Data Providers, initialize them <em>before</em> rendering react-admin resources, leveraging React’s <code class="language-plaintext highlighter-rouge">useState</code> and <code class="language-plaintext highlighter-rouge">useEffect</code>.</p>
+<p>一部のデータプロバイダーは、非同期初期化フェーズを必要とします（例えば、APIに接続するため）。そのようなデータプロバイダーを使用するには、Reactの<code class="language-plaintext highlighter-rouge">useState</code>と<code class="language-plaintext highlighter-rouge">useEffect</code>を活用してreact-adminリソースをレンダリングする前にそれらを初期化します。</p>
 
-<p>For instance, the <code class="language-plaintext highlighter-rouge">ra-data-hasura</code> data provider needs to be initialized:</p>
+<p>例えば、<code class="language-plaintext highlighter-rouge">ra-data-hasura</code>データプロバイダーは初期化が必要です：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">buildHasuraProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-hasura</span><span class="dl">'</span><span class="p">;</span>
@@ -964,17 +962,17 @@
 <span class="k">import</span> <span class="p">{</span> <span class="nx">PostCreate</span><span class="p">,</span> <span class="nx">PostEdit</span><span class="p">,</span> <span class="nx">PostList</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./posts</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="c1">// start with an empty data provider</span>
+    <span class="c1">// 空のデータプロバイダーで開始</span>
     <span class="kd">const</span> <span class="p">[</span><span class="nx">dataProvider</span><span class="p">,</span> <span class="nx">setDataProvider</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
 
-    <span class="c1">// initialize on mount</span>
+    <span class="c1">// マウント時に初期化</span>
     <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="nx">buildHasuraProvider</span><span class="p">({</span>
             <span class="na">clientOptions</span><span class="p">:</span> <span class="p">{</span> <span class="na">uri</span><span class="p">:</span> <span class="dl">'</span><span class="s1">http://localhost:8080/v1/graphql</span><span class="dl">'</span> <span class="p">}</span>
         <span class="p">}).</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">setDataProvider</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">dataProvider</span><span class="p">));</span>
     <span class="p">},</span> <span class="p">[]);</span>
 
-    <span class="c1">// hide the admin until the data provider is ready</span>
+    <span class="c1">// データプロバイダーが準備完了するまで管理コンポーネントを非表示にする</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">dataProvider</span><span class="p">)</span> <span class="k">return</span> <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Loading...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;;</span>
 
     <span class="k">return</span> <span class="p">(</span>
@@ -987,13 +985,13 @@
 <span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: This example uses the function version of <code class="language-plaintext highlighter-rouge">setState</code> (<code class="language-plaintext highlighter-rouge">setDataProvider(() =&gt; dataProvider))</code>) instead of the more classic version (<code class="language-plaintext highlighter-rouge">setDataProvider(dataProvider)</code>). This is because some legacy Data Providers are actually functions, and <code class="language-plaintext highlighter-rouge">setState</code> would call them immediately on mount.</p>
+<p><strong>ヒント</strong>: この例では、<code class="language-plaintext highlighter-rouge">setState</code>の関数バージョン（<code class="language-plaintext highlighter-rouge">setDataProvider(() =&gt; dataProvider))</code>）を使用しています。これは、一部のレガシーデータプロバイダーが実際には関数であり、<code class="language-plaintext highlighter-rouge">setState</code>がマウント時にすぐにそれらを呼び出すためです。</p>
 
-<h2 id="combining-data-providers">Combining Data Providers</h2>
+<h2 id="データプロバイダーの組み合わせ">データプロバイダーの組み合わせ</h2>
 
-<p>If you need to build an app relying on more than one API, you may face a problem: the <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component accepts only one <code class="language-plaintext highlighter-rouge">dataProvider</code> prop. You can combine multiple data providers into one using the <code class="language-plaintext highlighter-rouge">combineDataProviders</code> helper. It expects a function as parameter accepting a resource name and returning a data provider for that resource.</p>
+<p>複数のAPIに依存するアプリを構築する必要がある場合、<code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code>コンポーネントは1つの<code class="language-plaintext highlighter-rouge">dataProvider</code>プロップしか受け入れないため、問題に直面することがあります。<code class="language-plaintext highlighter-rouge">combineDataProviders</code>ヘルパーを使用して、複数のデータプロバイダーを1つに組み合わせることができます。このヘルパーは、リソース名を受け取り、そのリソース用のデータプロバイダーを返す関数をパラメーターとして受け取ります。</p>
 
-<p>For instance, the following app uses <code class="language-plaintext highlighter-rouge">ra-data-simple-rest</code> for the <code class="language-plaintext highlighter-rouge">posts</code> and <code class="language-plaintext highlighter-rouge">comments</code> resources,  and <code class="language-plaintext highlighter-rouge">ra-data-local-storage</code> for the <code class="language-plaintext highlighter-rouge">user</code> resource:</p>
+<p>例えば、次のアプリは<code class="language-plaintext highlighter-rouge">posts</code>と<code class="language-plaintext highlighter-rouge">comments</code>リソースに<code class="language-plaintext highlighter-rouge">ra-data-simple-rest</code>を使用し、<code class="language-plaintext highlighter-rouge">user</code>リソースに<code class="language-plaintext highlighter-rouge">ra-data-local-storage</code>を使用します：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">buildRestProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-simple-rest</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">buildStorageProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-local-storage</span><span class="dl">'</span><span class="p">;</span>
@@ -1023,9 +1021,9 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>If the choice of dataProvider doesn’t only rely on the resource name, or if you want to manipulate the resource name, combine Data Providers manually using a JavaScript <code class="language-plaintext highlighter-rouge">Proxy</code> object.</p>
+<p>データプロバイダーの選択がリソース名だけに依存しない場合、またはリソース名を操作したい場合、JavaScriptの<code class="language-plaintext highlighter-rouge">Proxy</code>オブジェクトを使用してデータプロバイダーを手動で組み合わせます。</p>
 
-<p>For instance, you can prefix your resource names to facilitate the API selection:</p>
+<p>例えば、API選択を容易にするためにリソース名にプレフィックスを付けることができます：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">buildRestProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-simple-rest</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">buildStorageProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-local-storage</span><span class="dl">'</span><span class="p">;</span>
@@ -1059,27 +1057,27 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="react-query-options">React-Query Options</h2>
+<h2 id="react-queryオプション">React-Queryオプション</h2>
 
-<p>React-admin uses <a href="https://react-query-v3.tanstack.com/">react-query</a> to fetch, cache and update data. Internally, the <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component creates a react-query <a href="https://tanstack.com/query/v3/docs/react/reference/QueryClient"><code class="language-plaintext highlighter-rouge">QueryClient</code></a> on mount, using <a href="https://react-query-v3.tanstack.com/guides/important-defaults">react-query’s “aggressive but sane” defaults</a>:</p>
+<p>react-adminは、データのフェッチ、キャッシュ、更新に<a href="https://react-query-v3.tanstack.com/">react-query</a>を使用します。内部的に、<code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code>コンポーネントはマウント時にreact-queryの<a href="https://tanstack.com/query/v3/docs/react/reference/QueryClient"><code class="language-plaintext highlighter-rouge">QueryClient</code></a>を作成し、<a href="https://react-query-v3.tanstack.com/guides/important-defaults">react-queryの「攻撃的だが理にかなっている」デフォルト</a>を使用します：</p>
 
 <ul>
-  <li>Queries consider cached data as stale</li>
-  <li>Stale queries are refetched automatically in the background when:
+  <li>クエリはキャッシュされたデータを古いと見なします</li>
+  <li>古いクエリは以下の場合にバックグラウンドで自動的に再フェッチされます：
     <ul>
-      <li>New instances of the query mount</li>
-      <li>The window is refocused</li>
-      <li>The network is reconnected</li>
-      <li>The query is optionally configured with a refetch interval</li>
+      <li>クエリの新しいインスタンスがマウントされたとき</li>
+      <li>ウィンドウがフォーカスされたとき</li>
+      <li>ネットワークが再接続されたとき</li>
+      <li>クエリがオプションで再フェッチ間隔で設定されている場合</li>
     </ul>
   </li>
-  <li>Query results that are no longer used in the current page are labeled as “inactive” and remain in the cache in case they are used again at a later time.</li>
-  <li>By default, “inactive” queries are garbage collected after 5 minutes.</li>
-  <li>Queries that fail are silently retried 3 times, with exponential backoff delay before capturing and displaying an error to the UI.</li>
-  <li>Query results by default are structurally shared to detect if data has actually changed and if not, the data reference remains unchanged to better help with value stabilization with regards to <code class="language-plaintext highlighter-rouge">useMemo</code> and <code class="language-plaintext highlighter-rouge">useCallback</code>.</li>
+  <li>現在のページで使用されていないクエリ結果は「非アクティブ」とラベル付けされ、後で再度使用される場合に備えてキャッシュに残ります</li>
+  <li>デフォルトでは、「非アクティブ」なクエリは5分後にガベージコレクションされます</li>
+  <li>失敗したクエリはサイレントに3回再試行され、指数バックオフ遅延後にUIにエラーを表示します</li>
+  <li>クエリ結果はデフォルトで構造的に共有され、データが実際に変更されたかどうかを検出し、そうでない場合はデータ参照が変更されず、<code class="language-plaintext highlighter-rouge">useMemo</code>や<code class="language-plaintext highlighter-rouge">useCallback</code>に関する値の安定化が向上します。</li>
 </ul>
 
-<p>If you want to override the react-query default query and mutation default options, or use a specific client or mutation cache, you can create your own <code class="language-plaintext highlighter-rouge">QueryClient</code> instance and pass it to the <code class="language-plaintext highlighter-rouge">&lt;Admin queryClient&gt;</code> prop:</p>
+<p>react-queryのデフォルトクエリおよびミューテーションデフォルトオプションを上書きしたり、特定のクライアントやミューテーションキャッシュを使用したりする場合は、独自の<code class="language-plaintext highlighter-rouge">QueryClient</code>インスタンスを作成し、<code class="language-plaintext highlighter-rouge">&lt;Admin queryClient&gt;</code>プロップに渡すことができます：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">QueryClient</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-query</span><span class="dl">'</span><span class="p">;</span>
@@ -1103,9 +1101,9 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>To know which options you can pass to the <code class="language-plaintext highlighter-rouge">QueryClient</code> constructor, check the <a href="https://tanstack.com/query/v3/docs/react/reference/QueryClient">react-query documentation</a> and the <a href="https://tanstack.com/query/v3/docs/react/reference/useQuery">query options</a> and <a href="https://tanstack.com/query/v3/docs/react/reference/useMutation">mutation options</a> sections.</p>
+<p><code class="language-plaintext highlighter-rouge">QueryClient</code>コンストラクタに渡すオプションについては、<a href="https://tanstack.com/query/v3/docs/react/reference/QueryClient">react-queryのドキュメント</a>および<a href="https://tanstack.com/query/v3/docs/react/reference/useQuery">クエリオプション</a>と<a href="https://tanstack.com/query/v3/docs/react/reference/useMutation">ミューテーションオプション</a>セクションを確認してください。</p>
 
-<p>The settings that react-admin developers often overwrite are:</p>
+<p>react-adminの開発者がよく上書きする設定は次のとおりです：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">QueryClient</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-query</span><span class="dl">'</span><span class="p">;</span>
 
@@ -1113,23 +1111,23 @@
     <span class="na">defaultOptions</span><span class="p">:</span> <span class="p">{</span>
         <span class="na">queries</span><span class="p">:</span> <span class="p">{</span>
             <span class="cm">/**
-             * The time in milliseconds after data is considered stale.
-             * If set to `Infinity`, the data will never be considered stale.
+             * データが古いと見なされるまでの時間（ミリ秒単位）。
+             * `Infinity`に設定すると、データは古いと見なされません。
              */</span>
             <span class="na">staleTime</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
             <span class="cm">/**
-             * If `false`, failed queries will not retry by default.
-             * If `true`, failed queries will retry infinitely., failureCount: num
-             * If set to an integer number, e.g. 3, failed queries will retry until the failed query count meets that number.
-             * If set to a function `(failureCount, error) =&gt; boolean` failed queries will retry until the function returns false.
+             * `false`に設定すると、失敗したクエリはデフォルトで再試行されません。
+             * `true`に設定すると、失敗したクエリは無限に再試行されます。
+             * 整数（例：3）に設定すると、失敗したクエリは失敗回数がその数に達するまで再試行されます。
+             * `(failureCount, error) =&gt; boolean`の関数に設定すると、関数がfalseを返すまで失敗したクエリが再試行されます。
              */</span>
             <span class="na">retry</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
             <span class="cm">/**
-             * If set to `true`, the query will refetch on window focus if the data is stale.
-             * If set to `false`, the query will not refetch on window focus.
-             * If set to `'always'`, the query will always refetch on window focus.
-             * If set to a function, the function will be executed with the latest data and query to compute the value.
-             * Defaults to `true`.
+             * `true`に設定すると、データが古い場合、ウィンドウフォーカス時にクエリが再フェッチされます。
+             * `false`に設定すると、クエリはウィンドウフォーカス時に再フェッチされません。
+             * `always`に設定すると、クエリはウィンドウフォーカス時に常に再フェッチされます。
+             * 関数に設定すると、最新のデータとクエリを使用して値を計算するために関数が実行されます。
+             * デフォルトは`true`です。
              */</span>
             <span class="na">refetchOnWindowFocus</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
         <span class="p">},</span>
@@ -1137,11 +1135,11 @@
 <span class="p">});</span>
 </code></pre></div></div>
 
-<h2 id="calling-the-data-provider">Calling The Data Provider</h2>
+<h2 id="データプロバイダーの呼び出し">データプロバイダーの呼び出し</h2>
 
-<p>You can call the data provider directly from your own React components, combining it with react-query’s <code class="language-plaintext highlighter-rouge">useQuery</code> and <code class="language-plaintext highlighter-rouge">useMutation</code> hooks. However, this is such a common use case that react-admin provides a hook for each of the data provider methods.</p>
+<p>独自のReactコンポーネントからデータプロバイダーを直接呼び出し、react-queryの<code class="language-plaintext highlighter-rouge">useQuery</code>と<code class="language-plaintext highlighter-rouge">useMutation</code>フックを組み合わせて使用できます。ただし、これは非常に一般的なユースケースであるため、react-adminはデータプロバイダーメソッドごとにフックを提供しています。</p>
 
-<p>For instance, to call <code class="language-plaintext highlighter-rouge">dataProvider.getOne()</code>, use the <code class="language-plaintext highlighter-rouge">useGetOne</code> hook:</p>
+<p>例えば、<code class="language-plaintext highlighter-rouge">dataProvider.getOne()</code>を呼び出すには、<code class="language-plaintext highlighter-rouge">useGetOne</code>フックを使用します：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useGetOne</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Loading</span><span class="p">,</span> <span class="nb">Error</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./MyComponents</span><span class="dl">'</span><span class="p">;</span>
@@ -1162,21 +1160,22 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>The <a href="./Actions.md">Querying the API</a> documentation lists all the hooks available for querying the API, as well as the options and return values for each of them.</p>
+<p><a href="./Actions.md">APIのクエリ</a>ドキュメントには、APIをクエリするためのフック、およびそれらのオプションと戻り値のすべてがリストされています。</p>
 
-<h2 id="handling-file-uploads">Handling File Uploads</h2>
+<h2 id="ファイルアップロードの処理">ファイルアップロードの処理</h2>
 
-<p>When a user submits a form with a file input, the dataProvider method (<code class="language-plaintext highlighter-rouge">create</code> or <code class="language-plaintext highlighter-rouge">update</code>) receives <a href="https://developer.mozilla.org/en-US/docs/Web/API/File">a <code class="language-plaintext highlighter-rouge">File</code> object</a>. You can use that <code class="language-plaintext highlighter-rouge">File</code> object to send the file in the format your server expects:</p>
+<p>ユーザーがファイル入力を含むフォームを送信すると、データプロバイダーメソッド（<code class="language-plaintext highlighter-rouge">create</code>または<code class="language-plaintext highlighter-rouge">update</code>）は<a href="https://developer.mozilla.org/en-US/docs/Web/API/File">ファイルオブジェクト</a>を受け取ります。この<code class="language-plaintext highlighter-rouge">File</code>オブジェクトを使用して、サーバーが期待する形式でファイルを送信できます：</p>
+
 <ul>
-  <li>you can <a href="#sending-files-in-base64">send files as Base64 string</a>, using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/FileReader"><code class="language-plaintext highlighter-rouge">FileReader</code></a> API;</li>
-  <li>you can <a href="#sending-files-in-multipartform-data">send file using multipart/form-data</a> (i.e. send the record data and their files in one query);</li>
-  <li>or you might want <a href="#sending-files-to-a-third-party-service">to send files to a third party service</a> such as CDN;</li>
-  <li>etc.</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileReader"><code class="language-plaintext highlighter-rouge">FileReader</code></a> APIを使用して、<a href="#sending-files-in-base64">Base64文字列としてファイルを送信</a>できます。</li>
+  <li>レコードデータとそのファイルを1つのクエリで送信する<a href="#sending-files-in-multipartform-data">multipart/form-dataを使用してファイルを送信</a>できます。</li>
+  <li>または、<a href="#sending-files-to-a-third-party-service">CDNなどのサードパーティサービスにファイルを送信</a>することもできます。</li>
+  <li>その他。</li>
 </ul>
 
-<h3 id="sending-files-in-base64">Sending Files In Base64</h3>
+<h3 id="base64でファイルを送信する">Base64でファイルを送信する</h3>
 
-<p>The following <code class="language-plaintext highlighter-rouge">dataProvider</code> extends an existing <code class="language-plaintext highlighter-rouge">dataProvider</code> to convert images passed to <code class="language-plaintext highlighter-rouge">dataProvider.update('posts')</code> into Base64 strings. The example leverages <a href="#adding-lifecycle-callbacks"><code class="language-plaintext highlighter-rouge">withLifecycleCallbacks</code></a> to modify the <code class="language-plaintext highlighter-rouge">dataProvider.update()</code> method for the <code class="language-plaintext highlighter-rouge">posts</code> resource only.</p>
+<p>以下のデータプロバイダーは、<code class="language-plaintext highlighter-rouge">dataProvider.update('posts')</code>に渡された画像をBase64文字列に変換する既存のデータプロバイダーを拡張します。この例では、<code class="language-plaintext highlighter-rouge">withLifecycleCallbacks</code>を活用して、<code class="language-plaintext highlighter-rouge">posts</code>リソースのみの<code class="language-plaintext highlighter-rouge">dataProvider.update()</code>メソッドを変更しています。</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">withLifecycleCallbacks</span><span class="p">,</span> <span class="nx">DataProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">simpleRestProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-simple-rest</span><span class="dl">'</span><span class="p">;</span>
@@ -1184,12 +1183,12 @@
 <span class="kd">const</span> <span class="nx">dataProvider</span> <span class="o">=</span> <span class="nx">withLifecycleCallbacks</span><span class="p">(</span><span class="nx">simpleRestProvider</span><span class="p">(</span><span class="dl">'</span><span class="s1">http://path.to.my.api/</span><span class="dl">'</span><span class="p">),</span> <span class="p">[</span>
     <span class="p">{</span>
         <span class="cm">/**
-         * For posts update only, convert uploaded images to base 64 and attach them to
-         * the `picture` sent property, with `src` and `title` attributes.
+         * 投稿の更新のみ、アップロードされた画像をbase64に変換し、
+         * それらを`src`および`title`属性を持つ`picture`送信プロパティに添付します。
          */</span>
         <span class="na">resource</span><span class="p">:</span> <span class="dl">'</span><span class="s1">posts</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">beforeUpdate</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="na">params</span><span class="p">:</span> <span class="nx">any</span><span class="p">,</span> <span class="na">dataProvider</span><span class="p">:</span> <span class="nx">DataProvider</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-            <span class="c1">// Freshly dropped pictures are File objects and must be converted to base64 strings</span>
+            <span class="c1">// 新しくドロップされた画像はFileオブジェクトであり、base64文字列に変換する必要があります</span>
             <span class="kd">const</span> <span class="nx">newPictures</span> <span class="o">=</span> <span class="nx">params</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">pictures</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span>
                 <span class="nx">p</span> <span class="o">=&gt;</span> <span class="nx">p</span><span class="p">.</span><span class="nx">rawFile</span> <span class="k">instanceof</span> <span class="nx">File</span>
             <span class="p">);</span>
@@ -1221,9 +1220,9 @@
 <span class="p">]);</span>
 
 <span class="cm">/**
- * Convert a `File` object returned by the upload input into a base 64 string.
- * That's not the most optimized way to store images in production, but it's
- * enough to illustrate the idea of dataprovider decoration.
+ * アップロード入力から返された`File`オブジェクトをbase64文字列に変換します。
+ * これは、製品で画像を保存するための最適な方法ではありませんが、
+ * データプロバイダーの装飾のアイデアを示すのに十分です。
  */</span>
 <span class="kd">const</span> <span class="nx">convertFileToBase64</span> <span class="o">=</span> <span class="nx">file</span> <span class="o">=&gt;</span>
     <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -1236,23 +1235,24 @@
 <span class="k">export</span> <span class="k">default</span> <span class="nx">myDataProvider</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: Use <code class="language-plaintext highlighter-rouge">beforeSave</code> instead of <code class="language-plaintext highlighter-rouge">beforeUpdate</code> to do the same for both create and update calls.</p>
+<p><strong>ヒント</strong>: <code class="language-plaintext highlighter-rouge">create</code>と<code class="language-plaintext highlighter-rouge">update</code>の両方の呼び出しについて同じことを行うには、<code class="language-plaintext highlighter-rouge">beforeUpdate</code>の代わりに<code class="language-plaintext highlighter-rouge">beforeSave</code>を使用します。</p>
 
-<h3 id="sending-files-in-multipartform-data">Sending Files In <code class="language-plaintext highlighter-rouge">multipart/form-data</code></h3>
+<h3 id="multipartform-dataでファイルを送信する"><code class="language-plaintext highlighter-rouge">multipart/form-data</code>でファイルを送信する</h3>
 
-<p>In case you need to upload files, as you would with an HTML form but to your API, you can use the <a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">FormData</a> API. It uses the same format as a form would use if the encoding type were set to <code class="language-plaintext highlighter-rouge">multipart/form-data</code>.</p>
+<p>HTMLフォームのように、APIにファイルをアップロードする必要がある場合、<a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">FormData</a> APIを使用できます。これは、エンコーディングタイプが<code class="language-plaintext highlighter-rouge">multipart/form-data</code>に設定された場合のフォームが使用する形式と同じです。</p>
 
-<p>The following <code class="language-plaintext highlighter-rouge">dataProvider</code> extends an existing one and tweaks its <code class="language-plaintext highlighter-rouge">create</code> and <code class="language-plaintext highlighter-rouge">update</code> methods for the <code class="language-plaintext highlighter-rouge">posts</code> resource only. It is the role of your API to negotiate the request and process the image.</p>
+<p>次のデータプロバイダーは、既存のものを拡張し、<code class="language-plaintext highlighter-rouge">posts</code>リソースのみの<code class="language-plaintext highlighter-rouge">create</code>および<code class="language-plaintext highlighter-rouge">update</code>メソッドを調整します。APIがリクエストを交渉し、画像を処理する役割です。</p>
 
-<p>The data provider sends the <code class="language-plaintext highlighter-rouge">post</code> data with the attached file in one query and works this way:</p>
+<p>データプロバイダーは、<code class="language-plaintext highlighter-rouge">post</code>データと添付ファイルを1つのクエリで送信し、次のように機能します：</p>
+
 <ul>
-  <li>it checks if the resource is <code class="language-plaintext highlighter-rouge">posts</code>;</li>
-  <li>if so, it creates a new <code class="language-plaintext highlighter-rouge">FormData</code> object with the <code class="language-plaintext highlighter-rouge">post</code> data and the file received from the form;</li>
-  <li>it sends this <code class="language-plaintext highlighter-rouge">FormData</code> to the API with the react-admin <a href="./fetchJson.md"><code class="language-plaintext highlighter-rouge">fetchUtils.fetchJson()</code></a> function;</li>
-  <li>if the resource is other than <code class="language-plaintext highlighter-rouge">posts</code>, it simply uses the <code class="language-plaintext highlighter-rouge">baseDataProvider</code> base methods.</li>
+  <li>リソースが<code class="language-plaintext highlighter-rouge">posts</code>であるかどうかを確認します。</li>
+  <li>そうであれば、フォームから受け取った<code class="language-plaintext highlighter-rouge">post</code>データとファイルで新しい<code class="language-plaintext highlighter-rouge">FormData</code>オブジェクトを作成します。</li>
+  <li>この<code class="language-plaintext highlighter-rouge">FormData</code>をAPIにreact-adminの<a href="./fetchJson.md"><code class="language-plaintext highlighter-rouge">fetchUtils.fetchJson()</code></a>関数を使用して送信します。</li>
+  <li>リソースが<code class="language-plaintext highlighter-rouge">posts</code>以外の場合、単に<code class="language-plaintext highlighter-rouge">baseDataProvider</code>のベースメソッドを使用します。</li>
 </ul>
 
-<p>Let’s have a look:</p>
+<p>見てみましょう：</p>
 
 <div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">simpleRestDataProvider</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">ra-data-simple-rest</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span>
@@ -1319,17 +1319,17 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<h3 id="sending-files-to-a-third-party-service">Sending Files To A Third-Party Service</h3>
+<h3 id="サードパーティサービスへのファイル送信">サードパーティサービスへのファイル送信</h3>
 
-<p>A common way to handle file uploads in single-page-apps is to first upload the file to a CDN such as <a href="https://cloudinary.com/">Cloudinary</a> or <a href="https://www.cloudimage.io/en/home">CloudImage</a>, then use the file URL generated by the CDN in the record creation / modification payload.</p>
+<p>シングルページアプリケーションでファイルアップロードを処理する一般的な方法は、最初に<a href="https://cloudinary.com/">Cloudinary</a>や<a href="https://www.cloudimage.io/en/home">CloudImage</a>などのCDNにファイルをアップロードし、CDNが生成したファイルURLをレコード作成/変更ペイロードに使用することです。</p>
 
-<p>Let’s see an example with the <a href="https://cloudinary.com/">Cloudinary</a> service, by adapting the <code class="language-plaintext highlighter-rouge">dataProvider</code> according to <a href="hhtps://cloudinary.com/documentation/upload_images#authenticated_requests">their “Authenticated requests” example</a>.</p>
+<p><a href="https://cloudinary.com/">Cloudinary</a>サービスを例にとって、彼らの<a href="https://cloudinary.com/documentation/upload_images#authenticated_requests">“Authenticated requests” example</a>に従って<code class="language-plaintext highlighter-rouge">dataProvider</code>を適応させる方法を見てみましょう。</p>
 
-<p>To do that, you need an API that serves a <a href="https://cloudinary.com/documentation/upload_images#generating_authentication_signatures"><code class="language-plaintext highlighter-rouge">signature</code></a> in the format that Cloudinary expect. To make it easier, you can install the <a href="https://cloudinary.com/documentation/node_integration#installation_and_setup"><code class="language-plaintext highlighter-rouge">cloudinary</code> package</a>.</p>
+<p>これを行うためには、Cloudinaryが期待する形式の<a href="https://cloudinary.com/documentation/upload_images#generating_authentication_signatures"><code class="language-plaintext highlighter-rouge">署名</code></a>を提供するAPIが必要です。これを容易にするために<a href="https://cloudinary.com/documentation/node_integration#installation_and_setup"><code class="language-plaintext highlighter-rouge">cloudinary</code>パッケージ</a>をインストールできます。</p>
 
-<p>The following example generates and serves the signature needed to send files to Cloudinary. It uses Remix:</p>
+<p>次の例は、ファイルをCloudinaryに送信するために必要な署名を生成して提供するものです。Remixを使用しています：</p>
 
-<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// handles the "get-cloudinary-signature" route and should be secured</span>
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// "get-cloudinary-signature"ルートを処理し、セキュリティ保護する必要があります</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">LoaderFunctionArgs</span><span class="p">,</span> <span class="nx">json</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@remix-run/node</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">cloudinary</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">cloudinary</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1359,18 +1359,19 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>The following <code class="language-plaintext highlighter-rouge">dataProvider</code> extends an existing one and leverages <a href="#adding-lifecycle-callbacks"><code class="language-plaintext highlighter-rouge">withLifecycleCallbacks</code></a> to modify the <code class="language-plaintext highlighter-rouge">dataProvider.create()</code> and <code class="language-plaintext highlighter-rouge">dataProvider.update()</code> methods for the <code class="language-plaintext highlighter-rouge">posts</code> resource only with the <a href="./withLifecycleCallbacks.md#beforesave"><code class="language-plaintext highlighter-rouge">beforeSave</code></a> methods.</p>
+<p>次のデータプロバイダーは、既存のものを拡張し、<a href="#adding-lifecycle-callbacks"><code class="language-plaintext highlighter-rouge">withLifecycleCallbacks</code></a>を活用して、<code class="language-plaintext highlighter-rouge">posts</code>リソースのみの<code class="language-plaintext highlighter-rouge">dataProvider.create()</code>および<code class="language-plaintext highlighter-rouge">dataProvider.update()</code>メソッドを<a href="./withLifecycleCallbacks.md#beforesave"><code class="language-plaintext highlighter-rouge">beforeSave</code></a>メソッドで変更します。</p>
 
-<p>It works as follow:</p>
+<p>次のように動作します：</p>
+
 <ul>
-  <li>it grabs the Cloudinary signature to allow the autentication in the request;</li>
-  <li>it creates a new <code class="language-plaintext highlighter-rouge">FormData</code> object with the file received from the form;</li>
-  <li>it sends this file to the Cloudinary API;</li>
-  <li>it populates the <code class="language-plaintext highlighter-rouge">params.picture</code> object with the data sent by Cloudinary;</li>
-  <li>it returns the <code class="language-plaintext highlighter-rouge">params</code> object to allow the parent <code class="language-plaintext highlighter-rouge">dataProvider</code> to carry out its processes.</li>
+  <li>Cloudinaryの署名を取得してリクエストの認証を許可します。</li>
+  <li>フォームから受け取ったファイルで新しい<code class="language-plaintext highlighter-rouge">FormData</code>オブジェクトを作成します。</li>
+  <li>このファイルをCloudinary APIに送信します。</li>
+  <li>Cloudinaryから送信されたデータで<code class="language-plaintext highlighter-rouge">params.picture</code>オブジェクトを埋めます。</li>
+  <li>親データプロバイダーがそのプロセスを実行できるように<code class="language-plaintext highlighter-rouge">params</code>オブジェクトを返します。</li>
 </ul>
 
-<p>An example is worth a thousand words:</p>
+<p>例を見てみましょう：</p>
 
 <div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// dataProvider.ts</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">DataProvider</span><span class="p">,</span> <span class="nx">withLifecycleCallbacks</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-admin</span><span class="dl">"</span><span class="p">;</span>
@@ -1399,7 +1400,7 @@
         <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span>
           <span class="s2">`</span><span class="p">${</span><span class="nx">endpoint</span><span class="p">}</span><span class="s2">/get-cloudinary-signature`</span><span class="p">,</span>
           <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span> <span class="p">}</span>
-          <span class="c1">// should send headers with correct authentications</span>
+          <span class="c1">// 正しい認証情報でヘッダーを送信する必要があります</span>
         <span class="p">);</span>
 
         <span class="kd">const</span> <span class="na">signData</span><span class="p">:</span> <span class="nx">SignData</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
@@ -1432,7 +1433,8 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>Feel free to read the <a href="https://cloudinary.com/documentation/programmable_media_overview">Cloudinary Get Started doc</a> to learn more.</p>
+<p>詳細については、<a href="https://cloudinary.com/documentation/programmable_media_overview">Cloudinaryのスタートガイド</a>を参照してください。</p>
+
 
                         </div>
                     </div>

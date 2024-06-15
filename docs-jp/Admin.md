@@ -5,39 +5,40 @@ title: "The Admin Component"
 
 # `<Admin>`
 
-The `<Admin>` component is the root component of a react-admin app. It allows to configure the application adapters, routes, and UI.
+`<Admin>` コンポーネントは、React-Admin アプリのルートコンポーネントです。アプリケーションのアダプター、ルート、および UI を設定するために使用されます。
 
-`<Admin>` creates a series of context providers to allow its children to access the app configuration. It renders the main routes and layout. It delegates the rendering of the content area to its `<Resource>` children.
+`<Admin>` は一連のコンテキストプロバイダーを作成し、その子コンポーネントがアプリの設定にアクセスできるようにします。主なルートとレイアウトをレンダリングし、コンテンツ領域のレンダリングをその `<Resource>` 子コンポーネントに委譲します。
 
 ![Admin Component](./img/dense.webp)
 
-## Usage
+## 使用方法
 
-`<Admin>` requires only a `dataProvider` prop, and at least one child `<Resource>` to work. Here is the most basic example:
+`<Admin>` には `dataProvider` プロップと、少なくとも1つの `<Resource>` 子コンポーネントが必要です。以下は最も基本的な例です:
 
 ```tsx
-// in src/App.js
-import { Admin, Resource } from 'react-admin';
-import simpleRestProvider from 'ra-data-simple-rest';
+    // src/App.js
+    import { Admin, Resource } from 'react-admin';
+    import simpleRestProvider from 'ra-data-simple-rest';
 
-import { PostList } from './posts';
+    import { PostList } from './posts';
 
-const App = () => (
-    <Admin dataProvider={simpleRestProvider('http://path.to.my.api')}>
-        <Resource name="posts" list={PostList} />
-    </Admin>
-);
+    const App = () => (
+        <Admin dataProvider={simpleRestProvider('http://path.to.my.api')}>
+            <Resource name="posts" list={PostList} />
+        </Admin>
+    );
 
-export default App;
+    export default App;
 ```
 
-`<Admin>` children can be [`<Resource>`](./Resource.md) and [`<CustomRoutes>`](./CustomRoutes.md) elements.
+`<Admin>` の子コンポーネントは [`<Resource>`](./Resource.md) および [`<CustomRoutes>`](./CustomRoutes.md) です。
 
-In most apps, you need to pass more props to `<Admin>`. Here is a more complete example taken from [the e-commerce demo](https://marmelab.com/react-admin-demo/):
+ほとんどのアプリでは、`<Admin>` により多くのプロップを渡す必要があります。以下は [e-commerce demo](https://marmelab.com/react-admin-demo/) から取られたより完全な例です:
 
 {% raw %}
+
 ```tsx
-// in src/App.js
+// src/App.js
 import { Admin, Resource, CustomRoutes } from 'react-admin';
 import { Route } from "react-router-dom";
 
@@ -78,12 +79,13 @@ const App = () => (
     </Admin>
 );
 ```
+
 {% endraw %}
 
-To make the main app component more concise, a good practice is to move the resources props to separate files. For instance, the previous example can be rewritten as:
+メインのアプリコンポーネントを簡潔にするために、リソースのプロップを別のファイルに移動することをお勧めします。例えば、先ほどの例を以下のように書き換えることができます:
 
 ```tsx
-// in src/App.js
+// src/App.js
 import { Admin, Resource, CustomRoutes } from 'react-admin';
 import { Route } from "react-router-dom";
 
@@ -99,7 +101,6 @@ import products from './products';
 import categories from './categories';
 import reviews from './reviews';
 import { Segments } from './segments';
-
 
 const App = () => (
     <Admin 
@@ -126,48 +127,47 @@ const App = () => (
 );
 ```
 
-## Props
+## プロップ
 
-Three main props lets you configure the core features of the `<Admin>` component:
+`<Admin>` コンポーネントのコア機能を設定するための主要な3つのプロップ:
 
-- [`dataProvider`](#dataprovider) for data fetching
-- [`authProvider`](#authprovider) for security and permissions
-- [`i18nProvider`](#i18nprovider) for translations and internationalization
+* [`dataProvider`](#dataprovider): データ取得用
+* [`authProvider`](#authprovider): セキュリティと権限用
+* [`i18nProvider`](#i18nprovider): 翻訳と国際化用
 
-Here are all the props accepted by the component:
+以下は、コンポーネントが受け入れるすべてのプロップです:
 
-| Prop               | Required | Type           | Default        | Description                                              |
-|------------------- |----------|----------------|----------------|----------------------------------------------------------|
-| `dataProvider`     | Required | `DataProvider` | -              | The data provider for fetching resources                 |
-| `children`         | Required | `ReactNode`    | -              | The routes to render                                     |
-| `authCallbackPage` | Optional | `Component`    | `AuthCallback` | The content of the authentication callback page          |
-| `authProvider`     | Optional | `AuthProvider` | -              | The authentication provider for security and permissions |
-| `basename`         | Optional | `string`       | -              | The base path for all URLs                               |
-| `catchAll`         | Optional | `Component`    | `NotFound`     | The fallback component for unknown routes                |
-| `dashboard`        | Optional | `Component`    | -              | The content of the dashboard page                        |
-| `darkTheme`        | Optional | `object`       | -              | The dark theme configuration                             |
-| `defaultTheme`     | Optional | `boolean`      | `false`        | Flag to default to the light theme                       |
-| `disableTelemetry` | Optional | `boolean`      | `false`        | Set to `true` to disable telemetry collection            |
-| `i18nProvider`     | Optional | `I18NProvider` | -              | The internationalization provider for translations       |
-| `layout`           | Optional | `Component`    | `Layout`       | The content of the layout                                |
-| `loginPage`        | Optional | `Component`    | `LoginPage`    | The content of the login page                            |
-| `notification`     | Optional | `Component`    | `Notification` | The notification component                               |
-| `queryClient`      | Optional | `QueryClient`  | -              | The react-query client                                   |
-| `ready`            | Optional | `Component`    | `Ready`        | The content of the ready page                            |
-| `requireAuth`      | Optional | `boolean`      | `false`        | Flag to require authentication for all routes            |
-| `store`            | Optional | `Store`        | -              | The Store for managing user preferences                  |
-| `theme`            | Optional | `object`       | -              | The main (light) theme configuration                     |
-| `title`            | Optional | `string`       | -              | The error page title                                     |
-
+|プロップ|必須|タイプ|デフォルト|説明|
+|---|---|---|---|---|
+|`dataProvider`|必須|`DataProvider`|\-|リソースの取得に使用するデータプロバイダー|
+|`children`|必須|`ReactNode`|\-|レンダリングするルート|
+|`authCallbackPage`|任意|`Component`|`AuthCallback`|認証コールバックページの内容|
+|`authProvider`|任意|`AuthProvider`|\-|セキュリティと権限のための認証プロバイダー|
+|`basename`|任意|`string`|\-|すべてのURLのベースパス|
+|`catchAll`|任意|`Component`|`NotFound`|未知のルートに対するフォールバックコンポーネント|
+|`dashboard`|任意|`Component`|\-|ダッシュボードページの内容|
+|`darkTheme`|任意|`object`|\-|ダークテーマの設定|
+|`defaultTheme`|任意|`boolean`|`false`|デフォルトでライトテーマを使用するフラグ|
+|`disableTelemetry`|任意|`boolean`|`false`|テレメトリー収集を無効にする|
+|`i18nProvider`|任意|`I18NProvider`|\-|翻訳のための国際化プロバイダー|
+|`layout`|任意|`Component`|`Layout`|レイアウトの内容|
+|`loginPage`|任意|`Component`|`LoginPage`|ログインページの内容|
+|`notification`|任意|`Component`|`Notification`|通知コンポーネント|
+|`queryClient`|任意|`QueryClient`|\-|react-query クライアント|
+|`ready`|任意|`Component`|`Ready`|準備ページの内容|
+|`requireAuth`|任意|`boolean`|`false`|すべてのルートに対する認証を要求するフラグ|
+|`store`|任意|`Store`|\-|ユーザーの設定を管理するストア|
+|`theme`|任意|`object`|\-|メイン（ライト）テーマの設定|
+|`title`|任意|`string`|\-|エラーページのタイトル|
 
 ## `dataProvider`
 
-`dataProvider` is the only required prop. It must be an object allowing to communicate with the API. React-admin uses the data provider everywhere it needs to fetch or save data.
+`dataProvider` は唯一の必須プロップで、API と通信するためのオブジェクトでなければなりません。React-admin はデータの取得や保存が必要なすべての場所でこのデータプロバイダーを使用します。
 
-In many cases, you won't have to write a data provider, as one of the [50+ existing data providers](./DataProviderList.md) will probably fit your needs. For instance, if your API is REST-based, you can use the [Simple REST Data Provider](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-simple-rest) as follows:
+多くの場合、データプロバイダーを自分で書く必要はなく、[既存の50以上のデータプロバイダー](./DataProviderList.md) のいずれかがニーズに合うでしょう。例えば、API が REST ベースであれば、[Simple REST Data Provider](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-simple-rest) を次のように使用できます:
 
 ```tsx
-// in src/App.js
+// src/App.js
 import simpleRestProvider from 'ra-data-simple-rest';
 import { Admin, Resource } from 'react-admin';
 
@@ -182,7 +182,7 @@ const App = () => (
 );
 ```
 
-If you need to write your own, the data provider must have the following methods, all returning a promise:
+独自に書く必要がある場合、データプロバイダーは以下のメソッドを持つ必要があります。すべてが Promise を返します:
 
 ```tsx
 const dataProvider = {
@@ -198,17 +198,18 @@ const dataProvider = {
 }
 ```
 
-Check the [Writing a Data Provider](./DataProviderWriting.md) chapter for detailed instructions on how to write a data provider for your API.
+API のデータプロバイダーを書く方法についての詳細は [Writing a Data Provider](./DataProviderWriting.md) 章を参照してください。
 
-The `dataProvider` is also the ideal place to add custom HTTP headers, handle file uploads, map resource names to API endpoints, pass credentials to the API, put business logic, reformat API errors, etc. Check [the Data Provider documentation](./DataProviders.md) for more details.
+`dataProvider` は、カスタム HTTP ヘッダーの追加、ファイルのアップロード処理、リソース名の API エンドポイントへのマッピング、API への認証情報の渡し、ビジネスロジックの追加、API エラーの再フォーマットなどにも理想的です。詳細は [Data Provider documentation](./DataProviders.md) を参照してください。
 
 ## `children`
 
-The `<Admin>` component expects to receive [`<Resource>`](./Resource.md) and [`<CustomRoutes>`](./CustomRoutes.md) elements as children. They define the routes of the application.
+`<Admin>` コンポーネントは、[`<Resource>`](./Resource.md) および [`<CustomRoutes>`](./CustomRoutes.md) 要素を子コンポーネントとして受け取ることを期待しています。これらはアプリケーションのルートを定義します。
 
-For instance:
+例えば:
 
 {% raw %}
+
 ```tsx
 const App = () => (
     <Admin dataProvider={dataProvider} dashboard={Dashboard}>
@@ -224,30 +225,31 @@ const App = () => (
     </Admin>
 );
 ```
+
 {% endraw %}
 
-With these children, the `<Admin>` component will generate the following routes:
+これらの子コンポーネントにより、`<Admin>` コンポーネントは以下のルートを生成します:
 
-- `/`: the dashboard
-- `/customers`: the customer list
-- `/customers/:id`: the customer edit page
-- `/orders`: the order list
-- `/orders/:id`: the order edit page
-- `/invoices`: the invoice list
-- `/products`: the product list
-- `/products/create`: the product creation page
-- `/products/:id`: the product edit page
-- `/categories`: the category list
-- `/categories/create`: the category creation page
-- `/categories/:id`: the category edit page
-- `/reviews`: the review list
-- `/segments`: the segments page
+* `/`: ダッシュボード
+* `/customers`: カスタマーリスト
+* `/customers/:id`: カスタマー編集ページ
+* `/orders`: 注文リスト
+* `/orders/:id`: 注文編集ページ
+* `/invoices`: 請求書リスト
+* `/products`: 製品リスト
+* `/products/create`: 製品作成ページ
+* `/products/:id`: 製品編集ページ
+* `/categories`: カテゴリーリスト
+* `/categories/create`: カテゴリー作成ページ
+* `/categories/:id`: カテゴリー編集ページ
+* `/reviews`: レビューリスト
+* `/segments`: セグメントページ
 
 ## `authCallbackPage`
 
-React-admin apps contain a special route called `/auth-callback` to let external authentication providers (like Auth0, Cognito, OIDC servers) redirect users after login. This route renders the `AuthCallback` component by default, which in turn calls `authProvider.handleCallback()`. 
+React-admin アプリには `/auth-callback` と呼ばれる特別なルートがあり、外部認証プロバイダー (Auth0、Cognito、OIDC サーバーなど) がログイン後にユーザーをリダイレクトできるようになっています。このルートはデフォルトで `AuthCallback` コンポーネントをレンダリングし、`authProvider.handleCallback()` を呼び出します。
 
-If you need a different behavior for this route, you can render a custom component by passing it as the `authCallbackPage` prop.
+このルートに対して異なる動作が必要な場合、`authCallbackPage` プロップとしてカスタムコンポーネントを渡すことでカスタマイズできます。
 
 ```tsx
 import { Admin } from 'react-admin';
@@ -266,20 +268,20 @@ const App = () => (
 );
 ```
 
-**Note**: You should seldom use this option, even when using an external authentication provider. Since you can already define the `/auth-callback` route controller via `authProvider.handleCallback()`, the `authCallbackPage` prop is only useful when you need the user's feedback after they logged in.
+**注意**: 外部認証プロバイダーを使用する場合でも、このオプションを使用することはまれです。すでに `authProvider.handleCallback()` を介して `/auth-callback` ルートコントローラを定義できるため、ユーザーがログインした後にフィードバックが必要な場合のみ `authCallbackPage` プロップが有用です。
 
-You can also disable the `/auth-callback` route altogether by passing `authCallbackPage={false}`.
+`authCallbackPage={false}` を渡すことで、`/auth-callback` ルートを完全に無効にすることもできます。
 
-See The [Authentication documentation](./Authentication.md#using-external-authentication-providers) for more details.
+詳細については [Authentication documentation](./Authentication.md#using-external-authentication-providers) を参照してください。
 
 ## `authProvider`
 
-The `authProvider` is responsible for managing authentication and permissions, usually based on an authentication backend. React-admin uses it to check for authentication status, redirect to the login page when the user is not authenticated, check for permissions, display the user identity, and more.
+`authProvider` は認証および権限管理を担当し、通常は認証バックエンドに基づいています。React-admin はこれを使用して認証状態を確認し、ユーザーが認証されていない場合にログインページにリダイレクトし、権限を確認し、ユーザーの身元を表示します。
 
-If you use a standard authentication strategy, you can use one of the [existing auth providers](./AuthProviderList.md). For instance, to use [Auth0](https://auth0.com/), you can use [`ra-auth-auth0`](https://github.com/marmelab/ra-auth-auth0):
+標準的な認証戦略を使用する場合、既存の [auth providers](./AuthProviderList.md) の1つを使用できます。例えば、[Auth0](https://auth0.com/) を使用する場合は [`ra-auth-auth0`](https://github.com/marmelab/ra-auth-auth0) を使用できます:
 
 ```tsx
-// in src/App.tsx
+// src/App.tsx
 import React, { useEffect, useRef, useState } from 'react';
 import { Admin, Resource } from 'react-admin';
 import { Auth0AuthProvider } from 'ra-auth-auth0';
@@ -314,7 +316,7 @@ const App = () => {
 export default App;
 ```
 
-If your authentication backend isn't supported, you'll have to [write your own `authProvider`](./AuthProviderWriting.md). It's an object with 6 methods, each returning a Promise:
+認証バックエンドがサポートされていない場合、独自の `authProvider` を[作成](./AuthProviderWriting.md)する必要があります。それは6つのメソッドを持つオブジェクトで、それぞれが Promise を返します:
 
 ```tsx
 const authProvider = {
@@ -333,11 +335,11 @@ const App = () => (
 );
 ```
 
-The Auth Provider also lets you configure redirections after login/logout, anonymous access, refresh tokens, roles and user groups. The [Auth Provider documentation](./Authentication.md) explains how to implement these functions in detail.
+Auth Provider では、ログイン/ログアウト後のリダイレクト、匿名アクセス、リフレッシュトークン、ロールおよびユーザーグループも設定できます。詳細な実装方法については [Auth Provider documentation](./Authentication.md) を参照してください。
 
 ## `basename`
 
-Use this prop to make all routes and links in your Admin relative to a "base" portion of the URL pathname that they all share. This is required when using the [`BrowserRouter`](https://reactrouter.com/en/main/router-components/browser-router) to serve the application under a sub-path of your domain (for example https://marmelab.com/ra-enterprise-demo), or when embedding react-admin inside a single-page app with its own routing.
+このプロップを使用して、すべてのルートおよびリンクを共通の「ベース」URL パスに相対的にします。これは、`BrowserRouter` を使用してサブパスでアプリケーションを提供する場合や、シングルページアプリケーション内に react-admin を埋め込む場合に必要です。
 
 ```tsx
 import { Admin } from 'react-admin';
@@ -352,18 +354,18 @@ const App = () => (
 );
 ```
 
-See [Using React-Admin In A Sub Path](#using-react-admin-in-a-sub-path) for more usage examples.
+詳細な使用例については [Using React-Admin In A Sub Path](#using-react-admin-in-a-sub-path) を参照してください。
 
 ## `catchAll`
 
-When users type URLs that don't match any of the children `<Resource>` components, they see a default "Not Found" page.
+ユーザーが任意の URL を入力し、それが子の `<Resource>` コンポーネントと一致しない場合、デフォルトの「Not Found」ページが表示されます。
 
 ![Not Found](./img/not-found.png)
 
-You can customize this page to use the component of your choice by passing it as the `catchAll` prop. To fit in the general design, use Material UI's `<Card>` component, and [react-admin's `<Title>` component](./Title.md):
+このページをカスタマイズして、任意のコンポーネントを使用することができます。Material UI の `<Card>` コンポーネントと [react-admin の `<Title>` コンポーネント](./Title.md) を使用すると一般的なデザインにフィットします:
 
 ```tsx
-// in src/NotFound.js
+// src/NotFound.js
 import * as React from "react";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -380,7 +382,7 @@ export default () => (
 ```
 
 ```tsx
-// in src/App.js
+// src/App.js
 import * as React from "react";
 import { Admin } from 'react-admin';
 import simpleRestProvider from 'ra-data-simple-rest';
@@ -394,14 +396,14 @@ const App = () => (
 );
 ```
 
-**Tip**: If your custom `catchAll` component contains react-router `<Route>` components, this allows you to register new routes displayed within the react-admin layout easily. Note that these routes will match *after* all the react-admin resource routes have been tested. To add custom routes *before* the react-admin ones, and therefore override the default resource routes, see the [`custom pages`](./CustomRoutes.md) section instead.
+**ヒント**: カスタム `catchAll` コンポーネントに react-router の `<Route>` コンポーネントが含まれている場合、これを使用して react-admin レイアウト内に新しいルートを簡単に登録できます。これらのルートはすべての react-admin リソースルートがテストされた後に一致します。デフォルトのリソースルートを上書きするために react-admin よりも前にカスタムルートを追加するには、[`custom pages`](./CustomRoutes.md) セクションを参照してください。
 
 ## `dashboard`
 
-By default, the homepage of an admin app is the `list` of the first child `<Resource>`. But you can also specify a custom component instead. To fit in the general design, use Material UI's `<Card>` component, and [react-admin's `<Title>` component](./Title.md) to set the title in the AppBar:
+デフォルトでは、管理アプリのホームページは最初の子 `<Resource>` の `list` です。しかし、カスタムコンポーネントを指定することもできます。Material UI の `<Card>` コンポーネントと [react-admin の `<Title>` コンポーネント](./Title.md) を使用してタイトルを AppBar に設定すると、一般的なデザインにフィットします:
 
 ```tsx
-// in src/Dashboard.js
+// src/Dashboard.js
 import * as React from "react";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -415,7 +417,7 @@ export default () => (
 ```
 
 ```tsx
-// in src/App.js
+// src/App.js
 import * as React from "react";
 import { Admin } from 'react-admin';
 import simpleRestProvider from 'ra-data-simple-rest';
@@ -433,13 +435,9 @@ const App = () => (
 
 ## `darkTheme`
 
-If you want to support both light and dark mode, you can provide a `darkTheme` in addition to the `theme` prop. The app will use the `darkTheme` by default for users who prefer the dark mode at the OS level, and users will be able to switch from light to dark mode using a new app bar button leveraging [the `<ToggleThemeButton>` component](./ToggleThemeButton.md).
+ライトモードとダークモードの両方をサポートしたい場合は、`theme` プロップに加えて `darkTheme` を提供できます。OS レベルでダークモードを好むユーザーにはデフォルトで `darkTheme` が使用され、ユーザーは [<ToggleThemeButton> コンポーネント](./ToggleThemeButton.md) を利用してライトモードとダークモードを切り替えることができます。
 
-<video controls autoplay muted loop>
-  <source src="./img/ToggleThemeButton.webm" type="video/webm"/>
-  Your browser does not support the video tag.
-</video>
-
+<video controls autoplay muted loop> <source src="./img/ToggleThemeButton.webm" type="video/webm"/> Your browser does not support the video tag. </video>
 ```tsx
 import { Admin } from 'react-admin';
 import { dataProvider } from './dataProvider';
@@ -456,13 +454,13 @@ const App = () => (
 );
 ```
 
-**Tip**: To disable OS preference detection and always use one theme by default, see the [`defaultTheme`](#defaulttheme) prop.
+**ヒント**: OS の設定検出を無効にして、常に1つのテーマをデフォルトで使用する場合は、[`defaultTheme`](#defaulttheme) プロップを参照してください。
 
 ## `defaultTheme`
 
-If you provide both a `lightTheme` and a `darkTheme`, react-admin will choose the default theme to use for each user based on their OS preference. This means that users using dark mode will see the dark theme by default. Users can then switch to the other theme using [the `<ToggleThemeButton>` component](./ToggleThemeButton.md).
+`lightTheme` と `darkTheme` の両方を提供する場合、react-admin はユーザーの OS 設定に基づいてデフォルトテーマを選択します。これは、ダークモードを使用するユーザーにはデフォルトでダークテーマが表示されることを意味します。ユーザーはその後、[<ToggleThemeButton> コンポーネント](./ToggleThemeButton.md) を使用して他のテーマに切り替えることができます。
 
-If you prefer to always default to the light or the dark theme regardless of the user's OS preference, you can set the `defaultTheme` prop to either `light` or `dark`:
+ユーザーの OS 設定に関係なく常にライトテーマまたはダークテーマをデフォルトにする場合、`defaultTheme` プロップを `light` または `dark` に設定できます:
 
 ```tsx
 import { Admin } from 'react-admin';
@@ -481,16 +479,16 @@ const App = () => (
 
 ## `disableTelemetry`
 
-In production, react-admin applications send an anonymous request on mount to a telemetry server operated by marmelab. You can see this request by looking at the Network tab of your browser DevTools:
+本番環境では、react-admin アプリケーションはマウント時に marmelab によって運営されるテレメトリーサーバーに匿名リクエストを送信します。このリクエストはブラウザの DevTools のネットワークタブで確認できます:
 
 `https://react-admin-telemetry.marmelab.com/react-admin-telemetry`
 
-The only data sent to the telemetry server is the admin domain (e.g. "example.com") - no personal data is ever sent, and no cookie is included in the response. The react-admin team uses these domains to track the usage of the framework.
+テレメトリーサーバーに送信されるデータは管理ドメイン（例: "example.com"）のみであり、個人データは一切送信されず、レスポンスにクッキーも含まれません。react-admin チームはこれらのドメインを使用してフレームワークの使用状況を追跡します。
 
-You can opt out of telemetry by simply adding `disableTelemetry` to the `<Admin>` component:
+`<Admin>` コンポーネントに `disableTelemetry` を追加するだけでテレメトリーをオプトアウトできます:
 
 ```tsx
-// in src/App.js
+// src/App.js
 import { Admin } from 'react-admin';
 import { dataProvider } from './dataProvider';
 
@@ -501,19 +499,18 @@ const App = () => (
 );
 ```
 
-
 ## `i18nProvider`
 
-The `i18nProvider` props let you translate the GUI. For instance, to switch the UI to French instead of the default English:
+`i18nProvider` プロップを使用して GUI を翻訳できます。例えば、デフォルトの英語ではなくフランス語に切り替えるには次のようにします:
 
 ```tsx
-// in src/i18nProvider.js
+// src/i18nProvider.js
 import polyglotI18nProvider from 'ra-i18n-polyglot';
 import fr from 'ra-language-french';
 
 export const i18nProvider = polyglotI18nProvider(() => fr, 'fr');
 
-// in src/App.js
+// src/App.js
 import { i18nProvider } from './i18nProvider';
 
 const App = () => (
@@ -526,40 +523,20 @@ const App = () => (
 );
 ```
 
-The [Translation Documentation](./Translation.md) details this process.
+翻訳の詳細については [Translation Documentation](./Translation.md) を参照してください。
 
 ## `layout`
 
-If you want to deeply customize the app header, the menu, or the notifications, the best way is to provide a custom layout component.
+アプリのヘッダー、メニュー、通知を深くカスタマイズしたい場合、最良の方法はカスタムレイアウトコンポーネントを提供することです。
 
-React-admin offers predefined layouts for you to use:
+React-admin は使用できる既成のレイアウトを提供しています:
 
-<figure>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1177 290" preserveAspectRatio="xMinYMin meet">
-        <image width="1177" height="290" xlink:href="./img/layouts.png" />
-        <g opacity="0">
-            <a href="./Layout.html" aria-label="Layout">
-                <rect x="0" y="0" width="348" height="290"/>
-            </a>
-        </g>
-        <g opacity="0">
-            <a href="./ContainerLayout.html" aria-label="ContainerLayout">
-                <rect x="373" y="0" width="408" height="290"/>
-            </a>
-        </g>
-        <g opacity="0">
-            <a href="./SolarLayout.html" aria-label="SolarLayout">
-                <rect x="801" y="0" width="376" height="290"/>
-            </a>
-        </g>
-    </svg>
-</figure>
+<figure> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1177 290" preserveAspectRatio="xMinYMin meet"> <image width="1177" height="290" xlink:href="./img/layouts.png" /> <g opacity="0"> <a href="./Layout.html" aria-label="Layout"> <rect x="0" y="0" width="348" height="290"/> </a> </g> <g opacity="0"> <a href="./ContainerLayout.html" aria-label="ContainerLayout"> <rect x="373" y="0" width="408" height="290"/> </a> </g> <g opacity="0"> <a href="./SolarLayout.html" aria-label="SolarLayout"> <rect x="801" y="0" width="376" height="290"/> </a> </g> </svg> </figure>
+* [`<Layout>`](./Layout.md): デフォルトのレイアウト。トップのアプリバーとサイドバーにナビゲーションメニューをレンダリングします。
+* [`<ContainerLayout>`](./ContainerLayout.md): 水平方向のナビゲーションを持つ中央レイアウト。
+* [`<SolarLayout>`](./SolarLayout.md): 小さなアイコンのサイドバー、トップバーなし、全幅のコンテンツエリアを持つレイアウト。
 
-- [`<Layout>`](./Layout.md): The default layout. It renders a top app bar and the navigation menu in a side bar.
-- [`<ContainerLayout>`](./ContainerLayout.md) is centered layout with horizontal navigation.
-- [`<SolarLayout>`](./SolarLayout.md) is a layout with a small icon sidebar, no top bar, and a full-width content area.
-
-For instance, here is how to replace the default `Layout` with the `ContainerLayout`:
+例えば、デフォルトの `Layout` を `ContainerLayout` に置き換える方法は次のとおりです:
 
 ```tsx
 import { Admin } from 'react-admin';
@@ -572,20 +549,20 @@ export const App = () => (
 );
 ```
 
-Layout components can be customized via props. For instance, you can pass a custom `menu` prop to `<Layout>` to override the default menu:
+レイアウトコンポーネントはプロップを介してカスタマイズできます。例えば、`menu` プロップをカスタム `menu` にオーバーライドする `Layout` を渡すことができます:
 
 ```tsx
-// in src/MyLayout.js
+// src/MyLayout.js
 import { Layout } from 'react-admin';
 import MyMenu from './MyMenu';
 
 export const MyLayout = (props) => <Layout {...props} menu={MyMenu} />;
 ```
 
-Then, pass it to the `<Admin>` component as the `layout` prop:
+次に、それを `layout` プロップとして `<Admin>` コンポーネントに渡します:
 
 ```tsx
-// in src/App.js
+// src/App.js
 import { Admin } from 'react-admin';
 import { MyLayout } from './MyLayout';
 
@@ -596,13 +573,13 @@ const App = () => (
 );
 ```
 
-Refer to each layout component documentation to understand the props it accepts.
+各レイアウトコンポーネントのドキュメントを参照して、受け入れるプロップを確認してください。
 
-Finally, you can also pass a custom component as the `layout` prop. It must contain a `{children}` placeholder, where react-admin will render the page content. Check [the custom layout documentation](./Layout.md#writing-a-layout-from-scratch) for examples, and use the [default `<Layout>`](https://github.com/marmelab/react-admin/blob/master/packages/ra-ui-materialui/src/layout/Layout.tsx) as a starting point.
+最後に、カスタムコンポーネントを `layout` プロップとして渡すこともできます。それは、react-admin がページコンテンツをレンダリングする `{children}` プレースホルダーを含む必要があります。例については [カスタムレイアウトドキュメント](./Layout.md#writing-a-layout-from-scratch) を確認し、[デフォルトの `<Layout>`](https://github.com/marmelab/react-admin/blob/master/packages/ra-ui-materialui/src/layout/Layout.tsx) を出発点として使用してください。
 
 ## `loginPage`
 
-If you want to customize the Login page, or switch to another authentication strategy than a username/password form, pass a component of your own as the `loginPage` prop. React-admin will display this component whenever the `/login` route is called.
+ログインページをカスタマイズするか、ユーザー名/パスワードフォーム以外の認証戦略に切り替えたい場合は、独自のコンポーネントを `loginPage` プロップとして渡します。React-admin は `/login` ルートが呼び出されるたびにこのコンポーネントを表示します。
 
 ```tsx
 import { Admin } from 'react-admin';
@@ -621,9 +598,9 @@ const App = () => (
 );
 ```
 
-See The [Authentication documentation](./Authentication.md#customizing-the-login-component) for more details.
+詳細については [Authentication documentation](./Authentication.md#customizing-the-login-component) を参照してください。
 
-You can also disable the `/login` route completely by passing `false` to this prop. In this case, it's the `authProvider`'s responsibility to redirect unauthenticated users to a custom login page, by returning a `redirectTo` field in response to `checkAuth` (see [`authProvider.checkAuth()`](./AuthProviderWriting.md#checkauth) for details). If you fail to customize the redirection, the app will end up in an infinite loop.
+このプロップに `false` を渡すことで `/login` ルートを完全に無効にすることもできます。この場合、カスタムログインページにユーザーをリダイレクトする責任は `authProvider` にあります。これを行うには `checkAuth` に対する応答で `redirectTo` フィールドを返します（詳細については [`authProvider.checkAuth()`](./AuthProviderWriting.md#checkauth) を参照してください）。リダイレクトのカスタマイズに失敗した場合、アプリは無限ループに陥る可能性があります。
 
 ```tsx
 const authProvider = {
@@ -645,10 +622,10 @@ const App = () => (
 
 ## `notification`
 
-You can override the notification component, for instance to change the notification duration. A common use case is to change the `autoHideDuration`, and force the notification to remain on screen longer than the default 4 seconds. For instance, to create a custom Notification component with a 5 seconds default:
+通知コンポーネントをオーバーライドすることができます。例えば、通知の表示時間を変更するなどです。一般的な使用例は、`autoHideDuration` を変更し、通知をデフォルトの4秒よりも長く表示することです。例えば、デフォルトを5秒に設定したカスタム通知コンポーネントを作成するには:
 
 ```tsx
-// in src/MyNotification.js
+// src/MyNotification.js
 import { Notification } from 'react-admin';
 
 const MyNotification = () => <Notification autoHideDuration={5000} />;
@@ -656,10 +633,10 @@ const MyNotification = () => <Notification autoHideDuration={5000} />;
 export default MyNotification;
 ```
 
-To use this custom notification component, pass it to the `<Admin>` component as the `notification` prop:
+このカスタム通知コンポーネントを使用するには、`notification` プロップとして `<Admin>` コンポーネントに渡します:
 
 ```tsx
-// in src/App.js
+// src/App.js
 import MyNotification from './MyNotification';
 import dataProvider from './dataProvider';
 
@@ -672,20 +649,20 @@ const App = () => (
 
 ## `queryClient`
 
-React-admin uses [react-query](https://react-query-v3.tanstack.com/) to fetch, cache and update data. Internally, the `<Admin>` component creates a react-query [`QueryClient`](https://tanstack.com/query/v3/docs/react/reference/QueryClient) on mount, using [react-query's "aggressive but sane" defaults](https://react-query-v3.tanstack.com/guides/important-defaults):
+React-admin はデータの取得、キャッシュ、および更新に [react-query](https://react-query-v3.tanstack.com/) を使用します。内部的に `<Admin>` コンポーネントはマウント時に react-query の [`QueryClient`](https://tanstack.com/query/v3/docs/react/reference/QueryClient) を作成し、[react-query の「攻撃的だが健全な」デフォルト設定](https://react-query-v3.tanstack.com/guides/important-defaults) を使用します:
 
-* Queries consider cached data as stale
-* Stale queries are refetched automatically in the background when:
-  * New instances of the query mount
-  * The window is refocused
-  * The network is reconnected
-  * The query is optionally configured with a refetch interval
-* Query results that are no longer used in the current page are labeled as "inactive" and remain in the cache in case they are used again at a later time.
-* By default, "inactive" queries are garbage collected after 5 minutes.
-* Queries that fail are silently retried 3 times, with exponential backoff delay before capturing and displaying an error to the UI.
-* Query results by default are structurally shared to detect if data have actually changed and if not, the data reference remains unchanged to better help with value stabilization with regards to `useMemo` and `useCallback`. 
+* クエリはキャッシュされたデータを古いと見なします
+* 古いクエリは次の場合にバックグラウンドで自動的に再フェッチされます:
+  * クエリの新しいインスタンスがマウントされたとき
+  * ウィンドウが再フォーカスされたとき
+  * ネットワークが再接続されたとき
+  * クエリが再フェッチ間隔で構成されている場合
+* 現在のページで使用されていないクエリ結果は「非アクティブ」と見なされ、後で再使用される場合に備えてキャッシュに残ります。
+* デフォルトでは、「非アクティブ」クエリは5分後にガベージコレクションされます。
+* 失敗したクエリは3回静かに再試行され、指数関数的なバックオフ遅延の後にエラーが UI にキャプチャおよび表示されます。
+* デフォルトでクエリ結果は構造的に共有され、データが実際に変更されたかどうかを検出し、そうでない場合はデータ参照が変更されず、`useMemo` および `useCallback` に関して値の安定化に役立ちます。
 
-If you want to override the react-query default query and mutation default options, or use a specific client or mutation cache, you can create your own `QueryClient` instance and pass it to the `<Admin queryClient>` prop:
+react-query のデフォルトクエリおよびミューテーションデフォルトオプションを上書きするか、特定のクライアントまたはミューテーションキャッシュを使用する場合、独自の `QueryClient` インスタンスを作成し、`<Admin queryClient>` プロップに渡すことができます:
 
 ```tsx
 import { Admin } from 'react-admin';
@@ -711,9 +688,9 @@ const App = () => (
 );
 ```
 
-To know which options you can pass to the `QueryClient` constructor, check the [react-query documentation](https://tanstack.com/query/v3/docs/react/reference/QueryClient) and the [query options](https://tanstack.com/query/v3/docs/react/reference/useQuery) and [mutation options](https://tanstack.com/query/v3/docs/react/reference/useMutation) sections.
+`QueryClient` コンストラクタに渡すことができるオプションについては [react-query documentation](https://tanstack.com/query/v3/docs/react/reference/QueryClient) および [query options](https://tanstack.com/query/v3/docs/react/reference/useQuery) と [mutation options](https://tanstack.com/query/v3/docs/react/reference/useMutation) セクションを確認してください。
 
-The common settings that react-admin developers often overwrite are:
+react-admin 開発者が頻繁に上書きする一般的な設定は次のとおりです:
 
 ```tsx
 import { QueryClient } from 'react-query';
@@ -722,23 +699,23 @@ const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
             /**
-             * The time in milliseconds after data is considered stale.
-             * If set to `Infinity`, the data will never be considered stale.
+             * データが古いと見なされるまでのミリ秒単位の時間。
+             * `Infinity` に設定すると、データは決して古いと見なされません。
              */
             staleTime: 10000,
             /**
-             * If `false`, failed queries will not retry by default.
-             * If `true`, failed queries will retry infinitely., failureCount: num
-             * If set to an integer number, e.g. 3, failed queries will retry until the failed query count meets that number.
-             * If set to a function `(failureCount, error) => boolean` failed queries will retry until the function returns false.
+             * `false` に設定すると、デフォルトで失敗したクエリは再試行されません。
+             * `true` に設定すると、失敗したクエリは無限に再試行されます。失敗回数は `failureCount: num`。
+             * 整数値 (例: 3) に設定すると、失敗回数がその数値に達するまで再試行されます。
+             * 関数 `(failureCount, error) => boolean` に設定すると、関数が `false` を返すまで失敗したクエリが再試行されます。
              */
             retry: false,
             /**
-             * If set to `true`, the query will refetch on window focus if the data is stale.
-             * If set to `false`, the query will not refetch on window focus.
-             * If set to `'always'`, the query will always refetch on window focus.
-             * If set to a function, the function will be executed with the latest data and query to compute the value.
-             * Defaults to `true`.
+             * `true` に設定すると、データが古い場合にウィンドウフォーカス時にクエリが再フェッチされます。
+             * `false` に設定すると、ウィンドウフォーカス時にクエリは再フェッチされません。
+             * `always` に設定すると、ウィンドウフォーカス時にクエリが常に再フェッチされます。
+             * 関数に設定すると、最新のデータとクエリを使用して値を計算するために関数が実行されます。
+             * デフォルトは `true`。
              */
             refetchOnWindowFocus: false,
         },
@@ -748,11 +725,11 @@ const queryClient = new QueryClient({
 
 ## `ready`
 
-When you run an `<Admin>` with no child `<Resource>` nor `<CustomRoutes>`, react-admin displays a "ready" screen:
+`<Resource>` や `<CustomRoutes>` の子がない `<Admin>` を実行すると、react-admin は「ready」画面を表示します:
 
 ![Empty Admin](./img/tutorial_empty.png)
 
-You can replace that "ready" screen by passing a custom component as the `ready` prop:
+この「ready」画面をカスタムコンポーネントに置き換えるには、`ready` プロップとしてカスタムコンポーネントを渡します:
 
 ```tsx
 import * as React from 'react';
@@ -774,9 +751,9 @@ const App = () => (
 
 ## `requireAuth`
 
-Some pages in react-admin apps may allow anonymous access. For that reason, react-admin starts rendering the page layout before knowing if the user is logged in. If all the pages require authentication, this default behaviour creates an unwanted "flash of UI" for users who never logged in, before the `authProvider` redirects them to the login page.
+react-admin アプリの一部のページは匿名アクセスを許可する場合があります。そのため、react-admin はユーザーがログインしているかどうかを確認する前にページレイアウトのレンダリングを開始します。すべてのページが認証を必要とする場合、このデフォルトの動作により、ログインしていないユーザーに対して不要な「UI フラッシュ」が発生します。
 
-If you know your app will never accept anonymous access, you can force the app to wait for the `authProvider.checkAuth()` to resolve before rendering the page layout, by setting the `<Admin requireAuth>` prop.
+アプリが匿名アクセスを許可しないことがわかっている場合、`<Admin requireAuth>` プロップを設定してページレイアウトをレンダリングする前に `authProvider.checkAuth()` の解決を待機させることができます。
 
 ```tsx
 import { Admin } from 'react-admin';
@@ -796,14 +773,14 @@ const App = () => (
 
 ## `store`
 
-The `<Admin>` component initializes a [Store](./Store.md) for user preferences using `localStorage` as the storage engine. You can override this by passing a custom `store` prop.
+`<Admin>` コンポーネントは `localStorage` をストレージエンジンとして使用してユーザーの設定を管理する [Store](./Store.md) を初期化します。これを上書きするには、カスタム `store` プロップを渡します。
 
-Built-in stores are:
+組み込みのストアは次のとおりです:
 
-- `memoryStore`: stores data in memory
-- `localStorageStore`: stores data in `localStorage`
+* `memoryStore`: データをメモリに保存します
+* `localStorageStore`: データを `localStorage` に保存します
 
-For instance, you can store the user preferences in memory, e.g. for tests, or for apps that should not persist user data between sessions:
+例えば、メモリ内にユーザー設定を保存し、セッション間でユーザーデータを保持しないようにするか、テスト用に使用することができます:
 
 ```tsx
 import { Admin, Resource, memoryStore } from 'react-admin';
@@ -815,20 +792,17 @@ const App = () => (
 );
 ```
 
-Check the [Preferences documentation](./Store.md) for more details.
+詳細は [Preferences documentation](./Store.md) を参照してください。
 
 ## `theme`
 
-Material UI supports [theming](https://mui.com/material-ui/customization/theming/). This lets you customize the look and feel of an admin by overriding fonts, colors, and spacing. You can provide a custom Material UI theme by using the `theme` prop.
+Material UI は [テーマ](https://mui.com/material-ui/customization/theming/) をサポートしています。これにより、フォント、色、間隔をオーバーライドして管理アプリの外観と操作性をカスタマイズできます。`theme` プロップを使用してカスタム Material UI テーマを提供できます。
 
-React-admin comes with 4 built-in themes: [Default](./AppTheme.md#default), [Nano](./AppTheme.md#nano), [Radiant](./AppTheme.md#radiant), and [House](./AppTheme.md#house). The [e-commerce demo](https://marmelab.com/react-admin-demo/) contains a theme switcher, so you can test them in a real application. 
+React-admin には4つのビルトインテーマがあります: [Default](./AppTheme.md#default)、[Nano](./AppTheme.md#nano)、[Radiant](./AppTheme.md#radiant)、および [House](./AppTheme.md#house)。[e-commerce demo](https://marmelab.com/react-admin-demo/) にはテーマ切り替え機能があり、実際のアプリケーションでこれらをテストできます。
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/demo-themes.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+<video controls autoplay playsinline muted loop> <source src="./img/demo-themes.mp4" type="video/mp4"/> Your browser does not support the video tag. </video>
 
-For instance, to use the Nano theme instead of the default theme:
+例えば、デフォルトのテーマの代わりに Nano テーマを使用するには:
 
 ```tsx
 import { Admin, nanoLightTheme } from 'react-admin';
@@ -843,13 +817,13 @@ const App = () => (
 
 ![Nano light theme](./img/nanoLightTheme1.jpg)
 
-You can also [write your own theme](./AppTheme.md#writing-a-custom-theme) to fit your company branding. For more details on predefined and custom themes, refer to [the Application Theme chapter](./AppTheme.md).
+会社のブランディングに合わせて独自のテーマを[作成](./AppTheme.md#writing-a-custom-theme)することもできます。既定およびカスタムテーマの詳細については [Application Theme 章](./AppTheme.md) を参照してください。
 
-If you want to support both a light and a dark theme, check out [the `<Admin darkTheme>` prop](#darktheme). 
+ライトテーマとダークテーマの両方をサポートする場合は、[`<Admin darkTheme>` プロップ](#darktheme) を参照してください。
 
 ## `title`
 
-On error pages, the header of an admin app uses 'React Admin' as the main app title. Use the `title` to customize it.
+エラーページでは、管理アプリのヘッダーに「React Admin」がメインのアプリタイトルとして使用されます。`title` を使用してカスタマイズします。
 
 ```tsx
 const App = () => (
@@ -859,14 +833,14 @@ const App = () => (
 );
 ```
 
-## Adding Custom Pages
+## カスタムページの追加
 
-The [`children`](#children) prop of the `<Admin>` component define the routes of the application.
+`<Admin>` コンポーネントの [`children`](#children) プロップはアプリケーションのルートを定義します。
 
-In addition to [`<Resource> elements`](./Resource.md) for CRUD pages, you can use [the `<CustomRoutes>` component](./CustomRoutes.md) to do add custom routes.
+[CRUD ページのための `<Resource>` 要素](./Resource.md) に加えて、[<CustomRoutes> コンポーネント](./CustomRoutes.md) を使用してカスタムルートを追加することができます。
 
 ```tsx
-// in src/App.js
+// src/App.js
 import * as React from "react";
 import { Route } from 'react-router-dom';
 import { Admin, Resource, CustomRoutes } from 'react-admin';
@@ -889,11 +863,11 @@ const App = () => (
 export default App;
 ```
 
-## Using A Custom Router 
+## カスタムルーターの使用
 
-React-admin uses [the react-router library](https://reactrouter.com/) to handle routing, with a [HashRouter](https://reactrouter.com/en/6/router-components/hash-router#hashrouter). This means that the hash portion of the URL (i.e. `#/posts/123` in the example) contains the main application route. This strategy has the benefit of working without a server, and with legacy web browsers. 
+React-admin はルーティングを処理するために [react-router ライブラリ](https://reactrouter.com/) を使用し、[HashRouter](https://reactrouter.com/en/6/router-components/hash-router#hashrouter) を使用します。これは、URL のハッシュ部分 (例: `#/posts/123`) がメインのアプリケーションルートを含むことを意味します。この戦略はサーバーを使用せず、レガシーな Web ブラウザでも動作するという利点があります。
 
-But you may want to use another routing strategy, e.g. to allow server-side rendering of individual pages. React-router offers various Router components to implement such routing strategies. If you want to use a different router, simply wrap it around your app. React-admin will detect that it's already inside a router, and skip its own router. 
+しかし、サーバーサイドレンダリングなどの別のルーティング戦略を使用したい場合があります。React-router はそのようなルーティング戦略を実装するためのさまざまなルーターコンポーネントを提供しています。異なるルーターを使用したい場合、アプリ全体をラップします。React-admin はすでにルーター内にあることを検出し、独自のルーターをスキップします。
 
 ```tsx
 import { BrowserRouter } from 'react-router-dom';
@@ -909,11 +883,11 @@ const App = () => (
 );
 ```
 
-## Using React-Admin In A Sub Path
+## サブパスでの React-Admin の使用
 
-React-admin links are absolute (e.g. `/posts/123/show`). If you serve your admin from a sub path (e.g. `/admin`), react-admin works seamlessly as it only appends a hash (URLs will look like `/admin#/posts/123/show`).
+React-admin のリンクは絶対パスです (例: `/posts/123/show`)。サブパス (例: `/admin`) から管理アプリを提供する場合、react-admin はシームレスに動作し、ハッシュのみを追加します (URL は `/admin#/posts/123/show` のようになります)。
 
-However, if you serve your admin from a sub path AND use another Router (like [`<BrowserRouter>`](https://reactrouter.com/en/main/router-components/browser-router) for instance), you need to set the `<Admin basename>` prop, so that react-admin routes include the basename in all links (e.g. `/admin/posts/123/show`).
+しかし、サブパスから管理アプリを提供し、かつ別のルーター (例えば [`<BrowserRouter>`](https://reactrouter.com/en/main/router-components/browser-router) など) を使用する場合、`<Admin basename>` プロップを設定して、すべてのリンクにベースネームを含める必要があります (例: `/admin/posts/123/show`)。
 
 ```tsx
 import { Admin, Resource } from 'react-admin';
@@ -929,15 +903,15 @@ const App = () => (
 );
 ```
 
-This makes all links be prefixed with `/admin`.
+これにより、すべてのリンクが `/admin` で始まるようになります。
 
-Note that it is your responsibility to serve the admin from the sub path, e.g. by setting the `base` field in `vite.config.ts` if you use [Vite.js](https://vitejs.dev/config/shared-options.html#base), or the `homepage` field in `package.json` if you use [Create React App](https://create-react-app.dev/docs/deployment/#building-for-relative-paths).
+サブパスから管理アプリを提供する責任はあなたにあります。例えば、[Vite.js](https://vitejs.dev/config/shared-options.html#base) を使用している場合は `vite.config.ts` の `base` フィールドを設定するか、[Create React App](https://create-react-app.dev/docs/deployment/#building-for-relative-paths) を使用している場合は `package.json` の `homepage` フィールドを設定します。
 
-If you want to use react-admin as a sub path of a larger React application, check the next section for instructions. 
+react-admin をより大きな React アプリケーションのサブパスとして使用したい場合は、次のセクションの手順を確認してください。
 
-## Using React-Admin Inside a Route
+## ルート内での React-Admin の使用
 
-You can include a react-admin app inside another app, using a react-router `<Route>`:
+react-admin アプリを他のアプリ内に含めることができ、react-router の `<Route>` を使用します:
 
 ```tsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -954,10 +928,10 @@ export const App = () => (
 );
 ```
 
-React-admin will have to prefix all the internal links with `/admin`. Use the `<Admin basename>` prop for that:
+react-admin はすべての内部リンクに `/admin` をプレフィックスとして追加する必要があります。`<Admin basename>` プロップを使用します:
 
 ```tsx
-// in src/StoreAdmin.js
+// src/StoreAdmin.js
 import { Admin, Resource } from 'react-admin';
 import { dataProvider } from './dataProvider';
 import posts from './posts';
@@ -969,17 +943,17 @@ export const StoreAdmin = () => (
 );
 ```
 
-This will let react-admin build absolute URLs including the sub path.
+これにより、react-admin はサブパスを含む絶対URLを生成します。
 
-## Declaring resources at runtime
+## ランタイムにリソースを宣言する
 
-You might want to dynamically define the resources when the app starts. To do so, you have two options: using a function as `<Admin>` child, or unplugging it to use a combination of `AdminContext` and `<AdminUI>` instead.
+アプリの起動時にリソースを動的に定義する必要がある場合があります。そのためには、`<Admin>` 子として関数を使用するか、`AdminContext` と `<AdminUI>` の組み合わせを使用して `<Admin>` をプラグから外す方法の2つがあります。
 
-### Using a Function As `<Admin>` Child
+### `<Admin>` 子として関数を使用する
 
-The `<Admin>` component accepts a function as one of its children and this function can return a Promise. If you also defined an `authProvider`, the child function will receive the result of a call to `authProvider.getPermissions()` (you can read more about this in the [Auth Provider](./Authentication.md#enabling-auth-features) chapter).
+`<Admin>` コンポーネントは子の1つとして関数を受け入れ、この関数は Promise を返すことができます。`authProvider` も定義している場合、子関数は `authProvider.getPermissions()` の呼び出し結果を受け取ります (詳細は [Auth Provider](./Authentication.md#enabling-auth-features) 章を参照してください)。
 
-For instance, getting the resource from an API might look like:
+例えば、API からリソースを取得する例は次のようになります:
 
 ```tsx
 import * as React from "react";
@@ -1012,13 +986,13 @@ const App = () => (
 );
 ```
 
-### Unplugging the `<Admin>` using `<AdminContext>` and `<AdminUI>`
+### `<Admin>` をプラグから外して `<AdminContext>` と `<AdminUI>` を使用する
 
-Setting Resources dynamically using the children-as-function syntax may not be enough in all cases, because this function can't execute hooks.
+関数を子として使用してリソースを動的に設定することは、すべての場合に十分ではない場合があります。なぜなら、この関数はフックを実行できないためです。
 
-So it's impossible, for instance, to have a dynamic list of resources based on a call to the `dataProvider` (since the `dataProvider` is only defined after the `<Admin>` component renders).
+例えば、クエリを使用して動的にリソースを取得する場合、クエリを実行してから `<Admin>` コンポーネントをレンダリングする必要があります。
 
-To overcome this limitation, you can build your own `<Admin>` component using two lower-level components: `<AdminContext>` (responsible for putting the providers in contexts) and `<AdminUI>` (responsible for displaying the UI). Through this approach you'll have to bring your own i18n provider and store. Luckily react-admin provides easy to use defaults for you. Here is an example:
+この制限を克服するために、2つの低レベルコンポーネントを使用して独自の `<Admin>` コンポーネントを構築できます: `<AdminContext>` (プロバイダーをコンテキストに配置する役割) と `<AdminUI>` (UI を表示する役割)。このアプローチを通じて、独自の i18n プロバイダーとストアを提供する必要があります。幸いなことに、react-admin は使用するための簡単なデフォルトを提供しています。以下はその例です:
 
 ```tsx
 import * as React from "react";
@@ -1075,4 +1049,6 @@ function AsyncResources() {
 }
 ```
 
-In this example, we override the `<AdminUI ready>` component to prevent the admin from displaying [the ready screen](#ready) in development while the list of resources is empty.
+この例では、リソースのリストが空の状態で開発中に管理画面が表示されないように、`<AdminUI ready>` コンポーネントを上書きしています。
+
+

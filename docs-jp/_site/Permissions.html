@@ -563,45 +563,45 @@
                         <div
                             class="markdown-section DocSearch-content toc-content"
                         >
-                            <h1 id="permissions">Permissions</h1>
+                            <h1 id="パーミッション">パーミッション</h1>
 
-<p>By default, react-admin apps don’t check user permissions. They only require users to be logged in for the list, create, edit, and show pages if there is an <code class="language-plaintext highlighter-rouge">authProvider</code>.</p>
+<p>デフォルトでは、react-admin アプリはユーザーのパーミッションをチェックしません。<code class="language-plaintext highlighter-rouge">authProvider</code>が存在する場合、リスト、作成、編集、および表示ページにはログインが必要です。</p>
 
-<p>However, some applications may require fine-grained permissions to enable or disable access to certain features. Since there are many possible strategies (single role, multiple roles or rights, ACLs, etc.), react-admin delegates the permission logic to the <code class="language-plaintext highlighter-rouge">authProvider</code>.</p>
+<p>しかし、アプリケーションによっては、特定の機能へのアクセスを有効または無効にするために細かいパーミッションが必要になることがあります。多くの戦略が考えられるため（シングルロール、マルチロール、ACLなど）、react-adminはパーミッションロジックを<code class="language-plaintext highlighter-rouge">authProvider</code>に委任します。</p>
 
-<p>Should you need to customize a page according to users permissions, you can get the permissions from the <code class="language-plaintext highlighter-rouge">authProvider</code> through the <a href="./usePermissions.md"><code class="language-plaintext highlighter-rouge">usePermissions()</code></a> hook.</p>
+<p>ユーザーのパーミッションに応じてページをカスタマイズする必要がある場合は、<a href="./usePermissions.md"><code class="language-plaintext highlighter-rouge">usePermissions()</code></a>フックを使用して<code class="language-plaintext highlighter-rouge">authProvider</code>からパーミッションを取得できます。</p>
 
-<h2 id="permissions-in-the-authprovider">Permissions In The <code class="language-plaintext highlighter-rouge">authProvider</code></h2>
+<h2 id="authproviderのパーミッション"><code class="language-plaintext highlighter-rouge">authProvider</code>のパーミッション</h2>
 
-<p>It’s the responsibility of <code class="language-plaintext highlighter-rouge">authProvider.getPermissions()</code> to return the user permissions. These permissions can take the shape you want:</p>
+<p><code class="language-plaintext highlighter-rouge">authProvider.getPermissions()</code>はユーザーのパーミッションを返す責任があります。これらのパーミッションは以下のような形式を取ることができます：</p>
 
 <ul>
-  <li>a string (e.g. <code class="language-plaintext highlighter-rouge">'admin'</code>),</li>
-  <li>an array of roles (e.g. <code class="language-plaintext highlighter-rouge">['post_editor', 'comment_moderator', 'super_admin']</code>)</li>
-  <li>an object with fine-grained permissions (e.g. <code class="language-plaintext highlighter-rouge">{ postList: { read: true, write: false, delete: false } }</code>)</li>
-  <li>or even a function</li>
+  <li>文字列（例：<code class="language-plaintext highlighter-rouge">'admin'</code>）</li>
+  <li>ロールの配列（例：<code class="language-plaintext highlighter-rouge">['post_editor', 'comment_moderator', 'super_admin']</code>）</li>
+  <li>細かいパーミッションのオブジェクト（例：<code class="language-plaintext highlighter-rouge">{ postList: { read: true, write: false, delete: false } }</code>）</li>
+  <li>または関数</li>
 </ul>
 
-<p>The format of permissions is free because react-admin never actually uses the permissions itself. It’s up to you to use them in your code to hide or display content, redirect the user to another page, or display warnings.</p>
+<p>パーミッションの形式は自由です。なぜなら、react-admin自体はパーミッションを実際に使用しないためです。コード内でコンテンツを非表示または表示したり、ユーザーを別のページにリダイレクトしたり、警告を表示するためにそれらを使用するのはあなた次第です。</p>
 
-<p>React-admin is agnostic to the permissions format, but it provides an implementation for the most common permissions format: <a href="./AuthRBAC.md">role-based access control (RBAC)</a>. If you want to use RBAC, the <code class="language-plaintext highlighter-rouge">authProvider.getPermissions()</code> method should return an array of permissions objects.</p>
+<p>react-adminはパーミッションの形式には依存しませんが、最も一般的なパーミッション形式である<a href="./AuthRBAC.md">ロールベースアクセス制御（RBAC）</a>の実装を提供します。RBACを使用する場合、<code class="language-plaintext highlighter-rouge">authProvider.getPermissions()</code>メソッドはパーミッションオブジェクトの配列を返す必要があります。</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">authProvider</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="na">getPermissions</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">([</span>
-        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">read</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">create</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">edit</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">export</span><span class="dl">"</span><span class="p">],</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">"</span><span class="s2">companies</span><span class="dl">"</span> <span class="p">},</span>
-        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">read</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">create</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">edit</span><span class="dl">"</span><span class="p">],</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">"</span><span class="s2">people</span><span class="dl">"</span> <span class="p">},</span>
-        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">read</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">create</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">edit</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">export</span><span class="dl">"</span><span class="p">],</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">"</span><span class="s2">deals</span><span class="dl">"</span> <span class="p">},</span>
-        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">read</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">create</span><span class="dl">"</span><span class="p">],</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">"</span><span class="s2">comments</span><span class="dl">"</span> <span class="p">},,</span>
-        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">read</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">create</span><span class="dl">"</span><span class="p">],</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">"</span><span class="s2">tasks</span><span class="dl">"</span> <span class="p">},</span>
-        <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">write</span><span class="dl">"</span><span class="p">],</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">"</span><span class="s2">tasks.completed</span><span class="dl">"</span> <span class="p">},</span>
-    <span class="p">])</span>
-<span class="p">};</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">const</span> <span class="nx">authProvider</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="na">getPermissions</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">([</span>
+            <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">read</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">create</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">edit</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">export</span><span class="dl">"</span><span class="p">],</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">"</span><span class="s2">companies</span><span class="dl">"</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">read</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">create</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">edit</span><span class="dl">"</span><span class="p">],</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">"</span><span class="s2">people</span><span class="dl">"</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">read</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">create</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">edit</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">export</span><span class="dl">"</span><span class="p">],</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">"</span><span class="s2">deals</span><span class="dl">"</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">read</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">create</span><span class="dl">"</span><span class="p">],</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">"</span><span class="s2">comments</span><span class="dl">"</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">read</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">create</span><span class="dl">"</span><span class="p">],</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">"</span><span class="s2">tasks</span><span class="dl">"</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="na">action</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">write</span><span class="dl">"</span><span class="p">],</span> <span class="na">resource</span><span class="p">:</span> <span class="dl">"</span><span class="s2">tasks.completed</span><span class="dl">"</span> <span class="p">},</span>
+        <span class="p">])</span>
+    <span class="p">};</span>
 </code></pre></div></div>
 
-<p>Check the <a href="./AuthRBAC.md">RBAC chapter</a> for more details on how to use role-based access control.</p>
+<p>ロールベースアクセス制御の使用方法の詳細については、<a href="./AuthRBAC.md">RBACの章</a>を参照してください。</p>
 
-<p>Following is an example where the <code class="language-plaintext highlighter-rouge">authProvider</code> stores the user’s permissions in <code class="language-plaintext highlighter-rouge">localStorage</code> upon authentication, and returns these permissions when called with <code class="language-plaintext highlighter-rouge">getPermissions</code>:</p>
+<p>以下は、<code class="language-plaintext highlighter-rouge">authProvider</code>が認証時にユーザーのパーミッションを<code class="language-plaintext highlighter-rouge">localStorage</code>に保存し、<code class="language-plaintext highlighter-rouge">getPermissions</code>でこれらのパーミッションを返す例です：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/authProvider.js</span>
 <span class="k">import</span> <span class="nx">decodeJwt</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">jwt-decode</span><span class="dl">'</span><span class="p">;</span>
@@ -643,11 +643,11 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<h2 id="getting-user-permissions">Getting User Permissions</h2>
+<h2 id="ユーザーパーミッションの取得">ユーザーパーミッションの取得</h2>
 
-<p>If you need to check the permissions in any of the default react-admin views or in custom page, you can use the <a href="./usePermissions.md"><code class="language-plaintext highlighter-rouge">usePermissions()</code></a> hook:</p>
+<p>デフォルトのreact-adminビューやカスタムページでパーミッションを確認する必要がある場合は、<a href="./usePermissions.md"><code class="language-plaintext highlighter-rouge">usePermissions()</code></a>フックを使用できます：</p>
 
-<p>Here is an example of a <code class="language-plaintext highlighter-rouge">Create</code> view with a conditional Input based on permissions:</p>
+<p>以下は、パーミッションに基づいて条件付きの入力を行う<code class="language-plaintext highlighter-rouge">Create</code>ビューの例です：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">UserCreate</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="p">{</span> <span class="nx">permissions</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">usePermissions</span><span class="p">();</span>
@@ -665,7 +665,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>It works in custom pages too:</p>
+<p>カスタムページでも同様に機能します：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/MyPage.js</span>
 <span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
@@ -686,7 +686,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: If you use RBAC, use <a href="./IfCanAccess.md">the <code class="language-plaintext highlighter-rouge">&lt;IfCanAccess&gt;</code> component</a> to fetch permissions, and render its children only if the user has the required permissions.</p>
+<p><strong>ヒント</strong>: RBACを使用する場合は、<a href="./IfCanAccess.md"><code class="language-plaintext highlighter-rouge">&lt;IfCanAccess&gt;</code>コンポーネント</a>を使用してパーミッションを取得し、ユーザーが必要なパーミッションを持っている場合にのみ子コンテンツをレンダリングします。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">IfCanAccess</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@react-admin/ra-rbac</span><span class="dl">'</span><span class="p">;</span>
 
@@ -700,22 +700,22 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="restricting-access-to-resources-or-views">Restricting Access to Resources or Views</h2>
+<h2 id="リソースやビューへのアクセスの制限">リソースやビューへのアクセスの制限</h2>
 
-<p>Permissions can be useful to restrict access to resources or their views. To do so, you must pass a function as a child of the <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component. React-admin will call this function with the permissions returned by the <code class="language-plaintext highlighter-rouge">authProvider</code>. Note that you can only provide one of such function child.</p>
+<p>パーミッションはリソースやそのビューへのアクセスを制限するのに役立ちます。これを行うには、<code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code>コンポーネントの子として関数を渡す必要があります。react-adminは<code class="language-plaintext highlighter-rouge">authProvider</code>が返すパーミッションでこの関数を呼び出します。このような関数子を提供できるのは一つだけです。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">Admin</span> <span class="na">dataProvider</span><span class="p">=</span><span class="si">{</span><span class="nx">dataProvider</span><span class="si">}</span> <span class="na">authProvider</span><span class="p">=</span><span class="si">{</span><span class="nx">authProvider</span><span class="si">}</span><span class="p">&gt;</span>
         <span class="si">{</span><span class="nx">permissions</span> <span class="o">=&gt;</span> <span class="p">(</span>
             <span class="p">&lt;&gt;</span>
-                <span class="si">{</span><span class="cm">/* Restrict access to the edit view to admin only */</span><span class="si">}</span>
+                <span class="si">{</span><span class="cm">/* 編集ビューへのアクセスを管理者にのみ制限 */</span><span class="si">}</span>
                 <span class="p">&lt;</span><span class="nc">Resource</span>
                     <span class="na">name</span><span class="p">=</span><span class="s">"customers"</span>
                     <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">VisitorList</span><span class="si">}</span>
                     <span class="na">edit</span><span class="p">=</span><span class="si">{</span><span class="nx">permissions</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">admin</span><span class="dl">'</span> <span class="p">?</span> <span class="nx">VisitorEdit</span> <span class="p">:</span> <span class="kc">null</span><span class="si">}</span>
                     <span class="na">icon</span><span class="p">=</span><span class="si">{</span><span class="nx">VisitorIcon</span><span class="si">}</span>
                 <span class="p">/&gt;</span>
-                <span class="si">{</span><span class="cm">/* Only include the categories resource for admin users */</span><span class="si">}</span>
+                <span class="si">{</span><span class="cm">/* カテゴリリソースを管理者ユーザーのみに含める */</span><span class="si">}</span>
                 <span class="si">{</span><span class="nx">permissions</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">admin</span><span class="dl">'</span>
                     <span class="p">?</span> <span class="p">&lt;</span><span class="nc">Resource</span> <span class="na">name</span><span class="p">=</span><span class="s">"categories"</span> <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">CategoryList</span><span class="si">}</span> <span class="na">edit</span><span class="p">=</span><span class="si">{</span><span class="nx">CategoryEdit</span><span class="si">}</span> <span class="na">icon</span><span class="p">=</span><span class="si">{</span><span class="nx">CategoryIcon</span><span class="si">}</span> <span class="p">/&gt;</span>
                     <span class="p">:</span> <span class="kc">null</span><span class="si">}</span>
@@ -725,9 +725,9 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>Note that the function may return as many fragments as you need.</p>
+<p>関数は必要なだけ多くのフラグメントを返すことができます。</p>
 
-<p><strong>Tip</strong>: If you use RBAC, you won’t need to check permissions manually as above. Just use <a href="./AuthRBAC.md#resource"><code class="language-plaintext highlighter-rouge">ra-rbac</code>’s <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> component</a>, which will do it for you.</p>
+<p><strong>ヒント</strong>: RBACを使用する場合、上記のように手動でパーミッションをチェックする必要はありません。ただ<a href="./AuthRBAC.md#resource"><code class="language-plaintext highlighter-rouge">ra-rbac</code>の<code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>コンポーネント</a>を使用するだけです。これにより自動的にパーミッションがチェックされます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@react-admin/ra-rbac</span><span class="dl">'</span><span class="p">;</span>
@@ -740,11 +740,11 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="restricting-access-to-form-inputs">Restricting Access to Form Inputs</h2>
+<h2 id="フォーム入力へのアクセス制限">フォーム入力へのアクセス制限</h2>
 
-<p>You might want to display some inputs only to users with specific permissions. You can use the <code class="language-plaintext highlighter-rouge">usePermissions</code> hook for that.</p>
+<p>特定のパーミッションを持つユーザーにのみいくつかの入力を表示したい場合があります。そのためには<code class="language-plaintext highlighter-rouge">usePermissions</code>フックを使用できます。</p>
 
-<p>Here is an example of a <code class="language-plaintext highlighter-rouge">Create</code> view with a conditional Input based on permissions:</p>
+<p>以下は、パーミッションに基づいて条件付きの入力を行う<code class="language-plaintext highlighter-rouge">Create</code>ビューの例です：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">usePermissions</span><span class="p">,</span> <span class="nx">Create</span><span class="p">,</span> <span class="nx">SimpleForm</span><span class="p">,</span> <span class="nx">TextInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -762,7 +762,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p><strong>Note</strong>: <code class="language-plaintext highlighter-rouge">usePermissions</code> is asynchronous, which means that <code class="language-plaintext highlighter-rouge">permissions</code> will always be <code class="language-plaintext highlighter-rouge">undefined</code> on mount. Once the <code class="language-plaintext highlighter-rouge">authProvider.getPermissions()</code> promise is resolved, <code class="language-plaintext highlighter-rouge">permissions</code> will be set to the value returned by the promise, and the component will re-render. This may cause surprises when using <code class="language-plaintext highlighter-rouge">permissions</code> in props that are not reactive, e.g. <code class="language-plaintext highlighter-rouge">defaultValue</code>:</p>
+<p><strong>注意</strong>: <code class="language-plaintext highlighter-rouge">usePermissions</code>は非同期です。つまり、<code class="language-plaintext highlighter-rouge">permissions</code>はマウント時に常に<code class="language-plaintext highlighter-rouge">undefined</code>になります。<code class="language-plaintext highlighter-rouge">authProvider.getPermissions()</code>のプロミスが解決されると、<code class="language-plaintext highlighter-rouge">permissions</code>はプロミスが返す値に設定され、コンポーネントは再レンダリングされます。これにより、<code class="language-plaintext highlighter-rouge">defaultValue</code>などのリアクティブでないプロップスで<code class="language-plaintext highlighter-rouge">permissions</code>を使用する際に予期しないことが起こる可能性があります：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">usePermissions</span><span class="p">,</span> <span class="nx">Create</span><span class="p">,</span> <span class="nx">SimpleForm</span><span class="p">,</span> <span class="nx">TextInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -772,7 +772,7 @@
         <span class="p">&lt;</span><span class="nc">Create</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
                 <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"name"</span> <span class="na">defaultValue</span><span class="p">=</span><span class="si">{</span>
-                    <span class="c1">// this doesn't work: the defaultValue will always be 'user' </span>
+                    <span class="c1">// この方法は機能しません：defaultValueは常に'user'になります </span>
                     <span class="nx">permissions</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">admin</span><span class="dl">'</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">admin</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">user</span><span class="dl">'</span>
                 <span class="si">}</span> <span class="p">/&gt;</span>
             <span class="p">&lt;/</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
@@ -781,7 +781,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>In <code class="language-plaintext highlighter-rouge">react-hook-form</code>, <code class="language-plaintext highlighter-rouge">defaultValue</code> is only used on mount - changing its value after the initial render doesn’t change the default value. The solution is to delay the rendering of the input until the permissions are resolved:</p>
+<p><code class="language-plaintext highlighter-rouge">react-hook-form</code>では、<code class="language-plaintext highlighter-rouge">defaultValue</code>はマウント時にのみ使用され、初期レンダー後にその値が変更されてもデフォルト値は変わりません。解決策は、パーミッションが解決されるまで入力のレンダリングを遅らせることです：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">usePermissions</span><span class="p">,</span> <span class="nx">Create</span><span class="p">,</span> <span class="nx">SimpleForm</span><span class="p">,</span> <span class="nx">TextInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -799,7 +799,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: If you use RBAC, use <a href="./AuthRBAC.md#simpleform"><code class="language-plaintext highlighter-rouge">ra-rbac</code>’s <code class="language-plaintext highlighter-rouge">&lt;SimpleForm&gt;</code> component</a> instead. It renders its children only if the user has the required permissions.</p>
+<p><strong>ヒント</strong>: RBACを使用する場合は、<a href="./AuthRBAC.md#simpleform"><code class="language-plaintext highlighter-rouge">ra-rbac</code>の<code class="language-plaintext highlighter-rouge">&lt;SimpleForm&gt;</code>コンポーネント</a>を使用してください。これにより、ユーザーが必要なパーミッションを持っている場合にのみ子コンテンツがレンダリングされます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Create</span><span class="p">,</span> <span class="nx">TextInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">SimpleForm</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@react-admin/ra-rbac</span><span class="dl">'</span><span class="p">;</span>
@@ -814,9 +814,9 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="restricting-access-to-columns-in--a-list">Restricting Access to Columns In  a List</h2>
+<h2 id="リストの列へのアクセス制限">リストの列へのアクセス制限</h2>
 
-<p>You can use <code class="language-plaintext highlighter-rouge">usePermissions</code> to hide some columns in a <code class="language-plaintext highlighter-rouge">Datagrid</code>.</p>
+<p>いくつかの列を非表示にするために<code class="language-plaintext highlighter-rouge">usePermissions</code>を使用できます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">usePermissions</span><span class="p">,</span> <span class="nx">List</span><span class="p">,</span> <span class="nx">Datagrid</span><span class="p">,</span> <span class="nx">ShowButton</span><span class="p">,</span> <span class="nx">TextField</span> <span class="p">}</span>  <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
@@ -835,7 +835,7 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: If you use RBAC, use <a href="./AuthRBAC.md#datagrid"><code class="language-plaintext highlighter-rouge">ra-rbac</code>’s <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> component</a>, which will render a column only if the user has the permissions for it.</p>
+<p><strong>ヒント</strong>: RBACを使用する場合は、<a href="./AuthRBAC.md#datagrid"><code class="language-plaintext highlighter-rouge">ra-rbac</code>の<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>コンポーネント</a>を使用してください。これにより、ユーザーがその列のパーミッションを持っている場合にのみ列がレンダリングされます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">List</span><span class="p">,</span> <span class="nx">ShowButton</span><span class="p">,</span> <span class="nx">TextField</span><span class="p">,</span> <span class="nx">TextInput</span> <span class="p">}</span>  <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
@@ -852,9 +852,9 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="restricting-access-to-a-menu">Restricting Access to a Menu</h2>
+<h2 id="メニューへのアクセス制限">メニューへのアクセス制限</h2>
 
-<p>What if you want to check the permissions inside a <a href="./Admin.md#menu">custom menu</a>? Much like getting permissions inside a custom page, you’ll have to use the <code class="language-plaintext highlighter-rouge">usePermissions</code> hook:</p>
+<p><a href="./Admin.md#menu">カスタムメニュー</a>内でパーミッションを確認したい場合はどうしますか？カスタムページ内でパーミッションを取得するのと同様に、<code class="language-plaintext highlighter-rouge">usePermissions</code>フックを使用する必要があります：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/myMenu.js</span>
 <span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
@@ -874,11 +874,12 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: If you use RBAC, use <a href="./AuthRBAC.md#menu"><code class="language-plaintext highlighter-rouge">ra-rbac</code>’s <code class="language-plaintext highlighter-rouge">&lt;Menu&gt;</code> component</a>, which will render a menu item only if the user has the permissions for it.</p>
+<p><strong>ヒント</strong>: RBACを使用する場合は、<a href="./AuthRBAC.md#menu"><code class="language-plaintext highlighter-rouge">ra-rbac</code>の<code class="language-plaintext highlighter-rouge">&lt;Menu&gt;</code>コンポーネント</a>を使用してください。これにより、ユーザーがそのメニュー項目のパーミッションを持っている場合にのみメニュー項目がレンダリングされます。</p>
 
-<h2 id="role-based-access-control">Role-Based Access Control</h2>
+<h2 id="ロールベースアクセス制御">ロールベースアクセス制御</h2>
 
-<p>If you need a more complex permissions with roles and groups, principle of least privilege, record-level permissions, explicit deny and more, check the next section for the <a href="./AuthRBAC.md">Role-Based Access Control</a>.</p>
+<p>役割やグループを使用したより複雑なパーミッション、最小特権の原則、レコードレベルのパーミッション、明示的な拒否などが必要な場合は、次のセクションで<a href="./AuthRBAC.md">ロールベースアクセス制御</a>の詳細を確認してください。</p>
+
 
                         </div>
                     </div>

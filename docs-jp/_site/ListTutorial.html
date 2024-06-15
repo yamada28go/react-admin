@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <title>React-admin - The List Page</title>
+        <title>React-admin - リストページ</title>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
@@ -563,103 +563,103 @@
                         <div
                             class="markdown-section DocSearch-content toc-content"
                         >
-                            <h1 id="the-list-page">The List Page</h1>
+                            <h1 id="リストページ">リストページ</h1>
 
-<p>The List view displays a list of records, and lets users search for specific records using filters, sorting, and pagination.</p>
+<p>リストビューはレコードの一覧を表示し、ユーザーがフィルター、ソート、およびページネーションを使用して特定のレコードを検索できるようにします。</p>
 
-<p><img src="./img/list-view.jpg" alt="The List View" /></p>
+<p><img src="./img/list-view.jpg" alt="リストビュー" /></p>
 
-<p>This tutorial explains the List view from first principles, and shows how react-admin allows you to reduce the amount of boilerplate code to focus on the business logic.</p>
+<p>このチュートリアルでは、リストビューの基本原則を説明し、react-adminがどのようにして定型コードの量を減らし、ビジネスロジックに集中できるようにするかを示します。</p>
 
-<h2 id="from-pure-react-to-react-admin">From Pure React To React-Admin</h2>
+<h2 id="ピュアreactからreact-adminへ">ピュアReactからReact-Adminへ</h2>
 
-<p>The List view fetches a list of records and renders them, together with UI controls for filter, sort and pagination.</p>
+<p>リストビューはレコードのリストを取得し、フィルター、ソート、ページネーション用のUIコントロールと共にそれをレンダリングします。</p>
 
-<p><a href="./img/list-from-react-to-react-admin.webp"><img src="./img/list-from-react-to-react-admin.webp" alt="From Pure React To React-Admin" /></a></p>
+<p><a href="./img/list-from-react-to-react-admin.webp"><img src="./img/list-from-react-to-react-admin.webp" alt="ピュアReactからReact-Adminへ" /></a></p>
 
-<p>To better understand how to use the various react-admin hooks and components dedicated to editing and creating, let’s start by building such an edition view by hand.</p>
+<p>編集および作成に専念するためのreact-adminの様々なフックやコンポーネントの使い方を理解するために、まず手動でそのような編集ビューを構築してみましょう。</p>
 
-<h3 id="a-list-view-built-by-hand">A List View Built By Hand</h3>
+<h3 id="手動で構築したリストビュー">手動で構築したリストビュー</h3>
 
-<p>You’ve probably developed it a dozen times, and in fact you don’t need react-admin to build, say, a book List view:</p>
+<p>おそらく何度も開発してきたことがあると思いますし、実際に本のリストビューを作成するためにreact-adminを使用する必要はありません。</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Title</span><span class="p">,</span> <span class="nx">useGetList</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span>
-    <span class="nx">Card</span><span class="p">,</span>
-    <span class="nx">TextField</span><span class="p">,</span>
-    <span class="nx">Button</span><span class="p">,</span>
-    <span class="nx">Toolbar</span><span class="p">,</span>
-    <span class="nx">Table</span><span class="p">,</span>
-    <span class="nx">TableHead</span><span class="p">,</span>
-    <span class="nx">TableRow</span><span class="p">,</span>
-    <span class="nx">TableBody</span><span class="p">,</span>
-    <span class="nx">TableCell</span><span class="p">,</span>
-<span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material</span><span class="dl">'</span><span class="p">;</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">import</span> <span class="p">{</span> <span class="nx">Title</span><span class="p">,</span> <span class="nx">useGetList</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">import</span> <span class="p">{</span>
+        <span class="nx">Card</span><span class="p">,</span>
+        <span class="nx">TextField</span><span class="p">,</span>
+        <span class="nx">Button</span><span class="p">,</span>
+        <span class="nx">Toolbar</span><span class="p">,</span>
+        <span class="nx">Table</span><span class="p">,</span>
+        <span class="nx">TableHead</span><span class="p">,</span>
+        <span class="nx">TableRow</span><span class="p">,</span>
+        <span class="nx">TableBody</span><span class="p">,</span>
+        <span class="nx">TableCell</span><span class="p">,</span>
+    <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="kd">const</span> <span class="nx">BookList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="p">[</span><span class="nx">filter</span><span class="p">,</span> <span class="nx">setFilter</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
-    <span class="kd">const</span> <span class="p">[</span><span class="nx">page</span><span class="p">,</span> <span class="nx">setPage</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-    <span class="kd">const</span> <span class="nx">perPage</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-    <span class="kd">const</span> <span class="p">{</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">total</span><span class="p">,</span> <span class="nx">isLoading</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useGetList</span><span class="o">&lt;</span><span class="nx">Book</span><span class="o">&gt;</span><span class="p">(</span><span class="dl">'</span><span class="s1">books</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
-        <span class="na">filter</span><span class="p">:</span> <span class="p">{</span> <span class="na">q</span><span class="p">:</span> <span class="nx">filter</span> <span class="p">},</span>
-        <span class="na">pagination</span><span class="p">:</span> <span class="p">{</span> <span class="nx">page</span><span class="p">,</span> <span class="nx">perPage</span> <span class="p">},</span>
-        <span class="na">sort</span><span class="p">:</span> <span class="p">{</span> <span class="na">field</span><span class="p">:</span> <span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">,</span> <span class="na">order</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ASC</span><span class="dl">'</span> <span class="p">}</span>
-    <span class="p">});</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">isLoading</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Loading...<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="p">(</span>
-        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nc">Title</span> <span class="na">title</span><span class="p">=</span><span class="s">"Book list"</span> <span class="p">/&gt;</span>
-            <span class="p">&lt;</span><span class="nc">TextField</span>
-                <span class="na">label</span><span class="p">=</span><span class="s">"Search"</span>
-                <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">filter</span><span class="si">}</span>
-                <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="nx">setFilter</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span><span class="si">}</span>
-                <span class="na">variant</span><span class="p">=</span><span class="s">"filled"</span>
-                <span class="na">size</span><span class="p">=</span><span class="s">"small"</span>
-                <span class="na">margin</span><span class="p">=</span><span class="s">"dense"</span>
-            <span class="p">/&gt;</span>
-            <span class="p">&lt;</span><span class="nc">Card</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nc">Table</span> <span class="na">sx</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">padding</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span><span class="si">}</span> <span class="na">size</span><span class="p">=</span><span class="s">"small"</span><span class="p">&gt;</span>
-                    <span class="p">&lt;</span><span class="nc">TableHead</span><span class="p">&gt;</span>
-                        <span class="p">&lt;</span><span class="nc">TableRow</span><span class="p">&gt;</span>
-                            <span class="p">&lt;</span><span class="nc">TableCell</span><span class="p">&gt;</span>Id<span class="p">&lt;/</span><span class="nc">TableCell</span><span class="p">&gt;</span>
-                            <span class="p">&lt;</span><span class="nc">TableCell</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nc">TableCell</span><span class="p">&gt;</span>
-                            <span class="p">&lt;</span><span class="nc">TableCell</span><span class="p">&gt;</span>Author<span class="p">&lt;/</span><span class="nc">TableCell</span><span class="p">&gt;</span>
-                            <span class="p">&lt;</span><span class="nc">TableCell</span><span class="p">&gt;</span>Year<span class="p">&lt;/</span><span class="nc">TableCell</span><span class="p">&gt;</span>
-                        <span class="p">&lt;/</span><span class="nc">TableRow</span><span class="p">&gt;</span>
-                    <span class="p">&lt;/</span><span class="nc">TableHead</span><span class="p">&gt;</span>
-                    <span class="p">&lt;</span><span class="nc">TableBody</span><span class="p">&gt;</span>
-                        <span class="si">{</span><span class="nx">data</span><span class="p">?.</span><span class="nx">map</span><span class="p">(</span><span class="nx">book</span> <span class="o">=&gt;</span> <span class="p">(</span>
-                            <span class="p">&lt;</span><span class="nc">TableRow</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">book</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="p">&gt;</span>
-                                <span class="p">&lt;</span><span class="nc">TableCell</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">book</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="p">&lt;/</span><span class="nc">TableCell</span><span class="p">&gt;</span>
-                                <span class="p">&lt;</span><span class="nc">TableCell</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">book</span><span class="p">.</span><span class="nx">title</span><span class="si">}</span><span class="p">&lt;/</span><span class="nc">TableCell</span><span class="p">&gt;</span>
-                                <span class="p">&lt;</span><span class="nc">TableCell</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">book</span><span class="p">.</span><span class="nx">author</span><span class="si">}</span><span class="p">&lt;/</span><span class="nc">TableCell</span><span class="p">&gt;</span>
-                                <span class="p">&lt;</span><span class="nc">TableCell</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">book</span><span class="p">.</span><span class="nx">year</span><span class="si">}</span><span class="p">&lt;/</span><span class="nc">TableCell</span><span class="p">&gt;</span>
+    <span class="kd">const</span> <span class="nx">BookList</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="p">[</span><span class="nx">filter</span><span class="p">,</span> <span class="nx">setFilter</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
+        <span class="kd">const</span> <span class="p">[</span><span class="nx">page</span><span class="p">,</span> <span class="nx">setPage</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+        <span class="kd">const</span> <span class="nx">perPage</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="p">{</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">total</span><span class="p">,</span> <span class="nx">isLoading</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useGetList</span><span class="o">&lt;</span><span class="nx">Book</span><span class="o">&gt;</span><span class="p">(</span><span class="dl">'</span><span class="s1">books</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+            <span class="na">filter</span><span class="p">:</span> <span class="p">{</span> <span class="na">q</span><span class="p">:</span> <span class="nx">filter</span> <span class="p">},</span>
+            <span class="na">pagination</span><span class="p">:</span> <span class="p">{</span> <span class="nx">page</span><span class="p">,</span> <span class="nx">perPage</span> <span class="p">},</span>
+            <span class="na">sort</span><span class="p">:</span> <span class="p">{</span> <span class="na">field</span><span class="p">:</span> <span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">,</span> <span class="na">order</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ASC</span><span class="dl">'</span> <span class="p">}</span>
+        <span class="p">});</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">isLoading</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Loading...<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">Title</span> <span class="na">title</span><span class="p">=</span><span class="s">"Book list"</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">TextField</span>
+                    <span class="na">label</span><span class="p">=</span><span class="s">"Search"</span>
+                    <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">filter</span><span class="si">}</span>
+                    <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="nx">setFilter</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span><span class="si">}</span>
+                    <span class="na">variant</span><span class="p">=</span><span class="s">"filled"</span>
+                    <span class="na">size</span><span class="p">=</span><span class="s">"small"</span>
+                    <span class="na">margin</span><span class="p">=</span><span class="s">"dense"</span>
+                <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">Card</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">Table</span> <span class="na">sx</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">padding</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span><span class="si">}</span> <span class="na">size</span><span class="p">=</span><span class="s">"small"</span><span class="p">&gt;</span>
+                        <span class="p">&lt;</span><span class="nc">TableHead</span><span class="p">&gt;</span>
+                            <span class="p">&lt;</span><span class="nc">TableRow</span><span class="p">&gt;</span>
+                                <span class="p">&lt;</span><span class="nc">TableCell</span><span class="p">&gt;</span>Id<span class="p">&lt;/</span><span class="nc">TableCell</span><span class="p">&gt;</span>
+                                <span class="p">&lt;</span><span class="nc">TableCell</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nc">TableCell</span><span class="p">&gt;</span>
+                                <span class="p">&lt;</span><span class="nc">TableCell</span><span class="p">&gt;</span>Author<span class="p">&lt;/</span><span class="nc">TableCell</span><span class="p">&gt;</span>
+                                <span class="p">&lt;</span><span class="nc">TableCell</span><span class="p">&gt;</span>Year<span class="p">&lt;/</span><span class="nc">TableCell</span><span class="p">&gt;</span>
                             <span class="p">&lt;/</span><span class="nc">TableRow</span><span class="p">&gt;</span>
-                        <span class="p">))</span><span class="si">}</span>
-                    <span class="p">&lt;/</span><span class="nc">TableBody</span><span class="p">&gt;</span>
-                <span class="p">&lt;/</span><span class="nc">Table</span><span class="p">&gt;</span>
-            <span class="p">&lt;/</span><span class="nc">Card</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nc">Toolbar</span><span class="p">&gt;</span>
-                <span class="si">{</span><span class="nx">page</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">setPage</span><span class="p">(</span><span class="nx">page</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>Previous page<span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span><span class="si">}</span>
-                <span class="si">{</span><span class="nx">page</span> <span class="o">&lt;</span> <span class="p">(</span><span class="nx">total</span> <span class="o">||</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="nx">perPage</span> <span class="o">&amp;&amp;</span> <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">setPage</span><span class="p">(</span><span class="nx">page</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>Next page<span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span><span class="si">}</span>
-            <span class="p">&lt;/</span><span class="nc">Toolbar</span><span class="p">&gt;</span>
-        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">);</span>
-<span class="p">};</span>
+                        <span class="p">&lt;/</span><span class="nc">TableHead</span><span class="p">&gt;</span>
+                        <span class="p">&lt;</span><span class="nc">TableBody</span><span class="p">&gt;</span>
+                            <span class="si">{</span><span class="nx">data</span><span class="p">?.</span><span class="nx">map</span><span class="p">(</span><span class="nx">book</span> <span class="o">=&gt;</span> <span class="p">(</span>
+                                <span class="p">&lt;</span><span class="nc">TableRow</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">book</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="p">&gt;</span>
+                                    <span class="p">&lt;</span><span class="nc">TableCell</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">book</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="p">&lt;/</span><span class="nc">TableCell</span><span class="p">&gt;</span>
+                                    <span class="p">&lt;</span><span class="nc">TableCell</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">book</span><span class="p">.</span><span class="nx">title</span><span class="si">}</span><span class="p">&lt;/</span><span class="nc">TableCell</span><span class="p">&gt;</span>
+                                    <span class="p">&lt;</span><span class="nc">TableCell</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">book</span><span class="p">.</span><span class="nx">author</span><span class="si">}</span><span class="p">&lt;/</span><span class="nc">TableCell</span><span class="p">&gt;</span>
+                                    <span class="p">&lt;</span><span class="nc">TableCell</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">book</span><span class="p">.</span><span class="nx">year</span><span class="si">}</span><span class="p">&lt;/</span><span class="nc">TableCell</span><span class="p">&gt;</span>
+                                <span class="p">&lt;/</span><span class="nc">TableRow</span><span class="p">&gt;</span>
+                            <span class="p">))</span><span class="si">}</span>
+                        <span class="p">&lt;/</span><span class="nc">TableBody</span><span class="p">&gt;</span>
+                    <span class="p">&lt;/</span><span class="nc">Table</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nc">Card</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">Toolbar</span><span class="p">&gt;</span>
+                    <span class="si">{</span><span class="nx">page</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">setPage</span><span class="p">(</span><span class="nx">page</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>Previous page<span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span><span class="si">}</span>
+                    <span class="si">{</span><span class="nx">page</span> <span class="o">&lt;</span> <span class="p">(</span><span class="nx">total</span> <span class="o">||</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="nx">perPage</span> <span class="o">&amp;&amp;</span> <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">setPage</span><span class="p">(</span><span class="nx">page</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>Next page<span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span><span class="si">}</span>
+                <span class="p">&lt;/</span><span class="nc">Toolbar</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">);</span>
+    <span class="p">};</span>
 </code></pre></div></div>
 
-<p>You can pass this <code class="language-plaintext highlighter-rouge">BookList</code> component as the <code class="language-plaintext highlighter-rouge">list</code> prop of the <code class="language-plaintext highlighter-rouge">&lt;Resource name="books" /&gt;</code>, and react-admin will render it on the <code class="language-plaintext highlighter-rouge">/books/</code> path.</p>
+<p>この<code class="language-plaintext highlighter-rouge">BookList</code>コンポーネントを<code class="language-plaintext highlighter-rouge">&lt;Resource name="books" /&gt;</code>の<code class="language-plaintext highlighter-rouge">list</code>プロップとして渡すことができ、react-adminはそれを<code class="language-plaintext highlighter-rouge">/books/</code>パスにレンダリングします。</p>
 
-<p>This example uses the <code class="language-plaintext highlighter-rouge">useGetList</code> hook instead of <code class="language-plaintext highlighter-rouge">fetch</code> because <code class="language-plaintext highlighter-rouge">useGetList</code> already contains the authentication and request state logic. But you could totally write a List view with <code class="language-plaintext highlighter-rouge">fetch</code>.</p>
+<p>この例では、認証およびリクエスト状態のロジックを既に含んでいる<code class="language-plaintext highlighter-rouge">useGetList</code>フックを使用していますが、<code class="language-plaintext highlighter-rouge">fetch</code>を使用してリストビューを作成することも可能です。</p>
 
-<p>This list is a bit rough in the edges (for instance, typing in the search input makes one call to the dataProvider per character), but it’s good enough for the purpose of this chapter.</p>
+<p>このリストは多少粗削りです（例えば、検索入力に文字を1文字入力するごとにdataProviderへのコールが発生します）が、この章の目的には十分です。</p>
 
-<h3 id="datagrid-displays-fields-in-a-table"><code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> Displays Fields In A Table</h3>
+<h3 id="datagridがテーブル内のフィールドを表示"><code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>がテーブル内のフィールドを表示</h3>
 
-<p>Table layouts usually require a lot of code to define the table head, row, columns, etc. React-admin <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> component, together with Field components, can help remove that boilerplate:</p>
+<p>テーブルレイアウトは通常、テーブルヘッド、行、列などを定義するために多くのコードが必要です。react-adminの<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>コンポーネントは、フィールドコンポーネントと共に、その定型コードを削減するのに役立ちます。</p>
 
 <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">import { useState } from 'react';
 </span><span class="gd">-import { Title, useGetList } from 'react-admin';
@@ -737,11 +737,11 @@ const BookList = () =&gt; {
 <span class="err">};</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> does more than the previous table: it renders table headers depending on the current sort, and allows you to change the sort order by clicking a column header. Also, for each row, <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> creates a <code class="language-plaintext highlighter-rouge">RecordContext</code>, which lets you use react-admin Field and Buttons without explicitly passing the row data.</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>は以前のテーブル以上の機能を提供します。現在のソートに応じたテーブルヘッダーをレンダリングし、列ヘッダーをクリックすることでソート順序を変更することができます。また、各行に対して<code class="language-plaintext highlighter-rouge">RecordContext</code>を作成し、react-adminのフィールドおよびボタンを行データを明示的に渡すことなく使用することができます。</p>
 
-<h3 id="listcontext-exposes-list-data-to-descendants"><code class="language-plaintext highlighter-rouge">ListContext</code> Exposes List Data To Descendants</h3>
+<h3 id="listcontextが子孫コンポーネントにリストデータを公開"><code class="language-plaintext highlighter-rouge">ListContext</code>が子孫コンポーネントにリストデータを公開</h3>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> requires a <code class="language-plaintext highlighter-rouge">data</code> prop to render, but it can grab it from a <code class="language-plaintext highlighter-rouge">ListContext</code> instead. Creating such a context with <code class="language-plaintext highlighter-rouge">&lt;ListContextProvider&gt;</code> also allows to use other react-admin components specialized in filtering (<code class="language-plaintext highlighter-rouge">&lt;FilterForm&gt;</code>) and pagination (<code class="language-plaintext highlighter-rouge">&lt;Pagination&gt;</code>), and to reduce the boilerplate code even further:</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>はレンダリングするために<code class="language-plaintext highlighter-rouge">data</code>プロップを必要としますが、<code class="language-plaintext highlighter-rouge">ListContext</code>からそれを取得することもできます。<code class="language-plaintext highlighter-rouge">&lt;ListContextProvider&gt;</code>を使用してこのようなコンテキストを作成することにより、フィルタリング（<code class="language-plaintext highlighter-rouge">&lt;FilterForm&gt;</code>）やページネーション（<code class="language-plaintext highlighter-rouge">&lt;Pagination&gt;</code>）に特化した他のreact-adminコンポーネントを使用することができ、さらに定型コードを削減できます。</p>
 
 <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">import { useState } from 'react';
 import { 
@@ -808,9 +808,9 @@ const BookList = () =&gt; {
 <span class="err">};</span>
 </code></pre></div></div>
 
-<h3 id="uselistcontroller-handles-controller-logic"><code class="language-plaintext highlighter-rouge">useListController</code> Handles Controller Logic</h3>
+<h3 id="uselistcontrollerがコントローラーロジックを処理"><code class="language-plaintext highlighter-rouge">useListController</code>がコントローラーロジックを処理</h3>
 
-<p>The initial logic that grabs the records from the API, handles the filter and pagination state, and creates callbacks to change them is also common, and react-admin exposes <a href="./useListController.md">the <code class="language-plaintext highlighter-rouge">useListController</code> hook</a> to do it. It returns an object that fits perfectly the format expected by <code class="language-plaintext highlighter-rouge">&lt;ListContextProvider&gt;</code>:</p>
+<p>APIからレコードを取得し、フィルターおよびページネーションの状態を管理し、それらを変更するためのコールバックを作成する初期ロジックも共通であり、react-adminは <a href="./useListController.md"><code class="language-plaintext highlighter-rouge">useListController</code> フック</a>を提供しています。このフックは、<code class="language-plaintext highlighter-rouge">&lt;ListContextProvider&gt;</code>が期待する形式に完全に適合するオブジェクトを返します。</p>
 
 <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">-import { useState } from 'react';
 </span><span class="p">import { 
@@ -867,24 +867,24 @@ const BookList = () =&gt; {
 <span class="err">};</span>
 </code></pre></div></div>
 
-<p>Notice that <code class="language-plaintext highlighter-rouge">useListController</code> doesn’t need the ‘books’ resource name - it relies on the <code class="language-plaintext highlighter-rouge">ResourceContext</code>, set by the <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> component, to guess it.</p>
+<p><code class="language-plaintext highlighter-rouge">useListController</code>は’books’リソース名を必要としません - <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>コンポーネントによって設定された<code class="language-plaintext highlighter-rouge">ResourceContext</code>に依存してそれを推測します。</p>
 
-<p>React-admin’s List controller does much, much more than the code it replaces above:</p>
+<p>react-adminのリストコントローラーは、上記のコードを置き換える以上のことを多く行います：</p>
 
 <ul>
-  <li>it uses sensible defaults for the sort and pagination state,</li>
-  <li>it stores the list state (sort, pagination, filters) in the URL to make the page bookmarkable,</li>
-  <li>it memorises this state to let users find the same filters when they come back to the list,</li>
-  <li>it allows to select records for bulk actions,</li>
-  <li>it debounces the calls to the API when the user types text in the filter form,</li>
-  <li>it keeps the current data on screen while a new page is being fetched,</li>
-  <li>it changes the current page if it’s empty,</li>
-  <li>it translates the title</li>
+  <li>ソートおよびページネーション状態のデフォルトを使用します</li>
+  <li>リスト状態（ソート、ページネーション、フィルター）をURLに保存し、ページをブックマーク可能にします</li>
+  <li>ユーザーがリストに戻ったときに同じフィルターを見つけられるようにその状態を記憶します</li>
+  <li>バルクアクション用にレコードを選択することを可能にします</li>
+  <li>ユーザーがフィルターフォームにテキストを入力する際にAPIへのコールをデバウンスします</li>
+  <li>新しいページが取得される間、現在のデータを画面に保持します</li>
+  <li>ページが空の場合、現在のページを変更します</li>
+  <li>タイトルを翻訳します</li>
 </ul>
 
-<h3 id="listbase-component-version-of-the-controller"><code class="language-plaintext highlighter-rouge">&lt;ListBase&gt;</code>: Component Version Of The Controller</h3>
+<h3 id="listbaseコントローラーのコンポーネント版"><code class="language-plaintext highlighter-rouge">&lt;ListBase&gt;</code>：コントローラーのコンポーネント版</h3>
 
-<p>As calling the List controller and putting its result into a context is also common, react-admin provides <a href="./ListBase.md">the <code class="language-plaintext highlighter-rouge">&lt;ListBase&gt;</code> component</a> to do it. So the example can be further simplified to the following:</p>
+<p>リストコントローラーを呼び出してその結果をコンテキストに入れることも一般的であるため、react-adminは <a href="./ListBase.md"><code class="language-plaintext highlighter-rouge">&lt;ListBase&gt;</code> コンポーネント</a>を提供しています。これにより、次のようにさらに簡略化することができます。</p>
 
 <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">import { 
 </span>    Title,
@@ -929,13 +929,13 @@ const BookList = () =&gt; {
 <span class="err">};</span>
 </code></pre></div></div>
 
-<p>Notice that we’re not handling the loading state manually anymore. In fact, the <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> component can render a skeleton while the data is being fetched.</p>
+<p>ローディング状態を手動で処理する必要がなくなりました。実際、<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>コンポーネントはデータの取得中にスケルトンをレンダリングすることができます。</p>
 
-<h3 id="uselistcontext-accesses-the-list-context"><code class="language-plaintext highlighter-rouge">useListContext</code> Accesses The List Context</h3>
+<h3 id="uselistcontextでリストコンテキストにアクセス"><code class="language-plaintext highlighter-rouge">useListContext</code>でリストコンテキストにアクセス</h3>
 
-<p>Using the <code class="language-plaintext highlighter-rouge">&lt;ListBase&gt;</code> component has one drawback: you can no longer access the list context (<code class="language-plaintext highlighter-rouge">data</code>, <code class="language-plaintext highlighter-rouge">total</code>, etc.) in the component. Instead, you have to access it from the <code class="language-plaintext highlighter-rouge">ListContext</code> using <a href="./useListContext.md">the <code class="language-plaintext highlighter-rouge">useListContext</code> hook</a>.</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;ListBase&gt;</code>コンポーネントを使用することで一つの欠点があります。それは、コンポーネント内でリストコンテキスト（<code class="language-plaintext highlighter-rouge">data</code>、<code class="language-plaintext highlighter-rouge">total</code>など）にアクセスできなくなることです。その代わりに、<code class="language-plaintext highlighter-rouge">ListContext</code>から <a href="./useListContext.md"><code class="language-plaintext highlighter-rouge">useListContext</code> フック</a>を使用してアクセスする必要があります。</p>
 
-<p>The following example illustrates the usage of <code class="language-plaintext highlighter-rouge">useListContext</code> with a custom pagination component:</p>
+<p>以下の例は、カスタムページネーションコンポーネントでの<code class="language-plaintext highlighter-rouge">useListContext</code>の使用を示しています。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useListContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Toolbar</span><span class="p">,</span> <span class="nx">Button</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material</span><span class="dl">'</span><span class="p">;</span>
@@ -951,9 +951,9 @@ const BookList = () =&gt; {
 <span class="p">}</span>
 </code></pre></div></div>
 
-<h3 id="list-renders-title-filters-and-pagination"><code class="language-plaintext highlighter-rouge">&lt;List&gt;</code> Renders Title, Filters, And Pagination</h3>
+<h3 id="listはタイトルフィルターページネーションをレンダリング"><code class="language-plaintext highlighter-rouge">&lt;List&gt;</code>はタイトル、フィルター、ページネーションをレンダリング</h3>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;ListBase&gt;</code> is a headless component: it renders only its children. But almost every List view needs a wrapping <code class="language-plaintext highlighter-rouge">&lt;div&gt;</code>, a title, filters, pagination, a Material UI <code class="language-plaintext highlighter-rouge">&lt;Card&gt;</code>, etc. That’s why react-admin provides <a href="./List.md">the <code class="language-plaintext highlighter-rouge">&lt;List&gt;</code> component</a>, which includes the <code class="language-plaintext highlighter-rouge">&lt;ListBase&gt;</code> component and a “classic” layout to reduce the boilerplate even further:</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;ListBase&gt;</code>はヘッドレスコンポーネントであり、その子要素のみをレンダリングします。しかし、ほとんどのリストビューにはラップする<code class="language-plaintext highlighter-rouge">&lt;div&gt;</code>、タイトル、フィルター、ページネーション、Material UIの<code class="language-plaintext highlighter-rouge">&lt;Card&gt;</code>などが必要です。そこでreact-adminは <a href="./List.md"><code class="language-plaintext highlighter-rouge">&lt;List&gt;</code> コンポーネント</a>を提供しており、<code class="language-plaintext highlighter-rouge">&lt;ListBase&gt;</code>コンポーネントと”クラシック”なレイアウトを含め、さらに定型コードを削減します。</p>
 
 <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">import { 
 </span><span class="gd">-   Title,
@@ -990,9 +990,9 @@ const BookList = () =&gt; (
 </span><span class="err">);</span>
 </code></pre></div></div>
 
-<h2 id="a-typical-react-admin-list-view">A Typical React-Admin List View</h2>
+<h2 id="典型的なreact-adminリストビュー">典型的なReact-Adminリストビュー</h2>
 
-<p>Remember the first snippet in this page? The react-admin version is much shorter, and more expressive:</p>
+<p>このページの最初のスニペットを思い出してください。react-admin版ははるかに短く、表現力豊かです。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> 
     <span class="nx">List</span><span class="p">,</span>
@@ -1015,13 +1015,13 @@ const BookList = () =&gt; (
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>By encapsulating common CRUD logic, react-admin reduces the amount of code you need to write, and lets you focus on the business logic. As you’ve seen with the List controller and context, there is no magic: it’s just standard React hooks and components designed for B2B apps and web developers with deadlines.</p>
+<p>共通のCRUDロジックをカプセル化することで、react-adminは必要なコードの量を減らし、ビジネスロジックに集中できるようにします。リストコントローラーおよびコンテキストで見たように、魔法はありません：これは標準的なReactフックおよびコンポーネントで、B2Bアプリおよび期限のあるWeb開発者向けに設計されています。</p>
 
-<h2 id="listguesser-zero-configuration-list"><code class="language-plaintext highlighter-rouge">&lt;ListGuesser&gt;</code>: Zero-Configuration List</h2>
+<h2 id="listguesserゼロコンフィギュレーションリスト"><code class="language-plaintext highlighter-rouge">&lt;ListGuesser&gt;</code>：ゼロコンフィギュレーションリスト</h2>
 
-<p>Sometimes typing <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> and a few <code class="language-plaintext highlighter-rouge">&lt;Field&gt;</code> components is too much - for instance if you want to prototype an admin for many resources, or search data through an API without worrying about the actual data structure.</p>
+<p>時には<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>やいくつかの<code class="language-plaintext highlighter-rouge">&lt;Field&gt;</code>コンポーネントを入力することすら多すぎることがあります。例えば、多くのリソースの管理画面をプロトタイプする場合や、実際のデータ構造を気にせずにAPIを通じてデータを検索する場合です。</p>
 
-<p>For these cases, react-admin provides a <code class="language-plaintext highlighter-rouge">&lt;ListGuesser&gt;</code> component that will guess the datagrid columns from the data. It’s a bit like the <code class="language-plaintext highlighter-rouge">&lt;List&gt;</code> component, but it doesn’t require any configuration.</p>
+<p>このような場合に備えて、react-adminは<code class="language-plaintext highlighter-rouge">&lt;ListGuesser&gt;</code>コンポーネントを提供しており、データからdatagridの列を推測します。これは少し<code class="language-plaintext highlighter-rouge">&lt;List&gt;</code>コンポーネントのようですが、設定を一切必要としません。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span><span class="p">,</span> <span class="nx">ListGuesser</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">dataProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./dataProvider</span><span class="dl">'</span><span class="p">;</span>
@@ -1033,35 +1033,31 @@ const BookList = () =&gt; (
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;ListGuesser&gt;</code> is also a good way to bootstrap a List view, as it outputs the code that it generated for the List into the console. Copy and paste that code in a custom List component, and you can start customizing the list view in no time.</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;ListGuesser&gt;</code>はリストビューをブートストラップするための良い方法でもあり、生成されたリストのコードをコンソールに出力します。そのコードをカスタムリストコンポーネントにコピー＆ペーストし、リストビューのカスタマイズをすぐに開始できます。</p>
 
-<h2 id="list-iterators">List Iterators</h2>
+<h2 id="リストイテレータ">リストイテレータ</h2>
 
-<p>The components you can use as child of <code class="language-plaintext highlighter-rouge">&lt;List&gt;</code> are called “List Iterator”. They render a list of records. <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> is such a List Iterator, but react-admin provides many more:</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;List&gt;</code>の子要素として使用できるコンポーネントは「リストイテレータ」と呼ばれます。これらはレコードのリストをレンダリングします。<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>もその一つですが、react-adminは他にも多くのリストイテレータを提供しています。</p>
 
 <ul>
   <li><a href="./Datagrid.md"><code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code></a></li>
   <li><a href="./DatagridAG.md"><code class="language-plaintext highlighter-rouge">&lt;DatagridAG&gt;</code></a></li>
   <li><a href="./SimpleList.md"><code class="language-plaintext highlighter-rouge">&lt;SimpleList&gt;</code></a></li>
   <li><a href="./SingleFieldList.md"><code class="language-plaintext highlighter-rouge">&lt;SingleFieldList&gt;</code></a></li>
-  <li><a href="./EditableDatagrid.md"><code class="language-plaintext highlighter-rouge">&lt;EditableDatagrid&gt;</code></a></li>
+  <li><a href=""><code class="language-plaintext highlighter-rouge">&lt;EditableDatagrid&gt;</code></a></li>
   <li><a href="./TreeWithDetails.md"><code class="language-plaintext highlighter-rouge">&lt;TreeWithDetails&gt;</code></a></li>
   <li><a href="./Calendar.md"><code class="language-plaintext highlighter-rouge">&lt;Calendar&gt;</code></a></li>
 </ul>
 
-<p>If that’s not enough, <a href="#building-a-custom-iterator">building a custom iterator</a> isn’t hard.</p>
+<p>それでも十分でない場合は、<a href="#building-a-custom-iterator">カスタムイテレータの作成</a>も難しくありません。</p>
 
-<h2 id="responsive-lists">Responsive Lists</h2>
+<h2 id="レスポンシブリスト">レスポンシブリスト</h2>
 
-<p>On Mobile, <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> doesn’t work well - the screen is too narrow. You should use <a href="./SimpleList.md">the  <code class="language-plaintext highlighter-rouge">&lt;SimpleList&gt;</code> component</a> instead - it’s another built-in List Iterator.</p>
+<p>モバイルでは、<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>はうまく機能しません - 画面が狭すぎます。代わりに、<code class="language-plaintext highlighter-rouge">&lt;SimpleList&gt;</code>コンポーネントを使用するべきです - これはもう一つの組み込みリストイテレータです。</p>
 
-<video controls="" autoplay="" playsinline="" muted="" loop="" style="height:300px">
-    <source src="./img/simple-list.webm" type="video/webm" />
-    <source src="./img/simple-list.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-</video>
+<video controls="" autoplay="" playsinline="" muted="" loop="" style="height:300px"> <source src="./img/simple-list.webm" type="video/webm" /> <source src="./img/simple-list.mp4" type="video/mp4" /> Your browser does not support the video tag. </video>
 
-<p>To use <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> on desktop and <code class="language-plaintext highlighter-rouge">&lt;SimpleList&gt;</code> on mobile, use the <code class="language-plaintext highlighter-rouge">useMediaQuery</code> hook:</p>
+<p>デスクトップでは<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>を、モバイルでは<code class="language-plaintext highlighter-rouge">&lt;SimpleList&gt;</code>を使用するには、<code class="language-plaintext highlighter-rouge">useMediaQuery</code>フックを使用します。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/posts.tsx</span>
 <span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
@@ -1102,13 +1098,13 @@ const BookList = () =&gt; (
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>Check <a href="./useMediaQuery.md">the dedicated <code class="language-plaintext highlighter-rouge">useMediaQuery</code> documentation</a> for more information.</p>
+<p>詳細は <a href="./useMediaQuery.md"><code class="language-plaintext highlighter-rouge">useMediaQuery</code>の専用ドキュメント</a>を参照してください。</p>
 
-<h2 id="building-a-custom-iterator">Building a Custom Iterator</h2>
+<h2 id="カスタムイテレータの作成">カスタムイテレータの作成</h2>
 
-<p>In some cases, neither the <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> nor the <code class="language-plaintext highlighter-rouge">&lt;SimpleList&gt;</code> components allow to display the records in an optimal way for a given task. In these cases, pass your layout component directly as children of the <code class="language-plaintext highlighter-rouge">&lt;List&gt;</code> component.</p>
+<p>場合によっては、<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>や<code class="language-plaintext highlighter-rouge">&lt;SimpleList&gt;</code>コンポーネントが特定のタスクに最適な方法でレコードを表示できないことがあります。このような場合、レイアウトコンポーネントを直接<code class="language-plaintext highlighter-rouge">&lt;List&gt;</code>コンポーネントの子要素として渡します。</p>
 
-<p>As <code class="language-plaintext highlighter-rouge">&lt;List&gt;</code> takes care of fetching the data and putting it in a <code class="language-plaintext highlighter-rouge">ListContext</code>, you can leverage <a href="./WithListContext.md">the <code class="language-plaintext highlighter-rouge">&lt;WithListContext&gt;</code> component</a> to get the list data in a render prop.</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;List&gt;</code>はデータの取得とそれを<code class="language-plaintext highlighter-rouge">ListContext</code>に配置する役割を担っているため、レンダープロップでリストデータを取得するために <a href="./WithListContext.md"><code class="language-plaintext highlighter-rouge">&lt;WithListContext&gt;</code> コンポーネント</a>を活用することができます。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">List</span><span class="p">,</span> <span class="nx">WithListContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Stack</span><span class="p">,</span> <span class="nx">Typography</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material</span><span class="dl">'</span><span class="p">;</span>
@@ -1135,7 +1131,7 @@ const BookList = () =&gt; (
 );
 </code></pre></div></div>
 
-<p>If you prefer using a hook, you can use <a href="./useListContext.md">the <code class="language-plaintext highlighter-rouge">useListContext</code> hook</a> instead:</p>
+<p>フックを使用する場合は、代わりに <a href="./useListContext.md"><code class="language-plaintext highlighter-rouge">useListContext</code> フック</a>を使用できます。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">List</span><span class="p">,</span> <span class="nx">useListContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Stack</span><span class="p">,</span> <span class="nx">Typography</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material</span><span class="dl">'</span><span class="p">;</span>
@@ -1167,71 +1163,54 @@ const BookList = () =&gt; (
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: With <code class="language-plaintext highlighter-rouge">emptyWhileLoading</code> turned on, the <code class="language-plaintext highlighter-rouge">&lt;List&gt;</code> component doesn’t render its child component until the data is available. Without this flag, the <code class="language-plaintext highlighter-rouge">&lt;SimpleBookList&gt;</code> component would render even during the loading phase, break at <code class="language-plaintext highlighter-rouge">data.map()</code>.</p>
+<p><strong>Tip</strong>: <code class="language-plaintext highlighter-rouge">emptyWhileLoading</code>がオンになっている場合、<code class="language-plaintext highlighter-rouge">&lt;List&gt;</code>コンポーネントはデータが利用可能になるまで子コンポーネントをレンダリングしません。このフラグがない場合、<code class="language-plaintext highlighter-rouge">&lt;SimpleBookList&gt;</code>コンポーネントはロードフェーズ中にレンダリングされ、<code class="language-plaintext highlighter-rouge">data.map()</code>で壊れてしまいます。</p>
 
-<p>You can also handle the loading state inside a custom list layout by grabbing the <code class="language-plaintext highlighter-rouge">isLoading</code> variable from the <code class="language-plaintext highlighter-rouge">ListContext</code>, but <code class="language-plaintext highlighter-rouge">emptyWhileLoading</code> is usually more convenient.</p>
+<p>カスタムリストレイアウト内でローディング状態を処理することもできますが、通常は<code class="language-plaintext highlighter-rouge">emptyWhileLoading</code>がより便利です。</p>
 
-<h2 id="filtering-the-list">Filtering the List</h2>
+<h2 id="リストのフィルタリング">リストのフィルタリング</h2>
 
-<p>One of the most important features of the List page is the ability to search for a dedicated record. In this documentation, we use the term “filter” for the controls allowing to search the list.</p>
+<p>リストページの最も重要な機能の一つは、特定のレコードを検索する能力です。このドキュメントでは、リストを検索するためのコントロールを「フィルター」と呼びます。</p>
 
-<p>React-admin provides 2 possible UIs for filters, and lets your own if they’re not sufficient.</p>
+<p>react-adminはフィルターのために2つのUIを提供し、それらが不十分な場合には独自のUIを作成することができます。</p>
 
-<p>The first filter UI is called “the Filer/Form Combo”.</p>
+<p>最初のフィルターUIは「フィルター/フォームコンボ」と呼ばれます。</p>
 
-<video controls="" autoplay="" playsinline="" muted="" loop="">
-  <source src="./img/list_filter.webm" type="video/webm" />
-  <source src="./img/list_filter.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/list\_filter.webm" type="video/webm" /> <source src="./img/list\_filter.mp4" type="video/mp4" /> Your browser does not support the video tag. </video>
 
-<p>The second filter UI is called “the Filter List Sidebar”.</p>
+<p>二つ目のフィルターUIは「フィルターリストサイドバー」と呼ばれます。</p>
 
-<video controls="" autoplay="" playsinline="" muted="" loop="">
-  <source src="./img/filter-sidebar.webm" type="video/webm" />
-  <source src="./img/filter-sidebar.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/filter-sidebar.webm" type="video/webm" /> <source src="./img/filter-sidebar.mp4" type="video/mp4" /> Your browser does not support the video tag. </video>
 
-<p>Check <a href="./FilteringTutorial.md">the dedicated Filter tutorial chapter</a> for more information on filtering.</p>
+<p>フィルタリングに関する詳細は<a href="./FilteringTutorial.md">専用フィルターチュートリアル章</a>を参照してください。</p>
 
-<h2 id="sorting-the-list">Sorting the List</h2>
+<h2 id="リストのソート">リストのソート</h2>
 
-<p>The List view uses the <code class="language-plaintext highlighter-rouge">sort</code> and <code class="language-plaintext highlighter-rouge">order</code> query parameters to determine the sort field and order passed to <code class="language-plaintext highlighter-rouge">dataProvider.getList()</code>.</p>
+<p>リストビューは<code class="language-plaintext highlighter-rouge">sort</code>および<code class="language-plaintext highlighter-rouge">order</code>クエリパラメータを使用して、<code class="language-plaintext highlighter-rouge">dataProvider.getList()</code>に渡されるソートフィールドおよび順序を決定します。</p>
 
-<p>Here is a typical List URL:</p>
+<p>典型的なリストURLは次のとおりです。</p>
 
 <blockquote>
-  <p>https://myadmin.dev/#/posts?displayedFilters=%7B%22commentable%22%3Atrue%7D&amp;filter=%7B%22commentable%22%3Atrue%2C%22q%22%3A%22lorem%20%22%7D&amp;order=DESC&amp;page=1&amp;perPage=10&amp;sort=published_at</p>
+  <p><a href="https://myadmin.dev/#/posts?displayedFilters=%7B%22commentable%22%3Atrue%7D&amp;filter=%7B%22commentable%22%3Atrue%2C%22q%22%3A%22lorem%20%22%7D&amp;order=DESC&amp;page=1&amp;perPage=10&amp;sort=published_at">https://myadmin.dev/#/posts?displayedFilters=%7B%22commentable%22%3Atrue%7D&amp;filter=%7B%22commentable%22%3Atrue%2C%22q%22%3A%22lorem%20%22%7D&amp;order=DESC&amp;page=1&amp;perPage=10&amp;sort=published_at</a></p>
 </blockquote>
 
-<p>Once decoded, this URL reveals the intended sort:</p>
+<p>これをデコードすると、意図されたソートが明らかになります。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sort=published_at
-order=DESC
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">sort</span><span class="o">=</span>published_at
+<span class="nv">order</span><span class="o">=</span>DESC
 </code></pre></div></div>
 
-<p>If you’re using a <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> inside the List view, then the column headers are buttons allowing users to change the list sort field and order. This feature requires no configuration and works out fo the box. Check <a href="./Datagrid.md#customizing-column-sort">the <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> documentation</a> to see how to disable or modify the field used for sorting on a particular column.</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>をリストビュー内で使用している場合、列ヘッダーはボタンになっており、ユーザーがリストのソートフィールドおよび順序を変更することができます。この機能は設定を必要とせず、そのまま機能します。特定の列のソートに使用するフィールドを無効にしたり変更したりする方法については、 <a href="./Datagrid.md#customizing-column-sort"><code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> のドキュメント</a>を参照してください。</p>
 
-<video controls="" autoplay="" playsinline="" muted="" loop="">
-  <source src="./img/sort-column-header.webm" type="video/webm" />
-  <source src="./img/sort-column-header.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/sort-column-header.webm" type="video/webm" /> <source src="./img/sort-column-header.mp4" type="video/mp4" /> Your browser does not support the video tag. </video>
 
-<p>If you’re using another List layout, check <a href="./SortButton.md">the <code class="language-plaintext highlighter-rouge">&lt;SortButton&gt;</code> component</a>: It’s a standalone button that allows users to change the list sort field and order.</p>
+<p>他のリストレイアウトを使用している場合は、 <a href="./SortButton.md"><code class="language-plaintext highlighter-rouge">&lt;SortButton&gt;</code> コンポーネント</a>を参照してください。これは、ユーザーがリストのソートフィールドおよび順序を変更できるスタンドアロンのボタンです。</p>
 
-<video controls="" autoplay="" playsinline="" muted="" loop="">
-  <source src="./img/sort-button.webm" type="video/webm" />
-  <source src="./img/sort-button.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/sort-button.webm" type="video/webm" /> <source src="./img/sort-button.mp4" type="video/mp4" /> Your browser does not support the video tag. </video>
+<h2 id="プリソートされたリストへのリンク">プリソートされたリストへのリンク</h2>
 
-<h2 id="linking-to-a-pre-sorted-list">Linking to a Pre-Sorted List</h2>
+<p>ソート値はURLから取得されるため、<code class="language-plaintext highlighter-rouge">sort</code>および<code class="language-plaintext highlighter-rouge">order</code>クエリパラメータを設定することでプリソートされたリストへのリンクを提供できます。</p>
 
-<p>As the sort values are taken from the URL, you can link to a pre-sorted list by setting the <code class="language-plaintext highlighter-rouge">sort</code> and <code class="language-plaintext highlighter-rouge">order</code> query parameters.</p>
-
-<p>For instance, if you have a list of posts ordered by publication date, and you want to provide a button to sort the list by number of views descendant:</p>
+<p>例えば、公開日で並べ替えられた投稿のリストがあり、ビュー数の降順でリストを並べ替えるボタンを提供したい場合は次のようになります。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Button</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material/Button</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Link</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
@@ -1257,11 +1236,11 @@ order=DESC
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: You have to pass <em>all</em> the query string parameters - not just <code class="language-plaintext highlighter-rouge">sort</code> and <code class="language-plaintext highlighter-rouge">order</code>. That’s a current limitation of react-admin.</p>
+<p><strong>Tip</strong>: すべてのクエリ文字列パラメータを渡す必要があります - <code class="language-plaintext highlighter-rouge">sort</code>および<code class="language-plaintext highlighter-rouge">order</code>だけではありません。これはreact-adminの現在の制限です。</p>
 
-<h2 id="building-a-custom-sort-control">Building a Custom Sort Control</h2>
+<h2 id="カスタムソートコントロールの作成">カスタムソートコントロールの作成</h2>
 
-<p>When neither the <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code> or the <code class="language-plaintext highlighter-rouge">&lt;SortButton&gt;</code> fit your UI needs, you have to write a custom sort control. As with custom filters, this boils down to grabbing the required data and callbacks from the <code class="language-plaintext highlighter-rouge">ListContext</code>. Let’s use the <code class="language-plaintext highlighter-rouge">&lt;SortButton&gt;</code> source as an example usage of <code class="language-plaintext highlighter-rouge">sort</code> and <code class="language-plaintext highlighter-rouge">setSort</code>:</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>や<code class="language-plaintext highlighter-rouge">&lt;SortButton&gt;</code>がUIのニーズに合わない場合は、カスタムソートコントロールを作成する必要があります。カスタムフィルターと同様に、<code class="language-plaintext highlighter-rouge">ListContext</code>から必要なデータとコールバックを取得します。<code class="language-plaintext highlighter-rouge">sort</code>および<code class="language-plaintext highlighter-rouge">setSort</code>の使用例として、<code class="language-plaintext highlighter-rouge">&lt;SortButton&gt;</code>のソースを使用します。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Button</span><span class="p">,</span> <span class="nx">Menu</span><span class="p">,</span> <span class="nx">MenuItem</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material</span><span class="dl">'</span><span class="p">;</span>
@@ -1270,15 +1249,15 @@ order=DESC
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useListSortContext</span><span class="p">,</span> <span class="nx">useTranslate</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">SortButton</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">fields</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="c1">// sort is an object { field, order } containing the current sort</span>
-    <span class="c1">// setSort is a callback ({ field, order }) =&gt; void allowing to change the sort field and order</span>
+    <span class="c1">// sortは現在のソートを含むオブジェクト{ field, order }</span>
+    <span class="c1">// setSortはソートフィールドと順序を変更するコールバック({ field, order }) =&gt; void</span>
     <span class="kd">const</span> <span class="p">{</span> <span class="nx">sort</span><span class="p">,</span> <span class="nx">setSort</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useListSortContext</span><span class="p">();</span>
-    <span class="c1">// rely on the translations to display labels like 'Sort by sales descending'</span>
+    <span class="c1">// 翻訳に依存して「Sort by sales descending」などのラベルを表示</span>
     <span class="kd">const</span> <span class="nx">translate</span> <span class="o">=</span> <span class="nx">useTranslate</span><span class="p">();</span>
-    <span class="c1">// open/closed state for dropdown</span>
+    <span class="c1">// ドロップダウンのオープン/クローズ状態</span>
     <span class="kd">const</span> <span class="p">[</span><span class="nx">anchorEl</span><span class="p">,</span> <span class="nx">setAnchorEl</span><span class="p">]</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">useState</span><span class="o">&lt;</span><span class="nx">HTMLButtonElement</span> <span class="o">|</span> <span class="kc">null</span><span class="o">&gt;</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
 
-    <span class="c1">// mouse handlers</span>
+    <span class="c1">// マウスハンドラ</span>
 	<span class="kd">const</span> <span class="na">handleClick</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">MouseEventHandler</span><span class="o">&lt;</span><span class="nx">HTMLButtonElement</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="nx">setAnchorEl</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span>
     <span class="p">};</span>
@@ -1296,7 +1275,7 @@ order=DESC
         <span class="nx">setAnchorEl</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
     <span class="p">};</span>
 
-    <span class="c1">// English stranslation is 'Sort by %{field} %{order}'</span>
+    <span class="c1">// 英語翻訳は「Sort by %{field} %{order}」</span>
     <span class="kd">const</span> <span class="nx">buttonLabel</span> <span class="o">=</span> <span class="nx">translate</span><span class="p">(</span><span class="dl">'</span><span class="s1">ra.sort.sort_by</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
         <span class="na">field</span><span class="p">:</span> <span class="nx">translate</span><span class="p">(</span><span class="s2">`resources.products.fields.</span><span class="p">${</span><span class="nx">sort</span><span class="p">.</span><span class="nx">field</span><span class="p">}</span><span class="s2">`</span><span class="p">),</span>
         <span class="na">order</span><span class="p">:</span> <span class="nx">translate</span><span class="p">(</span><span class="s2">`ra.sort.</span><span class="p">${</span><span class="nx">sort</span><span class="p">.</span><span class="nx">order</span><span class="p">}</span><span class="s2">`</span><span class="p">),</span>
@@ -1324,7 +1303,7 @@ order=DESC
             <span class="si">{</span><span class="nx">fields</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">field</span> <span class="o">=&gt;</span> <span class="p">(</span>
                 <span class="p">&lt;</span><span class="nc">MenuItem</span>
                     <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">handleChangeSort</span><span class="si">}</span>
-                    <span class="c1">// store the sort field in the element dataset to avoid creating a new click handler for each item (better for performance)</span>
+                    <span class="c1">// ソートフィールドを要素データセットに格納し、各アイテムのために新しいクリックハンドラを作成することを避ける（パフォーマンス向上のため）</span>
                     <span class="na">data-sort</span><span class="p">=</span><span class="si">{</span><span class="nx">field</span><span class="si">}</span>
                     <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">field</span><span class="si">}</span>
                 <span class="p">&gt;</span>
@@ -1347,22 +1326,22 @@ order=DESC
 <span class="k">export</span> <span class="k">default</span> <span class="nx">SortButton</span><span class="p">;</span>
 </code></pre></div></div>
 
-<h2 id="building-a-custom-pagination">Building a Custom Pagination</h2>
+<h2 id="カスタムページネーションの作成">カスタムページネーションの作成</h2>
 
-<p>The <a href="./Pagination.md"><code class="language-plaintext highlighter-rouge">&lt;Pagination&gt;</code></a> component gets the following constants from <a href="./useListContext.md">the <code class="language-plaintext highlighter-rouge">useListContext</code> hook</a>:</p>
+<p><a href="./Pagination.md"><code class="language-plaintext highlighter-rouge">&lt;Pagination&gt;</code></a>コンポーネントは、 <a href="./useListContext.md"><code class="language-plaintext highlighter-rouge">useListContext</code> フック</a>から次の定数を取得します：</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">page</code>: The current page number (integer). First page is <code class="language-plaintext highlighter-rouge">1</code>.</li>
-  <li><code class="language-plaintext highlighter-rouge">perPage</code>: The number of records per page.</li>
-  <li><code class="language-plaintext highlighter-rouge">setPage</code>: <code class="language-plaintext highlighter-rouge">Function(page: number) =&gt; void</code>. A function that set the current page number.</li>
-  <li><code class="language-plaintext highlighter-rouge">total</code>: The total number of records (may be undefined when the data provider uses <a href="./DataProviderWriting.md#partial-pagination">Partial pagination</a>).</li>
-  <li><code class="language-plaintext highlighter-rouge">hasPreviousPage</code>: True if the page number is greater than 1.</li>
-  <li><code class="language-plaintext highlighter-rouge">hasNextPage</code>: True if the page number is lower than the total number of pages.</li>
-  <li><code class="language-plaintext highlighter-rouge">actions</code>: A component that displays the pagination buttons (default: <code class="language-plaintext highlighter-rouge">&lt;PaginationActions&gt;</code>)</li>
-  <li><code class="language-plaintext highlighter-rouge">limit</code>: An element that is displayed if there is no data to show (default: <code class="language-plaintext highlighter-rouge">&lt;PaginationLimit&gt;</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">page</code>: 現在のページ番号（整数）。最初のページは<code class="language-plaintext highlighter-rouge">1</code>。</li>
+  <li><code class="language-plaintext highlighter-rouge">perPage</code>: 1ページあたりのレコード数。</li>
+  <li><code class="language-plaintext highlighter-rouge">setPage</code>: 現在のページ番号を設定する関数<code class="language-plaintext highlighter-rouge">Function(page: number) =&gt; void</code>。</li>
+  <li><code class="language-plaintext highlighter-rouge">total</code>: レコードの総数（データプロバイダが<a href="./DataProviderWriting.md#partial-pagination">部分的なページネーション</a>を使用している場合、未定義の場合があります）。</li>
+  <li><code class="language-plaintext highlighter-rouge">hasPreviousPage</code>: ページ番号が1より大きい場合はtrue。</li>
+  <li><code class="language-plaintext highlighter-rouge">hasNextPage</code>: ページ番号が総ページ数より小さい場合はtrue。</li>
+  <li><code class="language-plaintext highlighter-rouge">actions</code>: ページネーションボタンを表示するコンポーネント（デフォルト：<code class="language-plaintext highlighter-rouge">&lt;PaginationActions&gt;</code>）</li>
+  <li><code class="language-plaintext highlighter-rouge">limit</code>: 表示するデータがない場合に表示される要素（デフォルト：<code class="language-plaintext highlighter-rouge">&lt;PaginationLimit&gt;</code>）</li>
 </ul>
 
-<p>If you want to replace the default pagination by a “&lt; previous - next &gt;” pagination, create a pagination component like the following:</p>
+<p>デフォルトのページネーションを「&lt;前 - 次&gt;」ページネーションに置き換えたい場合は、次のようなページネーションコンポーネントを作成します。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">List</span><span class="p">,</span> <span class="nx">useListContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Button</span><span class="p">,</span> <span class="nx">Toolbar</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material</span><span class="dl">'</span><span class="p">;</span>
@@ -1403,13 +1382,13 @@ order=DESC
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>But if you just want to change the color property of the pagination button, you can extend the existing components:</p>
+<p>ただし、ページネーションボタンの色プロパティを変更したいだけの場合は、既存のコンポーネントを拡張することができます。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">List</span><span class="p">,</span> <span class="nx">Pagination</span><span class="p">,</span> <span class="nx">PaginationActions</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="k">export</span> <span class="kd">const</span> <span class="nx">MyPaginationActions</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">PaginationActions</span>
-        <span class="c1">// these props are passed down to the Material UI &lt;Pagination&gt; component</span>
+        <span class="c1">// これらのプロップはMaterial UIの&lt;ページネーション&gt;コンポーネントに渡されます</span>
         <span class="na">color</span><span class="p">=</span><span class="s">"primary"</span>
         <span class="na">showFirstButton</span>
         <span class="na">showLastButton</span>
@@ -1425,14 +1404,15 @@ order=DESC
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="third-party-components">Third-Party Components</h2>
+<h2 id="サードパーティコンポーネント">サードパーティコンポーネント</h2>
 
-<p>You can find more List components for react-admin in third-party repositories.</p>
+<p>react-admin用のリストコンポーネントは、サードパーティのリポジトリでも見つけることができます。</p>
 
 <ul>
-  <li><a href="https://github.com/fizix-io/ra-customizable-datagrid">ra-customizable-datagrid</a>: plugin that allows to hide / show columns dynamically.</li>
-  <li><a href="https://github.com/marmelab/ra-datagrid">ra-datagrid</a>: Integration of <a href="https://mui.com/components/data-grid/">Material UI’s <code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code></a> into react-admin.</li>
+  <li><a href="https://github.com/fizix-io/ra-customizable-datagrid">ra-customizable-datagrid</a>: 列を動的に表示/非表示にするプラグイン。</li>
+  <li><a href="https://github.com/marmelab/ra-datagrid">ra-datagrid</a>: Material UIの<code class="language-plaintext highlighter-rouge">&lt;Datagrid&gt;</code>との統合。</li>
 </ul>
+
 
                         </div>
                     </div>

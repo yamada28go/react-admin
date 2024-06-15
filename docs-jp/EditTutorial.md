@@ -1,99 +1,99 @@
 ---
 layout: default
-title: "The Creation and Edition Pages"
+title: "作成ページと編集ページ"
 ---
 
-# The Creation and Edition Pages
+# 作成ページと編集ページ
 
-React-admin provides many hooks and components to let you build custom user experiences for editing and creating records, leveraging Material UI and react-hook-form.
+React-adminは、Material UIとreact-hook-formを活用してレコードの編集や作成のためのカスタムユーザーエクスペリエンスを構築するための多くのフックとコンポーネントを提供します。
 
-![Edit view example](./img/edit-view-example.png)
+![編集ビューの例](./img/edit-view-example.png)
 
-## From Pure React To React-Admin
+## ピュアReactからReact-Adminへ
 
-Edition views are very common in single-page apps. The most usual way to allow a user to update a record is to fetch the record from an API based on the URL parameters, initialize a form with the record, update the inputs as the user changes the values, and call the API to update the record with the new values upon submission. 
+シングルページアプリケーションでは、編集ビューは非常に一般的です。ユーザーがレコードを更新する最も一般的な方法は、URLパラメータに基づいてAPIからレコードを取得し、フォームにそのレコードを初期化し、ユーザーが値を変更するたびに入力を更新し、送信時に新しい値でAPIを呼び出してレコードを更新することです。
 
-[![From Pure React To React-Admin](./img/edit-from-react-to-react-admin.webp)](./img/edit-from-react-to-react-admin.webp)
+[![ピュアReactからReact-Adminへ](./img/edit-from-react-to-react-admin.webp)](./img/edit-from-react-to-react-admin.webp)
 
-To better understand how to use the various react-admin hooks and components dedicated to editing and creating, let's start by building such an edition view by hand.
+React-adminの編集と作成に特化したさまざまなフックとコンポーネントの使い方を理解するために、まず手動でそのような編集ビューを構築することから始めましょう。
 
-### An Edition View Built By Hand
+### 手動で構築された編集ビュー
 
-Here is how you could write a book edition view in pure React, leveraging react-admin's [data fetching hooks](./Actions.md), and [react-hook-form](https://react-hook-form.com/) to bind form inputs with a record object:
+以下は、react-adminの[データ取得フック](./Actions.md)と[react-hook-form](https://react-hook-form.com/)を活用して、レコードオブジェクトとフォーム入力をバインドする純粋なReactでの書籍編集ビューの例です：
 
 ```jsx
-import * as React from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useForm, Controller } from "react-hook-form";
-import { useGetOne, useUpdate, Title } from "react-admin";
-import { Card, TextField, Button, Stack, MenuItem } from "@mui/material";
+    import * as React from "react";
+    import { useParams, useNavigate } from "react-router-dom";
+    import { useForm, Controller } from "react-hook-form";
+    import { useGetOne, useUpdate, Title } from "react-admin";
+    import { Card, TextField, Button, Stack, MenuItem } from "@mui/material";
 
-export const BookEdit = () => {
-  const { id } = useParams();
-  const { handleSubmit, reset, control } = useForm();
-  const { isLoading } = useGetOne(
-    "books",
-    { id },
-    { onSuccess: (data) => reset(data) }
-  );
-  const [update, { isLoading: isSubmitting }] = useUpdate();
-  const navigate = useNavigate();
-  const onSubmit = (data) => {
-    update(
+    export const BookEdit = () => {
+      const { id } = useParams();
+      const { handleSubmit, reset, control } = useForm();
+      const { isLoading } = useGetOne(
         "books",
-        { id, data },
-        { onSuccess: () => { navigate('/books'); } }
-    );
-  };
+        { id },
+        { onSuccess: (data) => reset(data) }
+      );
+      const [update, { isLoading: isSubmitting }] = useUpdate();
+      const navigate = useNavigate();
+      const onSubmit = (data) => {
+        update(
+          "books",
+          { id, data },
+          { onSuccess: () => { navigate('/books'); } }
+        );
+      };
 
-  if (isLoading) return null;
-  return (
-    <div>
-      <Title title="Book Edition" />
-      <Card>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Stack spacing={2}>
-            <Controller
-              name="title"
-              render={({ field }) => <TextField label="Title" {...field} />}
-              control={control}
-            />
-            <Controller
-              name="author"
-              render={({ field }) => <TextField label="Author" {...field} />}
-              control={control}
-            />
-            <Controller
-              name="availability"
-              render={({ field }) => (
-                <TextField select label="Availability" {...field}>
-                  <MenuItem value="in_stock">In stock</MenuItem>
-                  <MenuItem value="out_of_stock">Out of stock</MenuItem>
-                  <MenuItem value="out_of_print">Out of print</MenuItem>
-                </TextField>
-              )}
-              control={control}
-            />
-            <Button type="submit" disabled={isSubmitting}>
-              Save
-            </Button>
-          </Stack>
-        </form>
-      </Card>
-    </div>
-  );
-};
+      if (isLoading) return null;
+      return (
+        <div>
+          <Title title="Book Edition" />
+          <Card>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Stack spacing={2}>
+                <Controller
+                  name="title"
+                  render={({ field }) => <TextField label="Title" {...field} />}
+                  control={control}
+                />
+                <Controller
+                  name="author"
+                  render={({ field }) => <TextField label="Author" {...field} />}
+                  control={control}
+                />
+                <Controller
+                  name="availability"
+                  render={({ field }) => (
+                    <TextField select label="Availability" {...field}>
+                      <MenuItem value="in_stock">In stock</MenuItem>
+                      <MenuItem value="out_of_stock">Out of stock</MenuItem>
+                      <MenuItem value="out_of_print">Out of print</MenuItem>
+                    </TextField>
+                  )}
+                  control={control}
+                />
+                <Button type="submit" disabled={isSubmitting}>
+                  Save
+                </Button>
+              </Stack>
+            </form>
+          </Card>
+        </div>
+      );
+    };
 ```
 
-This form displays 3 inputs (two text inputs and one select input), and redirects to the book list view upon successful submission. It doesn't even contain default values, validation, or dependent inputs. Yet, it's already quite verbose.
+このフォームは3つの入力（2つのテキスト入力と1つの選択入力）を表示し、送信成功後に書籍リストビューにリダイレクトします。デフォルト値やバリデーション、依存入力なども含まれていませんが、それでもかなり冗長です。
 
-It's a super common component. In fact, many of its features could be extracted for reuse in other pages. Let's see how to improve the code and the developer experience in the same process. 
+このようなコンポーネントは非常に一般的であり、その機能の多くは他のページで再利用するために抽出することができます。コードと開発者体験を向上させる方法を見てみましょう。
 
-### `<Form>`: Form Logic
+### `<Form>`: フォームロジック
 
-To use `react-hook-form` with Material UI inputs, the previous example leverages the `<Controller>` tag, which expects a `control` object generated by the `useForm` hook ([see the related `react-hook-form` doc](https://react-hook-form.com/get-started#IntegratingControlledInputs)).
+Material UI入力と一緒に`react-hook-form`を使用するために、前の例では`<Controller>`タグを活用し、これは`useForm`フックによって生成された`control`オブジェクトを期待します（[関連する`react-hook-form`のドキュメントを参照](https://react-hook-form.com/get-started#IntegratingControlledInputs))。
 
-We can avoid the call to `useForm` by putting its logic inside a custom component. That's exaclty what react-admin's [`<Form>` component](./Form.md) does. `<Form>` also creates a react-hook-form `<FormProvider>`, so we no longer need to pass the `control` prop to each `<Controller>` element. 
+このロジックをカスタムコンポーネント内に入れることで`useForm`の呼び出しを避けることができます。これがまさにreact-adminの[`<Form>`コンポーネント](./Form.md)が行うことです。`<Form>`はまたreact-hook-formの`<FormProvider>`も作成するので、`<Controller>`要素に`control`プロップを渡す必要はもうありません。
 
 ```diff
 import * as React from "react";
@@ -117,9 +117,9 @@ export const BookEdit = () => {
   const navigate = useNavigate();
   const onSubmit = (data) => {
     update(
-        "books",
-        { id, data },
-        { onSuccess: () => { navigate('/books'); } }
+      "books",
+      { id, data },
+      { onSuccess: () => { navigate('/books'); } }
     );
   };
   if (isLoading) return null;
@@ -163,9 +163,9 @@ export const BookEdit = () => {
 };
 ```
 
-### `<SimpleForm>`: Stacked Layout
+### `<SimpleForm>`: スタックレイアウト
 
-Displaying inputs in a Stack is a common UI pattern. [The `<SimpleForm>` component](./SimpleForm.md) is a convenience wrapper around `<Form>` that provides this stacked layout. It also includes a submit button, so the `BookEdit` component code is now more focused on business logic.
+スタックに入力を表示するのは一般的なUIパターンです。[`<SimpleForm>`コンポーネント](./SimpleForm.md)は、このスタックレイアウトを提供する`<Form>`の便利なラッパーです。また、送信ボタンも含まれているので、`BookEdit`コンポーネントのコードはビジネスロジックにより集中することができます。
 
 ```diff
 import * as React from "react";
@@ -183,9 +183,9 @@ export const BookEdit = () => {
   const navigate = useNavigate();
   const onSubmit = (data) => {
     update(
-        "books",
-        { id, data },
-        { onSuccess: () => { navigate('/books'); } }
+      "books",
+      { id, data },
+      { onSuccess: () => { navigate('/books'); } }
     );
   };
   if (isLoading) return null;
@@ -226,11 +226,11 @@ export const BookEdit = () => {
 };
 ```
 
-React-admin proposes alternative form layouts ([`<TabbedForm>`](./TabbedForm.md), [`<AccordionForm>`](./AccordionForm.md), [`<WizardForm>`](./WizardForm.md), [`<CreateDialog>, <EditDialog> & <ShowDialog>`](https://marmelab.com/ra-enterprise/modules/ra-form-layout#createdialog-editdialog--showdialog) as well as a headless [`<Form>`](./Form.md) component.
+React-adminは、代替のフォームレイアウト（[`<TabbedForm>`](./TabbedForm.md)、[`<AccordionForm>`](./AccordionForm.md)、[`<WizardForm>`](./WizardForm.md)、[`<CreateDialog>、<EditDialog> & <ShowDialog>`](https://marmelab.com/ra-enterprise/modules/ra-form-layout#createdialog-editdialog--showdialog)）およびヘッドレス[`<Form>`](./Form.md)コンポーネントも提案しています。
 
-### Using Input Components
+### 入力コンポーネントの使用
 
-Wrapping form inputs with a `<Controller>` tag is a common pattern, so react-admin provides a shortcut for all the common input types: [Input components](./Inputs.md). This means the `BookEdit` component doesn't need to use `react-hook-form`'s `<Controller>` directly:
+フォーム入力を`<Controller>`タグでラップするのは一般的なパターンなので、react-adminはすべての一般的な入力タイプのショートカットを提供しています：[入力コンポーネント](./Inputs.md)。これにより、`BookEdit`コンポーネントは`react-hook-form`の`<Controller>`を直接使用する必要がなくなります：
 
 ```diff
 import * as React from "react";
@@ -248,9 +248,9 @@ export const BookEdit = () => {
   const navigate = useNavigate();
   const onSubmit = (data) => {
     update(
-        "books",
-        { id, data },
-        { onSuccess: () => { navigate('/books'); } }
+      "books",
+      { id, data },
+      { onSuccess: () => { navigate('/books'); } }
     );
   };
   if (isLoading) return null;
@@ -291,11 +291,10 @@ export const BookEdit = () => {
 };
 ```
 
-### `<EditContext>` Exposes Data And Callbacks
+### `<EditContext>`データとコールバックの公開
 
-Instead of passing the `record` and `onSubmit` callback to the `<SimpleForm>` element, react-admin prefers putting them in an [`<EditContext>`](./useEditContext.md) context. This allows any descendant element to "pull" the data and callback from the context.
+`record`と`onSubmit`コールバックを`<SimpleForm>`要素に渡す代わりに、react-adminは[`<EditContext>`](./useEditContext.md)コンテキストにそれらを配置することを好みます。これにより、任意の子孫要素がコンテキストからデータとコールバックを「プル」できるようになります。
 
-{% raw %}
 ```diff
 import * as React from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -310,9 +309,9 @@ export const BookEdit = () => {
   const navigate = useNavigate();
   const onSubmit = (data) => {
     update(
-        "books",
-        { id, data },
-        { onSuccess: () => { navigate('/books'); } }
+      "books",
+      { id, data },
+      { onSuccess: () => { navigate('/books'); } }
     );
   };
   if (isLoading) return null;
@@ -342,15 +341,13 @@ export const BookEdit = () => {
   );
 };
 ```
-{% endraw %}
 
-Thanks to `<EditContextProvider>`, the `<SimpleForm>` component no longer needs explicit props. This may look a bit more verbose, but standardizing the `EditContext` value gives react-admin components a simplified API. And it enables further simplifications, explained below. 
+`<EditContextProvider>`のおかげで、`<SimpleForm>`コンポーネントは明示的なプロップを必要としなくなります。これは少し冗長に見えるかもしれませんが、`EditContext`値を標準化することで、react-adminコンポーネントにシンプルなAPIを提供します。そして、以下で説明するさらなる簡略化を可能にします。
 
-### `useEditController`: The Controller Logic
+### `useEditController`: コントローラーロジック
 
-The initial logic that grabs the id from the location, fetches the record from the API, and prepares the `save` callback is also common, and react-admin exposes [the `useEditController` hook](./useEditController.md) to do it:
+場所からidを取得し、APIからレコードを取得し、`save`コールバックを準備する初期ロジックも一般的であり、react-adminはこれを行うための [`useEditController` フック](./useEditController.md)を公開しています：
 
-{% raw %}
 ```diff
 import * as React from "react";
 -import { useParams, useNavigate } from "react-router-dom";
@@ -399,13 +396,12 @@ export const BookEdit = () => {
   );
 };
 ```
-{% endraw %}
 
-Notice that `useEditController` doesn’t need the ‘books’ resource name - it relies on the `ResourceContext`, set by the `<Resource>` component, to guess it.
+`useEditController`はリソース名を必要としません。これは`ResourceContext`に依存し、`<Resource>`コンポーネントによって推測されます。
 
-### `<EditBase>`: Component Version Of The Controller
+### `<EditBase>`: コントローラのコンポーネント版
 
-As calling the `useEditController` hook and putting its result into a context is also common, react-admin provides [the `<EditBase>` component](./EditBase.md) to do it. So the example can be further simplified to the following:
+`useEditController`フックを呼び出してその結果をコンテキストに配置するのも一般的なので、react-adminはこれを行うための[`<EditBase>`コンポーネント](./EditBase.md)を提供します。したがって、この例はさらに簡略化できます：
 
 ```diff
 import * as React from "react";
@@ -439,9 +435,9 @@ export const BookEdit = () => {
 };
 ```
 
-### `<Edit>` Renders Title, Fields, And Actions
+### `<Edit>` タイトル、フィールド、およびアクションをレンダリングする
 
-`<EditBase>` is a headless component: it renders only its children. But almost every edition view needs a wrapping `<div>`, a title, and a `<Card>`. That’s why react-admin provides [the `<Edit>` component](./Edit.md), which includes the `<EditBase>` component, a title built from the resource name, and even a "Show" button if the resource has a show component:
+`<EditBase>`はヘッドレスコンポーネントであり、その子要素のみをレンダリングします。しかし、ほとんどの編集ビューはラッピング`<div>`、タイトル、および`<Card>`が必要です。そのため、react-adminは [`<Edit>` コンポーネント](./Edit.md)を提供しており、`<EditBase>`コンポーネント、リソース名から構築されたタイトル、そしてリソースに表示コンポーネントがある場合は「表示」ボタンも含んでいます：
 
 ```diff
 import * as React from "react";
@@ -470,11 +466,11 @@ export const BookEdit = () => (
 );
 ```
 
-And that’s it! Now, the code is concise, expressive, and easier to maintain. 
+以上です！これでコードが簡潔で表現力があり、メンテナンスも容易になりました。
 
-### A Typical React-Admin Edit View
+### 典型的なReact-Adminの編集ビュー
 
-The react example had almost 60 lines of code, the react-admin one only has a quarter of that:
+Reactの例はほぼ60行のコードでしたが、react-adminの例はその4分の1しかありません：
 
 ```jsx
 import * as React from "react";
@@ -495,19 +491,19 @@ export const BookEdit = () => (
 );
 ```
 
-React-admin components are not magic, they are React components designed to let you focus on the business logic and avoid repetitive tasks. 
+React-adminのコンポーネントは魔法ではありません。それらはReactコンポーネントであり、ビジネスロジックに集中し、繰り返し作業を避けるために設計されています。
 
-Tip: Actually, `<Edit>` does more than the code it replaces in the previous example: it handles notification and redirection upon submission, it sets the page title, and handles the error logic.
+ヒント：実際には、`<Edit>`は前の例で置き換えられたコードよりも多くのことを行います：送信時の通知とリダイレクトを処理し、ページタイトルを設定し、エラーロジックを処理します。
 
-## Setting Default Values
+## デフォルト値の設定
 
-It's the Form and Input component's responsibility to define default values. 
+フォームと入力コンポーネントの責任でデフォルト値を定義します。
 
-To define default values, you can add a `defaultValues` prop to form components ([`<SimpleForm>`](./SimpleForm.md), [`<TabbedForm>`](./TabbedForm.md), etc.), or add a `defaultValue` to individual input components. Let's see each of these options.
+デフォルト値を定義するには、フォームコンポーネント（[`<SimpleForm>`](./SimpleForm.md)、[`<TabbedForm>`](./TabbedForm.md)など）に`defaultValues`プロップを追加するか、個々の入力コンポーネントに`defaultValue`を追加します。各オプションを見てみましょう。
 
-### Global Default Value
+### グローバルデフォルト値
 
-You can set the `defaultValues` at the form level. The expected value is an object, or a function returning an object, specifying default values for the created record. For instance:
+フォームレベルで`defaultValues`を設定できます。期待される値はオブジェクトまたはオブジェクトを返す関数であり、作成されたレコードのデフォルト値を指定します。例えば：
 
 ```jsx
 const postDefaultValue = () => ({ id: uuid(), created_at: new Date(), nb_views: 0 });
@@ -523,11 +519,11 @@ export const PostCreate = () => (
 );
 ```
 
-**Tip**: You can include properties in the form `defaultValues` that are not listed as input components, like the `created_at` property in the previous example.
+**ヒント**：フォーム`defaultValues`に入力コンポーネントとしてリストされていないプロパティを含めることができます。例えば前の例の`created_at`プロパティなどです。
 
-### Per Input Default Value
+### 入力ごとのデフォルト値
 
-Alternatively, you can specify a `defaultValue` prop directly in `<Input>` components. React-admin will ignore these default values if the Form already defines a global `defaultValues` (form > input):
+または、`<Input>`コンポーネントに直接`defaultValue`プロップを指定することもできます。フォームがすでにグローバル`defaultValues`を定義している場合、React-adminはこれらのデフォルト値を無視します（フォーム>入力）：
 
 ```jsx
 export const PostCreate = () => (
@@ -541,28 +537,28 @@ export const PostCreate = () => (
 );
 ```
 
-**Tip**: Per-input default values cannot be functions. For default values computed at render time, set the `defaultValues` at the form level, as explained in the previous section. 
+**ヒント**：入力ごとのデフォルト値は関数ではありえません。レンダリング時に計算されるデフォルト値については、前のセクションで説明したように、フォームレベルで`defaultValues`を設定します。
 
-## Validating User Input
+## ユーザー入力の検証
 
-React-admin supports the most common validation strategies:
+React-adminは最も一般的な検証戦略をサポートしています：
 
-* [per field validators](./Validation.md#per-input-validation-built-in-field-validators),
-* [form validation](./Validation.md#global-validation),
-* [validation schema powered by yup or zod](./Validation.md#schema-validation),
-* [server-side validation](./Validation.md#server-side-validation).
+* [フィールドごとのバリデータ](./Validation.md#per-input-validation-built-in-field-validators),
+* [フォームバリデーション](./Validation.md#global-validation),
+* [yupまたはzodを利用した検証スキーマ](./Validation.md#schema-validation),
+* [サーバー側の検証](./Validation.md#server-side-validation)。
 
-![Validation example](./img/validation.png)
+![バリデーションの例](./img/validation.png)
 
-Form validation deserves a section of its own ; check [the Validation chapter](./Validation.md) for more details.
+フォームバリデーションには専用のセクションが必要です。詳細については[バリデーション章](./Validation.md)を参照してください。
 
-## Altering the Form Values Before Submitting
+## 提出前にフォーム値を変更する
 
-Sometimes, you may want to alter the form values before sending them to the `dataProvider`. For those cases, use the `transform` prop either on the view component (`<Create>` or `<Edit>`) or on the `<SaveButton>` component. 
+場合によっては、`dataProvider`に送信する前にフォームの値を変更したい場合があります。その場合は、ビューコンポーネント（`<Create>`または`<Edit>`）または`<SaveButton>`コンポーネントに`transform`プロップを使用します。
 
-In the following example, a create view for a Post displays a form with two submit buttons. Both buttons create a new record, but the 'save and notify' button should trigger an email to other admins on the server side. The `POST /posts` API route only sends the email when the request contains a special HTTP header.
+以下の例では、投稿の作成ビューに2つの送信ボタンが表示されます。どちらのボタンも新しいレコードを作成しますが、「保存して通知」ボタンはサーバー側で他の管理者に通知するメールをトリガーする必要があります。`POST /posts`APIルートは、リクエストに特別なHTTPヘッダーが含まれている場合にのみメールを送信します。
 
-So the save button with 'save and notify' will *transform* the record before react-admin calls the `dataProvider.create()` method, adding a `notify` field:
+したがって、「保存して通知」ボタンは、react-adminが`dataProvider.create()`メソッドを呼び出す前にレコードを*変換*し、`notify`フィールドを追加します：
 
 ```jsx
 const PostCreateToolbar = () => (
@@ -585,7 +581,7 @@ const PostCreate = () => (
 );
 ```
 
-Then, in the `dataProvider.create()` code, detect the presence of the `notify` field in the data, and add the HTTP header if necessary. Something like:
+次に、`dataProvider.create()`コードで、データに`notify`フィールドがあるかどうかを検出し、必要に応じてHTTPヘッダーを追加します。例えば：
 
 ```js
 const dataProvider = {
@@ -609,7 +605,7 @@ const dataProvider = {
 }
 ```
 
-**Tip**: `<Edit>`'s transform prop function also get the `previousData` in its second argument:
+**ヒント**：`<Edit>`の`transform`プロップ関数は、第二引数で`previousData`も取得します：
 
 ```jsx
 const PostEditToolbar = () => (
@@ -635,13 +631,13 @@ const PostEdit = () => (
 );
 ```
 
-## Warning About Unsaved Changes
+## 保存されていない変更についての警告
 
-React-admin keeps track of the form state, so it can detect when the user leaves an `Edit` or `Create` page with unsaved changes. To avoid data loss, you can use this ability to ask the user to confirm before leaving a page with unsaved changes. 
+React-adminはフォームの状態を追跡し、ユーザーが保存されていない変更がある状態で`Edit`または`Create`ページを離れるときに検出できます。データの損失を防ぐために、この機能を使用して、保存されていない変更があるページを離れる前にユーザーに確認を求めることができます。
 
-![Warn About Unsaved Changes](./img/warn_when_unsaved_changes.png)
+![保存されていない変更についての警告](./img/warn_when_unsaved_changes.png)
 
-Warning about unsaved changes is an opt-in feature: you must set the `warnWhenUnsavedChanges` prop in the form component to enable it:
+保存されていない変更について警告するのはオプトイン機能です。この機能を有効にするには、フォームコンポーネントに`warnWhenUnsavedChanges`プロップを設定する必要があります：
 
 ```jsx
 export const TagEdit = () => (
@@ -655,7 +651,7 @@ export const TagEdit = () => (
 );
 ```
 
-And that's all. `warnWhenUnsavedChanges` works for both `<SimpleForm>` and `<TabbedForm>`. In fact, this feature is provided by a custom hook called `useWarnWhenUnsavedChanges()`, which you can use in your own react-hook-form forms.
+これで完了です。`warnWhenUnsavedChanges`は`<SimpleForm>`と`<TabbedForm>`の両方で機能します。実際、この機能は`useWarnWhenUnsavedChanges()`というカスタムフックによって提供されており、独自のreact-hook-formフォームでも使用できます。
 
 ```jsx
 import { useForm } from 'react-hook-form';
@@ -669,7 +665,7 @@ const MyForm = ({ onSubmit }) => {
 }
 
 const Form = ({ onSubmit }) => {
-    // enable the warn when unsaved changes feature
+    // 保存されていない変更についての警告機能を有効にする
     useWarnWhenUnsavedChanges(true);
     return (
         <form onSubmit={onSubmit}>
@@ -681,13 +677,13 @@ const Form = ({ onSubmit }) => {
 };
 ```
 
-**Tip**: You can customize the message displayed in the confirm dialog by setting the `ra.message.unsaved_changes` message in your i18nProvider.
+**ヒント**：表示される確認ダイアログのメッセージをカスタマイズするには、i18nProviderで`ra.message.unsaved_changes`メッセージを設定できます。
 
-**Warning**: This feature only works if you have a dependency on react-router 6.3.0 **at most**. The react-router team disabled this possibility in react-router 6.4, so `warnWhenUnsavedChanges` will silently fail with react-router 6.4 or later.
+**警告**：この機能は、react-router 6.3.0 **以下**に依存して動作します。react-routerチームはreact-router 6.4でこの可能性を無効にしたため、`warnWhenUnsavedChanges`はreact-router 6.4以降では静かに失敗します。
 
-## Submit On Enter
+## Enterキーでの送信
 
-By default, pressing `ENTER` in any of the form inputs submits the form - this is the expected behavior in most cases. To disable the automated form submission on enter, set the `type` prop of the `SaveButton` component to `button`.
+デフォルトでは、フォーム入力のいずれかで`ENTER`キーを押すとフォームが送信されます。これはほとんどの場合期待される動作です。自動フォーム送信をEnterキーで無効にするには、`SaveButton`コンポーネントの`type`プロップを`button`に設定します。
 
 ```jsx
 const MyToolbar = () => (
@@ -706,7 +702,7 @@ export const PostEdit = () => (
 );
 ```
 
-However, some of your custom input components (e.g. Google Maps widget) may have special handlers for the `ENTER` key. In that case, you should prevent the default handling of the event on those inputs. This would allow other inputs to still submit the form on Enter:
+ただし、カスタム入力コンポーネントの一部（例えばGoogleマップウィジェット）には、`ENTER`キーに特別なハンドラーがある場合があります。その場合、これらの入力でイベントのデフォルト処理を防ぐ必要があります。これにより、他の入力はEnterキーでフォームを送信できます：
 
 ```jsx
 export const PostEdit = () => (
@@ -725,7 +721,7 @@ export const PostEdit = () => (
 );
 ```
 
-**Tip**: `<SaveButton type="button">` does not take into account a custom `onSubmit` prop passed to the enclosing `<Form>`. If you need to override the default submit callback for a `<SaveButton type="button">`, you should include an `onClick` prop in the button.
+**ヒント**：`<SaveButton type="button">`は、囲む`<Form>`に渡されたカスタム`onSubmit`プロップを考慮しません。`<SaveButton type="button">`のデフォルトの送信コールバックをオーバーライドする必要がある場合は、ボタンに`onClick`プロップを含める必要があります。
 
 ```jsx
 const MyToolbar = () => {
@@ -734,7 +730,7 @@ const MyToolbar = () => {
     const redirect = useRedirect();
 
     const handleClick = e => {
-        e.preventDefault(); // necessary to prevent default SaveButton submit logic
+        e.preventDefault(); // デフォルトのSaveButton送信ロジックを防ぐために必要
         const { id, ...data } = getValues();
         update(
             'posts',
@@ -760,17 +756,11 @@ export const PostEdit = () => (
 );
 ```
 
-## AutoSave
+## 自動保存
 
-In forms where users may spend a lot of time, it's a good idea to save the form automatically after a few seconds of inactivity. You can auto save the form content by using [the `<AutoSave>` component](./AutoSave.md).
+ユーザーが多くの時間を費やす可能性があるフォームでは、数秒間の非アクティブ後にフォームを自動保存するのが良いアイデアです。フォームの内容を自動保存するには、 [`<AutoSave>` コンポーネント](./AutoSave.md)を使用します。
 
-<video controls autoplay playsinline muted loop>
-  <source src="./img/AutoSave.webm" type="video/webm"/>
-  <source src="./img/AutoSave.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
-
-{% raw %}
+<video controls autoplay playsinline muted loop> <source src="./img/AutoSave.webm" type="video/webm"/> <source src="./img/AutoSave.mp4" type="video/mp4"/> Your browser does not support the video tag. </video>
 ```tsx
 import { AutoSave } from '@react-admin/ra-form-layout';
 import { Edit, SimpleForm, TextInput, DateInput, SelectInput, Toolbar } from 'react-admin';
@@ -798,19 +788,18 @@ const PersonEdit = () => (
     </Edit>
 );
 ```
-{% endraw %}
 
-Note that you **must** set the `<SimpleForm resetOptions>` prop to `{ keepDirtyValues: true }`. If you forget that prop, any change entered by the end user after the autosave but before its acknowledgement by the server will be lost.
+**注意**： `<SimpleForm resetOptions>`プロップを`{ keepDirtyValues: true }`に設定する必要があります。このプロップを忘れると、自動保存後からサーバー側での承認前にエンドユーザーが入力した変更は失われます。
 
-If you're using it in an `<Edit>` page, you must also use a `pessimistic` or `optimistic` [`mutationMode`](https://marmelab.com/react-admin/Edit.html#mutationmode) - `<AutoSave>` doesn't work with the default `mutationMode="undoable"`.
+`<Edit>`ページで使用する場合は、`pessimistic`または`optimistic` [`mutationMode`](https://marmelab.com/react-admin/Edit.html#mutationmode)も使用する必要があります - `<AutoSave>`はデフォルトの`mutationMode="undoable"`では機能しません。
 
-Check [the `<AutoSave>` component](./AutoSave.md) documentation for more details.
+詳細については、 [`<AutoSave>` コンポーネント](./AutoSave.md)のドキュメントを確認してください。
 
-## Adding Fields With Labels
+## ラベル付きフィールドの追加
 
-All react-admin inputs handle the display of their label by wrapping their content inside a `<Labeled>` component.
+すべてのreact-admin入力は、その内容を`<Labeled>`コンポーネント内にラップすることでラベルの表示を処理します。
 
-You can wrap your own components inside the `<Labeled>` component too. You can either provide it the `label` prop directly or leverage the automatic label inference by providing it the `source` prop:
+独自のコンポーネントを`<Labeled>`コンポーネント内にラップすることもできます。`label`プロップを直接提供するか、`source`プロップを提供して自動ラベル推測を活用することができます：
 
 ```jsx
 const IdentifierField = ({ label }) => {
@@ -822,8 +811,7 @@ const IdentifierField = ({ label }) => {
     );
 };
 
-// Here Labeled will try to translate the label with the translation key `resources.posts.fields.body`
-// and with an inferred default of `Body`
+// ここではLabeledが翻訳キー`resources.posts.fields.body`でラベルを翻訳し、`Body`という推測されたデフォルトを使用します
 const BodyField = () => {
     const record = useRecordContext();
     return (
@@ -847,11 +835,11 @@ const PostEdit = () => (
 );
 ```
 
-## Grouping Inputs
+## 入力のグループ化
 
-Sometimes, you may want to group inputs in order to make a form more approachable. You may use a [`<TabbedForm>`](./TabbedForm.md), an [`<AccordionForm>`](./AccordionForm.md) or you may want to roll your own layout. In this case, you might need to know the state of a group of inputs: whether it's valid or if the user has changed them (dirty/touched state).
+場合によっては、フォームをより使いやすくするために入力をグループ化したい場合があります。 [`<TabbedForm>`](./TabbedForm.md)や[`<AccordionForm>`](./AccordionForm.md)を使用するか、自分のレイアウトを作成することもできます。この場合、グループの入力の状態（有効かどうか、ユーザーが変更したかどうか（dirty/touched状態））を知る必要があるかもしれません。
 
-For this, you can use the `<FormGroupContextProvider>`, which accepts a group name. All inputs rendered inside this context will register to it (thanks to the `useInput` hook). You may then call the `useFormGroup` hook to retrieve the status of the group. For example:
+これには、グループ名を受け入れる`<FormGroupContextProvider>`を使用できます。このコンテキスト内でレンダリングされるすべての入力はそれに登録されます（`useInput`フックのおかげで）。次に、`useFormGroup`フックを呼び出してグループの状態を取得できます。例えば：
 
 ```jsx
 import { Edit, SimpleForm, TextInput, FormGroupContextProvider, useFormGroup, minLength } from 'react-admin';
@@ -901,14 +889,14 @@ const AccordionSectionTitle = ({ children, name }) => {
 };
 ```
 
-## Redirection After Submission
+## 提出後のリダイレクト
 
-By default:
+デフォルトでは：
 
-- Submitting the form in the `<Create>` view redirects to the `<Edit>` view
-- Submitting the form in the `<Edit>` view redirects to the `<List>` view
+* `<Create>`ビューでフォームを送信すると、`<Edit>`ビューにリダイレクトします
+* `<Edit>`ビューでフォームを送信すると、`<List>`ビューにリダイレクトします
 
-You can customize the redirection by setting the `redirect` prop on the `<Create>` or `<Edit>` components. Possible values are "edit", "show", "list", and `false` to disable redirection. You may also specify a custom path such as `/my-custom-route`. For instance, to redirect to the `<Show>` view after edition:
+リダイレクトをカスタマイズするには、`<Create>`または`<Edit>`コンポーネントに`redirect`プロップを設定します。可能な値は「edit」、「show」、「list」、およびリダイレクトを無効にする`false`です。カスタムパス（例えば`/my-custom-route`）を指定することもできます。例えば、編集後に表示ビューにリダイレクトするには：
 
 ```jsx
 export const PostEdit = () => (
@@ -920,10 +908,10 @@ export const PostEdit = () => (
 );
 ```
 
-You can also pass a custom route (e.g. "/home") or a function as `redirect` prop value. For example, if you want to redirect to a page related to the current object:
+カスタムルート（例えば`"/home"`）や関数を`redirect`プロップ値として渡すこともできます。例えば、現在のオブジェクトに関連するページにリダイレクトしたい場合：
 
 ```jsx
-// redirect to the related Author show page
+// 関連する著者の表示ページにリダイレクト
 const redirect = (resource, id, data) => `/author/${data.author_id}/show`;
 
 export const PostEdit = () => (
@@ -935,27 +923,17 @@ export const PostEdit = () => (
 );
 ```
 
-This affects both the submit button, and the form submission when the user presses `ENTER` in one of the form fields.
+これは送信ボタンと、ユーザーがフォームフィールドの1つで`ENTER`キーを押したときのフォーム送信の両方に影響します。
 
-**Tip**: The `redirect` prop is ignored if you've set the `onSuccess` prop in the `<Edit>`/`<Create>` component, or in the `<SaveButton>` component.
+**ヒント**：`onSuccess`プロップを`<Edit>`/`<Create>`コンポーネント、または`<SaveButton>`コンポーネントに設定している場合、`redirect`プロップは無視されます。
 
-## Nested Forms
+## ネストされたフォーム
 
-Users often need to edit data from several resources in the same form. React-admin doesn't support nested forms, but provides ways to edit related data in a user-friendly way:
+ユーザーは同じフォーム内で複数のリソースのデータを編集する必要があることがよくあります。React-adminはネストされたフォームをサポートしていませんが、関連データをユーザーフレンドリーに編集する方法を提供しています：
 
-- [`<EditInDialogButton>`](./EditInDialogButton.md) lets users open a modal to edit a related record
-- [`<ReferenceOneInput>`](./ReferenceOneInput.md) lets users edit one related record
-- [`<ReferenceManyInput>`](./ReferenceManyInput.md) lets users edit a list of related records
-- [`<ReferenceManyToManyInput>`](./ReferenceManyToManyInput.md) lets users edit a list of related records via an associative table
+* [`<EditInDialogButton>`](./EditInDialogButton.md)は、ユーザーが関連するレコードを編集するためのモーダルを開くことを可能にします
+* [`<ReferenceOneInput>`](./ReferenceOneInput.md)は、1つの関連レコードを編集することを可能にします
+* [`<ReferenceManyInput>`](./ReferenceManyInput.md)は、関連レコードのリストを編集することを可能にします
+* [`<ReferenceManyToManyInput>`](./ReferenceManyToManyInput.md)は、関連レコードのリストを関連テーブル経由で編集することを可能にします
+<video controls autoplay playsinline muted loop> <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-form-layout/latest/InDialogButtons.webm" type="video/webm" /> <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-form-layout/latest/InDialogButtons.mp4" type="video/mp4" /> Your browser does not support the video tag. </video> <video controls autoplay playsinline muted loop> <source src="./img/reference-many-input.webm" type="video/webm"/> <source src="./img/reference-many-input.mp4" type="video/mp4"/> Your browser does not support the video tag. </video> \`\`\`
 
-<video controls autoplay playsinline muted loop>
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-form-layout/latest/InDialogButtons.webm" type="video/webm" />
-  <source src="https://marmelab.com/ra-enterprise/modules/assets/ra-form-layout/latest/InDialogButtons.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
-
-<video controls autoplay playsinline muted loop>
-  <source src="./img/reference-many-input.webm" type="video/webm"/>
-  <source src="./img/reference-many-input.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>

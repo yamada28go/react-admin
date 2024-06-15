@@ -565,64 +565,64 @@
                         >
                             <h1 id="the-show-page">The Show Page</h1>
 
-<p>The Show view displays the details of a single record.</p>
+<p>Showビューは単一のレコードの詳細を表示します。</p>
 
 <p><img src="./img/show-view.png" alt="post show view" /></p>
 
-<h2 id="from-pure-react-to-react-admin">From Pure React To React-Admin</h2>
+<h2 id="純粋なreactからreact-adminへ">純粋なReactからReact-Adminへ</h2>
 
-<p>The Show view is the simplest view in an admin: it fetches and displays the fields of a single record. You’ve probably developed such pages a dozen times, and they’re not rocket science. But the data fetching logic and presentation code can be long and tedious to write, and hide the business logic. That’s why, even for such simple pages, react-admin can help a lot.</p>
+<p>Showビューは管理画面の中で最もシンプルなビューです。単一のレコードのフィールドを取得して表示します。これまでにこうしたページを何度も開発してきたかもしれませんが、データ取得ロジックと表示コードを書くのは長くて退屈な作業であり、ビジネスロジックが隠れてしまうことがあります。だからこそ、こんなシンプルなページでもreact-adminは大いに役立ちます。</p>
 
-<p>To better understand how to use the various react-admin hooks and components dedicated to the show view, let’s start by building such a view by hand.</p>
+<p>react-adminのShowビュー専用フックやコンポーネントの使い方をより理解するために、まずは手動でShowビューを構築するところから始めましょう。</p>
 
-<h3 id="a-show-view-built-by-hand">A Show View Built By Hand</h3>
+<h3 id="手動で構築するshowビュー">手動で構築するShowビュー</h3>
 
-<p>Here is how you could write a simple book show view, leveraging react-admin’s <a href="./DataProviders.md">data fetching hooks</a>:</p>
+<p>以下に、react-adminの<a href="./DataProviders.md">データ取得フック</a>を活用して、シンプルな本のShowビューを書く方法を示します：</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useParams</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">useGetOne</span><span class="p">,</span> <span class="nx">useRedirect</span><span class="p">,</span> <span class="nx">Title</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Card</span><span class="p">,</span> <span class="nx">Stack</span><span class="p">,</span> <span class="nx">Typography</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material</span><span class="dl">'</span><span class="p">;</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">import</span> <span class="p">{</span> <span class="nx">useParams</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">import</span> <span class="p">{</span> <span class="nx">useGetOne</span><span class="p">,</span> <span class="nx">useRedirect</span><span class="p">,</span> <span class="nx">Title</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">import</span> <span class="p">{</span> <span class="nx">Card</span><span class="p">,</span> <span class="nx">Stack</span><span class="p">,</span> <span class="nx">Typography</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="cm">/**
- * Fetch a book from the API and display it
- */</span>
-<span class="kd">const</span> <span class="nx">BookShow</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="p">{</span> <span class="nx">id</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useParams</span><span class="p">();</span> <span class="c1">// this component is rendered in the /books/:id path</span>
-    <span class="kd">const</span> <span class="nx">redirect</span> <span class="o">=</span> <span class="nx">useRedirect</span><span class="p">();</span>
-    <span class="kd">const</span> <span class="p">{</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">isLoading</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useGetOne</span><span class="p">(</span>
-        <span class="dl">'</span><span class="s1">books</span><span class="dl">'</span><span class="p">,</span>
-        <span class="p">{</span> <span class="nx">id</span> <span class="p">},</span>
-        <span class="c1">// redirect to the list if the book is not found</span>
-        <span class="p">{</span> <span class="na">onError</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">redirect</span><span class="p">(</span><span class="dl">'</span><span class="s1">/books</span><span class="dl">'</span><span class="p">)</span> <span class="p">}</span>
-    <span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">isLoading</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="p">&lt;</span><span class="nc">Loading</span> <span class="p">/&gt;;</span> <span class="p">}</span>
-    <span class="k">return</span> <span class="p">(</span>
-        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nc">Title</span> <span class="na">title</span><span class="p">=</span><span class="s">"Book Show"</span><span class="p">/&gt;</span>
-            <span class="p">&lt;</span><span class="nc">Card</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nc">Stack</span> <span class="na">spacing</span><span class="p">=</span><span class="si">{</span><span class="mi">1</span><span class="si">}</span><span class="p">&gt;</span>
-                    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-                        <span class="p">&lt;</span><span class="nc">Typography</span> <span class="na">variant</span><span class="p">=</span><span class="s">"caption"</span> <span class="na">display</span><span class="p">=</span><span class="s">"block"</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nc">Typography</span><span class="p">&gt;</span>
-                        <span class="p">&lt;</span><span class="nc">Typography</span> <span class="na">variant</span><span class="p">=</span><span class="s">"body2"</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">data</span><span class="p">.</span><span class="nx">title</span><span class="si">}</span><span class="p">&lt;/</span><span class="nc">Typography</span><span class="p">&gt;</span>
-                    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-                    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-                        <span class="p">&lt;</span><span class="nc">Typography</span> <span class="na">variant</span><span class="p">=</span><span class="s">"caption"</span> <span class="na">display</span><span class="p">=</span><span class="s">"block"</span><span class="p">&gt;</span>Publication Date<span class="p">&lt;/</span><span class="nc">Typography</span><span class="p">&gt;</span>
-                        <span class="p">&lt;</span><span class="nc">Typography</span> <span class="na">variant</span><span class="p">=</span><span class="s">"body2"</span><span class="p">&gt;</span><span class="si">{</span><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">published_at</span><span class="p">).</span><span class="nx">toDateString</span><span class="p">()</span><span class="si">}</span><span class="p">&lt;/</span><span class="nc">Typography</span><span class="p">&gt;</span>
-                    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-                <span class="p">&lt;/</span><span class="nc">Stack</span><span class="p">&gt;</span>
-            <span class="p">&lt;/</span><span class="nc">Card</span><span class="p">&gt;</span>
-        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">);</span>
-<span class="p">};</span>
+    <span class="cm">/**
+     * APIから本を取得して表示する
+     */</span>
+    <span class="kd">const</span> <span class="nx">BookShow</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="p">{</span> <span class="nx">id</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useParams</span><span class="p">();</span> <span class="c1">// このコンポーネントは /books/:id パスでレンダリングされます</span>
+        <span class="kd">const</span> <span class="nx">redirect</span> <span class="o">=</span> <span class="nx">useRedirect</span><span class="p">();</span>
+        <span class="kd">const</span> <span class="p">{</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">isLoading</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useGetOne</span><span class="p">(</span>
+            <span class="dl">'</span><span class="s1">books</span><span class="dl">'</span><span class="p">,</span>
+            <span class="p">{</span> <span class="nx">id</span> <span class="p">},</span>
+            <span class="c1">// 本が見つからない場合はリストにリダイレクト</span>
+            <span class="p">{</span> <span class="na">onError</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">redirect</span><span class="p">(</span><span class="dl">'</span><span class="s1">/books</span><span class="dl">'</span><span class="p">)</span> <span class="p">}</span>
+        <span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">isLoading</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="p">&lt;</span><span class="nc">Loading</span> <span class="p">/&gt;;</span> <span class="p">}</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">Title</span> <span class="na">title</span><span class="p">=</span><span class="s">"Book Show"</span><span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">Card</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">Stack</span> <span class="na">spacing</span><span class="p">=</span><span class="si">{</span><span class="mi">1</span><span class="si">}</span><span class="p">&gt;</span>
+                        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+                            <span class="p">&lt;</span><span class="nc">Typography</span> <span class="na">variant</span><span class="p">=</span><span class="s">"caption"</span> <span class="na">display</span><span class="p">=</span><span class="s">"block"</span><span class="p">&gt;</span>タイトル<span class="p">&lt;/</span><span class="nc">Typography</span><span class="p">&gt;</span>
+                            <span class="p">&lt;</span><span class="nc">Typography</span> <span class="na">variant</span><span class="p">=</span><span class="s">"body2"</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">data</span><span class="p">.</span><span class="nx">title</span><span class="si">}</span><span class="p">&lt;/</span><span class="nc">Typography</span><span class="p">&gt;</span>
+                        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+                            <span class="p">&lt;</span><span class="nc">Typography</span> <span class="na">variant</span><span class="p">=</span><span class="s">"caption"</span> <span class="na">display</span><span class="p">=</span><span class="s">"block"</span><span class="p">&gt;</span>出版日<span class="p">&lt;/</span><span class="nc">Typography</span><span class="p">&gt;</span>
+                            <span class="p">&lt;</span><span class="nc">Typography</span> <span class="na">variant</span><span class="p">=</span><span class="s">"body2"</span><span class="p">&gt;</span><span class="si">{</span><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">published_at</span><span class="p">).</span><span class="nx">toDateString</span><span class="p">()</span><span class="si">}</span><span class="p">&lt;/</span><span class="nc">Typography</span><span class="p">&gt;</span>
+                        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                    <span class="p">&lt;/</span><span class="nc">Stack</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nc">Card</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">);</span>
+    <span class="p">};</span>
 </code></pre></div></div>
 
-<p>You can pass this <code class="language-plaintext highlighter-rouge">BookShow</code> component as the <code class="language-plaintext highlighter-rouge">show</code> prop of the <code class="language-plaintext highlighter-rouge">&lt;Resource name="books" /&gt;</code>, and react-admin will render it on the <code class="language-plaintext highlighter-rouge">/books/:id/show</code> path.</p>
+<p>この <code class="language-plaintext highlighter-rouge">BookShow</code> コンポーネントを <code class="language-plaintext highlighter-rouge">&lt;Resource name="books" /&gt;</code> の <code class="language-plaintext highlighter-rouge">show</code> プロップとして渡すと、react-adminはこれを <code class="language-plaintext highlighter-rouge">/books/:id/show</code> パスにレンダリングします。</p>
 
-<p>This example uses the <code class="language-plaintext highlighter-rouge">useGetOne</code> hook instead of <code class="language-plaintext highlighter-rouge">fetch</code> because <code class="language-plaintext highlighter-rouge">useGetOne</code> already contains the authentication and request state logic. But you could totally write a Show view with <code class="language-plaintext highlighter-rouge">fetch</code>.</p>
+<p>この例では、認証とリクエスト状態ロジックを既に含んでいる <code class="language-plaintext highlighter-rouge">useGetOne</code> フックを使用していますが、<code class="language-plaintext highlighter-rouge">fetch</code> を使ってShowビューを書くことも可能です。</p>
 
-<h3 id="labeled-displays-labels-over-fields"><code class="language-plaintext highlighter-rouge">&lt;Labeled&gt;</code> Displays Labels Over Fields</h3>
+<h3 id="labeledでフィールドにラベルを表示"><code class="language-plaintext highlighter-rouge">&lt;Labeled&gt;</code>でフィールドにラベルを表示</h3>
 
-<p>When you build Show views like the one above, you have to repeat quite a lot of code for each field. React-admin Field components can help avoid that repetition. The following example leverages the <code class="language-plaintext highlighter-rouge">&lt;Labeled&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;TextField&gt;</code>, and <code class="language-plaintext highlighter-rouge">&lt;DateField&gt;</code> components for that purpose:</p>
+<p>上記のようなShowビューを構築する際、各フィールドごとにかなりのコードを繰り返す必要があります。React-adminのFieldコンポーネントを利用することで、この繰り返しを避けることができます。次の例では、その目的で <code class="language-plaintext highlighter-rouge">&lt;Labeled&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;TextField&gt;</code>, および <code class="language-plaintext highlighter-rouge">&lt;DateField&gt;</code> コンポーネントを活用しています：</p>
 
 <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">import { useParams } from 'react-router-dom';
 </span><span class="gd">-import { useGetOne, useRedirect, Title } from 'react-admin';
@@ -645,17 +645,17 @@ const BookShow = () =&gt; {
             &lt;Card&gt;
                 &lt;Stack spacing={1}&gt;
 <span class="gd">-                   &lt;div&gt;
--                       &lt;Typography variant="caption" display="block"&gt;Title&lt;/Typography&gt;
+-                       &lt;Typography variant="caption" display="block"&gt;タイトル&lt;/Typography&gt;
 -                       &lt;Typography variant="body2"&gt;{data.title}&lt;/Typography&gt;
 -                   &lt;/div&gt;
-</span><span class="gi">+                   &lt;Labeled label="Title"&gt;
+</span><span class="gi">+                   &lt;Labeled label="タイトル"&gt;
 +                       &lt;TextField source="title" record={data} /&gt;
 +                   &lt;/Labeled&gt;
 </span><span class="gd">-                   &lt;div&gt;
--                       &lt;Typography variant="caption" display="block"&gt;Publication Date&lt;/Typography&gt;
+-                       &lt;Typography variant="caption" display="block"&gt;出版日&lt;/Typography&gt;
 -                       &lt;Typography variant="body2"&gt;{new Date(data.published_at).toDateString()}&lt;/Typography&gt;
 -                   &lt;/div&gt;
-</span><span class="gi">+                   &lt;Labeled label="Publication Date"&gt;
+</span><span class="gi">+                   &lt;Labeled label="出版日"&gt;
 +                       &lt;DateField source="published_at" record={data} /&gt;
 +                   &lt;/Labeled&gt;
 </span>                &lt;/Stack&gt;
@@ -665,9 +665,9 @@ const BookShow = () =&gt; {
 <span class="err">};</span>
 </code></pre></div></div>
 
-<h3 id="recordcontext-exposes-the-record"><code class="language-plaintext highlighter-rouge">&lt;RecordContext&gt;</code> Exposes The <code class="language-plaintext highlighter-rouge">record</code></h3>
+<h3 id="recordcontext-で-record-を公開"><code class="language-plaintext highlighter-rouge">&lt;RecordContext&gt;</code> で <code class="language-plaintext highlighter-rouge">record</code> を公開</h3>
 
-<p>Field components require a <code class="language-plaintext highlighter-rouge">record</code> to render, but they can grab it from a <code class="language-plaintext highlighter-rouge">RecordContext</code> instead of the <code class="language-plaintext highlighter-rouge">record</code> prop. Creating such a context with <code class="language-plaintext highlighter-rouge">&lt;RecordContextProvider&gt;</code> allows to reduce even more the amount of code you need to write for each field.</p>
+<p>フィールドコンポーネントはレンダリングのために <code class="language-plaintext highlighter-rouge">record</code> が必要ですが、<code class="language-plaintext highlighter-rouge">record</code> プロップの代わりに <code class="language-plaintext highlighter-rouge">RecordContext</code> から取得することができます。 <code class="language-plaintext highlighter-rouge">&lt;RecordContextProvider&gt;</code> を使用してこのようなコンテキストを作成することで、各フィールドに必要なコードの量をさらに減らすことができます。</p>
 
 <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">import { useParams } from 'react-router-dom';
 </span><span class="gd">-import { useGetOne, useRedirect, Title, Labeled, TextField, DateField } from 'react-admin';
@@ -689,11 +689,11 @@ const BookShow = () =&gt; {
                 &lt;Title title="Book Show"/&gt;
                 &lt;Card&gt;
                     &lt;Stack spacing={1}&gt;
-                        &lt;Labeled label="Title"&gt;
+                        &lt;Labeled label="タイトル"&gt;
 <span class="gd">-                           &lt;TextField source="title" record={data} /&gt;
 </span><span class="gi">+                           &lt;TextField source="title" /&gt;
 </span>                        &lt;/Labeled&gt;
-                        &lt;Labeled label="Publication Date"&gt;
+                        &lt;Labeled label="出版日"&gt;
 <span class="gd">-                           &lt;DateField source="published_at" record={data} /&gt;
 </span><span class="gi">+                           &lt;DateField source="published_at" /&gt;
 </span>                        &lt;/Labeled&gt;
@@ -705,9 +705,9 @@ const BookShow = () =&gt; {
 <span class="err">};</span>
 </code></pre></div></div>
 
-<h3 id="simpleshowlayout-displays-fields-in-a-stack"><code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code> Displays Fields In A Stack</h3>
+<h3 id="simpleshowlayout-でフィールドをスタックに表示"><code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code> でフィールドをスタックに表示</h3>
 
-<p>Displaying a stack of fields with a label is such a common task that react-admin provides a helper component for that. It’s called <a href="./SimpleShowLayout.md"><code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code></a>:</p>
+<p>ラベル付きのフィールドをスタック表示することは非常に一般的なタスクであるため、react-adminはそのためのヘルパーコンポーネントを提供しています。それが<a href="./SimpleShowLayout.md"><code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code></a>です：</p>
 
 <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">import { useParams } from 'react-router-dom';
 </span><span class="gd">-import { useGetOne, useRedirect, RecordContextProvider, Title, Labeled, TextField, DateField } from 'react-admin';
@@ -730,11 +730,11 @@ const BookShow = () =&gt; {
                 &lt;Card&gt;
 <span class="gd">-                   &lt;Stack spacing={1}&gt;
 </span><span class="gi">+                   &lt;SimpleShowLayout&gt;
-</span><span class="gd">-                       &lt;Labeled label="Title"&gt;
-</span>                            &lt;TextField label="Title" source="title" /&gt;
+</span><span class="gd">-                       &lt;Labeled label="タイトル"&gt;
+</span>                            &lt;TextField label="タイトル" source="title" /&gt;
 <span class="gd">-                       &lt;/Labeled&gt;
--                       &lt;Labeled label="Publication Date"&gt;
-</span>                            &lt;DateField label="Publication Date" source="published_at" /&gt;
+-                       &lt;Labeled label="出版日"&gt;
+</span>                            &lt;DateField label="出版日" source="published_at" /&gt;
 <span class="gd">-                       &lt;/Labeled&gt;
 </span><span class="gi">+                   &lt;/SimpleShowLayout&gt;
 </span><span class="gd">-                   &lt;/Stack&gt;
@@ -745,11 +745,11 @@ const BookShow = () =&gt; {
 <span class="err">};</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code> renders nothing as long as the <code class="language-plaintext highlighter-rouge">data</code> is not loaded (<code class="language-plaintext highlighter-rouge">record</code> is <code class="language-plaintext highlighter-rouge">undefined</code>), so the <code class="language-plaintext highlighter-rouge">isLoading</code> variable isn’t needed anymore.</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code> は <code class="language-plaintext highlighter-rouge">data</code> が読み込まれていない間は何もレンダリングしないので、<code class="language-plaintext highlighter-rouge">isLoading</code> 変数はもう必要ありません。</p>
 
-<h3 id="useshowcontroller-the-controller-logic"><code class="language-plaintext highlighter-rouge">useShowController</code>: The Controller Logic</h3>
+<h3 id="useshowcontroller-コントローラロジック"><code class="language-plaintext highlighter-rouge">useShowController</code>: コントローラロジック</h3>
 
-<p>The initial logic that grabs the id from the location and fetches the record from the API is also common, and react-admin exposes <a href="./useShowController.md">the <code class="language-plaintext highlighter-rouge">useShowController</code> hook</a> to do it:</p>
+<p>ロケーションからIDを取得し、APIからレコードを取得する初期ロジックも一般的で、react-adminはこれを行うための<a href="./useShowController.md"><code class="language-plaintext highlighter-rouge">useShowController</code>フック</a>を公開しています：</p>
 
 <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">-import { useParams } from 'react-router-dom';
 -import { useGetOne, useRedirect, RecordContextProvider, SimpleShowLayout, Title, TextField, DateField } from 'react-admin';
@@ -771,8 +771,8 @@ const BookShow = () =&gt; {
                 &lt;Title title="Book Show" /&gt;
                 &lt;Card&gt;
                     &lt;SimpleShowLayout&gt;
-                        &lt;TextField label="Title" source="title" /&gt;
-                        &lt;DateField label="Publication Date" source="published_at" /&gt;
+                        &lt;TextField label="タイトル" source="title" /&gt;
+                        &lt;DateField label="出版日" source="published_at" /&gt;
                     &lt;/SimpleShowLayout&gt;
                 &lt;/Card&gt;
             &lt;/div&gt;
@@ -781,15 +781,15 @@ const BookShow = () =&gt; {
 <span class="err">};</span>
 </code></pre></div></div>
 
-<p>Notice that <code class="language-plaintext highlighter-rouge">useShowController</code> doesn’t need the ‘books’ resource name - it relies on the <code class="language-plaintext highlighter-rouge">ResourceContext</code>, set by the <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> component, to guess it.</p>
+<p><code class="language-plaintext highlighter-rouge">useShowController</code> は ‘books’ リソース名を必要としません。これは、<code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> コンポーネントによって設定された <code class="language-plaintext highlighter-rouge">ResourceContext</code> に依存してそれを推測するためです。</p>
 
-<h3 id="showbase-component-version-of-the-controller"><code class="language-plaintext highlighter-rouge">&lt;ShowBase&gt;</code>: Component Version Of The Controller</h3>
+<h3 id="showbase-コントローラのコンポーネント版"><code class="language-plaintext highlighter-rouge">&lt;ShowBase&gt;</code>: コントローラのコンポーネント版</h3>
 
-<p>As calling the Show controller and putting its result into a context is also common, react-admin provides <a href="./ShowBase.md">the <code class="language-plaintext highlighter-rouge">&lt;ShowBase&gt;</code> component</a> to do it. So the example can be further simplified to the following:</p>
+<p>Showコントローラを呼び出してその結果をコンテキストに入れることも一般的であるため、react-adminはこれを行うための<a href="./ShowBase.md"><code class="language-plaintext highlighter-rouge">&lt;ShowBase&gt;</code>コンポーネント</a>を提供しています。このため、例をさらに以下のように簡素化できます：</p>
 
 <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">-import { useShowController, RecordContextProvider, SimpleShowLayout, Title, TextField, DateField } from 'react-admin';
 </span><span class="gi">+import { ShowBase, SimpleShowLayout, Title, TextField, DateField } from 'react-admin';
-</span><span class="p">import { Card } from '@mui/material';
+</span><span class="p">import { Card } from '@mui/material;
 </span>
 const BookShow = () =&gt; {
 <span class="gd">-   const { data } = useShowController();
@@ -800,8 +800,8 @@ const BookShow = () =&gt; {
                 &lt;Title title="Book Show" /&gt;
                 &lt;Card&gt;
                     &lt;SimpleShowLayout&gt;
-                        &lt;TextField label="Title" source="title" /&gt;
-                        &lt;DateField label="Publication Date" source="published_at" /&gt;
+                        &lt;TextField label="タイトル" source="title" /&gt;
+                        &lt;DateField label="出版日" source="published_at" /&gt;
                     &lt;/SimpleShowLayout&gt;
                 &lt;/Card&gt;
             &lt;/div&gt;
@@ -811,9 +811,9 @@ const BookShow = () =&gt; {
 <span class="err">};</span>
 </code></pre></div></div>
 
-<h3 id="show-renders-title-fields-and-actions"><code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code> Renders Title, Fields, And Actions</h3>
+<h3 id="show-タイトルフィールドアクションをレンダリング"><code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code>: タイトル、フィールド、アクションをレンダリング</h3>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;ShowBase&gt;</code> is a headless component: it renders only its children. But almost every show view needs a wrapping <code class="language-plaintext highlighter-rouge">&lt;div&gt;</code>, a title, and a <code class="language-plaintext highlighter-rouge">&lt;Card&gt;</code>. That’s why react-admin provides <a href="./Show.md">the <code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code> component</a>, which includes the <code class="language-plaintext highlighter-rouge">&lt;ShowBase&gt;</code> component, a title built from the resource name, and even an “Edit” button if the resource has an edit component:</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;ShowBase&gt;</code> はヘッドレスコンポーネントで、子要素のみをレンダリングします。しかし、ほとんどのShowビューにはラッピングする <code class="language-plaintext highlighter-rouge">&lt;div&gt;</code>、リソース名から構築されたタイトル、そして <code class="language-plaintext highlighter-rouge">&lt;Card&gt;</code> が必要です。そのためreact-adminは、<code class="language-plaintext highlighter-rouge">&lt;ShowBase&gt;</code> コンポーネント、リソース名から構築されたタイトル、そしてリソースに編集コンポーネントがある場合には「編集」ボタンさえも含む<a href="./Show.md"><code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code>コンポーネント</a>を提供しています：</p>
 
 <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">-import { ShowBase, SimpleShowLayout, Title, TextField, DateField } from 'react-admin';
 </span><span class="gi">+import { Show, SimpleShowLayout, TextField, DateField } from 'react-admin';
@@ -826,8 +826,8 @@ const BookShow = () =&gt; (
 -           &lt;Card&gt;
 </span><span class="gi">+   &lt;Show&gt;
 </span>        &lt;SimpleShowLayout&gt;
-            &lt;TextField label="Title" source="title" /&gt;
-            &lt;DateField label="Publication Date" source="published_at" /&gt;
+            &lt;TextField label="タイトル" source="title" /&gt;
+            &lt;DateField label="出版日" source="published_at" /&gt;
         &lt;/SimpleShowLayout&gt;
 <span class="gi">+   &lt;/Show&gt;
 </span><span class="gd">-           &lt;/Card&gt;
@@ -836,33 +836,33 @@ const BookShow = () =&gt; (
 </span><span class="err">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: Actually, <code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code> does more than the code it replaces in the previous example: it redirects to the List view if the call to <code class="language-plaintext highlighter-rouge">useGetOne</code> returns an error, it sets the page title, and stores all the data it prepared in a <code class="language-plaintext highlighter-rouge">&lt;ShowContext&gt;</code>.</p>
+<p><strong>Tip</strong>: 実際には、<code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code> は前の例のコードが置き換えるもの以上のことを行います。<code class="language-plaintext highlighter-rouge">useGetOne</code> の呼び出しがエラーを返した場合にリストビューにリダイレクトし、ページタイトルを設定し、準備したすべてのデータを <code class="language-plaintext highlighter-rouge">&lt;ShowContext&gt;</code> に保存します。</p>
 
-<p><strong>Tip</strong>: Don’t mix up the <code class="language-plaintext highlighter-rouge">RecordContext</code>, which stores a Record (e.g. <code class="language-plaintext highlighter-rouge">{ id: '1', title: 'The Lord of the Rings' }</code>), and the <code class="language-plaintext highlighter-rouge">&lt;ResourceContext&gt;</code>, which stores a resource name (e.g. <code class="language-plaintext highlighter-rouge">'book'</code>).</p>
+<p><strong>Tip</strong>: <code class="language-plaintext highlighter-rouge">RecordContext</code>（例：<code class="language-plaintext highlighter-rouge">{ id: '1', title: '指輪物語' }</code>）と<code class="language-plaintext highlighter-rouge">&lt;ResourceContext&gt;</code>（例：<code class="language-plaintext highlighter-rouge">'book'</code>）を混同しないでください。</p>
 
-<h3 id="a-typical-react-admin-show-view">A Typical React-Admin Show View</h3>
+<h3 id="典型的なreact-adminのshowビュー">典型的なReact-AdminのShowビュー</h3>
 
-<p>Now the code only expresses business logic. You only need 6 lines to express with react-admin what required 26 lines with React alone:</p>
+<p>今やコードはビジネスロジックのみを表現しています。React-adminを使用すると、React単独で必要だった26行のコードが、わずか6行で済みます：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Show</span><span class="p">,</span> <span class="nx">SimpleShowLayout</span><span class="p">,</span> <span class="nx">TextField</span><span class="p">,</span> <span class="nx">DateField</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">BookShow</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">Show</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nc">SimpleShowLayout</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">label</span><span class="p">=</span><span class="s">"Title"</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
-            <span class="p">&lt;</span><span class="nc">DateField</span> <span class="na">label</span><span class="p">=</span><span class="s">"Publication Date"</span> <span class="na">source</span><span class="p">=</span><span class="s">"published_at"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">label</span><span class="p">=</span><span class="s">"タイトル"</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">DateField</span> <span class="na">label</span><span class="p">=</span><span class="s">"出版日"</span> <span class="na">source</span><span class="p">=</span><span class="s">"published_at"</span> <span class="p">/&gt;</span>
         <span class="p">&lt;/</span><span class="nc">SimpleShowLayout</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nc">Show</span><span class="p">&gt;</span>
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>React-admin components are not magic, they are React components designed to let you focus on the business logic and avoid repetitive tasks.</p>
+<p>React-adminコンポーネントは魔法ではなく、ビジネスロジックに集中し、繰り返しの作業を避けるために設計されたReactコンポーネントです。</p>
 
-<h2 id="accessing-the-record">Accessing the Record</h2>
+<h2 id="レコードにアクセスする">レコードにアクセスする</h2>
 
-<p>Using the <code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code> component instead of calling <code class="language-plaintext highlighter-rouge">useGetOne</code> manually has one drawback: there is no longer a <code class="language-plaintext highlighter-rouge">data</code> object containing the fetched record. Instead, you have to access the record from the <code class="language-plaintext highlighter-rouge">&lt;RecordContext&gt;</code> using <a href="./useRecordContext.md">the <code class="language-plaintext highlighter-rouge">useRecordContext</code> hook</a>.</p>
+<p><code class="language-plaintext highlighter-rouge">useGetOne</code> を手動で呼び出す代わりに <code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code> コンポーネントを使用することには、一つの欠点があります。それは、取得されたレコードを含む <code class="language-plaintext highlighter-rouge">data</code> オブジェクトがなくなることです。代わりに、<code class="language-plaintext highlighter-rouge">&lt;RecordContext&gt;</code> からレコードにアクセスする必要があります。<a href="./useRecordContext.md"><code class="language-plaintext highlighter-rouge">useRecordContext</code> フック</a>を使用してこれを行います。</p>
 
-<p>The following example illustrates the usage of this hook with a custom Field component displaying stars according to the book rating:</p>
+<p>次の例は、本の評価に応じて星を表示するカスタムフィールドコンポーネントを使用する場合の、このフックの使い方を示しています：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Show</span><span class="p">,</span> <span class="nx">SimpleShowLayout</span><span class="p">,</span> <span class="nx">TextField</span><span class="p">,</span> <span class="nx">DateField</span><span class="p">,</span> <span class="nx">useRecordContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">StarIcon</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/icons-material/Star</span><span class="dl">'</span><span class="p">;</span>
@@ -877,15 +877,15 @@ const BookShow = () =&gt; (
 <span class="kd">const</span> <span class="nx">BookShow</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">Show</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nc">SimpleShowLayout</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">label</span><span class="p">=</span><span class="s">"Title"</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
-            <span class="p">&lt;</span><span class="nc">DateField</span> <span class="na">label</span><span class="p">=</span><span class="s">"Publication Date"</span> <span class="na">source</span><span class="p">=</span><span class="s">"published_at"</span> <span class="p">/&gt;</span>
-            <span class="p">&lt;</span><span class="nc">NbStarsField</span> <span class="na">label</span><span class="p">=</span><span class="s">"Rating"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">label</span><span class="p">=</span><span class="s">"タイトル"</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">DateField</span> <span class="na">label</span><span class="p">=</span><span class="s">"出版日"</span> <span class="na">source</span><span class="p">=</span><span class="s">"published_at"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">NbStarsField</span> <span class="na">label</span><span class="p">=</span><span class="s">"評価"</span> <span class="p">/&gt;</span>
         <span class="p">&lt;/</span><span class="nc">SimpleShowLayout</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nc">Show</span><span class="p">&gt;</span>
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>Sometimes you don’t want to create a new component just to be able to use the <code class="language-plaintext highlighter-rouge">useRecordContext</code> hook. In these cases, you can use <a href="./WithRecord.md">the <code class="language-plaintext highlighter-rouge">&lt;WithRecord&gt;</code> component</a>, which is the render prop version of the hook:</p>
+<p>新しいコンポーネントを作成せずに <code class="language-plaintext highlighter-rouge">useRecordContext</code> フックを使用したい場合もあります。そのような場合、フックのレンダープロップバージョンである<a href="./WithRecord.md"><code class="language-plaintext highlighter-rouge">&lt;WithRecord&gt;</code>コンポーネント</a>を使用できます：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Show</span><span class="p">,</span> <span class="nx">SimpleShowLayout</span><span class="p">,</span> <span class="nx">TextField</span><span class="p">,</span> <span class="nx">DateField</span><span class="p">,</span> <span class="nx">WithRecord</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">StarIcon</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/icons-material/Star</span><span class="dl">'</span><span class="p">;</span>
@@ -893,9 +893,9 @@ const BookShow = () =&gt; (
 <span class="kd">const</span> <span class="nx">BookShow</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">Show</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nc">SimpleShowLayout</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">label</span><span class="p">=</span><span class="s">"Title"</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
-            <span class="p">&lt;</span><span class="nc">DateField</span> <span class="na">label</span><span class="p">=</span><span class="s">"Publication Date"</span> <span class="na">source</span><span class="p">=</span><span class="s">"published_at"</span> <span class="p">/&gt;</span>
-            <span class="p">&lt;</span><span class="nc">WithRecord</span> <span class="na">label</span><span class="p">=</span><span class="s">"Rating"</span> <span class="na">render</span><span class="p">=</span><span class="si">{</span><span class="nx">record</span> <span class="o">=&gt;</span> <span class="p">&lt;&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">label</span><span class="p">=</span><span class="s">"タイトル"</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">DateField</span> <span class="na">label</span><span class="p">=</span><span class="s">"出版日"</span> <span class="na">source</span><span class="p">=</span><span class="s">"published_at"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">WithRecord</span> <span class="na">label</span><span class="p">=</span><span class="s">"評価"</span> <span class="na">render</span><span class="p">=</span><span class="si">{</span><span class="nx">record</span> <span class="o">=&gt;</span> <span class="p">&lt;&gt;</span>
                 <span class="si">{</span><span class="p">[...</span><span class="nb">Array</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">rating</span><span class="p">)].</span><span class="nx">map</span><span class="p">((</span><span class="nx">_</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nc">StarIcon</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">index</span><span class="si">}</span> <span class="p">/&gt;)</span><span class="si">}</span>
             <span class="p">&lt;/&gt;</span><span class="si">}</span> <span class="p">/&gt;</span>
         <span class="p">&lt;/</span><span class="nc">SimpleShowLayout</span><span class="p">&gt;</span>
@@ -903,9 +903,9 @@ const BookShow = () =&gt; (
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="using-another-layout">Using Another Layout</h2>
+<h2 id="別のレイアウトを使用する">別のレイアウトを使用する</h2>
 
-<p>When a Show view has to display a lot of fields, the <code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code> component ends up in very long page that is not user-friendly. You can use <a href="./TabbedShowLayout.md">the <code class="language-plaintext highlighter-rouge">&lt;TabbedShowLayout&gt;</code> component</a> instead, which is a variant of the <code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code> component that displays the fields in tabs.</p>
+<p>Showビューが多数のフィールドを表示する必要がある場合、<code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code> コンポーネントは非常に長いページになり、ユーザーフレンドリーではありません。代わりに、フィールドをタブで表示する <code class="language-plaintext highlighter-rouge">&lt;TabbedShowLayout&gt;</code> コンポーネントを使用できます：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Show</span><span class="p">,</span> <span class="nx">TabbedShowLayout</span><span class="p">,</span> <span class="nx">TextField</span><span class="p">,</span> <span class="nx">DateField</span><span class="p">,</span> <span class="nx">WithRecord</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">StarIcon</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/icons-material/Star</span><span class="dl">'</span><span class="p">;</span>
@@ -915,29 +915,29 @@ const BookShow = () =&gt; (
 <span class="kd">const</span> <span class="nx">BookShow</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">Show</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nc">TabbedShowLayout</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nc">TabbedShowLayout</span><span class="p">.</span><span class="nc">Tab</span> <span class="na">label</span><span class="p">=</span><span class="s">"Description"</span> <span class="na">icon</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">FavoriteIcon</span> <span class="p">/&gt;</span><span class="si">}</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">label</span><span class="p">=</span><span class="s">"Title"</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
-                <span class="p">&lt;</span><span class="nc">ReferenceField</span> <span class="na">label</span><span class="p">=</span><span class="s">"Author"</span> <span class="na">source</span><span class="p">=</span><span class="s">"author_id"</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TabbedShowLayout</span><span class="p">.</span><span class="nc">Tab</span> <span class="na">label</span><span class="p">=</span><span class="s">"説明"</span> <span class="na">icon</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">FavoriteIcon</span> <span class="p">/&gt;</span><span class="si">}</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">label</span><span class="p">=</span><span class="s">"タイトル"</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">ReferenceField</span> <span class="na">label</span><span class="p">=</span><span class="s">"著者"</span> <span class="na">source</span><span class="p">=</span><span class="s">"author_id"</span><span class="p">&gt;</span>
                     <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"name"</span> <span class="p">/&gt;</span>
                 <span class="p">&lt;/</span><span class="nc">ReferenceField</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nc">DateField</span> <span class="na">label</span><span class="p">=</span><span class="s">"Publication Date"</span> <span class="na">source</span><span class="p">=</span><span class="s">"published_at"</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">DateField</span> <span class="na">label</span><span class="p">=</span><span class="s">"出版日"</span> <span class="na">source</span><span class="p">=</span><span class="s">"published_at"</span> <span class="p">/&gt;</span>
             <span class="p">&lt;/</span><span class="nc">TabbedShowLayout</span><span class="p">.</span><span class="nc">Tab</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nc">TabbedShowLayout</span><span class="p">.</span><span class="nc">Tab</span> <span class="na">label</span><span class="p">=</span><span class="s">"User ratings"</span> <span class="na">icon</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">PersonPinIcon</span> <span class="p">/&gt;</span><span class="si">}</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nc">WithRecord</span> <span class="na">label</span><span class="p">=</span><span class="s">"Rating"</span> <span class="na">render</span><span class="p">=</span><span class="si">{</span><span class="nx">record</span> <span class="o">=&gt;</span> <span class="p">&lt;&gt;</span>
+            <span class="p">&lt;</span><span class="nc">TabbedShowLayout</span><span class="p">.</span><span class="nc">Tab</span> <span class="na">label</span><span class="p">=</span><span class="s">"ユーザー評価"</span> <span class="na">icon</span><span class="p">=</span><span class="si">{</span><span class="p">&lt;</span><span class="nc">PersonPinIcon</span> <span class="p">/&gt;</span><span class="si">}</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">WithRecord</span> <span class="na">label</span><span class="p">=</span><span class="s">"評価"</span> <span class="na">render</span><span class="p">=</span><span class="si">{</span><span class="nx">record</span> <span class="o">=&gt;</span> <span class="p">&lt;&gt;</span>
                     <span class="si">{</span><span class="p">[...</span><span class="nb">Array</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">rating</span><span class="p">)].</span><span class="nx">map</span><span class="p">((</span><span class="nx">_</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nc">StarIcon</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">index</span><span class="si">}</span> <span class="p">/&gt;)</span><span class="si">}</span>
                 <span class="p">&lt;/&gt;</span><span class="si">}</span> <span class="p">/&gt;</span>
-                <span class="p">&lt;</span><span class="nc">DateField</span> <span class="na">label</span><span class="p">=</span><span class="s">"Last rating"</span> <span class="na">source</span><span class="p">=</span><span class="s">"last_rated_at"</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">DateField</span> <span class="na">label</span><span class="p">=</span><span class="s">"最終評価日"</span> <span class="na">source</span><span class="p">=</span><span class="s">"last_rated_at"</span> <span class="p">/&gt;</span>
             <span class="p">&lt;/</span><span class="nc">TabbedShowLayout</span><span class="p">.</span><span class="nc">Tab</span><span class="p">&gt;</span>
         <span class="p">&lt;/</span><span class="nc">TabbedShowLayout</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nc">Show</span><span class="p">&gt;</span>
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="building-a-custom-layout">Building a Custom Layout</h2>
+<h2 id="カスタムレイアウトの構築">カスタムレイアウトの構築</h2>
 
-<p>In many cases, neither the <code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code> nor the <code class="language-plaintext highlighter-rouge">&lt;TabbedShowLayout&gt;</code> components are enough to display the fields you want. In these cases, pass your layout components directly as children of the <code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code> component. As <code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code> takes care of fetching the record and putting it in a <code class="language-plaintext highlighter-rouge">&lt;RecordContextProvider&gt;</code>, you can use Field components directly.</p>
+<p>多くの場合、<code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code> や <code class="language-plaintext highlighter-rouge">&lt;TabbedShowLayout&gt;</code> コンポーネントだけでは表示したいフィールドを十分に表示できないことがあります。そのような場合は、レイアウトコンポーネントを <code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code> コンポーネントの子要素として直接渡します。 <code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code> はレコードを取得して <code class="language-plaintext highlighter-rouge">&lt;RecordContextProvider&gt;</code> に入れるため、フィールドコンポーネントを直接使用できます。</p>
 
-<p>For instance, to display several fields in a single line, you can use Material UI’s <code class="language-plaintext highlighter-rouge">&lt;Grid&gt;</code> component:</p>
+<p>たとえば、複数のフィールドを1行に表示するには、Material UIの <code class="language-plaintext highlighter-rouge">&lt;Grid&gt;</code> コンポーネントを使用できます：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Show</span><span class="p">,</span> <span class="nx">TextField</span><span class="p">,</span> <span class="nx">DateField</span><span class="p">,</span> <span class="nx">ReferenceField</span><span class="p">,</span> <span class="nx">WithRecord</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Grid</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material</span><span class="dl">'</span><span class="p">;</span>
@@ -947,18 +947,18 @@ const BookShow = () =&gt; (
     <span class="p">&lt;</span><span class="nc">Show</span> <span class="na">emptyWhileLoading</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nc">Grid</span> <span class="na">container</span> <span class="na">spacing</span><span class="p">=</span><span class="si">{</span><span class="mi">2</span><span class="si">}</span> <span class="na">sx</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">margin</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nc">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="p">=</span><span class="si">{</span><span class="mi">12</span><span class="si">}</span> <span class="na">sm</span><span class="p">=</span><span class="si">{</span><span class="mi">6</span><span class="si">}</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">label</span><span class="p">=</span><span class="s">"Title"</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">label</span><span class="p">=</span><span class="s">"タイトル"</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
             <span class="p">&lt;/</span><span class="nc">Grid</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nc">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="p">=</span><span class="si">{</span><span class="mi">12</span><span class="si">}</span> <span class="na">sm</span><span class="p">=</span><span class="si">{</span><span class="mi">6</span><span class="si">}</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nc">ReferenceField</span> <span class="na">label</span><span class="p">=</span><span class="s">"Author"</span> <span class="na">source</span><span class="p">=</span><span class="s">"author_id"</span> <span class="na">reference</span><span class="p">=</span><span class="s">"authors"</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">ReferenceField</span> <span class="na">label</span><span class="p">=</span><span class="s">"著者"</span> <span class="na">source</span><span class="p">=</span><span class="s">"author_id"</span> <span class="na">reference</span><span class="p">=</span><span class="s">"authors"</span><span class="p">&gt;</span>
                     <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"name"</span> <span class="p">/&gt;</span>
                 <span class="p">&lt;/</span><span class="nc">ReferenceField</span><span class="p">&gt;</span>
             <span class="p">&lt;/</span><span class="nc">Grid</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nc">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="p">=</span><span class="si">{</span><span class="mi">12</span><span class="si">}</span> <span class="na">sm</span><span class="p">=</span><span class="si">{</span><span class="mi">6</span><span class="si">}</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nc">DateField</span> <span class="na">label</span><span class="p">=</span><span class="s">"Publication Date"</span> <span class="na">source</span><span class="p">=</span><span class="s">"published_at"</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">DateField</span> <span class="na">label</span><span class="p">=</span><span class="s">"出版日"</span> <span class="na">source</span><span class="p">=</span><span class="s">"published_at"</span> <span class="p">/&gt;</span>
             <span class="p">&lt;/</span><span class="nc">Grid</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nc">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="p">=</span><span class="si">{</span><span class="mi">12</span><span class="si">}</span> <span class="na">sm</span><span class="p">=</span><span class="si">{</span><span class="mi">6</span><span class="si">}</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nc">WithRecord</span> <span class="na">label</span><span class="p">=</span><span class="s">"Rating"</span> <span class="na">render</span><span class="p">=</span><span class="si">{</span><span class="nx">record</span> <span class="o">=&gt;</span> <span class="p">&lt;&gt;</span>
+                <span class="p">&lt;</span><span class="nc">WithRecord</span> <span class="na">label</span><span class="p">=</span><span class="s">"評価"</span> <span class="na">render</span><span class="p">=</span><span class="si">{</span><span class="nx">record</span> <span class="o">=&gt;</span> <span class="p">&lt;&gt;</span>
                     <span class="si">{</span><span class="p">[...</span><span class="nb">Array</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">rating</span><span class="p">)].</span><span class="nx">map</span><span class="p">((</span><span class="nx">_</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nc">StarIcon</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">index</span><span class="si">}</span> <span class="p">/&gt;)</span><span class="si">}</span>
                 <span class="p">&lt;/&gt;</span><span class="si">}</span> <span class="p">/&gt;</span>
             <span class="p">&lt;/</span><span class="nc">Grid</span><span class="p">&gt;</span>
@@ -967,9 +967,9 @@ const BookShow = () =&gt; (
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: With <code class="language-plaintext highlighter-rouge">emptyWhileLoading</code> turned on, the <code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code> component doesn’t render its child component until the record is available. Without this flag, the Field components would render even during the loading phase, and may break if they aren’t planned to work with an empty record context. You could grab the <code class="language-plaintext highlighter-rouge">isLoading</code> state from the <code class="language-plaintext highlighter-rouge">ShowContext</code> instead, but that would force you to split the <code class="language-plaintext highlighter-rouge">&lt;BookShow&gt;</code> component into two.</p>
+<p><strong>Tip</strong>: <code class="language-plaintext highlighter-rouge">emptyWhileLoading</code> をオンにすると、<code class="language-plaintext highlighter-rouge">&lt;Show&gt;</code> コンポーネントはレコードが利用可能になるまで子コンポーネントをレンダリングしません。このフラグがないと、フィールドコンポーネントはローディングフェーズ中にもレンダリングされ、空のレコードコンテキストで動作するように計画されていない場合は壊れる可能性があります。代わりに <code class="language-plaintext highlighter-rouge">ShowContext</code> から <code class="language-plaintext highlighter-rouge">isLoading</code> 状態を取得することもできますが、それでは <code class="language-plaintext highlighter-rouge">&lt;BookShow&gt;</code> コンポーネントを二つに分割する必要があります。</p>
 
-<p>You can also split the list of fields into two stacks, and use the <code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code> in the main panel:</p>
+<p>リストのフィールドを二つのスタックに分割し、メインパネルに <code class="language-plaintext highlighter-rouge">&lt;SimpleShowLayout&gt;</code> を使用することもできます：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Show</span><span class="p">,</span> <span class="nx">SimpleShowLayout</span><span class="p">,</span> <span class="nx">TextField</span><span class="p">,</span> <span class="nx">DateField</span><span class="p">,</span> <span class="nx">WithRecord</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">StarIcon</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/icons-material/Star</span><span class="dl">'</span><span class="p">;</span>
@@ -979,18 +979,18 @@ const BookShow = () =&gt; (
         <span class="p">&lt;</span><span class="nc">Grid</span> <span class="na">container</span> <span class="na">spacing</span><span class="p">=</span><span class="si">{</span><span class="mi">2</span><span class="si">}</span> <span class="na">sx</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">margin</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nc">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="p">=</span><span class="si">{</span><span class="mi">12</span><span class="si">}</span> <span class="na">sm</span><span class="p">=</span><span class="si">{</span><span class="mi">8</span><span class="si">}</span><span class="p">&gt;</span>
                 <span class="p">&lt;</span><span class="nc">SimpleShowLayout</span><span class="p">&gt;</span>
-                    <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">label</span><span class="p">=</span><span class="s">"Title"</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
-                    <span class="p">&lt;</span><span class="nc">DateField</span> <span class="na">label</span><span class="p">=</span><span class="s">"Publication Date"</span> <span class="na">source</span><span class="p">=</span><span class="s">"published_at"</span> <span class="p">/&gt;</span>
-                    <span class="p">&lt;</span><span class="nc">WithRecord</span> <span class="na">label</span><span class="p">=</span><span class="s">"Rating"</span> <span class="na">render</span><span class="p">=</span><span class="si">{</span><span class="nx">record</span> <span class="o">=&gt;</span> <span class="p">&lt;&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">TextField</span> <span class="na">label</span><span class="p">=</span><span class="s">"タイトル"</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">DateField</span> <span class="na">label</span><span class="p">=</span><span class="s">"出版日"</span> <span class="na">source</span><span class="p">=</span><span class="s">"published_at"</span> <span class="p">/&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">WithRecord</span> <span class="na">label</span><span class="p">=</span><span class="s">"評価"</span> <span class="na">render</span><span class="p">=</span><span class="si">{</span><span class="nx">record</span> <span class="o">=&gt;</span> <span class="p">&lt;&gt;</span>
                         <span class="si">{</span><span class="p">[...</span><span class="nb">Array</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">rating</span><span class="p">)].</span><span class="nx">map</span><span class="p">((</span><span class="nx">_</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nc">StarIcon</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">index</span><span class="si">}</span> <span class="p">/&gt;)</span><span class="si">}</span>
                     <span class="p">&lt;/&gt;</span><span class="si">}</span> <span class="p">/&gt;</span>
                 <span class="p">&lt;/</span><span class="nc">SimpleShowLayout</span><span class="p">&gt;</span>
             <span class="p">&lt;/</span><span class="nc">Grid</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nc">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="p">=</span><span class="si">{</span><span class="mi">12</span><span class="si">}</span> <span class="na">sm</span><span class="p">=</span><span class="si">{</span><span class="mi">4</span><span class="si">}</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nc">Typography</span><span class="p">&gt;</span>Details<span class="p">&lt;/</span><span class="nc">Typography</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">Typography</span><span class="p">&gt;</span>詳細<span class="p">&lt;/</span><span class="nc">Typography</span><span class="p">&gt;</span>
                 <span class="p">&lt;</span><span class="nc">Stack</span> <span class="na">spacing</span><span class="p">=</span><span class="si">{</span><span class="mi">1</span><span class="si">}</span><span class="p">&gt;</span>
                     <span class="p">&lt;</span><span class="nc">Labeled</span> <span class="na">label</span><span class="p">=</span><span class="s">"ISBN"</span><span class="p">&gt;&lt;</span><span class="nc">TextField</span> <span class="na">source</span><span class="p">=</span><span class="s">"isbn"</span> <span class="p">/&gt;&lt;/</span><span class="nc">Labeled</span><span class="p">&gt;</span>
-                    <span class="p">&lt;</span><span class="nc">Labeled</span> <span class="na">label</span><span class="p">=</span><span class="s">"Last rating"</span><span class="p">&gt;&lt;</span><span class="nc">DateField</span> <span class="na">source</span><span class="p">=</span><span class="s">"last_rated_at"</span> <span class="p">/&gt;&lt;/</span><span class="nc">Labeled</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">Labeled</span> <span class="na">label</span><span class="p">=</span><span class="s">"最終評価日"</span><span class="p">&gt;&lt;</span><span class="nc">DateField</span> <span class="na">source</span><span class="p">=</span><span class="s">"last_rated_at"</span> <span class="p">/&gt;&lt;/</span><span class="nc">Labeled</span><span class="p">&gt;</span>
                 <span class="p">&lt;/</span><span class="nc">Stack</span><span class="p">&gt;</span>
             <span class="p">&lt;/</span><span class="nc">Grid</span><span class="p">&gt;</span>
         <span class="p">&lt;/</span><span class="nc">Grid</span><span class="p">&gt;</span>
@@ -998,13 +998,14 @@ const BookShow = () =&gt; (
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="third-party-components">Third-Party Components</h2>
+<h2 id="サードパーティコンポーネントの使用">サードパーティコンポーネントの使用</h2>
 
-<p>You can find components for react-admin in third-party repositories.</p>
+<p>react-adminのコンポーネントはサードパーティリポジトリで見つけることができます。</p>
 
 <ul>
-  <li><a href="https://github.com/ValentinnDimitroff/ra-compact-ui#layouts">ra-compact-ui</a>: plugin that allows to have custom styled show layouts.</li>
+  <li><a href="https://github.com/ValentinnDimitroff/ra-compact-ui#layouts">ra-compact-ui</a>: カスタムスタイルのShowレイアウトを持つことができるプラグイン。</li>
 </ul>
+
 
                         </div>
                     </div>

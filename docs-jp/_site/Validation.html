@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <title>React-admin - Form Validation</title>
+        <title>React-admin - フォームバリデーション</title>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
@@ -563,39 +563,39 @@
                         <div
                             class="markdown-section DocSearch-content toc-content"
                         >
-                            <h1 id="form-validation">Form Validation</h1>
+                            <h1 id="フォームバリデーション">フォームバリデーション</h1>
 
-<p><img src="./img/validation.png" alt="Validation example" /></p>
+<p><img src="./img/validation.png" alt="バリデーションの例" /></p>
 
-<p>React-admin relies on <a href="https://react-hook-form.com/">react-hook-form</a> for the validation of user input in forms. React-admin supports several approaches:</p>
+<p>React-adminはフォーム内のユーザー入力のバリデーションに<a href="https://react-hook-form.com/">react-hook-form</a>を利用しています。React-adminは以下のアプローチをサポートしています：</p>
 
 <ul>
-  <li>using the <code class="language-plaintext highlighter-rouge">validate</code> prop at the Form level (validation by function)</li>
-  <li>using the <code class="language-plaintext highlighter-rouge">validate</code> prop at the Input level</li>
-  <li>using the <code class="language-plaintext highlighter-rouge">resolver</code> prop at the Form level (validation by schema)</li>
-  <li>using the return value from the server (server-side validation)</li>
+  <li><code class="language-plaintext highlighter-rouge">validate</code>プロパティをフォームレベルで使用（関数によるバリデーション）</li>
+  <li><code class="language-plaintext highlighter-rouge">validate</code>プロパティを入力レベルで使用</li>
+  <li><code class="language-plaintext highlighter-rouge">resolver</code>プロパティをフォームレベルで使用（スキーマによるバリデーション）</li>
+  <li>サーバからの戻り値を使用（サーバサイドバリデーション）</li>
 </ul>
 
-<p>You can’t use both form level validation and input level validation - this is a <code class="language-plaintext highlighter-rouge">react-hook-form</code> limitation.</p>
+<p>フォームレベルのバリデーションと入力レベルのバリデーションを同時に使用することはできません。これは<code class="language-plaintext highlighter-rouge">react-hook-form</code>の制限です。</p>
 
-<h2 id="validation-mode">Validation Mode</h2>
+<h2 id="バリデーションモード">バリデーションモード</h2>
 
-<p>By default, the validation mode is <code class="language-plaintext highlighter-rouge">onSubmit</code>, and the re-validation mode is <code class="language-plaintext highlighter-rouge">onChange</code>.</p>
+<p>デフォルトでは、バリデーションモードは<code class="language-plaintext highlighter-rouge">onSubmit</code>で、再バリデーションモードは<code class="language-plaintext highlighter-rouge">onChange</code>です。</p>
 
-<p>Since <a href="./Form.md"><code class="language-plaintext highlighter-rouge">&lt;Form&gt;</code></a> actually passes all additional props to react-hook-form’s <a href="https://react-hook-form.com/docs/useform/"><code class="language-plaintext highlighter-rouge">useForm</code> hook</a>, this can easily be changed by setting the <code class="language-plaintext highlighter-rouge">mode</code> and <code class="language-plaintext highlighter-rouge">reValidateMode</code> props.</p>
+<p><a href="./Form.md"><code class="language-plaintext highlighter-rouge">&lt;Form&gt;</code></a>は実際にはすべての追加プロパティをreact-hook-formの<a href="https://react-hook-form.com/docs/useform/"><code class="language-plaintext highlighter-rouge">useForm</code>フック</a>に渡すため、<code class="language-plaintext highlighter-rouge">mode</code>および<code class="language-plaintext highlighter-rouge">reValidateMode</code>プロパティを設定することで簡単に変更できます。</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">UserCreate</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
-    <span class="p">&lt;</span><span class="nc">Create</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nc">SimpleForm</span> <span class="na">mode</span><span class="p">=</span><span class="s">"onBlur"</span> <span class="na">reValidateMode</span><span class="p">=</span><span class="s">"onBlur"</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"First Name"</span> <span class="na">source</span><span class="p">=</span><span class="s">"firstName"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="nx">required</span><span class="p">()</span><span class="si">}</span> <span class="p">/&gt;</span>
-        <span class="p">&lt;/</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nc">Create</span><span class="p">&gt;</span>
-<span class="p">);</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">export</span> <span class="kd">const</span> <span class="nx">UserCreate</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nc">Create</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">SimpleForm</span> <span class="na">mode</span><span class="p">=</span><span class="s">"onBlur"</span> <span class="na">reValidateMode</span><span class="p">=</span><span class="s">"onBlur"</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"First Name"</span> <span class="na">source</span><span class="p">=</span><span class="s">"firstName"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="nx">required</span><span class="p">()</span><span class="si">}</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;/</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">Create</span><span class="p">&gt;</span>
+    <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="global-validation">Global Validation</h2>
+<h2 id="グローバルバリデーション">グローバルバリデーション</h2>
 
-<p>The value of the form <code class="language-plaintext highlighter-rouge">validate</code> prop must be a function taking the record as input, and returning an object with error messages indexed by field. For instance:</p>
+<p>フォームの<code class="language-plaintext highlighter-rouge">validate</code>プロパティの値は、レコードを入力として取り、フィールドごとにエラーメッセージをインデックス付けして返す関数でなければなりません。例えば：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">validateUserCreation</span> <span class="o">=</span> <span class="p">(</span><span class="nx">values</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">errors</span> <span class="o">=</span> <span class="p">{};</span>
@@ -603,41 +603,33 @@
         <span class="nx">errors</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">The firstName is required</span><span class="dl">'</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">values</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// You can return translation keys</span>
         <span class="nx">errors</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">ra.validation.required</span><span class="dl">'</span><span class="p">;</span>
     <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">values</span><span class="p">.</span><span class="nx">age</span> <span class="o">&lt;</span> <span class="mi">18</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// Or an object if the translation messages need parameters</span>
         <span class="nx">errors</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="p">{</span>
             <span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ra.validation.minValue</span><span class="dl">'</span><span class="p">,</span>
             <span class="na">args</span><span class="p">:</span> <span class="p">{</span> <span class="na">min</span><span class="p">:</span> <span class="mi">18</span> <span class="p">}</span>
         <span class="p">};</span>
     <span class="p">}</span>
-    <span class="c1">// You can add a message for a whole ArrayInput</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">values</span><span class="p">.</span><span class="nx">children</span> <span class="o">||</span> <span class="o">!</span><span class="nx">values</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">errors</span><span class="p">.</span><span class="nx">children</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">ra.validation.required</span><span class="dl">'</span><span class="p">;</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="c1">// Or target each child of an ArrayInput by returning an array of error objects</span>
         <span class="nx">errors</span><span class="p">.</span><span class="nx">children</span> <span class="o">=</span> <span class="nx">values</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">child</span> <span class="o">=&gt;</span> <span class="p">{</span>
             <span class="kd">const</span> <span class="nx">childErrors</span> <span class="o">=</span> <span class="p">{};</span>
             <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">child</span> <span class="o">||</span> <span class="o">!</span><span class="nx">child</span><span class="p">.</span><span class="nx">firstName</span><span class="p">)</span> <span class="p">{</span>
                 <span class="nx">childErrors</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">The firstName is required</span><span class="dl">'</span><span class="p">;</span>
             <span class="p">}</span>
             <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">child</span> <span class="o">||</span> <span class="o">!</span><span class="nx">child</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">childErrors</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">ra.validation.required</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// Translation keys are supported here too</span>
+                <span class="nx">childErrors</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">ra.validation.required</span><span class="dl">'</span><span class="p">;</span>
             <span class="p">}</span>
             <span class="k">return</span> <span class="nx">childErrors</span><span class="p">;</span>
         <span class="p">});</span>
     <span class="p">}</span>
-    <span class="k">return</span> <span class="nx">errors</span>
+    <span class="k">return</span> <span class="nx">errors</span><span class="p">;</span>
 <span class="p">};</span>
 
 <span class="k">export</span> <span class="kd">const</span> <span class="nx">UserCreate</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">Create</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nc">SimpleForm</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="nx">validateUserCreation</span><span class="si">}</span><span class="p">&gt;</span>
-            <span class="si">{</span><span class="cm">/* 
-                We need to add `validate={required()}` on required fields to append a '*' symbol 
-                to the label, but the real validation still happens in `validateUserCreation`
-            */</span><span class="si">}</span>
             <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"First Name"</span> <span class="na">source</span><span class="p">=</span><span class="s">"firstName"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="nx">required</span><span class="p">()</span><span class="si">}</span> <span class="p">/&gt;</span>
             <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"Age"</span> <span class="na">source</span><span class="p">=</span><span class="s">"age"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="nx">required</span><span class="p">()</span><span class="si">}</span> <span class="p">/&gt;</span>
             <span class="p">&lt;</span><span class="nc">ArrayInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"Children"</span> <span class="na">source</span><span class="p">=</span><span class="s">"children"</span> <span class="na">fullWidth</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="nx">required</span><span class="p">()</span><span class="si">}</span><span class="p">&gt;</span>
@@ -651,28 +643,28 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: The props you pass to <code class="language-plaintext highlighter-rouge">&lt;SimpleForm&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;TabbedForm&gt;</code> are passed to the <a href="https://react-hook-form.com/docs/useform">useForm hook</a> of <code class="language-plaintext highlighter-rouge">react-hook-form</code>.</p>
+<p><strong>ヒント</strong>: <code class="language-plaintext highlighter-rouge">&lt;SimpleForm&gt;</code>および<code class="language-plaintext highlighter-rouge">&lt;TabbedForm&gt;</code>に渡すプロパティは、<code class="language-plaintext highlighter-rouge">react-hook-form</code>の<a href="https://react-hook-form.com/docs/useform">useFormフック</a>に渡されます。</p>
 
-<p><strong>Tip</strong>: The <code class="language-plaintext highlighter-rouge">validate</code> function can return a promise for asynchronous validation. See <a href="#server-side-validation">the Server-Side Validation section</a> below.</p>
+<p><strong>ヒント</strong>: <code class="language-plaintext highlighter-rouge">validate</code>関数は、非同期バリデーションのためにプロミスを返すことができます。以下の<a href="#server-side-validation">サーバサイドバリデーションのセクション</a>を参照してください。</p>
 
-<h2 id="per-input-validation-built-in-field-validators">Per Input Validation: Built-in Field Validators</h2>
+<h2 id="入力ごとのバリデーション組み込みフィールドバリデーター">入力ごとのバリデーション：組み込みフィールドバリデーター</h2>
 
-<p>Alternatively, you can specify a <code class="language-plaintext highlighter-rouge">validate</code> prop directly in <code class="language-plaintext highlighter-rouge">&lt;Input&gt;</code> components, taking either a function or an array of functions. React-admin already bundles a few validator functions, that you can just require, and use as input-level validators:</p>
+<p>代わりに、<code class="language-plaintext highlighter-rouge">&lt;Input&gt;</code>コンポーネントに<code class="language-plaintext highlighter-rouge">validate</code>プロパティを直接指定することができます。これは関数または関数の配列を受け取ります。React-adminにはすでにいくつかのバリデータ関数がバンドルされており、これらを入力レベルのバリデーターとして使用できます：</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">required(message)</code> if the field is mandatory,</li>
-  <li><code class="language-plaintext highlighter-rouge">minValue(min, message)</code> to specify a minimum value for integers,</li>
-  <li><code class="language-plaintext highlighter-rouge">maxValue(max, message)</code> to specify a maximum value for integers,</li>
-  <li><code class="language-plaintext highlighter-rouge">minLength(min, message)</code> to specify a minimum length for strings,</li>
-  <li><code class="language-plaintext highlighter-rouge">maxLength(max, message)</code> to specify a maximum length for strings,</li>
-  <li><code class="language-plaintext highlighter-rouge">number(message)</code> to check that the input is a valid number,</li>
-  <li><code class="language-plaintext highlighter-rouge">email(message)</code> to check that the input is a valid email address,</li>
-  <li><code class="language-plaintext highlighter-rouge">regex(pattern, message)</code> to validate that the input matches a regex,</li>
-  <li><code class="language-plaintext highlighter-rouge">choices(list, message)</code> to validate that the input is within a given list,</li>
-  <li><code class="language-plaintext highlighter-rouge">unique()</code> to validate that the input is unique (see <a href="./useUnique.md"><code class="language-plaintext highlighter-rouge">useUnique</code></a>),</li>
+  <li>必須フィールドの場合は<code class="language-plaintext highlighter-rouge">required(message)</code></li>
+  <li>整数の最小値を指定する場合は<code class="language-plaintext highlighter-rouge">minValue(min, message)</code></li>
+  <li>整数の最大値を指定する場合は<code class="language-plaintext highlighter-rouge">maxValue(max, message)</code></li>
+  <li>文字列の最小長を指定する場合は<code class="language-plaintext highlighter-rouge">minLength(min, message)</code></li>
+  <li>文字列の最大長を指定する場合は<code class="language-plaintext highlighter-rouge">maxLength(max, message)</code></li>
+  <li>有効な数値であることを確認する場合は<code class="language-plaintext highlighter-rouge">number(message)</code></li>
+  <li>有効なメールアドレスであることを確認する場合は<code class="language-plaintext highlighter-rouge">email(message)</code></li>
+  <li>入力が正規表現に一致することを確認する場合は<code class="language-plaintext highlighter-rouge">regex(pattern, message)</code></li>
+  <li>入力が指定されたリスト内であることを確認する場合は<code class="language-plaintext highlighter-rouge">choices(list, message)</code></li>
+  <li>入力が一意であることを確認する場合は<code class="language-plaintext highlighter-rouge">unique()</code>（<a href="./useUnique.md"><code class="language-plaintext highlighter-rouge">useUnique</code></a>を参照）</li>
 </ul>
 
-<p>Example usage:</p>
+<p>使用例：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span>
     <span class="nx">required</span><span class="p">,</span>
@@ -709,15 +701,15 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: If you pass a function as a message, react-admin calls this function with <code class="language-plaintext highlighter-rouge">{ args, value, values,translate, ...props }</code> as argument. For instance:</p>
+<p><strong>ヒント</strong>: メッセージとして関数を渡すと、react-adminはこの関数を<code class="language-plaintext highlighter-rouge">{ args, value, values, translate, ...props }</code>として呼び出します。例えば：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">translate</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="nx">translate</span><span class="p">(</span><span class="dl">'</span><span class="s1">myroot.validation.email_invalid</span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">validateEmail</span> <span class="o">=</span> <span class="nx">email</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="per-input-validation-custom-function-validator">Per Input Validation: Custom Function Validator</h2>
+<h2 id="入力ごとのバリデーションカスタム関数バリデーター">入力ごとのバリデーション：カスタム関数バリデーター</h2>
 
-<p>You can also define your own validator functions. These functions should return <code class="language-plaintext highlighter-rouge">undefined</code> when there is no error, or an error string.</p>
+<p>独自のバリデーター関数を定義することもできます。これらの関数はエラーがない場合は<code class="language-plaintext highlighter-rouge">undefined</code>を返し、エラーメッセージを返します。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">required</span> <span class="o">=</span> <span class="p">(</span><span class="nx">message</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Required</span><span class="dl">'</span><span class="p">)</span> <span class="o">=&gt;</span>
     <span class="nx">value</span> <span class="o">=&gt;</span> <span class="nx">value</span> <span class="p">?</span> <span class="kc">undefined</span> <span class="p">:</span> <span class="nx">message</span><span class="p">;</span>
@@ -751,11 +743,11 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>React-admin will combine all the input-level functions into a single function looking just like the previous one.</p>
+<p>React-adminはすべての入力レベル関数を単一の関数に結合し、前述のような形になります。</p>
 
-<p>Input validation functions receive the current field value and the values of all fields of the current record. This allows for complex validation scenarios (e.g. validate that two passwords are the same).</p>
+<p>入力バリデーション関数は、現在のフィールド値と現在のレコードのすべてのフィールドの値を受け取ります。これにより、複雑なバリデーションシナリオ（例えば、2つのパスワードが同じかどうかのバリデーション）が可能になります。</p>
 
-<p><strong>Tip</strong>: If your admin has multi-language support, validator functions should return message <em>identifiers</em> rather than messages themselves. React-admin automatically passes these identifiers to the translation function:</p>
+<p><strong>ヒント</strong>: 管理者が多言語対応の場合、バリデーター関数はメッセージそのものではなく、メッセージ識別子を返すべきです。React-adminはこれらの識別子を翻訳関数に自動的に渡します：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in validators/required.js</span>
 <span class="kd">const</span> <span class="nx">required</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">allValues</span><span class="p">,</span> <span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span>
@@ -773,7 +765,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>If the translation depends on a variable, the validator can return an object rather than a translation identifier:</p>
+<p>翻訳が変数に依存する場合、バリデーターは翻訳識別子ではなくオブジェクトを返すことができます：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in validators/minLength.js</span>
 <span class="kd">const</span> <span class="nx">minLength</span> <span class="o">=</span> <span class="p">(</span><span class="nx">min</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">allValues</span><span class="p">,</span> <span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> 
@@ -791,9 +783,9 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>See the <a href="./TranslationTranslating.md#translating-form-validation-errors">Translation documentation</a> for details.</p>
+<p>詳細は<a href="./TranslationTranslating.md#translating-form-validation-errors">翻訳ドキュメント</a>を参照してください。</p>
 
-<p><strong>Tip</strong>: Make sure to define validation functions or array of functions in a variable outside your component, instead of defining them directly in JSX. This can result in a new function or array at every render, and trigger infinite rerender.</p>
+<p><strong>ヒント</strong>: バリデーター関数や関数の配列はコンポーネントの外側で変数として定義し、JSX内で直接定義しないようにしましょう。これにより、毎回新しい関数や配列が作成され、無限リレンダリングが発生する可能性があります。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">validateStock</span> <span class="o">=</span> <span class="p">[</span><span class="nx">required</span><span class="p">(),</span> <span class="nx">number</span><span class="p">(),</span> <span class="nx">minValue</span><span class="p">(</span><span class="mi">0</span><span class="p">)];</span>
 
@@ -801,9 +793,9 @@
     <span class="p">&lt;</span><span class="nc">Edit</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nc">SimpleForm</span> <span class="na">defaultValues</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">stock</span><span class="p">:</span> <span class="mi">0</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
             ...
-            <span class="si">{</span><span class="cm">/* do this */</span><span class="si">}</span>
+            <span class="si">{</span><span class="cm">/* こちらを使用 */</span><span class="si">}</span>
             <span class="p">&lt;</span><span class="nc">NumberInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"stock"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="nx">validateStock</span><span class="si">}</span> <span class="p">/&gt;</span>
-            <span class="si">{</span><span class="cm">/* don't do that */</span><span class="si">}</span>
+            <span class="si">{</span><span class="cm">/* こちらを使用しない */</span><span class="si">}</span>
             <span class="p">&lt;</span><span class="nc">NumberInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"stock"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="p">[</span><span class="nx">required</span><span class="p">(),</span> <span class="nx">number</span><span class="p">(),</span> <span class="nx">minValue</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span><span class="si">}</span> <span class="p">/&gt;</span>
             ...
         <span class="p">&lt;/</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
@@ -811,13 +803,13 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: The props of your Input components are passed to a <code class="language-plaintext highlighter-rouge">react-hook-form</code> <a href="https://react-hook-form.com/docs/usecontroller">useController</a> hook.</p>
+<p><strong>ヒント</strong>: 入力コンポーネントのプロパティは、<code class="language-plaintext highlighter-rouge">react-hook-form</code>の<a href="https://react-hook-form.com/docs/usecontroller">useController</a>フックに渡されます。</p>
 
-<p><strong>Tip</strong>: The custom validator function can return a promise, e.g. to use server-side validation. See next section for details.</p>
+<p><strong>ヒント</strong>: カスタムバリデーター関数はプロミスを返すことができ、サーバサイドバリデーションに使用されます。詳細は次のセクションを参照してください。</p>
 
-<h2 id="async-validation">Async Validation</h2>
+<h2 id="非同期バリデーション">非同期バリデーション</h2>
 
-<p>You can validate the entire form by returning a Promise in the form <code class="language-plaintext highlighter-rouge">validate</code> function. For instance:</p>
+<p>フォーム全体をバリデートするために、フォームの<code class="language-plaintext highlighter-rouge">validate</code>関数でプロミスを返すことができます。例えば：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">validateUserCreation</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">values</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">errors</span> <span class="o">=</span> <span class="p">{};</span>
@@ -832,17 +824,14 @@
 
     <span class="kd">const</span> <span class="nx">isEmailUnique</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">checkEmailIsUnique</span><span class="p">(</span><span class="nx">values</span><span class="p">.</span><span class="nx">email</span><span class="p">);</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isEmailUnique</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// Return a message directly</span>
         <span class="nx">errors</span><span class="p">.</span><span class="nx">email</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Email already used</span><span class="dl">'</span><span class="p">;</span>
-        <span class="c1">// Or a translation key</span>
         <span class="nx">errors</span><span class="p">.</span><span class="nx">email</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">myapp.validation.email_not_unique</span><span class="dl">'</span><span class="p">;</span>
-        <span class="c1">// Or an object if the translation needs parameters</span>
         <span class="nx">errors</span><span class="p">.</span><span class="nx">email</span> <span class="o">=</span> <span class="p">{</span>
             <span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">myapp.validation.email_not_unique</span><span class="dl">'</span><span class="p">,</span>
             <span class="na">args</span><span class="p">:</span> <span class="p">{</span> <span class="na">email</span><span class="p">:</span> <span class="nx">values</span><span class="p">.</span><span class="nx">email</span> <span class="p">}</span>
         <span class="p">};</span>
     <span class="p">}</span>
-    <span class="k">return</span> <span class="nx">errors</span>
+    <span class="k">return</span> <span class="nx">errors</span><span class="p">;</span>
 <span class="p">};</span>
 
 <span class="k">export</span> <span class="kd">const</span> <span class="nx">UserCreate</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
@@ -856,19 +845,14 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>Per Input validators can also return a Promise to call the server for validation. For instance:</p>
+<p>入力バリデーターもプロミスを返し、サーバにバリデーションを行わせることができます。例えば：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">validateEmailUnicity</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">isEmailUnique</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">checkEmailIsUnique</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isEmailUnique</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="dl">'</span><span class="s1">Email already used</span><span class="dl">'</span><span class="p">;</span>
-
-        <span class="c1">// You can return a translation key as well</span>
         <span class="k">return</span> <span class="dl">'</span><span class="s1">myroot.validation.email_already_used</span><span class="dl">'</span><span class="p">;</span>
-
-        <span class="c1">// Or even an object just like the other validators</span>
-        <span class="k">return</span> <span class="p">{</span> <span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">myroot.validation.email_already_used</span><span class="dl">'</span><span class="p">,</span> <span class="na">args</span><span class="p">:</span> <span class="p">{</span> <span class="na">email</span><span class="p">:</span> <span class="nx">value</span> <span class="p">}</span> <span class="p">}</span>
-
+        <span class="k">return</span> <span class="p">{</span> <span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">myroot.validation.email_already_used</span><span class="dl">'</span><span class="p">,</span> <span class="na">args</span><span class="p">:</span> <span class="p">{</span> <span class="na">email</span><span class="p">:</span> <span class="nx">value</span> <span class="p">}</span> <span class="p">};</span>
     <span class="p">}</span>
 
     <span class="k">return</span> <span class="kc">undefined</span><span class="p">;</span>
@@ -887,9 +871,9 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="schema-validation">Schema Validation</h2>
+<h2 id="スキーマバリデーション">スキーマバリデーション</h2>
 
-<p><code class="language-plaintext highlighter-rouge">react-hook-form</code> supports schema validation with many libraries through its <a href="https://react-hook-form.com/docs/useform#validationResolver"><code class="language-plaintext highlighter-rouge">resolver</code> props</a>. To use it, follow their <a href="https://github.com/react-hook-form/resolvers">resolvers documentation</a>. Here’s an example using <code class="language-plaintext highlighter-rouge">yup</code>:</p>
+<p><code class="language-plaintext highlighter-rouge">react-hook-form</code>は<a href="https://react-hook-form.com/docs/useform#validationResolver"><code class="language-plaintext highlighter-rouge">resolver</code>プロパティ</a>を通じて多くのライブラリと連携してスキーマバリデーションをサポートします。使用するには、<a href="https://github.com/react-hook-form/resolvers">resolversのドキュメント</a>に従ってください。以下は<code class="language-plaintext highlighter-rouge">yup</code>を使用した例です：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">yupResolver</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@hookform/resolvers/yup</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">yup</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">yup</span><span class="dl">'</span><span class="p">;</span>
@@ -913,26 +897,26 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="server-side-validation">Server-Side Validation</h2>
+<h2 id="サーバサイドバリデーション">サーバサイドバリデーション</h2>
 
-<p>Server-side validation is supported out of the box for <code class="language-plaintext highlighter-rouge">pessimistic</code> mode only. It requires that the dataProvider throws an error with the following shape:</p>
+<p>サーバサイドバリデーションは<code class="language-plaintext highlighter-rouge">pessimistic</code>モードのみで標準サポートされています。これは、dataProviderが以下の形のエラーをスローする必要があることを意味します：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
-    body: {
-        errors: {
-            title: 'An article with this title already exists. The title must be unique.',
-            date: 'The date is required',
-            tags: { message: "The tag 'agrriculture' doesn't exist" },
-        }
-    }
-}
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+    <span class="py">body</span><span class="p">:</span> <span class="err">{</span>
+        <span class="n">errors</span><span class="p">:</span> <span class="err">{</span>
+            <span class="n">title</span><span class="p">:</span> <span class="s2">'このタイトルの記事は既に存在します。タイトルは一意である必要があります。'</span><span class="p">,</span>
+            <span class="n">date</span><span class="p">:</span> <span class="s2">'日付は必須です。'</span><span class="p">,</span>
+            <span class="n">tags</span><span class="p">:</span> <span class="err">{</span> <span class="n">message</span><span class="p">:</span> <span class="s1">"タグ 'agriculture' は存在しません。"</span> <span class="p">}</span><span class="o">,</span>
+        <span class="err">}</span>
+    <span class="err">}</span>
+<span class="err">}</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: The shape of the returned validation errors must match the form shape: each key needs to match a <code class="language-plaintext highlighter-rouge">source</code> prop.</p>
+<p><strong>ヒント</strong>: 返されるバリデーションエラーの形はフォームの形と一致する必要があります：各キーは<code class="language-plaintext highlighter-rouge">source</code>プロパティと一致する必要があります。</p>
 
-<p><strong>Tip</strong>: The returned validation errors might have any validation format we support (simple strings, translation strings or translation objects with a <code class="language-plaintext highlighter-rouge">message</code> attribute) for each key.</p>
+<p><strong>ヒント</strong>: 返されるバリデーションエラーは、各キーに対して任意のバリデーションフォーマット（単純な文字列、翻訳文字列、または<code class="language-plaintext highlighter-rouge">message</code>属性を持つ翻訳オブジェクト）を持つことができます。</p>
 
-<p><strong>Tip</strong>: If your data provider leverages React Admin’s <a href="https://marmelab.com/react-admin/DataProviderWriting.html#example-rest-implementation"><code class="language-plaintext highlighter-rouge">httpClient</code></a>, all error response bodies are wrapped and thrown as <code class="language-plaintext highlighter-rouge">HttpError</code>. This means your API only needs to return an invalid response with a json body containing the <code class="language-plaintext highlighter-rouge">errors</code> key.</p>
+<p><strong>ヒント</strong>: React Adminの<a href="https://marmelab.com/react-admin/DataProviderWriting.html#example-rest-implementation"><code class="language-plaintext highlighter-rouge">httpClient</code></a>を利用するdata providerの場合、すべてのエラーレスポンスボディは<code class="language-plaintext highlighter-rouge">HttpError</code>としてラップされてスローされます。つまり、APIは<code class="language-plaintext highlighter-rouge">errors</code>キーを含むJSONボディを持つ無効なレスポンスを返すだけで済みます。</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">fetchUtils</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-admin</span><span class="dl">"</span><span class="p">;</span>
 
@@ -940,13 +924,13 @@
 
 <span class="kd">const</span> <span class="nx">apiUrl</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://my.api.com/</span><span class="dl">'</span><span class="p">;</span>
 <span class="cm">/*
-  Example response from the API when there are validation errors:
+  バリデーションエラーがある場合のAPIからの例：
 
   {
     "errors": {
-      "title": "An article with this title already exists. The title must be unique.",
-      "date": "The date is required",
-      "tags": { "message": "The tag 'agrriculture' doesn't exist" },
+      "title": "このタイトルの記事は既に存在します。タイトルは一意である必要があります。",
+      "date": "日付は必須です。",
+      "tags": { "message": "タグ 'agriculture' は存在しません。" },
     }
   }
 */</span>
@@ -962,9 +946,9 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p><strong>Tip:</strong> If you are not using React Admin’s <code class="language-plaintext highlighter-rouge">httpClient</code>, you can still wrap errors in an <code class="language-plaintext highlighter-rouge">HttpError</code> to return them with the correct shape:</p>
+<p><strong>ヒント:</strong> React Adminの<code class="language-plaintext highlighter-rouge">httpClient</code>を使用していない場合でも、エラーを<code class="language-plaintext highlighter-rouge">HttpError</code>でラップして正しい形で返すことができます：</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">HttpError</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">HttpError</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">myDataProvider</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">create</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="p">{</span> <span class="nx">data</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -975,12 +959,12 @@
 
         <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
         <span class="cm">/*
-            body should be something like:
+            bodyは次のようなものでなければなりません：
             {
                 errors: {
-                    title: "An article with this title already exists. The title must be unique.",
-                    date: "The date is required",
-                    tags: { message: "The tag 'agrriculture' doesn't exist" },
+                    title: "このタイトルの記事は既に存在します。タイトルは一意である必要があります。",
+                    date: "日付は必須です。",
+                    tags: { message: "タグ 'agriculture' は存在しません。" },
                 }
             }
         */</span>
@@ -997,6 +981,7 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
+
 
                         </div>
                     </div>

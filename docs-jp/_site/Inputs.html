@@ -565,143 +565,143 @@
                         >
                             <h1 id="input-components">Input Components</h1>
 
-<p>An <code class="language-plaintext highlighter-rouge">Input</code> component displays an input, or a dropdown list, a list of radio buttons, etc. Such components allow to update a record field and are common in the <code class="language-plaintext highlighter-rouge">&lt;Edit&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;Create&gt;</code> components, and in the List Filters.</p>
+<p><code class="language-plaintext highlighter-rouge">Input</code>コンポーネントは、入力フィールドやドロップダウンリスト、ラジオボタンのリストなどを表示します。これらのコンポーネントは、レコードフィールドを更新するために使用され、<code class="language-plaintext highlighter-rouge">&lt;Edit&gt;</code>や<code class="language-plaintext highlighter-rouge">&lt;Create&gt;</code>コンポーネント、およびリストフィルターで一般的に使用されます。</p>
 
 <p><img src="./img/inputs.webp" alt="Inputs" /></p>
 
-<p>Input components are usually wrappers around Material UI form components, bound to the current react-hook-form context.</p>
+<p>入力コンポーネントは通常、Material UIのフォームコンポーネントのラッパーであり、現在のreact-hook-formのコンテキストにバインドされています。</p>
 
-<h2 id="usage">Usage</h2>
+<h2 id="使用方法">使用方法</h2>
 
-<p>Input components must be used inside a Form element (e.g. <a href="./Form.md"><code class="language-plaintext highlighter-rouge">&lt;Form&gt;</code></a>, <a href="./SimpleForm.md"><code class="language-plaintext highlighter-rouge">&lt;SimpleForm&gt;</code></a>, <a href="./TabbedForm.md"><code class="language-plaintext highlighter-rouge">&lt;TabbedForm&gt;</code></a>). These components create a <a href="https://react-hook-form.com/"><code class="language-plaintext highlighter-rouge">react-hook-form</code></a> form and context.</p>
+<p>入力コンポーネントは必ずフォーム要素内（例：<a href="./Form.md"><code class="language-plaintext highlighter-rouge">&lt;Form&gt;</code></a>, <a href="./SimpleForm.md"><code class="language-plaintext highlighter-rouge">&lt;SimpleForm&gt;</code></a>, <a href="./TabbedForm.md"><code class="language-plaintext highlighter-rouge">&lt;TabbedForm&gt;</code></a>）で使用してください。これらのコンポーネントは<a href="https://react-hook-form.com/"><code class="language-plaintext highlighter-rouge">react-hook-form</code></a>のフォームとコンテキストを作成します。</p>
 
-<p>Input components require a <code class="language-plaintext highlighter-rouge">source</code> prop.</p>
+<p>入力コンポーネントには<code class="language-plaintext highlighter-rouge">source</code>プロップが必要です。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Edit</span><span class="p">,</span> <span class="nx">SimpleForm</span><span class="p">,</span> <span class="nx">ReferenceInput</span><span class="p">,</span> <span class="nx">SelectInput</span><span class="p">,</span> <span class="nx">TextInput</span><span class="p">,</span> <span class="nx">required</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="k">export</span> <span class="kd">const</span> <span class="nx">PostEdit</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
-    <span class="p">&lt;</span><span class="nc">Edit</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">disabled</span> <span class="na">source</span><span class="p">=</span><span class="s">"id"</span> <span class="p">/&gt;</span>
-            <span class="p">&lt;</span><span class="nc">ReferenceInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"User"</span> <span class="na">source</span><span class="p">=</span><span class="s">"userId"</span> <span class="na">reference</span><span class="p">=</span><span class="s">"users"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="p">[</span><span class="nx">required</span><span class="p">()]</span><span class="si">}</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nc">SelectInput</span> <span class="na">optionText</span><span class="p">=</span><span class="s">"name"</span> <span class="p">/&gt;</span>
-            <span class="p">&lt;/</span><span class="nc">ReferenceInput</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">label</span><span class="p">=</span><span class="s">"Post title"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="p">[</span><span class="nx">required</span><span class="p">()]</span><span class="si">}</span> <span class="p">/&gt;</span>
-            <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">multiline</span> <span class="na">source</span><span class="p">=</span><span class="s">"body"</span> <span class="na">defaultValue</span><span class="p">=</span><span class="s">"Lorem Ipsum"</span> <span class="p">/&gt;</span>
-        <span class="p">&lt;/</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nc">Edit</span><span class="p">&gt;</span>
-<span class="p">);</span>
+        <span class="p">&lt;</span><span class="nc">Edit</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">disabled</span> <span class="na">source</span><span class="p">=</span><span class="s">"id"</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">ReferenceInput</span> <span class="na">label</span><span class="p">=</span><span class="s">"User"</span> <span class="na">source</span><span class="p">=</span><span class="s">"userId"</span> <span class="na">reference</span><span class="p">=</span><span class="s">"users"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="p">[</span><span class="nx">required</span><span class="p">()]</span><span class="si">}</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">SelectInput</span> <span class="na">optionText</span><span class="p">=</span><span class="s">"name"</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;/</span><span class="nc">ReferenceInput</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">label</span><span class="p">=</span><span class="s">"Post title"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="p">[</span><span class="nx">required</span><span class="p">()]</span><span class="si">}</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">multiline</span> <span class="na">source</span><span class="p">=</span><span class="s">"body"</span> <span class="na">defaultValue</span><span class="p">=</span><span class="s">"Lorem Ipsum"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;/</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">Edit</span><span class="p">&gt;</span>
+    <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="common-input-props">Common Input Props</h2>
+<h2 id="共通の入力プロップ">共通の入力プロップ</h2>
 
-<p>All input components accept the following props:</p>
+<p>すべての入力コンポーネントは以下のプロップを受け取ります：</p>
 
 <table>
   <thead>
     <tr>
       <th>Prop</th>
-      <th>Required</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
+      <th>必須か</th>
+      <th>型</th>
+      <th>デフォルト</th>
+      <th>説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">source</code></td>
-      <td>Required</td>
+      <td>必須</td>
       <td><code class="language-plaintext highlighter-rouge">string</code></td>
       <td>-</td>
-      <td>Name of the entity property to use for the input value</td>
+      <td>入力値に使用するエンティティプロパティの名前</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">className</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">string</code></td>
       <td>-</td>
-      <td>Class name (usually generated by JSS) to customize the look and feel of the field element itself</td>
+      <td>フィールド要素自体の外観と感触をカスタマイズするためのクラス名（通常はJSSによって生成される）</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">defaultValue</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">any</code></td>
       <td>-</td>
-      <td>Default value of the input.</td>
+      <td>入力のデフォルト値</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">disabled</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">boolean</code></td>
       <td>-</td>
-      <td>If true, the input is disabled.</td>
+      <td>trueの場合、入力は無効になります</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">format</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">Function</code></td>
       <td><code class="language-plaintext highlighter-rouge">value =&gt; value == null ? '' : value</code></td>
-      <td>Callback taking the value from the form state, and returning the input value.</td>
+      <td>フォーム状態から値を取り、それを入力値として返すコールバック</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">fullWidth</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">boolean</code></td>
       <td><code class="language-plaintext highlighter-rouge">false</code></td>
-      <td>If <code class="language-plaintext highlighter-rouge">true</code>, the input will expand to fill the form width</td>
+      <td>trueの場合、入力はフォームの幅に合わせて広がります</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">helperText</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">string</code></td>
       <td>-</td>
-      <td>Text to be displayed under the input (cannot be used inside a filter)</td>
+      <td>入力の下に表示されるテキスト（フィルター内では使用できません）</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">label</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">string</code></td>
       <td>-</td>
-      <td>Input label. In i18n apps, the label is passed to the <code class="language-plaintext highlighter-rouge">translate</code> function. When omitted, the <code class="language-plaintext highlighter-rouge">source</code> property is humanized and used as a label. Set <code class="language-plaintext highlighter-rouge">label={false}</code> to hide the label.</td>
+      <td>入力ラベル。i18nアプリでは、ラベルは<code class="language-plaintext highlighter-rouge">translate</code>関数に渡されます。省略された場合、<code class="language-plaintext highlighter-rouge">source</code>プロパティが人間向けに変換されてラベルとして使用されます。<code class="language-plaintext highlighter-rouge">label={false}</code>と設定するとラベルが非表示になります。</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">parse</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">Function</code></td>
       <td><code class="language-plaintext highlighter-rouge">value =&gt; value === '' ? null : value</code></td>
-      <td>Callback taking the input value, and returning the value you want stored in the form state.</td>
+      <td>入力値を取り、フォーム状態に格納したい値を返すコールバック</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">sx</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">SxProps</code></td>
       <td>-</td>
-      <td>Material UI shortcut for defining custom styles</td>
+      <td>カスタムスタイルを定義するためのMaterial UIショートカット</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">validate</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">Function</code> | <code class="language-plaintext highlighter-rouge">array</code></td>
       <td>-</td>
-      <td>Validation rules for the current property. See the <a href="./Validation.md#per-input-validation-built-in-field-validators">Validation Documentation</a> for details.</td>
+      <td>現在のプロパティの検証ルール。詳細は<a href="./Validation.md#per-input-validation-built-in-field-validators">Validation Documentation</a>を参照してください。</td>
     </tr>
   </tbody>
 </table>
 
-<p>React-admin uses <a href="https://react-hook-form.com/">react-hook-form</a> to control form inputs. Each input component also accepts all react-hook-form <a href="https://react-hook-form.com/docs/usecontroller">useController</a> hook options.</p>
+<p>React-adminはフォーム入力を制御するために<a href="https://react-hook-form.com/">react-hook-form</a>を使用します。各入力コンポーネントもすべてのreact-hook-formの<a href="https://react-hook-form.com/docs/usecontroller">useController</a>フックオプションを受け取ります。</p>
 
-<p>Additional props are passed down to the underlying component (usually a Material UI component). For instance, when setting the <code class="language-plaintext highlighter-rouge">variant</code> prop on a <code class="language-plaintext highlighter-rouge">&lt;TextInput&gt;</code> component, the underlying Material UI <code class="language-plaintext highlighter-rouge">&lt;TextField&gt;</code> receives it, and renders it with a different variant. Refer to the documentation of each Input component to see the underlying Material UI component and its props.</p>
+<p>追加のプロップは、基礎となるコンポーネント（通常はMaterial UIコンポーネント）に渡されます。例えば、<code class="language-plaintext highlighter-rouge">&lt;TextInput&gt;</code>コンポーネントに<code class="language-plaintext highlighter-rouge">variant</code>プロップを設定すると、基礎となるMaterial UIの<code class="language-plaintext highlighter-rouge">&lt;TextField&gt;</code>がそれを受け取り、異なるバリアントでレンダリングされます。各入力コンポーネントの基礎となるMaterial UIコンポーネントとそのプロップについては、各入力コンポーネントのドキュメントを参照してください。</p>
 
-<h2 id="which-input-component-to-use">Which Input Component to Use?</h2>
+<h2 id="どの入力コンポーネントを使うべきか">どの入力コンポーネントを使うべきか？</h2>
 
-<p>React-admin provides a set of Input components, each one designed for a specific data type. Here is a list of the most common ones:</p>
+<p>React-adminは、特定のデータタイプ向けに設計された一連の入力コンポーネントを提供しています。以下は最も一般的な入力コンポーネントの一覧です：</p>
 
 <table>
   <thead>
     <tr>
-      <th>Data Type</th>
-      <th>Example value</th>
-      <th>Input Components</th>
+      <th>データタイプ</th>
+      <th>例</th>
+      <th>入力コンポーネント</th>
     </tr>
   </thead>
   <tbody>
@@ -763,7 +763,7 @@
     <tr>
       <td>Object</td>
       <td><code class="language-plaintext highlighter-rouge">{ foo: 'bar' }</code></td>
-      <td>All inputs (see <a href="#source"> <code class="language-plaintext highlighter-rouge">source</code></a>)</td>
+      <td>All inputs (see <a href="#source"><code class="language-plaintext highlighter-rouge">source</code></a>)</td>
     </tr>
     <tr>
       <td>Enum</td>
@@ -810,24 +810,24 @@
 
 <h2 id="classname"><code class="language-plaintext highlighter-rouge">className</code></h2>
 
-<p>The <code class="language-plaintext highlighter-rouge">className</code> prop is passed to the root element.</p>
+<p><code class="language-plaintext highlighter-rouge">className</code>プロップはルート要素に渡されます。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">className</span><span class="p">=</span><span class="s">"my-custom-class"</span> <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: Use <a href="#sx">the <code class="language-plaintext highlighter-rouge">sx</code> prop</a> rather than <code class="language-plaintext highlighter-rouge">className</code> to style the component.</p>
+<p><strong>ヒント</strong>：コンポーネントのスタイルを定義するには、<code class="language-plaintext highlighter-rouge">className</code>の代わりに<a href="#sx"><code class="language-plaintext highlighter-rouge">sx</code>プロップ</a>を使用してください。</p>
 
 <h2 id="defaultvalue"><code class="language-plaintext highlighter-rouge">defaultValue</code></h2>
 
-<p>Value of the input if the record has no value for the <code class="language-plaintext highlighter-rouge">source</code>.</p>
+<p>レコードに<code class="language-plaintext highlighter-rouge">source</code>の値がない場合の入力値。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">Form</span> <span class="na">record</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span> <span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Lorem ipsum</span><span class="dl">'</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nc">NumberInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"age"</span> <span class="na">defaultValue</span><span class="p">=</span><span class="si">{</span><span class="mi">18</span><span class="si">}</span> <span class="p">/&gt;</span> <span class="si">{</span><span class="cm">/* input initially renders with value 18 */</span><span class="si">}</span>
-    <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">defaultValue</span><span class="p">=</span><span class="s">"Hello, World!"</span> <span class="p">/&gt;</span> <span class="si">{</span><span class="cm">/* input initially renders with value "Lorem ipsum" */</span><span class="si">}</span>
+    <span class="p">&lt;</span><span class="nc">NumberInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"age"</span> <span class="na">defaultValue</span><span class="p">=</span><span class="si">{</span><span class="mi">18</span><span class="si">}</span> <span class="p">/&gt;</span> <span class="si">{</span><span class="cm">/* 初期値は18 */</span><span class="si">}</span>
+    <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">defaultValue</span><span class="p">=</span><span class="s">"Hello, World!"</span> <span class="p">/&gt;</span> <span class="si">{</span><span class="cm">/* 初期値は "Lorem ipsum" */</span><span class="si">}</span>
 <span class="p">&lt;/</span><span class="nc">Form</span><span class="p">&gt;</span>
 </code></pre></div></div>
 
-<p>React-admin will ignore these default values if the Form already defines <a href="./Form.md#defaultvalues">a form-wide <code class="language-plaintext highlighter-rouge">defaultValues</code></a>:</p>
+<p>フォーム全体で<code class="language-plaintext highlighter-rouge">defaultValues</code>を定義している場合、React-adminはこれらのデフォルト値を無視します：</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Create</span><span class="p">,</span> <span class="nx">SimpleForm</span><span class="p">,</span> <span class="nx">TextInput</span><span class="p">,</span> <span class="nx">NumberInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">RichTextInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-input-rich-text</span><span class="dl">'</span><span class="p">;</span>
@@ -841,14 +841,14 @@
         <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span>
             <span class="p">&lt;</span><span class="nc">RichTextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"body"</span> <span class="p">/&gt;</span>
-            <span class="si">{</span><span class="cm">/* input initially renders with value 123 (form &gt; input) */</span><span class="si">}</span>
+            <span class="si">{</span><span class="cm">/* 初期値は123 */</span><span class="si">}</span>
             <span class="p">&lt;</span><span class="nc">NumberInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"nb_views"</span> <span class="na">defaultValue</span><span class="p">=</span><span class="si">{</span><span class="mi">0</span><span class="si">}</span> <span class="p">/&gt;</span>
         <span class="p">&lt;/</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nc">Create</span><span class="p">&gt;</span>
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: <code class="language-plaintext highlighter-rouge">defaultValue</code> cannot use a function as value. For default values computed at render time, set the <code class="language-plaintext highlighter-rouge">defaultValues</code> at the form level.</p>
+<p><strong>ヒント</strong>：<code class="language-plaintext highlighter-rouge">defaultValue</code>に関数を使用することはできません。レンダリング時に計算されるデフォルト値が必要な場合は、フォームレベルで<code class="language-plaintext highlighter-rouge">defaultValues</code>を設定してください。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Create</span><span class="p">,</span> <span class="nx">SimpleForm</span><span class="p">,</span> <span class="nx">TextInput</span><span class="p">,</span> <span class="nx">NumberInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">RichTextInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-input-rich-text</span><span class="dl">'</span><span class="p">;</span>
@@ -869,24 +869,24 @@
 
 <h2 id="disabled"><code class="language-plaintext highlighter-rouge">disabled</code></h2>
 
-<p>If <code class="language-plaintext highlighter-rouge">true</code>, the input is disabled and the user can’t change the value.</p>
+<p><code class="language-plaintext highlighter-rouge">true</code>の場合、入力が無効になり、ユーザーは値を変更できません。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">disabled</span> <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: The form framework used by react-admin, react-hook-form, <a href="https://github.com/react-hook-form/react-hook-form/pull/10805">considers</a> that a <code class="language-plaintext highlighter-rouge">disabled</code> input shouldn’t submit any value. So react-hook-form sets the value of all <code class="language-plaintext highlighter-rouge">disabled</code> inputs to <code class="language-plaintext highlighter-rouge">undefined</code>. As a consequence, a form with a <code class="language-plaintext highlighter-rouge">disabled</code> input is always considered <code class="language-plaintext highlighter-rouge">dirty</code> (i.e. react-hook-form considers that the form values and the initial record values are different), and it triggers <a href="./EditTutorial.md#warning-about-unsaved-changes">the <code class="language-plaintext highlighter-rouge">warnWhenUnsavedChanges</code> feature</a> when leaving the form, even though the user changed nothing. The workaround is to set the <code class="language-plaintext highlighter-rouge">disabled</code> prop on the underlying input component, as follows:</p>
+<p><strong>ヒント</strong>：React-adminで使用されているフォームフレームワークであるreact-hook-formは、<code class="language-plaintext highlighter-rouge">disabled</code>な入力は値を送信すべきではないと考えています。そのため、react-hook-formはすべての<code class="language-plaintext highlighter-rouge">disabled</code>入力の値を<code class="language-plaintext highlighter-rouge">undefined</code>に設定します。この結果、<code class="language-plaintext highlighter-rouge">disabled</code>な入力を含むフォームは常に<code class="language-plaintext highlighter-rouge">dirty</code>と見なされ（つまり、react-hook-formはフォーム値と初期レコード値が異なると見なします）、ユーザーが何も変更していなくてもフォームを離れるときに<a href="./EditTutorial.md#warning-about-unsaved-changes">未保存の変更について警告する機能</a>がトリガーされます。この問題を回避するには、基礎となる入力コンポーネントに<code class="language-plaintext highlighter-rouge">disabled</code>プロップを設定します：</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">InputProps</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">disabled</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}</span><span class="si">}</span> <span class="p">/&gt;</span>
 </code></pre></div></div>
 
 <h2 id="format"><code class="language-plaintext highlighter-rouge">format</code></h2>
 
-<p>The <code class="language-plaintext highlighter-rouge">format</code> prop accepts a callback taking the value from the form state, and returning the input value (which should be a string).</p>
+<p><code class="language-plaintext highlighter-rouge">format</code>プロップは、フォーム状態から値を取り、入力値を返すコールバックを受け取ります（文字列である必要があります）。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>form state value --&gt; format --&gt; form input value (string)
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">form</span> <span class="nt">state</span> <span class="nt">value</span> <span class="nt">--</span><span class="o">&gt;</span> <span class="nt">format</span> <span class="nt">--</span><span class="o">&gt;</span> <span class="nt">form</span> <span class="nt">input</span> <span class="nt">value</span> <span class="o">(</span><span class="nt">string</span><span class="o">)</span>
 </code></pre></div></div>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="cm">/* Unit Price is stored in cents, i.e. 123 means 1.23 */</span><span class="p">}</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="cm">/* 単価はセントで保存されます。つまり、123は1.23を意味します */</span><span class="p">}</span>
 <span class="p">&lt;</span><span class="nc">NumberInput</span> 
     <span class="na">source</span><span class="p">=</span><span class="s">"unit_price"</span>
     <span class="na">format</span><span class="p">=</span><span class="si">{</span><span class="nx">v</span> <span class="o">=&gt;</span> <span class="nb">String</span><span class="p">(</span><span class="nx">v</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="si">}</span>
@@ -894,16 +894,16 @@
 <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">format</code> often comes in pair with <a href="#parse"><code class="language-plaintext highlighter-rouge">parse</code></a> to transform the input value before storing it in the form state. See the <a href="#transforming-input-value-tofrom-record">Transforming Input Value</a> section for more details.</p>
+<p><code class="language-plaintext highlighter-rouge">format</code>はしばしば<a href="#parse"><code class="language-plaintext highlighter-rouge">parse</code></a>とペアで使用され、入力値をフォーム状態に格納する前に変換します。詳細は<a href="#transforming-input-value-tofrom-record">Transforming Input Value</a>セクションを参照してください。</p>
 
-<p><strong>Tip:</strong> By default, react-admin inputs have the following <code class="language-plaintext highlighter-rouge">format</code> function, which turns any <code class="language-plaintext highlighter-rouge">null</code> or <code class="language-plaintext highlighter-rouge">undefined</code> value into an empty string. This is to avoid warnings about controlled/uncontrolled input components:</p>
+<p><strong>ヒント</strong>：デフォルトでは、react-adminの入力には以下の<code class="language-plaintext highlighter-rouge">format</code>関数があり、<code class="language-plaintext highlighter-rouge">null</code>または<code class="language-plaintext highlighter-rouge">undefined</code>の値を空文字列に変換します。これは、制御された/制御されていない入力コンポーネントに関する警告を回避するためです：</p>
 
 <div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">defaultFormat</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">value</span> <span class="o">==</span> <span class="kc">null</span> <span class="p">?</span> <span class="dl">''</span> <span class="p">:</span> <span class="nx">value</span><span class="p">;</span>
 </code></pre></div></div>
 
 <h2 id="fullwidth"><code class="language-plaintext highlighter-rouge">fullWidth</code></h2>
 
-<p>If <code class="language-plaintext highlighter-rouge">true</code>, the input will expand to fill the form width.</p>
+<p><code class="language-plaintext highlighter-rouge">true</code>の場合、入力はフォームの幅いっぱいに広がります。</p>
 
 <p><img src="./img/input-full-width.png" alt="input full width" /></p>
 
@@ -913,30 +913,30 @@
 
 <h2 id="helpertext"><code class="language-plaintext highlighter-rouge">helperText</code></h2>
 
-<p>Most inputs accept a <code class="language-plaintext highlighter-rouge">helperText</code> prop to display a text below the input.</p>
+<p>ほとんどの入力は、入力の下に表示するテキストを表示するために<code class="language-plaintext highlighter-rouge">helperText</code>プロップを受け取ります。</p>
 
 <p><img src="./img/input-helper-text.png" alt="input helper text" /></p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">NullableBooleanInput</span>
     <span class="na">source</span><span class="p">=</span><span class="s">"has_newsletter"</span>
-    <span class="na">helperText</span><span class="p">=</span><span class="s">"User has opted in to the newsletter"</span>
+    <span class="na">helperText</span><span class="p">=</span><span class="s">"ユーザーはニュースレターにオプトインしました"</span>
 <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<p>Set <code class="language-plaintext highlighter-rouge">helperText</code> to <code class="language-plaintext highlighter-rouge">false</code> to remove the empty line below the input. Beware that the form may “jump” visually when the input contains an error, as the error message will appear below the input.</p>
+<p><code class="language-plaintext highlighter-rouge">helperText</code>を<code class="language-plaintext highlighter-rouge">false</code>に設定して、入力の下の空行を削除します。入力にエラーが含まれている場合、エラーメッセージが入力の下に表示されるため、フォームが視覚的に「ジャンプ」する可能性があることに注意してください。</p>
 
-<p><strong>Tip:</strong> It is not possible to set a <code class="language-plaintext highlighter-rouge">helperText</code> for inputs used inside a <a href="./List.md#filters-filter-inputs">filter</a>.</p>
+<p><strong>ヒント</strong>：フィルター内で使用される入力には<code class="language-plaintext highlighter-rouge">helperText</code>を設定することはできません。</p>
 
 <h2 id="label"><code class="language-plaintext highlighter-rouge">label</code></h2>
 
-<p>The input label. In i18n apps, the label is passed to the translate function. When omitted, the <code class="language-plaintext highlighter-rouge">source</code> property is humanized and used as a label. Set <code class="language-plaintext highlighter-rouge">label={false}</code> to hide the label.</p>
+<p>入力ラベル。i18nアプリでは、ラベルは翻訳関数に渡されます。省略された場合、<code class="language-plaintext highlighter-rouge">source</code>プロパティが人間向けに変換され、ラベルとして使用されます。<code class="language-plaintext highlighter-rouge">label={false}</code>と設定するとラベルが非表示になります。</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span> <span class="p">{</span><span class="cm">/* input label is "Title" */</span><span class="p">}</span>
-<span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">label</span><span class="p">=</span><span class="s">"Post title"</span> <span class="p">/&gt;</span> <span class="p">{</span><span class="cm">/* input label is "Post title" */</span><span class="p">}</span>
-<span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">label</span><span class="p">=</span><span class="si">{</span><span class="kc">false</span><span class="si">}</span> <span class="p">/&gt;</span> <span class="p">{</span><span class="cm">/* input has no label */</span><span class="p">}</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span> <span class="p">{</span><span class="cm">/* 入力ラベルは "Title" */</span><span class="p">}</span>
+<span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">label</span><span class="p">=</span><span class="s">"Post title"</span> <span class="p">/&gt;</span> <span class="p">{</span><span class="cm">/* 入力ラベルは "Post title" */</span><span class="p">}</span>
+<span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">label</span><span class="p">=</span><span class="si">{</span><span class="kc">false</span><span class="si">}</span> <span class="p">/&gt;</span> <span class="p">{</span><span class="cm">/* 入力ラベルはなし */</span><span class="p">}</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: If your interface has to support multiple languages, don’t use the <code class="language-plaintext highlighter-rouge">label</code> prop. Provide one label per locale based on the default label (which is <code class="language-plaintext highlighter-rouge">resources.${resourceName}.fields.${fieldName}</code>) instead.</p>
+<p><strong>ヒント</strong>：インターフェースが複数の言語をサポートする必要がある場合、<code class="language-plaintext highlighter-rouge">label</code>プロップを使用しないでください。代わりに、デフォルトラベル（<code class="language-plaintext highlighter-rouge">resources.${resourceName}.fields.${fieldName}</code>）に基づいてロケールごとに1つのラベルを提供してください。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">frenchMessages</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">resources</span><span class="p">:</span> <span class="p">{</span>
@@ -949,19 +949,19 @@
     <span class="p">},</span>
 <span class="p">};</span>
 
-<span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span> <span class="p">{</span><span class="cm">/* input label is "Titre" */</span><span class="p">}</span>
+<span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span> <span class="p">{</span><span class="cm">/* 入力ラベルは "Titre" */</span><span class="p">}</span>
 </code></pre></div></div>
 
-<p>See the <a href="./TranslationTranslating.md#translating-resource-and-field-names">Translation documentation</a> for details.</p>
+<p>詳細は<a href="./TranslationTranslating.md#translating-resource-and-field-names">翻訳ドキュメント</a>を参照してください。</p>
 
 <h2 id="parse"><code class="language-plaintext highlighter-rouge">parse</code></h2>
 
-<p>The <code class="language-plaintext highlighter-rouge">parse</code> prop accepts a callback taking the value from the input (which is a string), and returning the value to put in the form state.</p>
+<p><code class="language-plaintext highlighter-rouge">parse</code>プロップは、入力値（文字列）を取り、フォーム状態に格納する値を返すコールバックを受け取ります。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>form input value (string) ---&gt; parse ---&gt; form state value
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">form</span> <span class="nt">input</span> <span class="nt">value</span> <span class="o">(</span><span class="nt">string</span><span class="o">)</span> <span class="nt">---</span><span class="o">&gt;</span> <span class="nt">parse</span> <span class="nt">---</span><span class="o">&gt;</span> <span class="nt">form</span> <span class="nt">state</span> <span class="nt">value</span>
 </code></pre></div></div>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="cm">/* Unit Price is stored in cents, i.e. 123 means 1.23 */</span><span class="p">}</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="cm">/* 単価はセントで保存されます。つまり、123は1.23を意味します */</span><span class="p">}</span>
 <span class="p">&lt;</span><span class="nc">NumberInput</span> 
     <span class="na">source</span><span class="p">=</span><span class="s">"unit_price"</span>
     <span class="na">format</span><span class="p">=</span><span class="si">{</span><span class="nx">v</span> <span class="o">=&gt;</span> <span class="nb">String</span><span class="p">(</span><span class="nx">v</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="si">}</span>
@@ -969,23 +969,23 @@
 <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">parse</code> often comes in pair with <a href="#format"><code class="language-plaintext highlighter-rouge">format</code></a> to transform the form value before passing it to the input. See the <a href="#transforming-input-value-tofrom-record">Transforming Input Value</a> section for more details.</p>
+<p><code class="language-plaintext highlighter-rouge">parse</code>はしばしば<a href="#format"><code class="language-plaintext highlighter-rouge">format</code></a>とペアで使用され、フォーム値を入力に渡す前に変換します。詳細は<a href="#transforming-input-value-tofrom-record">Transforming Input Value</a>セクションを参照してください。</p>
 
-<p><strong>Tip:</strong> By default, react-admin inputs have the following <code class="language-plaintext highlighter-rouge">parse</code> function, which transforms any empty string into <code class="language-plaintext highlighter-rouge">null</code>:</p>
+<p><strong>ヒント</strong>：デフォルトでは、react-adminの入力には以下の<code class="language-plaintext highlighter-rouge">parse</code>関数があり、空文字列を<code class="language-plaintext highlighter-rouge">null</code>に変換します：</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">defaultParse</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">''</span> <span class="p">?</span> <span class="kc">null</span> <span class="p">:</span> <span class="nx">value</span><span class="p">;</span>
 </code></pre></div></div>
 
 <h2 id="source"><code class="language-plaintext highlighter-rouge">source</code></h2>
 
-<p>Specifies the field of the record that the input should edit.</p>
+<p>入力が編集するレコードフィールドを指定します。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">Form</span> <span class="na">record</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span> <span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Hello, world!</span><span class="dl">'</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span> <span class="si">{</span><span class="cm">/* default value is "Hello, world!" */</span><span class="si">}</span>
+    <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span> <span class="si">{</span><span class="cm">/* 初期値は "Hello, world!" */</span><span class="si">}</span>
 <span class="p">&lt;/</span><span class="nc">Form</span><span class="p">&gt;</span>
 </code></pre></div></div>
 
-<p>If you edit a record with a complex structure, you can use a path as the <code class="language-plaintext highlighter-rouge">source</code> parameter. For instance, if the API returns the following ‘book’ record:</p>
+<p>複雑な構造を持つレコードを編集する場合、<code class="language-plaintext highlighter-rouge">source</code>パラメータとしてパスを使用できます。例えば、APIが以下の「book」レコードを返すとします：</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
@@ -997,14 +997,14 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Then you can display a text input to edit the author’s first name as follows:</p>
+<p>次に、以下のようにして著者の名前を編集するためのテキスト入力を表示できます：</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"author.firstName"</span> <span class="p">/&gt;</span>
 </code></pre></div></div>
 
 <h2 id="sx"><code class="language-plaintext highlighter-rouge">sx</code></h2>
 
-<p>Each individual input supports an <code class="language-plaintext highlighter-rouge">sx</code> prop to pass custom styles to the underlying component, relying on <a href="https://mui.com/system/basics/#the-sx-prop">Material UI system</a>.</p>
+<p>各入力は、基礎となるコンポーネントにカスタムスタイルを渡すための<code class="language-plaintext highlighter-rouge">sx</code>プロップをサポートしており、<a href="https://mui.com/system/basics/#the-sx-prop">Material UIシステム</a>に依存しています。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">TextInput</span>
     <span class="na">source</span><span class="p">=</span><span class="s">"title"</span>
@@ -1018,17 +1018,17 @@
 <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<p>Refer to the documentation of each input component to see what inner classes you can override.</p>
+<p>オーバーライドできる内部クラスについては、各入力コンポーネントのドキュメントを参照してください。</p>
 
 <h2 id="validate"><code class="language-plaintext highlighter-rouge">validate</code></h2>
 
-<p>A function or an array of functions to validate the input value.</p>
+<p>入力値を検証するための関数または関数の配列。</p>
 
-<p>Validator functions should return <code class="language-plaintext highlighter-rouge">undefined</code> if the value is valid, or a string describing the error if it’s invalid.</p>
+<p>バリデータ関数は、値が有効な場合は<code class="language-plaintext highlighter-rouge">undefined</code>を返し、無効な場合はエラーを説明する文字列を返すべきです。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">validateAge</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">&lt;</span> <span class="mi">18</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="dl">'</span><span class="s1">Must be over 18</span><span class="dl">'</span><span class="p">;</span>
+        <span class="k">return</span> <span class="dl">'</span><span class="s1">18歳以上でなければなりません</span><span class="dl">'</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="kc">undefined</span><span class="p">;</span>
 <span class="p">}</span>
@@ -1036,55 +1036,55 @@
 <span class="p">&lt;</span><span class="nc">NumberInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"age"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="nx">validate</span><span class="si">}</span> <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: If your admin has <a href="./Translation.md">multi-language support</a>, validator functions should return message <em>identifiers</em> rather than messages themselves. React-admin automatically passes these identifiers to the translation function:</p>
+<p><strong>ヒント</strong>：管理画面が<a href="./Translation.md">多言語サポート</a>されている場合、バリデータ関数はメッセージ自体ではなくメッセージ識別子を返すべきです。React-adminはこれらの識別子を自動的に翻訳関数に渡します：</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in validators/required.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// validators/required.jsで</span>
 <span class="kd">const</span> <span class="nx">required</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span>
     <span class="nx">value</span>
         <span class="p">?</span> <span class="kc">undefined</span>
         <span class="p">:</span> <span class="dl">'</span><span class="s1">myroot.validation.required</span><span class="dl">'</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>React-admin comes with a set of built-in validators:</p>
+<p>React-adminには一連の組み込みバリデータが付属しています：</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">required(message)</code> if the field is mandatory,</li>
-  <li><code class="language-plaintext highlighter-rouge">minValue(min, message)</code> to specify a minimum value for integers,</li>
-  <li><code class="language-plaintext highlighter-rouge">maxValue(max, message)</code> to specify a maximum value for integers,</li>
-  <li><code class="language-plaintext highlighter-rouge">minLength(min, message)</code> to specify a minimum length for strings,</li>
-  <li><code class="language-plaintext highlighter-rouge">maxLength(max, message)</code> to specify a maximum length for strings,</li>
-  <li><code class="language-plaintext highlighter-rouge">number(message)</code> to check that the input is a valid number,</li>
-  <li><code class="language-plaintext highlighter-rouge">email(message)</code> to check that the input is a valid email address,</li>
-  <li><code class="language-plaintext highlighter-rouge">regex(pattern, message)</code> to validate that the input matches a regex,</li>
-  <li><code class="language-plaintext highlighter-rouge">choices(list, message)</code> to validate that the input is within a given list,</li>
+  <li><code class="language-plaintext highlighter-rouge">required(message)</code> フィールドが必須の場合</li>
+  <li><code class="language-plaintext highlighter-rouge">minValue(min, message)</code> 整数の最小値を指定する場合</li>
+  <li><code class="language-plaintext highlighter-rouge">maxValue(max, message)</code> 整数の最大値を指定する場合</li>
+  <li><code class="language-plaintext highlighter-rouge">minLength(min, message)</code> 文字列の最小長を指定する場合</li>
+  <li><code class="language-plaintext highlighter-rouge">maxLength(max, message)</code> 文字列の最大長を指定する場合</li>
+  <li><code class="language-plaintext highlighter-rouge">number(message)</code> 入力が有効な数値であることを確認する場合</li>
+  <li><code class="language-plaintext highlighter-rouge">email(message)</code> 入力が有効なメールアドレスであることを確認する場合</li>
+  <li><code class="language-plaintext highlighter-rouge">regex(pattern, message)</code> 入力が正規表現と一致することを確認する場合</li>
+  <li><code class="language-plaintext highlighter-rouge">choices(list, message)</code> 入力が指定されたリスト内にあることを確認する場合</li>
 </ul>
 
-<p>These are validator factories, so you need to call the function to get the validator.</p>
+<p>これらはバリデータファクトリであるため、バリデータを取得するには関数を呼び出す必要があります。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">NumberInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"age"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="nx">required</span><span class="p">()</span><span class="si">}</span> <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<p>You can use an array of validators to apply different validation rules to the same input.</p>
+<p>複数のバリデーションルールを同じ入力に適用するために、バリデータの配列を使用できます。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">NumberInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"age"</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="p">[</span><span class="nx">required</span><span class="p">(),</span> <span class="nx">validateAge</span><span class="p">]</span><span class="si">}</span> <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<p><strong>Note</strong>: You can’t use both input-level validation and <a href="./Form.md#validate">form-level validation</a> - this is a <code class="language-plaintext highlighter-rouge">react-hook-form</code> limitation.</p>
+<p><strong>注意</strong>：入力レベルのバリデーションと<a href="./Form.md#validate">フォームレベルのバリデーション</a>を同時に使用することはできません。これは<code class="language-plaintext highlighter-rouge">react-hook-form</code>の制限です。</p>
 
-<p>Check <a href="./Validation.md">the Validation chapter for details</a>.</p>
+<p>詳細は<a href="./Validation.md">Validation章</a>を参照してください。</p>
 
-<h2 id="transforming-input-value-tofrom-record">Transforming Input Value to/from Record</h2>
+<h2 id="入力値のレコードへの変換およびその逆">入力値のレコードへの変換およびその逆</h2>
 
-<p>The data format returned by the input component may not be what your API desires. You can use the <code class="language-plaintext highlighter-rouge">parse</code> and <code class="language-plaintext highlighter-rouge">format</code> functions to transform the input value when saving to and loading from the record.</p>
+<p>入力コンポーネントが返すデータ形式は、APIが期待するものではないかもしれません。保存および読み込み時に入力値を変換するために、<code class="language-plaintext highlighter-rouge">parse</code>および<code class="language-plaintext highlighter-rouge">format</code>関数を使用できます。</p>
 
-<p>Mnemonic for the two functions:</p>
+<p>2つの関数のニーモニック：</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">parse()</code>: input -&gt; record</li>
-  <li><code class="language-plaintext highlighter-rouge">format()</code>: record -&gt; input</li>
+  <li><code class="language-plaintext highlighter-rouge">parse()</code>: 入力 -&gt; レコード</li>
+  <li><code class="language-plaintext highlighter-rouge">format()</code>: レコード -&gt; 入力</li>
 </ul>
 
-<p>Let’s look at a simple example. Say the user would like to input values of 0-100 to a percentage field but your API (hence record) expects 0-1.0. You can use simple <code class="language-plaintext highlighter-rouge">parse()</code> and <code class="language-plaintext highlighter-rouge">format()</code> functions to archive the transform:</p>
+<p>簡単な例を見てみましょう。ユーザーが0-100の値をパーセンテージフィールドに入力したいが、API（したがってレコード）は0-1.0を期待する場合、シンプルな<code class="language-plaintext highlighter-rouge">parse()</code>および<code class="language-plaintext highlighter-rouge">format()</code>関数を使用して変換を実現できます：</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">NumberInput</span>
     <span class="na">source</span><span class="p">=</span><span class="s">"percent"</span>
@@ -1094,13 +1094,13 @@
 <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<p>Another classical use-case is with handling dates. <code class="language-plaintext highlighter-rouge">&lt;DateInput&gt;</code> stores and returns a string. If you would like to store a JavaScript Date object in your record instead, you can do something like this:</p>
+<p>別の典型的な使用例は日付の処理です。<code class="language-plaintext highlighter-rouge">&lt;DateInput&gt;</code>は文字列を保存および返しますが、レコードにJavaScriptのDateオブジェクトを保存したい場合、以下のようにすることができます：</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">dateFormatRegex</span> <span class="o">=</span> <span class="sr">/^</span><span class="se">\d{4}</span><span class="sr">-</span><span class="se">\d{2}</span><span class="sr">-</span><span class="se">\d{2}</span><span class="sr">$/</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">dateParseRegex</span> <span class="o">=</span> <span class="sr">/</span><span class="se">(\d{4})</span><span class="sr">-</span><span class="se">(\d{2})</span><span class="sr">-</span><span class="se">(\d{2})</span><span class="sr">/</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">convertDateToString</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span> <span class="o">|</span> <span class="nb">Date</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="c1">// value is a `Date` object</span>
+    <span class="c1">// valueは`Date`オブジェクト</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">value</span> <span class="k">instanceof</span> <span class="nb">Date</span><span class="p">)</span> <span class="o">||</span> <span class="nb">isNaN</span><span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()))</span> <span class="k">return</span> <span class="dl">''</span><span class="p">;</span>
     <span class="kd">const</span> <span class="nx">pad</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">00</span><span class="dl">'</span><span class="p">;</span>
     <span class="kd">const</span> <span class="nx">yyyy</span> <span class="o">=</span> <span class="nx">value</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">().</span><span class="nx">toString</span><span class="p">();</span>
@@ -1110,18 +1110,17 @@
 <span class="p">};</span>
 
 <span class="kd">const</span> <span class="nx">dateFormatter</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">:</span> <span class="kr">string</span> <span class="o">|</span> <span class="nb">Date</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="c1">// null, undefined and empty string values should not go through dateFormatter</span>
-    <span class="c1">// otherwise, it returns undefined and will make the input an uncontrolled one.</span>
+    <span class="c1">// null, undefined, および空文字列の値はdateFormatterを通過させない</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="nx">value</span> <span class="o">===</span> <span class="dl">''</span><span class="p">)</span> <span class="k">return</span> <span class="dl">''</span><span class="p">;</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="k">instanceof</span> <span class="nb">Date</span><span class="p">)</span> <span class="k">return</span> <span class="nx">convertDateToString</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-    <span class="c1">// Valid dates should not be converted</span>
+    <span class="c1">// 有効な日付は変換しない</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">dateFormatRegex</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
 
     <span class="k">return</span> <span class="nx">convertDateToString</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">value</span><span class="p">));</span>
 <span class="p">};</span>
 
 <span class="kd">const</span> <span class="nx">dateParser</span> <span class="o">=</span> <span class="nx">value</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="c1">//value is a string of "YYYY-MM-DD" format</span>
+    <span class="c1">//valueは"YYYY-MM-DD"形式の文字列</span>
     <span class="kd">const</span> <span class="nx">match</span> <span class="o">=</span> <span class="nx">dateParseRegex</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">match</span> <span class="o">===</span> <span class="kc">null</span> <span class="o">||</span> <span class="nx">match</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
 	<span class="kd">const</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">match</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">match</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">match</span><span class="p">[</span><span class="mi">3</span><span class="p">]));</span>
@@ -1133,13 +1132,13 @@
 <span class="p">&lt;</span><span class="nc">DateInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"isodate"</span> <span class="na">format</span><span class="p">=</span><span class="si">{</span><span class="nx">dateFormatter</span><span class="si">}</span> <span class="na">parse</span><span class="p">=</span><span class="si">{</span><span class="nx">dateParser</span><span class="si">}</span> <span class="na">defaultValue</span><span class="p">=</span><span class="si">{</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()</span><span class="si">}</span> <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<p><strong>Tip:</strong> A common usage for this feature is to deal with empty values. Indeed, HTML form inputs always return strings, even for numbers and booleans, however most backends expect a value like <code class="language-plaintext highlighter-rouge">null</code>. This is why, by default, all react-admin inputs will store the value <code class="language-plaintext highlighter-rouge">null</code> when the HTML input value is <code class="language-plaintext highlighter-rouge">''</code>.</p>
+<p><strong>ヒント</strong>：この機能の一般的な使用方法は、空の値を処理することです。実際、HTMLフォーム入力は常に文字列を返しますが、数値やブール値の場合でも多くのバックエンドは<code class="language-plaintext highlighter-rouge">null</code>の値を期待します。これが、デフォルトでreact-adminのすべての入力がHTML入力値が空文字列の場合に<code class="language-plaintext highlighter-rouge">null</code>を格納する理由です。</p>
 
-<p><strong>Tip</strong>: If you need to do this globally, including for custom input components that do not use <a href="#the-useinput-hook">the <code class="language-plaintext highlighter-rouge">useInput</code> hook</a>, have a look at <a href="./Form.md#sanitizeemptyvalues">the <code class="language-plaintext highlighter-rouge">sanitizeEmptyValues</code> prop of the <code class="language-plaintext highlighter-rouge">&lt;Form&gt;</code> component</a>.</p>
+<p><strong>ヒント</strong>：カスタム入力コンポーネントを含むすべての入力コンポーネントに対してこれをグローバルに行う必要がある場合、 <a href="./Form.md#sanitizeemptyvalues"><code class="language-plaintext highlighter-rouge">&lt;Form&gt;</code>コンポーネントの<code class="language-plaintext highlighter-rouge">sanitizeEmptyValues</code>プロップ</a>を確認してください。</p>
 
-<h2 id="marking-an-input-as-required">Marking An Input as Required</h2>
+<h2 id="必須として入力をマークする">必須として入力をマークする</h2>
 
-<p>By default, react-admin will add an asterisk to the input label if the Input component uses <a href="./Validation.md#per-input-validation-built-in-field-validators">the <code class="language-plaintext highlighter-rouge">required</code> validator</a>.</p>
+<p>デフォルトでは、react-adminは入力コンポーネントが <a href="./Validation.md#per-input-validation-built-in-field-validators"><code class="language-plaintext highlighter-rouge">required</code>バリデータ</a>を使用する場合、入力ラベルにアスタリスクを追加します。</p>
 
 <p><img src="./img/input-full-width.png" alt="Required Input" /></p>
 
@@ -1149,11 +1148,11 @@
 <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"teaser"</span> <span class="na">multiline</span> <span class="na">fullWidth</span> <span class="na">validate</span><span class="p">=</span><span class="si">{</span><span class="nx">required</span><span class="p">()</span><span class="si">}</span> <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<h2 id="linking-two-inputs">Linking Two Inputs</h2>
+<h2 id="2つの入力をリンクする">2つの入力をリンクする</h2>
 
-<p>Edition forms often contain linked inputs, e.g. country and city (the choices of the latter depending on the value of the former).</p>
+<p>編集フォームには、例えば国と都市（後者の選択肢が前者の値に依存する）のようにリンクされた入力が含まれることがよくあります。</p>
 
-<p>React-admin relies on <a href="https://react-hook-form.com/">react-hook-form</a> for form handling. You can grab the current form values using react-hook-form’s <a href="https://react-hook-form.com/docs/usewatch">useWatch</a> hook.</p>
+<p>React-adminはフォーム処理のために<a href="https://react-hook-form.com/">react-hook-form</a>に依存しています。現在のフォーム値はreact-hook-formの<a href="https://react-hook-form.com/docs/usewatch">useWatch</a>フックを使用して取得できます。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Edit</span><span class="p">,</span> <span class="nx">SimpleForm</span><span class="p">,</span> <span class="nx">SelectInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-admin</span><span class="dl">"</span><span class="p">;</span>
@@ -1190,7 +1189,7 @@
 <span class="k">export</span> <span class="k">default</span> <span class="nx">OrderEdit</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>Alternatively, you can use the react-admin <code class="language-plaintext highlighter-rouge">&lt;FormDataConsumer&gt;</code> component, which grabs the form values, and passes them to a child function. As <code class="language-plaintext highlighter-rouge">&lt;FormDataConsumer&gt;</code> uses the render props pattern, you can avoid creating an intermediate component like the <code class="language-plaintext highlighter-rouge">&lt;CityInput&gt;</code> component above:</p>
+<p>または、React-adminの<code class="language-plaintext highlighter-rouge">&lt;FormDataConsumer&gt;</code>コンポーネントを使用することもできます。これにより、フォーム値が取得され、それが子関数に渡されます。<code class="language-plaintext highlighter-rouge">&lt;FormDataConsumer&gt;</code>はレンダープロップパターンを使用しているため、上記の<code class="language-plaintext highlighter-rouge">&lt;CityInput&gt;</code>コンポーネントのような中間コンポーネントを作成する必要がなくなります：</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Edit</span><span class="p">,</span> <span class="nx">SimpleForm</span><span class="p">,</span> <span class="nx">SelectInput</span><span class="p">,</span> <span class="nx">FormDataConsumer</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-admin</span><span class="dl">"</span><span class="p">;</span>
@@ -1224,14 +1223,14 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: When using a <code class="language-plaintext highlighter-rouge">FormDataConsumer</code> inside an <code class="language-plaintext highlighter-rouge">ArrayInput</code>, the <code class="language-plaintext highlighter-rouge">FormDataConsumer</code> will provide two additional properties to its children function:</p>
+<p><strong>ヒント</strong>：<code class="language-plaintext highlighter-rouge">&lt;ArrayInput&gt;</code>内で<code class="language-plaintext highlighter-rouge">FormDataConsumer</code>を使用する場合、<code class="language-plaintext highlighter-rouge">FormDataConsumer</code>は子関数に2つの追加プロパティを提供します：</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">scopedFormData</code>: an object containing the current values of the currently rendered item from the <code class="language-plaintext highlighter-rouge">ArrayInput</code></li>
-  <li><code class="language-plaintext highlighter-rouge">getSource</code>: a function that translates the source into a valid one for the <code class="language-plaintext highlighter-rouge">ArrayInput</code></li>
+  <li><code class="language-plaintext highlighter-rouge">scopedFormData</code>：現在レンダリングされている<code class="language-plaintext highlighter-rouge">ArrayInput</code>のアイテムの現在の値を含むオブジェクト</li>
+  <li><code class="language-plaintext highlighter-rouge">getSource</code>：<code class="language-plaintext highlighter-rouge">ArrayInput</code>用の有効なソースに変換する関数</li>
 </ul>
 
-<p>And here is an example usage for <code class="language-plaintext highlighter-rouge">getSource</code> inside <code class="language-plaintext highlighter-rouge">&lt;ArrayInput&gt;</code>:</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;ArrayInput&gt;</code>内での<code class="language-plaintext highlighter-rouge">getSource</code>の使用例は以下のとおりです：</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">FormDataConsumer</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -1243,14 +1242,14 @@
                     <span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"name"</span> <span class="p">/&gt;</span>
                     <span class="p">&lt;</span><span class="nc">FormDataConsumer</span><span class="err">&lt;</span><span class="si">{</span> <span class="nx">name</span><span class="p">:</span> <span class="kr">string</span> <span class="si">}</span><span class="p">&gt;</span>&gt;
                         <span class="si">{</span><span class="p">({</span>
-                            <span class="nx">formData</span><span class="p">,</span> <span class="c1">// The whole form data</span>
-                            <span class="nx">scopedFormData</span><span class="p">,</span> <span class="c1">// The data for this item of the ArrayInput</span>
-                            <span class="nx">getSource</span><span class="p">,</span> <span class="c1">// A function to get the valid source inside an ArrayInput</span>
+                            <span class="nx">formData</span><span class="p">,</span> <span class="c1">// フォーム全体のデータ</span>
+                            <span class="nx">scopedFormData</span><span class="p">,</span> <span class="c1">// ArrayInputのこのアイテムのデータ</span>
+                            <span class="nx">getSource</span><span class="p">,</span> <span class="c1">// ArrayInput内の有効なソースを取得するための関数</span>
                             <span class="p">...</span><span class="nx">rest</span>
                         <span class="p">})</span> <span class="o">=&gt;</span>
                             <span class="nx">scopedFormData</span> <span class="o">&amp;&amp;</span> <span class="nx">getSource</span> <span class="o">&amp;&amp;</span> <span class="nx">scopedFormData</span><span class="p">.</span><span class="nx">name</span> <span class="p">?</span> <span class="p">(</span>
                                 <span class="p">&lt;</span><span class="nc">SelectInput</span>
-                                    <span class="na">source</span><span class="p">=</span><span class="si">{</span><span class="nx">getSource</span><span class="p">(</span><span class="dl">'</span><span class="s1">role</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span> <span class="c1">// Will translate to "authors[0].role"</span>
+                                    <span class="na">source</span><span class="p">=</span><span class="si">{</span><span class="nx">getSource</span><span class="p">(</span><span class="dl">'</span><span class="s1">role</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span> <span class="c1">// "authors[0].role"に変換</span>
                                     <span class="na">choices</span><span class="p">=</span><span class="si">{</span><span class="p">[{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Head Writer</span><span class="dl">'</span> <span class="p">},</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Co-Writer</span><span class="dl">'</span> <span class="p">}]</span><span class="si">}</span>
                                     <span class="si">{</span><span class="p">...</span><span class="nx">rest</span><span class="si">}</span>
                                 <span class="p">/&gt;</span>
@@ -1264,13 +1263,13 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip:</strong> TypeScript users will notice that <code class="language-plaintext highlighter-rouge">scopedFormData</code> and <code class="language-plaintext highlighter-rouge">getSource</code> are typed as optional parameters. This is because the <code class="language-plaintext highlighter-rouge">&lt;FormDataConsumer&gt;</code> component can be used outside of an <code class="language-plaintext highlighter-rouge">&lt;ArrayInput&gt;</code> and in that case, these parameters will be <code class="language-plaintext highlighter-rouge">undefined</code>. If you are inside an <code class="language-plaintext highlighter-rouge">&lt;ArrayInput&gt;</code>, you can safely assume that these parameters will be defined.</p>
+<p><strong>ヒント</strong>：TypeScriptユーザーは、<code class="language-plaintext highlighter-rouge">scopedFormData</code>および<code class="language-plaintext highlighter-rouge">getSource</code>がオプションのパラメータとして型付けされていることに気付くでしょう。これは、<code class="language-plaintext highlighter-rouge">&lt;FormDataConsumer&gt;</code>コンポーネントが<code class="language-plaintext highlighter-rouge">&lt;ArrayInput&gt;</code>の外でも使用でき、その場合、これらのパラメータは<code class="language-plaintext highlighter-rouge">undefined</code>になるためです。<code class="language-plaintext highlighter-rouge">&lt;ArrayInput&gt;</code>内にいる場合、これらのパラメータは定義されていると安全に仮定できます。</p>
 
-<h2 id="hiding-inputs-based-on-other-inputs">Hiding Inputs Based On Other Inputs</h2>
+<h2 id="他の入力に基づいて入力を非表示にする">他の入力に基づいて入力を非表示にする</h2>
 
-<p>You may want to display or hide inputs based on the value of another input - for instance, show an <code class="language-plaintext highlighter-rouge">email</code> input only if the <code class="language-plaintext highlighter-rouge">hasEmail</code> boolean input has been ticked to <code class="language-plaintext highlighter-rouge">true</code>.</p>
+<p>他の入力の値に基づいて入力を表示または非表示にする場合があります。例えば、<code class="language-plaintext highlighter-rouge">hasEmail</code>ブール入力が<code class="language-plaintext highlighter-rouge">true</code>に設定されている場合にのみ<code class="language-plaintext highlighter-rouge">email</code>入力を表示するなど。</p>
 
-<p>For such cases, you can use the approach described above, using the <code class="language-plaintext highlighter-rouge">&lt;FormDataConsumer&gt;</code> component.</p>
+<p>このような場合、上記のアプローチを使用して、<code class="language-plaintext highlighter-rouge">&lt;FormDataConsumer&gt;</code>コンポーネントを使用できます。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">FormDataConsumer</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -1288,18 +1287,18 @@
  <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Note</strong>: By default, <code class="language-plaintext highlighter-rouge">react-hook-form</code> submits values of unmounted input components. In the above example, the <code class="language-plaintext highlighter-rouge">shouldUnregister</code> prop of the <code class="language-plaintext highlighter-rouge">&lt;SimpleForm&gt;</code> component prevents that from happening. That way, when end users hide an input, its value isn’t included in the submitted data.</p>
+<p><strong>注意</strong>：デフォルトでは、<code class="language-plaintext highlighter-rouge">react-hook-form</code>はアンマウントされた入力コンポーネントの値を送信します。上記の例では、<code class="language-plaintext highlighter-rouge">&lt;SimpleForm&gt;</code>コンポーネントの<code class="language-plaintext highlighter-rouge">shouldUnregister</code>プロップがそれを防ぎます。これにより、エンドユーザーが入力を非表示にした場合、その値は送信データに含まれません。</p>
 
-<h2 id="overriding-the-input-variant">Overriding The Input Variant</h2>
+<h2 id="入力バリアントのオーバーライド">入力バリアントのオーバーライド</h2>
 
-<p>Material UI offers <a href="https://mui.com/material-ui/react-text-field/#basic-textfield">3 variants for text fields</a>: <code class="language-plaintext highlighter-rouge">outlined</code>, <code class="language-plaintext highlighter-rouge">filled</code>, and <code class="language-plaintext highlighter-rouge">standard</code>. The default react-admin theme uses the <code class="language-plaintext highlighter-rouge">filled</code> variant.</p>
+<p>Material UIはテキストフィールドのために<a href="https://mui.com/material-ui/react-text-field/#basic-textfield">3つのバリアント</a>を提供しています：<code class="language-plaintext highlighter-rouge">outlined</code>、<code class="language-plaintext highlighter-rouge">filled</code>、および<code class="language-plaintext highlighter-rouge">standard</code>。デフォルトのreact-adminテーマは<code class="language-plaintext highlighter-rouge">filled</code>バリアントを使用します。</p>
 
-<p>Most Input components pass their additional props down to the root component, which is often a Material UI Field component. This means you can pass a <code class="language-plaintext highlighter-rouge">variant</code> prop to override the variant of a single input:</p>
+<p>ほとんどの入力コンポーネントは追加のプロップをルートコンポーネント（多くの場合Material UIフィールドコンポーネント）に渡すため、単一の入力のバリアントをオーバーライドするために<code class="language-plaintext highlighter-rouge">variant</code>プロップを渡すことができます：</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"name"</span> <span class="na">variant</span><span class="p">=</span><span class="s">"outlined"</span> <span class="p">/&gt;</span>
 </code></pre></div></div>
 
-<p>If you want to use another variant in all the Inputs of your application, override the <code class="language-plaintext highlighter-rouge">&lt;Admin theme&gt;</code> prop with a <a href="./AppTheme.md#overriding-default-props">custom theme</a>, as follows:</p>
+<p>アプリケーションのすべての入力で別のバリアントを使用したい場合、<a href="./AppTheme.md#overriding-default-props">カスタムテーマ</a>を使用して<code class="language-plaintext highlighter-rouge">&lt;Admin theme&gt;</code>プロップをオーバーライドします：</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">defaultTheme</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -1327,7 +1326,7 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: If you are a TypeScript user you may want to set the string values in the previous example <code class="language-plaintext highlighter-rouge">as const</code> to avoid TypeScript complaining about it:</p>
+<p><strong>ヒント</strong>：TypeScriptユーザーは、前述の例で文字列値を<code class="language-plaintext highlighter-rouge">as const</code>として設定することで、TypeScriptの警告を回避できます：</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">defaultTheme</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -1351,15 +1350,15 @@
 <span class="c1">// ...</span>
 </code></pre></div></div>
 
-<h2 id="writing-your-own-input-component">Writing Your Own Input Component</h2>
+<h2 id="独自の入力コンポーネントを作成する">独自の入力コンポーネントを作成する</h2>
 
-<p>If you need a more specific input type, you can write it directly in React. You’ll have to rely on react-hook-form’s <a href="https://react-hook-form.com/docs/usecontroller">useController</a> hook, to handle the value update cycle.</p>
+<p>より具体的な入力タイプが必要な場合は、Reactで直接作成できます。値の更新サイクルを処理するためにreact-hook-formの<a href="https://react-hook-form.com/docs/usecontroller">useController</a>フックに依存する必要があります。</p>
 
-<h3 id="using-usecontroller">Using <code class="language-plaintext highlighter-rouge">useController</code></h3>
+<h3 id="usecontrollerの使用"><code class="language-plaintext highlighter-rouge">useController</code>の使用</h3>
 
-<p>For instance, let’s write a component to edit the latitude and longitude of the current record:</p>
+<p>例えば、現在のレコードの緯度と経度を編集するコンポーネントを作成してみましょう：</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in LatLongInput.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// LatLongInput.jsで</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useController</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-hook-form</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">LatLngInput</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -1376,7 +1375,7 @@
 <span class="p">};</span>
 <span class="k">export</span> <span class="k">default</span> <span class="nx">LatLngInput</span><span class="p">;</span>
 
-<span class="c1">// in ItemEdit.js</span>
+<span class="c1">// ItemEdit.jsで</span>
 <span class="kd">const</span> <span class="nx">ItemEdit</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">Edit</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nc">SimpleForm</span><span class="p">&gt;</span>
@@ -1386,7 +1385,7 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">LatLngInput</code> takes no props, because the <code class="language-plaintext highlighter-rouge">useController</code> component can access the current record via the form context. The <code class="language-plaintext highlighter-rouge">name</code> prop serves as a selector for the record property to edit. Executing this component will render roughly the following code:</p>
+<p><code class="language-plaintext highlighter-rouge">LatLngInput</code>はプロップを受け取りません。なぜなら、<code class="language-plaintext highlighter-rouge">useController</code>コンポーネントはフォームコンテキストを介して現在のレコードにアクセスできるためです。<code class="language-plaintext highlighter-rouge">name</code>プロップは編集するレコードプロパティのセレクタとして機能します。このコンポーネントを実行すると、大まかに次のコードがレンダリングされます：</p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;span&gt;</span>
     <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"lat"</span> <span class="na">type=</span><span class="s">"number"</span> <span class="na">placeholder=</span><span class="s">"latitude"</span> <span class="na">value=</span><span class="s">{record.lat}</span> <span class="nt">/&gt;</span>
@@ -1394,9 +1393,9 @@
 <span class="nt">&lt;/span&gt;</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: Notice that we have added <code class="language-plaintext highlighter-rouge">defaultValue: ''</code> as one of the <code class="language-plaintext highlighter-rouge">useController</code> params. This is a good practice to avoid getting console warnings about controlled/uncontrolled components, that may arise if the value of <code class="language-plaintext highlighter-rouge">record.lat</code> or <code class="language-plaintext highlighter-rouge">record.lng</code> is <code class="language-plaintext highlighter-rouge">undefined</code> or <code class="language-plaintext highlighter-rouge">null</code>.</p>
+<p><strong>ヒント</strong>：<code class="language-plaintext highlighter-rouge">useController</code>パラメータの1つとして<code class="language-plaintext highlighter-rouge">defaultValue: ''</code>を追加しました。これは、<code class="language-plaintext highlighter-rouge">record.lat</code>や<code class="language-plaintext highlighter-rouge">record.lng</code>の値が<code class="language-plaintext highlighter-rouge">undefined</code>や<code class="language-plaintext highlighter-rouge">null</code>である場合に制御された/制御されていないコンポーネントに関する警告を回避するための良いプラクティスです。</p>
 
-<p><strong>Tip</strong>: React-hook-form’s <code class="language-plaintext highlighter-rouge">useController</code> component supports dot notation in the <code class="language-plaintext highlighter-rouge">name</code> prop, to allow binding to nested values:</p>
+<p><strong>ヒント</strong>：React-hook-formの<code class="language-plaintext highlighter-rouge">useController</code>コンポーネントは<code class="language-plaintext highlighter-rouge">name</code>プロップでドット表記をサポートしており、ネストされた値にバインドすることができます：</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useController</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-hook-form</span><span class="dl">'</span><span class="p">;</span>
 
@@ -1415,11 +1414,11 @@
 <span class="k">export</span> <span class="k">default</span> <span class="nx">LatLngInput</span><span class="p">;</span>
 </code></pre></div></div>
 
-<h3 id="using-labeled">Using <code class="language-plaintext highlighter-rouge">&lt;Labeled&gt;</code></h3>
+<h3 id="labeledの使用"><code class="language-plaintext highlighter-rouge">&lt;Labeled&gt;</code>の使用</h3>
 
-<p>This component lacks a label. React-admin provides the <code class="language-plaintext highlighter-rouge">&lt;Labeled&gt;</code> component for that:</p>
+<p>このコンポーネントにはラベルがありません。React-adminはそのための<code class="language-plaintext highlighter-rouge">&lt;Labeled&gt;</code>コンポーネントを提供しています：</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in LatLongInput.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// LatLongInput.jsで</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useController</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-hook-form</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Labeled</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -1440,7 +1439,7 @@
 <span class="k">export</span> <span class="k">default</span> <span class="nx">LatLngInput</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>Now the component will render with a label:</p>
+<p>これで、コンポーネントはラベル付きでレンダリングされます：</p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;label&gt;</span>Position<span class="nt">&lt;/label&gt;</span>
 <span class="nt">&lt;span&gt;</span>
@@ -1449,11 +1448,11 @@
 <span class="nt">&lt;/span&gt;</span>
 </code></pre></div></div>
 
-<h3 id="using-material-ui-field-components">Using Material UI Field Components</h3>
+<h3 id="material-uiフィールドコンポーネントの使用">Material UIフィールドコンポーネントの使用</h3>
 
-<p>Instead of HTML <code class="language-plaintext highlighter-rouge">input</code> elements, you can use a Material UI component like <code class="language-plaintext highlighter-rouge">TextField</code>. To bind Material UI components to the form values, use the <code class="language-plaintext highlighter-rouge">useController()</code> hook:</p>
+<p>HTMLの<code class="language-plaintext highlighter-rouge">input</code>要素の代わりに、<code class="language-plaintext highlighter-rouge">TextField</code>のようなMaterial UIコンポーネントを使用できます。Material UIコンポーネントをフォーム値にバインドするために、<code class="language-plaintext highlighter-rouge">useController()</code>フックを使用します：</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in LatLongInput.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// LatLongInput.jsで</span>
 <span class="k">import</span> <span class="nx">TextField</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material/TextField</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useController</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-hook-form</span><span class="dl">'</span><span class="p">;</span>
 
@@ -1482,15 +1481,15 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: Material UI’s <code class="language-plaintext highlighter-rouge">&lt;TextField&gt;</code> component already includes a label, so you don’t need to use <code class="language-plaintext highlighter-rouge">&lt;Labeled&gt;</code> in this case.</p>
+<p><strong>ヒント</strong>：Material UIの<code class="language-plaintext highlighter-rouge">&lt;TextField&gt;</code>コンポーネントにはすでにラベルが含まれているため、この場合は<code class="language-plaintext highlighter-rouge">&lt;Labeled&gt;</code>を使用する必要はありません。</p>
 
-<p><strong>Tip</strong>: Notice that we have added <code class="language-plaintext highlighter-rouge">defaultValue: ''</code> as one of the <code class="language-plaintext highlighter-rouge">useController</code> params. This is a good practice to avoid getting console warnings about controlled/uncontrolled components, that may arise if the value of <code class="language-plaintext highlighter-rouge">record.lat</code> or <code class="language-plaintext highlighter-rouge">record.lng</code> is <code class="language-plaintext highlighter-rouge">undefined</code> or <code class="language-plaintext highlighter-rouge">null</code>.</p>
+<p><strong>ヒント</strong>：<code class="language-plaintext highlighter-rouge">useController</code>パラメータの1つとして<code class="language-plaintext highlighter-rouge">defaultValue: ''</code>を追加しました。これは、<code class="language-plaintext highlighter-rouge">record.lat</code>や<code class="language-plaintext highlighter-rouge">record.lng</code>の値が<code class="language-plaintext highlighter-rouge">undefined</code>や<code class="language-plaintext highlighter-rouge">null</code>である場合に制御された/制御されていないコンポーネントに関する警告を回避するための良いプラクティスです。</p>
 
-<p><code class="language-plaintext highlighter-rouge">useController()</code> returns three values: <code class="language-plaintext highlighter-rouge">field</code>, <code class="language-plaintext highlighter-rouge">fieldState</code>, and <code class="language-plaintext highlighter-rouge">formState</code>. To learn more about these props, please refer to the <a href="https://react-hook-form.com/docs/usecontroller">useController</a> hook documentation.</p>
+<p><code class="language-plaintext highlighter-rouge">useController()</code>は3つの値を返します：<code class="language-plaintext highlighter-rouge">field</code>、<code class="language-plaintext highlighter-rouge">fieldState</code>、および<code class="language-plaintext highlighter-rouge">formState</code>。これらのプロップについて詳しくは、<a href="https://react-hook-form.com/docs/usecontroller">useController</a>フックのドキュメントを参照してください。</p>
 
-<p>Instead of HTML <code class="language-plaintext highlighter-rouge">input</code> elements or Material UI components, you can use react-admin input components, like <code class="language-plaintext highlighter-rouge">&lt;NumberInput&gt;</code> for instance. React-admin components already use <code class="language-plaintext highlighter-rouge">useController()</code>, and already include a label, so you don’t need either <code class="language-plaintext highlighter-rouge">useController()</code> or <code class="language-plaintext highlighter-rouge">&lt;Labeled&gt;</code> when using them:</p>
+<p>HTMLの<code class="language-plaintext highlighter-rouge">input</code>要素やMaterial UIコンポーネントの代わりに、react-admin入力コンポーネントを使用することもできます。例えば、<code class="language-plaintext highlighter-rouge">&lt;NumberInput&gt;</code>など。React-adminコンポーネントはすでに<code class="language-plaintext highlighter-rouge">useController()</code>を使用しており、すでにラベルを含んでいるため、<code class="language-plaintext highlighter-rouge">useController()</code>や<code class="language-plaintext highlighter-rouge">&lt;Labeled&gt;</code>は必要ありません：</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in LatLongInput.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// LatLongInput.jsで</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">NumberInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="kd">const</span> <span class="nx">LatLngInput</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>
@@ -1502,20 +1501,20 @@
 <span class="k">export</span> <span class="k">default</span> <span class="nx">LatLngInput</span><span class="p">;</span>
 </code></pre></div></div>
 
-<h3 id="the-useinput-hook">The <code class="language-plaintext highlighter-rouge">useInput()</code> Hook</h3>
+<h3 id="useinputフック"><code class="language-plaintext highlighter-rouge">useInput()</code>フック</h3>
 
-<p>React-admin adds functionality to react-hook-form:</p>
+<p>React-adminはreact-hook-formに機能を追加します：</p>
 
 <ul>
-  <li>handling of custom event emitters like <code class="language-plaintext highlighter-rouge">onChange</code>,</li>
-  <li>support for an array of validators,</li>
-  <li>detection of required fields to add an asterisk to the field label,</li>
-  <li>parse and format to translate record values to form values and vice-versa.</li>
+  <li><code class="language-plaintext highlighter-rouge">onChange</code>のようなカスタムイベントエミッタの処理、</li>
+  <li>バリデータの配列のサポート、</li>
+  <li>フィールドラベルにアスタリスクを追加するための必須フィールドの検出、</li>
+  <li>レコード値をフォーム値に、またその逆に変換するための<code class="language-plaintext highlighter-rouge">parse</code>および<code class="language-plaintext highlighter-rouge">format</code>。</li>
 </ul>
 
-<p>So internally, react-admin components use another hook, which wraps react-hook-form’s <code class="language-plaintext highlighter-rouge">useController()</code> hook. It’s called <code class="language-plaintext highlighter-rouge">useInput()</code>; use it instead of <code class="language-plaintext highlighter-rouge">useController()</code> to create form inputs that have the exact same API as react-admin Input components:</p>
+<p>したがって、内部的には、react-adminコンポーネントはreact-hook-formの<code class="language-plaintext highlighter-rouge">useController()</code>フックをラップする別のフックを使用します。それは<code class="language-plaintext highlighter-rouge">useInput()</code>と呼ばれ、react-admin入力コンポーネントと同じAPIを持つフォーム入力を作成するために使用します：</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in LatLongInput.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// LatLongInput.jsで</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">TextField</span><span class="p">,</span> <span class="nx">TextFieldProps</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@mui/material</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useInput</span><span class="p">,</span> <span class="nx">required</span><span class="p">,</span> <span class="nx">InputProps</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-admin</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1534,8 +1533,8 @@
         <span class="na">formState</span><span class="p">:</span> <span class="p">{</span> <span class="nx">isSubmitted</span> <span class="p">},</span>
         <span class="nx">isRequired</span><span class="p">,</span>
     <span class="p">}</span> <span class="o">=</span> <span class="nx">useInput</span><span class="p">({</span>
-        <span class="c1">// Pass the event handlers to the hook but not the component as the field property already has them.</span>
-        <span class="c1">// useInput will call the provided onChange and onBlur in addition to the default needed by react-hook-form.</span>
+        <span class="c1">// イベントハンドラをフックに渡しますが、フィールドプロパティには渡しません。フィールドプロパティにはすでに含まれています。</span>
+        <span class="c1">// useInputは提供されたonChangeとonBlurを呼び出し、react-hook-formに必要なデフォルトも呼び出します。</span>
         <span class="nx">onChange</span><span class="p">,</span>
         <span class="nx">onBlur</span><span class="p">,</span>
         <span class="p">...</span><span class="nx">rest</span><span class="p">,</span>
@@ -1575,9 +1574,9 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>Here is another example, this time using a Material UI <code class="language-plaintext highlighter-rouge">Select</code> component:</p>
+<p>今回は、Material UIの<code class="language-plaintext highlighter-rouge">Select</code>コンポーネントを使用した別の例です：</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in SexInput.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SexInput.jsで</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Select</span><span class="p">,</span> <span class="nx">MenuItem</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@mui/material</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">InputProps</span><span class="p">,</span> <span class="nx">useInput</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-admin</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1598,7 +1597,7 @@
 <span class="k">export</span> <span class="k">default</span> <span class="nx">SexInput</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: <code class="language-plaintext highlighter-rouge">useInput</code> accepts all arguments that you can pass to <code class="language-plaintext highlighter-rouge">useController</code>. Besides, components using <code class="language-plaintext highlighter-rouge">useInput</code> accept props like <code class="language-plaintext highlighter-rouge">format</code> and <code class="language-plaintext highlighter-rouge">parse</code>, to convert values from the form to the input, and vice-versa:</p>
+<p><strong>ヒント</strong>：<code class="language-plaintext highlighter-rouge">useInput</code>は、<code class="language-plaintext highlighter-rouge">useController</code>に渡すことができるすべての引数を受け入れます。さらに、<code class="language-plaintext highlighter-rouge">useInput</code>を使用するコンポーネントは、値をフォームから入力に、またその逆に変換するための<code class="language-plaintext highlighter-rouge">format</code>および<code class="language-plaintext highlighter-rouge">parse</code>プロップを受け入れます：</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">parse</span> <span class="o">=</span> <span class="nx">value</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="cm">/* ... */</span><span class="p">};</span>
 <span class="kd">const</span> <span class="nx">format</span> <span class="o">=</span> <span class="nx">value</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="cm">/* ... */</span><span class="p">};</span>
@@ -1616,15 +1615,15 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Reminder:</strong> <a href="https://react-hook-form.com/docs/useformstate/#rules">react-hook-form’s <code class="language-plaintext highlighter-rouge">formState</code> is wrapped with a Proxy</a> to improve render performance and skip extra computation if specific state is not subscribed. So, make sure you deconstruct or read the <code class="language-plaintext highlighter-rouge">formState</code> before render in order to enable the subscription.</p>
+<p><strong>リマインダー</strong>：<a href="https://react-hook-form.com/docs/useformstate/#rules">react-hook-formの<code class="language-plaintext highlighter-rouge">formState</code>はProxyでラップされています</a>ので、レンダリング前に<code class="language-plaintext highlighter-rouge">formState</code>をデコンストラクトまたは読み取ってサブスクリプションを有効にすることを確認してください。</p>
 
 <div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">{</span> <span class="nx">isDirty</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useFormState</span><span class="p">();</span> <span class="c1">// ✅</span>
-<span class="kd">const</span> <span class="nx">formState</span> <span class="o">=</span> <span class="nx">useFormState</span><span class="p">();</span> <span class="c1">// ❌ should deconstruct the formState      </span>
+<span class="kd">const</span> <span class="nx">formState</span> <span class="o">=</span> <span class="nx">useFormState</span><span class="p">();</span> <span class="c1">// ❌ formStateをデコンストラクトする必要があります      </span>
 </code></pre></div></div>
 
 <h2 id="i18n">i18n</h2>
 
-<p>In order to properly format the input’s <code class="language-plaintext highlighter-rouge">helperText</code> and error messages from <code class="language-plaintext highlighter-rouge">useInput()</code>, custom inputs should make use of the react-admin component <code class="language-plaintext highlighter-rouge">&lt;InputHelperText&gt;</code>, which ensures that the text below the input returns consistently whether it’s a string or a React component, and whether it’s a simple message or an error. Importantly, react-admin messages from <code class="language-plaintext highlighter-rouge">useInput()</code> are passed through <code class="language-plaintext highlighter-rouge">useTranslate()</code> inside <code class="language-plaintext highlighter-rouge">&lt;InputHelperText&gt;</code>, which makes this component important for localization.</p>
+<p>入力の<code class="language-plaintext highlighter-rouge">helperText</code>および<code class="language-plaintext highlighter-rouge">useInput()</code>からのエラーメッセージを適切にフォーマットするために、カスタム入力はreact-adminコンポーネントの<code class="language-plaintext highlighter-rouge">&lt;InputHelperText&gt;</code>を使用する必要があります。これにより、テキストが文字列かReactコンポーネントか、単純なメッセージかエラーかに関係なく、一貫して入力の下に表示されるようになります。重要なのは、<code class="language-plaintext highlighter-rouge">useInput()</code>からのreact-adminメッセージが<code class="language-plaintext highlighter-rouge">&lt;InputHelperText&gt;</code>内で<code class="language-plaintext highlighter-rouge">useTranslate()</code>を通過するため、このコンポーネントはローカライゼーションにとって重要です。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">TextField</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material/TextField</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useInput</span><span class="p">,</span> <span class="nx">InputHelperText</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
@@ -1666,29 +1665,40 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<h2 id="third-party-components">Third-Party Components</h2>
+<h2 id="サードパーティコンポーネント">サードパーティコンポーネント</h2>
 
-<p>You can find components for react-admin in third-party repositories.</p>
+<p>サードパーティリポジトリでreact-admin用のコンポーネントを見つけることができます。</p>
 
 <ul>
-  <li><a href="https://github.com/alexgschwend/react-admin-color-picker">alexgschwend/react-admin-color-picker</a>: a color input using <a href="https://casesandberg.github.io/react-color/">React Color</a>, a collection of color pickers.</li>
-  <li><a href="https://www.npmjs.com/package/react-admin-mui-dateinputs">react-admin-mui-dateinputs</a>: a collection of Date/Time Inputs for react-admin based on <a href="https://mui.com/x/react-date-pickers/date-picker/">MUI X Date Pickers</a>.</li>
-  <li><a href="https://github.com/MrHertal/react-admin-json-view">MrHertal/react-admin-json-view</a>: JSON field and input for react-admin.</li>
-  <li><a href="https://github.com/bigbasket/ra-components">@bb-tech/ra-components</a>: <code class="language-plaintext highlighter-rouge">JsonInput</code> which allows only valid JSON as input, <code class="language-plaintext highlighter-rouge">JsonField</code> to view JSON properly on show card and <code class="language-plaintext highlighter-rouge">TrimField</code> to trim the fields while showing in <code class="language-plaintext highlighter-rouge">Datagrid</code> in <code class="language-plaintext highlighter-rouge">List</code> component.</li>
   <li>
-    <p><a href="https://react-page.github.io/docs/#/integration-react-admin">@react-page/react-admin</a>: ReactPage is a rich content editor and comes with a ready-to-use React-admin input component. <a href="https://react-page.github.io/examples/reactadmin">check out the demo</a></p>
+    <p><a href="https://github.com/alexgschwend/react-admin-color-picker">alexgschwend/react-admin-color-picker</a>：色入力を提供する<a href="https://casesandberg.github.io/react-color/">React Color</a>を使用した色入力。</p>
   </li>
-  <li><strong>DEPRECATED V3</strong> <a href="https://github.com/LoicMahieu/aor-tinymce-input">LoicMahieu/aor-tinymce-input</a>: a TinyMCE component, useful for editing HTML</li>
+  <li>
+    <p><a href="https://www.npmjs.com/package/react-admin-mui-dateinputs">react-admin-mui-dateinputs</a>：<a href="https://mui.com/x/react-date-pickers/date-picker/">MUI X Date Pickers</a>に基づいたDate/Time入力のコレクション。</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/MrHertal/react-admin-json-view">MrHertal/react-admin-json-view</a>：react-admin用のJSONフィールドおよび入力。</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/bigbasket/ra-components">@bb-tech/ra-components</a>：有効なJSONのみを入力として許可する<code class="language-plaintext highlighter-rouge">JsonInput</code>、<code class="language-plaintext highlighter-rouge">Datagrid</code>の<code class="language-plaintext highlighter-rouge">List</code>コンポーネントで表示する際にフィールドをトリムする<code class="language-plaintext highlighter-rouge">TrimField</code>、およびJSONを適切に表示する<code class="language-plaintext highlighter-rouge">JsonField</code>。</p>
+  </li>
+  <li>
+    <p><a href="https://react-page.github.io/docs/#/integration-react-admin">@react-page/react-admin</a>：ReactPageはリッチコンテンツエディタであり、すぐに使用できるReact-admin入力コンポーネントが付属しています。<a href="https://react-page.github.io/examples/reactadmin">デモを確認する</a></p>
+  </li>
+  <li>
+    <p><strong>DEPRECATED V3</strong><a href="https://github.com/LoicMahieu/aor-tinymce-input">LoicMahieu/aor-tinymce-input</a>：HTML編集に便利なTinyMCEコンポーネント。</p>
+  </li>
 </ul>
 
-<h2 id="hiding-the-label">Hiding the label</h2>
+<h2 id="ラベルの非表示">ラベルの非表示</h2>
 
-<p>You can set <code class="language-plaintext highlighter-rouge">label={false}</code> on an input component to hide its label.</p>
+<p>入力コンポーネントで<code class="language-plaintext highlighter-rouge">label={false}</code>を設定すると、そのラベルを非表示にできます。</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span> <span class="p">{</span><span class="cm">/* input label is "Title" */</span><span class="p">}</span>
-<span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">label</span><span class="p">=</span><span class="s">"Post title"</span> <span class="p">/&gt;</span> <span class="p">{</span><span class="cm">/* input label is "Post title" */</span><span class="p">}</span>
-<span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">label</span><span class="p">=</span><span class="si">{</span><span class="kc">false</span><span class="si">}</span> <span class="p">/&gt;</span> <span class="p">{</span><span class="cm">/* input has no label */</span><span class="p">}</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="p">/&gt;</span> <span class="p">{</span><span class="cm">/* 入力ラベルは "Title" */</span><span class="p">}</span>
+<span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">label</span><span class="p">=</span><span class="s">"Post title"</span> <span class="p">/&gt;</span> <span class="p">{</span><span class="cm">/* 入力ラベルは "Post title" */</span><span class="p">}</span>
+<span class="p">&lt;</span><span class="nc">TextInput</span> <span class="na">source</span><span class="p">=</span><span class="s">"title"</span> <span class="na">label</span><span class="p">=</span><span class="si">{</span><span class="kc">false</span><span class="si">}</span> <span class="p">/&gt;</span> <span class="p">{</span><span class="cm">/* 入力ラベルはなし */</span><span class="p">}</span>
 </code></pre></div></div>
+
 
                         </div>
                     </div>

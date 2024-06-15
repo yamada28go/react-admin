@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <title>React-admin - Querying the API</title>
+        <title>React-admin - APIのクエリ実行</title>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
@@ -563,33 +563,33 @@
                         <div
                             class="markdown-section DocSearch-content toc-content"
                         >
-                            <h1 id="querying-the-api">Querying the API</h1>
+                            <h1 id="apiのクエリ実行">APIのクエリ実行</h1>
 
-<p>React-admin provides special hooks to emit read and write queries to the <a href="./DataProviders.md"><code class="language-plaintext highlighter-rouge">dataProvider</code></a>, which in turn sends requests to your API. Under the hood, it uses <a href="https://tanstack.com/query/v3/">react-query</a> to call the <code class="language-plaintext highlighter-rouge">dataProvider</code> and cache the results.</p>
+<p>React-adminは、読み取りおよび書き込みクエリを<a href="./DataProviders.md"><code class="language-plaintext highlighter-rouge">dataProvider</code></a>に送信するための特別なフックを提供します。<code class="language-plaintext highlighter-rouge">dataProvider</code>はあなたのAPIにリクエストを送信します。内部では、<a href="https://tanstack.com/query/v3/">react-query</a>を使用して<code class="language-plaintext highlighter-rouge">dataProvider</code>を呼び出し、その結果をキャッシュします。</p>
 
-<h2 id="getting-the-dataprovider-instance">Getting The <code class="language-plaintext highlighter-rouge">dataProvider</code> Instance</h2>
+<h2 id="dataproviderインスタンスの取得"><code class="language-plaintext highlighter-rouge">dataProvider</code>インスタンスの取得</h2>
 
-<p>React-admin stores the <code class="language-plaintext highlighter-rouge">dataProvider</code> object in a React context, so it’s available from anywhere in your application code. The <code class="language-plaintext highlighter-rouge">useDataProvider</code> hook grabs the Data Provider from that context, so you can call it directly.</p>
+<p>React-adminは<code class="language-plaintext highlighter-rouge">dataProvider</code>オブジェクトをReactコンテキストに保存しているため、アプリケーションコードのどこからでもアクセスできます。<code class="language-plaintext highlighter-rouge">useDataProvider</code>フックはそのコンテキストから<code class="language-plaintext highlighter-rouge">dataProvider</code>を取得し、直接呼び出すことができます。</p>
 
-<p>For instance, here is how to query the Data Provider for the current user profile:</p>
+<p>例えば、現在のユーザープロファイルを<code class="language-plaintext highlighter-rouge">dataProvider</code>にクエリする方法は次の通りです:</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useDataProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">import</span> <span class="p">{</span> <span class="nx">useDataProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="kd">const</span> <span class="nx">MyComponent</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="nx">dataProvider</span> <span class="o">=</span> <span class="nx">useDataProvider</span><span class="p">();</span>
-    <span class="c1">// ...</span>
-<span class="p">}</span>
+    <span class="kd">const</span> <span class="nx">MyComponent</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">dataProvider</span> <span class="o">=</span> <span class="nx">useDataProvider</span><span class="p">();</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Refer to <a href="./useDataProvider.md">the <code class="language-plaintext highlighter-rouge">useDataProvider</code> hook documentation</a> for more information.</p>
+<p>詳細については、<a href="./useDataProvider.md"><code class="language-plaintext highlighter-rouge">useDataProvider</code>フックのドキュメント</a>を参照してください。</p>
 
-<p><strong>Tip</strong>: The <code class="language-plaintext highlighter-rouge">dataProvider</code> returned by the hook is actually a <em>wrapper</em> around your Data Provider. This wrapper logs the user out if the <code class="language-plaintext highlighter-rouge">dataProvider</code> returns an error, and if the <code class="language-plaintext highlighter-rouge">authProvider</code> sees that error as an authentication error (via <code class="language-plaintext highlighter-rouge">authProvider.checkError()</code>).</p>
+<p><strong>ヒント</strong>: フックによって返される<code class="language-plaintext highlighter-rouge">dataProvider</code>は、実際にはあなたの<code class="language-plaintext highlighter-rouge">dataProvider</code>の<em>ラッパー</em>です。このラッパーは、<code class="language-plaintext highlighter-rouge">dataProvider</code>がエラーを返した場合にユーザーをログアウトさせ、<code class="language-plaintext highlighter-rouge">authProvider</code>がそのエラーを認証エラーと見なす場合（<code class="language-plaintext highlighter-rouge">authProvider.checkError()</code>を通じて）にログアウトさせます。</p>
 
-<h2 id="dataprovider-method-hooks">DataProvider Method Hooks</h2>
+<h2 id="dataproviderメソッドフック">DataProviderメソッドフック</h2>
 
-<p>React-admin provides one hook for each of the Data Provider methods. They are useful shortcuts that make your code more readable and more robust.</p>
+<p>React-adminは、各Data Providerメソッドに対して1つのフックを提供します。これらはコードをより読みやすくし、より堅牢にするための便利なショートカットです。</p>
 
-<p>The query hooks execute on mount. They return an object with the following properties: <code class="language-plaintext highlighter-rouge">{ data, isLoading, error }</code>. Query hooks are:</p>
+<p>クエリフックはマウント時に実行され、次のプロパティを持つオブジェクトを返します: <code class="language-plaintext highlighter-rouge">{ data, isLoading, error }</code>。クエリフックには次のものがあります:</p>
 
 <ul>
   <li><a href="./useGetList.md"><code class="language-plaintext highlighter-rouge">useGetList</code></a></li>
@@ -598,7 +598,7 @@
   <li><a href="./useGetManyReference.md"><code class="language-plaintext highlighter-rouge">useGetManyReference</code></a></li>
 </ul>
 
-<p>The mutation hooks execute the query when you call a callback. They return an array with the following items: <code class="language-plaintext highlighter-rouge">[mutate, { data, isLoading, error }]</code>. Mutation hooks are:</p>
+<p>ミューテーションフックはコールバックを呼び出したときにクエリを実行し、次の項目を含む配列を返します: <code class="language-plaintext highlighter-rouge">[mutate, { data, isLoading, error }]</code>。ミューテーションフックには次のものがあります:</p>
 
 <ul>
   <li><a href="./useCreate.md"><code class="language-plaintext highlighter-rouge">useCreate</code></a></li>
@@ -608,13 +608,13 @@
   <li><a href="./useDeleteMany.md"><code class="language-plaintext highlighter-rouge">useDeleteMany</code></a></li>
 </ul>
 
-<p>Their signature is the same as the related dataProvider method, e.g.:</p>
+<p>そのシグネチャは関連する<code class="language-plaintext highlighter-rouge">dataProvider</code>メソッドと同じです。例えば：</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// calls dataProvider.getOne(resource, { id })</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// dataProvider.getOne(resource, { id })を呼び出します</span>
 <span class="kd">const</span> <span class="p">{</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">isLoading</span><span class="p">,</span> <span class="nx">error</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useGetOne</span><span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="p">{</span> <span class="nx">id</span> <span class="p">});</span>
 </code></pre></div></div>
 
-<p>For instance, here is how to fetch one record from the API using the <code class="language-plaintext highlighter-rouge">useGetOne</code> hook:</p>
+<p>例えば、<code class="language-plaintext highlighter-rouge">useGetOne</code>フックを使用してAPIから1つのレコードを取得する方法は次の通りです:</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useGetOne</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Loading</span><span class="p">,</span> <span class="nb">Error</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./MyComponents</span><span class="dl">'</span><span class="p">;</span>
@@ -635,7 +635,7 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>Here is another example, using <code class="language-plaintext highlighter-rouge">useUpdate()</code>:</p>
+<p>次に、<code class="language-plaintext highlighter-rouge">useUpdate()</code>を使用した別の例を示します:</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useUpdate</span><span class="p">,</span> <span class="nx">useRecordContext</span><span class="p">,</span> <span class="nx">Button</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
@@ -647,7 +647,7 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>Both the query and mutation hooks accept an <code class="language-plaintext highlighter-rouge">options</code> argument, to override the query options:</p>
+<p>クエリフックとミューテーションフックの両方は、クエリオプションを上書きするための<code class="language-plaintext highlighter-rouge">options</code>引数を受け取ります:</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="nx">user</span><span class="p">,</span> <span class="nx">isLoading</span><span class="p">,</span> <span class="nx">error</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useGetOne</span><span class="p">(</span>
     <span class="dl">'</span><span class="s1">users</span><span class="dl">'</span><span class="p">,</span>
@@ -656,15 +656,15 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: If you use TypeScript, you can specify the record type for more type safety:</p>
+<p><strong>ヒント</strong>: TypeScriptを使用する場合、レコードタイプを指定してより型安全にすることができます:</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">{</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">isLoading</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useGetOne</span><span class="o">&lt;</span><span class="nx">Product</span><span class="o">&gt;</span><span class="p">(</span><span class="dl">'</span><span class="s1">products</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">123</span> <span class="p">});</span>
-<span class="c1">//        \- type of data is Product</span>
+<span class="c1">//        \- dataの型はProductになります</span>
 </code></pre></div></div>
 
-<h2 id="meta-parameter"><code class="language-plaintext highlighter-rouge">meta</code> Parameter</h2>
+<h2 id="metaパラメータ"><code class="language-plaintext highlighter-rouge">meta</code>パラメータ</h2>
 
-<p>All Data Provider methods accept a <code class="language-plaintext highlighter-rouge">meta</code> parameter. React-admin doesn’t set this parameter by default in its queries, but it’s a good way to pass special arguments or metadata to an API call.</p>
+<p>すべてのData Providerメソッドは<code class="language-plaintext highlighter-rouge">meta</code>パラメータを受け取ります。React-adminはデフォルトではクエリにこのパラメータを設定しませんが、APIコールに特別な引数やメタデータを渡すための良い方法です。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">{</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">isLoading</span><span class="p">,</span> <span class="nx">error</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useGetOne</span><span class="p">(</span>
     <span class="dl">'</span><span class="s1">books</span><span class="dl">'</span><span class="p">,</span>
@@ -672,29 +672,29 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>It’s up to the Data Provider to interpret this parameter.</p>
+<p>このパラメータを解釈するのはData Provider次第です。</p>
 
-<h2 id="usequery-and-usemutation"><code class="language-plaintext highlighter-rouge">useQuery</code> and <code class="language-plaintext highlighter-rouge">useMutation</code></h2>
+<h2 id="usequeryとusemutation"><code class="language-plaintext highlighter-rouge">useQuery</code>と<code class="language-plaintext highlighter-rouge">useMutation</code></h2>
 
-<p>Internally, react-admin uses <a href="https://tanstack.com/query/v3/">react-query</a> to call the dataProvider. When fetching data from the dataProvider in your components, if you can’t use any of the dataProvider method hooks, you should use that library, too. It brings several benefits:</p>
+<p>内部的には、react-adminは<a href="https://tanstack.com/query/v3/">react-query</a>を使用して<code class="language-plaintext highlighter-rouge">dataProvider</code>を呼び出します。コンポーネントで<code class="language-plaintext highlighter-rouge">dataProvider</code>からデータを取得する際、どの<code class="language-plaintext highlighter-rouge">dataProvider</code>メソッドフックも使用できない場合は、そのライブラリを使用することをお勧めします。以下のような利点があります:</p>
 
 <ol>
-  <li>It triggers the loader in the AppBar when the query is running.</li>
-  <li>It reduces the boilerplate code since you don’t need to use <code class="language-plaintext highlighter-rouge">useState</code>.</li>
-  <li>It supports a vast array of options</li>
-  <li>It displays stale data while fetching up-to-date data, leading to a snappier UI</li>
+  <li>クエリが実行されているときにAppBarのローダーがトリガーされる。</li>
+  <li><code class="language-plaintext highlighter-rouge">useState</code>を使用する必要がないため、ボイラープレートコードが削減される。</li>
+  <li>多くのオプションをサポートする。</li>
+  <li>最新のデータを取得する間、古いデータを表示し続けるため、UIがよりスムーズになる。</li>
 </ol>
 
-<p>React-query offers 2 main hooks to interact with the dataProvider:</p>
+<p>React-queryは、<code class="language-plaintext highlighter-rouge">dataProvider</code>と対話するための2つの主要なフックを提供します:</p>
 
 <ul>
-  <li><a href="https://tanstack.com/query/v3/docs/react/reference/useQuery"><code class="language-plaintext highlighter-rouge">useQuery</code></a>: fetches the dataProvider on mount. This is for <em>read</em> queries.</li>
-  <li><a href="https://tanstack.com/query/v3/docs/react/reference/useMutation"><code class="language-plaintext highlighter-rouge">useMutation</code></a>: fetches the dataProvider when you call a callback. This is for <em>write</em> queries, and <em>read</em> queries that execute on user interaction.</li>
+  <li><a href="https://tanstack.com/query/v3/docs/react/reference/useQuery"><code class="language-plaintext highlighter-rouge">useQuery</code></a>: マウント時に<code class="language-plaintext highlighter-rouge">dataProvider</code>をフェッチします。これは読み取りクエリ用です。</li>
+  <li><a href="https://tanstack.com/query/v3/docs/react/reference/useMutation"><code class="language-plaintext highlighter-rouge">useMutation</code></a>: コールバックを呼び出したときに<code class="language-plaintext highlighter-rouge">dataProvider</code>をフェッチします。これは書き込みクエリ用で、ユーザー操作で実行される読み取りクエリにも使用されます。</li>
 </ul>
 
-<p>Both these hooks accept a query <em>key</em> (identifying the query in the cache), and a query <em>function</em> (executing the query and returning a Promise). Internally, react-admin uses an array of arguments as the query key.</p>
+<p>これらのフックは、クエリキャッシュ内のクエリを識別するための<em>キー</em>と、クエリを実行しPromiseを返す<em>関数</em>を受け取ります。内部的には、react-adminは引数の配列をクエリキーとして使用します。</p>
 
-<p>For instance, the initial code snippet of this chapter can be rewritten with <code class="language-plaintext highlighter-rouge">useQuery</code> as follows:</p>
+<p>例えば、この章の最初のコードスニペットは、<code class="language-plaintext highlighter-rouge">useQuery</code>を使用して次のように書き直すことができます:</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useQuery</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-query</span><span class="dl">'</span><span class="p">;</span>
@@ -720,7 +720,7 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>To illustrate the usage of <code class="language-plaintext highlighter-rouge">useMutation</code>, here is an implementation of an “Approve” button for a comment:</p>
+<p><code class="language-plaintext highlighter-rouge">useMutation</code>の使用法を説明するために、コメントの”Approve”ボタンの実装を示します:</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useMutation</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-query</span><span class="dl">'</span><span class="p">;</span>
@@ -736,32 +736,32 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>If you want to go beyond data provider method hooks, we recommend that you read <a href="https://react-query-v3.tanstack.com/overview">the react-query documentation</a>.</p>
+<p>データプロバイダーメソッドフックを超えて使用したい場合は、<a href="https://react-query-v3.tanstack.com/overview">react-queryのドキュメント</a>を読むことをお勧めします。</p>
 
-<h2 id="isloading-vs-isfetching"><code class="language-plaintext highlighter-rouge">isLoading</code> vs <code class="language-plaintext highlighter-rouge">isFetching</code></h2>
+<h2 id="isloading対isfetching"><code class="language-plaintext highlighter-rouge">isLoading</code>対<code class="language-plaintext highlighter-rouge">isFetching</code></h2>
 
-<p>Data fetching hooks return two loading state variables: <code class="language-plaintext highlighter-rouge">isLoading</code> and <code class="language-plaintext highlighter-rouge">isFetching</code>. Which one should you use?</p>
+<p>データフェッチングフックは2つのロード状態変数を返します: <code class="language-plaintext highlighter-rouge">isLoading</code>と<code class="language-plaintext highlighter-rouge">isFetching</code>。どちらを使用するべきでしょうか？</p>
 
-<p>The short answer is: use <code class="language-plaintext highlighter-rouge">isLoading</code>. Read on to understand why.</p>
+<p>簡単な答えは: <code class="language-plaintext highlighter-rouge">isLoading</code>を使用してください。以下にその理由を説明します。</p>
 
-<p>The source of these two variables is <a href="https://react-query-v3.tanstack.com/guides/queries#query-basics">react-query</a>. Here is how they defined these two variables:</p>
+<p>これら2つの変数の出所は<a href="https://react-query-v3.tanstack.com/guides/queries#query-basics">react-query</a>です。彼らはこれらの2つの変数を次のように定義しています:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">isLoading</code>:  The query has no data and is currently fetching</li>
-  <li><code class="language-plaintext highlighter-rouge">isFetching</code>: In any state, if the query is fetching at any time (including background refetching) isFetching will be true.</li>
+  <li><code class="language-plaintext highlighter-rouge">isLoading</code>: クエリにデータがなく、現在フェッチ中である</li>
+  <li><code class="language-plaintext highlighter-rouge">isFetching</code>: クエリが任意の状態でフェッチ中である場合（バックグラウンドフェッチを含む）、<code class="language-plaintext highlighter-rouge">isFetching</code>はtrueになります。</li>
 </ul>
 
-<p>Let’s see how what these variables contain in a typical usage scenario:</p>
+<p>典型的な使用シナリオでこれらの変数が何を含むかを見てみましょう:</p>
 
 <ol>
-  <li>The user first loads a page. <code class="language-plaintext highlighter-rouge">isLoading</code> is true because the data was never loaded, and <code class="language-plaintext highlighter-rouge">isFetching</code> is also true because data is being fetched.</li>
-  <li>The dataProvider returns the data. Both <code class="language-plaintext highlighter-rouge">isLoading</code> and <code class="language-plaintext highlighter-rouge">isFetching</code> become false</li>
-  <li>The user navigates away</li>
-  <li>The user comes back to the first page, which triggers a new fetch. <code class="language-plaintext highlighter-rouge">isLoading</code> is false, because the stale data is available, and <code class="language-plaintext highlighter-rouge">isFetching</code> is true because data is being fetched via the dataProvider.</li>
-  <li>The dataProvider returns the data. Both <code class="language-plaintext highlighter-rouge">isLoading</code> and <code class="language-plaintext highlighter-rouge">isFetching</code> become false</li>
+  <li>ユーザーが最初にページを読み込む。<code class="language-plaintext highlighter-rouge">isLoading</code>はtrueです。データが一度もロードされておらず、<code class="language-plaintext highlighter-rouge">isFetching</code>もデータがフェッチされているためtrueです。</li>
+  <li><code class="language-plaintext highlighter-rouge">dataProvider</code>がデータを返します。<code class="language-plaintext highlighter-rouge">isLoading</code>も<code class="language-plaintext highlighter-rouge">isFetching</code>もfalseになります。</li>
+  <li>ユーザーが離れる</li>
+  <li>ユーザーが最初のページに戻り、新しいフェッチがトリガーされます。<code class="language-plaintext highlighter-rouge">isLoading</code>はfalseです。古いデータがあり、<code class="language-plaintext highlighter-rouge">isFetching</code>はデータが<code class="language-plaintext highlighter-rouge">dataProvider</code>を介してフェッチされているためtrueです。</li>
+  <li><code class="language-plaintext highlighter-rouge">dataProvider</code>がデータを返します。<code class="language-plaintext highlighter-rouge">isLoading</code>も<code class="language-plaintext highlighter-rouge">isFetching</code>もfalseになります。</li>
 </ol>
 
-<p>Components use the loading state to show a loading indicator when there is no data to show. In the example above, the loading indicator is necessary for step 2, but not in step 4, because you can display the stale data while fresh data is being loaded.</p>
+<p>コンポーネントは、表示するデータがない場合にロードインジケータを表示するためにロード状態を使用します。上記の例では、ステップ2ではロードインジケータが必要ですが、ステップ4では古いデータを表示できるため不要です。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useGetOne</span><span class="p">,</span> <span class="nx">useRecordContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -774,15 +774,15 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>As a consequence, you should always use <code class="language-plaintext highlighter-rouge">isLoading</code> to determine if you need to show a loading indicator.</p>
+<p>そのため、ロードインジケータを表示する必要がある場合は常に<code class="language-plaintext highlighter-rouge">isLoading</code>を使用する必要があります。</p>
 
-<h2 id="calling-custom-methods">Calling Custom Methods</h2>
+<h2 id="カスタムメソッドの呼び出し">カスタムメソッドの呼び出し</h2>
 
-<p>Admin interfaces often have to query the API beyond CRUD requests. For instance, a user profile page may need to get the User object based on a user id. Or, users may want to “Approve” a comment by pressing a button, and this action should update the <code class="language-plaintext highlighter-rouge">is_approved</code> property and save the updated record in one click.</p>
+<p>管理インターフェースでは、CRUDリクエストを超えてAPIにクエリを実行する必要があることがよくあります。例えば、ユーザープロファイルページではユーザーIDに基づいてユーザーオブジェクトを取得する必要があるかもしれません。また、ユーザーがボタンを押してコメントを「承認」したい場合、このアクションは<code class="language-plaintext highlighter-rouge">is_approved</code>プロパティを更新し、1クリックで更新されたレコードを保存する必要があります。</p>
 
-<p>Your dataProvider may contain custom methods, e.g. for calling RPC endpoints on your API. <code class="language-plaintext highlighter-rouge">useQuery</code> and <code class="language-plaintext highlighter-rouge">useMutation</code> are especially useful for calling these methods.</p>
+<p>あなたの<code class="language-plaintext highlighter-rouge">dataProvider</code>にはカスタムメソッドが含まれているかもしれません。例えば、APIのRPCエンドポイントを呼び出すためのメソッドです。<code class="language-plaintext highlighter-rouge">useQuery</code>と<code class="language-plaintext highlighter-rouge">useMutation</code>はこれらのメソッドを呼び出すために特に役立ちます。</p>
 
-<p>For instance, if your <code class="language-plaintext highlighter-rouge">dataProvider</code> exposes a <code class="language-plaintext highlighter-rouge">banUser()</code> method:</p>
+<p>例えば、あなたの<code class="language-plaintext highlighter-rouge">dataProvider</code>が<code class="language-plaintext highlighter-rouge">banUser()</code>メソッドを公開している場合:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">dataProvider</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">getList</span><span class="p">:</span> <span class="cm">/* ... */</span><span class="p">,</span>
@@ -801,7 +801,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>You can call it inside a <code class="language-plaintext highlighter-rouge">&lt;BanUser&gt;</code> button component as follows:</p>
+<p>次のように<code class="language-plaintext highlighter-rouge">&lt;BanUser&gt;</code>ボタンコンポーネント内で呼び出すことができます:</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">BanUserButton</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">userId</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">dataProvider</span> <span class="o">=</span> <span class="nx">useDataProvider</span><span class="p">();</span>
@@ -812,9 +812,9 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<h2 id="query-options">Query Options</h2>
+<h2 id="クエリオプション">クエリオプション</h2>
 
-<p>The data provider method hooks (like <code class="language-plaintext highlighter-rouge">useGetOne</code>) and react-query’s hooks (like <code class="language-plaintext highlighter-rouge">useQuery</code>) accept a query options object as the last argument. This object can be used to modify the way the query is executed. There are many options, all documented <a href="https://tanstack.com/query/v3/docs/react/reference/useQuery">in the react-query documentation</a>:</p>
+<p>データプロバイダーメソッドフック（<code class="language-plaintext highlighter-rouge">useGetOne</code>など）およびreact-queryのフック（<code class="language-plaintext highlighter-rouge">useQuery</code>など）は、最後の引数としてクエリオプションオブジェクトを受け取ります。このオブジェクトは、クエリの実行方法を変更するために使用できます。多くのオプションがあり、すべて<a href="https://tanstack.com/query/v3/docs/react/reference/useQuery">react-queryのドキュメント</a>に記載されています:</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">cacheTime</code></li>
@@ -845,7 +845,7 @@
   <li><code class="language-plaintext highlighter-rouge">useErrorBoundary</code></li>
 </ul>
 
-<p>For instance, if you want to execute a callback when the query completes (whether it’s successful or failed), you can use the <code class="language-plaintext highlighter-rouge">onSettled</code> option. this can be useful e.g. to log all calls to the dataProvider:</p>
+<p>例えば、クエリが完了したときにコールバックを実行したい場合（成功したか失敗したかに関わらず）、<code class="language-plaintext highlighter-rouge">onSettled</code>オプションを使用できます。これは例えば、dataProviderのすべての呼び出しをログに記録するのに役立ちます:</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useGetOne</span><span class="p">,</span> <span class="nx">useRecordContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -862,9 +862,9 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>We won’t re-explain all these options here, but we’ll focus on the most useful ones in react-admin.</p>
+<p>これらのオプションをすべて再説明することはしませんが、react-adminで最も有用なものに焦点を当てます。</p>
 
-<p><strong>Tip</strong>: In react-admin components that use the data provider method hooks, you can override the query options using the <code class="language-plaintext highlighter-rouge">queryOptions</code> prop, and the mutation options using the <code class="language-plaintext highlighter-rouge">mutationOptions</code> prop. For instance, to log the dataProvider calls, in the <code class="language-plaintext highlighter-rouge">&lt;List&gt;</code> component, you can do the following:</p>
+<p><strong>ヒント</strong>: data providerメソッドフックを使用するreact-adminコンポーネントでは、<code class="language-plaintext highlighter-rouge">queryOptions</code>プロップを使用してクエリオプションを上書きし、<code class="language-plaintext highlighter-rouge">mutationOptions</code>プロップを使用してミューテーションオプションを上書きすることができます。例えば、<code class="language-plaintext highlighter-rouge">&lt;List&gt;</code>コンポーネントでdataProvider呼び出しをログに記録するには、次のようにします:</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">List</span><span class="p">,</span> <span class="nx">Datagrid</span><span class="p">,</span> <span class="nx">TextField</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -881,32 +881,32 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="synchronizing-dependent-queries">Synchronizing Dependent Queries</h2>
+<h2 id="依存クエリの同期">依存クエリの同期</h2>
 
-<p>All Data Provider hooks support an <code class="language-plaintext highlighter-rouge">enabled</code> option. This is useful if you need to have a query executed only when a condition is met.</p>
+<p>すべてのData Providerフックは<code class="language-plaintext highlighter-rouge">enabled</code>オプションをサポートしています。これは、条件が満たされたときにのみクエリを実行する必要がある場合に便利です。</p>
 
-<p>For example, the following code only fetches the categories if at least one post is already loaded:</p>
+<p>例えば、次のコードは、少なくとも1つのポストがすでにロードされている場合にのみカテゴリをフェッチします:</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// fetch posts</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ポストをフェッチ</span>
 <span class="kd">const</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="nx">posts</span><span class="p">,</span> <span class="nx">isLoading</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useGetList</span><span class="p">(</span>
     <span class="dl">'</span><span class="s1">posts</span><span class="dl">'</span><span class="p">,</span>
     <span class="p">{</span> <span class="na">pagination</span><span class="p">:</span> <span class="p">{</span> <span class="na">page</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">perPage</span><span class="p">:</span> <span class="mi">20</span> <span class="p">},</span> <span class="na">sort</span><span class="p">:</span> <span class="p">{</span> <span class="na">field</span><span class="p">:</span> <span class="dl">'</span><span class="s1">name</span><span class="dl">'</span><span class="p">,</span> <span class="na">order</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ASC</span><span class="dl">'</span> <span class="p">}</span> <span class="p">},</span>
 <span class="p">);</span>
 
-<span class="c1">// then fetch categories for these posts</span>
+<span class="c1">// その後、これらのポストのカテゴリをフェッチ</span>
 <span class="kd">const</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="nx">categories</span><span class="p">,</span> <span class="na">isLoading</span><span class="p">:</span> <span class="nx">isLoadingCategories</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useGetMany</span><span class="p">(</span>
     <span class="dl">'</span><span class="s1">categories</span><span class="dl">'</span><span class="p">,</span>
     <span class="p">{</span> <span class="na">ids</span><span class="p">:</span> <span class="nx">posts</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">post</span> <span class="o">=&gt;</span> <span class="nx">posts</span><span class="p">.</span><span class="nx">category_id</span><span class="p">)</span> <span class="p">},</span>
-    <span class="c1">// run only if the first query returns non-empty result</span>
+    <span class="c1">// 最初のクエリが空でない結果を返した場合にのみ実行</span>
     <span class="p">{</span> <span class="na">enabled</span><span class="p">:</span> <span class="o">!</span><span class="nx">isLoading</span> <span class="o">&amp;&amp;</span> <span class="nx">posts</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="success-and-error-side-effects">Success and Error Side Effects</h2>
+<h2 id="成功とエラーの副作用">成功とエラーの副作用</h2>
 
-<p>To execute some logic after a query or a mutation is complete, use the <code class="language-plaintext highlighter-rouge">onSuccess</code> and <code class="language-plaintext highlighter-rouge">onError</code> options. React-admin uses the term “side effects” for this type of logic, as it’s usually modifying another part of the UI.</p>
+<p>クエリやミューテーションが完了した後にロジックを実行するには、<code class="language-plaintext highlighter-rouge">onSuccess</code>と<code class="language-plaintext highlighter-rouge">onError</code>オプションを使用します。React-adminはこのタイプのロジックを「副作用」と呼び、通常はUIの他の部分を変更します。</p>
 
-<p>This is very common when using mutation hooks like <code class="language-plaintext highlighter-rouge">useUpdate</code>, e.g. to display a notification, or redirect to another page. For instance, here is an <code class="language-plaintext highlighter-rouge">&lt;ApproveButton&gt;</code> that notifies the user of success or failure using the bottom notification banner:</p>
+<p>これは、ミューテーションフック（例: <code class="language-plaintext highlighter-rouge">useUpdate</code>）を使用する際に非常に一般的であり、通知を表示したり、別のページにリダイレクトするために使用されます。例えば、次の<code class="language-plaintext highlighter-rouge">&lt;ApproveButton&gt;</code>は、成功または失敗をユーザーに通知するために下部の通知バナーを使用します:</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useUpdate</span><span class="p">,</span> <span class="nx">useNotify</span><span class="p">,</span> <span class="nx">useRedirect</span><span class="p">,</span> <span class="nx">useRecordContext</span><span class="p">,</span> <span class="nx">Button</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
@@ -920,12 +920,12 @@
         <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="nx">record</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="na">data</span><span class="p">:</span> <span class="p">{</span> <span class="na">isApproved</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}</span> <span class="p">},</span>
         <span class="p">{</span>
             <span class="na">onSuccess</span><span class="p">:</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-                <span class="c1">// success side effects go here</span>
+                <span class="c1">// 成功時の副作用をここに記述</span>
                 <span class="nx">redirect</span><span class="p">(</span><span class="dl">'</span><span class="s1">/comments</span><span class="dl">'</span><span class="p">);</span>
                 <span class="nx">notify</span><span class="p">(</span><span class="dl">'</span><span class="s1">Comment approved</span><span class="dl">'</span><span class="p">);</span>
             <span class="p">},</span>
             <span class="na">onError</span><span class="p">:</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-                <span class="c1">// failure side effects go here </span>
+                <span class="c1">// 失敗時の副作用をここに記述</span>
                 <span class="nx">notify</span><span class="p">(</span><span class="s2">`Comment approval error: </span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">error</span><span class="dl">'</span> <span class="p">});</span>
             <span class="p">},</span>
         <span class="p">}</span>
@@ -935,19 +935,19 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>React-admin provides the following hooks to handle the most common side effects:</p>
+<p>React-adminは、最も一般的な副作用を処理するために次のフックを提供します:</p>
 
 <ul>
-  <li><a href="./useNotify.md"><code class="language-plaintext highlighter-rouge">useNotify</code></a>: Return a function to display a notification.</li>
-  <li><a href="./useRedirect.md"><code class="language-plaintext highlighter-rouge">useRedirect</code></a>: Return a function to redirect the user to another page.</li>
-  <li><a href="./useRefresh.md"><code class="language-plaintext highlighter-rouge">useRefresh</code></a>: Return a function to force a rerender of the current view (equivalent to pressing the Refresh button).</li>
-  <li><a href="./useUnselect.md"><code class="language-plaintext highlighter-rouge">useUnselect</code></a>: Return a function to unselect lines in the current <code class="language-plaintext highlighter-rouge">Datagrid</code> based on the ids passed to it.</li>
-  <li><a href="./useUnselectAll.md"><code class="language-plaintext highlighter-rouge">useUnselectAll</code></a>: Return a function to unselect all lines in the current <code class="language-plaintext highlighter-rouge">Datagrid</code>.</li>
+  <li><a href="./useNotify.md"><code class="language-plaintext highlighter-rouge">useNotify</code></a>: 通知を表示する関数を返します。</li>
+  <li><a href="./useRedirect.md"><code class="language-plaintext highlighter-rouge">useRedirect</code></a>: ユーザーを別のページにリダイレクトする関数を返します。</li>
+  <li><a href="./useRefresh.md"><code class="language-plaintext highlighter-rouge">useRefresh</code></a>: 現在のビューを強制的に再レンダリングする関数を返します（リフレッシュボタンを押すのと同等）。</li>
+  <li><a href="./useUnselect.md"><code class="language-plaintext highlighter-rouge">useUnselect</code></a>: 渡されたIDに基づいて現在の<code class="language-plaintext highlighter-rouge">Datagrid</code>の行を選択解除する関数を返します。</li>
+  <li><a href="./useUnselectAll.md"><code class="language-plaintext highlighter-rouge">useUnselectAll</code></a>: 現在の<code class="language-plaintext highlighter-rouge">Datagrid</code>のすべての行を選択解除する関数を返します。</li>
 </ul>
 
-<h2 id="optimistic-rendering-and-undo">Optimistic Rendering and Undo</h2>
+<h2 id="楽観的レンダリングとアンドゥ">楽観的レンダリングとアンドゥ</h2>
 
-<p>In the following example, after clicking on the “Approve” button, a loading spinner appears while the data provider is fetched. Then, users are redirected to the comments list.</p>
+<p>次の例では、”Approve”ボタンをクリックした後、データプロバイダーがフェッチされている間にローディングスピナーが表示されます。その後、ユーザーはコメントリストにリダイレクトされます。</p>
 
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useUpdate</span><span class="p">,</span> <span class="nx">useNotify</span><span class="p">,</span> <span class="nx">useRedirect</span><span class="p">,</span> <span class="nx">useRecordContext</span><span class="p">,</span> <span class="nx">Button</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
@@ -974,58 +974,58 @@
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>But in most cases, the server returns a successful response, so the user waits for this response for nothing.</p>
+<p>しかし、ほとんどの場合、サーバーは成功応答を返すため、ユーザーはこの応答を待つ必要がありません。</p>
 
-<p>This is called <strong>pessimistic rendering</strong>, as all users are forced to wait because of the (usually rare) possibility of server failure.</p>
+<p>これは<strong>悲観的レンダリング</strong>と呼ばれ、すべてのユーザーがサーバーの障害の可能性があるために待たされることになります。</p>
 
-<p>An alternative mode for mutations is <strong>optimistic rendering</strong>. The idea is to handle the calls to the <code class="language-plaintext highlighter-rouge">dataProvider</code> on the client side first (i.e. updating entities in the react-query cache), and re-render the screen immediately. The user sees the effect of their action with no delay. Then, react-admin applies the success side effects, and only after that, it triggers the call to the data provider. If the fetch ends with success, react-admin does nothing more than a refresh to grab the latest data from the server. In most cases, the user sees no difference (the data in the react-query cache and the data from the <code class="language-plaintext highlighter-rouge">dataProvider</code> are the same). If the fetch fails, react-admin shows an error notification and reverts the mutation.</p>
+<p>ミューテーションのもう一つのモードは<strong>楽観的レンダリング</strong>です。このアイデアは、クライアント側で最初に<code class="language-plaintext highlighter-rouge">dataProvider</code>への呼び出しを処理し（つまり、react-queryキャッシュ内のエンティティを更新）、画面を即座に再レンダリングすることです。ユーザーは遅延なしでアクションの効果を見ることができます。その後、react-adminは成功の副作用を適用し、その後のみ<code class="language-plaintext highlighter-rouge">dataProvider</code>への呼び出しをトリガーします。フェッチが成功すると、react-adminはサーバーから最新のデータを取得するためにリフレッシュするだけです。ほとんどの場合、ユーザーは違いを感じません（react-queryキャッシュ内のデータと<code class="language-plaintext highlighter-rouge">dataProvider</code>からのデータは同じです）。フェッチが失敗すると、react-adminはエラー通知を表示し、ミューテーションを元に戻します。</p>
 
-<p>A third mutation mode is called <strong>undoable</strong>. It’s like optimistic rendering, but with an added feature: after applying the changes and the side effects locally, react-admin <em>waits</em> for a few seconds before triggering the call to the <code class="language-plaintext highlighter-rouge">dataProvider</code>. During this delay, the end-user sees an “undo” button that, when clicked, cancels the call to the <code class="language-plaintext highlighter-rouge">dataProvider</code> and refreshes the screen.</p>
+<p>三つ目のミューテーションモードは<strong>アンドゥ可能</strong>です。これは楽観的レンダリングと似ていますが、追加の機能があります。ローカルで変更と副作用を適用した後、react-adminは<code class="language-plaintext highlighter-rouge">dataProvider</code>への呼び出しをトリガーする前に数秒間待ちます。この遅延中、エンドユーザーはアクションをキャンセルするための「アンドゥ」ボタンを見ることができ、クリックすると<code class="language-plaintext highlighter-rouge">dataProvider</code>への呼び出しがキャンセルされ、画面がリフレッシュされます。</p>
 
-<p>Here is a quick recap of the three mutation modes:</p>
+<p>以下は三つのミューテーションモードのクイックリキャップです:</p>
 
 <table>
   <thead>
     <tr>
+      <th>悲観的</th>
+      <th>楽観的</th>
+      <th>アンドゥ可能</th>
       <th> </th>
-      <th>pessimistic</th>
-      <th>optimistic</th>
-      <th>undoable</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>dataProvider call</td>
-      <td>immediate</td>
-      <td>immediate</td>
-      <td>delayed</td>
+      <td>dataProvider呼び出し</td>
+      <td>即座に</td>
+      <td>即座に</td>
+      <td>遅延</td>
     </tr>
     <tr>
-      <td>local changes</td>
-      <td>when dataProvider returns</td>
-      <td>immediate</td>
-      <td>immediate</td>
+      <td>ローカル変更</td>
+      <td>dataProviderが返るとき</td>
+      <td>即座に</td>
+      <td>即座に</td>
     </tr>
     <tr>
-      <td>side effects</td>
-      <td>when dataProvider returns</td>
-      <td>immediate</td>
-      <td>immediate</td>
+      <td>副作用</td>
+      <td>dataProviderが返るとき</td>
+      <td>即座に</td>
+      <td>即座に</td>
     </tr>
     <tr>
-      <td>cancellable</td>
-      <td>no</td>
-      <td>no</td>
-      <td>yes</td>
+      <td>キャンセル可能</td>
+      <td>いいえ</td>
+      <td>いいえ</td>
+      <td>はい</td>
     </tr>
   </tbody>
 </table>
 
-<p>By default, react-admin uses the <code class="language-plaintext highlighter-rouge">undoable</code> mode for the Edit view. As for the data provider method hooks, they default to the <code class="language-plaintext highlighter-rouge">pessimistic</code> mode.</p>
+<p>デフォルトでは、react-adminはEditビューに<code class="language-plaintext highlighter-rouge">undoable</code>モードを使用します。データプロバイダーメソッドフックの場合、デフォルトは<code class="language-plaintext highlighter-rouge">悲観的</code>モードです。</p>
 
-<p><strong>Tip</strong>: For the Create view, react-admin needs to wait for the response to know the id of the resource to redirect to, so the mutation mode is pessimistic.</p>
+<p><strong>ヒント</strong>: Createビューでは、リソースのIDを知ってリダイレクトする必要があるため、ミューテーションモードは悲観的です。</p>
 
-<p>You can benefit from optimistic and undoable modes when you call the <code class="language-plaintext highlighter-rouge">useUpdate</code> hook, too. You just need to pass a <code class="language-plaintext highlighter-rouge">mutationMode</code> option:</p>
+<p><code class="language-plaintext highlighter-rouge">useUpdate</code>フックを呼び出すときにも楽観的およびアンドゥ可能なモードを活用できます。<code class="language-plaintext highlighter-rouge">mutationMode</code>オプションを渡すだけです:</p>
 
 <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">import * as React from 'react';
 import { useUpdate, useNotify, useRedirect, useRecordContext, Button } from 'react-admin';
@@ -1052,9 +1052,9 @@ const ApproveButton = () =&gt; {
 <span class="err">};</span>
 </code></pre></div></div>
 
-<p>As you can see in this example, you need to tweak the notification for undoable calls: passing <code class="language-plaintext highlighter-rouge">undo: true</code> displays the ‘Undo’ button in the notification. Also, as side effects are executed immediately, they can’t rely on the response being passed to onSuccess.</p>
+<p>この例に示すように、アンドゥ可能な呼び出しの場合、通知を微調整する必要があります。<code class="language-plaintext highlighter-rouge">undo: true</code>を渡すと、通知に「アンドゥ」ボタンが表示されます。また、副作用は即座に実行されるため、成功応答に依存することはできません。</p>
 
-<p>The following hooks accept a <code class="language-plaintext highlighter-rouge">mutationMode</code> option:</p>
+<p>次のフックは<code class="language-plaintext highlighter-rouge">mutationMode</code>オプションを受け入れます:</p>
 
 <ul>
   <li><a href="./useUpdate.md"><code class="language-plaintext highlighter-rouge">useUpdate</code></a></li>
@@ -1063,13 +1063,13 @@ const ApproveButton = () =&gt; {
   <li><a href="./useDeleteMany.md"><code class="language-plaintext highlighter-rouge">useDeleteMany</code></a></li>
 </ul>
 
-<h2 id="querying-the-api-with-fetch">Querying The API With <code class="language-plaintext highlighter-rouge">fetch</code></h2>
+<h2 id="fetchを使用したapiクエリの実行"><code class="language-plaintext highlighter-rouge">fetch</code>を使用したAPIクエリの実行</h2>
 
-<p>Data Provider method hooks are “the react-admin way” to query the API. But nothing prevents you from using <code class="language-plaintext highlighter-rouge">fetch</code> if you want. For instance, when you don’t want to add some routing logic to the data provider for an RPC method on your API, that makes perfect sense.</p>
+<p>データプロバイダーメソッドフックはAPIにクエリを実行するための「react-adminの方法」です。しかし、必要に応じて<code class="language-plaintext highlighter-rouge">fetch</code>を使用することも可能です。例えば、APIのRPCメソッドに対してルーティングロジックを追加したくない場合は、その方が理にかなっています。</p>
 
-<p>There is no special react-admin sauce in that case. Here is an example implementation of calling <code class="language-plaintext highlighter-rouge">fetch</code> in a component:</p>
+<p>その場合、特別なreact-adminのソースはありません。コンポーネント内で<code class="language-plaintext highlighter-rouge">fetch</code>を呼び出す例の実装を示します:</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/comments/ApproveButton.js</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/comments/ApproveButton.js</span>
 <span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useNotify</span><span class="p">,</span> <span class="nx">useRedirect</span><span class="p">,</span> <span class="nx">useRecordContext</span><span class="p">,</span> <span class="nx">Button</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
@@ -1100,7 +1100,8 @@ const ApproveButton = () =&gt; {
 <span class="k">export</span> <span class="k">default</span> <span class="nx">ApproveButton</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: APIs often require a bit of HTTP plumbing to deal with authentication, query parameters, encoding, headers, etc. It turns out you probably already have a function that maps from a REST request to an HTTP request: your <a href="./DataProviders.md">Data Provider</a>. So it’s often better to use <code class="language-plaintext highlighter-rouge">useDataProvider</code> instead of <code class="language-plaintext highlighter-rouge">fetch</code>.</p>
+<p><strong>ヒント</strong>: APIは認証、クエリパラメータ、エンコーディング、ヘッダーなどに対処するためのHTTPのプラミングを必要とすることがよくあります。RESTリクエストをHTTPリクエストにマッピングする関数をすでに持っている可能性があります。それがあなたの<a href="./DataProviders.md">Data Provider</a>です。そのため、<code class="language-plaintext highlighter-rouge">fetch</code>の代わりに<code class="language-plaintext highlighter-rouge">useDataProvider</code>を使用する方が良いことがよくあります。</p>
+
 
                         </div>
                     </div>

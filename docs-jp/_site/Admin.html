@@ -565,36 +565,36 @@
                         >
                             <h1 id="admin"><code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code></h1>
 
-<p>The <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component is the root component of a react-admin app. It allows to configure the application adapters, routes, and UI.</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> コンポーネントは、React-Admin アプリのルートコンポーネントです。アプリケーションのアダプター、ルート、および UI を設定するために使用されます。</p>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> creates a series of context providers to allow its children to access the app configuration. It renders the main routes and layout. It delegates the rendering of the content area to its <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> children.</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> は一連のコンテキストプロバイダーを作成し、その子コンポーネントがアプリの設定にアクセスできるようにします。主なルートとレイアウトをレンダリングし、コンテンツ領域のレンダリングをその <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> 子コンポーネントに委譲します。</p>
 
 <p><img src="./img/dense.webp" alt="Admin Component" /></p>
 
-<h2 id="usage">Usage</h2>
+<h2 id="使用方法">使用方法</h2>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> requires only a <code class="language-plaintext highlighter-rouge">dataProvider</code> prop, and at least one child <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> to work. Here is the most basic example:</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> には <code class="language-plaintext highlighter-rouge">dataProvider</code> プロップと、少なくとも1つの <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> 子コンポーネントが必要です。以下は最も基本的な例です:</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/App.js</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">simpleRestProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-simple-rest</span><span class="dl">'</span><span class="p">;</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// src/App.js</span>
+    <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">import</span> <span class="nx">simpleRestProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-simple-rest</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="k">import</span> <span class="p">{</span> <span class="nx">PostList</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./posts</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">import</span> <span class="p">{</span> <span class="nx">PostList</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./posts</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
-    <span class="p">&lt;</span><span class="nc">Admin</span> <span class="na">dataProvider</span><span class="p">=</span><span class="si">{</span><span class="nx">simpleRestProvider</span><span class="p">(</span><span class="dl">'</span><span class="s1">http://path.to.my.api</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nc">Resource</span> <span class="na">name</span><span class="p">=</span><span class="s">"posts"</span> <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">PostList</span><span class="si">}</span> <span class="p">/&gt;</span>
-    <span class="p">&lt;/</span><span class="nc">Admin</span><span class="p">&gt;</span>
-<span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nc">Admin</span> <span class="na">dataProvider</span><span class="p">=</span><span class="si">{</span><span class="nx">simpleRestProvider</span><span class="p">(</span><span class="dl">'</span><span class="s1">http://path.to.my.api</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">Resource</span> <span class="na">name</span><span class="p">=</span><span class="s">"posts"</span> <span class="na">list</span><span class="p">=</span><span class="si">{</span><span class="nx">PostList</span><span class="si">}</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">Admin</span><span class="p">&gt;</span>
+    <span class="p">);</span>
 
-<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+    <span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> children can be <a href="./Resource.md"><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code></a> and <a href="./CustomRoutes.md"><code class="language-plaintext highlighter-rouge">&lt;CustomRoutes&gt;</code></a> elements.</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> の子コンポーネントは <a href="./Resource.md"><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code></a> および <a href="./CustomRoutes.md"><code class="language-plaintext highlighter-rouge">&lt;CustomRoutes&gt;</code></a> です。</p>
 
-<p>In most apps, you need to pass more props to <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code>. Here is a more complete example taken from <a href="https://marmelab.com/react-admin-demo/">the e-commerce demo</a>:</p>
+<p>ほとんどのアプリでは、<code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> により多くのプロップを渡す必要があります。以下は <a href="https://marmelab.com/react-admin-demo/">e-commerce demo</a> から取られたより完全な例です:</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/App.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/App.js</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span><span class="p">,</span> <span class="nx">CustomRoutes</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Route</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-router-dom</span><span class="dl">"</span><span class="p">;</span>
 
@@ -636,9 +636,9 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>To make the main app component more concise, a good practice is to move the resources props to separate files. For instance, the previous example can be rewritten as:</p>
+<p>メインのアプリコンポーネントを簡潔にするために、リソースのプロップを別のファイルに移動することをお勧めします。例えば、先ほどの例を以下のように書き換えることができます:</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/App.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/App.js</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span><span class="p">,</span> <span class="nx">CustomRoutes</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Route</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-router-dom</span><span class="dl">"</span><span class="p">;</span>
 
@@ -654,7 +654,6 @@
 <span class="k">import</span> <span class="nx">categories</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./categories</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">reviews</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./reviews</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Segments</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./segments</span><span class="dl">'</span><span class="p">;</span>
-
 
 <span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">Admin</span> 
@@ -681,179 +680,179 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="props">Props</h2>
+<h2 id="プロップ">プロップ</h2>
 
-<p>Three main props lets you configure the core features of the <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component:</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> コンポーネントのコア機能を設定するための主要な3つのプロップ:</p>
 
 <ul>
-  <li><a href="#dataprovider"><code class="language-plaintext highlighter-rouge">dataProvider</code></a> for data fetching</li>
-  <li><a href="#authprovider"><code class="language-plaintext highlighter-rouge">authProvider</code></a> for security and permissions</li>
-  <li><a href="#i18nprovider"><code class="language-plaintext highlighter-rouge">i18nProvider</code></a> for translations and internationalization</li>
+  <li><a href="#dataprovider"><code class="language-plaintext highlighter-rouge">dataProvider</code></a>: データ取得用</li>
+  <li><a href="#authprovider"><code class="language-plaintext highlighter-rouge">authProvider</code></a>: セキュリティと権限用</li>
+  <li><a href="#i18nprovider"><code class="language-plaintext highlighter-rouge">i18nProvider</code></a>: 翻訳と国際化用</li>
 </ul>
 
-<p>Here are all the props accepted by the component:</p>
+<p>以下は、コンポーネントが受け入れるすべてのプロップです:</p>
 
 <table>
   <thead>
     <tr>
-      <th>Prop</th>
-      <th>Required</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
+      <th>プロップ</th>
+      <th>必須</th>
+      <th>タイプ</th>
+      <th>デフォルト</th>
+      <th>説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">dataProvider</code></td>
-      <td>Required</td>
+      <td>必須</td>
       <td><code class="language-plaintext highlighter-rouge">DataProvider</code></td>
       <td>-</td>
-      <td>The data provider for fetching resources</td>
+      <td>リソースの取得に使用するデータプロバイダー</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">children</code></td>
-      <td>Required</td>
+      <td>必須</td>
       <td><code class="language-plaintext highlighter-rouge">ReactNode</code></td>
       <td>-</td>
-      <td>The routes to render</td>
+      <td>レンダリングするルート</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">authCallbackPage</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">Component</code></td>
       <td><code class="language-plaintext highlighter-rouge">AuthCallback</code></td>
-      <td>The content of the authentication callback page</td>
+      <td>認証コールバックページの内容</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">authProvider</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">AuthProvider</code></td>
       <td>-</td>
-      <td>The authentication provider for security and permissions</td>
+      <td>セキュリティと権限のための認証プロバイダー</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">basename</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">string</code></td>
       <td>-</td>
-      <td>The base path for all URLs</td>
+      <td>すべてのURLのベースパス</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">catchAll</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">Component</code></td>
       <td><code class="language-plaintext highlighter-rouge">NotFound</code></td>
-      <td>The fallback component for unknown routes</td>
+      <td>未知のルートに対するフォールバックコンポーネント</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">dashboard</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">Component</code></td>
       <td>-</td>
-      <td>The content of the dashboard page</td>
+      <td>ダッシュボードページの内容</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">darkTheme</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">object</code></td>
       <td>-</td>
-      <td>The dark theme configuration</td>
+      <td>ダークテーマの設定</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">defaultTheme</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">boolean</code></td>
       <td><code class="language-plaintext highlighter-rouge">false</code></td>
-      <td>Flag to default to the light theme</td>
+      <td>デフォルトでライトテーマを使用するフラグ</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">disableTelemetry</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">boolean</code></td>
       <td><code class="language-plaintext highlighter-rouge">false</code></td>
-      <td>Set to <code class="language-plaintext highlighter-rouge">true</code> to disable telemetry collection</td>
+      <td>テレメトリー収集を無効にする</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">i18nProvider</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">I18NProvider</code></td>
       <td>-</td>
-      <td>The internationalization provider for translations</td>
+      <td>翻訳のための国際化プロバイダー</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">layout</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">Component</code></td>
       <td><code class="language-plaintext highlighter-rouge">Layout</code></td>
-      <td>The content of the layout</td>
+      <td>レイアウトの内容</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">loginPage</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">Component</code></td>
       <td><code class="language-plaintext highlighter-rouge">LoginPage</code></td>
-      <td>The content of the login page</td>
+      <td>ログインページの内容</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">notification</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">Component</code></td>
       <td><code class="language-plaintext highlighter-rouge">Notification</code></td>
-      <td>The notification component</td>
+      <td>通知コンポーネント</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">queryClient</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">QueryClient</code></td>
       <td>-</td>
-      <td>The react-query client</td>
+      <td>react-query クライアント</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">ready</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">Component</code></td>
       <td><code class="language-plaintext highlighter-rouge">Ready</code></td>
-      <td>The content of the ready page</td>
+      <td>準備ページの内容</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">requireAuth</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">boolean</code></td>
       <td><code class="language-plaintext highlighter-rouge">false</code></td>
-      <td>Flag to require authentication for all routes</td>
+      <td>すべてのルートに対する認証を要求するフラグ</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">store</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">Store</code></td>
       <td>-</td>
-      <td>The Store for managing user preferences</td>
+      <td>ユーザーの設定を管理するストア</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">theme</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">object</code></td>
       <td>-</td>
-      <td>The main (light) theme configuration</td>
+      <td>メイン（ライト）テーマの設定</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">title</code></td>
-      <td>Optional</td>
+      <td>任意</td>
       <td><code class="language-plaintext highlighter-rouge">string</code></td>
       <td>-</td>
-      <td>The error page title</td>
+      <td>エラーページのタイトル</td>
     </tr>
   </tbody>
 </table>
 
 <h2 id="dataprovider"><code class="language-plaintext highlighter-rouge">dataProvider</code></h2>
 
-<p><code class="language-plaintext highlighter-rouge">dataProvider</code> is the only required prop. It must be an object allowing to communicate with the API. React-admin uses the data provider everywhere it needs to fetch or save data.</p>
+<p><code class="language-plaintext highlighter-rouge">dataProvider</code> は唯一の必須プロップで、API と通信するためのオブジェクトでなければなりません。React-admin はデータの取得や保存が必要なすべての場所でこのデータプロバイダーを使用します。</p>
 
-<p>In many cases, you won’t have to write a data provider, as one of the <a href="./DataProviderList.md">50+ existing data providers</a> will probably fit your needs. For instance, if your API is REST-based, you can use the <a href="https://github.com/marmelab/react-admin/tree/master/packages/ra-data-simple-rest">Simple REST Data Provider</a> as follows:</p>
+<p>多くの場合、データプロバイダーを自分で書く必要はなく、<a href="./DataProviderList.md">既存の50以上のデータプロバイダー</a> のいずれかがニーズに合うでしょう。例えば、API が REST ベースであれば、<a href="https://github.com/marmelab/react-admin/tree/master/packages/ra-data-simple-rest">Simple REST Data Provider</a> を次のように使用できます:</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/App.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/App.js</span>
 <span class="k">import</span> <span class="nx">simpleRestProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-simple-rest</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -868,7 +867,7 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>If you need to write your own, the data provider must have the following methods, all returning a promise:</p>
+<p>独自に書く必要がある場合、データプロバイダーは以下のメソッドを持つ必要があります。すべてが Promise を返します:</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">dataProvider</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">getList</span><span class="p">:</span>    <span class="p">(</span><span class="nx">resource</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(),</span>
@@ -883,15 +882,15 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Check the <a href="./DataProviderWriting.md">Writing a Data Provider</a> chapter for detailed instructions on how to write a data provider for your API.</p>
+<p>API のデータプロバイダーを書く方法についての詳細は <a href="./DataProviderWriting.md">Writing a Data Provider</a> 章を参照してください。</p>
 
-<p>The <code class="language-plaintext highlighter-rouge">dataProvider</code> is also the ideal place to add custom HTTP headers, handle file uploads, map resource names to API endpoints, pass credentials to the API, put business logic, reformat API errors, etc. Check <a href="./DataProviders.md">the Data Provider documentation</a> for more details.</p>
+<p><code class="language-plaintext highlighter-rouge">dataProvider</code> は、カスタム HTTP ヘッダーの追加、ファイルのアップロード処理、リソース名の API エンドポイントへのマッピング、API への認証情報の渡し、ビジネスロジックの追加、API エラーの再フォーマットなどにも理想的です。詳細は <a href="./DataProviders.md">Data Provider documentation</a> を参照してください。</p>
 
 <h2 id="children"><code class="language-plaintext highlighter-rouge">children</code></h2>
 
-<p>The <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component expects to receive <a href="./Resource.md"><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code></a> and <a href="./CustomRoutes.md"><code class="language-plaintext highlighter-rouge">&lt;CustomRoutes&gt;</code></a> elements as children. They define the routes of the application.</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> コンポーネントは、<a href="./Resource.md"><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code></a> および <a href="./CustomRoutes.md"><code class="language-plaintext highlighter-rouge">&lt;CustomRoutes&gt;</code></a> 要素を子コンポーネントとして受け取ることを期待しています。これらはアプリケーションのルートを定義します。</p>
 
-<p>For instance:</p>
+<p>例えば:</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">Admin</span> <span class="na">dataProvider</span><span class="p">=</span><span class="si">{</span><span class="nx">dataProvider</span><span class="si">}</span> <span class="na">dashboard</span><span class="p">=</span><span class="si">{</span><span class="nx">Dashboard</span><span class="si">}</span><span class="p">&gt;</span>
@@ -908,30 +907,30 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>With these children, the <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component will generate the following routes:</p>
+<p>これらの子コンポーネントにより、<code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> コンポーネントは以下のルートを生成します:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">/</code>: the dashboard</li>
-  <li><code class="language-plaintext highlighter-rouge">/customers</code>: the customer list</li>
-  <li><code class="language-plaintext highlighter-rouge">/customers/:id</code>: the customer edit page</li>
-  <li><code class="language-plaintext highlighter-rouge">/orders</code>: the order list</li>
-  <li><code class="language-plaintext highlighter-rouge">/orders/:id</code>: the order edit page</li>
-  <li><code class="language-plaintext highlighter-rouge">/invoices</code>: the invoice list</li>
-  <li><code class="language-plaintext highlighter-rouge">/products</code>: the product list</li>
-  <li><code class="language-plaintext highlighter-rouge">/products/create</code>: the product creation page</li>
-  <li><code class="language-plaintext highlighter-rouge">/products/:id</code>: the product edit page</li>
-  <li><code class="language-plaintext highlighter-rouge">/categories</code>: the category list</li>
-  <li><code class="language-plaintext highlighter-rouge">/categories/create</code>: the category creation page</li>
-  <li><code class="language-plaintext highlighter-rouge">/categories/:id</code>: the category edit page</li>
-  <li><code class="language-plaintext highlighter-rouge">/reviews</code>: the review list</li>
-  <li><code class="language-plaintext highlighter-rouge">/segments</code>: the segments page</li>
+  <li><code class="language-plaintext highlighter-rouge">/</code>: ダッシュボード</li>
+  <li><code class="language-plaintext highlighter-rouge">/customers</code>: カスタマーリスト</li>
+  <li><code class="language-plaintext highlighter-rouge">/customers/:id</code>: カスタマー編集ページ</li>
+  <li><code class="language-plaintext highlighter-rouge">/orders</code>: 注文リスト</li>
+  <li><code class="language-plaintext highlighter-rouge">/orders/:id</code>: 注文編集ページ</li>
+  <li><code class="language-plaintext highlighter-rouge">/invoices</code>: 請求書リスト</li>
+  <li><code class="language-plaintext highlighter-rouge">/products</code>: 製品リスト</li>
+  <li><code class="language-plaintext highlighter-rouge">/products/create</code>: 製品作成ページ</li>
+  <li><code class="language-plaintext highlighter-rouge">/products/:id</code>: 製品編集ページ</li>
+  <li><code class="language-plaintext highlighter-rouge">/categories</code>: カテゴリーリスト</li>
+  <li><code class="language-plaintext highlighter-rouge">/categories/create</code>: カテゴリー作成ページ</li>
+  <li><code class="language-plaintext highlighter-rouge">/categories/:id</code>: カテゴリー編集ページ</li>
+  <li><code class="language-plaintext highlighter-rouge">/reviews</code>: レビューリスト</li>
+  <li><code class="language-plaintext highlighter-rouge">/segments</code>: セグメントページ</li>
 </ul>
 
 <h2 id="authcallbackpage"><code class="language-plaintext highlighter-rouge">authCallbackPage</code></h2>
 
-<p>React-admin apps contain a special route called <code class="language-plaintext highlighter-rouge">/auth-callback</code> to let external authentication providers (like Auth0, Cognito, OIDC servers) redirect users after login. This route renders the <code class="language-plaintext highlighter-rouge">AuthCallback</code> component by default, which in turn calls <code class="language-plaintext highlighter-rouge">authProvider.handleCallback()</code>.</p>
+<p>React-admin アプリには <code class="language-plaintext highlighter-rouge">/auth-callback</code> と呼ばれる特別なルートがあり、外部認証プロバイダー (Auth0、Cognito、OIDC サーバーなど) がログイン後にユーザーをリダイレクトできるようになっています。このルートはデフォルトで <code class="language-plaintext highlighter-rouge">AuthCallback</code> コンポーネントをレンダリングし、<code class="language-plaintext highlighter-rouge">authProvider.handleCallback()</code> を呼び出します。</p>
 
-<p>If you need a different behavior for this route, you can render a custom component by passing it as the <code class="language-plaintext highlighter-rouge">authCallbackPage</code> prop.</p>
+<p>このルートに対して異なる動作が必要な場合、<code class="language-plaintext highlighter-rouge">authCallbackPage</code> プロップとしてカスタムコンポーネントを渡すことでカスタマイズできます。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">dataProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./dataProvider</span><span class="dl">'</span><span class="p">;</span>
@@ -949,19 +948,19 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Note</strong>: You should seldom use this option, even when using an external authentication provider. Since you can already define the <code class="language-plaintext highlighter-rouge">/auth-callback</code> route controller via <code class="language-plaintext highlighter-rouge">authProvider.handleCallback()</code>, the <code class="language-plaintext highlighter-rouge">authCallbackPage</code> prop is only useful when you need the user’s feedback after they logged in.</p>
+<p><strong>注意</strong>: 外部認証プロバイダーを使用する場合でも、このオプションを使用することはまれです。すでに <code class="language-plaintext highlighter-rouge">authProvider.handleCallback()</code> を介して <code class="language-plaintext highlighter-rouge">/auth-callback</code> ルートコントローラを定義できるため、ユーザーがログインした後にフィードバックが必要な場合のみ <code class="language-plaintext highlighter-rouge">authCallbackPage</code> プロップが有用です。</p>
 
-<p>You can also disable the <code class="language-plaintext highlighter-rouge">/auth-callback</code> route altogether by passing <code class="language-plaintext highlighter-rouge">authCallbackPage={false}</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">authCallbackPage={false}</code> を渡すことで、<code class="language-plaintext highlighter-rouge">/auth-callback</code> ルートを完全に無効にすることもできます。</p>
 
-<p>See The <a href="./Authentication.md#using-external-authentication-providers">Authentication documentation</a> for more details.</p>
+<p>詳細については <a href="./Authentication.md#using-external-authentication-providers">Authentication documentation</a> を参照してください。</p>
 
 <h2 id="authprovider"><code class="language-plaintext highlighter-rouge">authProvider</code></h2>
 
-<p>The <code class="language-plaintext highlighter-rouge">authProvider</code> is responsible for managing authentication and permissions, usually based on an authentication backend. React-admin uses it to check for authentication status, redirect to the login page when the user is not authenticated, check for permissions, display the user identity, and more.</p>
+<p><code class="language-plaintext highlighter-rouge">authProvider</code> は認証および権限管理を担当し、通常は認証バックエンドに基づいています。React-admin はこれを使用して認証状態を確認し、ユーザーが認証されていない場合にログインページにリダイレクトし、権限を確認し、ユーザーの身元を表示します。</p>
 
-<p>If you use a standard authentication strategy, you can use one of the <a href="./AuthProviderList.md">existing auth providers</a>. For instance, to use <a href="https://auth0.com/">Auth0</a>, you can use <a href="https://github.com/marmelab/ra-auth-auth0"><code class="language-plaintext highlighter-rouge">ra-auth-auth0</code></a>:</p>
+<p>標準的な認証戦略を使用する場合、既存の <a href="./AuthProviderList.md">auth providers</a> の1つを使用できます。例えば、<a href="https://auth0.com/">Auth0</a> を使用する場合は <a href="https://github.com/marmelab/ra-auth-auth0"><code class="language-plaintext highlighter-rouge">ra-auth-auth0</code></a> を使用できます:</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/App.tsx</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/App.tsx</span>
 <span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useEffect</span><span class="p">,</span> <span class="nx">useRef</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Auth0AuthProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-auth-auth0</span><span class="dl">'</span><span class="p">;</span>
@@ -996,7 +995,7 @@
 <span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>If your authentication backend isn’t supported, you’ll have to <a href="./AuthProviderWriting.md">write your own <code class="language-plaintext highlighter-rouge">authProvider</code></a>. It’s an object with 6 methods, each returning a Promise:</p>
+<p>認証バックエンドがサポートされていない場合、独自の <code class="language-plaintext highlighter-rouge">authProvider</code> を<a href="./AuthProviderWriting.md">作成</a>する必要があります。それは6つのメソッドを持つオブジェクトで、それぞれが Promise を返します:</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">authProvider</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">login</span><span class="p">:</span> <span class="nx">params</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(),</span>
@@ -1014,11 +1013,11 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>The Auth Provider also lets you configure redirections after login/logout, anonymous access, refresh tokens, roles and user groups. The <a href="./Authentication.md">Auth Provider documentation</a> explains how to implement these functions in detail.</p>
+<p>Auth Provider では、ログイン/ログアウト後のリダイレクト、匿名アクセス、リフレッシュトークン、ロールおよびユーザーグループも設定できます。詳細な実装方法については <a href="./Authentication.md">Auth Provider documentation</a> を参照してください。</p>
 
 <h2 id="basename"><code class="language-plaintext highlighter-rouge">basename</code></h2>
 
-<p>Use this prop to make all routes and links in your Admin relative to a “base” portion of the URL pathname that they all share. This is required when using the <a href="https://reactrouter.com/en/main/router-components/browser-router"><code class="language-plaintext highlighter-rouge">BrowserRouter</code></a> to serve the application under a sub-path of your domain (for example https://marmelab.com/ra-enterprise-demo), or when embedding react-admin inside a single-page app with its own routing.</p>
+<p>このプロップを使用して、すべてのルートおよびリンクを共通の「ベース」URL パスに相対的にします。これは、<code class="language-plaintext highlighter-rouge">BrowserRouter</code> を使用してサブパスでアプリケーションを提供する場合や、シングルページアプリケーション内に react-admin を埋め込む場合に必要です。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserRouter</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
@@ -1032,17 +1031,17 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>See <a href="#using-react-admin-in-a-sub-path">Using React-Admin In A Sub Path</a> for more usage examples.</p>
+<p>詳細な使用例については <a href="#using-react-admin-in-a-sub-path">Using React-Admin In A Sub Path</a> を参照してください。</p>
 
 <h2 id="catchall"><code class="language-plaintext highlighter-rouge">catchAll</code></h2>
 
-<p>When users type URLs that don’t match any of the children <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> components, they see a default “Not Found” page.</p>
+<p>ユーザーが任意の URL を入力し、それが子の <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> コンポーネントと一致しない場合、デフォルトの「Not Found」ページが表示されます。</p>
 
 <p><img src="./img/not-found.png" alt="Not Found" /></p>
 
-<p>You can customize this page to use the component of your choice by passing it as the <code class="language-plaintext highlighter-rouge">catchAll</code> prop. To fit in the general design, use Material UI’s <code class="language-plaintext highlighter-rouge">&lt;Card&gt;</code> component, and <a href="./Title.md">react-admin’s <code class="language-plaintext highlighter-rouge">&lt;Title&gt;</code> component</a>:</p>
+<p>このページをカスタマイズして、任意のコンポーネントを使用することができます。Material UI の <code class="language-plaintext highlighter-rouge">&lt;Card&gt;</code> コンポーネントと <a href="./Title.md">react-admin の <code class="language-plaintext highlighter-rouge">&lt;Title&gt;</code> コンポーネント</a> を使用すると一般的なデザインにフィットします:</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/NotFound.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/NotFound.js</span>
 <span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">Card</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material/Card</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">CardContent</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material/CardContent</span><span class="dl">'</span><span class="p">;</span>
@@ -1058,7 +1057,7 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/App.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/App.js</span>
 <span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">simpleRestProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-simple-rest</span><span class="dl">'</span><span class="p">;</span>
@@ -1072,13 +1071,13 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: If your custom <code class="language-plaintext highlighter-rouge">catchAll</code> component contains react-router <code class="language-plaintext highlighter-rouge">&lt;Route&gt;</code> components, this allows you to register new routes displayed within the react-admin layout easily. Note that these routes will match <em>after</em> all the react-admin resource routes have been tested. To add custom routes <em>before</em> the react-admin ones, and therefore override the default resource routes, see the <a href="./CustomRoutes.md"><code class="language-plaintext highlighter-rouge">custom pages</code></a> section instead.</p>
+<p><strong>ヒント</strong>: カスタム <code class="language-plaintext highlighter-rouge">catchAll</code> コンポーネントに react-router の <code class="language-plaintext highlighter-rouge">&lt;Route&gt;</code> コンポーネントが含まれている場合、これを使用して react-admin レイアウト内に新しいルートを簡単に登録できます。これらのルートはすべての react-admin リソースルートがテストされた後に一致します。デフォルトのリソースルートを上書きするために react-admin よりも前にカスタムルートを追加するには、<a href="./CustomRoutes.md"><code class="language-plaintext highlighter-rouge">custom pages</code></a> セクションを参照してください。</p>
 
 <h2 id="dashboard"><code class="language-plaintext highlighter-rouge">dashboard</code></h2>
 
-<p>By default, the homepage of an admin app is the <code class="language-plaintext highlighter-rouge">list</code> of the first child <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code>. But you can also specify a custom component instead. To fit in the general design, use Material UI’s <code class="language-plaintext highlighter-rouge">&lt;Card&gt;</code> component, and <a href="./Title.md">react-admin’s <code class="language-plaintext highlighter-rouge">&lt;Title&gt;</code> component</a> to set the title in the AppBar:</p>
+<p>デフォルトでは、管理アプリのホームページは最初の子 <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> の <code class="language-plaintext highlighter-rouge">list</code> です。しかし、カスタムコンポーネントを指定することもできます。Material UI の <code class="language-plaintext highlighter-rouge">&lt;Card&gt;</code> コンポーネントと <a href="./Title.md">react-admin の <code class="language-plaintext highlighter-rouge">&lt;Title&gt;</code> コンポーネント</a> を使用してタイトルを AppBar に設定すると、一般的なデザインにフィットします:</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/Dashboard.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/Dashboard.js</span>
 <span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">Card</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material/Card</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">CardContent</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@mui/material/CardContent</span><span class="dl">'</span><span class="p">;</span>
@@ -1091,7 +1090,7 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/App.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/App.js</span>
 <span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">simpleRestProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-data-simple-rest</span><span class="dl">'</span><span class="p">;</span>
@@ -1109,13 +1108,9 @@
 
 <h2 id="darktheme"><code class="language-plaintext highlighter-rouge">darkTheme</code></h2>
 
-<p>If you want to support both light and dark mode, you can provide a <code class="language-plaintext highlighter-rouge">darkTheme</code> in addition to the <code class="language-plaintext highlighter-rouge">theme</code> prop. The app will use the <code class="language-plaintext highlighter-rouge">darkTheme</code> by default for users who prefer the dark mode at the OS level, and users will be able to switch from light to dark mode using a new app bar button leveraging <a href="./ToggleThemeButton.md">the <code class="language-plaintext highlighter-rouge">&lt;ToggleThemeButton&gt;</code> component</a>.</p>
+<p>ライトモードとダークモードの両方をサポートしたい場合は、<code class="language-plaintext highlighter-rouge">theme</code> プロップに加えて <code class="language-plaintext highlighter-rouge">darkTheme</code> を提供できます。OS レベルでダークモードを好むユーザーにはデフォルトで <code class="language-plaintext highlighter-rouge">darkTheme</code> が使用され、ユーザーは [<ToggleThemeButton> コンポーネント](./ToggleThemeButton.md) を利用してライトモードとダークモードを切り替えることができます。</ToggleThemeButton></p>
 
-<video controls="" autoplay="" muted="" loop="">
-  <source src="./img/ToggleThemeButton.webm" type="video/webm" />
-  Your browser does not support the video tag.
-</video>
-
+<video controls="" autoplay="" muted="" loop=""> <source src="./img/ToggleThemeButton.webm" type="video/webm" /> Your browser does not support the video tag. </video>
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">dataProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./dataProvider</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">darkTheme</span><span class="p">,</span> <span class="nx">lightTheme</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./themes</span><span class="dl">'</span><span class="p">;</span>
@@ -1131,13 +1126,13 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>Tip</strong>: To disable OS preference detection and always use one theme by default, see the <a href="#defaulttheme"><code class="language-plaintext highlighter-rouge">defaultTheme</code></a> prop.</p>
+<p><strong>ヒント</strong>: OS の設定検出を無効にして、常に1つのテーマをデフォルトで使用する場合は、<a href="#defaulttheme"><code class="language-plaintext highlighter-rouge">defaultTheme</code></a> プロップを参照してください。</p>
 
 <h2 id="defaulttheme"><code class="language-plaintext highlighter-rouge">defaultTheme</code></h2>
 
-<p>If you provide both a <code class="language-plaintext highlighter-rouge">lightTheme</code> and a <code class="language-plaintext highlighter-rouge">darkTheme</code>, react-admin will choose the default theme to use for each user based on their OS preference. This means that users using dark mode will see the dark theme by default. Users can then switch to the other theme using <a href="./ToggleThemeButton.md">the <code class="language-plaintext highlighter-rouge">&lt;ToggleThemeButton&gt;</code> component</a>.</p>
+<p><code class="language-plaintext highlighter-rouge">lightTheme</code> と <code class="language-plaintext highlighter-rouge">darkTheme</code> の両方を提供する場合、react-admin はユーザーの OS 設定に基づいてデフォルトテーマを選択します。これは、ダークモードを使用するユーザーにはデフォルトでダークテーマが表示されることを意味します。ユーザーはその後、[<ToggleThemeButton> コンポーネント](./ToggleThemeButton.md) を使用して他のテーマに切り替えることができます。</ToggleThemeButton></p>
 
-<p>If you prefer to always default to the light or the dark theme regardless of the user’s OS preference, you can set the <code class="language-plaintext highlighter-rouge">defaultTheme</code> prop to either <code class="language-plaintext highlighter-rouge">light</code> or <code class="language-plaintext highlighter-rouge">dark</code>:</p>
+<p>ユーザーの OS 設定に関係なく常にライトテーマまたはダークテーマをデフォルトにする場合、<code class="language-plaintext highlighter-rouge">defaultTheme</code> プロップを <code class="language-plaintext highlighter-rouge">light</code> または <code class="language-plaintext highlighter-rouge">dark</code> に設定できます:</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -1155,15 +1150,15 @@
 
 <h2 id="disabletelemetry"><code class="language-plaintext highlighter-rouge">disableTelemetry</code></h2>
 
-<p>In production, react-admin applications send an anonymous request on mount to a telemetry server operated by marmelab. You can see this request by looking at the Network tab of your browser DevTools:</p>
+<p>本番環境では、react-admin アプリケーションはマウント時に marmelab によって運営されるテレメトリーサーバーに匿名リクエストを送信します。このリクエストはブラウザの DevTools のネットワークタブで確認できます:</p>
 
 <p><code class="language-plaintext highlighter-rouge">https://react-admin-telemetry.marmelab.com/react-admin-telemetry</code></p>
 
-<p>The only data sent to the telemetry server is the admin domain (e.g. “example.com”) - no personal data is ever sent, and no cookie is included in the response. The react-admin team uses these domains to track the usage of the framework.</p>
+<p>テレメトリーサーバーに送信されるデータは管理ドメイン（例: “example.com”）のみであり、個人データは一切送信されず、レスポンスにクッキーも含まれません。react-admin チームはこれらのドメインを使用してフレームワークの使用状況を追跡します。</p>
 
-<p>You can opt out of telemetry by simply adding <code class="language-plaintext highlighter-rouge">disableTelemetry</code> to the <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component:</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> コンポーネントに <code class="language-plaintext highlighter-rouge">disableTelemetry</code> を追加するだけでテレメトリーをオプトアウトできます:</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/App.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/App.js</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">dataProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./dataProvider</span><span class="dl">'</span><span class="p">;</span>
 
@@ -1176,15 +1171,15 @@
 
 <h2 id="i18nprovider"><code class="language-plaintext highlighter-rouge">i18nProvider</code></h2>
 
-<p>The <code class="language-plaintext highlighter-rouge">i18nProvider</code> props let you translate the GUI. For instance, to switch the UI to French instead of the default English:</p>
+<p><code class="language-plaintext highlighter-rouge">i18nProvider</code> プロップを使用して GUI を翻訳できます。例えば、デフォルトの英語ではなくフランス語に切り替えるには次のようにします:</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/i18nProvider.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/i18nProvider.js</span>
 <span class="k">import</span> <span class="nx">polyglotI18nProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-i18n-polyglot</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">fr</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">ra-language-french</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="k">export</span> <span class="kd">const</span> <span class="nx">i18nProvider</span> <span class="o">=</span> <span class="nx">polyglotI18nProvider</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">fr</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fr</span><span class="dl">'</span><span class="p">);</span>
 
-<span class="c1">// in src/App.js</span>
+<span class="c1">// src/App.js</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">i18nProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./i18nProvider</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
@@ -1197,42 +1192,22 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>The <a href="./Translation.md">Translation Documentation</a> details this process.</p>
+<p>翻訳の詳細については <a href="./Translation.md">Translation Documentation</a> を参照してください。</p>
 
 <h2 id="layout"><code class="language-plaintext highlighter-rouge">layout</code></h2>
 
-<p>If you want to deeply customize the app header, the menu, or the notifications, the best way is to provide a custom layout component.</p>
+<p>アプリのヘッダー、メニュー、通知を深くカスタマイズしたい場合、最良の方法はカスタムレイアウトコンポーネントを提供することです。</p>
 
-<p>React-admin offers predefined layouts for you to use:</p>
+<p>React-admin は使用できる既成のレイアウトを提供しています:</p>
 
-<figure>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1177 290" preserveAspectRatio="xMinYMin meet">
-        <image width="1177" height="290" xlink:href="./img/layouts.png" />
-        <g opacity="0">
-            <a href="./Layout.html" aria-label="Layout">
-                <rect x="0" y="0" width="348" height="290" />
-            </a>
-        </g>
-        <g opacity="0">
-            <a href="./ContainerLayout.html" aria-label="ContainerLayout">
-                <rect x="373" y="0" width="408" height="290" />
-            </a>
-        </g>
-        <g opacity="0">
-            <a href="./SolarLayout.html" aria-label="SolarLayout">
-                <rect x="801" y="0" width="376" height="290" />
-            </a>
-        </g>
-    </svg>
-</figure>
-
+<figure> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1177 290" preserveAspectRatio="xMinYMin meet"> <image width="1177" height="290" xlink:href="./img/layouts.png" /> <g opacity="0"> <a href="./Layout.html" aria-label="Layout"> <rect x="0" y="0" width="348" height="290" /> </a> </g> <g opacity="0"> <a href="./ContainerLayout.html" aria-label="ContainerLayout"> <rect x="373" y="0" width="408" height="290" /> </a> </g> <g opacity="0"> <a href="./SolarLayout.html" aria-label="SolarLayout"> <rect x="801" y="0" width="376" height="290" /> </a> </g> </svg> </figure>
 <ul>
-  <li><a href="./Layout.md"><code class="language-plaintext highlighter-rouge">&lt;Layout&gt;</code></a>: The default layout. It renders a top app bar and the navigation menu in a side bar.</li>
-  <li><a href="./ContainerLayout.md"><code class="language-plaintext highlighter-rouge">&lt;ContainerLayout&gt;</code></a> is centered layout with horizontal navigation.</li>
-  <li><a href="./SolarLayout.md"><code class="language-plaintext highlighter-rouge">&lt;SolarLayout&gt;</code></a> is a layout with a small icon sidebar, no top bar, and a full-width content area.</li>
+  <li><a href="./Layout.md"><code class="language-plaintext highlighter-rouge">&lt;Layout&gt;</code></a>: デフォルトのレイアウト。トップのアプリバーとサイドバーにナビゲーションメニューをレンダリングします。</li>
+  <li><a href="./ContainerLayout.md"><code class="language-plaintext highlighter-rouge">&lt;ContainerLayout&gt;</code></a>: 水平方向のナビゲーションを持つ中央レイアウト。</li>
+  <li><a href="./SolarLayout.md"><code class="language-plaintext highlighter-rouge">&lt;SolarLayout&gt;</code></a>: 小さなアイコンのサイドバー、トップバーなし、全幅のコンテンツエリアを持つレイアウト。</li>
 </ul>
 
-<p>For instance, here is how to replace the default <code class="language-plaintext highlighter-rouge">Layout</code> with the <code class="language-plaintext highlighter-rouge">ContainerLayout</code>:</p>
+<p>例えば、デフォルトの <code class="language-plaintext highlighter-rouge">Layout</code> を <code class="language-plaintext highlighter-rouge">ContainerLayout</code> に置き換える方法は次のとおりです:</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">ContainerLayout</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@react-admin/ra-navigation</span><span class="dl">'</span><span class="p">;</span>
@@ -1244,18 +1219,18 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>Layout components can be customized via props. For instance, you can pass a custom <code class="language-plaintext highlighter-rouge">menu</code> prop to <code class="language-plaintext highlighter-rouge">&lt;Layout&gt;</code> to override the default menu:</p>
+<p>レイアウトコンポーネントはプロップを介してカスタマイズできます。例えば、<code class="language-plaintext highlighter-rouge">menu</code> プロップをカスタム <code class="language-plaintext highlighter-rouge">menu</code> にオーバーライドする <code class="language-plaintext highlighter-rouge">Layout</code> を渡すことができます:</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/MyLayout.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/MyLayout.js</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Layout</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">MyMenu</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./MyMenu</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="k">export</span> <span class="kd">const</span> <span class="nx">MyLayout</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nc">Layout</span> <span class="si">{</span><span class="p">...</span><span class="nx">props</span><span class="si">}</span> <span class="na">menu</span><span class="p">=</span><span class="si">{</span><span class="nx">MyMenu</span><span class="si">}</span> <span class="p">/&gt;;</span>
 </code></pre></div></div>
 
-<p>Then, pass it to the <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component as the <code class="language-plaintext highlighter-rouge">layout</code> prop:</p>
+<p>次に、それを <code class="language-plaintext highlighter-rouge">layout</code> プロップとして <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> コンポーネントに渡します:</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/App.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/App.js</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">MyLayout</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./MyLayout</span><span class="dl">'</span><span class="p">;</span>
 
@@ -1266,13 +1241,13 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>Refer to each layout component documentation to understand the props it accepts.</p>
+<p>各レイアウトコンポーネントのドキュメントを参照して、受け入れるプロップを確認してください。</p>
 
-<p>Finally, you can also pass a custom component as the <code class="language-plaintext highlighter-rouge">layout</code> prop. It must contain a <code class="language-plaintext highlighter-rouge">{children}</code> placeholder, where react-admin will render the page content. Check <a href="./Layout.md#writing-a-layout-from-scratch">the custom layout documentation</a> for examples, and use the <a href="https://github.com/marmelab/react-admin/blob/master/packages/ra-ui-materialui/src/layout/Layout.tsx">default <code class="language-plaintext highlighter-rouge">&lt;Layout&gt;</code></a> as a starting point.</p>
+<p>最後に、カスタムコンポーネントを <code class="language-plaintext highlighter-rouge">layout</code> プロップとして渡すこともできます。それは、react-admin がページコンテンツをレンダリングする <code class="language-plaintext highlighter-rouge">{children}</code> プレースホルダーを含む必要があります。例については <a href="./Layout.md#writing-a-layout-from-scratch">カスタムレイアウトドキュメント</a> を確認し、<a href="https://github.com/marmelab/react-admin/blob/master/packages/ra-ui-materialui/src/layout/Layout.tsx">デフォルトの <code class="language-plaintext highlighter-rouge">&lt;Layout&gt;</code></a> を出発点として使用してください。</p>
 
 <h2 id="loginpage"><code class="language-plaintext highlighter-rouge">loginPage</code></h2>
 
-<p>If you want to customize the Login page, or switch to another authentication strategy than a username/password form, pass a component of your own as the <code class="language-plaintext highlighter-rouge">loginPage</code> prop. React-admin will display this component whenever the <code class="language-plaintext highlighter-rouge">/login</code> route is called.</p>
+<p>ログインページをカスタマイズするか、ユーザー名/パスワードフォーム以外の認証戦略に切り替えたい場合は、独自のコンポーネントを <code class="language-plaintext highlighter-rouge">loginPage</code> プロップとして渡します。React-admin は <code class="language-plaintext highlighter-rouge">/login</code> ルートが呼び出されるたびにこのコンポーネントを表示します。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">dataProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./dataProvider</span><span class="dl">'</span><span class="p">;</span>
@@ -1290,9 +1265,9 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>See The <a href="./Authentication.md#customizing-the-login-component">Authentication documentation</a> for more details.</p>
+<p>詳細については <a href="./Authentication.md#customizing-the-login-component">Authentication documentation</a> を参照してください。</p>
 
-<p>You can also disable the <code class="language-plaintext highlighter-rouge">/login</code> route completely by passing <code class="language-plaintext highlighter-rouge">false</code> to this prop. In this case, it’s the <code class="language-plaintext highlighter-rouge">authProvider</code>’s responsibility to redirect unauthenticated users to a custom login page, by returning a <code class="language-plaintext highlighter-rouge">redirectTo</code> field in response to <code class="language-plaintext highlighter-rouge">checkAuth</code> (see <a href="./AuthProviderWriting.md#checkauth"><code class="language-plaintext highlighter-rouge">authProvider.checkAuth()</code></a> for details). If you fail to customize the redirection, the app will end up in an infinite loop.</p>
+<p>このプロップに <code class="language-plaintext highlighter-rouge">false</code> を渡すことで <code class="language-plaintext highlighter-rouge">/login</code> ルートを完全に無効にすることもできます。この場合、カスタムログインページにユーザーをリダイレクトする責任は <code class="language-plaintext highlighter-rouge">authProvider</code> にあります。これを行うには <code class="language-plaintext highlighter-rouge">checkAuth</code> に対する応答で <code class="language-plaintext highlighter-rouge">redirectTo</code> フィールドを返します（詳細については <a href="./AuthProviderWriting.md#checkauth"><code class="language-plaintext highlighter-rouge">authProvider.checkAuth()</code></a> を参照してください）。リダイレクトのカスタマイズに失敗した場合、アプリは無限ループに陥る可能性があります。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">authProvider</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
@@ -1313,9 +1288,9 @@
 
 <h2 id="notification"><code class="language-plaintext highlighter-rouge">notification</code></h2>
 
-<p>You can override the notification component, for instance to change the notification duration. A common use case is to change the <code class="language-plaintext highlighter-rouge">autoHideDuration</code>, and force the notification to remain on screen longer than the default 4 seconds. For instance, to create a custom Notification component with a 5 seconds default:</p>
+<p>通知コンポーネントをオーバーライドすることができます。例えば、通知の表示時間を変更するなどです。一般的な使用例は、<code class="language-plaintext highlighter-rouge">autoHideDuration</code> を変更し、通知をデフォルトの4秒よりも長く表示することです。例えば、デフォルトを5秒に設定したカスタム通知コンポーネントを作成するには:</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/MyNotification.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/MyNotification.js</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Notification</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">MyNotification</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nc">Notification</span> <span class="na">autoHideDuration</span><span class="p">=</span><span class="si">{</span><span class="mi">5000</span><span class="si">}</span> <span class="p">/&gt;;</span>
@@ -1323,9 +1298,9 @@
 <span class="k">export</span> <span class="k">default</span> <span class="nx">MyNotification</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>To use this custom notification component, pass it to the <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component as the <code class="language-plaintext highlighter-rouge">notification</code> prop:</p>
+<p>このカスタム通知コンポーネントを使用するには、<code class="language-plaintext highlighter-rouge">notification</code> プロップとして <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> コンポーネントに渡します:</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/App.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/App.js</span>
 <span class="k">import</span> <span class="nx">MyNotification</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./MyNotification</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">dataProvider</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./dataProvider</span><span class="dl">'</span><span class="p">;</span>
 
@@ -1338,25 +1313,25 @@
 
 <h2 id="queryclient"><code class="language-plaintext highlighter-rouge">queryClient</code></h2>
 
-<p>React-admin uses <a href="https://react-query-v3.tanstack.com/">react-query</a> to fetch, cache and update data. Internally, the <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component creates a react-query <a href="https://tanstack.com/query/v3/docs/react/reference/QueryClient"><code class="language-plaintext highlighter-rouge">QueryClient</code></a> on mount, using <a href="https://react-query-v3.tanstack.com/guides/important-defaults">react-query’s “aggressive but sane” defaults</a>:</p>
+<p>React-admin はデータの取得、キャッシュ、および更新に <a href="https://react-query-v3.tanstack.com/">react-query</a> を使用します。内部的に <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> コンポーネントはマウント時に react-query の <a href="https://tanstack.com/query/v3/docs/react/reference/QueryClient"><code class="language-plaintext highlighter-rouge">QueryClient</code></a> を作成し、<a href="https://react-query-v3.tanstack.com/guides/important-defaults">react-query の「攻撃的だが健全な」デフォルト設定</a> を使用します:</p>
 
 <ul>
-  <li>Queries consider cached data as stale</li>
-  <li>Stale queries are refetched automatically in the background when:
+  <li>クエリはキャッシュされたデータを古いと見なします</li>
+  <li>古いクエリは次の場合にバックグラウンドで自動的に再フェッチされます:
     <ul>
-      <li>New instances of the query mount</li>
-      <li>The window is refocused</li>
-      <li>The network is reconnected</li>
-      <li>The query is optionally configured with a refetch interval</li>
+      <li>クエリの新しいインスタンスがマウントされたとき</li>
+      <li>ウィンドウが再フォーカスされたとき</li>
+      <li>ネットワークが再接続されたとき</li>
+      <li>クエリが再フェッチ間隔で構成されている場合</li>
     </ul>
   </li>
-  <li>Query results that are no longer used in the current page are labeled as “inactive” and remain in the cache in case they are used again at a later time.</li>
-  <li>By default, “inactive” queries are garbage collected after 5 minutes.</li>
-  <li>Queries that fail are silently retried 3 times, with exponential backoff delay before capturing and displaying an error to the UI.</li>
-  <li>Query results by default are structurally shared to detect if data have actually changed and if not, the data reference remains unchanged to better help with value stabilization with regards to <code class="language-plaintext highlighter-rouge">useMemo</code> and <code class="language-plaintext highlighter-rouge">useCallback</code>.</li>
+  <li>現在のページで使用されていないクエリ結果は「非アクティブ」と見なされ、後で再使用される場合に備えてキャッシュに残ります。</li>
+  <li>デフォルトでは、「非アクティブ」クエリは5分後にガベージコレクションされます。</li>
+  <li>失敗したクエリは3回静かに再試行され、指数関数的なバックオフ遅延の後にエラーが UI にキャプチャおよび表示されます。</li>
+  <li>デフォルトでクエリ結果は構造的に共有され、データが実際に変更されたかどうかを検出し、そうでない場合はデータ参照が変更されず、<code class="language-plaintext highlighter-rouge">useMemo</code> および <code class="language-plaintext highlighter-rouge">useCallback</code> に関して値の安定化に役立ちます。</li>
 </ul>
 
-<p>If you want to override the react-query default query and mutation default options, or use a specific client or mutation cache, you can create your own <code class="language-plaintext highlighter-rouge">QueryClient</code> instance and pass it to the <code class="language-plaintext highlighter-rouge">&lt;Admin queryClient&gt;</code> prop:</p>
+<p>react-query のデフォルトクエリおよびミューテーションデフォルトオプションを上書きするか、特定のクライアントまたはミューテーションキャッシュを使用する場合、独自の <code class="language-plaintext highlighter-rouge">QueryClient</code> インスタンスを作成し、<code class="language-plaintext highlighter-rouge">&lt;Admin queryClient&gt;</code> プロップに渡すことができます:</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">QueryClient</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-query</span><span class="dl">'</span><span class="p">;</span>
@@ -1381,9 +1356,9 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>To know which options you can pass to the <code class="language-plaintext highlighter-rouge">QueryClient</code> constructor, check the <a href="https://tanstack.com/query/v3/docs/react/reference/QueryClient">react-query documentation</a> and the <a href="https://tanstack.com/query/v3/docs/react/reference/useQuery">query options</a> and <a href="https://tanstack.com/query/v3/docs/react/reference/useMutation">mutation options</a> sections.</p>
+<p><code class="language-plaintext highlighter-rouge">QueryClient</code> コンストラクタに渡すことができるオプションについては <a href="https://tanstack.com/query/v3/docs/react/reference/QueryClient">react-query documentation</a> および <a href="https://tanstack.com/query/v3/docs/react/reference/useQuery">query options</a> と <a href="https://tanstack.com/query/v3/docs/react/reference/useMutation">mutation options</a> セクションを確認してください。</p>
 
-<p>The common settings that react-admin developers often overwrite are:</p>
+<p>react-admin 開発者が頻繁に上書きする一般的な設定は次のとおりです:</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">QueryClient</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-query</span><span class="dl">'</span><span class="p">;</span>
 
@@ -1391,23 +1366,23 @@
     <span class="na">defaultOptions</span><span class="p">:</span> <span class="p">{</span>
         <span class="na">queries</span><span class="p">:</span> <span class="p">{</span>
             <span class="cm">/**
-             * The time in milliseconds after data is considered stale.
-             * If set to `Infinity`, the data will never be considered stale.
+             * データが古いと見なされるまでのミリ秒単位の時間。
+             * `Infinity` に設定すると、データは決して古いと見なされません。
              */</span>
             <span class="na">staleTime</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
             <span class="cm">/**
-             * If `false`, failed queries will not retry by default.
-             * If `true`, failed queries will retry infinitely., failureCount: num
-             * If set to an integer number, e.g. 3, failed queries will retry until the failed query count meets that number.
-             * If set to a function `(failureCount, error) =&gt; boolean` failed queries will retry until the function returns false.
+             * `false` に設定すると、デフォルトで失敗したクエリは再試行されません。
+             * `true` に設定すると、失敗したクエリは無限に再試行されます。失敗回数は `failureCount: num`。
+             * 整数値 (例: 3) に設定すると、失敗回数がその数値に達するまで再試行されます。
+             * 関数 `(failureCount, error) =&gt; boolean` に設定すると、関数が `false` を返すまで失敗したクエリが再試行されます。
              */</span>
             <span class="na">retry</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
             <span class="cm">/**
-             * If set to `true`, the query will refetch on window focus if the data is stale.
-             * If set to `false`, the query will not refetch on window focus.
-             * If set to `'always'`, the query will always refetch on window focus.
-             * If set to a function, the function will be executed with the latest data and query to compute the value.
-             * Defaults to `true`.
+             * `true` に設定すると、データが古い場合にウィンドウフォーカス時にクエリが再フェッチされます。
+             * `false` に設定すると、ウィンドウフォーカス時にクエリは再フェッチされません。
+             * `always` に設定すると、ウィンドウフォーカス時にクエリが常に再フェッチされます。
+             * 関数に設定すると、最新のデータとクエリを使用して値を計算するために関数が実行されます。
+             * デフォルトは `true`。
              */</span>
             <span class="na">refetchOnWindowFocus</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
         <span class="p">},</span>
@@ -1417,11 +1392,11 @@
 
 <h2 id="ready"><code class="language-plaintext highlighter-rouge">ready</code></h2>
 
-<p>When you run an <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> with no child <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> nor <code class="language-plaintext highlighter-rouge">&lt;CustomRoutes&gt;</code>, react-admin displays a “ready” screen:</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> や <code class="language-plaintext highlighter-rouge">&lt;CustomRoutes&gt;</code> の子がない <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> を実行すると、react-admin は「ready」画面を表示します:</p>
 
 <p><img src="./img/tutorial_empty.png" alt="Empty Admin" /></p>
 
-<p>You can replace that “ready” screen by passing a custom component as the <code class="language-plaintext highlighter-rouge">ready</code> prop:</p>
+<p>この「ready」画面をカスタムコンポーネントに置き換えるには、<code class="language-plaintext highlighter-rouge">ready</code> プロップとしてカスタムコンポーネントを渡します:</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
@@ -1442,9 +1417,9 @@
 
 <h2 id="requireauth"><code class="language-plaintext highlighter-rouge">requireAuth</code></h2>
 
-<p>Some pages in react-admin apps may allow anonymous access. For that reason, react-admin starts rendering the page layout before knowing if the user is logged in. If all the pages require authentication, this default behaviour creates an unwanted “flash of UI” for users who never logged in, before the <code class="language-plaintext highlighter-rouge">authProvider</code> redirects them to the login page.</p>
+<p>react-admin アプリの一部のページは匿名アクセスを許可する場合があります。そのため、react-admin はユーザーがログインしているかどうかを確認する前にページレイアウトのレンダリングを開始します。すべてのページが認証を必要とする場合、このデフォルトの動作により、ログインしていないユーザーに対して不要な「UI フラッシュ」が発生します。</p>
 
-<p>If you know your app will never accept anonymous access, you can force the app to wait for the <code class="language-plaintext highlighter-rouge">authProvider.checkAuth()</code> to resolve before rendering the page layout, by setting the <code class="language-plaintext highlighter-rouge">&lt;Admin requireAuth&gt;</code> prop.</p>
+<p>アプリが匿名アクセスを許可しないことがわかっている場合、<code class="language-plaintext highlighter-rouge">&lt;Admin requireAuth&gt;</code> プロップを設定してページレイアウトをレンダリングする前に <code class="language-plaintext highlighter-rouge">authProvider.checkAuth()</code> の解決を待機させることができます。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">dataProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./dataProvider</span><span class="dl">'</span><span class="p">;</span>
@@ -1463,16 +1438,16 @@
 
 <h2 id="store"><code class="language-plaintext highlighter-rouge">store</code></h2>
 
-<p>The <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component initializes a <a href="./Store.md">Store</a> for user preferences using <code class="language-plaintext highlighter-rouge">localStorage</code> as the storage engine. You can override this by passing a custom <code class="language-plaintext highlighter-rouge">store</code> prop.</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> コンポーネントは <code class="language-plaintext highlighter-rouge">localStorage</code> をストレージエンジンとして使用してユーザーの設定を管理する <a href="./Store.md">Store</a> を初期化します。これを上書きするには、カスタム <code class="language-plaintext highlighter-rouge">store</code> プロップを渡します。</p>
 
-<p>Built-in stores are:</p>
+<p>組み込みのストアは次のとおりです:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">memoryStore</code>: stores data in memory</li>
-  <li><code class="language-plaintext highlighter-rouge">localStorageStore</code>: stores data in <code class="language-plaintext highlighter-rouge">localStorage</code></li>
+  <li><code class="language-plaintext highlighter-rouge">memoryStore</code>: データをメモリに保存します</li>
+  <li><code class="language-plaintext highlighter-rouge">localStorageStore</code>: データを <code class="language-plaintext highlighter-rouge">localStorage</code> に保存します</li>
 </ul>
 
-<p>For instance, you can store the user preferences in memory, e.g. for tests, or for apps that should not persist user data between sessions:</p>
+<p>例えば、メモリ内にユーザー設定を保存し、セッション間でユーザーデータを保持しないようにするか、テスト用に使用することができます:</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span><span class="p">,</span> <span class="nx">memoryStore</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 
@@ -1483,20 +1458,17 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>Check the <a href="./Store.md">Preferences documentation</a> for more details.</p>
+<p>詳細は <a href="./Store.md">Preferences documentation</a> を参照してください。</p>
 
 <h2 id="theme"><code class="language-plaintext highlighter-rouge">theme</code></h2>
 
-<p>Material UI supports <a href="https://mui.com/material-ui/customization/theming/">theming</a>. This lets you customize the look and feel of an admin by overriding fonts, colors, and spacing. You can provide a custom Material UI theme by using the <code class="language-plaintext highlighter-rouge">theme</code> prop.</p>
+<p>Material UI は <a href="https://mui.com/material-ui/customization/theming/">テーマ</a> をサポートしています。これにより、フォント、色、間隔をオーバーライドして管理アプリの外観と操作性をカスタマイズできます。<code class="language-plaintext highlighter-rouge">theme</code> プロップを使用してカスタム Material UI テーマを提供できます。</p>
 
-<p>React-admin comes with 4 built-in themes: <a href="./AppTheme.md#default">Default</a>, <a href="./AppTheme.md#nano">Nano</a>, <a href="./AppTheme.md#radiant">Radiant</a>, and <a href="./AppTheme.md#house">House</a>. The <a href="https://marmelab.com/react-admin-demo/">e-commerce demo</a> contains a theme switcher, so you can test them in a real application.</p>
+<p>React-admin には4つのビルトインテーマがあります: <a href="./AppTheme.md#default">Default</a>、<a href="./AppTheme.md#nano">Nano</a>、<a href="./AppTheme.md#radiant">Radiant</a>、および <a href="./AppTheme.md#house">House</a>。<a href="https://marmelab.com/react-admin-demo/">e-commerce demo</a> にはテーマ切り替え機能があり、実際のアプリケーションでこれらをテストできます。</p>
 
-<video controls="" autoplay="" playsinline="" muted="" loop="">
-  <source src="./img/demo-themes.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<video controls="" autoplay="" playsinline="" muted="" loop=""> <source src="./img/demo-themes.mp4" type="video/mp4" /> Your browser does not support the video tag. </video>
 
-<p>For instance, to use the Nano theme instead of the default theme:</p>
+<p>例えば、デフォルトのテーマの代わりに Nano テーマを使用するには:</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">nanoLightTheme</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">dataProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./dataProvider</span><span class="dl">'</span><span class="p">;</span>
@@ -1510,13 +1482,13 @@
 
 <p><img src="./img/nanoLightTheme1.jpg" alt="Nano light theme" /></p>
 
-<p>You can also <a href="./AppTheme.md#writing-a-custom-theme">write your own theme</a> to fit your company branding. For more details on predefined and custom themes, refer to <a href="./AppTheme.md">the Application Theme chapter</a>.</p>
+<p>会社のブランディングに合わせて独自のテーマを<a href="./AppTheme.md#writing-a-custom-theme">作成</a>することもできます。既定およびカスタムテーマの詳細については <a href="./AppTheme.md">Application Theme 章</a> を参照してください。</p>
 
-<p>If you want to support both a light and a dark theme, check out <a href="#darktheme">the <code class="language-plaintext highlighter-rouge">&lt;Admin darkTheme&gt;</code> prop</a>.</p>
+<p>ライトテーマとダークテーマの両方をサポートする場合は、<a href="#darktheme"><code class="language-plaintext highlighter-rouge">&lt;Admin darkTheme&gt;</code> プロップ</a> を参照してください。</p>
 
 <h2 id="title"><code class="language-plaintext highlighter-rouge">title</code></h2>
 
-<p>On error pages, the header of an admin app uses ‘React Admin’ as the main app title. Use the <code class="language-plaintext highlighter-rouge">title</code> to customize it.</p>
+<p>エラーページでは、管理アプリのヘッダーに「React Admin」がメインのアプリタイトルとして使用されます。<code class="language-plaintext highlighter-rouge">title</code> を使用してカスタマイズします。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
     <span class="p">&lt;</span><span class="nc">Admin</span> <span class="na">title</span><span class="p">=</span><span class="s">"My Custom Admin"</span> <span class="na">dataProvider</span><span class="p">=</span><span class="si">{</span><span class="nx">simpleRestProvider</span><span class="p">(</span><span class="dl">'</span><span class="s1">http://path.to.my.api</span><span class="dl">'</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>
@@ -1525,13 +1497,13 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="adding-custom-pages">Adding Custom Pages</h2>
+<h2 id="カスタムページの追加">カスタムページの追加</h2>
 
-<p>The <a href="#children"><code class="language-plaintext highlighter-rouge">children</code></a> prop of the <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component define the routes of the application.</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> コンポーネントの <a href="#children"><code class="language-plaintext highlighter-rouge">children</code></a> プロップはアプリケーションのルートを定義します。</p>
 
-<p>In addition to <a href="./Resource.md"><code class="language-plaintext highlighter-rouge">&lt;Resource&gt; elements</code></a> for CRUD pages, you can use <a href="./CustomRoutes.md">the <code class="language-plaintext highlighter-rouge">&lt;CustomRoutes&gt;</code> component</a> to do add custom routes.</p>
+<p><a href="./Resource.md">CRUD ページのための <code class="language-plaintext highlighter-rouge">&lt;Resource&gt;</code> 要素</a> に加えて、[<CustomRoutes> コンポーネント](./CustomRoutes.md) を使用してカスタムルートを追加することができます。</CustomRoutes></p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/App.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/App.js</span>
 <span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Route</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span><span class="p">,</span> <span class="nx">CustomRoutes</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
@@ -1554,11 +1526,11 @@
 <span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
 </code></pre></div></div>
 
-<h2 id="using-a-custom-router">Using A Custom Router</h2>
+<h2 id="カスタムルーターの使用">カスタムルーターの使用</h2>
 
-<p>React-admin uses <a href="https://reactrouter.com/">the react-router library</a> to handle routing, with a <a href="https://reactrouter.com/en/6/router-components/hash-router#hashrouter">HashRouter</a>. This means that the hash portion of the URL (i.e. <code class="language-plaintext highlighter-rouge">#/posts/123</code> in the example) contains the main application route. This strategy has the benefit of working without a server, and with legacy web browsers.</p>
+<p>React-admin はルーティングを処理するために <a href="https://reactrouter.com/">react-router ライブラリ</a> を使用し、<a href="https://reactrouter.com/en/6/router-components/hash-router#hashrouter">HashRouter</a> を使用します。これは、URL のハッシュ部分 (例: <code class="language-plaintext highlighter-rouge">#/posts/123</code>) がメインのアプリケーションルートを含むことを意味します。この戦略はサーバーを使用せず、レガシーな Web ブラウザでも動作するという利点があります。</p>
 
-<p>But you may want to use another routing strategy, e.g. to allow server-side rendering of individual pages. React-router offers various Router components to implement such routing strategies. If you want to use a different router, simply wrap it around your app. React-admin will detect that it’s already inside a router, and skip its own router.</p>
+<p>しかし、サーバーサイドレンダリングなどの別のルーティング戦略を使用したい場合があります。React-router はそのようなルーティング戦略を実装するためのさまざまなルーターコンポーネントを提供しています。異なるルーターを使用したい場合、アプリ全体をラップします。React-admin はすでにルーター内にあることを検出し、独自のルーターをスキップします。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserRouter</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
@@ -1573,11 +1545,11 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="using-react-admin-in-a-sub-path">Using React-Admin In A Sub Path</h2>
+<h2 id="サブパスでの-react-admin-の使用">サブパスでの React-Admin の使用</h2>
 
-<p>React-admin links are absolute (e.g. <code class="language-plaintext highlighter-rouge">/posts/123/show</code>). If you serve your admin from a sub path (e.g. <code class="language-plaintext highlighter-rouge">/admin</code>), react-admin works seamlessly as it only appends a hash (URLs will look like <code class="language-plaintext highlighter-rouge">/admin#/posts/123/show</code>).</p>
+<p>React-admin のリンクは絶対パスです (例: <code class="language-plaintext highlighter-rouge">/posts/123/show</code>)。サブパス (例: <code class="language-plaintext highlighter-rouge">/admin</code>) から管理アプリを提供する場合、react-admin はシームレスに動作し、ハッシュのみを追加します (URL は <code class="language-plaintext highlighter-rouge">/admin#/posts/123/show</code> のようになります)。</p>
 
-<p>However, if you serve your admin from a sub path AND use another Router (like <a href="https://reactrouter.com/en/main/router-components/browser-router"><code class="language-plaintext highlighter-rouge">&lt;BrowserRouter&gt;</code></a> for instance), you need to set the <code class="language-plaintext highlighter-rouge">&lt;Admin basename&gt;</code> prop, so that react-admin routes include the basename in all links (e.g. <code class="language-plaintext highlighter-rouge">/admin/posts/123/show</code>).</p>
+<p>しかし、サブパスから管理アプリを提供し、かつ別のルーター (例えば <a href="https://reactrouter.com/en/main/router-components/browser-router"><code class="language-plaintext highlighter-rouge">&lt;BrowserRouter&gt;</code></a> など) を使用する場合、<code class="language-plaintext highlighter-rouge">&lt;Admin basename&gt;</code> プロップを設定して、すべてのリンクにベースネームを含める必要があります (例: <code class="language-plaintext highlighter-rouge">/admin/posts/123/show</code>)。</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserRouter</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
@@ -1592,15 +1564,15 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>This makes all links be prefixed with <code class="language-plaintext highlighter-rouge">/admin</code>.</p>
+<p>これにより、すべてのリンクが <code class="language-plaintext highlighter-rouge">/admin</code> で始まるようになります。</p>
 
-<p>Note that it is your responsibility to serve the admin from the sub path, e.g. by setting the <code class="language-plaintext highlighter-rouge">base</code> field in <code class="language-plaintext highlighter-rouge">vite.config.ts</code> if you use <a href="https://vitejs.dev/config/shared-options.html#base">Vite.js</a>, or the <code class="language-plaintext highlighter-rouge">homepage</code> field in <code class="language-plaintext highlighter-rouge">package.json</code> if you use <a href="https://create-react-app.dev/docs/deployment/#building-for-relative-paths">Create React App</a>.</p>
+<p>サブパスから管理アプリを提供する責任はあなたにあります。例えば、<a href="https://vitejs.dev/config/shared-options.html#base">Vite.js</a> を使用している場合は <code class="language-plaintext highlighter-rouge">vite.config.ts</code> の <code class="language-plaintext highlighter-rouge">base</code> フィールドを設定するか、<a href="https://create-react-app.dev/docs/deployment/#building-for-relative-paths">Create React App</a> を使用している場合は <code class="language-plaintext highlighter-rouge">package.json</code> の <code class="language-plaintext highlighter-rouge">homepage</code> フィールドを設定します。</p>
 
-<p>If you want to use react-admin as a sub path of a larger React application, check the next section for instructions.</p>
+<p>react-admin をより大きな React アプリケーションのサブパスとして使用したい場合は、次のセクションの手順を確認してください。</p>
 
-<h2 id="using-react-admin-inside-a-route">Using React-Admin Inside a Route</h2>
+<h2 id="ルート内での-react-admin-の使用">ルート内での React-Admin の使用</h2>
 
-<p>You can include a react-admin app inside another app, using a react-router <code class="language-plaintext highlighter-rouge">&lt;Route&gt;</code>:</p>
+<p>react-admin アプリを他のアプリ内に含めることができ、react-router の <code class="language-plaintext highlighter-rouge">&lt;Route&gt;</code> を使用します:</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserRouter</span><span class="p">,</span> <span class="nx">Routes</span><span class="p">,</span> <span class="nx">Route</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-router-dom</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">StoreFront</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./StoreFront</span><span class="dl">'</span><span class="p">;</span>
@@ -1616,9 +1588,9 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>React-admin will have to prefix all the internal links with <code class="language-plaintext highlighter-rouge">/admin</code>. Use the <code class="language-plaintext highlighter-rouge">&lt;Admin basename&gt;</code> prop for that:</p>
+<p>react-admin はすべての内部リンクに <code class="language-plaintext highlighter-rouge">/admin</code> をプレフィックスとして追加する必要があります。<code class="language-plaintext highlighter-rouge">&lt;Admin basename&gt;</code> プロップを使用します:</p>
 
-<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in src/StoreAdmin.js</span>
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/StoreAdmin.js</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">dataProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./dataProvider</span><span class="dl">'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">posts</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./posts</span><span class="dl">'</span><span class="p">;</span>
@@ -1630,17 +1602,17 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<p>This will let react-admin build absolute URLs including the sub path.</p>
+<p>これにより、react-admin はサブパスを含む絶対URLを生成します。</p>
 
-<h2 id="declaring-resources-at-runtime">Declaring resources at runtime</h2>
+<h2 id="ランタイムにリソースを宣言する">ランタイムにリソースを宣言する</h2>
 
-<p>You might want to dynamically define the resources when the app starts. To do so, you have two options: using a function as <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> child, or unplugging it to use a combination of <code class="language-plaintext highlighter-rouge">AdminContext</code> and <code class="language-plaintext highlighter-rouge">&lt;AdminUI&gt;</code> instead.</p>
+<p>アプリの起動時にリソースを動的に定義する必要がある場合があります。そのためには、<code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> 子として関数を使用するか、<code class="language-plaintext highlighter-rouge">AdminContext</code> と <code class="language-plaintext highlighter-rouge">&lt;AdminUI&gt;</code> の組み合わせを使用して <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> をプラグから外す方法の2つがあります。</p>
 
-<h3 id="using-a-function-as-admin-child">Using a Function As <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> Child</h3>
+<h3 id="admin-子として関数を使用する"><code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> 子として関数を使用する</h3>
 
-<p>The <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component accepts a function as one of its children and this function can return a Promise. If you also defined an <code class="language-plaintext highlighter-rouge">authProvider</code>, the child function will receive the result of a call to <code class="language-plaintext highlighter-rouge">authProvider.getPermissions()</code> (you can read more about this in the <a href="./Authentication.md#enabling-auth-features">Auth Provider</a> chapter).</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> コンポーネントは子の1つとして関数を受け入れ、この関数は Promise を返すことができます。<code class="language-plaintext highlighter-rouge">authProvider</code> も定義している場合、子関数は <code class="language-plaintext highlighter-rouge">authProvider.getPermissions()</code> の呼び出し結果を受け取ります (詳細は <a href="./Authentication.md#enabling-auth-features">Auth Provider</a> 章を参照してください)。</p>
 
-<p>For instance, getting the resource from an API might look like:</p>
+<p>例えば、API からリソースを取得する例は次のようになります:</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Admin</span><span class="p">,</span> <span class="nx">Resource</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-admin</span><span class="dl">'</span><span class="p">;</span>
@@ -1672,13 +1644,13 @@
 <span class="p">);</span>
 </code></pre></div></div>
 
-<h3 id="unplugging-the-admin-using-admincontext-and-adminui">Unplugging the <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> using <code class="language-plaintext highlighter-rouge">&lt;AdminContext&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;AdminUI&gt;</code></h3>
+<h3 id="admin-をプラグから外して-admincontext-と-adminui-を使用する"><code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> をプラグから外して <code class="language-plaintext highlighter-rouge">&lt;AdminContext&gt;</code> と <code class="language-plaintext highlighter-rouge">&lt;AdminUI&gt;</code> を使用する</h3>
 
-<p>Setting Resources dynamically using the children-as-function syntax may not be enough in all cases, because this function can’t execute hooks.</p>
+<p>関数を子として使用してリソースを動的に設定することは、すべての場合に十分ではない場合があります。なぜなら、この関数はフックを実行できないためです。</p>
 
-<p>So it’s impossible, for instance, to have a dynamic list of resources based on a call to the <code class="language-plaintext highlighter-rouge">dataProvider</code> (since the <code class="language-plaintext highlighter-rouge">dataProvider</code> is only defined after the <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component renders).</p>
+<p>例えば、クエリを使用して動的にリソースを取得する場合、クエリを実行してから <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> コンポーネントをレンダリングする必要があります。</p>
 
-<p>To overcome this limitation, you can build your own <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> component using two lower-level components: <code class="language-plaintext highlighter-rouge">&lt;AdminContext&gt;</code> (responsible for putting the providers in contexts) and <code class="language-plaintext highlighter-rouge">&lt;AdminUI&gt;</code> (responsible for displaying the UI). Through this approach you’ll have to bring your own i18n provider and store. Luckily react-admin provides easy to use defaults for you. Here is an example:</p>
+<p>この制限を克服するために、2つの低レベルコンポーネントを使用して独自の <code class="language-plaintext highlighter-rouge">&lt;Admin&gt;</code> コンポーネントを構築できます: <code class="language-plaintext highlighter-rouge">&lt;AdminContext&gt;</code> (プロバイダーをコンテキストに配置する役割) と <code class="language-plaintext highlighter-rouge">&lt;AdminUI&gt;</code> (UI を表示する役割)。このアプローチを通じて、独自の i18n プロバイダーとストアを提供する必要があります。幸いなことに、react-admin は使用するための簡単なデフォルトを提供しています。以下はその例です:</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">useEffect</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
@@ -1734,7 +1706,8 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>In this example, we override the <code class="language-plaintext highlighter-rouge">&lt;AdminUI ready&gt;</code> component to prevent the admin from displaying <a href="#ready">the ready screen</a> in development while the list of resources is empty.</p>
+<p>この例では、リソースのリストが空の状態で開発中に管理画面が表示されないように、<code class="language-plaintext highlighter-rouge">&lt;AdminUI ready&gt;</code> コンポーネントを上書きしています。</p>
+
 
                         </div>
                     </div>
